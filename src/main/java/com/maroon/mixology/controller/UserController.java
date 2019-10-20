@@ -10,6 +10,8 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.service.EmailService;
 import com.maroon.mixology.service.UserServiceImpl;
 
+import com.maroon.mixology.config.CustomAuthenticationSuccessHandler;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +39,9 @@ public class UserController{
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler CustomAuthenticationSuccessHandler;
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
 	public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {
