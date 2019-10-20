@@ -1,4 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: com.maroon.mixology.MixologyApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.077 s - in com.maroon.mixology.MixologyApplicationTests
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.231 s <<< FAILURE! - in com.maroon.mixology.MixologyApplicationTests
+contextLoads(com.maroon.mixology.MixologyApplicationTests)  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: java.lang.IllegalStateException: Failed to execute CommandLineRunner
+Caused by: org.springframework.dao.DuplicateKeyException: E11000 duplicate key error collection: mixology-mongodb.role index: users.firstName dup key: { : null }; nested exception is com.mongodb.MongoWriteException: E11000 duplicate key error collection: mixology-mongodb.role index: users.firstName dup key: { : null }
+Caused by: com.mongodb.MongoWriteException: E11000 duplicate key error collection: mixology-mongodb.role index: users.firstName dup key: { : null }
+
