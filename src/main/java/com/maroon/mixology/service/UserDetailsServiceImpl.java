@@ -2,6 +2,8 @@ package com.maroon.mixology.service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.Role;
@@ -31,7 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         for (Role role : user.getRoles()){
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+        List<GrantedAuthority> authorityList = new ArrayList<>(authorities);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorityList);
     }
 
 }
