@@ -17,18 +17,4 @@ public class MixologyApplication {
 		SpringApplication.run(MixologyApplication.class, args);
 	}
 	
-	@Bean
-	CommandLineRunner init(RoleRepository roleRepository) {
-		
-		return args -> {
-			
-			Role userRole = roleRepository.findByRole("USER");
-			if (userRole == null) {
-				Role newUserRole = new Role();
-				newUserRole.setRole("USER");
-				roleRepository.save(newUserRole);
-			}
-		};
-		
-	}
 }
