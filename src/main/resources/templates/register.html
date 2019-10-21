@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{index}">
-    <head>
-        <title>Signup</title>
-        <link rel="stylesheet" href="/css/style.css">
-    </head>
-    <body>
-        <div layout:fragment="content">
-            <form class="form-signin" th:action="@{/register}" method="post">
-                <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
-                <div th:if="${param.error}">
-                    Invalid email and password.
-                </div>
-                <div th:if="${param.logout}">
-                    You have been logged out.
-                </div>
-                <label for="inputFirstName" class="sr-only">First Name</label>
-                <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="FirstName" required="" />
-                <label for="inputLastName" class="sr-only"> Last Name</label>
-                <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="LastName" required=""/>
-                <label for="inputEmail" name="email" class="sr-only"> Email </label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-                <label for="inputPasswordConfirm" class="sr-only">PasswordConfirm</label>
-                <input type="password" name="passwordConfirm" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" />
-               
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-            </form>
-            <form class="form-signin" th:action="@{/login}" method="get">
-                <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
-            </form>
-        </div>
-    </body>
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{index}">
+<head>
+    <title>Signup</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div layout:fragment="content">
+        <form class="form-signin" th:action="@{/register}" method="post">
+            <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
+            <div th:if="${param.error}">
+                Invalid email and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <label for="inputFirstName" class="sr-only">First Name</label>
+            <input type="text" name="firstName" id="inputFirstName" class="form-control" placeholder="FirstName" required="" />
+            <label for="inputLastName" class="sr-only"> Last Name</label>
+            <input type="text" name="lastName" id="inputLastName" class="form-control" placeholder="LastName" required=""/>
+            <label for="inputEmail" name="email" class="sr-only"> Email </label>
+            <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
+            <label for="inputPasswordConfirm" class="sr-only">PasswordConfirm</label>
+            <input type="password" name="passwordConfirm" id="inputPasswordConfirm" class="form-control" placeholder="Password" required="" />
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        </form>
+        <form class="form-signin" th:action="@{/login}" method="get">
+            <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
+        </form>
+    </div>
+</body>
 </html>

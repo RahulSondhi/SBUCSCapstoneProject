@@ -6,11 +6,10 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.maroon.mixology.config.CustomAuthenticationSuccessHandler;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.service.EmailService;
 import com.maroon.mixology.service.UserServiceImpl;
-
-import com.maroon.mixology.config.CustomAuthenticationSuccessHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -119,7 +118,7 @@ public class UserController{
             
             // Email message
             SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
-            passwordResetEmail.setFrom("support@demo.com");
+            passwordResetEmail.setFrom("tipsywebhelper@gmail.com");
             passwordResetEmail.setTo(user.getEmail());
             passwordResetEmail.setSubject("Password Reset Request");
             passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
@@ -181,7 +180,6 @@ public class UserController{
     @PostMapping({"/register"})
     public String registerUserAccount(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
         //Check for NULL
-        
         if (userForm.getFirstName().trim().isEmpty()){
             bindingResult.rejectValue("firstname", "blank");
             model.addAttribute("blankError", "Please fill in your first name.");
@@ -237,12 +235,12 @@ public class UserController{
             String appUrl = request.getScheme() + "://" + request.getServerName();
             
             SimpleMailMessage registrationEmail = new SimpleMailMessage();
-            registrationEmail.setFrom("support@demo.com");
+            registrationEmail.setFrom("tipsywebhelper@gmail.com");
             registrationEmail.setTo(userForm.getEmail());
             registrationEmail.setSubject("Registration Confirmation");
             registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
             + appUrl + "/confirm?token=" + userForm.getConfirmationToken());
-            registrationEmail.setFrom("noreply@domain.com");
+            System.out.println("Post email setup " + registrationEmail);
             emailService.sendEmail(registrationEmail);
             // Notify the user that an email has been sent
             model.addAttribute("confirmationMessage", "A confirmation e-mail has been sent to " + userForm.getEmail());

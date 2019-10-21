@@ -13,9 +13,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     @Id
     private String id;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String firstName;
 	private String lastName;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String email;
     private String password;
     private String passwordConfirm;

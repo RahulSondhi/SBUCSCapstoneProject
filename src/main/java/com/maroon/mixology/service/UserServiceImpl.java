@@ -8,7 +8,6 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
