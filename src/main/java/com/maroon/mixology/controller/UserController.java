@@ -33,154 +33,155 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController{
     @Autowired
     private UserServiceImpl userService;
-
+    
     @Autowired
     private EmailService emailService;
-
+    
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    
     @Autowired
     private CustomAuthenticationSuccessHandler CustomAuthenticationSuccessHandler;
-
+    
     @ExceptionHandler(MissingServletRequestParameterException.class)
-	public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {
-		return new ModelAndView("redirect:login");
-	}
-
+    public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {
+        return new ModelAndView("redirect:login");
+    }
+    
     // POST reset template
-	@PostMapping({"/reset"})
-	public ModelAndView resetforgottenPassword(ModelAndView modelAndView, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
-
-		// Find the user associated with the reset token
-		User user = userService.findByResetToken(requestParams.get("token"));
-
-		// This should always be non-null but we check just in case
-		if (user != null) {
-			
-			// Set new password    
+    @PostMapping({"/reset"})
+    public ModelAndView resetforgottenPassword(ModelAndView modelAndView, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+        
+        // Find the user associated with the reset token
+        User user = userService.findByResetToken(requestParams.get("token"));
+        
+        // This should always be non-null but we check just in case
+        if (user != null) {
+            
+            // Set new password    
             user.setPassword(bCryptPasswordEncoder.encode(requestParams.get("password")));
             
-			// Set the reset token to null so it cannot be used again
-			user.setResetToken(null);
-
-			// Save user
-			userService.saveUser(user);
-
-			// In order to set a model attribute on a redirect, we must use
-			// RedirectAttributes
-			redir.addFlashAttribute("successMessage", "You have successfully reset your password.  You may now login.");
-
-			modelAndView.setViewName("redirect:login");
-			return modelAndView;
-			
-		} else {
-			modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
-			modelAndView.setViewName("resetPassword");	
-		}
-		
-		return modelAndView;
-   }
-
-    // GET reset template
-	@RequestMapping(value = "/reset", method = RequestMethod.GET)
-	public ModelAndView displayResetPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
-		
-		User user = userService.findByResetToken(token);
-
-		if (user != null) { // Token found in DB
-			modelAndView.addObject("resetToken", token);
-		} else { // Token not found in DB
-			modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
-		}
-
-		modelAndView.setViewName("resetPassword");
-		return modelAndView;
-	}
-
-
-    // POST forget template
-	@PostMapping({"/forgot"})
-	public ModelAndView processForgotPasswordForm(ModelAndView modelAndView, @RequestParam("email") String userEmail, HttpServletRequest request) {
-
-		// Lookup user in database by e-mail
-		User user = userService.findByEmail(userEmail);
-
-		if (user == null) {
-			modelAndView.addObject("errorMessage", "We didn't find an account with that e-mail address.");
-		} else {
-			// Generate random 36-character string token for reset password 
-			user.setResetToken(UUID.randomUUID().toString());
-
-			// Save token to database
-			userService.saveUser(user);
-
-			String appUrl = request.getScheme() + "://" + request.getServerName();
-			
-			// Email message
-			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
-			// passwordResetEmail.setFrom("support@demo.com");
-			passwordResetEmail.setTo(user.getEmail());
-			passwordResetEmail.setSubject("Password Reset Request");
-			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
-					+ "/reset?token=" + user.getResetToken());
-			// send the email
-			emailService.sendEmail(passwordResetEmail);
-
-			// Add success message to view
-			modelAndView.addObject("successMessage", "A password reset link has been sent to " + userEmail);
-		}
-
-		modelAndView.setViewName("forgot"); //error?
-		return modelAndView;
-
-	}    
-
-    // GET forget template
-	@GetMapping({"/forgot"})
-	public ModelAndView displayForgotPasswordPage() {
-		return new ModelAndView("forgotPassword");
+            // Set the reset token to null so it cannot be used again
+            user.setResetToken(null);
+            
+            // Save user
+            userService.saveUser(user);
+            
+            // In order to set a model attribute on a redirect, we must use
+            // RedirectAttributes
+            redir.addFlashAttribute("successMessage", "You have successfully reset your password.  You may now login.");
+            
+            modelAndView.setViewName("redirect:login");
+            return modelAndView;
+            
+        } else {
+            modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
+            modelAndView.setViewName("resetPassword");	
+        }
+        
+        return modelAndView;
     }
-
+    
+    // GET reset template
+    @RequestMapping(value = "/reset", method = RequestMethod.GET)
+    public ModelAndView displayResetPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+        
+        User user = userService.findByResetToken(token);
+        
+        if (user != null) { // Token found in DB
+            modelAndView.addObject("resetToken", token);
+        } else { // Token not found in DB
+            modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
+        }
+        
+        modelAndView.setViewName("resetPassword");
+        return modelAndView;
+    }
+    
+    
+    // POST forget template
+    @PostMapping({"/forgot"})
+    public ModelAndView processForgotPasswordForm(ModelAndView modelAndView, @RequestParam("email") String userEmail, HttpServletRequest request) {
+        
+        // Lookup user in database by e-mail
+        User user = userService.findByEmail(userEmail);
+        
+        if (user == null) {
+            modelAndView.addObject("errorMessage", "We didn't find an account with that e-mail address.");
+        } else {
+            // Generate random 36-character string token for reset password 
+            user.setResetToken(UUID.randomUUID().toString());
+            
+            // Save token to database
+            userService.saveUser(user);
+            
+            String appUrl = request.getScheme() + "://" + request.getServerName();
+            
+            // Email message
+            SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
+            passwordResetEmail.setFrom("support@demo.com");
+            passwordResetEmail.setTo(user.getEmail());
+            passwordResetEmail.setSubject("Password Reset Request");
+            passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl
+            + "/reset?token=" + user.getResetToken());
+            // send the email
+            emailService.sendEmail(passwordResetEmail);
+            
+            // Add success message to view
+            modelAndView.addObject("successMessage", "A password reset link has been sent to " + userEmail);
+        }
+        
+        modelAndView.setViewName("forgot"); //error?
+        return modelAndView;
+        
+    }    
+    
+    // GET forget template
+    @GetMapping({"/forgot"})
+    public ModelAndView displayForgotPasswordPage() {
+        return new ModelAndView("forgotPassword");
+    }
+    
     // POST confirm template
-	@PostMapping({"/confirm"})
-	public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
-				
-		modelAndView.setViewName("confirm");
-		// Find the user associated with the reset token
-		User user = userService.findByConfirmationToken(requestParams.get("token"));
-
-		// Set user to enabled
-		user.setEnabled(true);
-		
-		// Save user
-		userService.saveUser(user);
-		
-		modelAndView.addObject("successMessage", "Your registeration is now complete! Your account is now avaliable for login");
-		return modelAndView;		
-	}
-
-
+    @PostMapping({"/confirm"})
+    public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+        
+        modelAndView.setViewName("confirm");
+        // Find the user associated with the reset token
+        User user = userService.findByConfirmationToken(requestParams.get("token"));
+        
+        // Set user to enabled
+        user.setEnabled(true);
+        
+        // Save user
+        userService.saveUser(user);
+        
+        modelAndView.addObject("successMessage", "Your registeration is now complete! Your account is now avaliable for login");
+        return modelAndView;		
+    }
+    
+    
     //GET confirm template
-	@GetMapping({"/confirm"})
-	public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
-			
-		User user = userService.findByConfirmationToken(token);
-			
-		if (user == null) { // No token found in Mongo
-			modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
-		} else { // Token found
-			modelAndView.addObject("confirmationToken", user.getConfirmationToken());
-		}
-			
-		modelAndView.setViewName("confirm");
-		return modelAndView;		
+    @GetMapping({"/confirm"})
+    public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+        
+        User user = userService.findByConfirmationToken(token);
+        
+        if (user == null) { // No token found in Mongo
+            modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
+        } else { // Token found
+            modelAndView.addObject("confirmationToken", user.getConfirmationToken());
+        }
+        
+        modelAndView.setViewName("confirm");
+        return modelAndView;		
     }
     
     //POST register template
     @PostMapping({"/register"})
     public String registerUserAccount(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
         //Check for NULL
+        
         if (userForm.getFirstName().trim().isEmpty()){
             bindingResult.rejectValue("firstname", "blank");
             model.addAttribute("blankError", "Please fill in your first name.");
@@ -205,7 +206,7 @@ public class UserController{
             //Check for duplicate user
             User userExists = userService.findByEmail(userForm.getEmail());
             if (userExists != null) {
-                bindingResult.rejectValue("email", "duplicate username");
+                bindingResult.rejectValue("email", "error.user", "duplicate username");
                 model.addAttribute("userDupError", "That email is already registered to a user. Please use another email address.");
             }
             //Check if password and password confirm match
@@ -232,14 +233,16 @@ public class UserController{
             // Save the new User
             userService.saveUser(userForm);
             // Send a confirmation email
+            //Should this also include the port number(?)
             String appUrl = request.getScheme() + "://" + request.getServerName();
-			
-			SimpleMailMessage registrationEmail = new SimpleMailMessage();
-			registrationEmail.setTo(userForm.getEmail());
-			registrationEmail.setSubject("Registration Confirmation");
-			registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
-					+ appUrl + "/confirm?token=" + userForm.getConfirmationToken());
-			registrationEmail.setFrom("noreply@domain.com");
+            
+            SimpleMailMessage registrationEmail = new SimpleMailMessage();
+            registrationEmail.setFrom("support@demo.com");
+            registrationEmail.setTo(userForm.getEmail());
+            registrationEmail.setSubject("Registration Confirmation");
+            registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
+            + appUrl + "/confirm?token=" + userForm.getConfirmationToken());
+            registrationEmail.setFrom("noreply@domain.com");
             emailService.sendEmail(registrationEmail);
             // Notify the user that an email has been sent
             model.addAttribute("confirmationMessage", "A confirmation e-mail has been sent to " + userForm.getEmail());
@@ -250,13 +253,13 @@ public class UserController{
     //@PostMapping("/login")
     //public String login();
     //handled by Spring Security
-
+    
     //GET register template
-    @GetMapping({"/register"})
+    @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         return "register";
     }
-
+    
     //GET login template
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
@@ -268,7 +271,7 @@ public class UserController{
         }
         return "login";
     }
-
+    
     //GET index template
     @GetMapping({"/index", "/"})
     public String index() {

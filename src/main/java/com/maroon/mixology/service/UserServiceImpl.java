@@ -8,6 +8,7 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         //Set the role to USER
+        user.setEnabled(true);
+        user.setPassword(user.getPassword());
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         //save the user
