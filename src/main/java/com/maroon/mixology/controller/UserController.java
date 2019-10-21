@@ -114,7 +114,7 @@ public class UserController{
             // Save token to database
             userService.saveUser(user);
             
-            String appUrl = request.getScheme() + "://" + request.getServerName();
+            String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
             
             // Email message
             SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
@@ -144,7 +144,7 @@ public class UserController{
     // POST confirm template
     @PostMapping({"/confirm"})
     public ModelAndView processConfirmationForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
-        
+        System.out.println("/confirm POST gets called"); 
         modelAndView.setViewName("confirm");
         // Find the user associated with the reset token
         User user = userService.findByConfirmationToken(requestParams.get("token"));
@@ -163,7 +163,7 @@ public class UserController{
     //GET confirm template
     @GetMapping({"/confirm"})
     public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
-        
+        System.out.println("/confirm GET gets called"); 
         User user = userService.findByConfirmationToken(token);
         
         if (user == null) { // No token found in Mongo
@@ -232,7 +232,7 @@ public class UserController{
             userService.saveUser(userForm);
             // Send a confirmation email
             //Should this also include the port number(?)
-            String appUrl = request.getScheme() + "://" + request.getServerName();
+            String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
             
             SimpleMailMessage registrationEmail = new SimpleMailMessage();
             registrationEmail.setFrom("tipsywebhelper@gmail.com");
@@ -259,7 +259,7 @@ public class UserController{
     }
     
     //GET login template
-    @GetMapping("/login")
+    @GetMapping({"/login", "/"})
     public String login(Model model, String error, String logout) {
         if (error != null) {
             model.addAttribute("error", "Invalid username and password");
@@ -271,8 +271,8 @@ public class UserController{
     }
     
     //GET index template
-    @GetMapping({"/index", "/"})
-    public String index() {
-        return "index";
-    }
+    // @GetMapping({"/index", "/"})
+    // public String index() {
+    //     return "index";
+    // }
 }

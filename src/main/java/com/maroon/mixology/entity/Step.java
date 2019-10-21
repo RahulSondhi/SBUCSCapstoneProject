@@ -1,5 +1,7 @@
 package com.maroon.mixology.entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "step")
 public class Step{    
     private int stepNumber;
     private Equipment equipment1;
