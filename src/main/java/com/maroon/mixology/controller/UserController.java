@@ -165,7 +165,6 @@ public class UserController{
     public ModelAndView showConfirmationPage(ModelAndView modelAndView, @RequestParam("token") String token) {
         System.out.println("/confirm GET gets called"); 
         User user = userService.findByConfirmationToken(token);
-        
         if (user == null) { // No token found in Mongo
             modelAndView.addObject("invalidToken", "Oops!  This is an invalid confirmation link.");
         } else { // Token found
@@ -261,6 +260,7 @@ public class UserController{
     //GET login template
     @GetMapping({"/login", "/"})
     public String login(Model model, String error, String logout) {
+        System.out.println("login GET called" + " " + error + " " + logout);
         if (error != null) {
             model.addAttribute("error", "Invalid username and password");
         }
