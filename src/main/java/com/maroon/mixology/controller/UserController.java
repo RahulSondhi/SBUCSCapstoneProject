@@ -155,7 +155,7 @@ public class UserController{
         // Save user
         userService.saveUser(user);
         
-        modelAndView.addObject("successMessage", "Your registeration is now complete! Your account is now avaliable for login");
+        modelAndView.addObject("successMessage", "Your registration is now complete! Your account is now available for login");
         return modelAndView;		
     }
     
@@ -247,8 +247,11 @@ public class UserController{
         return "register";
     }
     //POST login template
-    //@PostMapping("/login")
-    //public String login();
+    @PostMapping("/login")
+    public String login(){
+        System.out.println("login POST called");
+        return "menu";
+    }
     //handled by Spring Security
     
     //GET register template

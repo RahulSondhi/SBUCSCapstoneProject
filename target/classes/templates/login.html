@@ -7,7 +7,7 @@
     </head>
     <body class="text-center">
         <div layout:fragment="content">
-            <form class="form-signin" th:action="@{/login}" method="post">
+            <form class="form-signin" th:action="@{/login}" method="POST">
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <div th:if="${param.error}">
                     Invalid email and password.
@@ -19,7 +19,7 @@
                 <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required="" />
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                <button class="btn btn-lg btn-primary btn-block" type="Submit">Sign in</button>
             </form>
             <form class="form-signin" th:action="@{/register}" method="get">
                 <button class="btn btn-md btn-success btn-block" type="Submit">Signup Here</button>

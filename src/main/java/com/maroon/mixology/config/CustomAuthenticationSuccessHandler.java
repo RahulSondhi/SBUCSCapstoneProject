@@ -18,7 +18,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth)
 			throws IOException, ServletException {
             response.setStatus(HttpServletResponse.SC_OK);
-            
+           System.out.println("AUTHENTICATION CHECK"); 
             for (GrantedAuthority authorities : auth.getAuthorities()){
                 if("USER".equals(authorities.getAuthority())){
                     response.sendRedirect("/menu");
