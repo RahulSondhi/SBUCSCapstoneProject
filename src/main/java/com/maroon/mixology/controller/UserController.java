@@ -248,9 +248,18 @@ public class UserController{
     }
     //POST login template
     @PostMapping("/login")
-    public String login(){
-        System.out.println("login POST called");
-        return "menu";
+    public String loginPost(@ModelAttribute("userForm") @Valid User userForm, Model model, String error){
+        User userExists = userService.findByEmail(userForm.getEmail());
+        if (userExists == null) {
+            model.addAttribute("errorMessage", "We didn't find an account with that email.");
+            return "login";
+        }
+        if (bCryptPasswordEncoder.matches(userForm.getPassword(), userExists.getPassword())) {
+            //Check if the credentials are in the database
+            return "menu";
+        }
+        model.addAttribute("passwordMismatch", "The username or password is incorrect.");
+        return "login";
     }
     //handled by Spring Security
     
@@ -263,7 +272,6 @@ public class UserController{
     //GET login template
     @GetMapping({"/login", "/"})
     public String login(Model model, String error, String logout) {
-        System.out.println("login GET called" + " " + error + " " + logout);
         if (error != null) {
             model.addAttribute("error", "Invalid username and password");
         }
@@ -274,8 +282,9 @@ public class UserController{
     }
     
     //GET index template
-    // @GetMapping({"/index", "/"})
-    // public String index() {
-    //     return "index";
-    // }
+    @PostMapping({"/index", "/"})
+    public String index() {
+        System.out.println("POST INDEX CALLED");
+        return "index";
+    }
 }
