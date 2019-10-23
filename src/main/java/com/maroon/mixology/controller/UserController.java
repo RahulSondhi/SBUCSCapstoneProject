@@ -174,7 +174,42 @@ public class UserController{
         modelAndView.setViewName("confirm");
         return modelAndView;		
     }
+   
+    // POST confirm template
+    @PostMapping({"/forgot"})
+    public ModelAndView processResetForm(ModelAndView modelAndView, BindingResult bindingResult, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+        System.out.println("/forgot POST gets called"); 
+        modelAndView.setViewName("forgot");
+        // Find the user associated with the reset token
+        User user = userService.findByResetToken(requestParams.get("token"));
+        
+        // Set user to enabled
+        user.setEnabled(true);
+        
+        // Save user
+        userService.saveUser(user);
+        
+        modelAndView.addObject("successMessage", "Your registration is now complete! Your account is now available for login");
+        return modelAndView;
+    }
     
+    
+    //GET confirm template
+    @GetMapping({"/forgot"})
+    public ModelAndView showResetPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+        System.out.println("/confirm GET gets called"); 
+        User user = userService.findByResetToken(token);
+        if (user == null) { // No token found in Mongo
+            modelAndView.addObject("invalidToken", "Oops!  This is an invalid reset password link.");
+        } else { // Token found
+            modelAndView.addObject("confirmationToken", user.getResetToken());
+        }
+        
+        modelAndView.setViewName("forgot");
+        return modelAndView;		
+    }
+
+
     //POST register template
     @PostMapping({"/register"})
     public String registerUserAccount(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
