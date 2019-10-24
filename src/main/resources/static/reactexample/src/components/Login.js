@@ -6,7 +6,6 @@ class Login extends Component {
         return(
       <div className="container">
           <div className="logo">
-              Mixology
           </div>
           <form method="post">
               <div className="sign-in-form">
