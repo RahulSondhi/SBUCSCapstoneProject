@@ -11,21 +11,18 @@ class Login extends Component {
           <form method="post">
               <div className="sign-in-form">
                   <h2>Login your account.</h2>
-                  <div>
-                      <div>Invalid username or
-                          password.</div>
-                  </div>
-                  <div>
-                      <div>You have been logged out.</div>
-                  </div>
                   <br/>
-                  <label htmlFor="username">Username</label>: <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Username" />
+                  <label htmlFor="username">Username:</label>
+                  <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter Username" />
                   <br/><br/>
-                  <label htmlFor="password">Password</label>: <input type="password" id="password" name="password" placeholder="Password" />
+                  <label htmlFor="password">Password:</label>
+                  <input type="password" id="password" name="password" placeholder="Enter Password" />
 
                   <br/><br/>
-                  <input type="submit" name="login-submit" className="button" value="Log In" />
-                  <span className="button" id="myBtn">Register</span>
+                  <div className="footer">
+                    <input type="submit" name="register-submit" className="button" value="Register" />
+                    <input type="submit" name="login-submit" className="button" value="Log In" />
+                  </div>
               </div>
           </form>
       </div>

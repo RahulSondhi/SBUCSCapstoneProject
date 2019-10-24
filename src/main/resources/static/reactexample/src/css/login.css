@@ -1,88 +1,61 @@
-
 .container {
-    vertical-align: middle;
-    padding-top: 15vh;
-    height: 100%;
-    display: table;
-    margin: 0 auto;
+  vertical-align: middle;
+  padding-top: 15vh;
+  height: 100%;
+  display: table;
+  margin: 0 auto;
+  background-image: url("%PUBLIC_URL%/drinks.svg");
 }
 
 .logo {
-    color: #800000;
-    text-align: center;
-    padding: 1%;
-    font-size: calc(60px + 2vh);
-    margin: 0 auto;
-    text-shadow: 2px 2px #FFFFFF;
-    line-height: 1.2;
-    text-align: center;
-    display: table;
-    width: 100%;
+  color: #800000;
+  text-align: center;
+  padding: 1%;
+  font-size: calc(60px + 2vh);
+  margin: 0 auto;
+  text-shadow: 2px 2px white;
+  line-height: 1.2;
+  text-align: center;
+  display: table;
+  width: 100%;
 }
 
 form {
-    /*    width: 100%;*/
-    min-width: 50vh;
-    display: table;
-    vertical-align: middle;
-    background-color: rgba(255, 255, 255, 0.6);
-    margin: auto;
-    border-radius: 20px;
-    padding: 10px;
+  /*    width: 100%;*/
+  min-width: 55vh;
+  display: table;
+  vertical-align: middle;
+  /* background-color: rgba(255, 255, 255, 0.6); */
+  margin: auto;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
 }
 
 input[type=username],
 input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
-    display: inline-block;
-    border: 3px solid black;
-    border-style: groove;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background-color: white;
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: none;
+  border-bottom: solid 2px white;
+  font-size: 1em;
+  background-color: none;
+  background: none;
+  color: white;
+  transition: 1000ms;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width:100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.6);
-    color: black;
+input[type=username]:focus,
+input[type=password]:focus {
+  outline: none;
+  border-bottom: solid 2px #800000;
 }
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15vh auto;
-/*    padding: 20px;*/
-    width: 60vh;
-    max-width: 80vw;
-    border-radius: 20px;
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    background-color: #800000;
-    border-radius: 100%;
-    float: right;
-    font-size: 25px;
-    font-weight: bold;
-    padding: 10px;
-}
-
-.close:hover,
-.close:focus {
-    color: #FCFF00;
-    text-decoration: none;
-    cursor: pointer;
-    border: 3px solid #FCFF00;
+.footer {
+  text-align: center;
+  padding: 20px;
 }
