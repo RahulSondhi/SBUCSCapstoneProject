@@ -1,23 +1,31 @@
+body {
+  background-image: url("../assets/drinks.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 30%;
+  background-position: bottom;
+}
+
 .container {
   vertical-align: middle;
-  padding-top: 15vh;
+  padding-top: 10vh;
   height: 100%;
   display: table;
   margin: 0 auto;
-  background-image: url("%PUBLIC_URL%/drinks.svg");
 }
 
 .logo {
-  color: #800000;
-  text-align: center;
-  padding: 1%;
-  font-size: calc(60px + 2vh);
   margin: 0 auto;
-  text-shadow: 2px 2px white;
-  line-height: 1.2;
   text-align: center;
   display: table;
-  width: 100%;
+  width: 100vw;
+  height: 15vh;
+  align-items: center;
+  /* margin: 0 auto; */
+
+  background-image: url("../assets/Tipsy.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
 
 form {
