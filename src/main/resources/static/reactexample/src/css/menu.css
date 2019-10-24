@@ -78,21 +78,6 @@
     bottom: -5%;
 }
 
-.button {
-    background-color: #800000;
-    font-size: 1.5em;
-    border-radius: inherit;
-    position: relative;
-    height: 30%;
-    width: 10%;
-    color: white;
-    border: .1em solid black;
-    text-align: center;
-    margin: 1% 85%;
-    position: inline-block;
-    padding: 7px 7px 7px 7px !important;
-}
-
 #view {
     float: right;
 }
