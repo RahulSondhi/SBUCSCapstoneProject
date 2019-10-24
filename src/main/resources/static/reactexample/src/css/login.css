@@ -2,7 +2,7 @@ body,
 html {
     font-family: 'Righteous' !important;
     color: white !important;
-    background-image: linear-gradient(#000000, #800000);
+    background-color: #444444;
 }
 
 /*
@@ -26,7 +26,7 @@ html {
     padding: 1%;
     font-size: calc(60px + 2vh);
     margin: 0 auto;
-    text-shadow: 2px 2px #FCFF00;
+    text-shadow: 2px 2px #FFFFFF;
     line-height: 1.2;
     text-align: center;
     display: table;

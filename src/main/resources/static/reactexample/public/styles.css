@@ -1,4 +1,11 @@
 #root {
-    height: 95vh;
-    width: 95vw;
+    /* height: 95vh;
+    width: 95vw; */
+}
+
+body,
+html {
+    font-family: 'Righteous' !important;
+    color: white !important;
+    background-color: #444444;
 }
