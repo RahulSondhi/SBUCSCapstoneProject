@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './Menu'
-import '../css/login.css';
-import '../css/menu.css';
+import Menu from './Menu';
+import Search from './Search';
+import '../../public/styles.css';
 
 ReactDOM.render(
-  <Menu/>,
+  <Search/>,
   document.getElementById('root')
 )
 
-export default Menu;
+export default Search;

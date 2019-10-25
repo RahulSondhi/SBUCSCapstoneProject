@@ -1,23 +1,8 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Switch, BrowserRouter} from "react-router-dom";
 import Tabs from './Tabs';
 import '../css/menu.css';
-
-class Menu extends Component {
-    render() {
-        return (
-            <BrowserRouter>
-                <Tabs/>
-                <Switch>
-                    <Route path="/bar" component={BarMenu} className="tab"/>
-                    <Route path="/recipe" component={RecipeMenu} className="tab"/>
-                    <Route path="/account" component={AccountMenu} className="tab"/>
-                    <Route path="/login" component={LoginMenu} className="tab"/>
-                </Switch>
-            </BrowserRouter>
-        )
-    }
-}
+import '../../public/styles.css';
 
 const AccountMenu = () => (
     <div className="topContainer">
@@ -135,5 +120,23 @@ const LoginMenu = () => (
         REE
     </div>
 )
+
+class Menu extends Component {
+    render() {
+        return (
+            <div>
+                <BrowserRouter>
+                    <Tabs/>
+                    <Switch>
+                        <Route path="/bar" component={BarMenu} className="tab"/>
+                        <Route path="/recipe" component={RecipeMenu} className="tab"/>
+                        <Route path="/account" component={AccountMenu} className="tab"/>
+                        <Route path="/login" component={LoginMenu} className="tab"/>
+                    </Switch>
+                </BrowserRouter>
+            </div>
+        )
+    }
+}
 
 export default Menu;
