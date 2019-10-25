@@ -8,9 +8,9 @@ public interface UserService{
 
     User findByNickname(String nickname);
 
-    User findByConfirmationToken(String confirmationToken);
+    User findByConfirmationTokenUUID(String confirmationTokenUUID);
 
-    User findByResetToken(String resetToken);
+    User findByResetTokenUUID(String resetToken);
 
     Boolean existsByEmail(String email);
 

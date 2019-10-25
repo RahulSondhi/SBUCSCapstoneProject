@@ -19,9 +19,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-/**
- * Created by rajeevkumarsingh on 19/08/17.
- */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired

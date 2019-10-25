@@ -1,15 +1,15 @@
 package com.maroon.mixology.entity;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class Token {
     private String uuid;
-    private LocalDate creationTime;
+    private Calendar creationTime;
 
     public Token(){
         this.uuid = UUID.randomUUID().toString();
-        LocalDate date = LocalDate.now(); // gets the current date
+        Calendar date = Calendar.getInstance(); //get the current time
         this.creationTime = date;
     }
     public String getUUID(){
@@ -20,11 +20,11 @@ public class Token {
         this.uuid = uuid;
     }
     
-    public LocalDate getCreationDate(){
+    public Calendar getCreationDate(){
         return creationTime;
     }
 
-    public void setCreationDate(LocalDate creationTime){
+    public void setCreationDate(Calendar creationTime){
         this.creationTime = creationTime;
     }
 

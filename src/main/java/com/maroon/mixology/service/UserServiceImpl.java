@@ -22,8 +22,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByConfirmationToken(String confirmationToken) {
-		return userRepository.findByConfirmationToken(confirmationToken);
+    public User findByConfirmationTokenUUID(String confirmationTokenUUID) {
+		return userRepository.findByConfirmationTokenUUID(confirmationTokenUUID);
     }
 
     @Override

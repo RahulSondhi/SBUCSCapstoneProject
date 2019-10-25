@@ -106,6 +106,10 @@ public class User {
 		this.resetToken = resetToken;
 	}
 
+	public String getConfirmationTokenUUID(){
+		return confirmationToken.getUUID();
+	}
+	
 	public boolean getEnabled(){
 		return enabled;
 	}
