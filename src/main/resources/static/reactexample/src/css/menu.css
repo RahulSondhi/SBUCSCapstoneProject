@@ -18,7 +18,7 @@
     text-align: center;
     margin: 1% 0;
     position: relative;
-    bottom: 10vmin;
+    bottom: 5vmin;
 }
 
 .tab {
@@ -30,6 +30,7 @@
     padding: 0;
     background-color: transparent;
     text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .entry {

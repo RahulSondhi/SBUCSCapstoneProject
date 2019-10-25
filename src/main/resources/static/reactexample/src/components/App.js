@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './Menu';
-import Search from './Search';
-import '../../public/styles.css';
-
+import { BarResults } from './Results';
 ReactDOM.render(
-  <Search/>,
+  <BarResults/>,
   document.getElementById('root')
 )
 
-export default Search;
+export default BarResults;
