@@ -17,10 +17,11 @@ public class User {
 	private String lastName;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String email;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+	private String nickname;
     private String password;
-    private String passwordConfirm;
-	private String confirmationToken;
-	private String resetToken;
+	private Token confirmationToken;
+	private Token resetToken;
 	private boolean enabled;
     @DBRef
     private Set<Role> roles;
@@ -32,6 +33,14 @@ public class User {
 	private ArrayList<Recipe> recipes_Incompleted;
 	@DBRef
 	private ArrayList<Recipe> recipes_Completed;
+
+	public User(String firstName, String lastName, String email, String nickname, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+	}
 
 	public String getId() {
 		return id;
@@ -63,14 +72,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-    }
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	}
+	
+	public String getNickname(){
+		return nickname;	
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setNickname(String nickname){
+		this.nickname = nickname;
 	}
 
 	public String getPassword() {
@@ -81,19 +90,19 @@ public class User {
 		this.password = password;
 	}
 
-    public String getConfirmationToken() {
+    public Token getConfirmationToken() {
 		return confirmationToken;
 	}
 
-	public void setConfirmationToken(String confirmationToken) {
+	public void setConfirmationToken(Token confirmationToken) {
 		this.confirmationToken = confirmationToken;
 	}
 
-	public String getResetToken() {
+	public Token getResetToken() {
 		return resetToken;
 	}
 
-	public void setResetToken(String resetToken) {
+	public void setResetToken(Token resetToken) {
 		this.resetToken = resetToken;
 	}
 
