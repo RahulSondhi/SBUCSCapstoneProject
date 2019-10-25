@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './Menu';
-import Login from './Login'
+import Menu from './Menu'
 import '../css/login.css';
 import '../css/menu.css';
 
 ReactDOM.render(
-  <Login/>,
+  <Menu/>,
   document.getElementById('root')
 )
 
-export default Login;
+export default Menu;
