@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Menu from './Menu';
-import Login from './Login'
-import '../css/login.css';
-import '../css/menu.css';
-
+import { BarResults } from './Results';
 ReactDOM.render(
-  <Login/>,
+  <BarResults/>,
   document.getElementById('root')
 )
 
-export default Login;
+export default BarResults;
