@@ -20,19 +20,19 @@ const LoginBox = () => {
     return (
         <div className="container">
             <div className="logo">
-                <img src="assets/Tipsy.svg" />
+                <img src="../assets/Tipsy.svg" />
             </div>
             <form method="post">
                 <div className="sign-in-form">
                     <h3>Login your account.</h3>
                     <div>
-                        <div>Invalid username or password.</div>
+                        <p>Invalid username or password.</p>
                     </div>
                     <div>
-                        <div>You have been logged out.</div>
+                        <p>You have been logged out.</p>
                     </div>
                     <br/>
-                    <label htmlFor="username">Email:</label>:
+                    <label htmlFor="username">Email</label>:
                     <input
                         type="username"
                         id="username"
@@ -40,28 +40,28 @@ const LoginBox = () => {
                         autoFocus="autofocus"
                         placeholder="Enter Email"/>
                     <br/><br/>
-                    <label htmlFor="password">Password:</label>:
+                    <label htmlFor="password">Password</label>:
                     <input type="password" id="password" name="password" placeholder="Enter Password"/>
                     <br /><br />
-                    <div class="footer">
-                        <input type="submit" name="register-submit" class="button" value="Register" />
-                        <input type="submit" name="login-submit" class="button" value="Log In" />
+                    <div className="footer">
+                        <input type="submit" name="register-submit" className="button" value="Register" />
+                        <input type="submit" name="login-submit" className="button" value="Log In" />
                     </div>
                 </div>
             </form>
-            <img id="drinks" src="assets/drinks.svg" />
+            <img id="drinks" src="../assets/drinks.svg" />
         </div>
     )
 }
 
 const RegisterBox = () => {
     return (
-        <div class="container">
-        <div class="logo">
-            <img src="assets/Tipsy.svg" />
+        <div className="container">
+        <div className="logo">
+            <img src="../assets/Tipsy.svg" />
         </div>
         <form method="post">
-            <div class="sign-in-form">
+            <div className="sign-in-form">
                 <h3>Register your account.</h3>
                 <label htmlFor="username">First Name:</label>
                 <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter First Name" />
@@ -78,7 +78,7 @@ const RegisterBox = () => {
                 <label htmlFor="password">Confirm Password:</label>
                 <input type="password" id="password" name="password" placeholder="Enter Password" />
                 <br /><br />
-                <div class="footer">
+                <div className="footer">
                     <input type="submit" name="register-submit" class="button" value="Register" />
                 </div>
             </div>
