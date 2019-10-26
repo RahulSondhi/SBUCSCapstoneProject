@@ -4,12 +4,15 @@ import com.maroon.mixology.entity.User;
 
 public interface UserService{
     
-    void saveUser(User user);
-
     User findByEmail(String email);
 
-    User findByConfirmationToken(String confirmationToken);
+    User findByNickname(String nickname);
 
-    User findByResetToken(String resetToken);
+    User findByConfirmationTokenUUID(String confirmationTokenUUID);
 
+    User findByResetTokenUUID(String resetToken);
+
+    Boolean existsByEmail(String email);
+
+    Boolean existsByNickname(String nickname);
 }
