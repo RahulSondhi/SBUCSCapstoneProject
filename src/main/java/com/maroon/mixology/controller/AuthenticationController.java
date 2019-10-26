@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Role;
-import com.maroon.mixology.entity.Token;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
 import com.maroon.mixology.exchange.request.LoginRequest;
@@ -79,7 +79,11 @@ public class AuthenticationController {
 
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-                if(!userRepository.findByEmail(loginRequest.getEmail()).getEnabled()){
+                if(!userRepository.existsByEmail(loginRequest.getEmail())){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not found!"),
+                        HttpStatus.BAD_REQUEST);
+                }
+                if(!userRepository.findByEmail(loginRequest.getEmail()).isEnabled()){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not enabled!"),
                         HttpStatus.BAD_REQUEST);
                 }
@@ -109,7 +113,10 @@ public class AuthenticationController {
                         // Creating user's account
                         User user = new User(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.getEmail(), registerRequest.getNickname(), registerRequest.getPassword());
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
-                        user.setConfirmationToken(new Token()); // Generate a confirmation token
+                        //
+                        user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
+                        user.setConfirmationTokenCreationTime(Calendar.getInstance()); // Generate a creation date
+                        //
                         user.setPassword(passwordEncoder.encode(user.getPassword())); // Set the password (HASHED)
                         Role userRole = roleRepository.findByRole("USER");
                         if(userRole == null){
@@ -129,7 +136,7 @@ public class AuthenticationController {
                         confirmationEmail.setTo(user.getEmail());
                         confirmationEmail.setSubject(confirmationSubject);
                         confirmationEmail.setText(confirmationMessage
-                        + appUrl + "/confirm?token=" + user.getConfirmationToken().getUUID());
+                        + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
                         emailService.sendEmail(confirmationEmail);
                         // Notify the user that an email has been sent
                         return ResponseEntity.ok(new ApiResponse(true, "User registeration submitted successfully. Please complete the registration process by confirming your account."));
@@ -147,17 +154,17 @@ public class AuthenticationController {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                         }
-                if(user.getEnabled()) {
+                if(user.isEnabled()) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User is already enabled."),
                                 HttpStatus.BAD_REQUEST);
                         }
-                if(user.getConfirmationToken().getCreationDate().before(currentTime)) {
+                if(user.getConfirmationTokenCreationTime().before(currentTime)) {
                         //need to add a use case to allow confirmation link to be sent again
                         //or rather, send the confirmation link again here
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                         }
-                return ResponseEntity.ok(new ApiResponse(true, "Reset password link is valid, proceed to reset your password"));
+                return ResponseEntity.ok(new ApiResponse(true, "Confirmation link is valid, proceed to confirm your account"));
         }
 
         @PostMapping({"/confirm"})
@@ -190,8 +197,11 @@ public class AuthenticationController {
                 }
                 else {
                         // Lookup user in database by e-mail
-                        User user = userService.findByEmail(userEmail); 
-                        user.setResetToken(new Token()); // Generate a reset token
+                        User user = userService.findByEmail(userEmail);
+                        //
+                        user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
+                        user.setResetTokenCreationTime(Calendar.getInstance()); // Generate a creation date
+                        // 
                         // Save token to database
                         userRepository.save(user); // Saving the reset token in the database
 
@@ -205,11 +215,11 @@ public class AuthenticationController {
                         resetEmail.setTo(user.getEmail());
                         resetEmail.setSubject(passwordResetSubject);
                         resetEmail.setText(passwordResetMessage
-                        + appUrl + "/reset?token=" + user.getResetToken().getUUID());
+                        + appUrl + "/reset?token=" + user.getResetTokenUUID());
                         emailService.sendEmail(resetEmail);
                         // Notify the user that an email has been sent
                         return ResponseEntity.ok(new ApiResponse(true, "Password reset request submitted succesfully. Please check your email."));
-                        }
+                }
                 
         }
         
@@ -224,7 +234,7 @@ public class AuthenticationController {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                 }
-                if(user.getResetToken().getCreationDate().before(currentTime)) {
+                if(user.getResetTokenCreationTime().before(currentTime)) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token. Redirect to forgot password page."),
                                 HttpStatus.BAD_REQUEST);
                 }
@@ -242,7 +252,8 @@ public class AuthenticationController {
                 // Set new password
                 user.setPassword(passwordEncoder.encode(requestParams.get("password")));
                 // Set the reset token to null so it cannot be used again
-                user.setResetToken(null);
+                user.setResetTokenUUID(null);
+                user.setResetTokenCreationTime(null);
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete

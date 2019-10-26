@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByResetToken(String resetToken) {
-        return userRepository.findByResetToken(resetToken);
+    public User findByResetTokenUUID(String resetTokenUUID) {
+        return userRepository.findByResetTokenUUID(resetTokenUUID);
     }
 
     @Override

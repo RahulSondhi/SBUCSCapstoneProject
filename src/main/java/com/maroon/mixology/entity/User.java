@@ -1,6 +1,7 @@
 package com.maroon.mixology.entity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -20,8 +21,10 @@ public class User {
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String nickname;
     private String password;
-	private Token confirmationToken;
-	private Token resetToken;
+	private String confirmationTokenUUID;
+	private Calendar confirmationTokenCreationTime;
+	private String resetTokenUUID;
+	private Calendar resetTokenCreationTime;
 	private boolean enabled;
     @DBRef
     private Set<Role> roles;
@@ -90,29 +93,41 @@ public class User {
 		this.password = password;
 	}
 
-    public Token getConfirmationToken() {
-		return confirmationToken;
-	}
+    public String getConfirmationTokenUUID() {
+        return confirmationTokenUUID;
+    }
 
-	public void setConfirmationToken(Token confirmationToken) {
-		this.confirmationToken = confirmationToken;
-	}
-
-	public Token getResetToken() {
-		return resetToken;
-	}
-
-	public void setResetToken(Token resetToken) {
-		this.resetToken = resetToken;
-	}
-
-	public String getConfirmationTokenUUID(){
-		return confirmationToken.getUUID();
+    public void setConfirmationTokenUUID(String confirmationTokenUUID) {
+        this.confirmationTokenUUID = confirmationTokenUUID;
 	}
 	
-	public boolean getEnabled(){
-		return enabled;
-	}
+    public Calendar getConfirmationTokenCreationTime() {
+        return confirmationTokenCreationTime;
+    }
+
+    public void setConfirmationTokenCreationTime(Calendar confirmationTokenCreationTime) {
+        this.confirmationTokenCreationTime = confirmationTokenCreationTime;
+    }
+
+    public String getResetTokenUUID() {
+        return resetTokenUUID;
+    }
+
+    public void setResetTokenUUID(String resetTokenUUID) {
+        this.resetTokenUUID = resetTokenUUID;
+    }
+
+    public Calendar getResetTokenCreationTime() {
+        return resetTokenCreationTime;
+    }
+
+    public void setResetTokenCreationTime(Calendar resetTokenCreationTime) {
+        this.resetTokenCreationTime = resetTokenCreationTime;
+    }
+
+	public boolean isEnabled() {
+        return enabled;
+    }
 
 	public void setEnabled(boolean enabled){
 		this.enabled = enabled;

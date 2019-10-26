@@ -35,11 +35,11 @@ public class RegisterRequest {
     }
 
     public String getLastName() {
-        return firstName;
+        return lastName;
     }
 
-    public void setLastName(String firstName) {
-        this.firstName = firstName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
