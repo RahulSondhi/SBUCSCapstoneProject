@@ -30,11 +30,11 @@ public class User {
     @DBRef
     private ArrayList<Bar> bars;
     @DBRef
-	private ArrayList<Recipe> recipes_Written;
+	private ArrayList<Recipe> recipesWritten;
 	@DBRef
-	private ArrayList<Recipe> recipes_Incompleted;
+	private ArrayList<Recipe> recipesIncompleted;
 	@DBRef
-	private ArrayList<Recipe> recipes_Completed;
+	private ArrayList<Recipe> recipesCompleted;
 
 	public User(String firstName, String lastName, String email, String nickname, String password) {
 		this.firstName = firstName;
@@ -147,28 +147,28 @@ public class User {
         this.bars = bars;
 	}
 	
-	public ArrayList<Recipe> getRecipes_Written(){
-        return recipes_Written;
+	public ArrayList<Recipe> getRecipesWritten(){
+        return recipesWritten;
     }
 
-    public void setRecipes_Written(ArrayList<Recipe> recipes_Written){
-        this.recipes_Written = recipes_Written;
+    public void setRecipesWritten(ArrayList<Recipe> recipesWritten){
+        this.recipesWritten = recipesWritten;
     }
 	
-	public ArrayList<Recipe> getRecipes_Incompleted(){
-        return recipes_Incompleted;
+	public ArrayList<Recipe> getRecipesIncompleted(){
+        return recipesIncompleted;
     }
 
-    public void setRecipes_Incompleted(ArrayList<Recipe> recipes_Incompleted){
-        this.recipes_Incompleted = recipes_Incompleted;
+    public void setRecipesIncompleted(ArrayList<Recipe> recipesIncompleted){
+        this.recipesIncompleted = recipesIncompleted;
 	}
 	
-	public ArrayList<Recipe> getRecipes_Completed(){
-        return recipes_Completed;
+	public ArrayList<Recipe> getRecipesCompleted(){
+        return recipesCompleted;
     }
 
-    public void setRecipes_Completed(ArrayList<Recipe> recipes_Completed){
-        this.recipes_Completed = recipes_Completed;
+    public void setRecipesCompleted(ArrayList<Recipe> recipesCompleted){
+        this.recipesCompleted = recipesCompleted;
     }
 
 }

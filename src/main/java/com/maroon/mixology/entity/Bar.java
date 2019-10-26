@@ -22,7 +22,7 @@ public class Bar{
     @DBRef
     private Set<User> workers;
     @DBRef
-    private ArrayList<Recipe> recipes_avaliable;
+    private ArrayList<Recipe> recipesAvaliable;
 
     public String getId() {
         return id;
@@ -64,11 +64,11 @@ public class Bar{
         this.workers = workers;
     }
 
-    public ArrayList<Recipe> getRecipes_avaliable(){
-        return recipes_avaliable;
+    public ArrayList<Recipe> getRecipesAvaliable(){
+        return recipesAvaliable;
     }
 
-    public void setRecipes(ArrayList<Recipe> recipes_avaliable){
-        this.recipes_avaliable = recipes_avaliable;
+    public void setRecipes(ArrayList<Recipe> recipesAvaliable){
+        this.recipesAvaliable = recipesAvaliable;
     }
 }

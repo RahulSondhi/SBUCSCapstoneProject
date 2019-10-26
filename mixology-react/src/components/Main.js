@@ -107,7 +107,7 @@ const RegisterBox = () => {
     return (
         <div className="container">
         <div className="logo">
-            <img src="../assets/Tipsy.svg" />
+            
         </div>
     )
 }
