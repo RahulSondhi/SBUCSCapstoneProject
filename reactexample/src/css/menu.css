@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+.box {
+    width: 80%;
+    top: -12vmin;
+    height: 60vh;
+    border-radius: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.topContainer {
+    display: relative;
+}
+
+.tabs {
+    text-align: center;
+    margin: 1% 0;
+    position: relative;
+    bottom: 5vmin;
+}
+
+.tab {
+    display:inline-block;
+    margin: 0 5.5% 0 5.5%;
+    color: white;
+    font-size: 2vmin;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.entry {
+    position: absolute;
+    margin: 0 auto;
+    top: 5%;
+    width: 85%;
+    height: 20%;
+    background-color: white;
+    border-color: black;
+    border: .2em solid black;
+    right: 3%;
+}
+
+.addBar {
+    background-color: maroon;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    border-color: black;
+    border: .1em solid black;
+    position: absolute;
+    margin: 0 auto;
+    width: 70vw;
+    top: 80%;
+    right: 3%;
+}
+
+.bar-progress {
+    height: 100%;
+    width: 45%;
+    background-color: #800000;
+    border-radius: inherit;
+    position: absolute;
+    display: inline-block;
+}
+
+.title {
+    display: inline-block;
+    font-family: 'Righteous';
+    font-size: 10vmin;
+    color: #800000;
+    text-shadow: .05em .05em #FFCF00;
+}
+
+.text-info {
+    position: relative;
+    font-size: 2vmin;
+}
+
+.text-section {
+    position: relative;
+    width: 49%;
+    overflow: hidden;
+    top: 0%;
+    left: 10%;
+}
+
+.textRight {
+    float: right;
+}
+
+.textLeft {
+    float: left;
+}
+
+p {
+    color: white;
+}
+
+#owner {
+    float: bottom;
+    bottom: -5%;
+}
+
+#view {
+    float: right;
+}
+
+#make {
+    float: right;
+}
+
+.search {
+    border-radius: 1.5em;
+    height: 3vh;
+    font-size: 2vh;
+    position: absolute;
+    text-indent: 5%;
+    float: right;
+    display: block;
+    right: 35vmin;
+    top: 10vmin;
+}

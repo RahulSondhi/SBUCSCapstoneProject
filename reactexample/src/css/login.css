@@ -1,0 +1,92 @@
+#drinks {
+    max-height: 25vh;
+}
+
+.container {
+    vertical-align: middle;
+    padding-top: 5vh;
+    height: inherit;
+    display: table;
+    margin: 0 auto;
+}
+
+.logo {
+  margin: 1vh auto;
+  text-align: center;
+  display: table;
+  width: 100vw;
+  height: 15vh;
+  align-items: center;
+  /* margin: 0 auto; */
+/*
+  background-image: url("../assets/Tipsy.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; */
+}
+
+form {
+  /*    width: 100%;*/
+  min-width: 55vh;
+  display: table;
+  vertical-align: middle;
+  /* background-color: rgba(255, 255, 255, 0.6); */
+  margin: auto;
+  border-radius: 20px;
+}
+
+h3,
+p {
+    text-align: center;
+}
+
+label {
+    color: white;
+}
+
+input[type=username],
+input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: none !important;
+    border-bottom: solid 2px white !important;
+    font-size: 1em;
+    background-color: none;
+    background: none !important;
+    color: white;
+    transition: 1000ms;
+}
+
+input[type=username]:focus,
+input[type=password]:focus {
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: solid 2px #800000 !important;
+}
+
+.footer {
+  text-align: center;
+}
+
+.top-bar,
+.top-bar ul {
+    background-color: #1c1c1c;
+}
+
+#barLogo {
+    max-height: 5vh
+}
+
+.center {
+    width: 100vw;
+    text-align: center;
+    bottom: 0;
+}
+#counter {
+    max-height: 40vh;
+    max-width: 40vw;
+    margin: 0 auto;
+}
