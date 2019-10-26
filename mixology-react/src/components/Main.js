@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
-import { Menu, AccountMenu, BarMenu, RecipeMenu }from './Menu';
+import {AccountMenu, BarMenu, RecipeMenu} from './Menu';
+import Tipsy from '../assets/Tipsy.svg';
+import Drinks from '../assets/drinks.svg';
 import Search from './Search'
 import '../css/login.css';
 
@@ -16,11 +18,34 @@ const CustomButton = (props) => {
     )
 }
 
+const SVG = (props) => {
+    return (
+        <div>
+            <img src={props.src} height="50%" width="50%" style={props.style} alt={props.alt}/>
+        </div>
+    );
+}
+
+const DrinksStyle = {
+    width: "50%",
+    height: "50%",
+    "margin-left": "auto",
+    "margin-right": "auto",
+    "display": "block"
+}
+
+const TipsyStyle = {
+    width: "50%",
+    height: "50%"
+}
+
+
+
 const LoginBox = () => {
     return (
         <div className="container">
             <div className="logo">
-                <img src="../assets/Tipsy.svg" />
+                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
             </div>
             <form method="post">
                 <div className="sign-in-form">
@@ -41,15 +66,18 @@ const LoginBox = () => {
                         placeholder="Enter Email"/>
                     <br/><br/>
                     <label htmlFor="password">Password</label>:
-                    <input type="password" id="password" name="password" placeholder="Enter Password"/>
-                    <br /><br />
-                    <div className="footer">
-                        <input type="submit" name="register-submit" className="button" value="Register" />
-                        <input type="submit" name="login-submit" className="button" value="Log In" />
-                    </div>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter Password"/>
+                    <br/><br/>
+                    <CustomButton name="Login" redirect="/bar"/>
+                    <CustomButton name="Register" redirect="/register"/>
+                    <div className="footer"></div>
                 </div>
             </form>
-            <img id="drinks" src="../assets/drinks.svg" />
+            <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
         </div>
     )
 }
@@ -57,34 +85,57 @@ const LoginBox = () => {
 const RegisterBox = () => {
     return (
         <div className="container">
-        <div className="logo">
-            <img src="../assets/Tipsy.svg" />
-        </div>
-        <form method="post">
-            <div className="sign-in-form">
-                <h3>Register your account.</h3>
-                <label htmlFor="username">First Name:</label>
-                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter First Name" />
-                <br /><br />
-                <label htmlFor="username">Last Name:</label>
-                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter Last Name" />
-                <br /><br />
-                <label htmlFor="username">Email:</label>
-                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter Email" />
-                <br /><br />
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" />
-                <br /><br />
-                <label htmlFor="password">Confirm Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter Password" />
-                <br /><br />
-                <div className="footer">
-                    <input type="submit" name="register-submit" class="button" value="Register" />
-                </div>
+            <div className="logo">
+                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
             </div>
-        </form>
-        <img id="drinks" src="assets/drinks.svg" />
-    </div>
+            <form method="post">
+                <div className="sign-in-form">
+                    <h3>Register your account.</h3>
+                    <label htmlFor="username">First Name:</label>
+                    <input
+                        type="username"
+                        id="username"
+                        name="username"
+                        autoFocus="autofocus"
+                        placeholder="Enter First Name"/>
+                    <br/><br/>
+                    <label htmlFor="username">Last Name:</label>
+                    <input
+                        type="username"
+                        id="username"
+                        name="username"
+                        autoFocus="autofocus"
+                        placeholder="Enter Last Name"/>
+                    <br/><br/>
+                    <label htmlFor="username">Email:</label>
+                    <input
+                        type="username"
+                        id="username"
+                        name="username"
+                        autoFocus="autofocus"
+                        placeholder="Enter Email"/>
+                    <br/><br/>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter Password"/>
+                    <br/><br/>
+                    <label htmlFor="password">Confirm Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter Password"/>
+                    <br/><br/>
+                    <div className="footer">
+                        <input type="submit" name="register-submit" class="button" value="Register"/>
+                    </div>
+                </div>
+            </form>
+            <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+        </div>
     )
 }
 
