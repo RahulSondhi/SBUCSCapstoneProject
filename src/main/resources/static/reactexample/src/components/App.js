@@ -1,9 +1,9 @@
 import React from 'react';
+import Main from './Main';
 import ReactDOM from 'react-dom';
-import { BarResults } from './Results';
 ReactDOM.render(
-  <BarResults/>,
+  <Main/>,
   document.getElementById('root')
 )
 
-export default BarResults;
+export default Main;
