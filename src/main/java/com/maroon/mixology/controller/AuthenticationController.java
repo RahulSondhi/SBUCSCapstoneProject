@@ -12,8 +12,10 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
+import com.maroon.mixology.exchange.request.ForgotRequest;
 import com.maroon.mixology.exchange.request.LoginRequest;
 import com.maroon.mixology.exchange.request.RegisterRequest;
+import com.maroon.mixology.exchange.request.ResetRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.JwtAuthenticationResponse;
 import com.maroon.mixology.repository.RoleRepository;
@@ -189,15 +191,14 @@ public class AuthenticationController {
 
         // POST forget template
         @PostMapping({"/forgot"})
-        public ResponseEntity<?> processForgotPasswordForm(@RequestParam("email") String userEmail, HttpServletRequest request) {
-
-                if(!userRepository.existsByEmail(userEmail)) {
+        public ResponseEntity<?> processForgotPasswordForm(@RequestBody ForgotRequest userEmail, HttpServletRequest request) {
+                if(!userRepository.existsByEmail(userEmail.getEmail())) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
                         HttpStatus.BAD_REQUEST);
                 }
                 else {
                         // Lookup user in database by e-mail
-                        User user = userService.findByEmail(userEmail);
+                        User user = userService.findByEmail(userEmail.getEmail());
                         //
                         user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
                         user.setResetTokenCreationTime(Calendar.getInstance()); // Generate a creation date
@@ -229,6 +230,7 @@ public class AuthenticationController {
                 Calendar currentTime = Calendar.getInstance();
                 currentTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
+                System.out.println(requestParams.get("token"));
                 User user = userService.findByResetTokenUUID(requestParams.get("token"));
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
@@ -242,15 +244,16 @@ public class AuthenticationController {
         }
 
         @PostMapping({"/resetPassword"})
-        public ResponseEntity<?> resetPasswordForm(@RequestParam Map<String, String> requestParams) {
+        public ResponseEntity<?> resetPasswordForm(@RequestBody ResetRequest resetRequest) {
                 // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(requestParams.get("token"));
+                System.out.println(resetRequest.getUUID());
+                User user = userService.findByResetTokenUUID(resetRequest.getUUID());
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                 }
                 // Set new password
-                user.setPassword(passwordEncoder.encode(requestParams.get("password")));
+                user.setPassword(passwordEncoder.encode(resetRequest.getPassword()));
                 // Set the reset token to null so it cannot be used again
                 user.setResetTokenUUID(null);
                 user.setResetTokenCreationTime(null);
