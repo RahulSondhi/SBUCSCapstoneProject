@@ -1,5 +1,5 @@
 import React from 'react';
-import Main from './Main';
+import Main from '../main/main.js';
 import ReactDOM from 'react-dom';
 ReactDOM.render(
   <Main/>,
