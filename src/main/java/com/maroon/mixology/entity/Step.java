@@ -27,7 +27,7 @@ public class Step {
         this.equipment1 = equipment1;
     }
     
-    public Equipment getEquipment22(){
+    public Equipment getEquipment2(){
         return equipment2;
     }
 
