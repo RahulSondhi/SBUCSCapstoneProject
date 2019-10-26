@@ -1,10 +1,12 @@
 package com.maroon.mixology.entity;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "step")
-public class Step{    
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+public class Step {
     private int stepNumber;
+    @DBRef
     private Equipment equipment1;
+    @DBRef
     private Equipment equipment2;
     private String action;
     private boolean complete;

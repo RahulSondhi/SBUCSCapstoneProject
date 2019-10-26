@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -X POST http://localhost:8080/confirm?token="$0"| json_pp
+curl -X POST http://localhost:8080/confirm?token='$0'| json_pp
