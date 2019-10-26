@@ -5,6 +5,21 @@ import Tipsy from '../assets/Tipsy.svg';
 import Drinks from '../assets/drinks.svg';
 import Search from './Search'
 import '../css/login.css';
+import Drinks from "../assets/drinks.svg"; // Path to your icons.svg
+import PropTypes from 'prop-types';
+
+const Icon = ({ name, color, size }) => (
+  <svg className={`icon icon-${name}`} fill={color} width={size} height={size}>
+    <use xlinkHref={`${Drinks}#icon-${name}`} />
+  </svg>
+);
+
+Icon.propTypes = {
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  size: PropTypes.number
+};
+
 
 const CustomButton = (props) => {
     return (
@@ -45,7 +60,13 @@ const LoginBox = () => {
     return (
         <div className="container">
             <div className="logo">
-                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="40vw" viewBox="0 0 1885 465">
+                <g id="Tipsy" transform="translate(0 -265)">
+                  <text id="TIPSY-2" data-name="TIPSY" transform="translate(0 265)" fill="#fff" fontSize="400" fontFamily="ArialMT, Arial" letterSpacing="0.35em"><tspan x="84.57" y="362">TIPSY</tspan></text>
+                  <line id="Line_1" data-name="Line 1" x2="120" transform="translate(1604.5 612.5)" fill="none" stroke="#fff" strokeWidth="30"/>
+                  <path id="Polygon_1" data-name="Polygon 1" d="M49.5,0,99,79H0Z" transform="translate(1716.085 459.571) rotate(180)" fill="maroon"/>
+                </g>
+              </svg>
             </div>
             <form method="post">
                 <div className="sign-in-form">
@@ -77,7 +98,7 @@ const LoginBox = () => {
                     <div className="footer"></div>
                 </div>
             </form>
-            <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+            <img id="drinks" src="../assets/drinks.svg" />
         </div>
     )
 }
@@ -85,56 +106,8 @@ const LoginBox = () => {
 const RegisterBox = () => {
     return (
         <div className="container">
-            <div className="logo">
-                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-            </div>
-            <form method="post">
-                <div className="sign-in-form">
-                    <h3>Register your account.</h3>
-                    <label htmlFor="username">First Name:</label>
-                    <input
-                        type="username"
-                        id="username"
-                        name="username"
-                        autoFocus="autofocus"
-                        placeholder="Enter First Name"/>
-                    <br/><br/>
-                    <label htmlFor="username">Last Name:</label>
-                    <input
-                        type="username"
-                        id="username"
-                        name="username"
-                        autoFocus="autofocus"
-                        placeholder="Enter Last Name"/>
-                    <br/><br/>
-                    <label htmlFor="username">Email:</label>
-                    <input
-                        type="username"
-                        id="username"
-                        name="username"
-                        autoFocus="autofocus"
-                        placeholder="Enter Email"/>
-                    <br/><br/>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter Password"/>
-                    <br/><br/>
-                    <label htmlFor="password">Confirm Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter Password"/>
-                    <br/><br/>
-                    <div className="footer">
-                        <input type="submit" name="register-submit" class="button" value="Register"/>
-                    </div>
-                </div>
-            </form>
-            <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+        <div className="logo">
+            <img src="../assets/Tipsy.svg" />
         </div>
     )
 }

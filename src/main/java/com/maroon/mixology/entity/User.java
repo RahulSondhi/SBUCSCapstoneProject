@@ -1,7 +1,6 @@
 package com.maroon.mixology.entity;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -22,9 +21,9 @@ public class User {
 	private String nickname;
     private String password;
 	private String confirmationTokenUUID;
-	private Calendar confirmationTokenCreationTime;
+	private Long confirmationTokenCreationTime;
 	private String resetTokenUUID;
-	private Calendar resetTokenCreationTime;
+	private Long resetTokenCreationTime;
 	private boolean enabled;
     @DBRef
     private Set<Role> roles;
@@ -101,11 +100,11 @@ public class User {
         this.confirmationTokenUUID = confirmationTokenUUID;
 	}
 	
-    public Calendar getConfirmationTokenCreationTime() {
+    public Long getConfirmationTokenCreationTime() {
         return confirmationTokenCreationTime;
     }
 
-    public void setConfirmationTokenCreationTime(Calendar confirmationTokenCreationTime) {
+    public void setConfirmationTokenCreationTime(Long confirmationTokenCreationTime) {
         this.confirmationTokenCreationTime = confirmationTokenCreationTime;
     }
 
@@ -117,11 +116,11 @@ public class User {
         this.resetTokenUUID = resetTokenUUID;
     }
 
-    public Calendar getResetTokenCreationTime() {
+    public Long getResetTokenCreationTime() {
         return resetTokenCreationTime;
     }
 
-    public void setResetTokenCreationTime(Calendar resetTokenCreationTime) {
+    public void setResetTokenCreationTime(Long resetTokenCreationTime) {
         this.resetTokenCreationTime = resetTokenCreationTime;
     }
 

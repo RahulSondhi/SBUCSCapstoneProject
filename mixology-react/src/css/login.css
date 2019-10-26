@@ -11,32 +11,27 @@
 }
 
 .logo {
-  margin: 1vh auto;
-  text-align: center;
-  display: table;
-  width: 100vw;
-  height: 15vh;
-  align-items: center;
-  /* margin: 0 auto; */
-/*
-  background-image: url("../assets/Tipsy.svg");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center; */
+    margin: 0 auto;
+    text-align: center;
+    display: table;
+    max-width: 40vw;
+    min-width: 300px;
+    /*  height: 15vh;*/
+    align-items: center;
 }
 
 form {
-  /*    width: 100%;*/
-  min-width: 55vh;
-  display: table;
-  vertical-align: middle;
-  /* background-color: rgba(255, 255, 255, 0.6); */
-  margin: auto;
-  border-radius: 20px;
+    /*    width: 100%;*/
+    min-width: 55vh;
+    display: table;
+    vertical-align: middle;
+    /* background-color: rgba(255, 255, 255, 0.6); */
+    margin: auto;
+    border-radius: 20px;
+    padding: 10px;
 }
 
-h3,
-p {
+h3, p {
     text-align: center;
 }
 
@@ -68,7 +63,7 @@ input[type=password]:focus {
 }
 
 .footer {
-  text-align: center;
+    text-align: center;
 }
 
 .top-bar,

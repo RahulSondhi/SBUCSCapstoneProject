@@ -12,8 +12,10 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
+import com.maroon.mixology.exchange.request.ForgotRequest;
 import com.maroon.mixology.exchange.request.LoginRequest;
 import com.maroon.mixology.exchange.request.RegisterRequest;
+import com.maroon.mixology.exchange.request.ResetRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.JwtAuthenticationResponse;
 import com.maroon.mixology.repository.RoleRepository;
@@ -115,7 +117,7 @@ public class AuthenticationController {
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
                         //
                         user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
-                        user.setConfirmationTokenCreationTime(Calendar.getInstance()); // Generate a creation date
+                        user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
                         //
                         user.setPassword(passwordEncoder.encode(user.getPassword())); // Set the password (HASHED)
                         Role userRole = roleRepository.findByRole("USER");
@@ -146,8 +148,8 @@ public class AuthenticationController {
         @GetMapping({"/validateConfirm"})
         public ResponseEntity<?> validateConfirmation(@RequestParam Map<String, String> requestParams){
                 //Get the current time
-                Calendar currentTime = Calendar.getInstance();
-                currentTime.add(Calendar.HOUR, -24); //get time 24 hours ago
+                Calendar expiredTime = Calendar.getInstance();
+                expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
                 User user = userService.findByConfirmationTokenUUID(requestParams.get("token"));
                 if(user == null) {
@@ -158,7 +160,9 @@ public class AuthenticationController {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User is already enabled."),
                                 HttpStatus.BAD_REQUEST);
                         }
-                if(user.getConfirmationTokenCreationTime().before(currentTime)) {
+                Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
+                tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
+                if(tokenTime.before(expiredTime)) { //check if token is expired
                         //need to add a use case to allow confirmation link to be sent again
                         //or rather, send the confirmation link again here
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token."),
@@ -169,10 +173,7 @@ public class AuthenticationController {
 
         @PostMapping({"/confirm"})
         public ResponseEntity<?> processConfirmationForm(@RequestParam Map<String, String> requestParams) {
-                //Get the current time
-                Calendar currentTime = Calendar.getInstance();
-                currentTime.add(Calendar.HOUR, -24); //get time 24 hours ago
-                // Find the user associated with the reset token
+                // Find the user associated with the confirmation token
                 User user = userService.findByConfirmationTokenUUID(requestParams.get("token"));
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
@@ -189,18 +190,17 @@ public class AuthenticationController {
 
         // POST forget template
         @PostMapping({"/forgot"})
-        public ResponseEntity<?> processForgotPasswordForm(@RequestParam("email") String userEmail, HttpServletRequest request) {
-
-                if(!userRepository.existsByEmail(userEmail)) {
+        public ResponseEntity<?> processForgotPasswordForm(@RequestBody ForgotRequest userEmail, HttpServletRequest request) {
+                if(!userRepository.existsByEmail(userEmail.getEmail())) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
                         HttpStatus.BAD_REQUEST);
                 }
                 else {
                         // Lookup user in database by e-mail
-                        User user = userService.findByEmail(userEmail);
+                        User user = userService.findByEmail(userEmail.getEmail());
                         //
                         user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
-                        user.setResetTokenCreationTime(Calendar.getInstance()); // Generate a creation date
+                        user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
                         // 
                         // Save token to database
                         userRepository.save(user); // Saving the reset token in the database
@@ -226,15 +226,17 @@ public class AuthenticationController {
         @GetMapping({"/validateReset"})
         public ResponseEntity<?> processResetForm(@RequestParam Map<String, String> requestParams) {
                 //Get the current time
-                Calendar currentTime = Calendar.getInstance();
-                currentTime.add(Calendar.HOUR, -24); //get time 24 hours ago
+                Calendar expiredTime = Calendar.getInstance();
+                expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
                 User user = userService.findByResetTokenUUID(requestParams.get("token"));
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                 }
-                if(user.getResetTokenCreationTime().before(currentTime)) {
+                Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
+                tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
+                if(tokenTime.before(expiredTime)) { //check if token is expired
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token. Redirect to forgot password page."),
                                 HttpStatus.BAD_REQUEST);
                 }
@@ -242,15 +244,15 @@ public class AuthenticationController {
         }
 
         @PostMapping({"/resetPassword"})
-        public ResponseEntity<?> resetPasswordForm(@RequestParam Map<String, String> requestParams) {
+        public ResponseEntity<?> resetPasswordForm(@RequestBody ResetRequest resetRequest) {
                 // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(requestParams.get("token"));
+                User user = userService.findByResetTokenUUID(resetRequest.getUUID());
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                 }
                 // Set new password
-                user.setPassword(passwordEncoder.encode(requestParams.get("password")));
+                user.setPassword(passwordEncoder.encode(resetRequest.getPassword()));
                 // Set the reset token to null so it cannot be used again
                 user.setResetTokenUUID(null);
                 user.setResetTokenCreationTime(null);
