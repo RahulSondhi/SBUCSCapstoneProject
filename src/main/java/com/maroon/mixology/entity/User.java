@@ -1,6 +1,7 @@
 package com.maroon.mixology.entity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -17,10 +18,13 @@ public class User {
 	private String lastName;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String email;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+	private String nickname;
     private String password;
-    private String passwordConfirm;
-	private String confirmationToken;
-	private String resetToken;
+	private String confirmationTokenUUID;
+	private Calendar confirmationTokenCreationTime;
+	private String resetTokenUUID;
+	private Calendar resetTokenCreationTime;
 	private boolean enabled;
     @DBRef
     private Set<Role> roles;
@@ -32,6 +36,14 @@ public class User {
 	private ArrayList<Recipe> recipes_Incompleted;
 	@DBRef
 	private ArrayList<Recipe> recipes_Completed;
+
+	public User(String firstName, String lastName, String email, String nickname, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+	}
 
 	public String getId() {
 		return id;
@@ -63,14 +75,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-    }
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	}
+	
+	public String getNickname(){
+		return nickname;	
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setNickname(String nickname){
+		this.nickname = nickname;
 	}
 
 	public String getPassword() {
@@ -81,25 +93,41 @@ public class User {
 		this.password = password;
 	}
 
-    public String getConfirmationToken() {
-		return confirmationToken;
-	}
+    public String getConfirmationTokenUUID() {
+        return confirmationTokenUUID;
+    }
 
-	public void setConfirmationToken(String confirmationToken) {
-		this.confirmationToken = confirmationToken;
+    public void setConfirmationTokenUUID(String confirmationTokenUUID) {
+        this.confirmationTokenUUID = confirmationTokenUUID;
 	}
+	
+    public Calendar getConfirmationTokenCreationTime() {
+        return confirmationTokenCreationTime;
+    }
 
-	public String getResetToken() {
-		return resetToken;
-	}
+    public void setConfirmationTokenCreationTime(Calendar confirmationTokenCreationTime) {
+        this.confirmationTokenCreationTime = confirmationTokenCreationTime;
+    }
 
-	public void setResetToken(String resetToken) {
-		this.resetToken = resetToken;
-	}
+    public String getResetTokenUUID() {
+        return resetTokenUUID;
+    }
 
-	public boolean getEnabled(){
-		return enabled;
-	}
+    public void setResetTokenUUID(String resetTokenUUID) {
+        this.resetTokenUUID = resetTokenUUID;
+    }
+
+    public Calendar getResetTokenCreationTime() {
+        return resetTokenCreationTime;
+    }
+
+    public void setResetTokenCreationTime(Calendar resetTokenCreationTime) {
+        this.resetTokenCreationTime = resetTokenCreationTime;
+    }
+
+	public boolean isEnabled() {
+        return enabled;
+    }
 
 	public void setEnabled(boolean enabled){
 		this.enabled = enabled;

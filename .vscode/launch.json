@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MixologyApplication",
+            "request": "launch",
+            "mainClass": "com.maroon.mixology.MixologyApplication",
+            "projectName": "mixology"
+        }
+    ]
+}
