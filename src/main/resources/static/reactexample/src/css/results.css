@@ -20,7 +20,7 @@
     margin: auto auto;
 }
 
-#createBarButton {
+.createButton {
     position: absolute;
     z-index: 2;
     float: right;

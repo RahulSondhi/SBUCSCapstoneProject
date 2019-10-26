@@ -22,7 +22,7 @@ const Tabs = () => (
                     Account
                 </h1>
             </Link>
-            <Link to="/login" className="tab">
+            <Link to="/" className="tab">
                 <h1>
                     Logout
                 </h1>
