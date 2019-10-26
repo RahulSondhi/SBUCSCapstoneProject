@@ -14,13 +14,13 @@
     "bars": [
         DBRef("bar", ObjectId("String"))
     ],
-    "recipes_Written": [
+    "recipesWritten": [
         DBRef("recipe", ObjectId("String"))
     ],
-    "recipes_Incompleted": [
+    "recipesIncompleted": [
         DBRef("recipe", ObjectId("String"))
     ],
-    "recipes_Completed": [
+    "recipesCompleted": [
         DBRef("recipe", ObjectId("String"))
     ],
     "_class": "com.maroon.mixology.entity.User"

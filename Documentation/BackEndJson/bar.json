@@ -8,7 +8,7 @@
     "workers": [
         DBRef("bar", ObjectId("String"))
     ],
-    "recipes_avaliable": [
+    "recipesAvaliable": [
         DBRef("recipe", ObjectId("String"))
     ],
     "_class": "com.maroon.mixology.entity.Bar"
