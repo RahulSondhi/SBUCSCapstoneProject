@@ -20,11 +20,11 @@ const LoginBox = () => {
     return (
         <div className="container">
             <div className="logo">
-                Tipsy
+                <img src="assets/Tipsy.svg" />
             </div>
             <form method="post">
                 <div className="sign-in-form">
-                    <h2>Login your account.</h2>
+                    <h3>Login your account.</h3>
                     <div>
                         <div>Invalid username or password.</div>
                     </div>
@@ -32,22 +32,59 @@ const LoginBox = () => {
                         <div>You have been logged out.</div>
                     </div>
                     <br/>
-                    <label htmlFor="username">Username</label>:
+                    <label htmlFor="username">Email:</label>:
                     <input
                         type="username"
                         id="username"
                         name="username"
                         autoFocus="autofocus"
-                        placeholder="Username"/>
+                        placeholder="Enter Email"/>
                     <br/><br/>
-                    <label htmlFor="password">Password</label>:
-                    <input type="password" id="password" name="password" placeholder="Password"/>
-                    <br/><br/>
-                    <CustomButton name="Log in" redirect="/search"/>
-                    <CustomButton name="Register" redirect="/register"/>
+                    <label htmlFor="password">Password:</label>:
+                    <input type="password" id="password" name="password" placeholder="Enter Password"/>
+                    <br /><br />
+                    <div class="footer">
+                        <input type="submit" name="register-submit" class="button" value="Register" />
+                        <input type="submit" name="login-submit" class="button" value="Log In" />
+                    </div>
                 </div>
             </form>
+            <img id="drinks" src="assets/drinks.svg" />
         </div>
+    )
+}
+
+const RegisterBox = () => {
+    return (
+        <div class="container">
+        <div class="logo">
+            <img src="assets/Tipsy.svg" />
+        </div>
+        <form method="post">
+            <div class="sign-in-form">
+                <h3>Register your account.</h3>
+                <label htmlFor="username">First Name:</label>
+                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter First Name" />
+                <br /><br />
+                <label htmlFor="username">Last Name:</label>
+                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter Last Name" />
+                <br /><br />
+                <label htmlFor="username">Email:</label>
+                <input type="username" id="username" name="username" autoFocus="autofocus" placeholder="Enter Email" />
+                <br /><br />
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" />
+                <br /><br />
+                <label htmlFor="password">Confirm Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter Password" />
+                <br /><br />
+                <div class="footer">
+                    <input type="submit" name="register-submit" class="button" value="Register" />
+                </div>
+            </div>
+        </form>
+        <img id="drinks" src="assets/drinks.svg" />
+    </div>
     )
 }
 
@@ -58,7 +95,7 @@ class Main extends Component {
                 <Switch>
                     <Route path="/" exact component={LoginBox}/>
                     <Route path="/search" component={Search}/>
-                    <Route path="/register" component={Menu}/>
+                    <Route path="/register" component={RegisterBox}/>
                     <Route path="/bar" component={BarMenu} className="tab"/>
                     <Route path="/recipe" component={RecipeMenu} className="tab"/>
                     <Route path="/account" component={AccountMenu} className="tab"/>
