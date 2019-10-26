@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Switch} from "react-router-dom";
 import Tabs from './Tabs';
 import '../css/menu.css';
-import '../../public/styles.css';
+import '../css/styles.css';
 
 export const AccountMenu = () => (
     <div className="topContainer">
