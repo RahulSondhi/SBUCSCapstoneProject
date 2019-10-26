@@ -230,7 +230,6 @@ public class AuthenticationController {
                 Calendar currentTime = Calendar.getInstance();
                 currentTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
-                System.out.println(requestParams.get("token"));
                 User user = userService.findByResetTokenUUID(requestParams.get("token"));
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
@@ -246,7 +245,6 @@ public class AuthenticationController {
         @PostMapping({"/resetPassword"})
         public ResponseEntity<?> resetPasswordForm(@RequestBody ResetRequest resetRequest) {
                 // Find the user associated with the reset token
-                System.out.println(resetRequest.getUUID());
                 User user = userService.findByResetTokenUUID(resetRequest.getUUID());
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
