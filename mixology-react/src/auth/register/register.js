@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import { register, checkNicknameAvailability, checkEmailAvailability } from '../../util/APIUtils';
 
-import './Register.css';
+import './register.css';
 
 import { 
     FIRSTNAME_MIN_LENGTH, FIRSTNAME_MAX_LENGTH,
