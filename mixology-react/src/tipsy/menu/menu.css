@@ -2,7 +2,6 @@
 
 .box {
     width: 80%;
-    top: -12vmin;
     height: 60vh;
     border-radius: 1.5em;
     margin-left: auto;
@@ -10,28 +9,6 @@
     position: relative;
 }
 
-.topContainer {
-    display: relative;
-}
-
-.tabs {
-    text-align: center;
-    margin: 1% 0;
-    position: relative;
-    bottom: 5vmin;
-}
-
-.tab {
-    display:inline-block;
-    margin: 0 5.5% 0 5.5%;
-    color: white;
-    font-size: 2vmin;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    text-decoration: none;
-    font-family: 'Roboto Mono', monospace;
-}
 
 .entry {
     position: absolute;
@@ -68,13 +45,7 @@
     display: inline-block;
 }
 
-.title {
-    display: inline-block;
-    font-family: 'Righteous';
-    font-size: 10vmin;
-    color: #800000;
-    text-shadow: .05em .05em #FFCF00;
-}
+
 
 .text-info {
     position: relative;
@@ -125,3 +96,4 @@ p {
     right: 35vmin;
     top: 10vmin;
 }
+

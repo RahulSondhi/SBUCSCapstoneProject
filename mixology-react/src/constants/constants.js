@@ -1,3 +1,6 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 export const CustomButton = (props) => {
     return (
         <div>
@@ -23,15 +26,17 @@ export const SVG = (props) => {
     );
 }
 
-const DrinksStyle = {
+export const DrinksStyle = {
     width: "50%",
     height: "50%",
-    "margin-left": "auto",
-    "margin-right": "auto",
+    "marginLeft": "auto",
+    "marginRight": "auto",
     "display": "block"
 }
 
-const TipsyStyle = {
+export const TipsyStyle = {
     width: "50%",
     height: "50%"
 }
+
+export default SVG;

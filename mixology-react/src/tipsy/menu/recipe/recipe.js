@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
+import Tabs from '../../search/tabs.js';
+import '../menu.css';
 
 class Recipe extends Component {
     render() {
         return (
             <div className="topContainer">
                 <Tabs/>
-                <div className="tabs"></div>
                 {/* <-- bar tab --> */}
                 <div className="box" id="recipeBox">
                     <div className="entry">

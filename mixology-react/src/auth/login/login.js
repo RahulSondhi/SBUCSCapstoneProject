@@ -1,4 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../constants/constants.js';
+import Tipsy from '../../assets/Tipsy.svg';
+import Drinks from '../../assets/drinks.svg';
+import './login.css';
+import '../../index.css';
 
 class Login extends Component {
     render() {
@@ -9,7 +14,7 @@ class Login extends Component {
                 </div>
                 <form method="post">
                     <div className="sign-in-form">
-                        <h3>Login your account.</h3>
+                        <h3>Log into your account.</h3>
                         <div>
                             <p>Invalid username or password.</p>
                         </div>
@@ -17,7 +22,7 @@ class Login extends Component {
                             <p>You have been logged out.</p>
                         </div>
                         <br/>
-                        <label htmlFor="username">Email</label>:
+                        <label htmlFor="username">Email:</label>
                         <input
                             type="username"
                             id="username"
@@ -25,14 +30,14 @@ class Login extends Component {
                             autoFocus="autofocus"
                             placeholder="Enter Email"/>
                         <br/><br/>
-                        <label htmlFor="password">Password</label>:
+                        <label htmlFor="password">Password:</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
                             placeholder="Enter Password"/>
                         <br/><br/>
-                        <CustomButton name="Login" redirect="/bar"/>
+                        <CustomButton name="Login" redirect="/search"/>
                         <CustomButton name="Register" redirect="/register"/>
                         <div className="footer"></div>
                     </div>

@@ -1,0 +1,28 @@
+.topContainer {
+    display: relative;
+}
+
+.tabs {
+    text-align: center;
+    margin: 1% 0;
+    position: relative;
+    bottom: 5vmin;
+}
+
+.tab {
+    display:inline-block;
+    margin: 0 5.5% 0 5.5%;
+    color: white;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.title {
+    display: inline-block;
+    font-family: 'Righteous';
+    color: #800000;
+    text-shadow: .05em .05em #FFCF00;
+}

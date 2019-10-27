@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import { SVG, TipsyStyle, DrinksStyle } from '../../constants/constants.js';
+import Tipsy from '../../assets/Tipsy.svg';
+import Drinks from '../../assets/drinks.svg';
 
 class Register extends Component {
     render() {
