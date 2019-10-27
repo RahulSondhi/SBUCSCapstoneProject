@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {SVG, TipsyStyle} from '../../constants/constants.js';
-import Tipsy from '../../assets/Tipsy.svg';
 import './tabs.css';
 
 const Tab = (props) => {

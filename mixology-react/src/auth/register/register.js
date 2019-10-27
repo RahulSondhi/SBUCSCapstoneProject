@@ -4,6 +4,7 @@ import { register, checkNicknameAvailability, checkEmailAvailability } from '../
 import { SVG, TipsyStyle, DrinksStyle} from '../../constants/constants.js';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
+import '../../index.css';
 import './register.css';
 
 import { 
@@ -145,7 +146,6 @@ class Register extends Component {
                             validateStatus={this.state.nickname.validateStatus}
                             help={this.state.nickname.errorMsg}>
                             <Input 
-                                size="large"
                                 name="nickname" 
                                 autoComplete="off"
                                 placeholder="Enter Nickname"
@@ -159,7 +159,6 @@ class Register extends Component {
                             validateStatus={this.state.email.validateStatus}
                             help={this.state.email.errorMsg}>
                             <Input 
-                                size="large"
                                 name="email" 
                                 type="email" 
                                 autoComplete="off"
@@ -173,7 +172,6 @@ class Register extends Component {
                             validateStatus={this.state.password.validateStatus}
                             help={this.state.password.errorMsg}>
                             <Input 
-                                size="large"
                                 name="password" 
                                 type="password"
                                 autoComplete="off"
@@ -186,20 +184,18 @@ class Register extends Component {
                             validateStatus={this.state.passwordConfirm.validateStatus}
                             help={this.state.passwordConfirm.errorMsg}>
                             <Input 
-                                size="large"
                                 name="passwordConfirm" 
-                                type="passwordConfirm"
+                                type="password"
                                 autoComplete="off"
                                 placeholder="Confirm your password" 
-                                value={this.state.password.value} 
+                                value={this.state.passwordConfirm.value} 
                                 onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />    
                         </FormItem>
                         <FormItem>
                             <Button type="primary" 
                                 htmlType="submit" 
-                                size="large" 
-                                className="signup-form-button"
-                                disabled={this.isFormInvalid()}>Register</Button>
+                                disabled={this.isFormInvalid()}>Register 
+                            </Button>
                             Already registered? <Link to="/login">Login now!</Link>
                         </FormItem>
                     </Form>

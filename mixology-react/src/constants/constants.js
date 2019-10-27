@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import {login} from '../util/APIUtils.js';
 
 export const CustomButton = (props) => {
     return (
@@ -9,6 +10,16 @@ export const CustomButton = (props) => {
                     {props.name}
                 </button>
             </Link>
+        </div>
+    )
+}
+
+export const LoginButton = (props) => {
+    return (
+        <div>
+            <button type="submit" className="button" onClick={(e) => login(e)}>
+                Log in
+            </button>
         </div>
     )
 }
@@ -43,13 +54,23 @@ export const RecipeEntry = () => {
     )
 }
 
+export const UserEntry = () => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+                <p>
+                    UserName
+                </p>
+                <CustomButton redirect="/tipsy/user" name="View"/>
+            </div>
+        </div>
+    )
+}
+
 export const SVG = (props) => {
     return (
         <div>
-            <img
-                src={props.src}
-                style={props.style}
-                alt={props.alt}/>
+            <img src={props.src} style={props.style} alt={props.alt}/>
         </div>
     );
 }
@@ -63,8 +84,8 @@ export const DrinksStyle = {
 }
 
 export const TipsyStyle = {
-    width: "5%",
-    height: "5%"
+    width: "100%",
+    height: "100%"
 }
 
 export const SearchBarStyle = {
@@ -92,6 +113,5 @@ export const NICKNAME_MAX_LENGTH = 32;
 
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 256;
-
 
 export default SVG;
