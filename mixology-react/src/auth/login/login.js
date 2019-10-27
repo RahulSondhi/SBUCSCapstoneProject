@@ -63,7 +63,7 @@ class LoginForm extends Component {
                 </div>
                 <h3>Login to your account.</h3>
                 <Form onSubmit={this.handleSubmit} className="">
-                    <FormItem label="Email">
+                    <FormItem label="Email" className="inputLabel">
                         {getFieldDecorator('email', {
                             rules: [
                                 {
@@ -75,7 +75,7 @@ class LoginForm extends Component {
                             <Input prefix={< Icon type = "user" />} name="email" placeholder="Enter Email"/>
                         )}
                     </FormItem>
-                    <FormItem label="Password">
+                    <FormItem label="Password" className="inputLabel">
                         {getFieldDecorator('password', {
                             rules: [
                                 {
@@ -96,17 +96,19 @@ class LoginForm extends Component {
                         Forgot Password?
                     </Link>
                     <div className="grid-x grid-margin-x">
-                        <FormItem>
-                            {/* <div className="cell small-4"> */}
-                                {/* REEE */}
-                                <CustomButton redirect="/tipsy/search" name="Log in"/>
-                            {/* </div> */}
-                            Or
-                            {/* <div className="cell small-4"> */}
-                                {/* reeeeeee */}
+
+                        {/* <FormItem> */}
+                        <div className="cell small-4">
+                            <FormItem>
+                                <CustomButton redirect="/tipsy/search" name="Login"/>
+                            </FormItem>
+                        </div>
+                        <div className="cell small-4"></div>
+                        <div className="cell small-4">
+                            <FormItem>
                                 <CustomButton redirect="/register" name="Register"/>
-                            {/* </div> */}
-                        </FormItem>
+                            </FormItem>
+                        </div>
                     </div>
                 </Form>
                 <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
