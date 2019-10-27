@@ -18,7 +18,6 @@ html {
 .button {
   font-size: 1em;
   text-transform: uppercase;
-  line-height: 50px;
   border: 0 solid;
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
   outline: 1px solid;

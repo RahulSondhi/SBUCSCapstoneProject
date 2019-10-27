@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import { SVG, TipsyStyle } from '../../constants/constants.js';
+import {SVG, TipsyStyle} from '../../constants/constants.js';
 import Tipsy from '../../assets/Tipsy.svg';
 import './tabs.css';
 
@@ -9,9 +9,7 @@ const Tab = (props) => {
         <div>
             <Link to={props.link} className="tab">
                 <li>
-                    <p>
-                        {props.name}
-                    </p>
+                    {props.name}
                 </li>
             </Link>
         </div>
@@ -21,10 +19,11 @@ const Tab = (props) => {
 class Tabs extends Component {
     render() {
         return (
-            <div className="top-bar">
-                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+            <nav className="top-bar">
+                {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
+                <h1> TIPSY</h1>
                 <div className="top-bar-right">
-                    <ul className="vertical medium-horizontal menu">
+                    <ul className="horizontal menu nested">
                         <Tab link="/tipsy/search" name="Search"/>
                         <Tab link="/tipsy/myBars" name="My Bars"/>
                         <Tab link="/tipsy/myRecipes" name="My Recipes"/>
@@ -32,7 +31,7 @@ class Tabs extends Component {
                         <Tab link="/" name="Logout"/>
                     </ul>
                 </div>
-            </div>
+            </nav>
         )
     }
 }

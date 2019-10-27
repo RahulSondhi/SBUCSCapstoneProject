@@ -5,13 +5,13 @@
     padding-right: 10%;
 }
 
-
 .entry {
     margin: auto auto;
     width: 15vw;
     height: 15vw;
     background-color: black;
     border: .2em solid white;
+    text-align: center;
 }
 
 .addBar {
@@ -36,8 +36,6 @@
     position: absolute;
     display: inline-block;
 }
-
-
 
 .text-info {
     position: relative;

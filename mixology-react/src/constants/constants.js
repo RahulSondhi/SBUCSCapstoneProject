@@ -13,6 +13,36 @@ export const CustomButton = (props) => {
     )
 }
 
+export const BarEntry = () => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+                <p>
+                    BarName
+                </p>
+                <p>
+                    OwnerName</p>
+                <CustomButton redirect="/tipsy/bar" name="View"/>
+            </div>
+        </div>
+    )
+}
+
+export const RecipeEntry = () => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+                <p>
+                    RecipeName
+                </p>
+                <p>
+                    OwnerName</p>
+                <CustomButton redirect="/tipsy/recipe" name="View"/>
+            </div>
+        </div>
+    )
+}
+
 export const SVG = (props) => {
     return (
         <div>
@@ -33,8 +63,8 @@ export const DrinksStyle = {
 }
 
 export const TipsyStyle = {
-    width: "15%",
-    height: "15%"
+    width: "5%",
+    height: "5%"
 }
 
 export const SearchBarStyle = {

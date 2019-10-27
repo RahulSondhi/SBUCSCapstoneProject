@@ -1,46 +1,29 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
+import './myrecipe.css'
+import {CustomButton, RecipeEntry} from '../../../constants/constants.js';
 
-class Recipe extends Component {
+class MyRecipes extends Component {
     render() {
         return (
-            <div className="topContainer">
+            <div>
                 <Tabs/>
-                {/* <-- bar tab --> */}
-                <div className="box" id="recipeBox">
-                    <div className="entry">
-                        <div className="bar-progress">
-                            <div className="text-section textLeft">
-                                <p className="text-info">
-                                    BarName
-                                </p>
-                                <p className="text-info">
-                                    OwnerName
-                                </p>
-                            </div>
-                            <div className="text-section textRight">
-                                <p className="text-info" id="progress">
-                                    40%
-                                </p>
-                                <p className="text-info">
-                                    Date
-                                </p>
-                            </div>
-                        </div>
-                        <div className="button" id="make">
-                            Make
-                        </div>
-                        <div className="button" id="view">
-                            View
-                        </div>
-                    </div>
-                    <button className="addBar button">+</button>
+                <h1 className="myBar">
+                    My Recipes</h1>
+                <div id="createABar">
+                    <CustomButton redirect="/tipsy/createBar" name="Create a Recipe"/>
                 </div>
-
+                <div className="grid-x grid-margin-y box">
+                    <RecipeEntry/>
+                    <RecipeEntry/>
+                    <RecipeEntry/>
+                    <RecipeEntry/>
+                    <RecipeEntry/>
+                </div>
             </div>
         )
     }
 }
 
-export default Recipe;
+export default MyRecipes;
