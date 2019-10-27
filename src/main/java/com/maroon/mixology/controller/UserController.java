@@ -25,8 +25,8 @@ public class UserController {
         return userSummary;
     }
 
-    @GetMapping("/user/checkUsernameAvailability")
-    public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "nickname") String nickname) {
+    @GetMapping("/user/checkNicknameAvailability")
+    public UserIdentityAvailability checkNicknameAvailability(@RequestParam(value = "nickname") String nickname) {
         Boolean isAvailable = !userRepository.existsByNickname(nickname);
         return new UserIdentityAvailability(isAvailable);
     }
