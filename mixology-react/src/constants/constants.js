@@ -35,3 +35,20 @@ const TipsyStyle = {
     width: "50%",
     height: "50%"
 }
+
+export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+export const ACCESS_TOKEN = 'accessToken';
+
+export const FIRSTNAME_MIN_LENGTH = 2;
+export const FIRSTNAME_MAX_LENGTH = 50;
+
+export const LASTNAME_MIN_LENGTH = 2;
+export const LASTNAME_MAX_LENGTH = 50;
+
+export const EMAIL_MAX_LENGTH = 62;
+
+export const NICKNAME_MIN_LENGTH = 4;
+export const NICKNAME_MAX_LENGTH = 32;
+
+export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 256;
