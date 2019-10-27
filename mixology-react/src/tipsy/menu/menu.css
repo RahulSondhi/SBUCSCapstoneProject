@@ -1,48 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
 .box {
-    width: 80%;
-    top: -12vmin;
-    height: 60vh;
-    border-radius: 1.5em;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-}
-
-.topContainer {
-    display: relative;
-}
-
-.tabs {
-    text-align: center;
-    margin: 1% 0;
-    position: relative;
-    bottom: 5vmin;
-}
-
-.tab {
-    display:inline-block;
-    margin: 0 5.5% 0 5.5%;
-    color: white;
-    font-size: 2vmin;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    text-decoration: none;
-    font-family: 'Roboto Mono', monospace;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .entry {
-    position: absolute;
-    margin: 0 auto;
-    top: 5%;
-    width: 85%;
-    height: 20%;
-    background-color: white;
-    border-color: black;
-    border: .2em solid black;
-    right: 3%;
+    margin: auto auto;
+    width: 15vw;
+    height: 15vw;
+    background-color: black;
+    border: .2em solid white;
+    text-align: center;
 }
 
 .addBar {
@@ -66,14 +35,6 @@
     border-radius: inherit;
     position: absolute;
     display: inline-block;
-}
-
-.title {
-    display: inline-block;
-    font-family: 'Righteous';
-    font-size: 10vmin;
-    color: #800000;
-    text-shadow: .05em .05em #FFCF00;
 }
 
 .text-info {
@@ -125,3 +86,4 @@ p {
     right: 35vmin;
     top: 10vmin;
 }
+

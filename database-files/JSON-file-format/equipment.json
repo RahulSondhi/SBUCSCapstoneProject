@@ -1,8 +1,0 @@
-{
-    "_id": ObjectId("String"),
-    "name": "String",
-    "actions" : [
-        "String"
-    ],
-    "_class": "com.maroon.mixology.entity.Equipment"
-}
