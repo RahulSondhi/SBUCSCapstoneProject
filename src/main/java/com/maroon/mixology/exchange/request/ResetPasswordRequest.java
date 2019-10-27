@@ -2,7 +2,7 @@ package com.maroon.mixology.exchange.request;
 
 import javax.validation.constraints.NotBlank;
 
-public class ResetRequest {
+public class ResetPasswordRequest {
     @NotBlank
     private String UUID;
 

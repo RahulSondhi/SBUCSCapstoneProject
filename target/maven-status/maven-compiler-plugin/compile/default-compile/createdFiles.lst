@@ -1,5 +1,4 @@
 com/maroon/mixology/service/UserDetailsServiceImpl.class
-com/maroon/mixology/exchange/request/ResetRequest.class
 com/maroon/mixology/exchange/request/LoginRequest.class
 com/maroon/mixology/entity/Equipment.class
 com/maroon/mixology/config/WebMvcConfig.class

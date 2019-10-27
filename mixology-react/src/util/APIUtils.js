@@ -56,6 +56,21 @@ export function forgot(forgotRequest) {
     });
 }
 
+export function resetPassword(resetPasswordRequest) {
+    return request({
+        url: API_BASE_URL + "/resetPassword",
+        method: 'POST',
+        body: JSON.stringify(resetPasswordRequest)
+    });
+}
+
+export function validateReset(uuid) {
+    return request({
+        url: API_BASE_URL + "/validateReset?token=" + uuid,
+        method: 'GET'
+    });
+}
+
 export function checkNicknameAvailability(nickname) {
     return request({
         url: API_BASE_URL + "/user/checkNicknameAvailability?nickname=" + nickname,
