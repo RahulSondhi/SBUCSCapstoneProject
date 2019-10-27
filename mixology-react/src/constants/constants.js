@@ -1,6 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {login} from '../util/APIUtils.js';
+
+export const LoginLabelStyle = {
+    "float": "left"
+}
 
 export const CustomButton = (props) => {
     return (
@@ -38,7 +41,7 @@ export const RecipeEntry = () => {
                 </p>
                 <p>
                     OwnerName</p>
-                <CustomButton redirect="/tipsy/recipe" name="View"/>
+                <CustomButton redirect="/tipsy/myRecipes/recipe" name="View"/>
             </div>
         </div>
     )

@@ -18,6 +18,7 @@ import Reset from '../auth/reset/reset.js';
 import { getCurrentUser } from '../util/APIUtils.js';
 import { ACCESS_TOKEN } from '../constants/constants.js';
 import { notification } from 'antd';
+import Recipe from '../tipsy/menu/recipe/recipe';
 
 class Main extends Component {
     constructor(props) {
@@ -80,22 +81,21 @@ class Main extends Component {
         //We must redirect login
         this.props.history.push("/");
       }
-    
 
     render() {
         return (
             <Router>
                 <Switch>
                     <Route path="/" exact component={Login}/>
-                    <Route path="/login" component={Login}/>
                     <Route path="/login" render={ (props) => <Login onLogin={this.handleLogin} {...props} /> }/>
                     <Route path="/forgot" component={Forgot}/>
                     <Route path="/confirm" component={Confirm}/>
                     <Route path="/reset" component={Reset}/>
                     <Route path="/tipsy/search" component={Search}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/tipsy/myBars" component={MyBars} className="tab"/>
-                    <Route path="/tipsy/myRecipes" component={MyRecipes} className="tab"/>
+                    <Route path="/tipsy/myBars" exact component={MyBars} className="tab"/>
+                    <Route path="/tipsy/myRecipes" exact component={MyRecipes} className="tab"/>
+                    <Route path="/tipsy/myRecipes/recipe" component={Recipe}/>
                     <Route path="/tipsy/admin" component={Admin} className="tab"/>
                 </Switch>
             </Router>

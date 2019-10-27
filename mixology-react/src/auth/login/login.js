@@ -62,35 +62,54 @@ class LoginForm extends Component {
                 </div>
                 <h3>Login to your account.</h3>
                 <Form onSubmit={this.handleSubmit} className="">
-                <FormItem label="Email">
+                    <FormItem label="Email" className="inputLabel">
+                        {getFieldDecorator('email', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: 'Please input your email!'
+                                }
+                            ]
+                        })(
+                            <Input prefix={< Icon type = "user" />} name="email" placeholder="Enter Email"/>
+                        )}
+                    </FormItem>
+                    <FormItem label="Password" className="inputLabel">
+                        {getFieldDecorator('password', {
+                            rules: [
+                                {
+                                    required: true,
+                                    message: 'Please input your Password!'
+                                }
+                            ]
+                        })(
+                            <Input
+                                prefix={< Icon type = "lock" />}
+                                size="large"
+                                name="password"
+                                type="password"
+                                placeholder="Enter Password"/>
+                        )}
+                    </FormItem>
+                    <Link to="forgot">
+                        Forgot Password?
+                    </Link>
+                    <div className="grid-x grid-margin-x">
 
-                    {getFieldDecorator('email', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                    <Input 
-                        prefix={<Icon type="user" />}
-                        name="email" 
-                        placeholder="Enter Email" />    
-                    )}
-                </FormItem>
-                <FormItem
-                    label="Password">
-                {getFieldDecorator('password', {
-                    rules: [{ required: true, message: 'Please input your Password!' }],
-                })(
-                    <Input 
-                        prefix={<Icon type="lock" />}
-                        size="large"
-                        name="password" 
-                        type="password" 
-                        placeholder="Enter Password"  />                        
-                )}
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" htmlType="submit" className="login-form-button">Login</Button>
-                    Or <Link to="/register">Register</Link>
-                </FormItem>
-            </Form>
+                        {/* <FormItem> */}
+                        <div className="cell small-4">
+                            <FormItem>
+                                <CustomButton redirect="/tipsy/search" name="Login"/>
+                            </FormItem>
+                        </div>
+                        <div className="cell small-4"></div>
+                        <div className="cell small-4">
+                            <FormItem>
+                                <CustomButton redirect="/register" name="Register"/>
+                            </FormItem>
+                        </div>
+                    </div>
+                </Form>
                 <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
             </div>
         );

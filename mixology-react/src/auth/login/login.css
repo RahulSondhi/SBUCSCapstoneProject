@@ -85,3 +85,7 @@ input[name=password]:focus {
     max-width: 40vw;
     margin: 0 auto;
 }
+
+.inputLabel {
+    text-align: left;
+}

@@ -7,8 +7,6 @@ class Admin extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1 className="myBar">
-                    My Recipes</h1>
                 <div id="createABar">
                 </div>
                 <div className="grid-x grid-margin-y box">
