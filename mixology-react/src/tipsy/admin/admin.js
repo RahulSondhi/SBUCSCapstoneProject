@@ -1,42 +1,23 @@
 import React, {Component} from 'react';
 import Tabs from '../search/tabs.js';
+import { UserEntry } from '../../constants/constants.js';
 
 class Admin extends Component {
     render() {
         return (
-            <div className="topContainer">
+            <div>
                 <Tabs/>
-                {/* <-- bar tab --> */}
-                <div className="box" id="accountBox">
-                    <div className="entry">
-                        <div className="bar-progress">
-                            <div className="text-section textLeft">
-                                <p className="text-info">
-                                    BarName
-                                </p>
-                                <p className="text-info">
-                                    OwnerName
-                                </p>
-                            </div>
-                            <div className="text-section textRight">
-                                <p className="text-info" id="progress">
-                                    40%
-                                </p>
-                                <p className="text-info">
-                                    Date
-                                </p>
-                            </div>
-                        </div>
-                        <div className="button" id="make">
-                            Make
-                        </div>
-                        <div className="button" id="view">
-                            View
-                        </div>
-                    </div>
-                    <button className="addBar button">+</button>
+                <h1 className="myBar">
+                    My Recipes</h1>
+                <div id="createABar">
                 </div>
-
+                <div className="grid-x grid-margin-y box">
+                    <UserEntry/>
+                    <UserEntry/>
+                    <UserEntry/>
+                    <UserEntry/>
+                    <UserEntry/>
+                </div>
             </div>
         );
     }

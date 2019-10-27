@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    withRouter,
     Switch
   } from 'react-router-dom';
 import '../foundation/foundation.min.css';
