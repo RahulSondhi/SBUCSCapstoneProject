@@ -25,10 +25,10 @@ class Tabs extends Component {
                 </h1>
                 <div className="top-bar-right">
                     <ul className="vertical medium-horizontal menu">
-                        <Tab link="/search" name="Search"/>
-                        <Tab link="/bar" name="My Bars"/>
-                        <Tab link="/recipe" name="My Recipes"/>
-                        <Tab link="/admin" name="Admin"/>
+                        <Tab link="/tipsy/search" name="Search"/>
+                        <Tab link="/tipsy/bar" name="My Bars"/>
+                        <Tab link="/tipsy/recipe" name="My Recipes"/>
+                        <Tab link="/tipsy/admin" name="Admin"/>
                         <Tab link="/" name="Logout"/>
                     </ul>
                 </div>

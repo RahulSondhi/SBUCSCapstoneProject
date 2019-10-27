@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 
 import { register, checkNicknameAvailability, checkEmailAvailability } from '../../util/APIUtils';
-
-import './Register.css';
+import { SVG, TipsyStyle, DrinksStyle} from '../../constants/constants.js';
+import Tipsy from '../../assets/Tipsy.svg';
+import Drinks from '../../assets/drinks.svg';
+import './register.css';
 
 import { 
     FIRSTNAME_MIN_LENGTH, FIRSTNAME_MAX_LENGTH,
@@ -10,7 +12,7 @@ import {
     EMAIL_MAX_LENGTH,
     NICKNAME_MIN_LENGTH, NICKNAME_MAX_LENGTH,
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
-} from '../../constants';
+} from '../../constants/constants.js';
 
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, notification } from 'antd';
@@ -209,12 +211,12 @@ class Register extends Component {
     // Frontend Validation Functions 
 
     validateFirstName = (firstName) => {
-        if(firstName.length < NAME_MIN_LENGTH) {
+        if(firstName.length < FIRSTNAME_MIN_LENGTH) {
             return {
                 validateStatus: 'error',
                 errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`
             }
-        } else if (firstName.length > NAME_MAX_LENGTH) {
+        } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
             return {
                 validationStatus: 'error',
                 errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`
@@ -229,12 +231,12 @@ class Register extends Component {
 
 
     validateLastName = (lastName) => {
-        if(lastName.length < NAME_MIN_LENGTH) {
+        if(lastName.length < LASTNAME_MIN_LENGTH) {
             return {
                 validateStatus: 'error',
                 errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`
             }
-        } else if (lastName.length > NAME_MAX_LENGTH) {
+        } else if (lastName.length > LASTNAME_MAX_LENGTH) {
             return {
                 validationStatus: 'error',
                 errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`
@@ -277,12 +279,12 @@ class Register extends Component {
     }
 
     validateNickname = (nickname) => {
-        if(nickname.length < nickname_MIN_LENGTH) {
+        if(nickname.length < NICKNAME_MIN_LENGTH) {
             return {
                 validateStatus: 'error',
                 errorMsg: `Nickname is too short (Minimum ${NICKNAME_MIN_LENGTH} characters needed.)`
             }
-        } else if (nickname.length > USERNAME_MAX_LENGTH) {
+        } else if (nickname.length > NICKNAME_MAX_LENGTH) {
             return {
                 validationStatus: 'error',
                 errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`
@@ -316,7 +318,7 @@ class Register extends Component {
 
     validatePasswordConfirm = (passwordConfirm) => {
         const passwordValue = this.state.password.value;
-        if(passwordConfirm != passwordValue){
+        if(passwordConfirm !== passwordValue){
             return {
                 validateStatus: 'error',
                 errorMsg: `Passwords do not match`

@@ -37,7 +37,7 @@ class Login extends Component {
                             name="password"
                             placeholder="Enter Password"/>
                         <br/><br/>
-                        <CustomButton name="Login" redirect="/search"/>
+                        <CustomButton name="Login" redirect="/tipsy/search"/>
                         <CustomButton name="Register" redirect="/register"/>
                         <div className="footer"></div>
                     </div>

@@ -14,11 +14,12 @@ class Main extends Component {
             <BrowserRouter>
                 <Switch>
                     <Route path="/" exact component={Login}/>
-                    <Route path="/search" component={Search}/>
+                    <Route path="/login" exact component={Login}/>
+                    <Route path="/tipsy/search" component={Search}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/bar" component={Bar} className="tab"/>
-                    <Route path="/recipe" component={Recipe} className="tab"/>
-                    <Route path="/admin" component={Admin} className="tab"/>
+                    <Route path="/tipsy/bar" component={Bar} className="tab"/>
+                    <Route path="/tipsy/recipe" component={Recipe} className="tab"/>
+                    <Route path="/tipsy/admin" component={Admin} className="tab"/>
                 </Switch>
             </BrowserRouter>
         )
