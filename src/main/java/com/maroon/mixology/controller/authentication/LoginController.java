@@ -70,6 +70,7 @@ public class LoginController {
 
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
                 if(!userRepository.existsByEmail(loginRequest.getEmail())){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not found!"),
                         HttpStatus.BAD_REQUEST);
@@ -83,7 +84,8 @@ public class LoginController {
                                 loginRequest.getEmail(),
                                 loginRequest.getPassword()
                         )
-                );
+                ); //Bug is right here please fix it thanks 
+
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
                 String jwt = tokenProvider.generateToken(authentication);

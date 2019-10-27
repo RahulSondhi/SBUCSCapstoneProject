@@ -1,5 +1,7 @@
+/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/controller/UserController.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/entity/Recipe.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/security/JwtAuthenticationEntryPoint.java
+/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/UserSummary.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/service/UserServiceImpl.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/JwtAuthenticationResponse.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/security/JwtAuthenticationFilter.java
@@ -9,10 +11,10 @@
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/repository/UserRepository.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/security/JwtTokenProvider.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/service/UserService.java
-/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/controller/AuthenticationController.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/service/UserDetailsServiceImpl.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/MixologyApplication.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/entity/Step.java
+/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/UserIdentityAvailability.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/request/RegisterRequest.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/request/LoginRequest.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exception/AppException.java
@@ -25,5 +27,7 @@
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/config/WebMvcConfig.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exception/ResourceNotFoundException.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exception/BadRequestException.java
+/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/controller/authentication/LoginController.java
+/home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/controller/authentication/RegisterController.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/request/ForgotRequest.java
 /home/bryan/GitHub/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/ApiResponse.java

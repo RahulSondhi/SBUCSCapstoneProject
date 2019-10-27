@@ -11,7 +11,6 @@ com/maroon/mixology/exception/ResourceNotFoundException.class
 com/maroon/mixology/repository/UserRepository.class
 com/maroon/mixology/config/SecurityConfig.class
 com/maroon/mixology/repository/RoleRepository.class
-com/maroon/mixology/controller/AuthenticationController.class
 com/maroon/mixology/exchange/response/ApiResponse.class
 com/maroon/mixology/service/UserService.class
 com/maroon/mixology/exchange/response/JwtAuthenticationResponse.class
