@@ -71,6 +71,13 @@ export function validateReset(uuid) {
     });
 }
 
+export function validateConfirm(uuid) {
+    return request({
+        url: API_BASE_URL + "/validateConfirm?token=" + uuid,
+        method: 'GET'
+    });
+}
+
 export function checkNicknameAvailability(nickname) {
     return request({
         url: API_BASE_URL + "/user/checkNicknameAvailability?nickname=" + nickname,

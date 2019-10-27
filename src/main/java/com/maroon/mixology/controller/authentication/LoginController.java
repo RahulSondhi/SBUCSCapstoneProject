@@ -137,14 +137,14 @@ public class LoginController {
                 // Find the user associated with the reset token
                 User user = userService.findByResetTokenUUID(token);
                 if(user == null) {
-                        return new TokenValidity(false); //User not found
+                        return new TokenValidity(false, "User not found"); //User not found
                 }
                 Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                 tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
                 if(tokenTime.before(expiredTime)) { //check if token is expired
-                        return new TokenValidity(false); //Token expired
+                        return new TokenValidity(false, "Token is expired, invalid token."); //Token expired
                 }
-                return new TokenValidity(true); //Reset password link is valid, proceed to reset your password
+                return new TokenValidity(true, "Reset password link is valid, proceed to reset your password"); //Reset password link is valid, proceed to reset your password
         }
 
         @PostMapping({"/resetPassword"})
