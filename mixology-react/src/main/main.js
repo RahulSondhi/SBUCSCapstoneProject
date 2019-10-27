@@ -4,8 +4,8 @@ import '../foundation/foundation.min.css';
 import Login from '../auth/login/login.js';
 import Search from '../tipsy/search/search.js';
 import Register from '../auth/register/register.js';
-import Bar from '../tipsy/menu/bar/bar.js';
-import Recipe from '../tipsy/menu/recipe/recipe.js';
+import MyBars from '../tipsy/user/mybars/mybar.js';
+import MyRecipes from '../tipsy/user/myrecipes/myrecipe.js';
 import Admin from '../tipsy/admin/admin.js';
 
 class Main extends Component {
@@ -17,8 +17,8 @@ class Main extends Component {
                     <Route path="/login" exact component={Login}/>
                     <Route path="/tipsy/search" component={Search}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/tipsy/bar" component={Bar} className="tab"/>
-                    <Route path="/tipsy/recipe" component={Recipe} className="tab"/>
+                    <Route path="/tipsy/myBars" component={MyBars} className="tab"/>
+                    <Route path="/tipsy/myRecipes" component={MyRecipes} className="tab"/>
                     <Route path="/tipsy/admin" component={Admin} className="tab"/>
                 </Switch>
             </BrowserRouter>

@@ -1,41 +1,45 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../menu.css';
+import { CustomButton } from '../../../constants/constants.js';
 
 class Bar extends Component {
     render() {
         return (
-            <div className="topContainer">
+            <div>
                 <Tabs/>
-                {/* <-- bar tab --> */}
-                <div className="box" id="barBox">
-                    <div className="entry">
-                        <div className="bar-progress">
-                            <div className="text-section textLeft">
-                                <p className="text-info">
-                                    BarName
-                                </p>
-                                <p className="text-info">
-                                    OwnerName
-                                </p>
-                            </div>
-                            <div className="text-section textRight">
-                                <p className="text-info" id="progress">
-                                    40%
-                                </p>
-                                <p className="text-info">
-                                    Date
-                                </p>
-                            </div>
-                        </div>
-                        <div className="button" id="make">
-                            Make
-                        </div>
-                        <div className="button" id="view">
-                            View
+                <h1> My Bar</h1>
+                <CustomButton redirect="/tipsy/createBar" name="Create Bar"/>
+                <div class="grid-x grid-margin-y">
+                    <div class="small-3 cell">
+                        <div class="entry">BarName</div>
+                    </div>
+                    <div class="small-3 cell">
+                        <div class="entry">
+                            BarName
                         </div>
                     </div>
-                    <button className="addBar button">+</button>
+                    <div class="small-3 cell">
+                        <div class="entry">
+                            BarName
+                        </div>
+                    </div>
+                    <div class="small-3 cell">
+                        <div class="entry">
+                            BarName
+                        </div>
+                    </div>
+                    <div class="small-3 cell">
+                        <div class="entry">
+                            BarName
+                        </div>
+                    </div>
+                    <div class="small-3 cell">
+                        <div class="entry">
+                            BarName
+                        </div>
+                    </div>
+
                 </div>
             </div>
         )

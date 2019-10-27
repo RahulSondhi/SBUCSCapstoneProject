@@ -18,8 +18,6 @@ export const SVG = (props) => {
         <div>
             <img
                 src={props.src}
-                height="50%"
-                width="50%"
                 style={props.style}
                 alt={props.alt}/>
         </div>
@@ -35,8 +33,17 @@ export const DrinksStyle = {
 }
 
 export const TipsyStyle = {
+    width: "15%",
+    height: "15%"
+}
+
+export const SearchBarStyle = {
     width: "50%",
-    height: "50%"
+    height: "5vmin",
+    "color": "white",
+    "background-color": "gray",
+    "marginLeft": "auto",
+    "marginRight": "auto"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

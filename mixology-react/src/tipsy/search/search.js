@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Tabs from './tabs.js';
+import { SearchBarStyle } from '../../constants/constants.js';
 import './search.css';
 
 export const SearchBar = (props) => (
-    <input type="text" placeholder={props.placeholder}/>
+    <input type="text" placeholder={props.placeholder} style={props.style}/>
 );
 
 export class Search extends Component {
@@ -11,7 +12,7 @@ export class Search extends Component {
         return (
             <div>
                 <Tabs/>
-                <SearchBar placeholder="Search..."/>
+                <SearchBar placeholder="Enter Bar or Recipe" style={SearchBarStyle}/>
                 <button type="submit" className="button">
                     SEARCH
                 </button>

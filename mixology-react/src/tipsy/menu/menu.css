@@ -1,25 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
 .box {
-    width: 80%;
-    height: 60vh;
-    border-radius: 1.5em;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 
 .entry {
-    position: absolute;
-    margin: 0 auto;
-    top: 5%;
-    width: 85%;
-    height: 20%;
-    background-color: white;
-    border-color: black;
-    border: .2em solid black;
-    right: 3%;
+    margin: auto auto;
+    width: 15vw;
+    height: 15vw;
+    background-color: black;
+    border: .2em solid white;
 }
 
 .addBar {
