@@ -95,7 +95,7 @@ public class LoginController {
 
         // POST forget template
         @PostMapping({"/forgot"})
-        public ResponseEntity<?> processForgotPasswordForm(@RequestBody ForgotRequest userEmail, HttpServletRequest request) {
+        public ResponseEntity<?> processForgotPasswordForm(@Valid @RequestBody ForgotRequest userEmail, HttpServletRequest request) {
                 if(!userRepository.existsByEmail(userEmail.getEmail())) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
                         HttpStatus.BAD_REQUEST);

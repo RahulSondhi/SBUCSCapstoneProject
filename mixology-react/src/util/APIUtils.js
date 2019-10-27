@@ -48,6 +48,14 @@ export function register(registerRequest) {
     });
 }
 
+export function forgot(forgotRequest) {
+    return request({
+        url: API_BASE_URL + "/forgot",
+        method: 'POST',
+        body: JSON.stringify(forgotRequest)
+    });
+}
+
 export function checkNicknameAvailability(nickname) {
     return request({
         url: API_BASE_URL + "/user/checkNicknameAvailability?nickname=" + nickname,
