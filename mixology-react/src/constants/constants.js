@@ -14,16 +14,6 @@ export const CustomButton = (props) => {
     )
 }
 
-export const LoginButton = (props) => {
-    return (
-        <div>
-            <button type="submit" className="button" onClick={(e) => login(e)}>
-                Log in
-            </button>
-        </div>
-    )
-}
-
 export const BarEntry = () => {
     return (
         <div className="small-3 cell">

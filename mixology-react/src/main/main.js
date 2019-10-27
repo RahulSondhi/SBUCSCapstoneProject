@@ -13,6 +13,7 @@ import MyRecipes from '../tipsy/user/myrecipes/myrecipe.js';
 import Admin from '../tipsy/admin/admin.js';
 import Forgot from '../auth/forgot/forgot.js';
 import Confirm from '../auth/confirm/confirm.js';
+import Reset from '../auth/reset/reset.js';
 
 import { getCurrentUser } from '../util/APIUtils.js';
 import { ACCESS_TOKEN } from '../constants/constants.js';
@@ -90,6 +91,7 @@ class Main extends Component {
                     <Route path="/login" render={ (props) => <Login onLogin={this.handleLogin} {...props} /> }/>
                     <Route path="/forgot" component={Forgot}/>
                     <Route path="/confirm" component={Confirm}/>
+                    <Route path="/reset" component={Reset}/>
                     <Route path="/tipsy/search" component={Search}/>
                     <Route path="/register" component={Register}/>
                     <Route path="/tipsy/myBars" component={MyBars} className="tab"/>

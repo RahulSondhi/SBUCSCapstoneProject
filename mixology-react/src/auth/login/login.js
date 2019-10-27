@@ -92,12 +92,22 @@ class LoginForm extends Component {
                                 placeholder="Enter Password"/>
                         )}
                     </FormItem>
-                    <Link to="forgot"> Forgot Password? </Link>
-                    <FormItem>
-                        <CustomButton redirect="/tipsy/search" name="Log in"/>
-                        Or
-                        <CustomButton redirect="/register" name="Register"/>
-                    </FormItem>
+                    <Link to="forgot">
+                        Forgot Password?
+                    </Link>
+                    <div className="grid-x grid-margin-x">
+                        <FormItem>
+                            {/* <div className="cell small-4"> */}
+                                {/* REEE */}
+                                <CustomButton redirect="/tipsy/search" name="Log in"/>
+                            {/* </div> */}
+                            Or
+                            {/* <div className="cell small-4"> */}
+                                {/* reeeeeee */}
+                                <CustomButton redirect="/register" name="Register"/>
+                            {/* </div> */}
+                        </FormItem>
+                    </div>
                 </Form>
                 <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
             </div>
