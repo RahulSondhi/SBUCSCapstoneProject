@@ -88,6 +88,11 @@ export const TipsyStyle = {
     height: "100%"
 }
 
+export const SmallTipsyStyle = {
+    width: "20%",
+    height: "20%"
+}
+
 export const SearchBarStyle = {
     width: "50%",
     height: "5vmin",

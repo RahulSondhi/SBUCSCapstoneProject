@@ -5,7 +5,7 @@ import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './login.css';
-
+import {Link} from 'react-router-dom';
 import {ACCESS_TOKEN} from '../../constants/constants.js';
 import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
@@ -92,6 +92,7 @@ class LoginForm extends Component {
                                 placeholder="Enter Password"/>
                         )}
                     </FormItem>
+                    <Link to="forgot"> Forgot Password? </Link>
                     <FormItem>
                         <CustomButton redirect="/tipsy/search" name="Log in"/>
                         Or

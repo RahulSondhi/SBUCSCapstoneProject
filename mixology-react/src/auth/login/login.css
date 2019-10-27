@@ -39,8 +39,8 @@ label {
     color: white;
 }
 
-input[type=username],
-input[type=password] {
+input[name=email],
+input[name=password] {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -53,8 +53,8 @@ input[type=password] {
     transition: 1000ms;
 }
 
-input[type=username]:focus,
-input[type=password]:focus {
+input[name=email]:focus,
+input[name=password]:focus {
     outline: none !important;
     background: none !important;
     box-shadow: none !important;
