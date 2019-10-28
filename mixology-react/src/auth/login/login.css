@@ -76,7 +76,7 @@ input[name=passwordConfirm]:focus{
 
 .top-bar,
 .top-bar ul {
-    background-color: #1c1c1c;
+    background-color: var(--top-bar-bg);
 }
 
 #barLogo {

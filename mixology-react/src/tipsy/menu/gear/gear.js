@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
 import './gear.css';
-import { LargeButton,SVG, ToolStyle } from '../../../constants/constants.js';
+import { SVG, ToolStyle } from '../../../constants/constants.js';
 import Bottle from '../../../assets/bottle.svg';
 
 

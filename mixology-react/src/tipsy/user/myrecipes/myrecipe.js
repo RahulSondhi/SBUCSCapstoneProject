@@ -9,10 +9,18 @@ class MyRecipes extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1 className="myRecipe">
+                <h1 className="myTitle">
                     My Recipes</h1>
-                <div id="createABar">
-                    <CustomButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
+                <div className="grid-x">
+                    <div className="cell small-2"></div>
+                    <div className="grid-x cell small-6">
+                        <CustomButton redirect="/tipsy/myRecipes" name="Owned"/>
+                        <CustomButton redirect="/tipsy/myRecipes" name="Completed"/>
+                        <CustomButton redirect="/tipsy/myRecipes" name="In Progress"/>
+                    </div>
+                    <div className="cell small-4">
+                        <CustomButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
+                    </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
                     <RecipeEntry/>

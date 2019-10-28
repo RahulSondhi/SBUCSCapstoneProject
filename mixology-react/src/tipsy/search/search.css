@@ -5,3 +5,8 @@
 .searchW {
     text-align: center;
 }
+
+.searchButton {
+    width: 10%;
+    vertical-align: middle;
+}

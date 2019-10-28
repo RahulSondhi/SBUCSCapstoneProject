@@ -108,20 +108,9 @@ export const DrinksStyle = {
     "display": "block"
 }
 
-export const BottleStyle = {
-    width: "70vmin",
-    height: "70vmin",
-    top: "5%",
-    left: "50vmin",
-    position: "absolute"
-}
-
-export const CupStyle = {
-    width: "70vmin",
-    height: "70vmin",
-    top: "5%",
-    right: "50vmin",
-    position: "absolute"
+export const CupBottleStyle = {
+    width: "40em",
+    height: "40em",
 }
 
 export const TipsyStyle = {
@@ -141,20 +130,20 @@ export const UserStyle = {
 
 export const SearchBarStyle = {
     width: "50%",
-    height: "5vmin",
+    height: "3em",
     "color": "white",
     "background-color": "gray",
     "marginLeft": "auto",
-    "marginRight": "auto"
+    "marginRight": "auto",
 }
 
 export const CounterStyle = {
-  height: "40vmin",
+  height: "40em",
   margin: "0 auto",
 }
 
 export const IngredientStyle = {
-  height: "10vmin"
+  height: "10em"
 }
 
 export const ToolStyle = {

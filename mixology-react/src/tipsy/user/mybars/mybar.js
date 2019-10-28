@@ -9,10 +9,16 @@ class MyBar extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1 className="myBar">
-                    My Bars</h1>
-                <div id="createABar">
-                    <CustomButton redirect="/tipsy/createBar" name="Create A Bar +"/>
+                <div className="grid-x">
+                    <div className="cell small-4"></div>
+                    <div className="cell small-4">
+                        <h1 className="myTitle">
+                            My Bars
+                        </h1>
+                    </div>
+                    <div className="cell small-4">
+                        <CustomButton redirect="/tipsy/createBar" name="Create A Bar +"/>
+                    </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
                     <BarEntry/>

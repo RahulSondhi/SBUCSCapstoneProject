@@ -8,7 +8,7 @@
 }
 
 .ingredients {
-  background-color: #1c1c1c;
+  background-color: var(--top-bar-bg);
   border: 1px solid white;
   width: 10%;
   padding: 5px;
@@ -21,7 +21,7 @@
 }
 
 .tools {
-  background-color: #1c1c1c;
+  background-color: var(--top-bar-bg);
   border: 1px solid white;
   width: 10%;
   padding: 5px;

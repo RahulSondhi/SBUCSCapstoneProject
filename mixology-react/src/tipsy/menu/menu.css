@@ -9,37 +9,14 @@
     margin: auto auto;
     width: 15vw;
     height: 15vw;
-    background-color: black;
-    border: .2em solid white;
+    background-color: var(--box-color);
+    border: .2em solid var(--button-border-color);
     text-align: center;
-}
-
-.addBar {
-    background-color: maroon;
-    color: white;
-    text-align: center;
-    font-size: 2em;
-    border-color: black;
-    border: .1em solid black;
-    position: absolute;
-    margin: 0 auto;
-    width: 70vw;
-    top: 80%;
-    right: 3%;
-}
-
-.bar-progress {
-    height: 100%;
-    width: 45%;
-    background-color: #800000;
-    border-radius: inherit;
-    position: absolute;
-    display: inline-block;
 }
 
 .text-info {
     position: relative;
-    font-size: 2vmin;
+    font-size: 2em;
 }
 
 .text-section {
@@ -74,16 +51,3 @@ p {
 #make {
     float: right;
 }
-
-.search {
-    border-radius: 1.5em;
-    height: 3vh;
-    font-size: 2vh;
-    position: absolute;
-    text-indent: 5%;
-    float: right;
-    display: block;
-    right: 35vmin;
-    top: 10vmin;
-}
-
