@@ -99,13 +99,13 @@ class LoginForm extends Component {
                         {/* <FormItem> */}
                         <div className="cell small-4">
                             <FormItem>
-                                <CustomButton redirect="/tipsy/search" name="Login"/>
+                                <CustomButton redirect="/register" name="Register"/>
                             </FormItem>
                         </div>
                         <div className="cell small-4"></div>
                         <div className="cell small-4">
                             <FormItem>
-                                <CustomButton redirect="/register" name="Register"/>
+                                <CustomButton redirect="/tipsy/search" name="Login"/>
                             </FormItem>
                         </div>
                     </div>

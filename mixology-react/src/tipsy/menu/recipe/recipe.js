@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
-import {CustomButton} from '../../../constants/constants';
 import './recipe.css';
+import { RecipePlayButton } from '../../../constants/constants.js';
+
 
 class Recipe extends Component {
     render() {
@@ -13,20 +14,23 @@ class Recipe extends Component {
                 </h1>
                 <h3>Author: Name
                 </h3>
-                <CustomButton redirect="/tipsy/game" name="Play"/>
+                <RecipePlayButton redirect="/tipsy/mixer" name="Play"/>
                 <div className="grid-x grid-margin-x boxContainer">
                     <div className="cell small-6">
-                    <h3> Ingredients </h3>
-                    <div className="viewBox">
-                        <p>IngredientName1</p>
-                        <p>IngredientName2</p>
-                    </div>
+                        <h2>
+                            Ingredients
+                        </h2>
+                        <div className="viewBox">
+                            <p>IngredientName1</p>
+                            <p>IngredientName2</p>
+                        </div>
                     </div>
                     <div className="cell small-6">
-                        <h3> Equipment</h3>
+                        <h2>
+                            Equipment</h2>
                         <div className="viewBox">
-                        <p>EquipmentName1</p>
-                        <p>EquipmentName2</p>
+                            <p>EquipmentName1</p>
+                            <p>EquipmentName2</p>
                         </div>
                     </div>
                 </div>

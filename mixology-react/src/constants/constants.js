@@ -1,9 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../tipsy/menu/recipe/recipe.js';
 
 export const LoginLabelStyle = {
     "float": "left"
 }
+
+export const RecipePlayButton = (props) => {
+    return (
+        <div>
+           <Link to={props.redirect}>
+               <button type="submit" className="button" id="recipePlayButton">
+                   {props.name}
+               </button>
+           </Link>
+        </div>
+    )
+};
+
 
 export const CustomButton = (props) => {
     return (
