@@ -21,14 +21,14 @@ class Login extends Component {
 }
 
 class LoginForm extends Component {
-    
+
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
-        event.preventDefault();   
+        event.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 const loginRequest = Object.assign({}, values);
@@ -41,12 +41,12 @@ class LoginForm extends Component {
                         notification.error({
                             message: 'Tipsy App',
                             description: 'Your Email or Password is incorrect. Please try again!'
-                        });                    
+                        });
                     } else {
                         notification.error({
                             message: 'Tipsy App',
                             description: error.message || 'Sorry! Something went wrong. Please try again!'
-                        });                                            
+                        });
                     }
                 });
             }

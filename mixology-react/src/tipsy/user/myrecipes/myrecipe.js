@@ -12,7 +12,7 @@ class MyRecipes extends Component {
                 <h1 className="myRecipe">
                     My Recipes</h1>
                 <div id="createABar">
-                    <CustomButton redirect="/tipsy/createRecipe" name="Create a Recipe"/>
+                    <CustomButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
                 </div>
                 <div className="grid-x grid-margin-y box">
                     <RecipeEntry/>

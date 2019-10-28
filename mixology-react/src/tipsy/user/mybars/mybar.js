@@ -12,7 +12,7 @@ class MyBar extends Component {
                 <h1 className="myBar">
                     My Bars</h1>
                 <div id="createABar">
-                    <CustomButton redirect="/tipsy/createBar" name="Create a Bar"/>
+                    <CustomButton redirect="/tipsy/createBar" name="Create A Bar +"/>
                 </div>
                 <div className="grid-x grid-margin-y box">
                     <BarEntry/>

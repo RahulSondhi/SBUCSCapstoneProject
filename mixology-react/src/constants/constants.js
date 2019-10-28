@@ -34,11 +34,12 @@ export const BarEntry = () => {
     return (
         <div className="small-3 cell">
             <div className="entry">
-                <p>
-                    BarName
-                </p>
-                <p>
-                    OwnerName</p>
+            <br/>
+            <h3>
+                BarName
+            </h3>
+              <SVG src={UserIcon} style={UserStyle} alt="User"/>
+                <p>OwnerName</p>
                 <CustomButton redirect="/tipsy/myBars/bar" name="View"/>
             </div>
         </div>
@@ -49,11 +50,12 @@ export const RecipeEntry = () => {
     return (
         <div className="small-3 cell">
             <div className="entry">
-                <p>
-                    RecipeName
-                </p>
-                <p>
-                    OwnerName</p>
+            <br/>
+            <h3>
+                RecipeName
+            </h3>
+              <SVG src={UserIcon} style={UserStyle} alt="User"/>
+                <p>OwnerName</p>
                 <CustomButton redirect="/tipsy/myRecipes/recipe" name="View"/>
             </div>
         </div>
@@ -64,11 +66,27 @@ export const UserEntry = () => {
     return (
         <div className="small-3 cell">
             <div className="entry">
+            <br/>
                 <SVG src={UserIcon} style={UserStyle} alt="User"/>
                 <p>
                     UserName
                 </p>
                 <CustomButton redirect="/tipsy/admin/user" name="View"/>
+            </div>
+        </div>
+    )
+}
+
+export const GearEntry = () => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+            <br/>
+                <SVG src={UserIcon} style={UserStyle} alt="User"/>
+                <p>
+                    Gear
+                </p>
+                <CustomButton redirect="/tipsy/barGears/gear" name="View"/>
             </div>
         </div>
     )
@@ -137,6 +155,14 @@ export const CounterStyle = {
 
 export const IngredientStyle = {
   height: "10vmin"
+}
+
+export const ToolStyle = {
+  width: "30%",
+  height: "30%",
+  "marginLeft": "auto",
+  "marginRight": "auto",
+  "display": "block"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

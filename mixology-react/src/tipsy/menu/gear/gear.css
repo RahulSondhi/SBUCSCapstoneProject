@@ -1,0 +1,12 @@
+.boxContainer {
+    width: 70%;
+    height: 50vmin;
+    margin: 0 auto;
+}
+
+.viewBox {
+    height:100%;
+    width: 100%;
+    background-color: black;
+    border: 3px solid white;
+}
