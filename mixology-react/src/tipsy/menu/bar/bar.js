@@ -14,14 +14,21 @@ class Bar extends Component {
               <h3>Author: Name
               </h3>
               <div className="grid-x grid-margin-x boxContainer">
-                  <div className="cell small-6">
-                  <h3> Managers </h3>
-                  <div className="viewBox">
-                      <p>ManagerName1</p>
-                      <p>ManagerName2</p>
+                  <div className="cell small-4">
+                    <h3> Managers </h3>
+                    <div className="viewBox">
+                        <p>ManagerName1</p>
+                        <p>ManagerName2</p>
+                    </div>
                   </div>
+                  <div className="cell small-4">
+                      <h3> Workers</h3>
+                      <div className="viewBox">
+                      <p>WorkerName1</p>
+                      <p>WorkerName2</p>
+                      </div>
                   </div>
-                  <div className="cell small-6">
+                  <div className="cell small-4">
                       <h3> Recipes</h3>
                       <div className="viewBox">
                       <p>RecipeName1</p>
