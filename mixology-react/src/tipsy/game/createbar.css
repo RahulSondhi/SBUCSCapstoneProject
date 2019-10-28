@@ -24,9 +24,16 @@ input[name=barName]:focus{
 }
 
 .boxContainer {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .add {
   width: 100%;
+}
+
+#BigButton {
+    font-size: 2em;
+    position: absolute;
+    top: 5%;
+    right: 25%;
 }

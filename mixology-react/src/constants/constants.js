@@ -1,16 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import '../tipsy/menu/recipe/recipe.js';
 
 export const LoginLabelStyle = {
     "float": "left"
 }
 
-export const RecipePlayButton = (props) => {
+export const LargeButton = (props) => {
     return (
         <div>
             <Link to={props.redirect}>
-                <button type="submit" className="button" id="recipePlayButton">
+                <button type="submit" className="button" id="BigButton">
                     {props.name}
                 </button>
             </Link>

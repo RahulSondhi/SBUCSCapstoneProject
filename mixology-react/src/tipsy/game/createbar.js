@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../search/tabs.js';
-import { CustomButton } from '../../constants/constants.js';
+import { LargeButton, CustomButton } from '../../constants/constants.js';
 import { Form, Input, Button, Icon, notification } from 'antd';
 import './createbar.css';
 
@@ -13,7 +13,7 @@ class CreateBar extends Component {
                   Create/Edit Your Bar
               </h1>
               <Input id="barName" size="large" name="barName" type="barName" placeholder="Enter Bar Name"/>
-              <CustomButton redirect="/tipsy/myBars/bar" name="Create Bar +"/>
+              <LargeButton redirect="/tipsy/myBars/bar" name="Create Bar +"/>
 
               <div className="grid-x grid-margin-x boxContainer">
                   <div className="cell small-6">
