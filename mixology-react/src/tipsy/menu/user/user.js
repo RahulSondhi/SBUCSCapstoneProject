@@ -1,31 +1,34 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import { CustomButton } from '../../../constants/constants.js';
-import './bar.css';
+import './user.css';
 
-class Bar extends Component {
+class User extends Component {
     render() {
         return (
           <div>
               <Tabs/>
-              <h1>
-                  BarName
-              </h1>
-              <h3>Author: Name
-              </h3>
+              <h1>UserName</h1>
               <div className="grid-x grid-margin-x boxContainer">
-                  <div className="cell small-6">
-                  <h3> Managers </h3>
+                  <div className="cell small-4">
+                  <h3> Bars </h3>
                   <div className="viewBox">
-                      <p>ManagerName1</p>
-                      <p>ManagerName2</p>
+                      <p>BarName1</p>
+                      <p>BarName2</p>
                   </div>
                   </div>
-                  <div className="cell small-6">
+                  <div className="cell small-4">
                       <h3> Recipes</h3>
                       <div className="viewBox">
                       <p>RecipeName1</p>
                       <p>RecipeName2</p>
+                      </div>
+                  </div>
+                  <div className="cell small-4">
+                      <h3> Equipment</h3>
+                      <div className="viewBox">
+                      <p>EquipmentName1</p>
+                      <p>EquipmentName2</p>
                       </div>
                   </div>
               </div>
@@ -34,4 +37,4 @@ class Bar extends Component {
     }
 }
 
-export default Bar;
+export default User;

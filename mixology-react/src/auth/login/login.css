@@ -40,7 +40,11 @@ label {
 }
 
 input[name=email],
-input[name=password] {
+input[name=password],
+input[name=firstName],
+input[name=lastName],
+input[name=nickname],
+input[name=passwordConfirm]{
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -54,7 +58,11 @@ input[name=password] {
 }
 
 input[name=email]:focus,
-input[name=password]:focus {
+input[name=password]:focus,
+input[name=firstName]:focus,
+input[name=lastName]:focus,
+input[name=nickname]:focus,
+input[name=passwordConfirm]:focus{
     outline: none !important;
     background: none !important;
     box-shadow: none !important;

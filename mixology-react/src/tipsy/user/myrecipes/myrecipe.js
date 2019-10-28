@@ -9,7 +9,7 @@ class MyRecipes extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1 className="myBar">
+                <h1 className="myRecipe">
                     My Recipes</h1>
                 <div id="createABar">
                     <CustomButton redirect="/tipsy/createBar" name="Create a Recipe"/>

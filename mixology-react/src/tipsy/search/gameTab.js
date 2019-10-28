@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import './tabs.css';
+import './gameTab.css';
 
-const Tab = (props) => {
+const GameTab = (props) => {
     return (
         <div>
             <Link to={props.link} className="tab">
@@ -14,7 +14,7 @@ const Tab = (props) => {
     )
 };
 
-class Tabs extends Component {
+class GameTabs extends Component {
     render() {
         return (
             <nav className="top-bar">
@@ -22,11 +22,9 @@ class Tabs extends Component {
                 <h1> TIPSY</h1>
                 <div className="top-bar-right">
                     <ul className="horizontal menu nested">
-                        <Tab link="/tipsy/search" name="Search"/>
-                        <Tab link="/tipsy/myBars" name="My Bars"/>
-                        <Tab link="/tipsy/myRecipes" name="My Recipes"/>
-                        <Tab link="/tipsy/admin" name="Admin"/>
-                        <Tab link="/" name="Logout"/>
+                        <GameTab link="" name="Instruction"/>
+                        <GameTab link="" name="Save"/>
+                        <GameTab link="" name="Quit"/>
                     </ul>
                 </div>
             </nav>
@@ -34,4 +32,4 @@ class Tabs extends Component {
     }
 }
 
-export default Tabs;
+export default GameTabs;

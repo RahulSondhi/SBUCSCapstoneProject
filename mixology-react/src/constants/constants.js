@@ -26,7 +26,7 @@ export const BarEntry = () => {
                 </p>
                 <p>
                     OwnerName</p>
-                <CustomButton redirect="/tipsy/bar" name="View"/>
+                <CustomButton redirect="/tipsy/myBars/bar" name="View"/>
             </div>
         </div>
     )
@@ -54,7 +54,7 @@ export const UserEntry = () => {
                 <p>
                     UserName
                 </p>
-                <CustomButton redirect="/tipsy/user" name="View"/>
+                <CustomButton redirect="/tipsy/admin/user" name="View"/>
             </div>
         </div>
     )
@@ -93,6 +93,13 @@ export const SearchBarStyle = {
     "background-color": "gray",
     "marginLeft": "auto",
     "marginRight": "auto"
+}
+
+export const CounterStyle = {
+  width: "40%",
+  height: "30%",
+  margin: "0 auto",
+  bottom: "0"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

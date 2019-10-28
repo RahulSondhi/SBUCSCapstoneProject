@@ -12,6 +12,8 @@ export class Search extends Component {
         return (
             <div>
                 <Tabs/>
+                <h1 className="searchW">
+                    Search</h1>
                 <SearchBar placeholder="Enter Bar or Recipe" style={SearchBarStyle}/>
                 <button type="submit" className="button">
                     SEARCH

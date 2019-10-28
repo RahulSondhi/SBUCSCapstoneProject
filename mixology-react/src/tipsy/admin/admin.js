@@ -7,7 +7,7 @@ class Admin extends Component {
         return (
             <div>
                 <Tabs/>
-                <div id="createABar">
+                <div id="tabs">
                 </div>
                 <div className="grid-x grid-margin-y box">
                     <UserEntry/>

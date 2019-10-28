@@ -7,7 +7,7 @@ import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './register.css';
 
-import { 
+import {
     FIRSTNAME_MIN_LENGTH, FIRSTNAME_MAX_LENGTH,
     LASTNAME_MIN_LENGTH, LASTNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
@@ -57,7 +57,7 @@ class Register extends Component {
     */
     handleInputChange(event, validationFun) {
         const target = event.target;
-        const inputName = target.name;        
+        const inputName = target.name;
         const inputValue = target.value;
 
         this.setState({
@@ -69,11 +69,11 @@ class Register extends Component {
     }
 
     /*
-        Handle our submit 
+        Handle our submit
     */
     handleSubmit(event) {
         event.preventDefault();
-    
+
         const registerRequest = {
             firstName: this.state.firstName.value,
             lastName: this.state.lastName.value,
@@ -86,7 +86,7 @@ class Register extends Component {
             notification.success({
                 message: 'Tipsy App',
                 description: "Thank you! You're successfully registered. Please check your email to confirm your registration!",
-            });          
+            });
         }).catch(error => {
             notification.error({
                 message: 'Tipsy App',
@@ -113,88 +113,84 @@ class Register extends Component {
     render() {
         return (
             <div className="container">
-                <div className="logo">
-                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-                    <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
-                </div>
-                <h3>Register your account</h3>
+                <h1>Register your account</h1>
                 <Form onSubmit={this.handleSubmit} class="">
-                        <FormItem 
+                        <FormItem
                             label="First Name"
                             validateStatus={this.state.firstName.validateStatus}
                             help={this.state.firstName.errorMsg}>
-                            <Input 
+                            <Input
                                 name="firstName"
                                 autoComplete="off"
                                 placeholder="Enter First Name"
-                                value={this.state.firstName.value} 
-                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />    
+                                value={this.state.firstName.value}
+                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />
                         </FormItem>
-                        <FormItem 
+                        <FormItem
                             label="Last Name"
                             validateStatus={this.state.lastName.validateStatus}
                             help={this.state.lastName.errorMsg}>
-                            <Input 
+                            <Input
                                 name="lastName"
                                 autoComplete="off"
                                 placeholder="Enter Last Name"
-                                value={this.state.lastName.value} 
-                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />    
+                                value={this.state.lastName.value}
+                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />
                         </FormItem>
                         <FormItem label="Nickname"
                             hasFeedback
                             validateStatus={this.state.nickname.validateStatus}
                             help={this.state.nickname.errorMsg}>
-                            <Input 
-                                name="nickname" 
+                            <Input
+                                name="nickname"
                                 autoComplete="off"
                                 placeholder="Enter Nickname"
-                                value={this.state.nickname.value} 
+                                value={this.state.nickname.value}
                                 onBlur={this.validateNicknameAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateNickname)} />    
+                                onChange={(event) => this.handleInputChange(event, this.validateNickname)} />
                         </FormItem>
-                        <FormItem 
+                        <FormItem
                             label="Email"
                             hasFeedback
                             validateStatus={this.state.email.validateStatus}
                             help={this.state.email.errorMsg}>
-                            <Input 
-                                name="email" 
-                                type="email" 
+                            <Input
+                                name="email"
+                                type="email"
                                 autoComplete="off"
                                 placeholder="Enter email"
-                                value={this.state.email.value} 
+                                value={this.state.email.value}
                                 onBlur={this.validateEmailAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateEmail)} />    
+                                onChange={(event) => this.handleInputChange(event, this.validateEmail)} />
                         </FormItem>
-                        <FormItem 
+                        <FormItem
                             label="Password"
                             validateStatus={this.state.password.validateStatus}
                             help={this.state.password.errorMsg}>
-                            <Input 
-                                name="password" 
+                            <Input
+                                name="password"
                                 type="password"
                                 autoComplete="off"
-                                placeholder="Enter Password" 
-                                value={this.state.password.value} 
-                                onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
+                                placeholder="Enter Password"
+                                value={this.state.password.value}
+                                onChange={(event) => this.handleInputChange(event, this.validatePassword)} />
                         </FormItem>
-                        <FormItem 
+                        <FormItem
                             label="Confirm Password"
                             validateStatus={this.state.passwordConfirm.validateStatus}
                             help={this.state.passwordConfirm.errorMsg}>
-                            <Input 
-                                name="passwordConfirm" 
+                            <Input
+                                name="passwordConfirm"
                                 type="password"
                                 autoComplete="off"
-                                placeholder="Confirm your password" 
-                                value={this.state.passwordConfirm.value} 
-                                onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />    
+                                placeholder="Confirm your password"
+                                value={this.state.passwordConfirm.value}
+                                onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />
                         </FormItem>
                         <FormItem>
-                            <Button type="primary" 
-                                htmlType="submit" 
-                                disabled={this.isFormInvalid()}>Register 
+                            <Button type="primary"
+                                htmlType="submit"
+                                disabled={this.isFormInvalid()}>Register
                             </Button>
                             Already registered? <Link to="/login">Login now!</Link>
                         </FormItem>
@@ -204,7 +200,7 @@ class Register extends Component {
     }
 
     // Functions performed after page is rendered
-    // Frontend Validation Functions 
+    // Frontend Validation Functions
 
     validateFirstName = (firstName) => {
         if(firstName.length < FIRSTNAME_MIN_LENGTH) {
@@ -221,7 +217,7 @@ class Register extends Component {
             return {
                 validateStatus: 'success',
                 errorMsg: null,
-              };            
+              };
         }
     }
 
@@ -241,7 +237,7 @@ class Register extends Component {
             return {
                 validateStatus: 'success',
                 errorMsg: null,
-              };            
+              };
         }
     }
 
@@ -249,7 +245,7 @@ class Register extends Component {
         if(!email) {
             return {
                 validateStatus: 'error',
-                errorMsg: 'Email may not be empty'                
+                errorMsg: 'Email may not be empty'
             }
         }
 
@@ -308,7 +304,7 @@ class Register extends Component {
             return {
                 validateStatus: 'success',
                 errorMsg: null,
-            };            
+            };
         }
     }
 
@@ -392,7 +388,7 @@ class Register extends Component {
                     value: emailValue,
                     ...emailValidation
                 }
-            });    
+            });
             return;
         }
 
