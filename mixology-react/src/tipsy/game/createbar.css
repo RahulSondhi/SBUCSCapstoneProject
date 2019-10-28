@@ -34,6 +34,6 @@ input[name=barName]:focus{
 #BigButton {
     font-size: 2em;
     position: absolute;
-    top: 5%;
-    right: 25%;
+    top: 6%;
+    right: 12.5%;
 }

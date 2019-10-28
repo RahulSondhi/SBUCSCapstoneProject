@@ -92,7 +92,7 @@ export const BottleStyle = {
     width: "70vmin",
     height: "70vmin",
     top: "5%",
-    left: "60%",
+    left: "50vmin",
     position: "absolute"
 }
 
@@ -100,7 +100,7 @@ export const CupStyle = {
     width: "70vmin",
     height: "70vmin",
     top: "5%",
-    right: "60%",
+    right: "50vmin",
     position: "absolute"
 }
 

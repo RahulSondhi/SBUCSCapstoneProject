@@ -24,9 +24,3 @@
     color: #800000;
     text-shadow: .05em .05em #FFCF00;
 }
-
-.tabHolder {
-    position: fixed;
-    top: 0%;
-    width: 100%;
-}

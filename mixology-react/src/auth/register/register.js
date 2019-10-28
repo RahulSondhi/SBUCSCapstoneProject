@@ -122,7 +122,7 @@ class Register extends Component {
     */
     render() {
         return (
-            <div className="container">
+            <div className="container registerContainer">
                 <h1>Register your account</h1>
                 <SVG src={Cup} style={CupStyle} alt="Cup"/>
                 <Form onSubmit={this.handleSubmit} class="">

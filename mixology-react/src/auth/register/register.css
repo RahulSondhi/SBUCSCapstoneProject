@@ -1,6 +1,4 @@
-body {
-    position: absolute;
-    top: 10%;
-    bottom: 0%;
-    overflow: hidden;
+.registerContainer {
+    top: 7vmin;
+    position: relative;
 }
