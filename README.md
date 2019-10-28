@@ -1,17 +1,23 @@
-# Tipsy
-## Team
-### Lead Programmer
-### Rahul Sondhi
-<img src="./Documentation/READMEAssets/rahul.jpg)" width="200" height="200"/>
+# Tipsy 
+## Team 
+### Lead Programmer 
+## Rahul Sondhi 
+
+<img src="./Documentation/READMEAssets/rahul.jpg)" width="200" height="200">
+
 ### Front End Designer
 ### Ju-Hsin Chen
-<img src="./Documentation/READMEAssets/judy.jpg)" width="200" height="200"/>
+
+<img src="./Documentation/READMEAssets/judy.jpg)" width="200" height="200">
+
 ### Back End Engineer
 ### Bryan Valarezo
-<img src="./Documentation/READMEAssets/bryan.jpg" width="200" height="200"/>
+
+<img src="./Documentation/READMEAssets/bryan.jpg" width="200" height="200">
+
 ### Project Manager
 ### Immanuel Almosara
-<img src="./Documentation/READMEAssets/manny.jpg)" width="200" height="200"/>
+<img src="./Documentation/READMEAssets/manny.jpg)" width="200" height="200">
 ## Project Description
 Tipsy is a Web Application for users who want to learn the art of bartending. The user will be invited to a bar, and within the bars, there will be an example recipe of actual mixed drinks the user may learn from and recipes made by other users who were in the same bar. The users may be creative and make their own drinks, or further more, create their own bar. The web application should be able to provide the service of teaching the instructions on how to make common drinks we may see in real life.
 ### Overview
