@@ -17,7 +17,7 @@ const Tab = (props) => {
 class Tabs extends Component {
     render() {
         return (
-            <nav className="top-bar">
+            <nav className="top-bar tabHolder">
                 {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                 <h1> TIPSY</h1>
                 <div className="top-bar-right">

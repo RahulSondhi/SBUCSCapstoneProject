@@ -9,15 +9,14 @@ export const LoginLabelStyle = {
 export const RecipePlayButton = (props) => {
     return (
         <div>
-           <Link to={props.redirect}>
-               <button type="submit" className="button" id="recipePlayButton">
-                   {props.name}
-               </button>
-           </Link>
+            <Link to={props.redirect}>
+                <button type="submit" className="button" id="recipePlayButton">
+                    {props.name}
+                </button>
+            </Link>
         </div>
     )
 };
-
 
 export const CustomButton = (props) => {
     return (
@@ -90,6 +89,22 @@ export const DrinksStyle = {
     "display": "block"
 }
 
+export const BottleStyle = {
+    width: "70vmin",
+    height: "70vmin",
+    top: "5%",
+    left: "60%",
+    position: "absolute"
+}
+
+export const CupStyle = {
+    width: "70vmin",
+    height: "70vmin",
+    top: "5%",
+    right: "60%",
+    position: "absolute"
+}
+
 export const TipsyStyle = {
     width: "100%",
     height: "100%"
@@ -110,10 +125,10 @@ export const SearchBarStyle = {
 }
 
 export const CounterStyle = {
-  width: "40%",
-  height: "30%",
-  margin: "0 auto",
-  bottom: "0"
+    width: "40%",
+    height: "30%",
+    margin: "0 auto",
+    bottom: "0"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

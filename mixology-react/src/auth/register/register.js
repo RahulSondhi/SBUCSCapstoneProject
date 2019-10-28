@@ -1,22 +1,28 @@
 import React, {Component} from 'react';
 
-import { register, checkNicknameAvailability, checkEmailAvailability } from '../../util/APIUtils';
-import { SVG, TipsyStyle, DrinksStyle} from '../../constants/constants.js';
+import {register, checkNicknameAvailability, checkEmailAvailability} from '../../util/APIUtils';
+import {SVG, TipsyStyle, DrinksStyle, BottleStyle, CupStyle} from '../../constants/constants.js';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
+import Bottle from '../../assets/bottle.svg';
+import Cup from '../../assets/cup.svg';
 import '../../index.css';
 import './register.css';
 
 import {
-    FIRSTNAME_MIN_LENGTH, FIRSTNAME_MAX_LENGTH,
-    LASTNAME_MIN_LENGTH, LASTNAME_MAX_LENGTH,
+    FIRSTNAME_MIN_LENGTH,
+    FIRSTNAME_MAX_LENGTH,
+    LASTNAME_MIN_LENGTH,
+    LASTNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
-    NICKNAME_MIN_LENGTH, NICKNAME_MAX_LENGTH,
-    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
+    NICKNAME_MIN_LENGTH,
+    NICKNAME_MAX_LENGTH,
+    PASSWORD_MIN_LENGTH,
+    PASSWORD_MAX_LENGTH
 } from '../../constants/constants.js';
 
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, notification } from 'antd';
+import {Link} from 'react-router-dom';
+import {Form, Input, Button, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Register extends Component {
@@ -46,11 +52,21 @@ class Register extends Component {
             }
         }
         //Functions needed for this Register Class
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
-        this.validateNicknameAvailability = this.validateNicknameAvailability.bind(this);
-        this.isFormInvalid = this.isFormInvalid.bind(this);
+        this.handleInputChange = this
+            .handleInputChange
+            .bind(this);
+        this.handleSubmit = this
+            .handleSubmit
+            .bind(this);
+        this.validateEmailAvailability = this
+            .validateEmailAvailability
+            .bind(this);
+        this.validateNicknameAvailability = this
+            .validateNicknameAvailability
+            .bind(this);
+        this.isFormInvalid = this
+            .isFormInvalid
+            .bind(this);
     }
     /*
         Handle changes from the form and update our fields
@@ -61,7 +77,7 @@ class Register extends Component {
         const inputValue = target.value;
 
         this.setState({
-            [inputName] : {
+            [inputName]: {
                 value: inputValue,
                 ...validationFun(inputValue)
             }
@@ -81,11 +97,11 @@ class Register extends Component {
             nickname: this.state.nickname.value,
             password: this.state.password.value
         };
-        register(registerRequest)
-        .then(response => {
+        register(registerRequest).then(response => {
             notification.success({
                 message: 'Tipsy App',
-                description: "Thank you! You're successfully registered. Please check your email to confirm your registration!",
+                description: "Thank you! You're successfully registered. Please check your email to confirm yo" +
+                        "ur registration!"
             });
         }).catch(error => {
             notification.error({
@@ -98,13 +114,7 @@ class Register extends Component {
         returns true if the Form is invalid.
     */
     isFormInvalid() {
-        return !(this.state.firstName.validateStatus === 'success' &&
-            this.state.lastName.validateStatus === 'success' &&
-            this.state.email.validateStatus === 'success' &&
-            this.state.nickname.validateStatus === 'success' &&
-            this.state.password.validateStatus === 'success' &&
-            this.state.passwordConfirm.validateStatus === 'success'
-        );
+        return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success' && this.state.nickname.validateStatus === 'success' && this.state.password.validateStatus === 'success' && this.state.passwordConfirm.validateStatus === 'success');
     }
 
     /*
@@ -114,209 +124,163 @@ class Register extends Component {
         return (
             <div className="container">
                 <h1>Register your account</h1>
+                <SVG src={Cup} style={CupStyle} alt="Cup"/>
                 <Form onSubmit={this.handleSubmit} class="">
-                        <FormItem
-                            label="First Name"
-                            validateStatus={this.state.firstName.validateStatus}
-                            help={this.state.firstName.errorMsg}>
-                            <Input
-                                name="firstName"
-                                autoComplete="off"
-                                placeholder="Enter First Name"
-                                value={this.state.firstName.value}
-                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />
-                        </FormItem>
-                        <FormItem
-                            label="Last Name"
-                            validateStatus={this.state.lastName.validateStatus}
-                            help={this.state.lastName.errorMsg}>
-                            <Input
-                                name="lastName"
-                                autoComplete="off"
-                                placeholder="Enter Last Name"
-                                value={this.state.lastName.value}
-                                onChange={(event) => this.handleInputChange(event, this.validateFirstName)} />
-                        </FormItem>
-                        <FormItem label="Nickname"
-                            hasFeedback
-                            validateStatus={this.state.nickname.validateStatus}
-                            help={this.state.nickname.errorMsg}>
-                            <Input
-                                name="nickname"
-                                autoComplete="off"
-                                placeholder="Enter Nickname"
-                                value={this.state.nickname.value}
-                                onBlur={this.validateNicknameAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateNickname)} />
-                        </FormItem>
-                        <FormItem
-                            label="Email"
-                            hasFeedback
-                            validateStatus={this.state.email.validateStatus}
-                            help={this.state.email.errorMsg}>
-                            <Input
-                                name="email"
-                                type="email"
-                                autoComplete="off"
-                                placeholder="Enter email"
-                                value={this.state.email.value}
-                                onBlur={this.validateEmailAvailability}
-                                onChange={(event) => this.handleInputChange(event, this.validateEmail)} />
-                        </FormItem>
-                        <FormItem
-                            label="Password"
-                            validateStatus={this.state.password.validateStatus}
-                            help={this.state.password.errorMsg}>
-                            <Input
-                                name="password"
-                                type="password"
-                                autoComplete="off"
-                                placeholder="Enter Password"
-                                value={this.state.password.value}
-                                onChange={(event) => this.handleInputChange(event, this.validatePassword)} />
-                        </FormItem>
-                        <FormItem
-                            label="Confirm Password"
-                            validateStatus={this.state.passwordConfirm.validateStatus}
-                            help={this.state.passwordConfirm.errorMsg}>
-                            <Input
-                                name="passwordConfirm"
-                                type="password"
-                                autoComplete="off"
-                                placeholder="Confirm your password"
-                                value={this.state.passwordConfirm.value}
-                                onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />
-                        </FormItem>
-                        <FormItem>
-                            <Button type="primary"
-                                htmlType="submit"
-                                disabled={this.isFormInvalid()}>Register
-                            </Button>
-                            Already registered? <Link to="/login">Login now!</Link>
-                        </FormItem>
-                    </Form>
+                    <FormItem
+                        label="First Name"
+                        validateStatus={this.state.firstName.validateStatus}
+                        help={this.state.firstName.errorMsg}>
+                        <Input
+                            name="firstName"
+                            autoComplete="off"
+                            placeholder="Enter First Name"
+                            value={this.state.firstName.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                    </FormItem>
+                    <FormItem
+                        label="Last Name"
+                        validateStatus={this.state.lastName.validateStatus}
+                        help={this.state.lastName.errorMsg}>
+                        <Input
+                            name="lastName"
+                            autoComplete="off"
+                            placeholder="Enter Last Name"
+                            value={this.state.lastName.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                    </FormItem>
+                    <FormItem
+                        label="Nickname"
+                        hasFeedback
+                        validateStatus={this.state.nickname.validateStatus}
+                        help={this.state.nickname.errorMsg}>
+                        <Input
+                            name="nickname"
+                            autoComplete="off"
+                            placeholder="Enter Nickname"
+                            value={this.state.nickname.value}
+                            onBlur={this.validateNicknameAvailability}
+                            onChange={(event) => this.handleInputChange(event, this.validateNickname)}/>
+                    </FormItem>
+                    <FormItem
+                        label="Email"
+                        hasFeedback
+                        validateStatus={this.state.email.validateStatus}
+                        help={this.state.email.errorMsg}>
+                        <Input
+                            name="email"
+                            type="email"
+                            autoComplete="off"
+                            placeholder="Enter email"
+                            value={this.state.email.value}
+                            onBlur={this.validateEmailAvailability}
+                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                    </FormItem>
+                    <FormItem
+                        label="Password"
+                        validateStatus={this.state.password.validateStatus}
+                        help={this.state.password.errorMsg}>
+                        <Input
+                            name="password"
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Enter Password"
+                            value={this.state.password.value}
+                            onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
+                    </FormItem>
+                    <FormItem
+                        label="Confirm Password"
+                        validateStatus={this.state.passwordConfirm.validateStatus}
+                        help={this.state.passwordConfirm.errorMsg}>
+                        <Input
+                            name="passwordConfirm"
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Confirm your password"
+                            value={this.state.passwordConfirm.value}
+                            onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
+                    </FormItem>
+                    <FormItem>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            disabled={this.isFormInvalid()}
+                            className="button">
+                            Register
+                        </Button>
+                        <br/>
+                        Already registered?
+                        <Link to="/login">Login now!</Link>
+                    </FormItem>
+                </Form>
+                <SVG src={Bottle} style={BottleStyle} alt="Bottle"/>
             </div>
         );
     }
 
-    // Functions performed after page is rendered
-    // Frontend Validation Functions
+    // Functions performed after page is rendered Frontend Validation Functions
 
     validateFirstName = (firstName) => {
-        if(firstName.length < FIRSTNAME_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`
-            }
+        if (firstName.length < FIRSTNAME_MIN_LENGTH) {
+            return {validateStatus: 'error', errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`}
         } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`
-            }
+            return {validationStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
         } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-              };
+            return {validateStatus: 'success', errorMsg: null};
         }
     }
 
-
     validateLastName = (lastName) => {
-        if(lastName.length < LASTNAME_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`
-            }
+        if (lastName.length < LASTNAME_MIN_LENGTH) {
+            return {validateStatus: 'error', errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`}
         } else if (lastName.length > LASTNAME_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`
-            }
+            return {validationStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
         } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-              };
+            return {validateStatus: 'success', errorMsg: null};
         }
     }
 
     validateEmail = (email) => {
-        if(!email) {
-            return {
-                validateStatus: 'error',
-                errorMsg: 'Email may not be empty'
-            }
+        if (!email) {
+            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
         }
 
         const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
-        if(!EMAIL_REGEX.test(email)) {
-            return {
-                validateStatus: 'error',
-                errorMsg: 'Email not valid'
-            }
+        if (!EMAIL_REGEX.test(email)) {
+            return {validateStatus: 'error', errorMsg: 'Email not valid'}
         }
 
-        if(email.length > EMAIL_MAX_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`
-            }
+        if (email.length > EMAIL_MAX_LENGTH) {
+            return {validateStatus: 'error', errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`}
         }
 
-        return {
-            validateStatus: null,
-            errorMsg: null
-        }
+        return {validateStatus: null, errorMsg: null}
     }
 
     validateNickname = (nickname) => {
-        if(nickname.length < NICKNAME_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Nickname is too short (Minimum ${NICKNAME_MIN_LENGTH} characters needed.)`
-            }
+        if (nickname.length < NICKNAME_MIN_LENGTH) {
+            return {validateStatus: 'error', errorMsg: `Nickname is too short (Minimum ${NICKNAME_MIN_LENGTH} characters needed.)`}
         } else if (nickname.length > NICKNAME_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`
-            }
+            return {validationStatus: 'error', errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`}
         } else {
-            return {
-                validateStatus: null,
-                errorMsg: null
-            }
+            return {validateStatus: null, errorMsg: null}
         }
     }
 
     validatePassword = (password) => {
-        if(password.length < PASSWORD_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`
-            }
+        if (password.length < PASSWORD_MIN_LENGTH) {
+            return {validateStatus: 'error', errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`}
         } else if (password.length > PASSWORD_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`
-            }
+            return {validationStatus: 'error', errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`}
         } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-            };
+            return {validateStatus: 'success', errorMsg: null};
         }
     }
 
     validatePasswordConfirm = (passwordConfirm) => {
         const passwordValue = this.state.password.value;
-        if(passwordConfirm !== passwordValue){
-            return {
-                validateStatus: 'error',
-                errorMsg: `Passwords do not match`
-            }
-        }
-        else{
+        if (passwordConfirm !== passwordValue) {
+            return {validateStatus: 'error', errorMsg: `Passwords do not match`}
+        } else {
             return this.validatePassword(passwordConfirm)
         }
     }
@@ -328,7 +292,7 @@ class Register extends Component {
         const nicknameValue = this.state.nickname.value;
         const nicknameValidation = this.validateNickname(nicknameValue);
 
-        if(nicknameValidation.validateStatus === 'error') {
+        if (nicknameValidation.validateStatus === 'error') {
             this.setState({
                 nickname: {
                     value: nicknameValue,
@@ -346,9 +310,8 @@ class Register extends Component {
             }
         });
 
-        checkNicknameAvailability(nicknameValue)
-        .then(response => {
-            if(response.available) {
+        checkNicknameAvailability(nicknameValue).then(response => {
+            if (response.available) {
                 this.setState({
                     nickname: {
                         value: nicknameValue,
@@ -382,7 +345,7 @@ class Register extends Component {
         const emailValue = this.state.email.value;
         const emailValidation = this.validateEmail(emailValue);
 
-        if(emailValidation.validateStatus === 'error') {
+        if (emailValidation.validateStatus === 'error') {
             this.setState({
                 email: {
                     value: emailValue,
@@ -400,9 +363,8 @@ class Register extends Component {
             }
         });
 
-        checkEmailAvailability(emailValue)
-        .then(response => {
-            if(response.available) {
+        checkEmailAvailability(emailValue).then(response => {
+            if (response.available) {
                 this.setState({
                     email: {
                         value: emailValue,
