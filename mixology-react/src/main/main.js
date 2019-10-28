@@ -14,14 +14,16 @@ import Admin from '../tipsy/admin/admin.js';
 import Forgot from '../auth/forgot/forgot.js';
 import Confirm from '../auth/confirm/confirm.js';
 import Reset from '../auth/reset/reset.js';
-
-import { getCurrentUser } from '../util/APIUtils.js';
-import { ACCESS_TOKEN } from '../constants/constants.js';
-import { notification } from 'antd';
 import Recipe from '../tipsy/menu/recipe/recipe';
 import Bar from '../tipsy/menu/bar/bar';
 import User from '../tipsy/menu/user/user';
 import Game from '../tipsy/game/game';
+import CreateBar from '../tipsy/game/createbar'
+
+import { getCurrentUser } from '../util/APIUtils.js';
+import { ACCESS_TOKEN } from '../constants/constants.js';
+import { notification } from 'antd';
+
 
 class Main extends Component {
     constructor(props) {
@@ -103,6 +105,7 @@ class Main extends Component {
                     <Route path="/tipsy/admin" exact component={Admin} className="tab"/>
                     <Route path="/tipsy/admin/user" component={User}/>
                     <Route path="/tipsy/game" component={Game}/>
+                    <Route path="/tipsy/createbar" component={CreateBar}/>
                 </Switch>
             </Router>
         )

@@ -23,8 +23,8 @@ class GameTabs extends Component {
                 <div className="top-bar-right">
                     <ul className="horizontal menu nested">
                         <GameTab link="" name="Instruction"/>
-                        <GameTab link="" name="Save"/>
-                        <GameTab link="" name="Quit"/>
+                        <GameTab link="/tipsy/myRecipes/recipe" name="Save"/>
+                        <GameTab link="/tipsy/myRecipes" name="Quit"/>
                     </ul>
                 </div>
             </nav>

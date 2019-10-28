@@ -125,10 +125,12 @@ export const SearchBarStyle = {
 }
 
 export const CounterStyle = {
-    width: "40%",
-    height: "30%",
-    margin: "0 auto",
-    bottom: "0"
+  height: "40vmin",
+  margin: "0 auto",
+}
+
+export const IngredientStyle = {
+  height: "10vmin"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
