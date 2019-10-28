@@ -25,6 +25,7 @@ class Tabs extends Component {
                         <Tab link="/tipsy/search" name="Search"/>
                         <Tab link="/tipsy/myBars" name="My Bars"/>
                         <Tab link="/tipsy/myRecipes" name="My Recipes"/>
+                        <Tab link="/tipsy/barGears" name="Bar Gears"/>
                         <Tab link="/tipsy/admin" name="Admin"/>
                         <Tab link="/" name="Logout"/>
                     </ul>

@@ -19,12 +19,13 @@ import Bar from '../tipsy/menu/bar/bar';
 import User from '../tipsy/menu/user/user';
 import Game from '../tipsy/game/game';
 import CreateBar from '../tipsy/game/createbar'
+import CreateRecipe from '../tipsy/game/createrecipe';
+import BarGears from '../tipsy/user/bargears/bargears';
+import Gear from '../tipsy/menu/gear/gear';
 
 import { getCurrentUser } from '../util/APIUtils.js';
 import { ACCESS_TOKEN } from '../constants/constants.js';
 import { notification } from 'antd';
-import CreateRecipe from '../tipsy/game/createrecipe';
-
 
 class Main extends Component {
     constructor(props) {
@@ -103,6 +104,8 @@ class Main extends Component {
                     <Route path="/tipsy/myBars/bar" component={Bar}/>
                     <Route path="/tipsy/myRecipes" exact component={MyRecipes} className="tab"/>
                     <Route path="/tipsy/myRecipes/recipe" component={Recipe}/>
+                    <Route path="/tipsy/barGears" exact component={BarGears} className="tab"/>
+                    <Route path="/tipsy/barGears/gear" component={Gear}/>
                     <Route path="/tipsy/admin" exact component={Admin} className="tab"/>
                     <Route path="/tipsy/admin/user" component={User}/>
                     <Route path="/tipsy/game" component={Game}/>
