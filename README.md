@@ -39,9 +39,11 @@ For creating the UI Mockups we used the program Abobe XD. To create our UML Diag
 https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/UIMockUps/Tipsy.xd
 ### UML Diagrams
 #### Class Diagram
-![ClassDiagram](./Documentation/Tipsy UML Class Diagram.png)
+![ClassDiagram](./Documentation/UMLDiagrams/tipsyUMLClassDiagram.png)
 #### Component Diagram
-![ComponentDiagram](./Documentation/Tipsy UML Component Diagram.png)
+![ComponentDiagram](./Documentation/UMLDiagrams/tipsyUMLComponentDiagram.png)
+#### Package Diagram
+![PackageDiagram](./Documentation/UMLDiagrams/tipsyUMLPackageDiagram.png)
 ### SRS Document
 https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/SRSDocument/CSE308%20SRS.docx
 ### Progress Reports
@@ -52,4 +54,4 @@ https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/SR
 Our team has utilized various tools to ensure that our progress continues at a steady rate. In regards to organization we used Trello and TeamGantt to properly delegate our work evenly. For staying connected we created a group chat in Facebook Messenger. For organizing meetings we used When2Meet to quickly find a time where all members were available to schedule an appropriate time to hold a meeting.
 
 ### Rules for committing
-We as a group have collectively decided to only make commits once a significant amount of progress has been made.
+We as a group have collectively decided to only make commits once a significant amount of progress has been made and to be descriptive in each commit.
