@@ -1,61 +1,60 @@
 import React, {Component} from 'react';
 import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../constants/constants.js';
-import {login} from '../../util/APIUtils';
+import { login } from '../../util/APIUtils';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './login.css';
-import {Link} from 'react-router-dom';
-import {ACCESS_TOKEN} from '../../constants/constants.js';
-import {Form, Input, Icon, notification} from 'antd';
+
+import { ACCESS_TOKEN } from '../../constants/constants.js';
+import { Link } from 'react-router-dom';
+import { Form, Input, Button, Icon, notification } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
     render() {
         const AntWrappedLoginForm = Form.create()(LoginForm)
-        return (<AntWrappedLoginForm onLogin={this.props.onLogin}/>);
+        return (
+            <AntWrappedLoginForm onLogin={this.props.onLogin} />
+        );
     }
 }
 
 class LoginForm extends Component {
-
+    
     constructor(props) {
         super(props);
-        this.handleSubmit = this
-            .handleSubmit
-            .bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
-        event.preventDefault();
-        this
-            .props
-            .form
-            .validateFields((err, values) => {
-                if (!err) {
-                    const loginRequest = Object.assign({}, values);
-                    login(loginRequest) //JSON to backend
-                        .then(response => {
-                        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                        this
-                            .props
-                            .onLogin();
-                    }).catch(error => {
-                        if (error.status === 401) {
-                            notification.error({message: 'Tipsy App', description: 'Your Email or Password is incorrect. Please try again!'});
-                        } else {
-                            notification.error({
-                                message: 'Tipsy App',
-                                description: error.message || 'Sorry! Something went wrong. Please try again!'
-                            });
-                        }
-                    });
-                }
-            });
+        event.preventDefault();   
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                const loginRequest = Object.assign({}, values);
+                login(loginRequest) //JSON to backend
+                .then(response => {
+                    localStorage.setItem(ACCESS_TOKEN, response.accessToken);  //get the token and save it
+                    this.props.onLogin();
+                }).catch(error => {
+                    if(error.status === 401) {
+                        notification.error({
+                            message: 'Tipsy App',
+                            description: 'Your Email or Password is incorrect. Please try again!'
+                        });                    
+                    } else {
+                        notification.error({
+                            message: 'Tipsy App',
+                            description: error.message || 'Sorry! Something went wrong. Please try again!'
+                        });                                            
+                    }
+                });
+            }
+        });
     }
 
     render() {
-        const {getFieldDecorator} = this.props.form;
+        const { getFieldDecorator } = this.props.form;
         return (
             <div className="container">
                 <div className="logo">

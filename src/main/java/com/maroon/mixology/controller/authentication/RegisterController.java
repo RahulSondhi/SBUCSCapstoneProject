@@ -14,6 +14,7 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
 import com.maroon.mixology.exchange.request.RegisterRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
+import com.maroon.mixology.exchange.response.TokenValidity;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
@@ -111,47 +112,31 @@ public class RegisterController {
                 }
 
         @GetMapping({"/validateConfirm"})
-        public ResponseEntity<?> validateConfirmation(@RequestParam Map<String, String> requestParams){
+        public TokenValidity validateConfirm(@RequestParam(value = "token") String token){
                 //Get the current time
                 Calendar expiredTime = Calendar.getInstance();
                 expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
-                User user = userService.findByConfirmationTokenUUID(requestParams.get("token"));
+                User user = userService.findByConfirmationTokenUUID(token);
                 if(user == null) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
-                                HttpStatus.BAD_REQUEST);
-                        }
+                        return new TokenValidity(false, "User not found"); //User not found
+                }
                 if(user.isEnabled()) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User is already enabled."),
-                                HttpStatus.BAD_REQUEST);
+                        return new TokenValidity(false, "User is already enabled"); //User is already enabled
                         }
                 Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                 tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
                 if(tokenTime.before(expiredTime)) { //check if token is expired
                         //need to add a use case to allow confirmation link to be sent again
                         //or rather, send the confirmation link again here
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token."),
-                                HttpStatus.BAD_REQUEST);
-                        }
-                return ResponseEntity.ok(new ApiResponse(true, "Confirmation link is valid, proceed to confirm your account"));
-        }
-
-        @PostMapping({"/confirm"})
-        public ResponseEntity<?> processConfirmationForm(@RequestParam Map<String, String> requestParams) {
-                // Find the user associated with the confirmation token
-                User user = userService.findByConfirmationTokenUUID(requestParams.get("token"));
-                if(user == null) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
-                                HttpStatus.BAD_REQUEST);
+                        return new TokenValidity(false, "Token is expired, invalid token."); //Token is expired, invalid token.
                 }
                 // Set user to enabled
                 user.setEnabled(true);
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete 
-                return ResponseEntity.ok(new ApiResponse(true, "User registeration complete. You may now login."));
-                }
-
-
+                return new TokenValidity(true, "Confirmation link is valid, you may now login!"); //"Confirmation link is valid, you may now login
+        }
         
 }

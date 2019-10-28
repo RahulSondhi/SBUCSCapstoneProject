@@ -10,9 +10,10 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exchange.request.ForgotRequest;
 import com.maroon.mixology.exchange.request.LoginRequest;
-import com.maroon.mixology.exchange.request.ResetRequest;
+import com.maroon.mixology.exchange.request.ResetPasswordRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.JwtAuthenticationResponse;
+import com.maroon.mixology.exchange.response.TokenValidity;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
@@ -129,35 +130,33 @@ public class LoginController {
         }
         
         @GetMapping({"/validateReset"})
-        public ResponseEntity<?> processResetForm(@RequestParam Map<String, String> requestParams) {
+        public TokenValidity validateReset(@RequestParam(value = "token") String token) {
                 //Get the current time
                 Calendar expiredTime = Calendar.getInstance();
                 expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
                 // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(requestParams.get("token"));
+                User user = userService.findByResetTokenUUID(token);
                 if(user == null) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
-                                HttpStatus.BAD_REQUEST);
+                        return new TokenValidity(false, "User not found"); //User not found
                 }
                 Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                 tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
                 if(tokenTime.before(expiredTime)) { //check if token is expired
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Token is expired, invalid token. Redirect to forgot password page."),
-                                HttpStatus.BAD_REQUEST);
+                        return new TokenValidity(false, "Token is expired, invalid token."); //Token expired
                 }
-                return ResponseEntity.ok(new ApiResponse(true, "Reset password link is valid, proceed to reset your password"));
+                return new TokenValidity(true, "Reset password link is valid, proceed to reset your password"); //Reset password link is valid, proceed to reset your password
         }
 
         @PostMapping({"/resetPassword"})
-        public ResponseEntity<?> resetPasswordForm(@RequestBody ResetRequest resetRequest) {
+        public ResponseEntity<?> resetPasswordForm(@RequestBody ResetPasswordRequest resetPasswordRequest) {
                 // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(resetRequest.getUUID());
+                User user = userService.findByResetTokenUUID(resetPasswordRequest.getUUID());
                 if(user == null) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
                                 HttpStatus.BAD_REQUEST);
                 }
                 // Set new password
-                user.setPassword(passwordEncoder.encode(resetRequest.getPassword()));
+                user.setPassword(passwordEncoder.encode(resetPasswordRequest.getPassword()));
                 // Set the reset token to null so it cannot be used again
                 user.setResetTokenUUID(null);
                 user.setResetTokenCreationTime(null);
