@@ -8,7 +8,7 @@ import './login.css';
 
 import { ACCESS_TOKEN } from '../../constants/constants.js';
 import { Link } from 'react-router-dom';
-import { Form, Input, Button, Icon, notification } from 'antd';
+import { Form, Input, Icon, notification } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -105,7 +105,7 @@ class LoginForm extends Component {
                         <div className="cell small-4"></div>
                         <div className="cell small-4">
                             <FormItem>
-                                <CustomButton redirect="/tipsy/search" name="Login"/>
+                                <button type="submit" className="button">Login</button>
                             </FormItem>
                         </div>
                     </div>

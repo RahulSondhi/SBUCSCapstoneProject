@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import { CustomButton } from '../../../constants/constants.js';
 import './user.css';
 
 class User extends Component {

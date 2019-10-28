@@ -23,6 +23,7 @@ import CreateBar from '../tipsy/game/createbar'
 import { getCurrentUser } from '../util/APIUtils.js';
 import { ACCESS_TOKEN } from '../constants/constants.js';
 import { notification } from 'antd';
+import CreateRecipe from '../tipsy/game/createrecipe';
 
 
 class Main extends Component {
@@ -106,6 +107,7 @@ class Main extends Component {
                     <Route path="/tipsy/admin/user" component={User}/>
                     <Route path="/tipsy/game" component={Game}/>
                     <Route path="/tipsy/createbar" component={CreateBar}/>
+                    <Route path="/tipsy/createRecipe" component={CreateRecipe}/>
                 </Switch>
             </Router>
         )

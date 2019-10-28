@@ -95,7 +95,8 @@ class Forgot extends Component {
                     <FormItem>
                             <Button type="primary" 
                                 htmlType="submit" 
-                                disabled={this.isFormInvalid()}>Send 
+                                disabled={this.isFormInvalid()}
+                                className="button">Send 
                             </Button>
                             Already registered? <Link to="/login">Login now!</Link>
                         </FormItem>

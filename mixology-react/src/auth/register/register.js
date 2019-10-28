@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../../util/APIUtils';
-import {SVG, TipsyStyle, DrinksStyle, BottleStyle, CupStyle} from '../../constants/constants.js';
-import Tipsy from '../../assets/Tipsy.svg';
-import Drinks from '../../assets/drinks.svg';
+import {SVG, BottleStyle, CupStyle} from '../../constants/constants.js';
 import Bottle from '../../assets/bottle.svg';
 import Cup from '../../assets/cup.svg';
 import '../../index.css';

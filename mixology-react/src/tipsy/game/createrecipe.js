@@ -4,13 +4,13 @@ import { LargeButton, CustomButton } from '../../constants/constants.js';
 import { Input } from 'antd';
 import './createbar.css';
 
-class CreateBar extends Component {
+class CreateRecipe extends Component {
     render() {
         return (
           <div>
               <Tabs/>
               <h1>
-                  Create/Edit Your Bar
+                  Create/Edit Your Recipe
               </h1>
               <Input id="barName" size="large" name="barName" type="barName" placeholder="Enter Bar Name"/>
               <LargeButton redirect="/tipsy/myBars/bar" name="Create Bar +"/>
@@ -38,4 +38,4 @@ class CreateBar extends Component {
     }
 }
 
-export default CreateBar;
+export default CreateRecipe;

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import UserIcon from '../assets/user.svg';
 
 export const LoginLabelStyle = {
     "float": "left"
@@ -63,6 +64,7 @@ export const UserEntry = () => {
     return (
         <div className="small-3 cell">
             <div className="entry">
+                <SVG src={UserIcon} style={UserStyle} alt="User"/>
                 <p>
                     UserName
                 </p>
@@ -112,6 +114,11 @@ export const TipsyStyle = {
 export const SmallTipsyStyle = {
     width: "20%",
     height: "20%"
+}
+
+export const UserStyle = {
+    width: "30%",
+    height: "30%"
 }
 
 export const SearchBarStyle = {
