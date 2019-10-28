@@ -1,0 +1,47 @@
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1,Text Area 2
+1,Page,,,,,,,,,UML Package Diagram,
+2,Text,Standard,1,,46,,,,,Tipsy UML Package Diagram,
+3,Text,Standard,1,,46,,,,,"Rahul Sondhi  |  October 28, 2019",
+4,Package,UML,1,,,,,,,,User UI
+5,Package,UML,1,,,,,,,,User Account
+6,Package,UML,1,,,,,,,,User Bars
+7,Package,UML,1,,,,,,,,Data Collection
+8,Package,UML,1,,,,,,,,User
+9,Package,UML,1,,,,,,,,Search
+10,Package,UML,1,,,,,,,,Equipment Page
+11,Package,UML,1,,,,,,,,Recipe Page
+12,Package,UML,1,,,,,,,,Bar Page
+13,Package,UML,1,,,,,,,,Profile Page
+14,Package,UML,1,,,,,,,,User Recipes
+15,Package,UML,1,,,,,,,,User Equipment
+16,Package,UML,1,,,,,,,,User Profile
+17,Package,UML,1,,,,,,,,Recipes
+18,Package,UML,1,,,,,,,,Equipment
+19,Package,UML,1,,,,,,,,Bars
+20,Line,,1,,46,,,None,None,,
+21,Line,,1,,,4,9,Arrow,None,,
+22,Line,,1,,,4,10,Arrow,None,,
+23,Line,,1,,,4,11,Arrow,None,,
+24,Line,,1,,,4,7,Arrow,None, «access»,
+25,Line,,1,,,5,7,Arrow,None, «access»,
+26,Line,,1,,,8,4,None,Arrow, «use»,
+27,Line,,1,,,12,4,None,Arrow,,
+28,Line,,1,,,13,4,None,Arrow,<<merge>>,
+29,Line,,1,,,5,14,Arrow,None,,
+30,Line,,1,,,15,5,None,Arrow,,
+31,Line,,1,,,5,6,Arrow,None,,
+32,Line,,1,,,16,5,None,Arrow,<<merge>>,
+33,Line,,1,,,14,17,None,Arrow,<<import>>,
+34,Line,,1,,,15,18,None,Arrow,<<import>>,
+35,Line,,1,,,6,19,None,Arrow,<<import>>,
+36,Line,,1,,,19,25,Arrow,None,,
+37,Line,,1,,,18,25,Arrow,None,,
+38,Line,,1,,,17,25,Arrow,None,,
+39,Line,,1,,,18,17,None,Arrow,<<use>>,
+40,Line,,1,,,17,19,None,Arrow,<<use>>,
+41,Line,,1,,,7,10,Arrow,None,,
+42,Line,,1,,,12,7,None,Arrow,,
+43,Line,,1,,,13,7,None,Arrow,,
+44,Line,,1,,,11,7,None,Arrow,,
+45,Line,,1,,,9,7,None,Arrow,<<use>>,
+46,Group 1,,1,,,,,,,,
