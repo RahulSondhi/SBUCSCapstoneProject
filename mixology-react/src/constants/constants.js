@@ -23,7 +23,7 @@ export const EntryTwoFields = (props) => {
         <div className="small-3 cell">
             <div className="entry">
             <br/>
-            <h3>
+            <h3 style={props.titleStyle}>
                 {props.itemName}
             </h3>
               <SVG src={props.icon} style={props.style} alt="User"/>
@@ -113,6 +113,16 @@ export const ToolStyle = {
 export const BottleIconStyle = {
     width: "15%",
     height: "15%"
+}
+
+export const ProfileIconStyle = {
+    width: "10%",
+    height: "10%"
+}
+
+export const TitleStyle = {
+    width: "80%",
+    height: "20%",
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
