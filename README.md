@@ -38,7 +38,6 @@ The technologies we implemented in Tipsy include:
 - ValidateConfirm GET
 - ValidateReset GET
 - ResetPassword POST
-- Confirm POST
 ## Documentation
 ### Overview
 For creating the UI Mockups we used the program Abobe XD. To create our UML Diagrams we used LucidChart.  For creating the SRS Document we used Google Docs.

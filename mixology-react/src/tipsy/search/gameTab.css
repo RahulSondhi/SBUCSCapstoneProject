@@ -13,14 +13,7 @@
     color: white;
     border: 0;
     padding: 0;
-    background-color: transparent;
+    background-color: var(--tab-color);
     text-decoration: none;
     font-family: 'Roboto Mono', monospace;
-}
-
-.title {
-    display: inline-block;
-    font-family: 'Righteous';
-    color: #800000;
-    text-shadow: .05em .05em #FFCF00;
 }

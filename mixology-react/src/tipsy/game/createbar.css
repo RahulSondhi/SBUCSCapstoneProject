@@ -1,17 +1,13 @@
-#barName {
-  width: 30%;
-}
-
 input[name=barName]{
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
     border: none !important;
-    border-bottom: solid 2px white !important;
+    border-bottom: solid 2px var(--input-border-bottom) !important;
     font-size: 1em;
     background-color: none;
     background: none !important;
-    color: white;
+    color: var(--input-text-color);
     transition: 1000ms;
 }
 
@@ -20,7 +16,7 @@ input[name=barName]:focus{
     background: none !important;
     box-shadow: none !important;
     border: none !important;
-    border-bottom: solid 2px #800000 !important;
+    border-bottom: solid 2px var(--input-border-bottom-focus) !important;
 }
 
 .boxContainer {
@@ -31,9 +27,6 @@ input[name=barName]:focus{
   width: 100%;
 }
 
-#BigButton {
-    font-size: 2em;
-    position: absolute;
-    top: 6%;
-    right: 12.5%;
+#createButton {
+  font-size: 2em;
 }
