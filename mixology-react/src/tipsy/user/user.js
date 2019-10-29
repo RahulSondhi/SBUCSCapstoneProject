@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Tabs from '../../search/tabs.js';
+import Tabs from '../../tipsy/search/tabs.js';
 import './user.css';
 
 class User extends Component {

@@ -6,18 +6,6 @@ export const LoginLabelStyle = {
     "float": "left"
 }
 
-export const LargeButton = (props) => {
-    return (
-        <div>
-            <Link to={props.redirect}>
-                <button type="submit" className="button" id="BigButton">
-                    {props.name}
-                </button>
-            </Link>
-        </div>
-    )
-};
-
 export const CustomButton = (props) => {
     return (
         <div>
@@ -30,63 +18,32 @@ export const CustomButton = (props) => {
     )
 }
 
-export const BarEntry = () => {
+export const EntryTwoFields = (props) => {
     return (
         <div className="small-3 cell">
             <div className="entry">
             <br/>
             <h3>
-                BarName
+                {props.itemName}
             </h3>
-              <SVG src={UserIcon} style={UserStyle} alt="User"/>
-                <p>OwnerName</p>
-                <CustomButton redirect="/tipsy/myBars/bar" name="View"/>
+              <SVG src={props.icon} style={props.style} alt="User"/>
+                <p>{props.ownerName}</p>
+                <CustomButton redirect={props.redirect} name="View"/>
             </div>
         </div>
     )
 }
 
-export const RecipeEntry = () => {
-    return (
-        <div className="small-3 cell">
-            <div className="entry">
-            <br/>
-            <h3>
-                RecipeName
-            </h3>
-              <SVG src={UserIcon} style={UserStyle} alt="User"/>
-                <p>OwnerName</p>
-                <CustomButton redirect="/tipsy/myRecipes/recipe" name="View"/>
-            </div>
-        </div>
-    )
-}
-
-export const UserEntry = () => {
+export const EntryOneField = (props) => {
     return (
         <div className="small-3 cell">
             <div className="entry">
             <br/>
                 <SVG src={UserIcon} style={UserStyle} alt="User"/>
                 <p>
-                    UserName
+                    {props.objectName}
                 </p>
-                <CustomButton redirect="/tipsy/admin/user" name="View"/>
-            </div>
-        </div>
-    )
-}
-
-export const GearEntry = () => {
-    return (
-        <div className="small-3 cell">
-            <div className="entry">
-            <br/>
-                <SVG src={UserIcon} style={UserStyle} alt="User"/>
-                <p>
-                    Gear
-                </p>
-                <CustomButton redirect="/tipsy/barGears/gear" name="View"/>
+                <CustomButton redirect={props.redirect} name="View"/>
             </div>
         </div>
     )
@@ -138,8 +95,7 @@ export const SearchBarStyle = {
 }
 
 export const CounterStyle = {
-  height: "40em",
-  margin: "0 auto",
+  height: "30em"
 }
 
 export const IngredientStyle = {
@@ -152,6 +108,11 @@ export const ToolStyle = {
   "marginLeft": "auto",
   "marginRight": "auto",
   "display": "block"
+}
+
+export const BottleIconStyle = {
+    width: "15%",
+    height: "15%"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

@@ -16,10 +16,10 @@ import Confirm from '../auth/confirm/confirm.js';
 import Reset from '../auth/reset/reset.js';
 import Recipe from '../tipsy/menu/recipe/recipe';
 import Bar from '../tipsy/menu/bar/bar';
-import User from '../tipsy/menu/user/user';
+import User from '../tipsy/user/user.js';
 import Game from '../tipsy/game/game';
-import CreateBar from '../tipsy/game/createbar'
-import CreateRecipe from '../tipsy/game/createrecipe';
+import CreateBar from '../tipsy/user/createbar/createbar'
+import CreateRecipe from '../tipsy/user/createrecipe/createrecipe';
 import BarGears from '../tipsy/user/bargears/bargears';
 import Gear from '../tipsy/menu/gear/gear';
 

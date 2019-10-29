@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import Tabs from '../search/tabs.js';
-import {LargeButton, IngredientStyle, SVG} from '../../constants/constants.js';
+import Tabs from '../../search/tabs.js';
+import {CustomButton, IngredientStyle, SVG} from '../../../constants/constants.js';
 import {Input} from 'antd';
 import {Link} from 'react-router-dom';
-import Bottle from '../../assets/bottle.svg';
+import Bottle from '../../../assets/bottle.svg';
 import './createrecipe.css';
 
 class CreateRecipe extends Component {
@@ -27,7 +27,7 @@ class CreateRecipe extends Component {
                         </div>
                     </div>
                     <div className="cell small-4">
-                        <LargeButton redirect="/tipsy/myBars/bar" name="Create Recipe+"/>
+                        <CustomButton redirect="/tipsy/myBars/bar" name="Create Recipe+"/>
                     </div>
                 </div>
                 <div className="grid-x grid-margin-x containerBox">

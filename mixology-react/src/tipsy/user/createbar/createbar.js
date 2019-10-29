@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Tabs from '../search/tabs.js';
-import {LargeButton, CustomButton} from '../../constants/constants.js';
+import Tabs from '../../search/tabs.js';
+import {CustomButton} from '../../../constants/constants.js'; 
 import {Input} from 'antd';
 import './createbar.css';
 
@@ -24,8 +24,8 @@ class CreateBar extends Component {
                                 placeholder="Enter Bar Name"/>
                         </div>
                     </div>
-                    <div className="small-4 cell" id="createButton">
-                        <LargeButton redirect="/tipsy/myBars/bar" name="Create Bar +"/>
+                    <div className="small-4 cell createButton" id="createButton">
+                        <CustomButton redirect="/tipsy/myBars/bar" name="Create Bar +"/>
                     </div>
                 </div>
                 <div className="grid-x grid-margin-x boxContainer">

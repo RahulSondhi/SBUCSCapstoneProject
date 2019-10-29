@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
-.box {
-    padding-left: 10%;
-    padding-right: 10%;
-}
-
 .entry {
     margin: auto auto;
     width: 15vw;
@@ -14,40 +9,10 @@
     text-align: center;
 }
 
-.text-info {
-    position: relative;
-    font-size: 2em;
+.createButton {
+    margin-top: 2em;
 }
 
-.text-section {
-    position: relative;
-    width: 49%;
-    overflow: hidden;
-    top: 0%;
-    left: 10%;
-}
-
-.textRight {
-    float: right;
-}
-
-.textLeft {
-    float: left;
-}
-
-p {
-    color: white;
-}
-
-#owner {
-    float: bottom;
-    bottom: -5%;
-}
-
-#view {
-    float: right;
-}
-
-#make {
-    float: right;
+.tabButton {
+    margin: 2em 2em 2em;
 }

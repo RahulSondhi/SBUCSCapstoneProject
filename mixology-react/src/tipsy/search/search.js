@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 import Tabs from './tabs.js';
-import SVG, {SearchBarStyle, DrinksStyle} from '../../constants/constants.js';
+import {SearchBarStyle } from '../../constants/constants.js';
 import './search.css';
 
 export const SearchBar = (props) => (<input type="text" placeholder={props.placeholder} style={props.style}/>);
-
-const SearchDrinksStyle = {
-    width: "50%",
-    height: "50%",
-    "marginLeft": "auto",
-    "marginRight": "auto",
-    "display": "block",
-    position: "relative"
-}
 
 export class Search extends Component {
     render() {

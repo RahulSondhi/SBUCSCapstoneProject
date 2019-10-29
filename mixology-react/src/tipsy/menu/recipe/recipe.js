@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
 import './recipe.css';
-import { LargeButton } from '../../../constants/constants.js';
+import { CustomButton } from '../../../constants/constants.js';
 
 
 class Recipe extends Component {
@@ -14,7 +14,7 @@ class Recipe extends Component {
                 </h1>
                 <h3>Author: Name
                 </h3>
-                <LargeButton redirect="/tipsy/game" name="Play"/>
+                <CustomButton redirect="/tipsy/game" name="Play"/>
                 <div className="grid-x grid-margin-x boxContainer">
                     <div className="cell small-6">
                         <h2>
