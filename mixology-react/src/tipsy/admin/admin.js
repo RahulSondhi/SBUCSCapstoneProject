@@ -5,6 +5,7 @@ import './admin.css';
 
 class Admin extends Component {
     render() {
+        this.props.checkAuthenticated();
         return (
             <div>
                 <Tabs/>

@@ -7,6 +7,7 @@ export const SearchBar = (props) => (<input type="text" placeholder={props.place
 
 export class Search extends Component {
     render() {
+        this.props.checkAuthenticated();
         return (
             <div>
                 <Tabs/>

@@ -6,6 +6,7 @@ import {CustomButton, EntryOneField} from '../../../constants/constants.js';
 
 class BarGears extends Component {
     render() {
+        this.props.checkAuthenticated();
         return (
             <div>
                 <Tabs/>

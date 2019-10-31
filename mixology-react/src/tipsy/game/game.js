@@ -7,6 +7,7 @@ import './game.css';
 
 class Game extends Component {
     render() {
+        this.props.checkAuthenticated();
         return (
           <div>
               <GameTab/>
