@@ -5,6 +5,8 @@
     "email": "String",
     "nickname": "String",
     "password": "String",
+    "profilePic" : "String",
+    "measurement" : ENUM,
     "confirmationTokenUUID": "String",
     "confirmationTokenCreationTime": NumberLong(),
     "enabled": boolean,
