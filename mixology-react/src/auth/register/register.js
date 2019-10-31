@@ -131,7 +131,7 @@ class Register extends Component {
                         <SVG src={Cup} style={CupBottleStyle} alt="Cup"/>
                     </div>
                     <div className="cell small-4">
-                        <Form onSubmit={this.handleSubmit} class="">
+                        <Form onSubmit={this.handleSubmit}>
                             <FormItem
                                 label="First Name"
                                 validateStatus={this.state.firstName.validateStatus}

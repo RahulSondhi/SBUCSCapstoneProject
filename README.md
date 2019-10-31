@@ -49,7 +49,7 @@ The technologies we implemented in Tipsy include:
 - **CheckNicknameAvailability POST**
 -- This call will handle checking if a nickname is already registered in the database. It sends a request with a String and Spring then checks if the provided nickname is already reigstered in the database. If the nickname is already registered, then the user will not be allowed to register for an account with that nickname, otherwise the user will be allowed to create a new account.
 - **GetCurrentUser GET**
--- This call will handle returning a JSON containing a UserSummary Object that holds the user ID, nickname, and name. 
+-- This call will handle returning a JSON containing a UserSummary Object that holds the user ID, nickname, and name. The value that is returned will return a user based on the JWT Token, if no user is found then the function returns nothing. 
 ## Documentation
 ### Overview
 For creating the UI Mockups we used the program Abobe XD. To create our UML Diagrams we used LucidChart.  For creating the SRS Document we used Google Docs.

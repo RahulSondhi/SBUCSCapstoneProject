@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "recipe")
 public class Recipe{
     @Id
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String id;
     private String name;
     @DBRef
