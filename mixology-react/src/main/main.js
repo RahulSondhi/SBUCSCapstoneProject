@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch
-  } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import '../foundation/foundation.min.css';
 import Login from '../auth/login/login.js';
 import Search from '../tipsy/search/search.js';
@@ -23,22 +19,28 @@ import CreateRecipe from '../tipsy/user/createrecipe/createrecipe';
 import BarGears from '../tipsy/user/bargears/bargears';
 import Gear from '../tipsy/menu/gear/gear';
 
-import { getCurrentUser } from '../util/APIUtils.js';
-import { ACCESS_TOKEN } from '../constants/constants.js';
-import { notification } from 'antd';
+import history from './history.js';
+import {getCurrentUser} from '../util/APIUtils.js';
+import {ACCESS_TOKEN} from '../constants/constants.js';
+import {notification} from 'antd';
 
 class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          currentUser: null,
-          isAuthenticated: false,
-          isLoading: false
+            currentUser: null,
+            isAuthenticated: false,
+            isLoading: false
         }
-        this.handleLogout = this.handleLogout.bind(this);
-        this.loadCurrentUser = this.loadCurrentUser.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
-
+        this.handleLogout = this
+            .handleLogout
+            .bind(this);
+        this.loadCurrentUser = this
+            .loadCurrentUser
+            .bind(this);
+        this.handleLogin = this
+            .handleLogin
+            .bind(this);
     }
 
     componentDidMount() {
@@ -46,55 +48,46 @@ class Main extends Component {
     }
 
     loadCurrentUser() {
-        this.setState({
-          isLoading: true
-        });
-        getCurrentUser()
-        .then(response => {
-          this.setState({
-            currentUser: response,
-            isAuthenticated: true,
-            isLoading: false
-          });
+        this.setState({isLoading: true});
+        getCurrentUser().then(response => {
+            this.setState({currentUser: response, isAuthenticated: true, isLoading: false});
         }).catch(error => {
-          this.setState({
-            isLoading: false
-          });
+            this.setState({isLoading: false});
         });
-      }
+    }
 
-    handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
+    handleLogout(redirectTo = "/", notificationType = "success", description = "You're successfully logged out.") {
         localStorage.removeItem(ACCESS_TOKEN);
 
-        this.setState({
-          currentUser: null,
-          isAuthenticated: false
-        });
+        this.setState({currentUser: null, isAuthenticated: false});
 
-        this.props.history.push(redirectTo);
+        this
+            .props
+            .history
+            .push(redirectTo);
 
-        notification[notificationType]({
-          message: 'Polling App',
-          description: description,
-        });
-      }
+        notification[notificationType]({message: 'Polling App', description: description});
+    }
 
-      handleLogin() {
-        notification.success({
-          message: 'Polling App',
-          description: "You're successfully logged in.",
-        });
+    handleLogin() {
+        notification.success({message: 'Polling App', description: "You're successfully logged in."});
         this.loadCurrentUser();
         //We must redirect login
-        this.props.history.push("/");
-      }
+        console.log(history);
+        history.push("/tipsy/search");
+        window.location.reload();
+    }
 
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <Switch>
-                    <Route path="/" exact component={Login}/>
-                    <Route path="/login" render={ (props) => <Login onLogin={this.handleLogin} {...props} /> }/>
+                    <Route
+                        path="/" exact
+                        render={(props) => <Login onLogin={this.handleLogin} {...props}/>}/>
+                    <Route
+                        path="/login"
+                        render={(props) => <Login onLogin={this.handleLogin} {...props}/>}/>
                     <Route path="/forgot" component={Forgot}/>
                     <Route path="/confirm" component={Confirm}/>
                     <Route path="/reset" component={Reset}/>

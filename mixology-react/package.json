@@ -5,6 +5,7 @@
   "dependencies": {
     "@csstools/normalize.css": "github:csstools/normalize.css",
     "antd": "^3.24.3",
+    "history": "^4.10.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
