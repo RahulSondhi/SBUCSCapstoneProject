@@ -6,7 +6,6 @@ import UserPic from '../../assets/user.svg';
 
 class User extends Component {
     render() {
-        this.props.checkAuthenticated();
         return (
           <div>
               <Tabs/>
