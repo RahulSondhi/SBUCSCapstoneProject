@@ -1,19 +1,19 @@
 # Tipsy 
 ## Team 
 ### Lead Programmer - Rahul Sondhi
-<img src="./Documentation/READMEAssets/rahul.jpg" width="200" height="200">
+<img src="./Documentation/READMEAssets/rahul.jpg" width="200" height="auto">
 The lead programmer will have their hands full because in addition to their own coding responsibilities, they will need to have a general understanding of all the technologies being used and all the implementation work being done at any time. The lead programmer will be responsible for directing group decision-making regarding any technical aspects of the project, including design, implementation, and test decisions.
 
 ### Front End Designer- Ju-Hsin Chen
-<img src="./Documentation/READMEAssets/judy.jpg" width="200" height="200">
+<img src="./Documentation/READMEAssets/judy.jpg" width="200" height="auto">
 The Front End Designer is responsible for the look and feel, including interactivity, of the Web app. 
 
 ### Back End Engineer - Bryan Valarezo
-<img src="./Documentation/READMEAssets/bryan.jpg" width="200" height="200">
+<img src="./Documentation/READMEAssets/bryan.jpg" width="200" height="auto">
 The Data Designer is responsible for the data persisted to your site's database. This means deciding what needs to be stored there and in what format to put it, and then making decisions regarding how to setup the database, how to update it, and how to make sure proper data is preserved and reset when necessary.
 
 ### Project Manager - Immanuel Almosara
-<img src="./Documentation/READMEAssets/manny.jpg" width="200" height="200">
+<img src="./Documentation/READMEAssets/manny.jpg" width="200" height="auto">
 The project manager drives the project, which means working with the lead programmer to direct the meetings (i.e. make the meeting agenda, assign action items, follow up on action items, take meeting minutes), develop the Project Specifications, help divide project responsibilities, develop Gantt and Pert Charts for managing work measurement, forecasting, task breakdown, task assignment, and task dependencies.
 
 ## Project Description
@@ -57,7 +57,7 @@ We are using an Agile Software Engineering strategy. This means planning a build
 
 ### UI Mockups
 This is a UI Mockup created in Adobe XD to show how the site is to desgined.
-![Link to Adobe XD Files](https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/UIMockUps/Tipsy.xd)
+#### ![Link to Adobe XD Files](https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/UIMockUps/Tipsy.xd)
 ### UML Class Diagram
 This is a UML Class Diagram which maps out the structure of our system by modeling its classes, attributes, operations, and relationships between objects. This was created using Lucidcharts.
 ![ClassDiagram](./Documentation/UMLDiagrams/tipsyUMLClassDiagram.png)
@@ -69,7 +69,7 @@ This is a UML Package Diagram which simplifies the complex class diagrams and he
 ![PackageDiagram](./Documentation/UMLDiagrams/tipsyUMLPackageDiagram.png)
 ### SRS Document
 This is a software requirements specification (SRS) which is a document that describes what the software will do and how it will be expected to perform. This was created in Google Documents.
-![Link to SRS Document File](https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/SRSDocument/CSE308%20SRS.docx)
+#### ![Link to SRS Document File](https://github.com/RahulSondhi/SBUCSCapstoneProject/blob/master/Documentation/SRSDocument/CSE308%20SRS.docx)
 
 ## Build Process/Work Flow
 ### Team Communication/Organization
