@@ -1,7 +1,6 @@
 package com.maroon.mixology.controller.authentication;
 
 import java.util.Calendar;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +68,9 @@ public class LoginController {
         @Value("${spring.mail.username}")
         private String mailUserName;
 
+        @Value("${mixology.react.port}")
+        private String reactPort;
+
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -114,7 +116,8 @@ public class LoginController {
                         // Send a reset email
                         // Should this also include the port number(?)
                         // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+                        // the port should be 80 so please change this during deployment when we have domain name
+                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
                         
                         SimpleMailMessage resetEmail = new SimpleMailMessage();
                         resetEmail.setFrom(mailUserName);

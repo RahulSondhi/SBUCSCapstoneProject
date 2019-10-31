@@ -3,7 +3,6 @@ package com.maroon.mixology.controller.authentication;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +66,9 @@ public class RegisterController {
         @Value("${spring.mail.username}")
         private String mailUserName;
 
+        @Value("${mixology.react.port}")
+        private String reactPort;
+
         @PostMapping("/register")
         public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
                 if(userRepository.existsByEmail(registerRequest.getEmail())) {
@@ -97,7 +99,8 @@ public class RegisterController {
                         // Send a confirmation email
                         // Should this also include the port number(?)
                         // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+                        // the port should be 80 so please change this during deployment when we have domain name
+                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
                         
                         SimpleMailMessage confirmationEmail = new SimpleMailMessage();
                         confirmationEmail.setFrom(mailUserName);
