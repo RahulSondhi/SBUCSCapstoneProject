@@ -10,14 +10,14 @@ import Admin from '../tipsy/admin/admin.js';
 import Forgot from '../auth/forgot/forgot.js';
 import Confirm from '../auth/confirm/confirm.js';
 import Reset from '../auth/reset/reset.js';
-import Recipe from '../tipsy/menu/recipe/recipe';
-import Bar from '../tipsy/menu/bar/bar';
+import Recipe from '../tipsy/menu/recipe/recipe.js';
+import Bar from '../tipsy/menu/bar/bar.js';
 import User from '../tipsy/user/user.js';
-import Game from '../tipsy/game/game';
-import CreateBar from '../tipsy/user/createbar/createbar'
-import CreateRecipe from '../tipsy/user/createrecipe/createrecipe';
-import BarGears from '../tipsy/user/bargears/bargears';
-import Gear from '../tipsy/menu/gear/gear';
+import Game from '../tipsy/game/game.js';
+import CreateBar from '../tipsy/user/createbar/createbar.js'
+import CreateRecipe from '../tipsy/user/createrecipe/createrecipe.js';
+import BarGears from '../tipsy/user/bargears/bargears.js';
+import Gear from '../tipsy/menu/gear/gear.js';
 
 import history from './history.js';
 import {getCurrentUser} from '../util/APIUtils.js';
@@ -78,16 +78,9 @@ class Main extends Component {
         window.location.reload();
     }
 
-    checkAuthenticated() {
-        if (this.currentUser == null) {
-            history.push("/login");
-            window.location.reload();
-        }
-    }
-
     render() {
         return (
-            <Router history={history}>
+            <Router>
                 <Switch>
                     <Route
                         path="/" exact
@@ -99,13 +92,12 @@ class Main extends Component {
                     <Route path="/confirm" component={Confirm}/>
                     <Route path="/reset" component={Reset}/>
                     <Route path="/register" component={Register}/>
-
                     <Route path="/tipsy/search" component={Search}/>
-                    <Route path="/tipsy/myBars" component={MyBars} className="tab"/>
+                    <Route path="/tipsy/myBars" exact component={MyBars} className="tab"/>
                     <Route path="/tipsy/myBars/bar" component={Bar}/>
-                    <Route path="/tipsy/myRecipes" component={MyRecipes} className="tab"/>
+                    <Route path="/tipsy/myRecipes" exact component={MyRecipes} className="tab"/>
                     <Route path="/tipsy/myRecipes/recipe" component={Recipe}/>
-                    <Route path="/tipsy/barGears" component={BarGears} className="tab"/>
+                    <Route path="/tipsy/barGears" exact component={BarGears} className="tab"/>
                     <Route path="/tipsy/barGears/gear" component={Gear}/>
                     <Route path="/tipsy/admin" exact component={Admin} className="tab"/>
                     <Route path="/tipsy/admin/user" component={User}/>

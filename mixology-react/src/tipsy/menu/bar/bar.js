@@ -4,7 +4,6 @@ import './bar.css';
 
 class Bar extends Component {
     render() {
-        this.props.checkAuthenticated();
         return (
           <div>
               <Tabs/>
