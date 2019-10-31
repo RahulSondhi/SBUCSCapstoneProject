@@ -79,7 +79,7 @@ class Main extends Component {
     }
 
     checkAuthenticated() {
-        if (!this.isAuthenticated) {
+        if (this.currentUser == null) {
             history.push("/login");
             window.location.reload();
         }
@@ -107,8 +107,8 @@ class Main extends Component {
                     <Route path="/tipsy/myRecipes/recipe" render={(props) => <Recipe checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
                     <Route path="/tipsy/barGears" exact render={(props) => <BarGears checkAuthenticated={this.checkAuthenticated} {...props}/>} className="tab"/>
                     <Route path="/tipsy/barGears/gear" render={(props) => <Gear checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
-                    <Route path="/tipsy/admin" exact render={(props) => <Admin checkAuthenticated={this.checkAuthenticated} {...props}/>}component={Admin} className="tab"/>
-                    <Route path="/tipsy/admin/user" component={User}render={(props) => <User checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
+                    <Route path="/tipsy/admin" exact render={(props) => <Admin checkAuthenticated={this.checkAuthenticated} {...props}/>} className="tab"/>
+                    <Route path="/tipsy/admin/user" render={(props) => <User checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
                     <Route path="/tipsy/game" render={(props) => <Game checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
                     <Route path="/tipsy/createbar" render={(props) => <CreateBar checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
                     <Route path="/tipsy/createRecipe" render={(props) => <CreateRecipe checkAuthenticated={this.checkAuthenticated} {...props}/>}/>
