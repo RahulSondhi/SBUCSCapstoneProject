@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.maroon.mixology.MixologyApplicationTests
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.11 s - in com.maroon.mixology.MixologyApplicationTests
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.218 s - in com.maroon.mixology.MixologyApplicationTests
->>>>>>> parent of 29347c8... There was a missing semicolon in login.js causing the bug
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.53 s - in com.maroon.mixology.MixologyApplicationTests

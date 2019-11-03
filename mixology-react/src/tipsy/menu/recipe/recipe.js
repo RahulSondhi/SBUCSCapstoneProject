@@ -6,7 +6,6 @@ import { CustomButton } from '../../../constants/constants.js';
 
 class Recipe extends Component {
     render() {
-        this.props.checkAuthenticated();
         return (
             <div>
                 <Tabs/>

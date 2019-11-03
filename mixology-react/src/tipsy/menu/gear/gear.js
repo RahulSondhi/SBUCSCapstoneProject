@@ -7,7 +7,6 @@ import Bottle from '../../../assets/bottle.svg';
 
 class Gear extends Component {
     render() {
-        this.props.checkAuthenticated();
         return (
             <div>
                 <Tabs/>
