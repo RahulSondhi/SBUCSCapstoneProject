@@ -2,15 +2,15 @@ package com.maroon.mixology.controller.authentication;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
-import com.maroon.mixology.exception.AppException;
+import com.maroon.mixology.entity.type.RoleType;
 import com.maroon.mixology.exchange.request.RegisterRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.TokenValidity;
@@ -88,11 +88,8 @@ public class RegisterController {
                         user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
                         //
                         user.setPassword(passwordEncoder.encode(user.getPassword())); // Set the password (HASHED)
-                        Role userRole = roleRepository.findByRole("USER");
-                        if(userRole == null){
-                                throw new AppException("User Role not set.");
-                        }
-                        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+                        Role userRole = roleRepository.findByName(RoleType.USER);
+                        user.setRoles(Collections.singleton(userRole));                        
                         
                         userRepository.save(user); // Saving the user in the database
 

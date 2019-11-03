@@ -11,7 +11,7 @@ public class Role {
     @Id
     private String id;
     @Indexed(unique = true)
-    private RoleType role;
+    private RoleType name;
 
     public String getId() {
         return id;
@@ -22,10 +22,10 @@ public class Role {
     }
 
     public RoleType getRole(){
-        return role;
+        return name;
     }
-    public void setRole(RoleType role){
-        this.role = role;
+    public void setRole(RoleType name){
+        this.name = name;
     }
 
 }

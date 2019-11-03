@@ -16,5 +16,5 @@ public enum ActionType {
     IGNITE,
     HEAT,
     COOL,
-    FREEZE
+    FREEZE;
 }

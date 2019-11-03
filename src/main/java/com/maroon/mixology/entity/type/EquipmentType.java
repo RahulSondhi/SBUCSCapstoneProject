@@ -15,5 +15,5 @@ public enum EquipmentType {
     BLENDER,
     PEELER,
     HEATING,
-    COOLING
+    COOLING;
 }

@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
             User user = userRepository.findByEmail(email);
             Set<GrantedAuthority> authorities = new HashSet<>();
             for (Role role : user.getRoles()){
-                authorities.add(new SimpleGrantedAuthority(role.getRole()));
+                authorities.add(new SimpleGrantedAuthority(role.getRole().toString())); //Role ENUM must turn to string for Spring Security
             }
             List<GrantedAuthority> authorityList = new ArrayList<>(authorities);
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorityList);

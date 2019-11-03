@@ -22,7 +22,6 @@ com/maroon/mixology/exchange/response/JwtAuthenticationResponse.class
 com/maroon/mixology/entity/Bar.class
 com/maroon/mixology/exception/BadRequestException.class
 com/maroon/mixology/exception/AppException.class
-com/maroon/mixology/controller/authentication/RegisterController.class
 com/maroon/mixology/entity/Step.class
 com/maroon/mixology/security/JwtAuthenticationEntryPoint.class
 com/maroon/mixology/security/CurrentUser.class
