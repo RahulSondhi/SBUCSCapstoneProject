@@ -3,33 +3,37 @@ package com.maroon.mixology.entity;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.maroon.mixology.entity.type.MeasurementType;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection ="user")
+@Document(collection = "user")
 public class User {
-    @Id
-    private String id;
+	@Id
+	private String id;
 	private String firstName;
 	private String lastName;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String email;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String nickname;
-    private String password;
+	private String password;
+	private String profilePic;
+	private MeasurementType measurement;
 	private String confirmationTokenUUID;
 	private Long confirmationTokenCreationTime;
 	private String resetTokenUUID;
 	private Long resetTokenCreationTime;
 	private boolean enabled;
-    @DBRef
-    private Set<Role> roles;
-    @DBRef
-    private ArrayList<Bar> bars;
-    @DBRef
+	@DBRef
+	private Set<Role> roles;
+	@DBRef
+	private ArrayList<Bar> bars;
+	@DBRef
 	private ArrayList<Recipe> recipesWritten;
 	@DBRef
 	private ArrayList<Recipe> recipesIncompleted;
@@ -90,6 +94,22 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
+
+	public MeasurementType getMeasurement() {
+		return measurement;
+	}
+
+	public void setMeasurement(MeasurementType measurement) {
+		this.measurement = measurement;
 	}
 
     public String getConfirmationTokenUUID() {

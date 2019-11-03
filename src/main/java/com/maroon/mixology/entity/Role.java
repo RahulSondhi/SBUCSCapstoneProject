@@ -1,16 +1,17 @@
 package com.maroon.mixology.entity;
 
+import com.maroon.mixology.entity.type.RoleType;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 @Document(collection = "role")
 public class Role {
     @Id
     private String id;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-    private String role;
+    @Indexed(unique = true)
+    private RoleType role;
 
     public String getId() {
         return id;
@@ -20,10 +21,10 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole(){
+    public RoleType getRole(){
         return role;
     }
-    public void setRole(String role){
+    public void setRole(RoleType role){
         this.role = role;
     }
 
