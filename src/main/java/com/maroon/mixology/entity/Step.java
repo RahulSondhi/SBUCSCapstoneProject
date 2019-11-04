@@ -1,51 +1,79 @@
 package com.maroon.mixology.entity;
+
+import com.maroon.mixology.entity.type.ActionType;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "step")
-public class Step{    
-    private int stepNumber;
-    private Equipment equipment1;
-    private Equipment equipment2;
-    private String action;
-    private boolean complete;
+public class Step {
+    @Id
+    private String id;
+    @DBRef
+    private Equipment objToDo;
+    @DBRef
+    private Equipment objDoing;
+    private ActionType action;
+    private int value;
+    @DBRef
+    private Unit unit;
+    private boolean completed;
 
-    public int getStepNumber(){
-        return stepNumber;
+    public String getId() {
+        return id;
     }
 
-    public void setStepNumber(int stepNumber){
-        this.stepNumber = stepNumber;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public Equipment getEquipment1(){
-        return equipment1;
+    public Equipment getObjToDo() {
+        return objToDo;
     }
 
-    public void setEquipment1(Equipment equipment1){
-        this.equipment1 = equipment1;
-    }
-    
-    public Equipment getEquipment22(){
-        return equipment2;
+    public void setObjToDo(Equipment objToDo) {
+        this.objToDo = objToDo;
     }
 
-    public void setEquipment2(Equipment equipment2){
-        this.equipment2 = equipment2;
+    public Equipment getObjDoing() {
+        return objDoing;
     }
 
-    public String getAction(){
+    public void setObjDoing(Equipment objDoing) {
+        this.objDoing = objDoing;
+    }
+
+    public ActionType getAction() {
         return action;
     }
 
-    public void setAction(String action){
+    public void setAction(ActionType action) {
         this.action = action;
     }
 
-    public boolean getComplete(){
-        return complete;
+    public int getValue() {
+        return value;
     }
 
-    public void setComplete(boolean complete){
-        this.complete = complete;
+    public void setValue(int value) {
+        this.value = value;
     }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
 }

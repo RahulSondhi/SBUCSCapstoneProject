@@ -1,11 +1,6 @@
 package com.maroon.mixology.service;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
-import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +10,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Override
-    public void saveUser(User user) {
-        //Set the role to USER
-        user.setEnabled(true);
-        user.setPassword(user.getPassword());
-        Role userRole = roleRepository.findByRole("USER");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
-        //save the user
-        userRepository.save(user);
-    }
 
     @Override
     public User findByEmail(String email) {
@@ -35,13 +17,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByConfirmationToken(String confirmationToken) {
-		return userRepository.findByConfirmationToken(confirmationToken);
+    public User findByNickname(String nickname) {
+        return userRepository.findByNickname(nickname);
     }
 
     @Override
-    public User findByResetToken(String resetToken) {
-        return userRepository.findByResetToken(resetToken);
+    public User findByConfirmationTokenUUID(String confirmationTokenUUID) {
+		return userRepository.findByConfirmationTokenUUID(confirmationTokenUUID);
+    }
+
+    @Override
+    public User findByResetTokenUUID(String resetTokenUUID) {
+        return userRepository.findByResetTokenUUID(resetTokenUUID);
+    }
+
+    @Override
+    public Boolean existsByEmail(String email){
+        if(userRepository.findByEmail(email) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
     
+    @Override
+    public Boolean existsByNickname(String nickname){
+        if(userRepository.findByNickname(nickname) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }

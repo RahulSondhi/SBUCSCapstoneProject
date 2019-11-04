@@ -1,0 +1,13 @@
+{
+    "_id": ObjectId("String"),
+    "name": "String",
+    "author" : DBRef("user", ObjectId("String")),
+    "published" : boolean,
+    "steps" : [
+        Object(Step)
+    ],
+    "equipments": [
+        DBRef("equipment", ObjectId("String"))
+    ],
+    "_class": "com.maroon.mixology.entity.Recipe"
+}

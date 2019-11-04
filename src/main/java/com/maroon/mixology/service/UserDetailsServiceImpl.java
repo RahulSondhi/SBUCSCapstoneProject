@@ -1,14 +1,13 @@
 package com.maroon.mixology.service;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.Role;
+import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.UserRepository;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,16 +24,19 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("user not found");
+        if (!userRepository.existsByEmail(email)) {
+            throw new UsernameNotFoundException("User not found");
         }
-        Set<GrantedAuthority> authorities = new HashSet<>();
-        for (Role role : user.getRoles()){
-            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        else{
+            User user = userRepository.findByEmail(email);
+            Set<GrantedAuthority> authorities = new HashSet<>();
+            for (Role role : user.getRoles()){
+                authorities.add(new SimpleGrantedAuthority(role.getRole())); //Role ENUM must turn to string for Spring Security
+            }
+            List<GrantedAuthority> authorityList = new ArrayList<>(authorities);
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorityList);
         }
-        List<GrantedAuthority> authorityList = new ArrayList<>(authorities);
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorityList);
+        
     }
 
 }

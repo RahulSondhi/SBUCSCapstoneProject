@@ -3,35 +3,50 @@ package com.maroon.mixology.entity;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.maroon.mixology.entity.type.MeasurementType;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection ="user")
+@Document(collection = "user")
 public class User {
-    @Id
-    private String id;
+	@Id
+	private String id;
 	private String firstName;
 	private String lastName;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
 	private String email;
-    private String password;
-    private String passwordConfirm;
-	private String confirmationToken;
-	private String resetToken;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
+	private String nickname;
+	private String password;
+	private String profilePic;
+	private MeasurementType measurement;
+	private String confirmationTokenUUID;
+	private Long confirmationTokenCreationTime;
+	private String resetTokenUUID;
+	private Long resetTokenCreationTime;
 	private boolean enabled;
-    @DBRef
-    private Set<Role> roles;
-    @DBRef
-    private ArrayList<Bar> bars;
-    @DBRef
-	private ArrayList<Recipe> recipes_Written;
 	@DBRef
-	private ArrayList<Recipe> recipes_Incompleted;
+	private Set<Role> roles;
 	@DBRef
-	private ArrayList<Recipe> recipes_Completed;
+	private ArrayList<Bar> bars;
+	@DBRef
+	private ArrayList<Recipe> recipesWritten;
+	@DBRef
+	private ArrayList<Recipe> recipesIncompleted;
+	@DBRef
+	private ArrayList<Recipe> recipesCompleted;
+
+	public User(String firstName, String lastName, String email, String nickname, String password) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+	}
 
 	public String getId() {
 		return id;
@@ -63,14 +78,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-    }
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	}
+	
+	public String getNickname(){
+		return nickname;	
 	}
 
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
+	public void setNickname(String nickname){
+		this.nickname = nickname;
 	}
 
 	public String getPassword() {
@@ -81,25 +96,57 @@ public class User {
 		this.password = password;
 	}
 
-    public String getConfirmationToken() {
-		return confirmationToken;
+	public String getProfilePic() {
+		return profilePic;
 	}
 
-	public void setConfirmationToken(String confirmationToken) {
-		this.confirmationToken = confirmationToken;
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
-	public String getResetToken() {
-		return resetToken;
+	public MeasurementType getMeasurement() {
+		return measurement;
 	}
 
-	public void setResetToken(String resetToken) {
-		this.resetToken = resetToken;
+	public void setMeasurement(MeasurementType measurement) {
+		this.measurement = measurement;
 	}
 
-	public boolean getEnabled(){
-		return enabled;
+    public String getConfirmationTokenUUID() {
+        return confirmationTokenUUID;
+    }
+
+    public void setConfirmationTokenUUID(String confirmationTokenUUID) {
+        this.confirmationTokenUUID = confirmationTokenUUID;
 	}
+	
+    public Long getConfirmationTokenCreationTime() {
+        return confirmationTokenCreationTime;
+    }
+
+    public void setConfirmationTokenCreationTime(Long confirmationTokenCreationTime) {
+        this.confirmationTokenCreationTime = confirmationTokenCreationTime;
+    }
+
+    public String getResetTokenUUID() {
+        return resetTokenUUID;
+    }
+
+    public void setResetTokenUUID(String resetTokenUUID) {
+        this.resetTokenUUID = resetTokenUUID;
+    }
+
+    public Long getResetTokenCreationTime() {
+        return resetTokenCreationTime;
+    }
+
+    public void setResetTokenCreationTime(Long resetTokenCreationTime) {
+        this.resetTokenCreationTime = resetTokenCreationTime;
+    }
+
+	public boolean isEnabled() {
+        return enabled;
+    }
 
 	public void setEnabled(boolean enabled){
 		this.enabled = enabled;
@@ -120,28 +167,28 @@ public class User {
         this.bars = bars;
 	}
 	
-	public ArrayList<Recipe> getRecipes_Written(){
-        return recipes_Written;
+	public ArrayList<Recipe> getRecipesWritten(){
+        return recipesWritten;
     }
 
-    public void setRecipes_Written(ArrayList<Recipe> recipes_Written){
-        this.recipes_Written = recipes_Written;
+    public void setRecipesWritten(ArrayList<Recipe> recipesWritten){
+        this.recipesWritten = recipesWritten;
     }
 	
-	public ArrayList<Recipe> getRecipes_Incompleted(){
-        return recipes_Incompleted;
+	public ArrayList<Recipe> getRecipesIncompleted(){
+        return recipesIncompleted;
     }
 
-    public void setRecipes_Incompleted(ArrayList<Recipe> recipes_Incompleted){
-        this.recipes_Incompleted = recipes_Incompleted;
+    public void setRecipesIncompleted(ArrayList<Recipe> recipesIncompleted){
+        this.recipesIncompleted = recipesIncompleted;
 	}
 	
-	public ArrayList<Recipe> getRecipes_Completed(){
-        return recipes_Completed;
+	public ArrayList<Recipe> getRecipesCompleted(){
+        return recipesCompleted;
     }
 
-    public void setRecipes_Completed(ArrayList<Recipe> recipes_Completed){
-        this.recipes_Completed = recipes_Completed;
+    public void setRecipesCompleted(ArrayList<Recipe> recipesCompleted){
+        this.recipesCompleted = recipesCompleted;
     }
 
 }

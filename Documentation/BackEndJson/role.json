@@ -1,0 +1,5 @@
+{
+	"_id" : ObjectId("String"),
+	"role" : ENUM,
+	"_class" : "com.maroon.mixology.entity.Role"
+}

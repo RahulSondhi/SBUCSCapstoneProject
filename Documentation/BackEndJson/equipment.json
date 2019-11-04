@@ -1,0 +1,15 @@
+{
+    "_id": ObjectId("String"),
+    "name": "String",
+    "img" : "String",
+    "type" : ENUM,
+    "published" : boolean,
+    "filled" : boolean,
+    "actionsDoTo" : [
+        ENUM
+    ],
+    "actionsDoing" :[
+    	ENUM
+    ],
+    "_class": "com.maroon.mixology.entity.Equipment"
+}

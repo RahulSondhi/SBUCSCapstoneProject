@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "bar")
@@ -14,10 +15,14 @@ public class Bar{
     private String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
+    @DBRef
     private User owner;
+    @DBRef
     private Set<User> managers;
+    @DBRef
     private Set<User> workers;
-    private ArrayList<Recipe> recipes_avaliable;
+    @DBRef
+    private ArrayList<Recipe> recipesAvaliable;
 
     public String getId() {
         return id;
@@ -59,11 +64,11 @@ public class Bar{
         this.workers = workers;
     }
 
-    public ArrayList<Recipe> getRecipes_avaliable(){
-        return recipes_avaliable;
+    public ArrayList<Recipe> getRecipesAvaliable(){
+        return recipesAvaliable;
     }
 
-    public void setRecipes(ArrayList<Recipe> recipes_avaliable){
-        this.recipes_avaliable = recipes_avaliable;
+    public void setRecipes(ArrayList<Recipe> recipesAvaliable){
+        this.recipesAvaliable = recipesAvaliable;
     }
 }

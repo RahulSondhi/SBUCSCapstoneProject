@@ -1,0 +1,13 @@
+.boxContainer {
+    width: 70%;
+    height: 50em;
+    margin: 0 auto;
+    padding-top: 4em;
+}
+
+.viewBox {
+    height:130%;
+    width: 100%;
+    background-color: var(--box-color);
+    border: 3px solid var(--button-border-color);
+}

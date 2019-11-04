@@ -1,0 +1,29 @@
+{
+    "_id": ObjectId("String"),
+    "firstName": "String",
+    "lastName": "String",
+    "email": "String",
+    "nickname": "String",
+    "password": "String",
+    "profilePic" : "String",
+    "measurement" : ENUM,
+    "confirmationTokenUUID": "String",
+    "confirmationTokenCreationTime": NumberLong(),
+    "enabled": boolean,
+    "roles": [
+        DBRef("role", ObjectId("String"))
+    ],
+    "bars": [
+        DBRef("bar", ObjectId("String"))
+    ],
+    "recipesWritten": [
+        DBRef("recipe", ObjectId("String"))
+    ],
+    "recipesIncompleted": [
+        DBRef("recipe", ObjectId("String"))
+    ],
+    "recipesCompleted": [
+        DBRef("recipe", ObjectId("String"))
+    ],
+    "_class": "com.maroon.mixology.entity.User"
+}

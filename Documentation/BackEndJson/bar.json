@@ -1,0 +1,16 @@
+{
+    "_id": ObjectId("String"),
+    "name": "String",
+    "owner" :  DBRef("user", ObjectId("String")),
+    "managers": [
+        DBRef("role", ObjectId("String"))
+    ],
+    "workers": [
+        DBRef("bar", ObjectId("String"))
+    ],
+    "recipes": [
+        DBRef("recipe", ObjectId("String"))
+    ],
+    "published": boolean,
+    "_class": "com.maroon.mixology.entity.Bar"
+}
