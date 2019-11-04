@@ -66,7 +66,7 @@ class CreateRecipe extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="cell">
+                        <div className="cell">
                             <Link to="/tipsy/myRecipes/addSteps">
                                 <button type="submit" className="button addStepsButton">
                                     Add Steps

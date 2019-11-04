@@ -120,7 +120,7 @@ class Register extends Component {
     */
     render() {
         return (
-            <div className="grid-y">
+            <div className="grid-ygrid-x align-center-middle grid-padding-y">
                 <div className="grid-x cell small-4 align-center-middle">
                     <h1 className="caption">
                         Register your account

@@ -5,19 +5,9 @@
   src: url(../src/fonts/fzshuti.ttf);
 }
 
-#root {
-  width: 100vw;
-  height: 100vh;
-}
+/* Variables */
 
-label {
-    color: white;
-    font-size: 1.5em;
-}
-
-body {
-  margin: 0;
-  padding: 0;
+:root{
   --card-bg-image: url(../src/assets/card.jpg);
   --card-text-color: #40110A;
   --create-button-top-gradient: #444444;
@@ -46,6 +36,36 @@ body {
   --viewbox-image: url(../src/assets/metalPlate.jpg);
 }
 
+/* Repeating HTML Elements */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono', monospace;
+  color: white !important;
+  background-image: url(../src/assets/bg.jpg);
+  background-color: var(--background-color);
+  background-blend-mode: luminosity;
+}
+
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
+
+#root{
+ height: 100%;
+ width: 100%;
+}
+
+label {
+    color: white;
+    font-size: 1.5em;
+}
+
 .link {
   color: var(--link-color);
   text-decoration: underline;
@@ -57,21 +77,10 @@ body {
   text-shadow: 0 0 0.5em var(--link-hover-text-shadow-color), 0 0 0.5em var(--link-hover-text-shadow-color);
 }
 
-body,
-html {
-  font-family: 'Roboto Mono', monospace;
-  color: white !important;
-  background-image: url(../src/assets/bg.jpg);
-  background-color: var(--background-color);
-  background-blend-mode: luminosity;
-  height: 100vh;
-  width: 100vw;
-}
-
 .caption {
   font-family: fzshuti;
   text-shadow: 0 0 0.5em var(--page-title-box-shadow), 0 0 0.5em var(--page-title-box-shadow);
-  font-size: 4.5em;
+  font-size: 3em;
 }
 
 .button {
@@ -98,4 +107,11 @@ html {
   outline-offset: 15px;
   text-shadow: 1px 1px, 2px, var(--button-text-shadow-color);
   background-color: none !important;
+}
+
+/* Navbar */
+
+.top-bar,
+.top-bar ul {
+    background-color: var(--top-bar-bg);
 }
