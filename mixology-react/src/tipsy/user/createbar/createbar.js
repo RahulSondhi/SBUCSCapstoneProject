@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomButton, CustomCreateButton} from '../../../js/constants.js'; 
+import {CustomButton } from '../../../js/constants.js'; 
 import {Input} from 'antd';
 import './createbar.css';
 
