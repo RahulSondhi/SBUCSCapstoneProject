@@ -131,8 +131,8 @@ export const BottleIconStyle = {
 }
 
 export const ProfileIconStyle = {
-    width: "10%",
-    height: "10%"
+    width: "8%",
+    height: "8%"
 }
 
 export const TitleStyle = {
