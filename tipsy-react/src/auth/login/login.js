@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-// import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../js/constants.js';
+import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../js/constants.js';
 import { login } from '../../util/APIUtils';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './login.css';
 
-import { ACCESS_TOKEN } from '../../js/constants.js/index.js';
+import { ACCESS_TOKEN } from '../../js/constants.js';
 import { Link } from 'react-router-dom';
 import { Form, Input, Icon, notification } from 'antd';
 const FormItem = Form.Item;
@@ -58,9 +58,9 @@ class LoginForm extends Component {
         return (
             <div className="container">
                 <div className="logo">
-                    <constant.SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
                 </div>
-                <h3 className="caption loginCaption">Login to your account</h3>
+                <h3 className="caption">Login to your account</h3>
                 <Form onSubmit={this.handleSubmit} className="">
                     <FormItem label="Email" className="inputLabel">
                         {getFieldDecorator('email', {
@@ -91,7 +91,7 @@ class LoginForm extends Component {
                                 placeholder="Enter Password"/>
                         )}
                     </FormItem>
-                    <Link to="forgot">
+                    <Link to="forgot" className="link">
                         Forgot Password?
                     </Link>
                     <div className="grid-x grid-margin-x">
@@ -110,7 +110,7 @@ class LoginForm extends Component {
                         </div>
                     </div>
                 </Form>
-                <constant.SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+                <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
             </div>
         );
     }

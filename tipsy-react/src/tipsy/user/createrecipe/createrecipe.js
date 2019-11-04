@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomButton, IngredientStyle, SVG} from '../../../constants/constants.js';
+import {CustomButton, IngredientStyle, SVG} from '../../../js/constants.js';
 import {Input} from 'antd';
 import {Link} from 'react-router-dom';
 import Bottle from '../../../assets/bottle.svg';
@@ -13,8 +13,8 @@ class CreateRecipe extends Component {
                 <Tabs/>
                 <div className="grid-x">
                     <div className="cell small-4"></div>
-                    <div className="grid-y cell small-4">
-                        <h1 className="cell small-6">
+                    <div className="grid-margin-y cell small-4">
+                        <h1 className="cell small-6 caption">
                             Create/Edit Your Recipe
                         </h1>
                         <div className="cell small-6">

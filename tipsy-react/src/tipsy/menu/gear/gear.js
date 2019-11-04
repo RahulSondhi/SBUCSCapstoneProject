@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
 import './gear.css';
-import { SVG, ToolStyle } from '../../../constants/constants.js';
-import Bottle from '../../../assets/bottle.svg';
+import { SVG, ToolStyle } from '../../../js/constants.js';
+import Spoon from '../../../assets/spoon.svg';
 
 
 class Gear extends Component {
@@ -10,14 +10,14 @@ class Gear extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1>
+                <h1 className="caption">
                     GearName
                 </h1>
                 <h3>Owner: Name
                 </h3>
                 <div className="grid-x grid-margin-x boxContainer">
                     <div className="cell small-6">
-                        <SVG src={Bottle} style={ToolStyle} alt="Ingredient"/>
+                        <SVG src={Spoon} style={ToolStyle} alt="Ingredient"/>
                     </div>
                     <div className="cell small-6">
                         <h2>

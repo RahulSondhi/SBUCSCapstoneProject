@@ -18,6 +18,10 @@ label {
 body {
   margin: 0;
   padding: 0;
+  --card-bg-image: url(../src/assets/card.jpg);
+  --card-text-color: #40110A;
+  --create-button-top-gradient: #444444;
+  --create-button-bottom-gradient: #1c1c1c;
   --button-color: maroon;
   --button-text-color: white;
   --button-border-color: #40110A;
@@ -30,7 +34,6 @@ body {
   --button-text-bottom-gradient: #40110a;
   --background-color: #40110A;
   --top-bar-bg: #1c1c1c;
-  --box-color: #008080;
   --tab-color: transparent;
   --tab-text-color: white;
   --input-text-color: white;
@@ -40,14 +43,15 @@ body {
   --link-hover-color: white;
   --link-hover-text-shadow-color: #00FFFF;
   --page-title-box-shadow: #00FFFF;
+  --viewbox-image: url(../src/assets/metalPlate.jpg);
 }
 
-a {
+.link {
   color: var(--link-color);
   text-decoration: underline;
 }
 
-a:hover {
+.link:hover {
   color: var(--link-hover-color);
   text-decoration: underline;
   text-shadow: 0 0 0.5em var(--link-hover-text-shadow-color), 0 0 0.5em var(--link-hover-text-shadow-color);
@@ -67,6 +71,7 @@ html {
 .caption {
   font-family: fzshuti;
   text-shadow: 0 0 0.5em var(--page-title-box-shadow), 0 0 0.5em var(--page-title-box-shadow);
+  font-size: 4.5em;
 }
 
 .button {

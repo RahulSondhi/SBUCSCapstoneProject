@@ -13,14 +13,14 @@ body {
 .ingredientsBox {
     width: 40em;
     height: 35em;
-    background-color: var(--box-color); 
+    background: var(--viewbox-image); 
     border: 3px solid var(--box-border-color);
 }
 
 .actionBox {
     width: 10em;
     height: 10em;
-    background-color: var(--box-color);
+    background: var(--viewbox-image);
     border: 3px solid var(--box-border-color);
 }
 

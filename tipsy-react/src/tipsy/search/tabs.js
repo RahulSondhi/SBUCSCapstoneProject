@@ -5,7 +5,7 @@ import './tabs.css';
 const Tab = (props) => {
     return (
         <div>
-            <Link to={props.link} className="tab">
+            <Link to={props.link} className="tab link">
                 <li>
                     {props.name}
                 </li>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../index.css';
-import {SVG, TipsyStyle} from '../../constants/constants.js';
+import {SVG, TipsyStyle} from '../../js/constants.js';
 import Tipsy from '../../assets/Tipsy.svg';
 import './forgot.css';
 
@@ -98,7 +98,7 @@ class Forgot extends Component {
                                 disabled={this.isFormInvalid()}
                                 className="button">Send 
                             </Button>
-                            <Link to="/login">Already Registered?</Link>
+                            <Link to="/login" className="link">Already Registered?</Link>
                         </FormItem>
                 </Form>
             </div>

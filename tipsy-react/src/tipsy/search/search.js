@@ -1,20 +1,29 @@
 import React, {Component} from 'react';
 import Tabs from './tabs.js';
-import {SearchBarStyle } from '../../constants/constants.js';
+import Drinks from '../../assets/drinks.svg';
 import './search.css';
-
-export const SearchBar = (props) => (<input type="text" placeholder={props.placeholder} style={props.style}/>);
 
 export class Search extends Component {
     render() {
         return (
-            <div>
+            <div className="grid-padding-y">
                 <Tabs/>
-                <h1 className="myTitle">
+                <h1 className="myTitle cell small-1 caption">
                     Search
                 </h1>
-                <SearchBar placeholder="Enter Bar or Recipe" style={SearchBarStyle}/>
-                <input type="submit" className="button" value="SEARCH"/>
+                <div className="cell small-2">
+                    <input
+                        type="text"
+                        className="search searchBar"
+                        placeholder="Search"/>
+                </div>
+                <div className="cell small-2">
+                    <input type="submit" className="button" value="SEARCH"/>
+                </div>
+                <div className="cell small-5"></div>
+                <div className="cell small-2">
+                    <img src={Drinks} className="drinks" alt="Drinks"/>
+                </div>
             </div>
         )
     }

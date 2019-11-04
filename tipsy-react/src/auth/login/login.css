@@ -35,10 +35,6 @@ h3, p {
     text-align: center;
 }
 
-.loginCaption {
-    font-size: 4.5em;
-}
-
 input[name=email],
 input[name=password],
 input[name=firstName],

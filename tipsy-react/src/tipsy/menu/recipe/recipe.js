@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
 import './recipe.css';
-import { CustomButton } from '../../../constants/constants.js';
+import { CustomButton } from '../../../js/constants.js';
 
 
 class Recipe extends Component {

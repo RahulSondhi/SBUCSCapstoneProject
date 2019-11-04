@@ -7,6 +7,6 @@
 .viewBox {
     height:100%;
     width: 100%;
-    background-color: var(--box-color);
+    background: var(--viewbox-image);
     border: 3px solid var(--button-border-color);
 }

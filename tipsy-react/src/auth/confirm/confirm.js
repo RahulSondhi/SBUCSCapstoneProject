@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../index.css';
-import {SVG, SmallTipsyStyle, TipsyStyle, CustomButton} from '../../constants/constants.js';
+import {SVG, SmallTipsyStyle, TipsyStyle, CustomButton} from '../../js/constants.js';
 import Tipsy from '../../assets/Tipsy.svg';
 import './confirm.css';
 
@@ -68,7 +68,7 @@ class Confirm extends Component {
             return (
                 <div>
                     <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-                    <h1>Confirmation</h1>
+                    <h1 className="caption">Confirmation</h1>
                     <h3>You have successfully registered with
                         <SVG src={Tipsy} style={SmallTipsyStyle} alt="TipsyLogo"/></h3>
                     <h4>You can now login with your email

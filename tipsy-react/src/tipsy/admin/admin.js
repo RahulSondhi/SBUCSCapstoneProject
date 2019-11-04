@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../search/tabs.js';
-import {EntryOneField, CustomButton} from '../../constants/constants.js';
+import {EntryOneField, CustomButton} from '../../js/constants.js';
 import './admin.css';
 
 class Admin extends Component {

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
 import './bargears.css'
-import {CustomButton, EntryOneField} from '../../../constants/constants.js';
+import {CustomButton, EntryOneField} from '../../../js/constants.js';
 
 class BarGears extends Component {
     render() {
@@ -11,7 +11,7 @@ class BarGears extends Component {
                 <Tabs/>
                 <div className="grid-x">
                     <div className="cell small-4"></div>
-                    <h1 className="myTitle cell small-4">
+                    <h1 className="myTitle caption cell small-4">
                         Bar Gear</h1>
                     <div className="cell small-4 createButton" id="uploadGear">
                         <CustomButton redirect="/tipsy/barGears/gear" name="Upload A Gear +"/>

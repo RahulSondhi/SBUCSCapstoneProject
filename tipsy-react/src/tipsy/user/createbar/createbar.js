@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomButton} from '../../../constants/constants.js'; 
+import {CustomButton, CustomCreateButton} from '../../../js/constants.js'; 
 import {Input} from 'antd';
 import './createbar.css';
 
@@ -11,8 +11,8 @@ class CreateBar extends Component {
                 <Tabs/>
                 <div className="grid-x">
                   <div className="cell small-4"></div>
-                    <div className="grid-y small-4">
-                        <h1 className="small-6 cell">
+                    <div className="grid-margin-y small-4">
+                        <h1 className="small-6 cell caption">
                             Create/Edit Your Bar
                         </h1>
                         <div className="small-6 cell">

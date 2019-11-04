@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../../util/APIUtils';
-import {SVG, CupBottleStyle} from '../../constants/constants.js';
+import {SVG, CupBottleStyle} from '../../js/constants.js';
 import Bottle from '../../assets/bottle.svg';
 import Cup from '../../assets/cup.svg';
 import '../../index.css';
@@ -17,7 +17,7 @@ import {
     NICKNAME_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
     PASSWORD_MAX_LENGTH
-} from '../../constants/constants.js';
+} from '../../js/constants.js';
 
 import {Link} from 'react-router-dom';
 import {Form, Input, Button, notification} from 'antd';
@@ -122,7 +122,7 @@ class Register extends Component {
         return (
             <div className="grid-y">
                 <div className="grid-x cell small-4 align-center-middle">
-                    <h1>
+                    <h1 className="caption">
                         Register your account
                     </h1>
                 </div>
@@ -214,7 +214,7 @@ class Register extends Component {
                                     Register
                                 </Button>
                                 <br/>
-                                <Link to="/login">Already Registered?</Link>
+                                <Link to="/login" className="link">Already Registered?</Link>
                             </FormItem>
                         </Form>
                     </div>

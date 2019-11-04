@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
 import './myrecipe.css'
-import {CustomButton, EntryTwoFields, BottleIconStyle} from '../../../constants/constants.js';
+import {CustomButton, EntryTwoFields, BottleIconStyle} from '../../../js/constants.js';
 import Bottle from '../../../assets/bottle.svg';
 
 class MyRecipes extends Component {
@@ -10,7 +10,7 @@ class MyRecipes extends Component {
         return (
             <div>
                 <Tabs/>
-                <h1 className="myTitle">
+                <h1 className="myTitle caption">
                     My Recipes</h1>
                 <div className="grid-x">
                     <div className="cell small-2"></div>
