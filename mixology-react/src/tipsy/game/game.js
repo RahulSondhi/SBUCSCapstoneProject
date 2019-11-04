@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import GameTab from '../search/gameTab.js';
-import { SVG, CounterStyle, IngredientStyle } from '../../constants/constants.js';
+import { SVG, CounterStyle, IngredientStyle } from '../../js/constants.js';
 import Counter from '../../assets/counter.svg';
 import Bottle from '../../assets/bottle.svg';
 import './game.css';

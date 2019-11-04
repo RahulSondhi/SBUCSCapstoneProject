@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
 import './mybar.css'
-import {CustomButton, EntryTwoFields, BottleIconStyle} from '../../../constants/constants.js';
+import {CustomButton, EntryTwoFields, BottleIconStyle} from '../../../js/constants.js';
 import Bottle from '../../../assets/bottle.svg';
 
 class MyBar extends Component {
@@ -13,7 +13,7 @@ class MyBar extends Component {
                 <div className="grid-x">
                     <div className="cell small-4"></div>
                     <div className="cell small-4">
-                        <h1 className="myTitle">
+                        <h1 className="myTitle caption">
                             My Bars
                         </h1>
                     </div>

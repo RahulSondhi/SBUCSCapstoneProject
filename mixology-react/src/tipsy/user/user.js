@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '../../tipsy/search/tabs.js';
 import './user.css';
-import { SVG, ProfileIconStyle} from '../../constants/constants.js';
+import { SVG, ProfileIconStyle} from '../../js/constants.js';
 import UserPic from '../../assets/user.svg';
 
 class User extends Component {

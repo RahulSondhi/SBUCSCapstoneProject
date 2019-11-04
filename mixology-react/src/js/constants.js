@@ -82,16 +82,7 @@ export const SmallTipsyStyle = {
 
 export const UserStyle = {
     width: "30%",
-    height: "30%"
-}
-
-export const SearchBarStyle = {
-    width: "50%",
-    height: "3em",
-    "color": "white",
-    "backgroundColor": "gray",
-    "marginLeft": "auto",
-    "marginRight": "auto",
+    height: "30%",
 }
 
 export const CounterStyle = {
@@ -103,10 +94,11 @@ export const IngredientStyle = {
 }
 
 export const ToolStyle = {
-  width: "30%",
-  height: "30%",
+  width: "70%",
+  height: "70%",
   "marginLeft": "auto",
   "marginRight": "auto",
+  "marginTop": "auto",
   "display": "block"
 }
 
