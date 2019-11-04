@@ -11,7 +11,7 @@
     color: var(--card-text-color);
 }
 
-.createButton {
+.createButtonHolder {
     margin-top: 2em;
 }
 

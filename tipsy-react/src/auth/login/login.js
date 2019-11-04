@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../js/constants.js';
+import {CustomButton} from '../../js/constants.js';
 import {login} from '../../util/APIUtils';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
