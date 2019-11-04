@@ -18,10 +18,10 @@ public class MixologyApplication {
 	// @Bean
     // CommandLineRunner init(RoleRepository roleRepository) {
     //     return args -> {
-    //         Role userRole = roleRepository.findByRole(RoleType.USER);
-    //         if (userRole == null) {
+    //         Role adminRole = roleRepository.findByName("USER");
+    //         if (adminRole == null) {
     //             Role newUserRole = new Role();
-    //             newUserRole.setRole(RoleType.USER);
+    //             newUserRole.setRole("USER");
     //             roleRepository.save(newUserRole);
     //         }
     //     };

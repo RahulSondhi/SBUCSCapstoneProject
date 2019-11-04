@@ -11,7 +11,7 @@
 	<groupId>com.maroon</groupId>
 	<artifactId>mixology</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mixology</name>
+	<name>tipsy</name>
 	<description>Capstone Project for CSE308</description>
 
 	<properties>

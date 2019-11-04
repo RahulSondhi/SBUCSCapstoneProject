@@ -25,13 +25,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         if (!userRepository.existsByEmail(email)) {
-            throw new UsernameNotFoundException("User not found");
+            throw new UsernameNotFoundException("Tipsy Spring Error: User not found");
         }
         else{
             User user = userRepository.findByEmail(email);
             Set<GrantedAuthority> authorities = new HashSet<>();
             for (Role role : user.getRoles()){
-                authorities.add(new SimpleGrantedAuthority(role.getRole())); //Role ENUM must turn to string for Spring Security
+                authorities.add(new SimpleGrantedAuthority(role.getName())); //Role ENUM must turn to string for Spring Security
             }
             List<GrantedAuthority> authorityList = new ArrayList<>(authorities);
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorityList);
