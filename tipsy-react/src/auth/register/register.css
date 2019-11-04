@@ -1,0 +1,7 @@
+.registerContainer {
+    position: relative;
+}
+
+label {
+    float: left;
+}
