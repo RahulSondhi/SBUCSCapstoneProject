@@ -2,7 +2,6 @@ package com.maroon.mixology.controller.authentication;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
@@ -57,16 +56,16 @@ public class RegisterController {
         @Autowired
         private UserServiceImpl userService;
 
-        @Value("${mixology.mail.confirmation.subject}")
+        @Value("${tipsy.mail.confirmation.subject}")
         private String confirmationSubject;
 
-        @Value("${mixology.mail.confirmation.message}")
+        @Value("${tipsy.mail.confirmation.message}")
         private String confirmationMessage;
 
         @Value("${spring.mail.username}")
         private String mailUserName;
 
-        @Value("${mixology.react.port}")
+        @Value("${tipsy.react.port}")
         private String reactPort;
 
         @PostMapping("/register")

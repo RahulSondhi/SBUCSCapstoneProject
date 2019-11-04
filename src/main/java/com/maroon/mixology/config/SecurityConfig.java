@@ -2,12 +2,12 @@ package com.maroon.mixology.config;
 
 import com.maroon.mixology.security.JwtAuthenticationEntryPoint;
 import com.maroon.mixology.security.JwtAuthenticationFilter;
-import com.maroon.mixology.security.JwtTokenProvider;
 import com.maroon.mixology.service.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -59,7 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //Bug here
         http
                 .cors()
                     .and()
@@ -82,7 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll()
-                    .antMatchers("/login","/register","/forgot","/validateReset","/validateConfirm","/user/checkNicknameAvailability","/user/checkEmailAvailability")
+                    .antMatchers("/login","/register","/forgot","/validateReset","/validateConfirm")
+                        .permitAll()
+                    .antMatchers("/user/checkNicknameAvailability","/user/checkEmailAvailability")
+                        .permitAll()
+                    .antMatchers(HttpMethod.GET, "/users/**")
                         .permitAll()
                     .anyRequest()
                         .authenticated();

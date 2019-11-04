@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5dbfa32cf19f9023c765d5df"},"name":"ADMIN","_class":"com.maroon.mixology.entity.Role"}
+{"_id":{"$oid":"5dbfa33ff19f9023c765d5e1"},"name":"USER","_class":"com.maroon.mixology.entity.Role"}

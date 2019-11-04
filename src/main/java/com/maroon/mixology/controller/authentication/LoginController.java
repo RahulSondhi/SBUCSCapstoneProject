@@ -59,16 +59,16 @@ public class LoginController {
         @Autowired
         private UserServiceImpl userService;
 
-        @Value("${mixology.mail.passwordreset.subject}")
+        @Value("${tipsy.mail.passwordreset.subject}")
         private String passwordResetSubject;
 
-        @Value("${mixology.mail.passwordreset.message}")
+        @Value("${tipsy.mail.passwordreset.message}")
         private String passwordResetMessage;
 
         @Value("${spring.mail.username}")
         private String mailUserName;
 
-        @Value("${mixology.react.port}")
+        @Value("${tipsy.react.port}")
         private String reactPort;
 
         @PostMapping("/login")
