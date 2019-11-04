@@ -8,7 +8,7 @@ import Spoon from '../../../assets/spoon.svg';
 class Gear extends Component {
     render() {
         return (
-            <div>
+            <div className="grid-margin-y">
                 <Tabs/>
                 <h1 className="caption">
                     GearName

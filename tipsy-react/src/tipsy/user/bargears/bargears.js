@@ -24,43 +24,44 @@ class BarGears extends Component {
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
                     <Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
                     <Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
                     <Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
                     <Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
                     <Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
+                        textClass="userCaption"
                         redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        redirect="/tipsy/barGears/gear"/>
+
                 </div>
             </div>
         )

@@ -9,6 +9,7 @@
     text-align: center;
     border-radius: 2em;
     color: var(--card-text-color);
+    cursor: pointer;
 }
 
 .createButtonHolder {
@@ -20,6 +21,10 @@
 }
 
 #user {
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 40%;
+}
+
+.userCaption {
+    font-size: 1.5em;
 }

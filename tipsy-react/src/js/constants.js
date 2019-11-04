@@ -42,7 +42,7 @@ export const Entry = (props) => {
                     <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
                     <br/>
 
-                    <p>{props.ownerName}</p>
+                    <p className={props.textClass}>{props.ownerName}</p>
                 </button>
             </Link>
         </div>
@@ -59,7 +59,7 @@ export const EntryTwoFields = (props) => {
                 </h3>
                 <img src={props.src} style={props.style} alt={props.alt}/>
                 <br/>
-                <p>{props.ownerName}</p>
+                <p className={props.textClass}>{props.ownerName}</p>
             </div>
         </div>
     )
