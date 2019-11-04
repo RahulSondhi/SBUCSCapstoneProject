@@ -1,7 +1,5 @@
 package com.maroon.mixology.entity;
 
-import com.maroon.mixology.entity.type.RoleType;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -11,7 +9,7 @@ public class Role {
     @Id
     private String id;
     @Indexed(unique = true)
-    private RoleType name;
+    private String name;
 
     public String getId() {
         return id;
@@ -21,10 +19,10 @@ public class Role {
         this.id = id;
     }
 
-    public RoleType getRole(){
+    public String getRole(){
         return name;
     }
-    public void setRole(RoleType name){
+    public void setRole(String name){
         this.name = name;
     }
 

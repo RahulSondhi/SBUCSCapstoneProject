@@ -1,7 +1,6 @@
 package com.maroon.mixology;
 
 import com.maroon.mixology.entity.Role;
-import com.maroon.mixology.entity.type.RoleType;
 import com.maroon.mixology.repository.RoleRepository;
 
 import org.springframework.boot.CommandLineRunner;

@@ -87,7 +87,7 @@ public class LoginController {
                                 loginRequest.getEmail(),
                                 loginRequest.getPassword()
                         )
-                ); //Bug is right here please fix it thanks 
+                );
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 

@@ -33,7 +33,6 @@
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/ApiResponse.java
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/entity/Role.java
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/entity/Step.java
-/home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/entity/type/RoleType.java
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/service/UserService.java
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/exchange/response/UserSummary.java
 /home/bryan/Github/SBUCSCapstoneProject/src/main/java/com/maroon/mixology/repository/UserRepository.java
