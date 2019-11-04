@@ -31,7 +31,7 @@ class Forgot extends Component {
     */
     handleInputChange(event, validationFun) {
         const target = event.target;
-        const inputName = target.name;        
+        const inputName = target.name;
         const inputValue = target.value;
 
         this.setState({
@@ -43,7 +43,7 @@ class Forgot extends Component {
     }
 
     /*
-        Handle our submit 
+        Handle our submit
     */
     handleSubmit(event) {
         event.preventDefault();
@@ -55,7 +55,7 @@ class Forgot extends Component {
             notification.success({
                 message: 'Tipsy App',
                 description: "Password reset request submitted succesfully. Please check your email.",
-            });          
+            });
         }).catch(error => {
             notification.error({
                 message: 'Tipsy App',
@@ -73,31 +73,37 @@ class Forgot extends Component {
 
     render() {
         return (
-            <div>
+            <div className="grid-container">
+              <div className="header">
                 <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-                <h1>Forgot Password</h1>
-                <h3>Please enter your email address to request a password reset email</h3>
+                </div>
+                <h1 className="caption">
+                    Forgot Password
+                </h1>
+                <br/>
+                <h4>Please enter your email address to request a password reset email</h4>
                 <Form onSubmit={this.handleSubmit} className="">
-                    <FormItem 
+                    <FormItem
                         label="Email"
                         hasFeedback
                         validateStatus={this.state.email.validateStatus}
                         help={this.state.email.errorMsg}>
-                        <Input 
-                            name="email" 
-                            type="email" 
+                        <Input
+                            name="email"
+                            type="email"
                             autoComplete="off"
                             placeholder="Enter email"
-                            value={this.state.email.value} 
+                            value={this.state.email.value}
                             onBlur={this.validateEmailAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateEmail)} />    
+                            onChange={(event) => this.handleInputChange(event, this.validateEmail)} />
                         </FormItem>
                     <FormItem>
-                            <Button type="primary" 
-                                htmlType="submit" 
+                            <Button type="primary"
+                                htmlType="submit"
                                 disabled={this.isFormInvalid()}
-                                className="button">Send 
+                                className="button">Send
                             </Button>
+                            <br/>
                             <Link to="/login" className="link">Already Registered?</Link>
                         </FormItem>
                 </Form>
@@ -109,7 +115,7 @@ class Forgot extends Component {
         if(!email) {
             return {
                 validateStatus: 'error',
-                errorMsg: 'Email may not be empty'                
+                errorMsg: 'Email may not be empty'
             }
         }
 
@@ -138,7 +144,7 @@ class Forgot extends Component {
                     value: emailValue,
                     ...emailValidation
                 }
-            });    
+            });
             return;
         }
 

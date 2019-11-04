@@ -126,11 +126,11 @@ class Register extends Component {
                         Register your account
                     </h1>
                 </div>
-                <div className="grid-x cell small-8">
-                    <div className="cell small-4">
+                <div className="grid-x cell small-12">
+                    <div className="cell small-2">
                         <SVG src={Cup} style={CupBottleStyle} alt="Cup"/>
                     </div>
-                    <div className="cell small-4">
+                    <div className="cell small-8">
                         <Form onSubmit={this.handleSubmit}>
                             <FormItem
                                 label="First Name"
@@ -218,7 +218,7 @@ class Register extends Component {
                             </FormItem>
                         </Form>
                     </div>
-                    <div className="cell small-4">
+                    <div className="cell small-2">
                         <SVG src={Bottle} style={CupBottleStyle} alt="Bottle"/>
                     </div>
                 </div>

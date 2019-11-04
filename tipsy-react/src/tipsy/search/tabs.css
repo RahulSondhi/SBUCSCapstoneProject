@@ -1,19 +1,26 @@
-.topContainer {
-    display: relative;
+.tabHolder {
+    width: 100vw;
 }
 
 .tabs {
-    text-align: center;
+    /* text-align: center; */
     position: relative;
+    border: none;
 }
 
 .tab {
     display:inline-block;
-    margin: 0 5.5% 0 5.5%;
+    /* margin: 0 5.5% 0 5.5%; */
+    /* padding: 3em; */
     color: var(--tab-text-color);
     border: 0;
-    padding: 0;
+    min-width: 8em!important;
     background-color: var(--tab-color);
     text-decoration: none;
     font-family: 'Roboto Mono', monospace;
+    font-size: 1.5em;
+}
+
+.tab:hover {
+  /* background-color: var(--tab-color-hover); */
 }

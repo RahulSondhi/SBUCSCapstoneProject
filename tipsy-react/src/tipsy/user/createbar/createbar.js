@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomButton } from '../../../js/constants.js'; 
+import {CustomButton } from '../../../js/constants.js';
 import {Input} from 'antd';
 import './createbar.css';
 
@@ -33,7 +33,7 @@ class CreateBar extends Component {
                         <h3>
                             Managers
                         </h3>
-                        <div className="viewBox">
+                        <div className="card">
                             <p>ManagerName1</p>
                             <p>ManagerName2</p>
                             <CustomButton
@@ -45,7 +45,7 @@ class CreateBar extends Component {
                     <div className="cell small-6">
                         <h3>
                             Workers</h3>
-                        <div className="viewBox">
+                        <div className="card">
                             <p>WorkerName1</p>
                             <p>WorkerName2</p>
                             <CustomButton className="add" redirect="/tipsy/admin/user" name="Add Worker +"/>

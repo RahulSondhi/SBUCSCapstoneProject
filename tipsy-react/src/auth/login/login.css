@@ -1,9 +1,10 @@
 .container {
     text-align: center;
+    /* min-width: 50vh; */
 }
 
 form {
-    display: table;
+    /* display: table; */
     vertical-align: middle;
     margin: auto;
 }
@@ -15,7 +16,7 @@ input[name=nickname],
 input[name=passwordConfirm],
 input[name=password] {
     width: 100%;
-    padding: 12px 20px;
+    /* padding: 12px 20px; */
     display: inline-block;
     border: none !important;
     border-bottom: solid 2px white !important;
@@ -43,15 +44,14 @@ input[name=password]:focus {
     text-align: left;
 }
 
-.footer,.header{
-    height: auto!important;
+.header{
+    height: auto;
     width: 70%!important;
 }
 
-.footer img,
-.header img{
-    height: auto;
-    width: 100%;
+.footer {
+    /* max-height: 1vh; */
+    width: 55%;
 }
 
 .ant-input-prefix{

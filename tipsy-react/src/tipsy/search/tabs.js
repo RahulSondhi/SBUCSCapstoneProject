@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import './tabs.css';
+import {Icon} from 'antd';
 
 const Tab = (props) => {
     return (
@@ -17,17 +18,16 @@ const Tab = (props) => {
 class Tabs extends Component {
     render() {
         return (
-            <nav className="top-bar tabHolder">
+            <nav className="top-bar tabHolder tabs">
                 {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                 <h1> TIPSY</h1>
-                <div className="top-bar-right">
+                <div className="top-bar-right ">
                     <ul className="horizontal menu nested">
-                        <Tab link="/tipsy/search" name="Search"/>
-                        <Tab link="/tipsy/myBars" name="My Bars"/>
-                        <Tab link="/tipsy/myRecipes" name="My Recipes"/>
-                        <Tab link="/tipsy/barGears" name="Bar Gears"/>
-                        <Tab link="/tipsy/admin" name="Admin"/>
-                        <Tab link="/" name="Logout"/>
+                        <Tab className="tab" link="/tipsy/search" name="Search"/>
+                        <Tab className="tab" link="/tipsy/myBars" name="My Bars"/>
+                        <Tab className="tab" link="/tipsy/myRecipes" name="My Recipes"/>
+                        <Tab className="tab" link="/tipsy/barGears" name="Bar Gears"/>
+                        <Tab className="tab" link="/" name={< Icon type = "user" />}/>
                     </ul>
                 </div>
             </nav>
