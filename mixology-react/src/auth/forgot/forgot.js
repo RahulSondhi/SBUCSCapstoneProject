@@ -98,7 +98,7 @@ class Forgot extends Component {
                                 disabled={this.isFormInvalid()}
                                 className="button">Send 
                             </Button>
-                            Already registered? <Link to="/login">Login now!</Link>
+                            <Link to="/login">Already Registered?</Link>
                         </FormItem>
                 </Form>
             </div>

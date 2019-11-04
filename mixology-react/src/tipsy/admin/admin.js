@@ -23,12 +23,12 @@ class Admin extends Component {
                     </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
-                    <EntryOneField objectName="User"/>
-                    <EntryOneField objectName="User"/>
-                    <EntryOneField objectName="User"/>
-                    <EntryOneField objectName="User"/>
-                    <EntryOneField objectName="User"/>
-                    <EntryOneField objectName="User"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
                 </div>
             </div>
         );

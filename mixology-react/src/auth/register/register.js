@@ -214,8 +214,7 @@ class Register extends Component {
                                     Register
                                 </Button>
                                 <br/>
-                                Already registered?
-                                <Link to="/login">Login now!</Link>
+                                <Link to="/login">Already Registered?</Link>
                             </FormItem>
                         </Form>
                     </div>

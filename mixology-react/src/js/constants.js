@@ -66,8 +66,8 @@ export const DrinksStyle = {
 }
 
 export const CupBottleStyle = {
-    width: "40em",
-    height: "40em",
+    width: "50em",
+    height: "50em",
 }
 
 export const TipsyStyle = {
@@ -89,7 +89,7 @@ export const SearchBarStyle = {
     width: "50%",
     height: "3em",
     "color": "white",
-    "background-color": "gray",
+    "backgroundColor": "gray",
     "marginLeft": "auto",
     "marginRight": "auto",
 }

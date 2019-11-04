@@ -14,9 +14,7 @@ export class Search extends Component {
                     Search
                 </h1>
                 <SearchBar placeholder="Enter Bar or Recipe" style={SearchBarStyle}/>
-                <button type="submit" className="searchButton button cell small-4">
-                    SEARCH
-                </button>
+                <input type="submit" className="button" value="SEARCH"/>
             </div>
         )
     }

@@ -21,7 +21,7 @@
 }
 
 form {
-    /*    width: 100%;*/
+    /* width: 100%; */
     min-width: 55vh;
     display: table;
     vertical-align: middle;
@@ -35,8 +35,8 @@ h3, p {
     text-align: center;
 }
 
-label {
-    color: white;
+.loginCaption {
+    font-size: 4.5em;
 }
 
 input[name=email],
