@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import Tabs from '../search/tabs.js';
 import {Entry, CustomButton} from '../../js/constants.js';
 import './admin.css';
+import UserIcon from '../../assets/user.svg';
 
 class Admin extends Component {
     render() {
         return (
-            <div>
+            <div className="grid-margin-y">
                 <Tabs/>
                 <h1 className="myTitle caption">
                     Admin
@@ -26,12 +27,43 @@ class Admin extends Component {
                     </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
-                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/><Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/><Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/><Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/><Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/><Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        textClass="userCaption"
+                        redirect="/tipsy/barGears/gear"/>
                 </div>
             </div>
         );

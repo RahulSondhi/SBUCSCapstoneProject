@@ -7,7 +7,7 @@ import UserPic from '../../assets/user.svg';
 class User extends Component {
     render() {
         return (
-          <div>
+          <div className="grid-margin-y">
               <Tabs/>
               <h1 className="caption">UserName</h1>
               <SVG src={UserPic} style={ProfileIconStyle}/>

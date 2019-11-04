@@ -5,7 +5,7 @@ import './bar.css';
 class Bar extends Component {
     render() {
         return (
-          <div>
+          <div className="grid-margin-y">
               <Tabs/>
               <h1>
                   BarName

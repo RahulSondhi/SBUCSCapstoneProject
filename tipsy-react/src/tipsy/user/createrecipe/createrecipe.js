@@ -27,7 +27,7 @@ class CreateRecipe extends Component {
                         </div>
                     </div>
                     <div className="cell small-4">
-                        <CustomCreateButton redirect="/tipsy/myBars/bar" name="Create Recipe+"/>
+                        <CustomCreateButton redirect="/tipsy/myRecipes/recipe" name="Create Recipe+"/>
                     </div>
                 </div>
                 <div className="grid-x grid-margin-x containerBox">

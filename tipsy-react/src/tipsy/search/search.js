@@ -6,7 +6,7 @@ import './search.css';
 export class Search extends Component {
     render() {
         return (
-            <div className="grid-padding-y">
+            <div className="grid-margin-y">
                 <Tabs/>
                 <br/>
                 <div className="cell small-2">
