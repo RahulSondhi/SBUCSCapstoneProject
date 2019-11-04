@@ -8,6 +8,9 @@ class Admin extends Component {
         return (
             <div>
                 <Tabs/>
+                <h1 className="myTitle caption">
+                    Admin
+                </h1>
                 <div className="grid-x buttonHolder">
                     <div className="tabButton">
                         <CustomButton name="Bar" redirect="/tipsy/admin"/>
