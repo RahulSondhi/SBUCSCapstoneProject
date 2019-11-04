@@ -2,6 +2,7 @@ package com.maroon.mixology.config;
 
 import com.maroon.mixology.security.JwtAuthenticationEntryPoint;
 import com.maroon.mixology.security.JwtAuthenticationFilter;
+import com.maroon.mixology.security.JwtTokenProvider;
 import com.maroon.mixology.service.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
