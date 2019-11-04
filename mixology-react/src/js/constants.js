@@ -9,7 +9,7 @@ export const LoginLabelStyle = {
 export const CustomButton = (props) => {
     return (
         <div>
-            <Link to={props.redirect}>
+            <Link to={props.redirect}> 
                 <button type="submit" className="button">
                     {props.name}
                 </button>

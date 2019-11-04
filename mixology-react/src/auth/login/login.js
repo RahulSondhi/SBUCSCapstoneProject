@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../constants/constants.js';
+// import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../js/constants.js';
 import { login } from '../../util/APIUtils';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './login.css';
 
-import { ACCESS_TOKEN } from '../../constants/constants.js';
+import { ACCESS_TOKEN } from '../../js/constants.js/index.js';
 import { Link } from 'react-router-dom';
 import { Form, Input, Icon, notification } from 'antd';
 const FormItem = Form.Item;
@@ -58,7 +58,7 @@ class LoginForm extends Component {
         return (
             <div className="container">
                 <div className="logo">
-                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+                    <constant.SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
                 </div>
                 <h3>Login to your account.</h3>
                 <Form onSubmit={this.handleSubmit} className="">
@@ -110,7 +110,7 @@ class LoginForm extends Component {
                         </div>
                     </div>
                 </Form>
-                <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+                <constant.SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
             </div>
         );
     }

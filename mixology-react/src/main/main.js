@@ -21,7 +21,7 @@ import Gear from '../tipsy/menu/gear/gear.js';
 
 import history from './history.js';
 import {getCurrentUser} from '../util/APIUtils.js';
-import {ACCESS_TOKEN} from '../constants/constants.js';
+import * as constant from '../js/constants.js';
 import {notification} from 'antd';
 
 class Main extends Component {
@@ -57,7 +57,7 @@ class Main extends Component {
     }
 
     handleLogout(redirectTo = "/", notificationType = "success", description = "You're successfully logged out.") {
-        localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(constant.ACCESS_TOKEN);
 
         this.setState({currentUser: null, isAuthenticated: false});
 
