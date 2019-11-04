@@ -2,14 +2,15 @@ import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
 import './bargears.css'
-import {CustomCreateButton, EntryOneField} from '../../../js/constants.js';
+import UserIcon from '../../../assets/user.svg';
+import {CustomCreateButton, Entry} from '../../../js/constants.js';
 
 class BarGears extends Component {
     render() {
         return (
-            <div>
+            <div className="grid-margin-y">
                 <Tabs/>
-                <div className="grid-x">
+                <div className="grid-x cell">
                     <div className="cell small-4"></div>
                     <h1 className="myTitle caption cell small-4">
                         Bar Gear</h1>
@@ -17,13 +18,49 @@ class BarGears extends Component {
                         <CustomCreateButton redirect="/tipsy/barGears/gear" name="Upload A Gear +"/>
                     </div>
                 </div>
-                <div className="grid-x grid-margin-y box">
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
-                    <EntryOneField objectName="Gear" redirect="/tipsy/barGears/gear"/>
+                <div className="grid-x grid-margin-y box cell">
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
+                    <Entry
+                        objectName="Gear"
+                        icon={UserIcon}
+                        id="user"
+                        ownerName="User"
+                        redirect="/tipsy/barGears/gear"/>
                 </div>
             </div>
         )

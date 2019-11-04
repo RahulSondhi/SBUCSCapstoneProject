@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../search/tabs.js';
-import {EntryOneField, CustomButton} from '../../js/constants.js';
+import {Entry, CustomButton} from '../../js/constants.js';
 import './admin.css';
 
 class Admin extends Component {
@@ -23,12 +23,12 @@ class Admin extends Component {
                     </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
-                    <EntryOneField objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
+                    <Entry objectName="User" redirect="/tipsy/admin/user"/>
                 </div>
             </div>
         );

@@ -30,42 +30,20 @@ export const CustomCreateButton = (props) => {
     )
 }
 
-export const EntryTwoFields = (props) => {
+export const Entry = (props) => {
     return (
         <div className="small-3 cell">
             <div className="entry">
-            <br/>
-            <h3 style={props.titleStyle}>
-                {props.itemName}
-            </h3>
-              <SVG src={props.icon} style={props.style} alt="User"/>
+                <br/>
+                <h3 style={props.titleStyle}>
+                    {props.itemName}
+                </h3>
+                <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
+                <br/>
                 <p>{props.ownerName}</p>
             </div>
         </div>
     )
-}
-
-export const EntryOneField = (props) => {
-    return (
-        <div className="small-3 cell">
-            <div className="entry">
-            <br/>
-                <SVG src={UserIcon} style={UserStyle} alt="User"/>
-                <p>
-                    {props.objectName}
-                </p>
-                <CustomButton redirect={props.redirect} name="View"/>
-            </div>
-        </div>
-    )
-}
-
-export const SVG = (props) => {
-    return (
-        <div>
-            <img src={props.src} style={props.style} alt={props.alt}/>
-        </div>
-    );
 }
 
 export const DrinksStyle = {
@@ -78,7 +56,7 @@ export const DrinksStyle = {
 
 export const CupBottleStyle = {
     width: "50em",
-    height: "50em",
+    height: "50em"
 }
 
 export const TipsyStyle = {
@@ -91,13 +69,8 @@ export const SmallTipsyStyle = {
     height: "20%"
 }
 
-export const UserStyle = {
-    width: "30%",
-    height: "30%",
-}
-
 export const CounterStyle = {
-  height: "30em"
+    height: "30em"
 }
 
 export const IngredientStyle = {
@@ -106,17 +79,17 @@ export const IngredientStyle = {
 }
 
 export const ToolStyle = {
-  width: "70%",
-  height: "70%",
-  "marginLeft": "auto",
-  "marginRight": "auto",
-  "marginTop": "auto",
-  "display": "block"
+    width: "70%",
+    height: "70%",
+    "marginLeft": "auto",
+    "marginRight": "auto",
+    "marginTop": "auto",
+    "display": "block"
 }
 
 export const BottleIconStyle = {
-    width: "15%",
-    height: "15%"
+    width: "50%",
+    height: "50%"
 }
 
 export const ProfileIconStyle = {
@@ -126,7 +99,7 @@ export const ProfileIconStyle = {
 
 export const TitleStyle = {
     width: "80%",
-    height: "20%",
+    height: "20%"
 }
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';

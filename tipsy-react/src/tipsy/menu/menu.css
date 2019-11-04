@@ -2,8 +2,8 @@
 
 .entry {
     margin: auto auto;
-    width: 15vw;
-    height: 15vw;
+    width: 15em;
+    height: 15em;
     background-image: var(--card-bg-image);
     border: .2em solid var(--button-border-color);
     text-align: center;
@@ -17,4 +17,9 @@
 
 .tabButton {
     margin: 2em 2em 2em;
+}
+
+#user {
+    width: 30%;
+    height: 30%;
 }

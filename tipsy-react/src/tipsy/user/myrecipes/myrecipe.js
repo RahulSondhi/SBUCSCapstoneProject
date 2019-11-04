@@ -2,21 +2,18 @@ import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
 import '../../menu/menu.css';
 import './myrecipe.css'
-import {CustomButton, CustomCreateButton, EntryTwoFields, BottleIconStyle} from '../../../js/constants.js';
+import {CustomButton, CustomCreateButton, Entry, BottleIconStyle} from '../../../js/constants.js';
 import Bottle from '../../../assets/bottle.svg';
 
 class MyRecipes extends Component {
     render() {
         return (
-            <div className="grid-y">
-                <div className="">
+            <div className="grid-margin-y">
                     <div className="">
                         <Tabs/>
                     </div>
-                </div>
                 <div className="grid-x">
-                    <div className="cell small-4"></div>
-                    <h1 className="myTitle caption small-4">
+                    <h1 className="myTitle caption small-4 large-offset-4">
                         My Recipes</h1>
                     <div className="cell small-4 createButtonHolder">
                         <CustomCreateButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
@@ -35,43 +32,43 @@ class MyRecipes extends Component {
                     </div>
                 </div>
                 <div className="grid-x grid-margin-y box">
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
                         ownerName="OwnerName"
                         redirect="/tipsy/myRecipes/recipe"/>
-                    <EntryTwoFields
+                    <Entry
                         icon={Bottle}
                         style={BottleIconStyle}
                         itemName="RecipeName"
