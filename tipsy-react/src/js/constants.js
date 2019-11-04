@@ -114,7 +114,8 @@ export const CounterStyle = {
 }
 
 export const IngredientStyle = {
-    height: "10em"
+    height: "6em",
+    margin: "0.5em"
 }
 
 export const ToolStyle = {
