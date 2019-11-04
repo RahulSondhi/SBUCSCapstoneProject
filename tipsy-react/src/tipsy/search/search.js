@@ -8,9 +8,7 @@ export class Search extends Component {
         return (
             <div className="grid-padding-y">
                 <Tabs/>
-                <h1 className="myTitle cell small-1 caption">
-                    Search
-                </h1>
+                <br/>
                 <div className="cell small-2">
                     <input
                         type="text"
@@ -20,7 +18,6 @@ export class Search extends Component {
                 <div className="cell small-2">
                     <input type="submit" className="button" value="SEARCH"/>
                 </div>
-                <div className="cell small-5"></div>
                 <div className="cell small-2">
                     <img src={Drinks} className="drinks" alt="Drinks"/>
                 </div>

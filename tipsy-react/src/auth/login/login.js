@@ -58,16 +58,19 @@ class LoginForm extends Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
-            <div className="container grid-x align-center-middle grid-padding-y">
+            <div className="container grid-container grid-x align-center-middle grid-padding-y">
                 <div className="header grid-x grid-margin-y">
                     <img src={Tipsy} alt="TipsyLogo" className=" small-12 cell"></img>
                 </div>
+                <h1 className="caption">
+                    Login your account
+                </h1>
                 <Form
                     onSubmit={this.handleSubmit}
                     className="grid-x align-middle grid-margin-y">
                     <FormItem
                         label="Email"
-                        className="inputLabel link  medium-offset-2 medium-8 cell">
+                        className="inputLabel  medium-offset-2 medium-8 cell">
                         {getFieldDecorator('email', {
                             rules: [
                                 {
@@ -81,7 +84,7 @@ class LoginForm extends Component {
                     </FormItem>
                     <FormItem
                         label="Password"
-                        className="inputLabel link  medium-offset-2 medium-8 cell">
+                        className="inputLabel  medium-offset-2 medium-8 cell">
                         {getFieldDecorator('password', {
                             rules: [
                                 {
@@ -118,7 +121,7 @@ class LoginForm extends Component {
                     </div>
                 </Form>
                 <div className="footer grid-x grid-margin-y">
-                    <img src={Drinks} alt="DrinksLogo" className=" small-12 cell"></img>
+                    <img src={Drinks} alt="DrinksLogo" ></img>
                 </div>
             </div>
         );
