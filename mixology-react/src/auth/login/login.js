@@ -60,7 +60,7 @@ class LoginForm extends Component {
                 <div className="logo">
                     <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
                 </div>
-                <h3>Login to your account.</h3>
+                <h3 className="caption loginCaption">Login to your account</h3>
                 <Form onSubmit={this.handleSubmit} className="">
                     <FormItem label="Email" className="inputLabel">
                         {getFieldDecorator('email', {
