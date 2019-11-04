@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs';
 import './gear.css';
-import { ToolStyle } from '../../../js/constants.js';
+import { SVG, ToolStyle } from '../../../js/constants.js';
 import Spoon from '../../../assets/spoon.svg';
 
 
@@ -18,7 +18,6 @@ class Gear extends Component {
                 <div className="grid-x grid-margin-x boxContainer">
                     <div className="cell small-6">
                         <SVG src={Spoon} style={ToolStyle} alt="Ingredient"/>
-
                     </div>
                     <div className="cell small-6">
                         <h2>

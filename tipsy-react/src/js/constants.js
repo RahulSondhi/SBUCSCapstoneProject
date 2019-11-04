@@ -40,10 +40,50 @@ export const Entry = (props) => {
                 </h3>
                 <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
                 <br/>
+
                 <p>{props.ownerName}</p>
             </div>
         </div>
     )
+}
+
+export const EntryTwoFields = (props) => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+                <br/>
+                <h3 style={props.titleStyle}>
+                    {props.itemName}
+                </h3>
+                <img src={props.src} style={props.style} alt={props.alt}/>
+                <br/>
+                <p>{props.ownerName}</p>
+            </div>
+        </div>
+    )
+}
+
+export const EntryOneField = (props) => {
+    return (
+        <div className="small-3 cell">
+            <div className="entry">
+                <br/>
+                <SVG src={UserIcon} alt="User"/>
+                <br/>
+                <p>
+                    {props.objectName}
+                </p>
+            </div>
+        </div>
+    )
+}
+
+export const SVG = (props) => {
+    return (
+        <div>
+            <img src={props.src} style={props.style} alt={props.alt}/>
+        </div>
+    );
 }
 
 export const DrinksStyle = {
@@ -74,8 +114,7 @@ export const CounterStyle = {
 }
 
 export const IngredientStyle = {
-  height: "6em",
-  margin:"0.5em"
+    height: "10em"
 }
 
 export const ToolStyle = {
