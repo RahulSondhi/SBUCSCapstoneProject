@@ -1,22 +1,20 @@
 import React, {Component} from 'react';
 import {SVG, TipsyStyle, DrinksStyle, CustomButton} from '../../js/constants.js';
-import { login } from '../../util/APIUtils';
+import {login} from '../../util/APIUtils';
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 import '../../index.css';
 import './login.css';
 
-import { ACCESS_TOKEN } from '../../js/constants.js';
-import { Link } from 'react-router-dom';
-import { Form, Input, Icon, notification } from 'antd';
+import {ACCESS_TOKEN} from '../../js/constants.js';
+import {Link} from 'react-router-dom';
+import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
     render() {
-        const AntWrappedLoginForm = Form.create()(LoginForm);   
-        return (
-            <AntWrappedLoginForm onLogin={this.props.onLogin} />
-        );
+        const AntWrappedLoginForm = Form.create()(LoginForm);
+        return (<AntWrappedLoginForm onLogin={this.props.onLogin}/>);
     }
 }
 
@@ -24,45 +22,52 @@ class LoginForm extends Component {
 
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSubmit = this
+            .handleSubmit
+            .bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                const loginRequest = Object.assign({}, values);
-                login(loginRequest) //JSON to backend
-                .then(response => {
-                    localStorage.setItem(ACCESS_TOKEN, response.accessToken);  //get the token and save it
-                    this.props.onLogin();
-                }).catch(error => {
-                    if(error.status === 401) {
-                        notification.error({
-                            message: 'Tipsy App',
-                            description: 'Your Email or Password is incorrect. Please try again!'
-                        });
-                    } else {
-                        notification.error({
-                            message: 'Tipsy App',
-                            description: error.message || 'Sorry! Something went wrong. Please try again!'
-                        });
-                    }
-                });
-            }
-        });
+        this
+            .props
+            .form
+            .validateFields((err, values) => {
+                if (!err) {
+                    const loginRequest = Object.assign({}, values);
+                    login(loginRequest) //JSON to backend
+                        .then(response => {
+                        localStorage.setItem(ACCESS_TOKEN, response.accessToken); //get the token and save it
+                        this
+                            .props
+                            .onLogin();
+                    }).catch(error => {
+                        if (error.status === 401) {
+                            notification.error({message: 'Tipsy App', description: 'Your Email or Password is incorrect. Please try again!'});
+                        } else {
+                            notification.error({
+                                message: 'Tipsy App',
+                                description: error.message || 'Sorry! Something went wrong. Please try again!'
+                            });
+                        }
+                    });
+                }
+            });
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
         return (
-            <div className="container">
-                <div className="logo">
-                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+            <div className="container grid-x align-center-middle grid-padding-y">
+                <div className="header grid-x grid-margin-y">
+                    <img src={Tipsy} alt="TipsyLogo" className=" small-12 cell"></img>
                 </div>
-                <h3 className="caption">Login to your account</h3>
-                <Form onSubmit={this.handleSubmit} className="">
-                    <FormItem label="Email" className="inputLabel">
+                <Form
+                    onSubmit={this.handleSubmit}
+                    className="grid-x align-middle grid-margin-y">
+                    <FormItem
+                        label="Email"
+                        className="inputLabel link  medium-offset-2 medium-8 cell">
                         {getFieldDecorator('email', {
                             rules: [
                                 {
@@ -74,7 +79,9 @@ class LoginForm extends Component {
                             <Input prefix={< Icon type = "user" />} name="email" placeholder="Enter Email"/>
                         )}
                     </FormItem>
-                    <FormItem label="Password" className="inputLabel">
+                    <FormItem
+                        label="Password"
+                        className="inputLabel link  medium-offset-2 medium-8 cell">
                         {getFieldDecorator('password', {
                             rules: [
                                 {
@@ -91,26 +98,28 @@ class LoginForm extends Component {
                                 placeholder="Enter Password"/>
                         )}
                     </FormItem>
-                    <Link to="forgot" className="link">
+                    <Link to="forgot" className="link  medium-12 cell">
                         Forgot Password?
                     </Link>
-                    <div className="grid-x grid-margin-x">
+                    <br></br>
+                    <div className="grid-x align-middle grid-margin-y medium-12 cell">
 
                         {/* <FormItem> */}
-                        <div className="cell small-4">
+                        <div className=" small-offset-2 small-4 cell">
                             <FormItem>
                                 <CustomButton redirect="/register" name="Register"/>
                             </FormItem>
                         </div>
-                        <div className="cell small-4"></div>
-                        <div className="cell small-4">
+                        <div className=" small-4 cell">
                             <FormItem>
                                 <button type="submit" className="button">Login</button>
                             </FormItem>
                         </div>
                     </div>
                 </Form>
-                <SVG src={Drinks} style={DrinksStyle} alt="DrinksLogo"/>
+                <div className="footer grid-x grid-margin-y">
+                    <img src={Drinks} alt="DrinksLogo" className=" small-12 cell"></img>
+                </div>
             </div>
         );
     }

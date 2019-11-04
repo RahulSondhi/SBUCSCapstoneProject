@@ -1,46 +1,19 @@
-#drinks {
-    max-height: 25vh;
-}
-
 .container {
-    vertical-align: middle;
-    padding-top: 5vh;
-    height: inherit;
-    display: table;
-    margin: 0 auto;
-}
-
-.logo {
-    margin: 0 auto;
     text-align: center;
-    display: table;
-    max-width: 40vw;
-    min-width: 300px;
-    /*  height: 15vh;*/
-    align-items: center;
 }
 
 form {
-    /* width: 100%; */
-    min-width: 55vh;
     display: table;
     vertical-align: middle;
-    /* background-color: rgba(255, 255, 255, 0.6); */
     margin: auto;
-    border-radius: 20px;
-    padding: 10px;
-}
-
-h3, p {
-    text-align: center;
 }
 
 input[name=email],
-input[name=password],
 input[name=firstName],
 input[name=lastName],
 input[name=nickname],
-input[name=passwordConfirm]{
+input[name=passwordConfirm],
+input[name=password] {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -54,11 +27,11 @@ input[name=passwordConfirm]{
 }
 
 input[name=email]:focus,
-input[name=password]:focus,
 input[name=firstName]:focus,
 input[name=lastName]:focus,
 input[name=nickname]:focus,
-input[name=passwordConfirm]:focus{
+input[name=passwordConfirm]:focus,
+input[name=password]:focus {
     outline: none !important;
     background: none !important;
     box-shadow: none !important;
@@ -66,30 +39,25 @@ input[name=passwordConfirm]:focus{
     border-bottom: solid 2px #800000 !important;
 }
 
-.footer {
-    text-align: center;
-}
-
-.top-bar,
-.top-bar ul {
-    background-color: var(--top-bar-bg);
-}
-
-#barLogo {
-    max-height: 5vh
-}
-
-.center {
-    width: 100vw;
-    text-align: center;
-    bottom: 0;
-}
-#counter {
-    max-height: 40vh;
-    max-width: 40vw;
-    margin: 0 auto;
-}
-
 .inputLabel {
     text-align: left;
+}
+
+.footer,.header{
+    height: auto!important;
+    width: 70%!important;
+}
+
+.footer img,
+.header img{
+    height: auto;
+    width: 100%;
+}
+
+.ant-input-prefix{
+    line-height: 2.75em;
+}
+
+form{
+    margin-top: 2em!important;
 }
