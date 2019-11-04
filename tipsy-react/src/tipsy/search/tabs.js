@@ -38,7 +38,7 @@ class Tabs extends Component {
 
   closeMenu(event) {
 
-    if (!this.dropdownMenu.contains(event.target)) {
+    if (event.target != null || !this.dropdownMenu.contains(event.target)) {
 
       this.setState({ showMenu: false }, () => {
         document.removeEventListener('click', this.closeMenu);
