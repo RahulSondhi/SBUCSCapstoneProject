@@ -18,6 +18,18 @@ export const CustomButton = (props) => {
     )
 }
 
+export const CustomCreateButton = (props) => {
+    return (
+        <div>
+            <Link to={props.redirect}> 
+                <button type="submit" className="createButton">
+                    {props.name}
+                </button>
+            </Link>
+        </div>
+    )
+}
+
 export const EntryTwoFields = (props) => {
     return (
         <div className="small-3 cell">
@@ -28,7 +40,6 @@ export const EntryTwoFields = (props) => {
             </h3>
               <SVG src={props.icon} style={props.style} alt="User"/>
                 <p>{props.ownerName}</p>
-                <CustomButton redirect={props.redirect} name="View"/>
             </div>
         </div>
     )
