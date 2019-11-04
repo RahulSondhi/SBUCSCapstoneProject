@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 public class Role {
     @Id
     private String id;
-    @Indexed(unique = true)
+    @Indexed
     private String name;
 
     public String getId() {
@@ -19,10 +19,10 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole(){
+    public String getName(){
         return name;
     }
-    public void setRole(String name){
+    public void setName(String name){
         this.name = name;
     }
 

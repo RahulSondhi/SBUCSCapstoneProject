@@ -1,0 +1,29 @@
+.counter {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position:absolute;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.ingredients {
+  background-color: var(--top-bar-bg);
+  border: 1px solid white;
+  width: 10%;
+  padding: 5px;
+  float:left;
+}
+
+.ing {
+  display: flex;
+  flex-wrap:wrap;
+}
+
+.tools {
+  background-color: var(--top-bar-bg);
+  border: 1px solid white;
+  width: 10%;
+  padding: 5px;
+  float: right;
+}

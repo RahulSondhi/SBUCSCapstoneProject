@@ -1,0 +1,37 @@
+.containerBox {
+    width:90vw;
+    vertical-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+}
+
+body {
+    overflow: hidden;
+}
+
+.ingredientsBox {
+    width: 40em;
+    height: 50vh;
+    background: var(--card-bg-image); 
+    border: 3px solid var(--box-border-color);
+    border-radius: 2em;
+    color: var(--card-text-color);
+}
+
+.actionBox {
+    width: 10em;
+    height: 10em;
+    background: var(--viewbox-image);
+    background-size: 100% 100%;
+    border: 3px solid var(--box-border-color);
+}
+
+.addStepsButton {
+    width: 90%;
+}
+
+.ing {
+  display: flex;
+  flex-wrap:wrap;
+}

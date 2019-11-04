@@ -1,0 +1,29 @@
+.search {
+    width: 50%;
+    background: none !important;
+    text-shadow: 0 0 0.5em #00FFFF;
+    box-shadow: 0 0 0.2em #00FFFF;
+}
+
+.searchW {
+    text-align: center;
+}
+
+.searchButton {
+    width: 10%;
+    vertical-align: middle;
+}
+
+.searchBar {
+    width: 50%;
+    height: 3em;
+    color: white;
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.drinks {
+    width: 50%;
+    height: 50%;
+}

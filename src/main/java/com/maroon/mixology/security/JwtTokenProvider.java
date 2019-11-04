@@ -22,10 +22,10 @@ public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    @Value("${mixology.jwtSecret}")
+    @Value("${tipsy.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${mixology.jwtExpirationInMs}")
+    @Value("${tipsy.jwtExpirationInMs}")
     private int jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
