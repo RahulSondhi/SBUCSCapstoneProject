@@ -9,7 +9,7 @@ export const LoginLabelStyle = {
 export const CustomButton = (props) => {
     return (
         <div>
-            <Link to={props.redirect}> 
+            <Link to={props.redirect}>
                 <button type="submit" className="button">
                     {props.name}
                 </button>
@@ -21,7 +21,7 @@ export const CustomButton = (props) => {
 export const CustomCreateButton = (props) => {
     return (
         <div>
-            <Link to={props.redirect}> 
+            <Link to={props.redirect}>
                 <button type="submit" className="createButton">
                     {props.name}
                 </button>
@@ -101,7 +101,8 @@ export const CounterStyle = {
 }
 
 export const IngredientStyle = {
-  height: "10em"
+  height: "6em",
+  margin:"0.5em"
 }
 
 export const ToolStyle = {
