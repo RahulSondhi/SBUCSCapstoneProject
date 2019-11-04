@@ -108,7 +108,7 @@ export const SmallTipsyStyle = {
 }
 
 export const CounterStyle = {
-    height: "30em"
+    height: "20em"
 }
 
 export const IngredientStyle = {

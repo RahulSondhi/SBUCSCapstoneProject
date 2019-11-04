@@ -5,10 +5,13 @@
     padding-top: 4em;
 }
 
-.viewBox {
-    height:130%;
-    width: 100%;
-    background-image: var(--metal-gradient);
-    border: 3px solid var(--button-border-color);
-    border-radius: 2em;
+.recipeBox {
+  height:100%;
+  width: 100%;
+  background-image: var(--viewbox-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: var(--button-border-color);
+  border-radius: 0.5em;
 }

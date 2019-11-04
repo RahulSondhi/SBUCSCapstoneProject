@@ -20,7 +20,7 @@ class Recipe extends Component {
                         <h2>
                             Ingredients
                         </h2>
-                        <div className="viewBox">
+                        <div className="recipeBox">
                             <p>IngredientName1</p>
                             <p>IngredientName2</p>
                         </div>
@@ -28,7 +28,7 @@ class Recipe extends Component {
                     <div className="cell small-6">
                         <h2>
                             Equipment</h2>
-                        <div className="viewBox">
+                        <div className="recipeBox">
                             <p>EquipmentName1</p>
                             <p>EquipmentName2</p>
                         </div>
