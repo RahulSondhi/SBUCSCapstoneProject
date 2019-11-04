@@ -10,7 +10,7 @@ class User extends Component {
           <div>
               <Tabs/>
               <SVG src={UserPic} style={ProfileIconStyle}/>
-              <h1>UserName</h1>
+              <h1 className="caption">UserName</h1>
               <div className="grid-x grid-margin-x boxContainer">
                   <div className="cell small-4">
                   <h3> Bars </h3>

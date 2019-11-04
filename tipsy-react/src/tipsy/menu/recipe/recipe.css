@@ -8,6 +8,7 @@
 .viewBox {
     height:130%;
     width: 100%;
-    background: var(--viewbox-image);
+    background-image: var(--metal-gradient);
     border: 3px solid var(--button-border-color);
+    border-radius: 2em;
 }
