@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomButton, IngredientStyle, SVG} from '../../../js/constants.js';
+import {CustomCreateButton, IngredientStyle, SVG} from '../../../js/constants.js';
 import {Input} from 'antd';
 import {Link} from 'react-router-dom';
 import Bottle from '../../../assets/bottle.svg';
@@ -9,9 +9,9 @@ import './createrecipe.css';
 class CreateRecipe extends Component {
     render() {
         return (
-            <div>
+            <div className="grid-margin-y">
                 <Tabs/>
-                <div className="grid-x">
+                <div className="cell grid-x">
                     <div className="cell small-4"></div>
                     <div className="grid-margin-y cell small-4">
                         <h1 className="cell small-6 caption">
@@ -27,7 +27,7 @@ class CreateRecipe extends Component {
                         </div>
                     </div>
                     <div className="cell small-4">
-                        <CustomButton redirect="/tipsy/myBars/bar" name="Create Recipe+"/>
+                        <CustomCreateButton redirect="/tipsy/myBars/bar" name="Create Recipe+"/>
                     </div>
                 </div>
                 <div className="grid-x grid-margin-x containerBox">

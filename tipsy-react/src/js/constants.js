@@ -33,16 +33,18 @@ export const CustomCreateButton = (props) => {
 export const Entry = (props) => {
     return (
         <div className="small-3 cell">
-            <div className="entry">
-                <br/>
-                <h3 style={props.titleStyle}>
-                    {props.itemName}
-                </h3>
-                <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
-                <br/>
+            <Link to={props.redirect}>
+                <button type="submit" className="entry">
+                    <br/>
+                    <h3 style={props.titleStyle}>
+                        {props.itemName}
+                    </h3>
+                    <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
+                    <br/>
 
-                <p>{props.ownerName}</p>
-            </div>
+                    <p>{props.ownerName}</p>
+                </button>
+            </Link>
         </div>
     )
 }
@@ -79,11 +81,7 @@ export const EntryOneField = (props) => {
 }
 
 export const SVG = (props) => {
-    return (
-        <div>
-            <img src={props.src} style={props.style} alt={props.alt}/>
-        </div>
-    );
+    return (<img src={props.src} style={props.style} alt={props.alt}/>);
 }
 
 export const DrinksStyle = {
