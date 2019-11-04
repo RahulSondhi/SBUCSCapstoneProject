@@ -10,7 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Step {
     @Id
     private String id;
+    @DBRef
     private Equipment objToDo;
+    @DBRef
     private Equipment objDoing;
     private ActionType action;
     private int value;
