@@ -33,37 +33,37 @@ class Admin extends Component {
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/><Entry
+                        redirect="/tipsy/admin/user"/><Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/><Entry
+                        redirect="/tipsy/admin/user"/><Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/><Entry
+                        redirect="/tipsy/admin/user"/><Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/><Entry
+                        redirect="/tipsy/admin/user"/><Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/><Entry
+                        redirect="/tipsy/admin/user"/><Entry
                         objectName="Gear"
                         icon={UserIcon}
                         id="user"
                         ownerName="User"
                         textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
+                        redirect="/tipsy/admin/user"/>
                 </div>
             </div>
         );

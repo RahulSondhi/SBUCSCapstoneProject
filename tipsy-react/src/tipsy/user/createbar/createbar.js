@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import Tabs from '../../search/tabs.js';
-import {CustomCreateButton, CustomButton } from '../../../js/constants.js';
+import {CustomCreateButton} from '../../../js/constants.js';
 import {Input} from 'antd';
+import {Link} from 'react-router-dom';
 import './createbar.css';
 
 class CreateBar extends Component {
@@ -33,23 +34,29 @@ class CreateBar extends Component {
                             Managers
                         </h3>
                         <div className="card">
-                            <p>ManagerName1</p>
-                            <p>ManagerName2</p>
-                            <CustomButton
-                                className="add"
-                                redirect="/tipsy/admin/user"
-                                name="Add Manager +"/>
+                            <Link to="/tipsy/admin/user" className="userBoxEntry">ManagerName1</Link>
+                            <Link to="/tipsy/admin/user" className="userBoxEntry">ManagerName2</Link>
                         </div>
+                        <Link to="/tipsy/admin/user">
+                            <button type="submit" className="add button" disabled>
+                                Add Manager +
+                            </button>
+                        </Link>
                     </div>
                     <div className="cell small-6">
                         <h3>
                             Workers</h3>
                         <div className="card">
-                            <p>WorkerName1</p>
-                            <p>WorkerName2</p>
-                            <CustomButton className="add" redirect="/tipsy/admin/user" name="Add Worker +"/>
+                            <Link to="/tipsy/admin/user" className="userBoxEntry">WorkerName1</Link>
+                            <Link to="/tipsy/admin/user" className="userBoxEntry">WorkerName2</Link>
                         </div>
+                        <Link to="/tipsy/admin/user">
+                            <button type="submit" className="add button" disabled>
+                                Add Worker +
+                            </button>
+                        </Link>
                     </div>
+
                 </div>
             </div>
         )
