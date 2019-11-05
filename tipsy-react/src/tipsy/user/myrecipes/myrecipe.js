@@ -13,9 +13,9 @@ class MyRecipes extends Component {
                         <Tabs/>
                     </div>
                 <div className="grid-x">
-                    <h1 className="myTitle caption small-4 large-offset-4">
+                    <h1 className="myTitle cell caption small-12 medium-6 large-4 large-offset-4">
                         My Recipes</h1>
-                    <div className="cell small-4 createButtonHolder">
+                    <div className="cell small-12 medium-6 large-4 createButtonHolder">
                         <CustomCreateButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
                     </div>
                 </div>

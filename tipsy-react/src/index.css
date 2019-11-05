@@ -34,6 +34,8 @@
     --link-hover-color: white;
     --link-hover-text-shadow-color: #00FFFF;
     --page-title-box-shadow: #00FFFF;
+    --userbox-entry-text-color: #40110A;
+    --userbox-entry-text-shadow: #B80F0A;
     --viewbox-image: url("../src/assets/metalPlate.jpg");
 }
 
@@ -77,6 +79,18 @@ label {
     font-family: fzshuti;
     text-shadow: 0 0 0.5em var(--page-title-box-shadow), 0 0 0.5em var(--page-title-box-shadow);
     font-size: 3em;
+}
+
+.userBoxEntry {
+    display: block;
+    text-decoration: none;
+    color: var(--userbox-entry-text-color);
+    margin-bottom: 1rem;
+}
+
+.userBoxEntry:hover {
+    color: var(--userbox-entry-text-color);
+    text-shadow: 0.1em 0.1em 0.1em var(--userbox-entry-text-shadow);
 }
 
 .button {

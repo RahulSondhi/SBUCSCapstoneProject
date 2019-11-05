@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import UserIcon from '../assets/user.svg';
 
 export const LoginLabelStyle = {
     "float": "left"
@@ -32,7 +31,7 @@ export const CustomCreateButton = (props) => {
 
 export const Entry = (props) => {
     return (
-        <div className="small-3 cell">
+        <div className="small-12 medium-6 large-3">
             <Link to={props.redirect}>
                 <button type="submit" className="entry">
                     <br/>
@@ -45,37 +44,6 @@ export const Entry = (props) => {
                     <p className={props.textClass}>{props.ownerName}</p>
                 </button>
             </Link>
-        </div>
-    )
-}
-
-export const EntryTwoFields = (props) => {
-    return (
-        <div className="small-3 cell">
-            <div className="entry">
-                <br/>
-                <h3 style={props.titleStyle}>
-                    {props.itemName}
-                </h3>
-                <img src={props.src} style={props.style} alt={props.alt}/>
-                <br/>
-                <p className={props.textClass}>{props.ownerName}</p>
-            </div>
-        </div>
-    )
-}
-
-export const EntryOneField = (props) => {
-    return (
-        <div className="small-3 cell">
-            <div className="entry">
-                <br/>
-                <SVG src={UserIcon} alt="User"/>
-                <br/>
-                <p>
-                    {props.objectName}
-                </p>
-            </div>
         </div>
     )
 }

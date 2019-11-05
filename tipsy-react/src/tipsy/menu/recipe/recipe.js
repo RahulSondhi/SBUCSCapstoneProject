@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Tabs from '../../search/tabs';
 import './recipe.css';
 import {CustomCreateButton} from '../../../js/constants.js';
@@ -34,8 +35,8 @@ class Recipe extends Component {
                         <h2>
                             Equipment</h2>
                         <div className="recipeBox">
-                            <p>EquipmentName1</p>
-                            <p>EquipmentName2</p>
+                            <Link to="/tipsy/barGears/gear" className="userBoxEntry">GearName1</Link>
+                            <Link to="/tipsy/barGears/gear" className="userBoxEntry">GearName2</Link>
                         </div>
                     </div>
                 </div>
