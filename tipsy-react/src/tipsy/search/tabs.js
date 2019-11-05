@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import './tabs.css';
 import {Icon} from 'antd';
+import {SmallTipsyStyle, SVG} from '../../js/constants.js';
+import Tipsy from '../../assets/Tipsy.png';
 
 const Tab = (props) => {
     return (
@@ -50,8 +52,7 @@ class Tabs extends Component {
         return (
           <div>
             <nav className="top-bar tabHolder tabs">
-                {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
-                <h1> TIPSY</h1>
+                <SVG src={Tipsy} style={SmallTipsyStyle} alt="TipsyLogo"/>
                 <div className="top-bar-right ">
                     <ul className="horizontal menu nested">
                         <Tab className="tab" link="/tipsy/search" name="Search"/>
