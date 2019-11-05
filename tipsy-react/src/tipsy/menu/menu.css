@@ -2,19 +2,33 @@
 
 .entry {
     margin: auto auto;
-    width: 15vw;
-    height: 15vw;
+    width: 15em;
+    height: 15em;
     background-image: var(--card-bg-image);
     border: .2em solid var(--button-border-color);
     text-align: center;
     border-radius: 2em;
     color: var(--card-text-color);
+    cursor: pointer;
 }
 
-.createButton {
+.entryDiv {
+    padding: 2em 0;
+}
+
+.createButtonHolder {
     margin-top: 2em;
 }
 
 .tabButton {
     margin: 2em 2em 2em;
+}
+
+#user {
+    width: 40%;
+    height: 40%;
+}
+
+.userCaption {
+    font-size: 1.5em;
 }
