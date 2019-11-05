@@ -8,7 +8,9 @@ export class Search extends Component {
         return (
             <div className="grid-margin-y">
                 <Tabs/>
-                <br/>
+                <h1 className="cell small-6 caption">
+                    Search
+                </h1>
                 <div className="search grid-x">
                     <input type="text" className="searchBar" placeholder="Search"/>
                         <button type="submit" className="submit">

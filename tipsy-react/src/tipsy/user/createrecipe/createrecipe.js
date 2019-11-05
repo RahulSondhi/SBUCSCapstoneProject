@@ -62,13 +62,11 @@ class CreateRecipe extends Component {
                         </div>
                         <div className="actionBox cell small-4">
                             <div className="grid-x actionContainer">
-                                <div className="cell small-4 ingBox">
-                                <div className="ingName">
+                                <div className="small-4 ingBox">
                                     <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
                                     <p>name</p>
                                 </div>
-                                </div>
-                                <div className="cell small-4">
+                                <div className="small-4">
                                     <select className="dropdownMenu">
                                         <option value="stir">Stir</option>
                                         <option value="shake">Shake</option>
@@ -76,11 +74,9 @@ class CreateRecipe extends Component {
                                         <option value="blend">Blend</option>
                                     </select>
                                 </div>
-                                <div className="cell small-4 ingBox">
-                                <div className="ingName">
+                                <div className="small-4 ingBox">
                                     <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
                                     <p>name</p>
-                                </div>
                                 </div>
                             </div>
                         </div>
