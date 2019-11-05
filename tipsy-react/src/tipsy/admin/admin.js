@@ -25,7 +25,7 @@ class Admin extends Component {
                     <div className="tabButton">
                         <CustomButton name="Equipment" redirect="/tipsy/admin"/>
                     </div>
-                </div>
+                  </div>
                 <div className="grid-container grid-x full">
                     <div className="grid-x grid-margin-y box cell large-10 large-offset-1">
                         <Entry
