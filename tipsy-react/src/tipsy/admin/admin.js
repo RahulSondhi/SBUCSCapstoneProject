@@ -25,45 +25,47 @@ class Admin extends Component {
                     <div className="tabButton">
                         <CustomButton name="Equipment" redirect="/tipsy/admin"/>
                     </div>
-                </div>
-                <div className="grid-x grid-margin-y box">
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/><Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/><Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/><Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/><Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/><Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/admin/user"/>
+                  </div>
+                <div className="grid-container grid-x full">
+                    <div className="grid-x grid-margin-y box cell large-10 large-offset-1">
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/><Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/><Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/><Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/><Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/><Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/admin/user"/>
+                    </div>
                 </div>
             </div>
         );
