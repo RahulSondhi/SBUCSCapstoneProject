@@ -5,10 +5,10 @@
     width: 15em;
     height: 15em;
     background-image: var(--card-bg-image);
-    border: .2em solid var(--button-border-color);
+    border: .2em solid var(--crimson);
     text-align: center;
     border-radius: 2em;
-    color: var(--card-text-color);
+    color: var(--crimson);
     cursor: pointer;
 }
 

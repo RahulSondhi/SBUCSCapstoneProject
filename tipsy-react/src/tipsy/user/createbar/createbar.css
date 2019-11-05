@@ -3,11 +3,11 @@ input[name=barName]{
     padding: 12px 20px;
     display: inline-block;
     border: none !important;
-    border-bottom: solid 2px var(--input-border-bottom) !important;
+    border-bottom: solid 2px var(--white) !important;
     font-size: 1em;
     background-color: none;
     background: none !important;
-    color: var(--input-text-color);
+    color: var(--white);
     transition: 1000ms;
 }
 
@@ -16,7 +16,7 @@ input[name=barName]:focus{
     background: none !important;
     box-shadow: none !important;
     border: none !important;
-    border-bottom: solid 2px var(--input-border-bottom-focus) !important;
+    border-bottom: solid 2px var(--maroon) !important;
 }
 
 .boxContainer {

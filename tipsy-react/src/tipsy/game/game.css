@@ -9,8 +9,8 @@
 
 .ingredients {
   background: var(--card-bg-image);
-  color: var(--button-border-color);
-  border: 1px solid var(--button-border-color);
+  color: var(--crimson);
+  border: 1px solid var(--crimson);
   width: 10%;
   padding: 5px;
   float:left;
@@ -24,8 +24,8 @@
 
 .tools {
   background: var(--card-bg-image);
-  color: var(--button-border-color);
-  border: 1px solid var(--button-border-color);
+  color: var(--crimson);
+  border: 1px solid var(--crimson);
   width: 10%;
   padding: 5px;
   float: right;
