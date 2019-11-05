@@ -5,31 +5,31 @@ import './bar.css';
 class Bar extends Component {
     render() {
         return (
-          <div>
+          <div className="grid-margin-y">
               <Tabs/>
-              <h1>
-                  BarName
+              <h1 className="cell small-6 caption">
+                  Bar Name
               </h1>
-              <h3>Author: Name
-              </h3>
+              <h4>Author: Name
+              </h4>
               <div className="grid-x grid-margin-x boxContainer">
                   <div className="cell small-4">
-                    <h3> Managers </h3>
-                    <div className="viewBox">
+                    <h4> Managers </h4>
+                    <div className="barBox">
                         <p>ManagerName1</p>
                         <p>ManagerName2</p>
                     </div>
                   </div>
                   <div className="cell small-4">
-                      <h3> Workers</h3>
-                      <div className="viewBox">
+                      <h4> Workers</h4>
+                      <div className="barBox">
                       <p>WorkerName1</p>
                       <p>WorkerName2</p>
                       </div>
                   </div>
                   <div className="cell small-4">
-                      <h3> Recipes</h3>
-                      <div className="viewBox">
+                      <h4> Recipes</h4>
+                      <div className="barBox">
                       <p>RecipeName1</p>
                       <p>RecipeName2</p>
                       </div>

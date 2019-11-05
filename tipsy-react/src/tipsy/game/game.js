@@ -16,19 +16,43 @@ class Game extends Component {
                 <div className="ingredients">
                   <p>Ingredients</p>
                   <div className="ing">
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
                   </div>
                 </div>
                 <div className="tools">
                   <p>Tools</p>
                   <div className="ing">
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
-                    <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
+                    <div className="ingName">
+                        <SVG src={Bottle} style={IngredientStyle} alt="Ingredient"/>
+                        <p>name</p>
+                    </div>
                   </div>
 
               </div>
