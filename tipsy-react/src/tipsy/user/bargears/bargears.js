@@ -18,50 +18,51 @@ class BarGears extends Component {
                         <CustomCreateButton redirect="/tipsy/barGears/gear" name="Upload A Gear +"/>
                     </div>
                 </div>
-                <div className="grid-x grid-margin-y box cell">
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-                    <Entry
-                        objectName="Gear"
-                        icon={UserIcon}
-                        id="user"
-                        ownerName="User"
-                        textClass="userCaption"
-                        redirect="/tipsy/barGears/gear"/>
-
+                <div className="grid-container grid-x full">
+                    <div className="grid-x grid-margin-y box cell large-10 large-offset-1">
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                        <Entry
+                            objectName="Gear"
+                            icon={UserIcon}
+                            id="user"
+                            ownerName="User"
+                            textClass="userCaption"
+                            redirect="/tipsy/barGears/gear"/>
+                    </div>
                 </div>
             </div>
         )

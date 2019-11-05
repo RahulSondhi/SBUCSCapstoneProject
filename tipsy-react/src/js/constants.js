@@ -31,7 +31,7 @@ export const CustomCreateButton = (props) => {
 
 export const Entry = (props) => {
     return (
-        <div className="small-12 medium-6 large-3">
+        <div className="small-12 medium-6 large-3 entryDiv">
             <Link to={props.redirect}>
                 <button type="submit" className="entry">
                     <br/>

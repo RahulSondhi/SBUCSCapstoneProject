@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.entryDiv {
+    padding: 2em 0;
+}
+
 .createButtonHolder {
     margin-top: 2em;
 }

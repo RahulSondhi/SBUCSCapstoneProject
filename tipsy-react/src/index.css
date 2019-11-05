@@ -69,6 +69,7 @@ label {
     color: var(--link-color);
     text-decoration: underline;
 }
+
 .link:hover {
     color: var(--link-hover-color);
     text-decoration: underline;

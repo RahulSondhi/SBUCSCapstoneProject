@@ -21,7 +21,7 @@ class MyBar extends Component {
                     </div>
                 </div>
                 <div className="grid-container grid-x full">
-                    <div className="grid-x grid-margin-y box cell large-8 large-offset-2">
+                    <div className="grid-x box cell large-10 large-offset-1">
                         <Entry
                             itemName="BarName"
                             icon={Bottle}
@@ -60,7 +60,7 @@ class MyBar extends Component {
                             ownerName="OwnerName"
                             redirect="/tipsy/myBars/bar"/>
                     </div>
-                    <div className="grid-x cell large-2"></div>
+                    <div className="grid-x cell large-1"></div>
                 </div>
             </div>
         )
