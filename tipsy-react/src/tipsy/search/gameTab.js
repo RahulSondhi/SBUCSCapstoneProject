@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import './gameTab.css';
+import {SmallTipsyStyle, SVG} from '../../js/constants.js';
+import Tipsy from '../../assets/Tipsy.png';
 
 const GameTab = (props) => {
     return (
@@ -18,8 +20,7 @@ class GameTabs extends Component {
     render() {
         return (
             <nav className="top-bar">
-                {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
-                <h1> TIPSY</h1>
+                <SVG src={Tipsy} style={SmallTipsyStyle} alt="TipsyLogo"/>
                 <div className="top-bar-right">
                     <ul className="horizontal menu nested">
                         <GameTab link="" name="Instruction"/>

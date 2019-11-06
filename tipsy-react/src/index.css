@@ -29,7 +29,7 @@ html {
     padding: 0;
     font-family: 'Roboto Mono', monospace;
     color: white !important;
-    background: linear-gradient( rgba(var(--background-color), 0.5) 100%, rgba(var(--background-color), 0.5)100%),url("../src/assets/bg.jpg");
+    background: linear-gradient( rgba(var(--background-color), 0.5) 100%, rgba(var(--background-color), 0.8)100%),url("../src/assets/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -73,7 +73,7 @@ label {
 
 .userBoxEntry:hover {
     color: var(--crimson);
-    text-shadow: 0.1em 0.1em 0.1em var(--bright-red);
+    text-shadow: 0em 0em 0.2em var(--bright-red);
 }
 
 .button {
@@ -96,7 +96,6 @@ label {
     border: var(--brass) 0.1em solid;
     border-radius: 0.5em;
     text-shadow: none;
-    transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
     color: var(--white);
     background: linear-gradient(var(--light-gray), var(--dark-gray));
     cursor: pointer;

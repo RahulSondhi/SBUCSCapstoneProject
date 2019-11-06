@@ -58,7 +58,7 @@ class Tabs extends Component {
                         <Tab className="tab" link="/tipsy/search" name="Search"/>
                         <Tab className="tab" link="/tipsy/myBars" name="My Bars"/>
                         <Tab className="tab" link="/tipsy/myRecipes" name="My Recipes"/>
-                        <Tab className="tab" link="/tipsy/barGears" name="Bar Gears"/>
+                        <Tab className="tab" link="/tipsy/barGears" name="Bar Gear"/>
                         <div className="account" onClick={this.showMenu}> {< Icon type = "user" />}</div>
                     </ul>
                 </div>
