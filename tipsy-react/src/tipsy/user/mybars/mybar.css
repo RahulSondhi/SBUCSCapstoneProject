@@ -1,0 +1,9 @@
+#createABar{
+    position: relative;
+    /* left: 80%; */
+}
+
+.myTitle {
+    text-align: center;
+    font-size: 4em;
+}

@@ -1,0 +1,47 @@
+.search {
+  /* margin: auto; */
+  max-width: 50%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchBar {
+    width: 90%;
+    height: 3em;
+    color: white;
+    background-color: gray;
+}
+
+.submit {
+  margin-left: 1em;
+  margin-bottom: 1em;
+  cursor: pointer;
+}
+
+.drinks {
+    width: 40%;
+    height: 40%;
+}
+
+input[type=text] {
+  font-size: 1em;
+  /* text-transform: uppercase; */
+  border: var(--input-border-bottom) 0.1em solid;
+  border-radius: 0.5em;
+  text-shadow: none;
+  transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+  color: var(--button-text-color);
+  background: none!important;
+}
+
+input[type=text]:focus{
+  border: var(--input-border-bottom) 0.1em solid;
+  border-radius: 0.5em;
+  box-shadow: 0 0 0.5em var(--button-border-color-posthover);
+}
+
+footer {
+  position: absolute;
+  bottom:0;
+}
