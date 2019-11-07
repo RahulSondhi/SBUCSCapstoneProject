@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="85" height="241.768" viewBox="0 0 85 241.768">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.198" cy="0.208" r="0.792" gradientTransform="matrix(-0.006, 1, -1.156, -0.001, 0.44, 0.01)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d8d7d7"/>
+      <stop offset="0.51" stop-color="#868484"/>
+      <stop offset="0.854" stop-color="#706d6d"/>
+      <stop offset="1" stop-color="#686666"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-2" cx="0.153" cy="0.56" r="2.145" gradientTransform="matrix(0.997, 0.073, -0.026, 0.354, 0.015, 0.35)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e4e4e4"/>
+      <stop offset="0.345" stop-color="#aeacac"/>
+      <stop offset="0.382" stop-color="#acaaaa"/>
+      <stop offset="0.696" stop-color="#9a9696"/>
+      <stop offset="1" stop-color="silver"/>
+    </radialGradient>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-0.316" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+  </defs>
+  <g id="shaker" transform="translate(-274 -421.848)">
+    <path id="Path_14" data-name="Path 14" d="M10,0H66A10,10,0,0,1,76,10V99L62.138,164.341s-11.581,7.274-24.119,7.274-26.034-7.274-26.034-7.274S0,104.523,0,99V10A10,10,0,0,1,10,0Z" transform="translate(279 492)" fill="url(#radial-gradient)"/>
+    <path id="Path_15" data-name="Path 15" d="M24.62-37.152H50.27c3.247,0,3.063,27.565,3.063,27.565l15.7,16.08,4.211,24.885C73.241,36.9,71.523,36,66,36H10c-5.523,0-10,.9-10-4.623L4.328,6.492l16.08-16.08S21.45-37.152,24.62-37.152Z" transform="translate(279 459)" fill="url(#radial-gradient-2)"/>
+    <rect id="Rectangle_5" data-name="Rectangle 5" width="85" height="6" rx="3" transform="translate(274 492)" fill="url(#linear-gradient)"/>
+    <path id="Path_16" data-name="Path 16" d="M2283.594,375.945c2.68,65.084-5.743,83.461-5.743,83.461" transform="translate(-1938.531 135.68)" fill="none" stroke="rgba(255,255,255,0.71)" stroke-linecap="round" stroke-width="3"/>
+    <path id="Path_17" data-name="Path 17" d="M2269.514,322.644c16.08,5.36,13.4,29.479,13.4,29.479" transform="translate(-1939 135)" fill="none" stroke="rgba(255,255,255,0.7)" stroke-linecap="round" stroke-width="2"/>
+    <rect id="Rectangle_6" data-name="Rectangle 6" width="85" height="6" rx="3" transform="translate(274 492)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>
