@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import Tabs from '../search/tabs.js';
 import {Entry, CustomButton} from '../../js/constants.js';
+import './admin.css';
 import UserIcon from '../../assets/user.svg';
-import Navbar from '../navbar/navbar.js';
 
-class AdminPage extends Component {
+class Admin extends Component {
     render() {
         return (
             <div className="grid-margin-y">
-                <Navbar/>
+                <Tabs/>
                 <h1 className="myTitle caption">
                     Admin
                 </h1>
@@ -67,8 +68,8 @@ class AdminPage extends Component {
                     </div>
                 </div>
             </div>
-        ); 
+        );
     }
 }
 
-export default AdminPage;
+export default Admin;
