@@ -1,0 +1,52 @@
+/* Controls CSS for every instance of form */
+form {
+    vertical-align: middle;
+    margin: auto;
+    margin-top: 2em!important;
+}
+
+form label,
+.inputLabel {
+    float: left;
+}
+
+input[name=email],
+input[name=firstName],
+input[name=lastName],
+input[name=nickname],
+input[name=passwordConfirm],
+input[name=password] {
+    width: 100%;
+    display: inline-block;
+    border: none !important;
+    border-bottom: solid 2px white !important;
+    font-size: 1em;
+    background-color: rgba(0,0,0,0);
+    background: none !important;
+    color: white;
+    transition: 1000ms;
+}
+
+input[name=email]:focus,
+input[name=firstName]:focus,
+input[name=lastName]:focus,
+input[name=nickname]:focus,
+input[name=passwordConfirm]:focus,
+input[name=password]:focus {
+    outline: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: solid 2px var(--light-blue) !important;
+}
+
+.ant-input-prefix{
+    line-height: 2.75em;
+}
+
+.ant-form-explain{
+    text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
+    -webkit-animation: blink 1s linear infinite;
+    -moz-animation: blink 1s linear infinite;
+    animation: blink 1s linear infinite;
+}

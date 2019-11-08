@@ -1,0 +1,29 @@
+/* Controls CSS for login, register, reset, forgot, & confirm */
+
+/* Login */
+
+.container {
+    text-align: center;
+}
+
+.header {
+    height: auto;
+    width: 70%!important;
+}
+
+.footer {
+    width: 55%;
+}
+
+/* Register */
+
+.registerContainer {
+    position: relative;
+}
+
+/* Confirm */
+
+#smallIcon {
+    width: 10%;
+    height: 10%;
+}
