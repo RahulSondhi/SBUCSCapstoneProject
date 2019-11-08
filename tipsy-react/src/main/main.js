@@ -1,23 +1,30 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import '../foundation/foundation.min.css';
-import Login from '../auth/login/login.js';
-import Search from '../tipsy/search/search.js';
-import Register from '../auth/register/register.js';
-import MyBars from '../tipsy/user/mybars/mybar.js';
-import MyRecipes from '../tipsy/user/myrecipes/myrecipe.js';
-import Admin from '../tipsy/admin/admin.js';
-import Forgot from '../auth/forgot/forgot.js';
-import Confirm from '../auth/confirm/confirm.js';
-import Reset from '../auth/reset/reset.js';
-import Recipe from '../tipsy/menu/recipe/recipe.js';
-import Bar from '../tipsy/menu/bar/bar.js';
-import User from '../tipsy/user/user.js';
-import Game from '../tipsy/game/game.js';
-import CreateBar from '../tipsy/user/createbar/createbar.js'
-import CreateRecipe from '../tipsy/user/createrecipe/createrecipe.js';
-import BarGears from '../tipsy/user/bargears/bargears.js';
-import Gear from '../tipsy/menu/gear/gear.js';
+
+// Authentification Imports
+import Login from '../auth/login.js';
+import Register from '../auth/register.js';
+import Forgot from '../auth/forgot.js';
+import Confirm from '../auth/confirm.js';
+import Reset from '../auth/reset.js';
+
+// Public Page Imports
+import GearPage from '../tipsy/publicPages/gearPage.js';
+import RecipePage from '../tipsy/publicPages/recipePage.js';
+import BarPage from '../tipsy/publicPages/barPage.js';
+import UserPage from '../tipsy/publicPages/userPage.js';
+
+// User Page Imports
+import AdminPage from '../tipsy/userPages/adminPage.js';
+import UsersBarsPage from '../tipsy/userPages/usersBarsPage.js';
+import UsersRecipesPage from '../tipsy/userPages/usersRecipesPage.js';
+import CreateBarPage from '../tipsy/userPages/createBarPage.js'
+import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
+import BarGearsPage from '../tipsy/userPages/barGearsPage.js';
+import SearchPage from '../tipsy/userPages/searchPage.js';
+
+// Game Page Imports
+import Game from '../tipsy/game.js';
 
 import history from './history.js';
 import {getCurrentUser} from '../util/APIUtils.js';
@@ -92,18 +99,18 @@ class Main extends Component {
                     <Route path="/confirm" component={Confirm}/>
                     <Route path="/reset" component={Reset}/>
                     <Route path="/register" component={Register}/>
-                    <Route path="/tipsy/search" component={Search}/>
-                    <Route path="/tipsy/myBars" exact component={MyBars} className="tab"/>
-                    <Route path="/tipsy/myBars/bar" component={Bar}/>
-                    <Route path="/tipsy/myRecipes" exact component={MyRecipes} className="tab"/>
-                    <Route path="/tipsy/myRecipes/recipe" component={Recipe}/>
-                    <Route path="/tipsy/barGears" exact component={BarGears} className="tab"/>
-                    <Route path="/tipsy/barGears/gear" component={Gear}/>
-                    <Route path="/tipsy/admin" exact component={Admin} className="tab"/>
-                    <Route path="/tipsy/admin/user" component={User}/>
+                    <Route path="/tipsy/search" component={SearchPage}/>
+                    <Route path="/tipsy/myBars" exact component={UsersBarsPage} className="tab"/>
+                    <Route path="/tipsy/myBars/bar" component={BarPage}/>
+                    <Route path="/tipsy/myRecipes" exact component={UsersRecipesPage} className="tab"/>
+                    <Route path="/tipsy/myRecipes/recipe" component={RecipePage}/>
+                    <Route path="/tipsy/barGears" exact component={BarGearsPage} className="tab"/>
+                    <Route path="/tipsy/barGears/gear" component={GearPage}/>
+                    <Route path="/tipsy/admin" exact component={AdminPage} className="tab"/>
+                    <Route path="/tipsy/admin/user" component={UserPage}/>
                     <Route path="/tipsy/game" component={Game}/>
-                    <Route path="/tipsy/createbar" component={CreateBar}/>
-                    <Route path="/tipsy/createRecipe" component={CreateRecipe}/>
+                    <Route path="/tipsy/createbar" component={CreateBarPage}/>
+                    <Route path="/tipsy/createRecipe" component={CreateRecipePage}/>
                 </Switch>
             </Router>
         )

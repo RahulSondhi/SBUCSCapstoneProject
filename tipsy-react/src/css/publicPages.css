@@ -1,0 +1,82 @@
+/* CSS for Public Pages */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+.boxContainer {
+    width: 70%;
+    height: 50em;
+    margin: 0 auto;
+}
+
+/* User Pages */
+
+.entry {
+    margin: auto auto;
+    width: 15em;
+    height: 15em;
+    background-image: var(--card-bg-image);
+    border: .2em solid var(--crimson);
+    text-align: center;
+    border-radius: 2em;
+    color: var(--crimson);
+    cursor: pointer;
+}
+
+.entryDiv {
+    padding: 2em 0;
+}
+
+.createButtonHolder {
+    margin-top: 2em;
+}
+
+.tabButton {
+    margin: 2em 2em 2em;
+}
+
+#user {
+    width: 40%;
+    height: 40%;
+}
+
+.userCaption {
+    font-size: 1.5em;
+}
+
+/* Bar Pages */
+
+.barBox {
+  height:100%;
+  width: 100%;
+  background-image: var(--viewbox-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: var(--crimson);
+  border-radius: 0.5em;
+}
+
+/* Gear Pages */
+
+.gearBox {
+  height:100%;
+  width: 100%;
+  background-image: var(--viewbox-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: var(--crimson);
+  border-radius: 0.5em;
+}
+
+/* Recipe Pages */
+
+.recipeBox {
+    height:100%;
+    width: 100%;
+    background-image: var(--viewbox-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: var(--crimson);
+    border-radius: 0.5em;
+  }
