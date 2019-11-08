@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.488" height="190.604" viewBox="0 0 52.488 190.604">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.234" y1="0.907" x2="1.459" y2="0.187" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#34761e"/>
+      <stop offset="1" stop-color="#65c42e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.171" y1="0.254" x2="-0.428" y2="0.752" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+  </defs>
+  <g id="soju" transform="translate(-385.648 -45)">
+    <path id="Path_42" data-name="Path 42" d="M40.678,48.074s9.158.813,12.587,8.412,0,112.436,0,112.436a85.4,85.4,0,0,1-19.884,2.728A89.6,89.6,0,0,1,13.2,168.922S9.965,65.035,13.2,56.486s11.067-8.412,11.067-8.412V26.564H40.678Z" transform="translate(378 56.954)" fill="rgba(178,210,238,0.68)"/>
+    <path id="Path_41" data-name="Path 41" d="M27.323-.766H47.079l-.624,42.317s11.024.877,15.151,9.071,0,121.244,0,121.244a113.905,113.905,0,0,1-23.935,2.942,119.542,119.542,0,0,1-24.293-2.942s-3.893-112.026,0-121.244A14.864,14.864,0,0,1,26.7,41.551Z" transform="translate(374 60.797)" fill="rgba(64,190,0,0.25)"/>
+    <rect id="Rectangle_11" data-name="Rectangle 11" width="23" height="23" transform="translate(400 45)" fill="url(#linear-gradient)"/>
+    <path id="Path_57" data-name="Path 57" d="M0,0H51.44V50H0Z" transform="translate(386 144)" fill="url(#linear-gradient-2)"/>
+    <text id="SOJU-2" data-name="SOJU" transform="translate(389 165)" font-size="15" font-family="VinerHandITC, Viner Hand ITC"><tspan x="4.581" y="15">SOJU</tspan></text>
+    <path id="Path_47" data-name="Path 47" d="M2369.091-52.847c6.188,8.168,4.208,21.782,4.208,21.782" transform="translate(-1937 134)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <path id="Icon_awesome-cuttlefish" data-name="Icon awesome-cuttlefish" d="M7.309,10.936a3.065,3.065,0,0,1,0-6.13A17.633,17.633,0,0,0,12.7,2.941,7.308,7.308,0,1,0,7.309,15.18c2.137,0,2.122-.028,2.829-1.491S8.446,10.936,7.309,10.936Z" transform="translate(412.074 143.221) rotate(43)" fill="red"/>
+    <path id="Icon_awesome-cuttlefish-2" data-name="Icon awesome-cuttlefish" d="M7.309,10.936a3.065,3.065,0,0,1,0-6.13A17.633,17.633,0,0,0,12.7,2.941,7.308,7.308,0,1,0,7.309,15.18c2.137,0,2.122-.028,2.829-1.491S8.446,10.936,7.309,10.936Z" transform="translate(411.156 170.42) rotate(-140)" fill="#1000ff"/>
+  </g>
+</svg>
