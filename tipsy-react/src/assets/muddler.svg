@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.079" height="161.427" viewBox="0 0 34.079 161.427">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.657" y1="0.299" x2="1.918" y2="0.392" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dfdfdf"/>
+      <stop offset="1" stop-color="#757575"/>
+    </linearGradient>
+  </defs>
+  <g id="muddler" transform="translate(-1234.921 -515.787)">
+    <path id="Path_23" data-name="Path 23" d="M-.983,13.324C.9,1.727,14.568.788,14.568.788S29.752.411,32.017,13.324c1.065,6.069-4.929,38.385-4.931,71.252C27.085,120.981,33,158,33,158s-7.631,4.214-15.881,4.214S0,158,0,158s4.226-37.255,3.98-73.424S-1.875,18.832-.983,13.324Z" transform="translate(1236 515)" fill="url(#linear-gradient)"/>
+    <path id="Path_24" data-name="Path 24" d="M3201.407,391.341c2.265,13.592-2.945,34.66-1.812,44.628" transform="translate(-1939 135)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>

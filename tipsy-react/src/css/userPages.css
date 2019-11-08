@@ -1,0 +1,190 @@
+/* CSS for User Pages */
+
+/* Admin Page */
+.buttonHolder {
+    display: inline-flex;
+}
+
+/* Search */
+.search {
+    /* margin: auto; */
+    max-width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .searchBar {
+      width: 90%;
+      height: 3em;
+      color: white;
+      background-color: gray;
+  }
+  
+  .submit {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+  }
+  
+  .drinks {
+      width: 40%;
+      height: 40%;
+  }
+  
+  input[type=text] {
+    font-size: 1em;
+    /* text-transform: uppercase; */
+    border: var(--white) 0.1em solid;
+    border-radius: 0.5em;
+    text-shadow: none;
+    transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+    color: var(--maroon);
+    background: none!important;
+  }
+  
+  input[type=text]:focus{
+    border: var(--white) 0.1em solid;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.5em var(--light-blue);
+  }
+  
+  footer {
+    position: absolute;
+    bottom:0;
+  }
+
+  /* Bar Gears Page */
+
+  #uploadGear{
+    position: relative;
+    /* left: 80%; */
+}
+
+.myBar {
+    text-align: center;
+}
+
+/* Create Bar Page */
+
+input[name=barName]{
+  width: 100%;
+  padding: 12px 20px;
+  display: inline-block;
+  border: none !important;
+  border-bottom: solid 2px var(--white) !important;
+  font-size: 1em;
+  background-color: none;
+  background: none !important;
+  color: var(--white);
+  transition: 1000ms;
+}
+
+input[name=barName]:focus{
+  outline: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-bottom: solid 2px var(--maroon) !important;
+}
+
+.boxContainer {
+margin-top: 10px;
+}
+
+.card {
+background-image: var(--card-bg-image)!important;
+border: none!important;
+box-shadow: 0px 0px 1em black!important;
+height: 100%!important;
+/* width: 80%; */
+border-radius: 1em!important;
+margin-left: 6em;
+margin-right: 6em;
+}
+
+.add {
+width: 70%;
+}
+
+#createButton {
+font-size: 2em;
+}
+
+/* Create Recipe Page */
+
+.containerBox {
+  width:90vw;
+  vertical-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+}
+
+.ingredientsBox {
+  width: 40em;
+  height: 50vh;
+  background: var(--card-bg-image);
+  border: 3px solid var(--box-border-color);
+  border-radius: 2em;
+  color: var(--crimson);
+}
+
+.actionBox {
+  /* width: 10em;
+  height: auto; */
+  /* height: 10em; */
+  background: var(--viewbox-image);
+  background-size: 100% 100%;
+  border-radius: 0.5em!important;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+}
+
+.addStepsButton {
+  width: 100%;
+}
+
+.ing {
+display: flex;
+flex-wrap:wrap;
+}
+
+.dropdownMenu {
+margin-top: 3em;
+border-radius: 0.5em;
+}
+
+.ingBox {
+height:15px!important;
+}
+
+/* Users Bar Page */
+
+#createABar{
+  position: relative;
+  /* left: 80%; */
+}
+
+.myTitle {
+  text-align: center;
+  font-size: 4em;
+}
+
+/* User Page */
+
+.boxContainer {
+  width: 70%;
+  height: 50em;
+  margin: 0 auto;
+}
+
+.userBox {
+  height:100%;
+  width: 100%;
+  background-image: var(--viewbox-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: var(--crimson);
+  border-radius: 0.5em;
+}

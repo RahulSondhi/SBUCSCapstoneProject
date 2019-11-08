@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55.467" height="222.604" viewBox="0 0 55.467 222.604">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.234" y1="0.907" x2="1.459" y2="0.187" gradientUnits="objectBoundingBox">
+      <stop offset="0"/>
+      <stop offset="1" stop-color="#545454"/>
+    </linearGradient>
+  </defs>
+  <g id="tequila" transform="translate(-386.32 -13)">
+    <path id="Path_41" data-name="Path 41" d="M28.871-.766H50.665l-.689,51.85S62.137,52.159,66.69,62.2s-6.535,148.558-6.535,148.558-6.568,3.6-19.869,3.6-22.155-3.6-22.155-3.6S9.193,73.493,13.487,62.2s14.7-11.114,14.7-11.114Z" transform="translate(374 21.243)" fill="rgba(255,255,255,0.25)"/>
+    <path id="Path_42" data-name="Path 42" d="M44.385,47.5s10.356,1,14.232,10.347-5.565,138.3-5.565,138.3S47.46,199.5,36.134,199.5a50.5,50.5,0,0,1-18.866-3.355S9.657,68.365,13.314,57.85,25.827,47.5,25.827,47.5Z" transform="translate(378 29.1)" fill="rgba(234,228,170,0.68)"/>
+    <rect id="Rectangle_11" data-name="Rectangle 11" width="23" height="38" transform="translate(402 13)" fill="url(#linear-gradient)"/>
+    <text id="TEQUILA-2" data-name="TEQUILA" transform="translate(391 130)" font-size="9" font-family="ImprintMT-Shadow, Imprint MT Shadow"><tspan x="0.512" y="8">TEQUILA</tspan></text>
+    <g id="Icon_ionic-md-bowtie" data-name="Icon ionic-md-bowtie" transform="translate(402.75 79.25)">
+      <path id="Path_44" data-name="Path 44" d="M17.39,18.528H15.763a1.142,1.142,0,0,1-1.138-1.138V15.763a1.142,1.142,0,0,1,1.138-1.138H17.39a1.142,1.142,0,0,1,1.138,1.138V17.39A1.142,1.142,0,0,1,17.39,18.528Z" transform="translate(-5.22 -3.322)"/>
+      <g id="Group_1" data-name="Group 1" transform="translate(2.25 6.75)">
+        <path id="Path_45" data-name="Path 45" d="M8.1,14.23V12.279a2.268,2.268,0,0,1,.9-1.813C8.755,9.352,4.852,6.75,3.551,6.75a1.3,1.3,0,0,0-1.3,1.3V18.459a1.3,1.3,0,0,0,1.3,1.3c1.3,0,5.2-2.6,5.456-3.716A2.268,2.268,0,0,1,8.1,14.23Z" transform="translate(-2.25 -6.75)"/>
+        <path id="Path_46" data-name="Path 46" d="M27.52,6.75c-1.3,0-5.2,2.6-5.456,3.716a2.268,2.268,0,0,1,.9,1.813V14.23a2.268,2.268,0,0,1-.9,1.813c.252,1.114,4.155,3.716,5.456,3.716a1.3,1.3,0,0,0,1.3-1.3V8.051A1.3,1.3,0,0,0,27.52,6.75Z" transform="translate(-10.608 -6.75)"/>
+      </g>
+    </g>
+    <path id="Icon_material-line-weight" data-name="Icon material-line-weight" d="M4.5,19.111H48.275V17.936H4.5Zm0,1.762H48.275v-.587H4.5Zm0-4.111H48.275V15H4.5Z" transform="translate(387.5 109.128)"/>
+    <path id="Icon_material-line-weight-2" data-name="Icon material-line-weight" d="M4.5,19.111H48.275V17.936H4.5Zm0,1.762H48.275v-.587H4.5Zm0-4.111H48.275V15H4.5Z" transform="translate(440.275 161) rotate(180)"/>
+    <text id="Maroon" transform="translate(406 148)" font-size="5" font-family="ImprintMT-Shadow, Imprint MT Shadow"><tspan x="1.192" y="5">Maroon</tspan></text>
+    <path id="Path_47" data-name="Path 47" d="M2369.091-52.847c6.188,8.168,4.208,21.782,4.208,21.782" transform="translate(-1937 134)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

@@ -7,36 +7,18 @@
 /* Variables */
 :root {
     --card-bg-image: url("../src/assets/card.jpg");
-    --card-text-color: #40110A;
-    --create-button-top-gradient: #444444;
-    --create-button-bottom-gradient: #1c1c1c;
-    --create-button-border-color: #B5A624;
-    --button-color: maroon;
-    --button-text-color: white;
-    --button-border-color: #40110A;
-    --button-border-color-posthover: #00FFFF;
-    --button-box-shadow-prehover: rgba(255, 255, 255, .5);
-    --button-box-shadow-posthover: rgba(255, 255, 255, .2);
-    --button-hover-shade: rgba(0, 0, 0, 0.5);
-    --button-text-shadow-color: #00FFFF;
-    --button-text-color-posthover: #FFFFFF;
-    --button-text-top-gradient: #b80f0a;
-    --button-text-bottom-gradient: #40110a;
-    --background-color: 25, 7, 4;
-    --top-bar-bg: #1c1c1c;
-    --tab-color: transparent;
-    --tab-color-hover: #444444;
-    --tab-text-color: white;
-    --input-text-color: white;
-    --input-border-bottom: white;
-    --input-border-bottom-focus: #800000;
-    --link-color: #00FFFF;
-    --link-hover-color: white;
-    --link-hover-text-shadow-color: #00FFFF;
-    --page-title-box-shadow: #00FFFF;
-    --userbox-entry-text-color: #40110A;
-    --userbox-entry-text-shadow: #B80F0A;
     --viewbox-image: url("../src/assets/metalPlate.jpg");
+    --crimson: #40110A;
+    --maroon: #800000;
+    --white: #FFFFFF;
+    --light-gray: #444444;
+    --dark-gray: #1c1c1c;
+    --light-blue: #00FFFF;
+    --brass: #B5A624;
+    --bright-red: #B80F0A;
+    --button-hover-shade: rgba(0, 0, 0, 0.5);
+    --background-color: 25, 7, 4;
+    --tab-color: transparent;
 }
 
 /* Repeating HTML Elements */
@@ -47,7 +29,7 @@ html {
     padding: 0;
     font-family: 'Roboto Mono', monospace;
     color: white !important;
-    background: linear-gradient( rgba(var(--background-color), 0.5) 100%, rgba(var(--background-color), 0.5)100%),url("../src/assets/bg.jpg");
+    background: linear-gradient( rgba(var(--background-color), 0.5) 100%, rgba(var(--background-color), 0.8)100%),url("../src/assets/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -66,43 +48,43 @@ label {
 }
 
 .link {
-    color: var(--link-color);
+    color: var(--light-blue);
     text-decoration: underline;
 }
 
 .link:hover {
-    color: var(--link-hover-color);
+    color: var(--white);
     text-decoration: underline;
-    text-shadow: 0 0 0.5em var(--link-hover-text-shadow-color), 0 0 0.5em var(--link-hover-text-shadow-color);
+    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
 }
 
 .caption {
     font-family: fzshuti;
-    text-shadow: 0 0 0.5em var(--page-title-box-shadow), 0 0 0.5em var(--page-title-box-shadow);
+    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
     font-size: 3em;
 }
 
 .userBoxEntry {
     display: block;
     text-decoration: none;
-    color: var(--userbox-entry-text-color);
+    color: var(--crimson);
     margin-bottom: 1rem;
 }
 
 .userBoxEntry:hover {
-    color: var(--userbox-entry-text-color);
-    text-shadow: 0.1em 0.1em 0.1em var(--userbox-entry-text-shadow);
+    color: var(--crimson);
+    text-shadow: 0em 0em 0.2em var(--bright-red);
 }
 
 .button {
     font-size: 1em;
     text-transform: uppercase;
-    border: var(--button-border-color) 0.1em solid;
+    border: var(--crimson) 0.1em solid;
     border-radius: 0.5em;
     text-shadow: none;
     transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
-    color: var(--button-text-color);
-    background: linear-gradient(var(--button-text-top-gradient), var(--button-text-bottom-gradient));
+    color: var(--white);
+    background: linear-gradient(var(--bright-red), var(--crimson));
     cursor: pointer;
     max-width: 100%;
     max-height: 100%;
@@ -111,12 +93,11 @@ label {
 .createButton {
     font-size: 1.2em;
     text-transform: uppercase;
-    border: var(--create-button-border-color) 0.1em solid;
+    border: var(--brass) 0.1em solid;
     border-radius: 0.5em;
     text-shadow: none;
-    transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
-    color: var(--button-text-color);
-    background: linear-gradient(var(--create-button-top-gradient), var(--create-button-bottom-gradient));
+    color: var(--white);
+    background: linear-gradient(var(--light-gray), var(--dark-gray));
     cursor: pointer;
     max-width: 100%;
     max-height: 100%;
@@ -124,8 +105,8 @@ label {
 }
 
 .button:hover {
-    border: var(--button-border-color-posthover) 0.1em solid;
-    text-shadow: 1px 1px 5px var(--button-text-shadow-color);
+    border: var(--light-blue) 0.1em solid;
+    text-shadow: 1px 1px 5px var(--light-blue);
     background-color: var(--button-hover-shade) !important;
 }
 
@@ -133,5 +114,25 @@ label {
 
 .top-bar,
 .top-bar ul {
-    background-color: var(--top-bar-bg);
+    background-color: var(--dark-gray);
+}
+
+/* Animations */
+
+@-moz-keyframes blink {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blink {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blink {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
 }
