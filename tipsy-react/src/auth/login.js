@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {CustomButton} from '../js/constants.js';
 import {login} from '../util/APIUtils';
 import Tipsy from '../assets/Tipsy.svg';
 import Drinks from '../assets/drinks.svg';
@@ -60,7 +59,7 @@ class LoginForm extends Component {
             <div className="grid-x align-center-middle">
 
                 {/* Logo */}
-                <div id="loginHeader" className="grid-x">
+                <div className="loginHeader grid-x cell align-center-middle">
                     <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
                 </div>
 
@@ -70,8 +69,8 @@ class LoginForm extends Component {
                 {/* Form */}
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-8 medium-offset-2 cell grid-x align-center-middle">
-                    <FormItem className="medium-offset-2 medium-8 cell">
+                    className="small-12 medium-8 cell grid-x align-center-middle">
+                    <FormItem className="medium-8 cell">
                         {getFieldDecorator('email', {
                             rules: [
                                 {
@@ -81,7 +80,7 @@ class LoginForm extends Component {
                             ]
                         })(
                             <Input
-                                prefix={< Icon type = "user" />}
+                                prefix={< Icon type = "mail" />}
                                 name="email"
                                 type="email"
                                 placeholder="Enter Email"
@@ -89,7 +88,7 @@ class LoginForm extends Component {
                         )}
                     </FormItem>
                     <FormItem
-                        className="medium-offset-2 medium-8 cell">
+                        className="medium-8 cell">
                         {getFieldDecorator('password', {
                             rules: [
                                 {

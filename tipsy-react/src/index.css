@@ -53,13 +53,6 @@ label {
     text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
 }
 
-.caption {
-    font-family: fzshuti;
-    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
-    font-size: 3em;
-    color: var(--white);
-}
-
 .userBoxEntry {
     display: block;
     text-decoration: none;
@@ -111,6 +104,22 @@ label {
 .top-bar,
 .top-bar ul {
     background-color: var(--dark-gray);
+}
+
+/* Caption Headers */
+
+.caption {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
+    font-size: 3em;
+    color: var(--white);
+}
+
+.captionRed {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
+    font-size: 3em;
+    color: var(--white);
 }
 
 /* Animations */

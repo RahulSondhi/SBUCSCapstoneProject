@@ -33,10 +33,26 @@ input[name=password]:focus {
     border-bottom: solid 2px var(--light-blue) !important;
 }
 
-.ant-input-prefix{
+/* Icons */
+
+form .ant-input-prefix{
     color: white !important;
 }
 
-.ant-form-explain{
+/* Error Messages */
+
+form .ant-form-explain{
     text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
+}
+
+/* Labels */
+
+form .ant-form-item-label label{
+    color: white !important;
+    text-align: left;
+    float: left;
+}
+
+form .ant-form-item-label{
+   display: block;
 }
