@@ -55,19 +55,23 @@ class LoginForm extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
+
         return (
-            <div
-                className="container grid-container grid-x align-center-middle grid-padding-y">
-                <div className="header grid-x grid-margin-y">
-                    <img src={Tipsy} alt="TipsyLogo" className=" small-12 cell"></img>
+            <div className="grid-x align-center-middle">
+
+                {/* Logo */}
+                <div id="loginHeader" className="grid-x">
+                    <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
                 </div>
-                <h1 className="caption">
-                    Login your account
-                </h1>
+
+                {/* Title */}
+                <h1 className="caption small-12 medium-8 cell">Sign In</h1>
+
+                {/* Form */}
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="grid-x align-middle grid-margin-y">
-                    <FormItem label="Email" className="inputLabel  medium-offset-2 medium-8 cell">
+                    className="small-12 medium-8 medium-offset-2 cell grid-x align-center-middle">
+                    <FormItem className="medium-offset-2 medium-8 cell">
                         {getFieldDecorator('email', {
                             rules: [
                                 {
@@ -80,12 +84,12 @@ class LoginForm extends Component {
                                 prefix={< Icon type = "user" />}
                                 name="email"
                                 type="email"
-                                placeholder="Enter Email"/>
+                                placeholder="Enter Email"
+                                className="form-icons"/>
                         )}
                     </FormItem>
                     <FormItem
-                        label="Password"
-                        className="inputLabel  medium-offset-2 medium-8 cell">
+                        className="medium-offset-2 medium-8 cell">
                         {getFieldDecorator('password', {
                             rules: [
                                 {
@@ -96,32 +100,29 @@ class LoginForm extends Component {
                         })(
                             <Input
                                 prefix={< Icon type = "lock" />}
-                                size="large"
                                 name="password"
                                 type="password"
-                                placeholder="Enter Password"/>
+                                placeholder="Enter Password"
+                                className="form-icons"/>
                         )}
                     </FormItem>
-                    <Link to="forgot" className="link  medium-12 cell">
+
+                    <FormItem className="cell">
+                        <button type="submit" className="button">Login</button>
+                    </FormItem>
+
+                    <Link to="register" className="link medium-3 cell">
+                        Register
+                    </Link>
+                    <span className="medium-1 medium-offset-1 cell">
+                        or</span>
+                    <Link to="forgot" className="link medium-3 medium-offset-1 cell">
                         Forgot Password?
                     </Link>
-                    <br></br>
-                    <div className="grid-x align-middle grid-margin-y medium-12 cell">
-
-                        {/* <FormItem> */}
-                        <div className=" small-offset-2 small-4 cell">
-                            <FormItem>
-                                <CustomButton redirect="/register" name="Register"/>
-                            </FormItem>
-                        </div>
-                        <div className=" small-4 cell">
-                            <FormItem>
-                                <button type="submit" className="button">Login</button>
-                            </FormItem>
-                        </div>
-                    </div>
                 </Form>
-                <div className="footer grid-x grid-margin-y">
+
+                {/* Drinks Footer */}
+                <div id="loginDrinks" className="small-12 cell">
                     <img src={Drinks} alt="DrinksLogo"></img>
                 </div>
             </div>

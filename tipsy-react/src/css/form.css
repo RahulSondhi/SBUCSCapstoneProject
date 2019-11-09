@@ -1,13 +1,6 @@
 /* Controls CSS for every instance of form */
 form {
-    vertical-align: middle;
-    margin: auto;
-    margin-top: 2em!important;
-}
-
-form label,
-.inputLabel {
-    float: left;
+    color: white !important;
 }
 
 input[name=email],
@@ -41,12 +34,9 @@ input[name=password]:focus {
 }
 
 .ant-input-prefix{
-    line-height: 2.75em;
+    color: white !important;
 }
 
 .ant-form-explain{
     text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
-    -webkit-animation: blink 1s linear infinite;
-    -moz-animation: blink 1s linear infinite;
-    animation: blink 1s linear infinite;
 }

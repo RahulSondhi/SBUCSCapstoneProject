@@ -2,17 +2,16 @@
 
 /* Login */
 
-.container {
-    text-align: center;
-}
-
-.header {
+#loginHeader {
+    margin-top: 10%;
     height: auto;
     width: 70%!important;
 }
 
-.footer {
+#loginDrinks {
     width: 55%;
+    position: absolute;
+    bottom: 0;
 }
 
 /* Register */
