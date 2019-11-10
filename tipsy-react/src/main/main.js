@@ -54,7 +54,6 @@ class Main extends Component {
             .handleLogin
             .bind(this);
     }
-    register
     componentDidMount() {
         this.loadCurrentUser();
     }
@@ -63,6 +62,8 @@ class Main extends Component {
         this.setState({isLoading: true});
         getCurrentUser().then(response => {
             this.setState({currentUser: response, isAuthenticated: true, isLoading: false});
+            console.log(this.state.isAuthenticated);
+            console.log(constant.ACCESS_TOKEN);
         }).catch(error => {
             this.setState({isLoading: false});
         });
@@ -93,7 +94,7 @@ class Main extends Component {
 
     render() {
         return (
-            <Router history={history}>
+            <Router>
                 <Switch>
                     <PublicRoute
                         exact
@@ -166,14 +167,17 @@ class Main extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={AdminPage}/>
-                    <PrivateRoute
+
+                    <Route
+                        path="/tipsy/user/:nickname"
+                        render={(props) => <UserPage isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}/>}/>
+                    {/* <PrivateRoute
                         path="/tipsy/user/:nickname"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <UserPage
-                        isAuthenticated={this.state.isAuthenticated}
-                        currentUser={this.state.currentUser}
-                        {...props}/>}/>
+                        component={(props) => <UserPage currentUser={this.state.currentUser}
+                        {...props}/>}
+                        /> */}
                     <PrivateRoute 
                         exact path="/tipsy/game"
                         authed={this.state.isAuthenticated}
