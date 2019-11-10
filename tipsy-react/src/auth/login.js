@@ -120,7 +120,7 @@ class LoginForm extends Component {
 
                 {/* Drinks Footer */}
                 <div id="loginDrinks" className="grid-x cell align-center-middle">
-                    <img src={Drinks} classNamme="small-12 cell" alt="DrinksLogo"></img>
+                    <img src={Drinks} className="small-12 cell" alt="DrinksLogo"></img>
                 </div>
             </div>
         );

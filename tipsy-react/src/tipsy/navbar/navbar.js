@@ -18,10 +18,9 @@ class Navbar extends Component {
 
     render() {
         return (
-
             <nav className="menuBar">
                 <div className="logo">
-                <img src={Tipsy} alt="Tipsy" alt="TipsyLogo"/>
+                    <img src={Tipsy} alt="TipsyLogo"/>
                 </div>
                 <div className="menuCon">
                     {/* <div className="leftMenu">

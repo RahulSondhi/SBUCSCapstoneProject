@@ -108,7 +108,7 @@ class GeneralNavbar extends Component {
 
                     <Menu.Item key="setting:3">
                         <NavLink
-                            to="/login"
+                            to="/logout"
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;

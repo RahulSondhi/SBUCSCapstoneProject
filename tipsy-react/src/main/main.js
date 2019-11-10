@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
-import { 
-    BrowserRouter as Router, 
-    Route, 
-    Switch, } from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import history from './history';
-// import { PropsRoute, PublicRoute, PrivateRoute } from 'react-router-with-props';
-// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
-// Authentification Imports
+// import { PropsRoute, PublicRoute, PrivateRoute } from
+// 'react-router-with-props'; import {BrowserRouter as Router, Route, Switch}
+// from 'react-router-dom'; Authentification Imports
 import Login from '../auth/login.js';
+import Logout from '../auth/logout.js';
 import Register from '../auth/register.js';
 import Forgot from '../auth/forgot.js';
 import Confirm from '../auth/confirm.js';
@@ -65,38 +62,33 @@ class Main extends Component {
     loadCurrentUser() {
         this.setState({isLoading: true});
         getCurrentUser().then(response => {
-            this.setState({
-                currentUser: response, 
-                isAuthenticated: true, 
-                isLoading: false
-            });
+            this.setState({currentUser: response, isAuthenticated: true, isLoading: false});
         }).catch(error => {
             this.setState({isLoading: false});
         });
     }
 
-    handleLogout(redirectTo = "/", notificationType = "success", description = "You're successfully logged out.") {
+    handleLogout(notificationType = "success", description = "You're successfully logged out.") {
         localStorage.removeItem(constant.ACCESS_TOKEN);
 
-        this.setState({
-            currentUser: null, 
-            isAuthenticated: false
-        });
+        this.setState({currentUser: null, isAuthenticated: false});
 
-        this.props.history.push(redirectTo);
+        // this
+        //     .props
+        //     .history
+        //     .push(redirectTo);
+
+        history.push("/");
+        window.location.reload();
 
         notification[notificationType]({message: 'Tipsy App', description: description});
     }
 
     handleLogin() {
-        notification.success({
-            message: 'Tipsy App', 
-            description: "You're successfully logged in."});
+        notification.success({message: 'Tipsy App', description: "You're successfully logged in."});
         this.loadCurrentUser();
-        //We must redirect login
-        // history.push("/tipsy/search");
-        // window.location.reload();
-        // this.props.history.push("/tipsy/search");
+        // We must redirect login history.push("/tipsy/search");
+        // window.location.reload(); this.props.history.push("/tipsy/search");
     }
 
     render() {
@@ -104,56 +96,73 @@ class Main extends Component {
             <Router history={history}>
                 <Switch>
                     <PublicRoute
-                        exact path={["/", "/login"]}
+                        exact
+                        path={["/", "/login"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component = {
-                            (props) => <Login onLogin={this.handleLogin} {...props}/>
-                            }/> 
-                    <PublicRoute 
-                        exact path="/forgot"
+                        component=
+                        { (props) => <Login onLogin={this.handleLogin} {...props}/> }/>
+                    <PublicRoute
+                        exact
+                        path="/forgot"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
                         component={Forgot}/>
-                    <PublicRoute 
-                        exact path="/confirm" 
+                    <PublicRoute
+                        exact
+                        path="/confirm"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
                         component={Confirm}/>
-                    <PublicRoute 
-                        exact path="/reset"
+                    <PublicRoute
+                        exact
+                        path="/reset"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/tipsy/search" 
+                        redirectTo="/tipsy/search"
                         component={Reset}/>
-                    <PublicRoute 
-                        exact path="/register"
+                    <PublicRoute
+                        exact
+                        path="/register"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/tipsy/search" 
+                        redirectTo="/tipsy/search"
                         component={Register}/>
 
-                    <PrivateRoute 
-                        exact path="/tipsy/search"
+                    <PrivateRoute
+                        exact
+                        path="/tipsy/search"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login" 
+                        redirectTo="/login"
                         component={SearchPage}/>
-                    <PrivateRoute exact path="/tipsy/myBars"
+                    <PrivateRoute
+                        exact
+                        path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"  
+                        redirectTo="/login"
                         component={UsersBarsPage}/>
                     <Route path="/tipsy/bar" component={BarPage}/>
-                    <Route path="/tipsy/myRecipes" exact component={UsersRecipesPage} className="tab"/>
+                    <Route
+                        path="/tipsy/myRecipes"
+                        exact
+                        component={UsersRecipesPage}
+                        className="tab"/>
                     <Route path="/tipsy/recipe" component={RecipePage}/>
                     <Route path="/tipsy/barGears" exact component={BarGearsPage} className="tab"/>
                     <Route path="/tipsy/gear" component={GearPage}/>
                     <Route path="/tipsy/admin" exact component={AdminPage} className="tab"/>
                     <PrivateRoute
-                            path="/tipsy/user/:nickname"
-                            authed={this.state.isAuthenticated}
-                            redirectTo="/login"  
-                            component={(props) => <UserPage isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}/>
+                        path="/tipsy/user/:nickname"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <UserPage
+                        isAuthenticated={this.state.isAuthenticated}
+                        currentUser={this.state.currentUser}
+                        {...props}/>}/>
                     <Route path="/tipsy/game" component={Game}/>
                     <Route path="/tipsy/createbar" component={CreateBarPage}/>
                     <Route path="/tipsy/createRecipe" component={CreateRecipePage}/>
+                    <Route
+                        path="/logout"
+                        component={(props) => <Logout onLogout={this.handleLogout} {...props}/>}/>
                 </Switch>
             </Router>
         );
