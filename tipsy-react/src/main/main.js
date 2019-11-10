@@ -12,7 +12,7 @@ import Confirm from '../auth/confirm.js';
 import Reset from '../auth/reset.js';
 
 // Public Page Imports
-import GearPage from '../tipsy/publicPages/gearPage.js';
+import EquipmentPage from '../tipsy/publicPages/equipmentPage.js';
 import RecipePage from '../tipsy/publicPages/recipePage.js';
 import BarPage from '../tipsy/publicPages/barPage.js';
 import UserPage from '../tipsy/publicPages/userPage.js';
@@ -23,7 +23,7 @@ import UsersBarsPage from '../tipsy/userPages/usersBarsPage.js';
 import UsersRecipesPage from '../tipsy/userPages/usersRecipesPage.js';
 import CreateBarPage from '../tipsy/userPages/createBarPage.js'
 import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
-import BarGearsPage from '../tipsy/userPages/barGearsPage.js';
+import BarEquipmentPage from '../tipsy/userPages/barEquipmentPage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
 
 // Game Page Imports
@@ -146,8 +146,8 @@ class Main extends Component {
                         component={UsersRecipesPage}
                         className="tab"/>
                     <Route path="/tipsy/recipe" component={RecipePage}/>
-                    <Route path="/tipsy/barGears" exact component={BarGearsPage} className="tab"/>
-                    <Route path="/tipsy/gear" component={GearPage}/>
+                    <Route path="/tipsy/barEquipment" exact component={BarEquipmentPage} className="tab"/>
+                    <Route path="/tipsy/equipment" component={EquipmentPage}/>
                     <Route path="/tipsy/admin" exact component={AdminPage} className="tab"/>
                     <PrivateRoute
                         path="/tipsy/user/:nickname"

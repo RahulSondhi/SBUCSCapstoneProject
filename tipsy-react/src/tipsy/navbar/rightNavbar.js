@@ -27,9 +27,9 @@ class GeneralNavbar extends Component {
                 </Menu.Item>
 
                 {/* Bar Gears */}
-                <Menu.Item key="barGears">
+                <Menu.Item key="barEquipment">
                     <NavLink
-                        to="/tipsy/barGears"
+                        to="/tipsy/barEquipment"
                         isActive={(match, location) => {
                         if (!match) {
                             return false;
@@ -38,7 +38,7 @@ class GeneralNavbar extends Component {
                         return !isNaN(eventID) && eventID % 2 === 1;
                     }}>
                         < BarToolsIcon/>
-                        Bar Tools
+                        Bar Equipment
                     </NavLink>
                 </Menu.Item>
 
