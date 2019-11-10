@@ -66,21 +66,22 @@ class Main extends Component {
     handleLogout(redirectTo = "/", notificationType = "success", description = "You're successfully logged out.") {
         localStorage.removeItem(constant.ACCESS_TOKEN);
 
-        this.setState({currentUser: null, isAuthenticated: false});
+        this.setState({
+            currentUser: null, 
+            isAuthenticated: false
+        });
 
-        this
-            .props
-            .history
-            .push(redirectTo);
+        this.props.history.push(redirectTo);
 
         notification[notificationType]({message: 'Polling App', description: description});
     }
 
     handleLogin() {
-        notification.success({message: 'Polling App', description: "You're successfully logged in."});
+        notification.success({
+            message: 'Polling App', 
+            description: "You're successfully logged in."});
         this.loadCurrentUser();
         //We must redirect login
-        console.log(history);
         history.push("/tipsy/search");
         window.location.reload();
     }
