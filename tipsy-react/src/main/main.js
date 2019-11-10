@@ -126,29 +126,38 @@ class Main extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
                         component={Register}/>
-
-                    <PrivateRoute
-                        exact
-                        path="/tipsy/search"
+                    <PrivateRoute 
+                        exact path="/tipsy/search"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={SearchPage}/>
-                    <PrivateRoute
-                        exact
-                        path="/tipsy/myBars"
+                    <PrivateRoute 
+                        exact path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={UsersBarsPage}/>
-                    <Route path="/tipsy/bar" component={BarPage}/>
-                    <Route
-                        path="/tipsy/myRecipes"
-                        exact
-                        component={UsersRecipesPage}
-                        className="tab"/>
-                    <Route path="/tipsy/recipe" component={RecipePage}/>
-                    <Route path="/tipsy/barEquipment" exact component={BarEquipmentPage} className="tab"/>
+                    <PrivateRoute 
+                        exact path="/tipsy/bar"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"  
+                        component={BarPage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/myRecipes" 
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login" 
+                        component={UsersRecipesPage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/recipe"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login" 
+                        component={RecipePage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/barEquipment" 
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login" 
+                        component={BarEquipmentPage}/>
                     <Route path="/tipsy/equipment" component={EquipmentPage}/>
-                    <Route path="/tipsy/admin" exact component={AdminPage} className="tab"/>
+                    <Route path="/tipsy/admin" exact component={AdminPage}/>
                     <PrivateRoute
                         path="/tipsy/user/:nickname"
                         authed={this.state.isAuthenticated}
