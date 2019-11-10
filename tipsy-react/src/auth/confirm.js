@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {SVG, SmallTipsyStyle, TipsyStyle, CustomButton} from '../js/constants.js';
 import Tipsy from '../assets/Tipsy.svg';
-
-import { validateConfirm } from '../util/APIUtils';
-
+import {Link} from 'react-router-dom';
+import {validateConfirm} from '../util/APIUtils';
 
 class Confirm extends Component {
     constructor(props) {
@@ -17,22 +15,23 @@ class Confirm extends Component {
         }
         //initialize the uuid
         let search = window.location.search;
-        let params = new URLSearchParams(search); 
+        let params = new URLSearchParams(search);
         this.state.uuid.value = params.get('token');
         //Functions needed for this Confirm Class
-        this.handleValidateConfirm = this.handleValidateConfirm.bind(this);
+        this.handleValidateConfirm = this
+            .handleValidateConfirm
+            .bind(this);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.handleValidateConfirm();
     }
 
-    handleValidateConfirm(){
+    handleValidateConfirm() {
         const uuidValue = this.state.uuid.value;
 
-        validateConfirm(uuidValue)
-        .then(response => {
-            if(response.valid){
+        validateConfirm(uuidValue).then(response => {
+            if (response.valid) {
                 this.setState({
                     uuid: {
                         value: uuidValue,
@@ -62,25 +61,43 @@ class Confirm extends Component {
     }
 
     render() {
-        if(this.state.uuid.validateStatus === 'success'){
+        if (this.state.uuid.validateStatus === 'success') {
             return (
-                <div>
-                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-                    <h1 className="caption">Confirmation</h1>
-                    <h3>You have successfully registered with
-                        <SVG src={Tipsy} style={SmallTipsyStyle} alt="TipsyLogo"/></h3>
-                    <h4>You can now login with your email
+                <div className="grid-x align-center-middle">
+
+                    {/* Logo */}
+                    <div className="loginHeader grid-x cell align-center-middle">
+                        <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
+                    </div>
+
+                    {/* Title */}
+                    <h1 className="caption small-12 medium-8 cell">Welcome to Tipsy!</h1>
+
+                    {/* Description */}
+                    <h4 id="forgotDesc" className="small-8 cell">
+                        You have successfully registered your account!
+                        <br></br>
+                        <br></br>
+                        Login to your account to start!
                     </h4>
-                    <br/>
-                    <CustomButton redirect="/" name="Login"/>
+
+                    <Link to="/login" className="cell">
+                        <button type="submit" className="button">Login</button>
+                    </Link>
+
                 </div>
             )
-        }
-        else{
-            return ( //The token is invalid, return an error page
-                <div>
-                    <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
-                    <h1>Invalid Reset token :(</h1>
+        } else {
+            return (
+                <div className="grid-x align-center-middle">
+
+                    {/* Logo */}
+                    <div className="loginHeader grid-x cell align-center-middle">
+                        <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
+                    </div>
+
+                    {/* Title */}
+                    <h1 className="captionRed small-12 medium-8 cell">Invalid Reset Token</h1>
                 </div>
             );
         }

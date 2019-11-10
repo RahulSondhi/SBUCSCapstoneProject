@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-
+import Tipsy from '../assets/Tipsy.svg';
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../util/APIUtils';
-import {SVG, CupBottleStyle} from '../js/constants.js';
 import Bottle from '../assets/bottle.svg';
 import Cup from '../assets/cup.svg';
 
@@ -18,7 +17,7 @@ import {
 } from '../js/constants.js';
 
 import {Link} from 'react-router-dom';
-import {Form, Input, Button, notification} from 'antd';
+import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Register extends Component {
@@ -118,107 +117,130 @@ class Register extends Component {
     */
     render() {
         return (
-            <div className="grid-ygrid-x align-center-middle grid-padding-y">
-                <div className="grid-x cell small-4 align-center-middle">
-                    <h1 className="caption">
-                        Register your account
-                    </h1>
+            <div className="grid-x align-center-middle">
+
+                {/* Logo */}
+                <div className="loginHeader grid-x cell align-center-middle">
+                    <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
                 </div>
-                <div className="grid-x cell small-12">
-                    <div className="cell small-2">
-                        <SVG src={Cup} style={CupBottleStyle} alt="Cup"/>
-                    </div>
-                    <div className="cell small-8">
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormItem
-                                label="First Name"
-                                validateStatus={this.state.firstName.validateStatus}
-                                help={this.state.firstName.errorMsg}>
-                                <Input
-                                    name="firstName"
-                                    autoComplete="off"
-                                    placeholder="Enter First Name"
-                                    value={this.state.firstName.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
-                            </FormItem>
-                            <FormItem
-                                label="Last Name"
-                                validateStatus={this.state.lastName.validateStatus}
-                                help={this.state.lastName.errorMsg}>
-                                <Input
-                                    name="lastName"
-                                    autoComplete="off"
-                                    placeholder="Enter Last Name"
-                                    value={this.state.lastName.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
-                            </FormItem>
-                            <FormItem
-                                label="Nickname"
-                                hasFeedback
-                                validateStatus={this.state.nickname.validateStatus}
-                                help={this.state.nickname.errorMsg}>
-                                <Input
-                                    name="nickname"
-                                    autoComplete="off"
-                                    placeholder="Enter Nickname"
-                                    value={this.state.nickname.value}
-                                    onBlur={this.validateNicknameAvailability}
-                                    onChange={(event) => this.handleInputChange(event, this.validateNickname)}/>
-                            </FormItem>
-                            <FormItem
-                                label="Email"
-                                hasFeedback
-                                validateStatus={this.state.email.validateStatus}
-                                help={this.state.email.errorMsg}>
-                                <Input
-                                    name="email"
-                                    type="email"
-                                    autoComplete="off"
-                                    placeholder="Enter email"
-                                    value={this.state.email.value}
-                                    onBlur={this.validateEmailAvailability}
-                                    onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
-                            </FormItem>
-                            <FormItem
-                                label="Password"
-                                validateStatus={this.state.password.validateStatus}
-                                help={this.state.password.errorMsg}>
-                                <Input
-                                    name="password"
-                                    type="password"
-                                    autoComplete="off"
-                                    placeholder="Enter Password"
-                                    value={this.state.password.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
-                            </FormItem>
-                            <FormItem
-                                label="Confirm Password"
-                                validateStatus={this.state.passwordConfirm.validateStatus}
-                                help={this.state.passwordConfirm.errorMsg}>
-                                <Input
-                                    name="passwordConfirm"
-                                    type="password"
-                                    autoComplete="off"
-                                    placeholder="Confirm your password"
-                                    value={this.state.passwordConfirm.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
-                            </FormItem>
-                            <FormItem>
-                                <Button
-                                    type="primary"
-                                    htmlType="submit"
-                                    disabled={this.isFormInvalid()}
-                                    className="button">
-                                    Register
-                                </Button>
-                                <br/>
-                                <Link to="/login" className="link">Already Registered?</Link>
-                            </FormItem>
-                        </Form>
-                    </div>
-                    <div className="cell small-2">
-                        <SVG src={Bottle} style={CupBottleStyle} alt="Bottle"/>
-                    </div>
+
+                {/* Title */}
+                <h1 className="caption small-12 cell">Register</h1>
+
+                {/* Right Image */}
+                <div className="hide-for-small-only medium-2 grid-x cell align-center-middle">
+                    <img src={Bottle} alt="bottle" className="small-10 cell"></img>
+                </div>
+
+                {/* Form */}
+                <Form
+                    onSubmit={this.handleSubmit}
+                    className="small-12 medium-8 cell grid-x align-center-middle">
+                    <FormItem
+                        label="First Name"
+                        validateStatus={this.state.firstName.validateStatus}
+                        help={this.state.firstName.errorMsg}
+                        className="medium-3 cell">
+                        <Input
+                            prefix={< Icon type = "idcard" />}
+                            name="firstName"
+                            autoComplete="off"
+                            placeholder="Enter First Name"
+                            value={this.state.firstName.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                    </FormItem>
+
+                    {/* Place Holder DO NOT DELTE */}
+                    <div className="medium-2 cell"></div>
+                    
+                    <FormItem
+                        label="Last Name"
+                        validateStatus={this.state.lastName.validateStatus}
+                        help={this.state.lastName.errorMsg}
+                        className="medium-3 cell">
+                        <Input
+                            prefix={< Icon type = "idcard" />}
+                            name="lastName"
+                            autoComplete="off"
+                            placeholder="Enter Last Name"
+                            value={this.state.lastName.value}
+                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                    </FormItem>
+
+                    <FormItem
+                        label="Nickname"
+                        hasFeedback
+                        validateStatus={this.state.nickname.validateStatus}
+                        help={this.state.nickname.errorMsg}
+                        className="medium-8 cell">
+                        <Input
+                            prefix={< Icon type = "user" />}
+                            name="nickname"
+                            autoComplete="off"
+                            placeholder="Enter Nickname"
+                            value={this.state.nickname.value}
+                            onBlur={this.validateNicknameAvailability}
+                            onChange={(event) => this.handleInputChange(event, this.validateNickname)}/>
+                    </FormItem>
+
+                    <FormItem
+                        label="Email"
+                        hasFeedback
+                        validateStatus={this.state.email.validateStatus}
+                        help={this.state.email.errorMsg}
+                        className="medium-8 cell">
+                        <Input
+                            prefix={< Icon type = "mail" />}
+                            name="email"
+                            type="email"
+                            autoComplete="off"
+                            placeholder="Enter email"
+                            value={this.state.email.value}
+                            onBlur={this.validateEmailAvailability}
+                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                    </FormItem>
+
+                    <FormItem
+                        label="Password"
+                        validateStatus={this.state.password.validateStatus}
+                        help={this.state.password.errorMsg}
+                        className="medium-8 cell">
+                        <Input
+                            prefix={< Icon type = "lock" />}
+                            name="password"
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Enter Password"
+                            value={this.state.password.value}
+                            onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
+                    </FormItem>
+
+                    <FormItem
+                        label="Confirm Password"
+                        validateStatus={this.state.passwordConfirm.validateStatus}
+                        help={this.state.passwordConfirm.errorMsg}
+                        className="medium-8 cell">
+                        <Input
+                            prefix={< Icon type = "lock" />}
+                            name="passwordConfirm"
+                            type="password"
+                            autoComplete="off"
+                            placeholder="Confirm your password"
+                            value={this.state.passwordConfirm.value}
+                            onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
+                    </FormItem>
+
+                    <FormItem className="cell">
+                        <button type="submit" disabled={this.isFormInvalid()} className="button">
+                            Register
+                        </button>
+                    </FormItem>
+                    <Link to="/login" className="link medium-3 cell">Already Registered?</Link>
+                </Form>
+
+                {/* Left Image */}
+                <div className="hide-for-small-only medium-2 grid-x cell align-center-middle">
+                    <img src={Cup} alt="Cup" className="small-10 cell"></img>
                 </div>
             </div>
         );

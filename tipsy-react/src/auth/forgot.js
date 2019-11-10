@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {SVG, TipsyStyle} from '../js/constants.js';
 import Tipsy from '../assets/Tipsy.svg';
 
-import { forgot, checkEmailAvailability } from '../util/APIUtils';
+import {forgot, checkEmailAvailability} from '../util/APIUtils';
 
-import { Link } from 'react-router-dom';
-import { Form, Input, Button, notification } from 'antd';
+import {Link} from 'react-router-dom';
+import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Forgot extends Component {
@@ -17,10 +16,18 @@ class Forgot extends Component {
             }
         }
         //Functions needed for this Forgot Class
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
-        this.isFormInvalid = this.isFormInvalid.bind(this);
+        this.handleInputChange = this
+            .handleInputChange
+            .bind(this);
+        this.handleSubmit = this
+            .handleSubmit
+            .bind(this);
+        this.validateEmailAvailability = this
+            .validateEmailAvailability
+            .bind(this);
+        this.isFormInvalid = this
+            .isFormInvalid
+            .bind(this);
 
     }
 
@@ -33,7 +40,7 @@ class Forgot extends Component {
         const inputValue = target.value;
 
         this.setState({
-            [inputName] : {
+            [inputName]: {
                 value: inputValue,
                 ...validationFun(inputValue)
             }
@@ -48,12 +55,8 @@ class Forgot extends Component {
         const forgotRequest = {
             email: this.state.email.value
         };
-        forgot(forgotRequest)
-        .then(response => {
-            notification.success({
-                message: 'Tipsy App',
-                description: "Password reset request submitted succesfully. Please check your email.",
-            });
+        forgot(forgotRequest).then(response => {
+            notification.success({message: 'Tipsy App', description: "Password reset request submitted succesfully. Please check your email."});
         }).catch(error => {
             notification.error({
                 message: 'Tipsy App',
@@ -65,70 +68,71 @@ class Forgot extends Component {
         returns true if the Form is invalid.
     */
     isFormInvalid() {
-        return !(this.state.email.validateStatus === 'success'
-        );
+        return !(this.state.email.validateStatus === 'success');
     }
 
     render() {
         return (
-            <div className="grid-container">
-              <div className="header">
-                <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+            <div className="grid-x align-center-middle">
+
+                {/* Logo */}
+                <div className="loginHeader grid-x cell align-center-middle">
+                    <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
                 </div>
-                <h1 className="caption">
+
+                {/* Title */}
+                <h1 className="caption small-12 medium-8 cell">
                     Forgot Password
                 </h1>
-                <br/>
-                <h4>Please enter your email address to request a password reset email</h4>
-                <Form onSubmit={this.handleSubmit} className="">
+
+                {/* Form */}
+                <Form
+                    onSubmit={this.handleSubmit}
+                    className="small-12 medium-8 cell grid-x align-center-middle">
+
+                    {/* Description */}
+                    <h4 id="forgotDesc" className="small-8 cell">
+                        Enter your email address and we will send you a link to reset your password.
+                    </h4>
+
                     <FormItem
-                        label="Email"
                         hasFeedback
                         validateStatus={this.state.email.validateStatus}
-                        help={this.state.email.errorMsg}>
+                        help={this.state.email.errorMsg}
+                        className="small-8 cell">
                         <Input
+                            prefix={< Icon type = "mail" />}
                             name="email"
                             type="email"
                             autoComplete="off"
                             placeholder="Enter email"
                             value={this.state.email.value}
                             onBlur={this.validateEmailAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateEmail)} />
-                        </FormItem>
-                    <FormItem>
-                            <Button type="primary"
-                                htmlType="submit"
-                                disabled={this.isFormInvalid()}
-                                className="button">Send
-                            </Button>
-                            <br/>
-                            <Link to="/login" className="link">Already Registered?</Link>
-                        </FormItem>
+                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                    </FormItem>
+
+                    <FormItem className="cell">
+                        <button type="submit" disabled={this.isFormInvalid()} className="button">
+                            Send
+                        </button>
+                    </FormItem>
+                    <Link to="/login" className="link medium-3 cell">Already Registered?</Link>
                 </Form>
             </div>
         );
     }
 
     validateEmail = (email) => {
-        if(!email) {
-            return {
-                validateStatus: 'error',
-                errorMsg: 'Email may not be empty'
-            }
+        if (!email) {
+            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
         }
 
         const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
-        if(!EMAIL_REGEX.test(email)) {
-            return {
-                validateStatus: 'error',
-                errorMsg: 'Email not valid'
-            }
+        if (!EMAIL_REGEX.test(email)) {
+            return {validateStatus: 'error', errorMsg: 'Email not valid'}
         }
 
-        return {
-            validateStatus: null,
-            errorMsg: null
-        }
+        return {validateStatus: null, errorMsg: null}
     }
 
     validateEmailAvailability() {
@@ -136,7 +140,7 @@ class Forgot extends Component {
         const emailValue = this.state.email.value;
         const emailValidation = this.validateEmail(emailValue);
 
-        if(emailValidation.validateStatus === 'error') {
+        if (emailValidation.validateStatus === 'error') {
             this.setState({
                 email: {
                     value: emailValue,
@@ -154,9 +158,8 @@ class Forgot extends Component {
             }
         });
 
-        checkEmailAvailability(emailValue)
-        .then(response => {
-            if(!response.available) {
+        checkEmailAvailability(emailValue).then(response => {
+            if (!response.available) {
                 this.setState({
                     email: {
                         value: emailValue,

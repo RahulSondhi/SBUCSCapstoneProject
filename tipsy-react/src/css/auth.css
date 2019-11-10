@@ -1,29 +1,23 @@
 /* Controls CSS for login, register, reset, forgot, & confirm */
 
-/* Login */
+/* Shared */
 
-.container {
-    text-align: center;
-}
-
-.header {
+.loginHeader {
     height: auto;
     width: 70%!important;
+    margin-top: 10%;
+    margin-bottom: 3%;
 }
 
-.footer {
-    width: 55%;
+/* Login */
+
+#loginDrinks {
+    width: 70%;
+    position: absolute;
+    bottom: 0;
 }
+/* Forgot */
 
-/* Register */
-
-.registerContainer {
-    position: relative;
-}
-
-/* Confirm */
-
-#smallIcon {
-    width: 10%;
-    height: 10%;
+#forgotDesc{
+    color: white !important;
 }
