@@ -36,9 +36,7 @@ class LoginForm extends Component {
                     login(loginRequest) //JSON to backend
                         .then(response => {
                         localStorage.setItem(ACCESS_TOKEN, response.accessToken); //get the token and save it
-                        this
-                            .props
-                            .onLogin();
+                        this.props.onLogin();
                     }).catch(error => {
                         if (error.status === 401) {
                             notification.error({message: 'Tipsy App', description: 'Your Email or Password is incorrect. Please try again!'});
