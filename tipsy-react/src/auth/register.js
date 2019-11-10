@@ -17,7 +17,7 @@ import {
 } from '../js/constants.js';
 
 import {Link} from 'react-router-dom';
-import {Form, Input, Icon, Button, notification} from 'antd';
+import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Register extends Component {
@@ -129,7 +129,7 @@ class Register extends Component {
 
                 {/* Right Image */}
                 <div className="hide-for-small-only medium-2 grid-x cell align-center-middle">
-                    <img src={Bottle} className="small-10 cell"></img>
+                    <img src={Bottle} alt="bottle" className="small-10 cell"></img>
                 </div>
 
                 {/* Form */}
@@ -240,7 +240,7 @@ class Register extends Component {
 
                 {/* Left Image */}
                 <div className="hide-for-small-only medium-2 grid-x cell align-center-middle">
-                    <img src={Cup} className="small-10 cell"></img>
+                    <img src={Cup} alt="Cup" className="small-10 cell"></img>
                 </div>
             </div>
         );

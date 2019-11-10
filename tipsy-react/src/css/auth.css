@@ -12,21 +12,10 @@
 /* Login */
 
 #loginDrinks {
-    width: 55%;
+    width: 70%;
     position: absolute;
     bottom: 0;
 }
-
-/* Register */
-
-
-/* Confirm */
-
-#smallIcon {
-    width: 10%;
-    height: 10%;
-}
-
 /* Forgot */
 
 #forgotDesc{

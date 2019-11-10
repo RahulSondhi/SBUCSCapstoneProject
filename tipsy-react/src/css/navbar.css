@@ -1,80 +1,139 @@
 /* CSS for Navbars */
-/* Game Navbar */
 
-.topContainer {
-    display: relative;
+/* Navbar */
+
+/* .menu .anticon {
+    display: block;
+} */
+
+.menuBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: var(--light-gray);
+    color: white!important;
+    padding: 0.25em 1em;
 }
 
-.tabs {
-    text-align: center;
-    position: relative;
-}
-
-.tab {
-    display:inline-block;
-    margin: 0 5.5% 0 5.5%;
-    color: white;
-    border: 0;
-    padding: 0;
-    background-color: var(--tab-color);
-    text-decoration: none;
-    font-family: 'Roboto Mono', monospace;
-}
-
-/* Normal Navbar */
-
-.tabs {
-    /* text-align: center; */
-    position: relative;
-    border: none;
-}
-
-.tab {
-    display:inline-block;
-    /* margin: 0 5.5% 0 5.5%; */
-    /* padding: 3em; */
-    color: var(--white);
-    border: 0;
-    min-width: 8em!important;
-    background-color: var(--tab-color);
-    text-decoration: none;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1.5em;
-}
-
-.tab:hover {
-  /* background-color: var(--light-gray); */
-}
-
-.account {
-  min-width: 8em!important;
-  font-size: 1.5em;
-  /* width:1.5em; */
-}
-
-.list {
-  position: absolute;
-  right: 0;
-  display: block!important;
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
   background-color: var(--light-gray);
-  /* min-width: 160px; */
-  min-width: 20vh;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  color: white!important;
-  border-radius: 0.5em;
+    color: white !important;
 }
 
-.icon {
-  margin: 1em;
-  padding:1em;
+.logo {
+    width: 10em;
+    float: left;
+}
+.logo img {
+    display: inline-block;
+    padding: 1.5em 1.25em;
 }
 
-.option {
-  margin: 1em;
-  padding:1em;
-  background-color: var(--dark-gray);
-  color: white!important;
-  border-radius: 0.5em;
+/* Right Menu */
+.menuCon {
+    width: calc(100% - 10em);
+    float: left;
+}
+.menuCon .ant-menu-item {
+    padding: 0 5px;
+}
+.menuCon .ant-menu-submenu-title {
+    padding: 10px 20px;
+}
+.menuCon .ant-menu-item a,
+.menuCon .ant-menu-submenu-title a {
+    padding: 10px 15px;
+}
+.menuCon .ant-menu-horizontal {
+    border-bottom: none;
+}
+.menuCon .leftMenu {
+    float: left;
+}
+.menuCon .rightMenu {
+    float: right;
 }
 
+/* Hamburger Btn */
+.barsMenu {
+    float: right;
+    height: 2.3em;
+    padding: 0 0.5em 0.5em;
+    display: none;
+    background: none;
+    margin-top: 1em;
+}
+.barsBtn {
+    display: block;
+    width: 1.5em;
+    height: 0.1em;
+    background: #1890ff;
+    position: relative;
+}
+.barsBtn:after,
+.barsBtn:before {
+    content: attr(x);
+    width: 1.5em;
+    height: 0.15em;
+    position: absolute;
+    top: -0.4em;
+    left: 0;
+    background: #1890ff;
+}
+.barsBtn:after {
+    top: auto;
+    bottom: -0.4em;
+}
+
+/* Side Menu */
+.ant-drawer-body {
+    padding: 0;
+}
+
+.ant-drawer-body,
+.ant-drawer-content,
+.ant-drawer-header,
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+    background-color: var(--light-gray);
+}
+
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
+    display: inline-block;
+    width: 100%;
+}
+.ant-drawer-body .ant-menu-horizontal {
+    border-bottom: none;
+}
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
+    border-bottom-color: transparent;
+}
+
+/* side Menu title */
+.ant-drawer-title {
+    color: white!important;
+}
+
+/* Page Size Listener */
+@media(max-width: 47.9375em) {
+    .barsMenu {
+        display: inline-block;
+    }
+    .leftMenu,
+    .rightMenu {
+        display: none;
+    }
+    .logo img {
+        margin-left: -1.25em;
+    }
+    .menuCon .ant-menu-item,
+    .menuCon .ant-menu-submenu-title {
+        padding: 0.0625em 1.25em;
+    }
+    .logo a {
+        padding: 0.625em 1.25em;
+    }
+}

@@ -121,8 +121,8 @@ class LoginForm extends Component {
                 </Form>
 
                 {/* Drinks Footer */}
-                <div id="loginDrinks" className="small-12 cell">
-                    <img src={Drinks} alt="DrinksLogo"></img>
+                <div id="loginDrinks" className="grid-x cell align-center-middle">
+                    <img src={Drinks} classNamme="small-12 cell" alt="DrinksLogo"></img>
                 </div>
             </div>
         );
