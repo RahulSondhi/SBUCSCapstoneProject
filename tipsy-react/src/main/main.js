@@ -156,8 +156,16 @@ class Main extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login" 
                         component={BarEquipmentPage}/>
-                    <Route path="/tipsy/equipment" component={EquipmentPage}/>
-                    <Route path="/tipsy/admin" exact component={AdminPage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/equipment" 
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={EquipmentPage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/admin"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={AdminPage}/>
                     <PrivateRoute
                         path="/tipsy/user/:nickname"
                         authed={this.state.isAuthenticated}
@@ -166,9 +174,21 @@ class Main extends Component {
                         isAuthenticated={this.state.isAuthenticated}
                         currentUser={this.state.currentUser}
                         {...props}/>}/>
-                    <Route path="/tipsy/game" component={Game}/>
-                    <Route path="/tipsy/createbar" component={CreateBarPage}/>
-                    <Route path="/tipsy/createRecipe" component={CreateRecipePage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/game"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={Game}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/createbar"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={CreateBarPage}/>
+                    <PrivateRoute 
+                        exact path="/tipsy/createRecipe" 
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={CreateRecipePage}/>
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.handleLogout} {...props}/>}/>
