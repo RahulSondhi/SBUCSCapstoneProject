@@ -62,6 +62,9 @@ class Register extends Component {
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
+        this.clearFields = this
+            .clearFields
+            .bind(this);
     }
     /*
         Handle changes from the form and update our fields
@@ -112,6 +115,17 @@ class Register extends Component {
         return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success' && this.state.nickname.validateStatus === 'success' && this.state.password.validateStatus === 'success' && this.state.passwordConfirm.validateStatus === 'success');
     }
 
+    clearFields() {
+        this.setState({
+            firstName: '',
+            lastName: '',
+            nickname: '',
+            email: '',
+            password: ''
+        });
+        console.log("ClearFields is being caled");
+    }
+
     /*
     Render the html in the page
     */
@@ -150,9 +164,9 @@ class Register extends Component {
                             onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
                     </FormItem>
 
-                    {/* Place Holder DO NOT DELTE */}
+                    {/* Place Holder DO NOT DELETE */}
                     <div className="medium-2 cell"></div>
-                    
+
                     <FormItem
                         label="Last Name"
                         validateStatus={this.state.lastName.validateStatus}
@@ -231,7 +245,7 @@ class Register extends Component {
                     </FormItem>
 
                     <FormItem className="cell">
-                        <button type="submit" disabled={this.isFormInvalid()} className="button">
+                        <button type="submit" disabled={this.isFormInvalid()} onClick={this.clearFields} className="button">
                             Register
                         </button>
                     </FormItem>
