@@ -44,7 +44,12 @@ class UserPage extends Component {
     }
       
     componentDidMount() {
-        const nickname = this.props.match.params.nickname;
+        let try_name = "";
+        if(this.props.match.params.nickname === "me")
+            try_name = this.props.currentUser.nickname;
+        else
+            try_name = this.props.match.params.nickname;
+        const nickname = try_name;
         this.loadUserProfile(nickname);
     }
 

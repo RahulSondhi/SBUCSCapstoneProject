@@ -26,7 +26,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/me")
+    @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserDetails currentUser) {
         //We have their email address
@@ -51,9 +51,9 @@ public class UserController {
     public ResponseEntity<?> getProfile(@PathVariable(value = "nickname") String nickname) {
         User user = userRepository.findByNickname(nickname);
         if(user == null){
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname [" + nickname + "] was not found!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"), HttpStatus.BAD_REQUEST);
         }
-        
+        //Build all 
         ProfileResponse userProfile = new ProfileResponse(
             user.getNickname(),
             user.getProfilePic(), 

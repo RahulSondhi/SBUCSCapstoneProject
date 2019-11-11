@@ -6,18 +6,17 @@ public class ProfileResponse {
     private String nickname;
     private String profilePic;
     private String name;
-    private ArrayList<BarResponse> bars;
-    private ArrayList<RecipeResponse> recipes;
+    private ArrayList<UserBarResponse> bars;
+    private ArrayList<UserRecipeResponse> recipes;
 
-    public ProfileResponse(String nickname, String profilePic, String name, ArrayList<BarResponse> bars,
-            ArrayList<RecipeResponse> recipes) {
+    public ProfileResponse(String nickname, String profilePic, String name, ArrayList<UserBarResponse> bars,
+            ArrayList<UserRecipeResponse> recipes) {
         this.nickname = nickname;
         this.profilePic = profilePic;
         this.name = name;
         this.bars = bars;
         this.recipes = recipes;
     }
-
 
     public String getNickname() {
         return nickname;
@@ -43,20 +42,21 @@ public class ProfileResponse {
         this.name = name;
     }
 
-    public ArrayList<BarResponse> getBars() {
+    public ArrayList<UserBarResponse> getBars() {
         return bars;
     }
 
-    public void setBars(ArrayList<BarResponse> bars) {
+    public void setBars(ArrayList<UserBarResponse> bars) {
         this.bars = bars;
     }
 
-    public ArrayList<RecipeResponse> getRecipes() {
+    public ArrayList<UserRecipeResponse> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(ArrayList<RecipeResponse> recipes) {
+    public void setRecipes(ArrayList<UserRecipeResponse> recipes) {
         this.recipes = recipes;
     }
+
 
 }

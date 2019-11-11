@@ -78,7 +78,7 @@ class GeneralNavbar extends Component {
                 <SubMenu title={<span>< AccountIcon />Account</span>}>
                     <Menu.Item key="Account:1">
                         <NavLink
-                            to="/tipsy/user"
+                            to="/tipsy/user/me"
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;

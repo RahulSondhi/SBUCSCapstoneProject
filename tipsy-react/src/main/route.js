@@ -45,7 +45,8 @@ class Routes extends Component {
 
     render() {
         console.log("Children Authenticated: "+this.state.isAuthenticated);
-        console.log("User: "+this.state.currentUser.nickname);
+        if(this.state.currentUser) 
+            console.log("User: "+this.state.currentUser.nickname);
         return (
             <Router>
                 <Switch>
@@ -130,7 +131,7 @@ class Routes extends Component {
                         redirectTo="/login"
                         component={AdminPage}/> {/* <Route */}
                     <PrivateRoute
-                        path={["/tipsy/user", "/tipsy/user/:nickname"]}
+                        path={["/tipsy/user/:nickname"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <UserPage currentUser={this.state.currentUser} {...props}/>}/>

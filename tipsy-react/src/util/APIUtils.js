@@ -89,7 +89,7 @@ export function getCurrentUser() {
         return Promise.reject("No access token set.");
     }
 
-    return request({url: API_BASE_URL + "/tipsy/user/me", method: 'GET'
+    return request({url: API_BASE_URL + "/tipsy/user/currentUser", method: 'GET'
     });
 }
 
