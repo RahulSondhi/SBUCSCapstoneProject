@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import renderMergedProps from './renderMergedProps';
 
-const PublicRoute = ({ component, authed = false, redirectTo, ...rest }) => {
+const PublicRoute = ({ component, authed, redirectTo, ...rest }) => {
     return (
         <Route {...rest} render={ routeProps => {
             return authed ? (
