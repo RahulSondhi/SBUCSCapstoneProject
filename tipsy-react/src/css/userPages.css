@@ -8,13 +8,13 @@
 /* Search */
 
 #searchDrinks {
-  width: 70%;
+  width: 50%;
   position: absolute;
   bottom: 0;
 }
 
 #searchTitle{
-  margin-top: 10%;
+  margin-top: 5%;
   font-size: 7em;
   margin-bottom: 10%;
 }

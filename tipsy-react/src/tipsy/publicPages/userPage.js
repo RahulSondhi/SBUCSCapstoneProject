@@ -188,8 +188,125 @@ class UserPage extends Component {
             }
         ]
 
+        this.state.user.recipes = {
+            recipesWritten:[
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"1",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"2",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"3",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"4",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"5",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"6",
+                    img: UserPic
+                }
+            ],
+            recipesIncompleted:[
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"11",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"22",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"33",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"44",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"55",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"66",
+                    img: UserPic
+                }
+            ],
+            recipesCompleted:[
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"111",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"222",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"333",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"444",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"555",
+                    img: UserPic
+                },
+                {
+                    name: "gaytini",
+                    author: "DAPAPI",
+                    id:"666",
+                    img: UserPic
+                }
+            ]
+        }
+
         return (
-            <div className="grid-x align-center-middle">
+            <div className="grid-x grid-x-margin align-center-middle">
 
                 <Navbar/>
                 <h1 id="userPageTitle" className="caption small-10 cell">{this.state.user.nickname}</h1>
@@ -199,7 +316,7 @@ class UserPage extends Component {
                     className="small-12 medium-4 grid-x align-center-middle cell">
 
                     <GetUserImg
-                        className="small-8"
+                        className="small-4"
                         pic={this.state.user.profilePic}
                         nickname={this.state.user.nickname}/>
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
@@ -216,7 +333,7 @@ class UserPage extends Component {
                 </div>
                 <div
                     id="rightProfileSide"
-                    className="small-12 medium-8 grid-x align-top-middle cell">
+                    className="small-12 medium-8 grid-x align-center-middle cell">
                     <div className="grid-x align-center-middle cell">
                         <div className="small-6 medium-3 grid-x align-center-middle cell">
                             <button className="button small-10 cell">All</button>
