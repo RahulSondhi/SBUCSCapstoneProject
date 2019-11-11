@@ -2,16 +2,17 @@ package com.maroon.mixology.repository;
 
 import java.util.Optional;
 
-import com.maroon.mixology.entity.Role;
+import com.maroon.mixology.entity.Recipe;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends MongoRepository<Role, String> {
+public interface RecipeRepository extends MongoRepository<Recipe, String> {
 
-    Optional<Role> findById(String id);
-    
-    Role findByName(String name);
+    Optional<Recipe> findById(String id);
+
+    Recipe findByName(String name);
+
 }

@@ -23,7 +23,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         // This is invoked when user tries to access a secured REST resource without supplying any credentials
         // We should just send a 401 Unauthorized response because there is no 'login page' to redirect to
         // Here you can place any message you want
-        logger.error("Responding with unauthorized error. Message - {Unauthorized request}", e.getMessage()); //Bug here please fix 
+        logger.error("Responding with unauthorized error. Message - {Unauthorized request to page | Sending 401 response}", e.getMessage());
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
     }
 }

@@ -1,18 +1,20 @@
 package com.maroon.mixology.exchange.response;
 
+import com.maroon.mixology.Helper;
+
 public class UserBarResponse {
-    private String id;
+    private String id; //save as base64
     private String name;
     private String img;
     private String owner;
 
     public UserBarResponse(String id, String name, String img, String owner) {
-        this.id = id;
+        this.id = Helper.encodeHexToBase64(id);
         this.name = name;
         this.img = img;
         this.owner = owner;
     }
-    
+
     public String getId() {
         return id;
     }
