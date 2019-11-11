@@ -10,11 +10,12 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "bar")
-public class Bar{
+public class Bar {
     @Id
     private String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
+    private String image;
     @DBRef
     private User owner;
     @DBRef
@@ -38,6 +39,14 @@ public class Bar{
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public User getOwner(){

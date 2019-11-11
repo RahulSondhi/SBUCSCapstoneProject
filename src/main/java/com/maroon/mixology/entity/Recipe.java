@@ -13,6 +13,7 @@ public class Recipe{
     @Id
     private String id;
     private String name;
+    private String image;
     @DBRef
     private User author;
     private boolean published;
@@ -34,6 +35,14 @@ public class Recipe{
 
     public void setName(String name){
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public User getAuthor(){
@@ -64,7 +73,7 @@ public class Recipe{
         return equipments;
     }
 
-    public void setEquipment(Set<Equipment> equipments){
+    public void setEquipments(Set<Equipment> equipments) {
         this.equipments = equipments;
     }
 

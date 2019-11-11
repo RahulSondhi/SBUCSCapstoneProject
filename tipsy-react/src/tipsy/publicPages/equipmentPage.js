@@ -3,7 +3,7 @@ import { SVG, ToolStyle } from '../../js/constants.js';
 import Spoon from '../../assets/spoon.svg';
 import Navbar from '../navbar/navbar.js';
 
-class GearPage extends Component {
+class EquipmentPage extends Component {
     render() {
         return (
             <div className="grid-margin-y">
@@ -31,4 +31,4 @@ class GearPage extends Component {
     }
 }
 
-export default GearPage;
+export default EquipmentPage;

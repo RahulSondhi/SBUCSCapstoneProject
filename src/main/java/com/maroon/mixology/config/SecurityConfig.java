@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .permitAll()
                     .antMatchers("/login","/register","/forgot","/validateReset","/validateConfirm", "/")
                         .permitAll()
-                    .antMatchers("/user/checkNicknameAvailability","/user/checkEmailAvailability")
+                    .antMatchers("/tipsy/user/checkNicknameAvailability","/tipsy/user/checkEmailAvailability", "/tipsy/user/me")
                         .permitAll()
                     .antMatchers(HttpMethod.GET, "/users/**")
                         .permitAll()

@@ -3,7 +3,7 @@ import UserIcon from '../../assets/user.svg';
 import {CustomCreateButton, Entry} from '../../js/constants.js';
 import Navbar from '../navbar/navbar.js';
 
-class BarGearsPage extends Component {
+class BarEquipmentPage extends Component {
     render() {
         return (
             <div className="grid-margin-y">
@@ -67,4 +67,4 @@ class BarGearsPage extends Component {
     }
 }
 
-export default BarGearsPage;
+export default BarEquipmentPage;
