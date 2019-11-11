@@ -1,6 +1,5 @@
 package com.maroon.mixology.entity;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.MeasurementType;
@@ -31,17 +30,18 @@ public class User {
 	private boolean enabled;
 	@DBRef
 	private Set<Role> roles;
-	@DBRef
-	private ArrayList<Bar> bars;
-	@DBRef
-	private ArrayList<Recipe> recipesWritten;
-	@DBRef
-	private ArrayList<Recipe> recipesIncompleted;
-	@DBRef
-	private ArrayList<Recipe> recipesCompleted;
+	// @DBRef
+	private Set<String> bars; //barIDs
+	// @DBRef
+	private Set<String> recipesWritten; //recipeIDs
+	// @DBRef
+	private Set<String> recipesIncompleted; //recipeIDs
+	// @DBRef
+	private Set<String> recipesCompleted; //recipeIDs
 
-	public User(String firstName, String lastName, String email, String nickname, String password, ArrayList<Bar> bars, ArrayList<Recipe> recipesWritten, ArrayList<Recipe> recipesIncompleted,
-	ArrayList<Recipe> recipesCompleted) {
+
+	public User(String firstName, String lastName, String email, String nickname, String password, Set<String> bars,
+			Set<String> recipesWritten, Set<String> recipesIncompleted, Set<String> recipesCompleted) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -163,37 +163,40 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
 	}
-	
-	public ArrayList<Bar> getBars(){
-        return bars;
-    }
 
-    public void setBars(ArrayList<Bar> bars){
-        this.bars = bars;
+	public Set<String> getBars() {
+		return bars;
 	}
-	
-	public ArrayList<Recipe> getRecipesWritten(){
-        return recipesWritten;
-    }
 
-    public void setRecipesWritten(ArrayList<Recipe> recipesWritten){
-        this.recipesWritten = recipesWritten;
-    }
-	
-	public ArrayList<Recipe> getRecipesIncompleted(){
-        return recipesIncompleted;
-    }
-
-    public void setRecipesIncompleted(ArrayList<Recipe> recipesIncompleted){
-        this.recipesIncompleted = recipesIncompleted;
+	public void setBars(Set<String> bars) {
+		this.bars = bars;
 	}
-	
-	public ArrayList<Recipe> getRecipesCompleted(){
-        return recipesCompleted;
-    }
 
-    public void setRecipesCompleted(ArrayList<Recipe> recipesCompleted){
-        this.recipesCompleted = recipesCompleted;
-    }
+	public Set<String> getRecipesWritten() {
+		return recipesWritten;
+	}
+
+	public void setRecipesWritten(Set<String> recipesWritten) {
+		this.recipesWritten = recipesWritten;
+	}
+
+	public Set<String> getRecipesIncompleted() {
+		return recipesIncompleted;
+	}
+
+	public void setRecipesIncompleted(Set<String> recipesIncompleted) {
+		this.recipesIncompleted = recipesIncompleted;
+	}
+
+	public Set<String> getRecipesCompleted() {
+		return recipesCompleted;
+	}
+
+	public void setRecipesCompleted(Set<String> recipesCompleted) {
+		this.recipesCompleted = recipesCompleted;
+	}
+
+	
+
 
 }
