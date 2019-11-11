@@ -1,6 +1,5 @@
 package com.maroon.mixology.controller.authentication;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -8,8 +7,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.maroon.mixology.entity.Bar;
-import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
@@ -73,11 +70,11 @@ public class RegisterController {
 
         @PostMapping("/register")
         public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
-                if(userRepository.existsByEmail(registerRequest.getEmail())) {
+                if(userService.existsByEmail(registerRequest.getEmail())) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
-                if(userRepository.existsByNickname(registerRequest.getNickname())){
+                if(userService.existsByNickname(registerRequest.getNickname())){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
@@ -89,10 +86,10 @@ public class RegisterController {
                                 registerRequest.getEmail(), 
                                 registerRequest.getNickname(), 
                                 registerRequest.getPassword(),
-                                new ArrayList<Bar>(),
-                                new ArrayList<Recipe>(),
-                                new ArrayList<Recipe>(),
-                                new ArrayList<Recipe>());
+                                new HashSet<String>(),
+                                new HashSet<String>(),
+                                new HashSet<String>(),
+                                new HashSet<String>());
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
                         //
                         user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID

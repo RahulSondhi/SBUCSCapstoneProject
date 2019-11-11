@@ -25,32 +25,32 @@ public class MixologyApplication {
 	}
     
     
-	// @Bean
-    // CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository) {
-    //     return args -> {
-    //         Role adminRole = roleRepository.findByName("ADMIN");
-    //         if (adminRole == null) {
-    //             Role newUserRole = new Role();
-    //             newUserRole.setName("ADMIN");
-    //             roleRepository.save(newUserRole);
-    //         }
-    //         User bryan = userRepository.findByNickname("bryan");
-    //         User rahul = userRepository.findByNickname("rahul");
-    //         User manny = userRepository.findByNickname("manny");
-    //         Set<User> workers = new HashSet<User>();
-    //         Set<User> managers = new HashSet<User>();
-    //         ArrayList<Recipe> barRecipes = new ArrayList<Recipe>();
-    //         managers.add(rahul);
-    //         workers.add(manny);
-    //         Bar bar = new Bar("My Second Bar", bryan, "", managers, workers, barRecipes);
-    //         barRepository.save(bar);
-    //         bryan.getBars().add(bar);
-    //         rahul.getBars().add(bar);
-    //         manny.getBars().add(bar);
-    //         userRepository.save(bryan);
-    //         userRepository.save(rahul);
-    //         userRepository.save(manny);
-    //     };
-    // }
+	@Bean
+    CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository) {
+        return args -> {
+            // // Role adminRole = roleRepository.findByName("ADMIN");
+            // // if (adminRole == null) {
+            // //     Role newUserRole = new Role();
+            // //     newUserRole.setName("ADMIN");
+            // //     roleRepository.save(newUserRole);
+            // // }
+            // User bryan = userRepository.findByNickname("bryan");
+            // User rahul = userRepository.findByNickname("rahul");
+            // User manny = userRepository.findByNickname("manny");
+            // Set<User> workers = new HashSet<User>();
+            // Set<User> managers = new HashSet<User>();
+            // ArrayList<Recipe> barRecipes = new ArrayList<Recipe>();
+            // managers.add(rahul);
+            // workers.add(manny);
+            // Bar bar = new Bar("My Second Bar", bryan, "", managers, workers, barRecipes);
+            // barRepository.save(bar);
+            // bryan.getBars().add(bar.getId());
+            // rahul.getBars().add(bar.getId());
+            // manny.getBars().add(bar.getId());
+            // userRepository.save(bryan);
+            // userRepository.save(rahul);
+            // userRepository.save(manny);
+        };
+    }
 
 }

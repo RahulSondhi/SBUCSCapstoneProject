@@ -8,7 +8,7 @@ import com.maroon.mixology.exchange.response.JwtAuthenticationResponse;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
-
+import com.maroon.mixology.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +38,9 @@ public class LoginController {
 
         @Autowired
         JwtTokenProvider tokenProvider;
+        
+        @Autowired
+        private UserServiceImpl userService;
 
         @Value("${tipsy.mail.passwordreset.subject}")
         private String passwordResetSubject;
@@ -53,11 +56,11 @@ public class LoginController {
 
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-                if(!userRepository.existsByEmail(loginRequest.getEmail())){
+                if(!userService.existsByEmail(loginRequest.getEmail())){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not found!"),
                         HttpStatus.BAD_REQUEST);
                 }
-                if(!userRepository.findByEmail(loginRequest.getEmail()).isEnabled()){
+                if(!userService.findByEmail(loginRequest.getEmail()).isEnabled()){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not enabled!"),
                         HttpStatus.BAD_REQUEST);
                 }
