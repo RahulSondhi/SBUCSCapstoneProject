@@ -29,7 +29,6 @@ class Main extends Component {
 
     async componentDidMount(){
         await this.loadCurrentUser();
-        console.log(this.state.isAuthenticated);
     }
 
     async loadCurrentUser() {
