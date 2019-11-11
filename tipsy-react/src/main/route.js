@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
-// import { PropsRoute, PublicRoute, PrivateRoute } from
-// 'react-router-with-props';  Authentification Imports
+// Authentification Imports
 import Login from '../auth/login.js';
 import Logout from '../auth/logout.js';
 import Register from '../auth/register.js';
