@@ -5,4 +5,4 @@ if [ ! $1 ]; then
         exit 1
 fi
 db=$1
-mongo $db --eval "db.dropDatabase();
+mongo $db --eval "db.dropDatabase();"

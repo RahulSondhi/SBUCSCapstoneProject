@@ -40,12 +40,17 @@ public class User {
 	@DBRef
 	private ArrayList<Recipe> recipesCompleted;
 
-	public User(String firstName, String lastName, String email, String nickname, String password) {
+	public User(String firstName, String lastName, String email, String nickname, String password, ArrayList<Bar> bars, ArrayList<Recipe> recipesWritten, ArrayList<Recipe> recipesIncompleted,
+	ArrayList<Recipe> recipesCompleted) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
+		this.bars = bars;
+		this.recipesWritten = recipesWritten;
+		this.recipesIncompleted = recipesIncompleted;
+		this.recipesCompleted = recipesCompleted;
 	}
 
 	public String getId() {

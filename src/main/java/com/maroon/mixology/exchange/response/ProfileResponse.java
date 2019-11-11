@@ -7,16 +7,19 @@ public class ProfileResponse {
     private String profilePic;
     private String name;
     private ArrayList<UserBarResponse> bars;
-    private ArrayList<UserRecipeResponse> recipes;
+    private ArrayList<UserRecipeResponse> recipesWritten;
+    private ArrayList<UserRecipeResponse> recipesIncompleted;
+    private ArrayList<UserRecipeResponse> recipesCompleted;
 
-    public ProfileResponse(String nickname, String profilePic, String name, ArrayList<UserBarResponse> bars,
-            ArrayList<UserRecipeResponse> recipes) {
+    public ProfileResponse(String nickname, String profilePic, String name, ArrayList<UserBarResponse> bars, ArrayList<UserRecipeResponse> recipesWritten, ArrayList<UserRecipeResponse> recipesIncompleted, ArrayList<UserRecipeResponse> recipesCompleted) {
         this.nickname = nickname;
         this.profilePic = profilePic;
         this.name = name;
         this.bars = bars;
-        this.recipes = recipes;
-    }
+        this.recipesWritten = recipesWritten;
+        this.recipesIncompleted = recipesIncompleted;
+        this.recipesCompleted = recipesCompleted;
+}
 
     public String getNickname() {
         return nickname;
@@ -50,13 +53,31 @@ public class ProfileResponse {
         this.bars = bars;
     }
 
-    public ArrayList<UserRecipeResponse> getRecipes() {
-        return recipes;
+    public ArrayList<UserRecipeResponse> getRecipesWritten() {
+        return recipesWritten;
     }
 
-    public void setRecipes(ArrayList<UserRecipeResponse> recipes) {
-        this.recipes = recipes;
+    public void setRecipesWritten(ArrayList<UserRecipeResponse> recipesWritten) {
+        this.recipesWritten = recipesWritten;
     }
+
+    public ArrayList<UserRecipeResponse> getRecipesIncompleted() {
+        return recipesIncompleted;
+    }
+
+    public void setRecipesIncompleted(ArrayList<UserRecipeResponse> recipesIncompleted) {
+        this.recipesIncompleted = recipesIncompleted;
+    }
+
+    public ArrayList<UserRecipeResponse> getRecipesCompleted() {
+        return recipesCompleted;
+    }
+
+    public void setRecipesCompleted(ArrayList<UserRecipeResponse> recipesCompleted) {
+        this.recipesCompleted = recipesCompleted;
+    }
+
+
 
 
 }

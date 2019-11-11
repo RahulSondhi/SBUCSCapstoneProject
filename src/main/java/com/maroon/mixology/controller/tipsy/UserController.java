@@ -1,10 +1,15 @@
 package com.maroon.mixology.controller.tipsy;
 
+import java.util.ArrayList;
+
+import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.ProfileResponse;
+import com.maroon.mixology.exchange.response.UserBarResponse;
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
-import com.maroon.mixology.exchange.response.ProfileResponse;
+import com.maroon.mixology.exchange.response.UserRecipeResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
@@ -29,7 +34,7 @@ public class UserController {
     @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserDetails currentUser) {
-        //We have their email address
+        // We have their email address
         User user = userRepository.findByEmail(currentUser.getUsername());
         UserSummary userSummary = new UserSummary(user.getId(), user.getEmail(), user.getNickname());
         return userSummary;
@@ -50,16 +55,35 @@ public class UserController {
     @GetMapping("/{nickname}")
     public ResponseEntity<?> getProfile(@PathVariable(value = "nickname") String nickname) {
         User user = userRepository.findByNickname(nickname);
-        if(user == null){
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"), HttpStatus.BAD_REQUEST);
+        if (user == null) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
+                    HttpStatus.BAD_REQUEST);
         }
-        //Build all 
+        // Build all
+        ArrayList<UserBarResponse> userBars = new ArrayList<UserBarResponse>();
+        for (Bar bar : user.getBars()){
+            userBars.add(new UserBarResponse(bar.getId(), bar.getName(), bar.getImage(), bar.getOwner().getNickname()));
+        }
+        ArrayList<UserRecipeResponse> userRecipesWritten = new ArrayList<UserRecipeResponse>();
+        for (Recipe recipeWritten : user.getRecipesWritten()){
+            userRecipesWritten.add(new UserRecipeResponse(recipeWritten.getId(), recipeWritten.getName(), recipeWritten.getImage(), recipeWritten.getAuthor().getNickname()));
+        }
+        ArrayList<UserRecipeResponse> userRecipesCompleted = new ArrayList<UserRecipeResponse>();
+        for (Recipe recipeCompleted : user.getRecipesCompleted()){
+            userRecipesCompleted.add(new UserRecipeResponse(recipeCompleted.getId(), recipeCompleted.getName(), recipeCompleted.getImage(), recipeCompleted.getAuthor().getNickname()));
+        }
+        ArrayList<UserRecipeResponse> userRecipesIncompleted = new ArrayList<UserRecipeResponse>();
+        for (Recipe recipeIncompleted : user.getRecipesIncompleted()){
+            userRecipesIncompleted.add(new UserRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
+        }
         ProfileResponse userProfile = new ProfileResponse(
             user.getNickname(),
             user.getProfilePic(), 
             user.getFirstName() + " " + user.getLastName(),
-            null,
-            null 
+            userBars,
+            userRecipesWritten,
+            userRecipesCompleted,
+            userRecipesIncompleted
             );
 
         return ResponseEntity.ok(userProfile);
