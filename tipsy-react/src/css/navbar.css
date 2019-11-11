@@ -7,13 +7,14 @@
 } */
 
 .menuBar {
-    position: absolute;
+    position: sticky;
     top: 0;
     right: 0;
     width: 100%;
     background-color: var(--light-gray);
     color: white!important;
     padding: 0.25em 1em;
+    margin-bottom: 3%;
 }
 
 #barEquipment, #myBars, #account {

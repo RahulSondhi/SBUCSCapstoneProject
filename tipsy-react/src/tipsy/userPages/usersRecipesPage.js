@@ -6,10 +6,8 @@ import Navbar from '../navbar/navbar.js';
 class UsersRecipesPage extends Component {
     render() {
         return (
-            <div className="grid-margin-y">
-                <div className="">
-                    <Navbar/>
-                </div>
+            <div className="">
+                <Navbar/>
                 <div className="grid-x">
                     <h1 className="myTitle cell caption small-12 medium-6 large-4 large-offset-4">
                         My Recipes</h1>

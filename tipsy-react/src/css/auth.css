@@ -4,15 +4,15 @@
 
 .loginHeader {
     height: auto;
-    width: 70%!important;
-    margin-top: 10%;
+    width: 40%!important;
+    margin-top: 5%;
     margin-bottom: 3%;
 }
 
 /* Login */
 
 #loginDrinks {
-    width: 70%;
+    width: 50%;
     position: absolute;
     bottom: 0;
 }
