@@ -23,25 +23,32 @@
     flex-direction: row;
 }
 
-.userPageBarPreview{
+.userPageBarPreview,
+.userPageRecipePreview{
     text-align: left;
     color: white;
     min-height: 0;
 }
 
-.userPageBarPreview:hover{
+.userPageBarPreview:hover,
+.userPageRecipePreview:hover{
     color: white;
 }
 
-.userPageBarPreviewName{
-    font-size: 2em;
+.userPageBarPreviewName,
+.userPageRecipePreviewName{
+    font-size: 1.5em;
 }
 
-.userPageBarPreviewOwner span{
+.userPageBarPreviewOwner,
+.userPageRecipePreviewOwner{
+    font-size: 0.75em;
+}
+
+.userPageBarPreviewOwner span,
+.userPageRecipePreviewOwner span{
     color: var(--brass);
 }
-
-/* User Pages - Recipe Viewing */
 
 /* Bar Pages */
 
