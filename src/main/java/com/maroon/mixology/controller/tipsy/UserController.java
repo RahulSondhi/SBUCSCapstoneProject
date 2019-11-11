@@ -2,6 +2,7 @@ package com.maroon.mixology.controller.tipsy;
 
 import java.util.ArrayList;
 
+
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
@@ -85,7 +86,7 @@ public class UserController {
             userRecipesCompleted,
             userRecipesIncompleted
             );
-
+ 
         return ResponseEntity.ok(userProfile);
     }
 
