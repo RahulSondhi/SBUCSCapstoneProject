@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component //Needed for Autowired
 public class Helper{
+
     public static String encodeHexToBase64(String hex){
         return Base64.getEncoder().encodeToString(new BigInteger(hex, 16).toByteArray());
     }
