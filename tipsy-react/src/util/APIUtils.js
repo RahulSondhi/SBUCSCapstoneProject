@@ -23,14 +23,6 @@ const request = (options) => {
     );
 };
 
-export function getCurrentUser() {
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
-        return Promise.reject("No access token set.");
-    }
-
-    return request({url: API_BASE_URL + "/user/me",method: 'GET'
-    });
-}
 
 export function login(loginRequest) {
     return request({
@@ -80,15 +72,30 @@ export function validateConfirm(uuid) {
 
 export function checkNicknameAvailability(nickname) {
     return request({
-        url: API_BASE_URL + "/user/checkNicknameAvailability?nickname=" + nickname,
+        url: API_BASE_URL + "/tipsy/user/checkNicknameAvailability?nickname=" + nickname,
         method: 'GET'
     });
 }
 
 export function checkEmailAvailability(email) {
     return request({
-        url: API_BASE_URL + "/user/checkEmailAvailability?email=" + email,
+        url: API_BASE_URL + "/tipsy/user/checkEmailAvailability?email=" + email,
         method: 'GET'
     });
 }
 
+export function getCurrentUser() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({url: API_BASE_URL + "/tipsy/user/currentUser", method: 'GET'
+    });
+}
+
+export function getUserProfile(nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/" + nickname,
+        method: 'GET'
+    });
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './main/main.js';
+import {BrowserRouter} from 'react-router-dom'
 
 import './foundation/foundation.min.css';
 import './index.css';
@@ -12,6 +13,8 @@ import './css/userPages.css';
 import './css/publicPages.css';
 
 ReactDOM.render(
-  <Main/>,
+  <BrowserRouter>
+    <Main/>
+  </BrowserRouter>,
   document.getElementById('root')
 );

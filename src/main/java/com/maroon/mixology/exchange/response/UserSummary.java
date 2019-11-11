@@ -2,13 +2,13 @@ package com.maroon.mixology.exchange.response;
 
 public class UserSummary {
     private String id;
+    private String email;
     private String nickname;
-    private String name;
 
-    public UserSummary(String id, String nickname, String name) {
+    public UserSummary(String id, String email, String nickname) {
         this.id = id;
+        this.email = email;
         this.nickname = nickname;
-        this.name = name;
     }
 
     /**
@@ -25,6 +25,14 @@ public class UserSummary {
         this.id = id;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     /**
      * @return String return the nickname
      */
@@ -38,14 +46,5 @@ public class UserSummary {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 
 }
