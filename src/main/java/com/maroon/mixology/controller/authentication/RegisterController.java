@@ -1,5 +1,6 @@
 package com.maroon.mixology.controller.authentication;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -7,6 +8,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exception.AppException;
@@ -80,7 +83,16 @@ public class RegisterController {
                 }
                 else{
                         // Creating user's account
-                        User user = new User(registerRequest.getFirstName(), registerRequest.getLastName(), registerRequest.getEmail(), registerRequest.getNickname(), registerRequest.getPassword());
+                        User user = new User(
+                                registerRequest.getFirstName(), 
+                                registerRequest.getLastName(), 
+                                registerRequest.getEmail(), 
+                                registerRequest.getNickname(), 
+                                registerRequest.getPassword(),
+                                new ArrayList<Bar>(),
+                                new ArrayList<Recipe>(),
+                                new ArrayList<Recipe>(),
+                                new ArrayList<Recipe>());
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
                         //
                         user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
@@ -88,11 +100,11 @@ public class RegisterController {
                         //
                         user.setPassword(passwordEncoder.encode(user.getPassword())); // Set the password (HASHED)
                         Role userRole = roleRepository.findByName("USER");
+                        // Role adminRole = roleRepository.findByName("ADMIN");
                         if(userRole == null){
                                 throw new AppException("User Role not set.");
                         }
                         user.setRoles(new HashSet<>(Arrays.asList(userRole)));                   
-                        
                         userRepository.save(user); // Saving the user in the database
 
                         // Send a confirmation email
