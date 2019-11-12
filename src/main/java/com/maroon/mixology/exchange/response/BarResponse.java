@@ -13,17 +13,17 @@ public class BarResponse {
     private BriefUserResponse owner;
     private Set<BriefUserResponse> managers;
     private Set<BriefUserResponse> workers;
-    private Set<BriefRecipeResponse> recipesAvaliable;
+    private Set<BriefRecipeResponse> recipesAvailable;
 
     public BarResponse(String name, String description, String img, BriefUserResponse owner, Set<BriefUserResponse> managers,
-            Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvaliable) {
+            Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvailable) {
         this.name = name;
         this.description = description;
         this.img = img;
         this.owner = owner;
         this.managers = managers;
         this.workers = workers;
-        this.recipesAvaliable = recipesAvaliable;
+        this.recipesAvailable = recipesAvailable;
     }
 
 
@@ -75,12 +75,12 @@ public class BarResponse {
         this.workers = workers;
     }
 
-    public Set<BriefRecipeResponse> getRecipesAvaliable() {
-        return recipesAvaliable;
+    public Set<BriefRecipeResponse> getRecipesAvailable() {
+        return recipesAvailable;
     }
 
-    public void setRecipesAvaliable(Set<BriefRecipeResponse> recipesAvaliable) {
-        this.recipesAvaliable = recipesAvaliable;
+    public void setRecipesAvailable(Set<BriefRecipeResponse> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
     }
 
 

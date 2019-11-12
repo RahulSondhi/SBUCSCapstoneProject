@@ -119,6 +119,12 @@ public class UserController {
 
     @PostMapping("/settings")
     public ResponseEntity<?> changeProfile(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
+        //we get the current user by getting their email address
+        User user = userService.findByEmail(currentUser.getUsername());
+        //If empty, leave default
+        if(settingsRequest.getFirstName() != "")
+            user.setFirstName(settingsRequest.getFirstName());
+        userRepository.save(user);
         return null;
     }
 }
