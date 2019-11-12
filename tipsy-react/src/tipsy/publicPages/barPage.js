@@ -5,7 +5,7 @@ import Navbar from '../navbar/navbar.js';
 class BarPage extends Component {
     render() {
         return (
-            <div className="grid-margin-y">
+            <div className="grid-x grid-x-margin align-center-middle">
                 <Navbar/>
                 <h1 className="cell small-6 caption">
                     Bar Name

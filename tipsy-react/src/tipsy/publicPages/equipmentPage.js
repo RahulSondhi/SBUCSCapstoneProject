@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { SVG, ToolStyle } from '../../js/constants.js';
+import { SVG, ToolStyle } from '../../main/constants';
 import Spoon from '../../assets/spoon.svg';
 import Navbar from '../navbar/navbar.js';
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import UserIcon from '../../assets/user.svg';
-import {CustomCreateButton, Entry} from '../../js/constants.js';
+import {CustomCreateButton, Entry} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 
 class BarEquipmentPage extends Component {

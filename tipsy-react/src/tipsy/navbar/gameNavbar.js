@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import {SmallTipsyStyle, SVG} from '../../js/constants.js';
+import {SmallTipsyStyle, SVG} from '../../main/constants';
 import Tipsy from '../../assets/Tipsy.png';
 
 const GameTab = (props) => {
