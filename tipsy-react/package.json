@@ -6,6 +6,7 @@
     "@csstools/normalize.css": "github:csstools/normalize.css",
     "antd": "^3.25.0",
     "async": "^3.1.0",
+    "enumify": "^1.0.4",
     "eslint": "^6.6.0",
     "history": "^4.10.1",
     "jquery": "^3.4.1",

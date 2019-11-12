@@ -82,7 +82,8 @@ class Routes extends Component {
                         path="/register"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Register}/> {/* Private  */}
+                        component={Register}/> 
+                    {/* Private  */}
                     <PrivateRoute
                         exact
                         path="/tipsy/search"
@@ -154,11 +155,15 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={CreateRecipePage}/>
+                    <PrivateRoute
+                        exact
+                        path = "/tipsy/settings"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.props.onLogout} {...props}/>}/>
-                    {/* Temp route for settings and error page */}
-                    <Route path="/tipsy/settings" component={SettingsPage}/>
                     <Route path="/tipsy/error" component={ErrorPage}/>
                 </Switch>
             </Router>

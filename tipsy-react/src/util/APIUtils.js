@@ -114,3 +114,18 @@ export function createBar(barRequest) {
         body: JSON.stringify(barRequest)
     });
 }
+
+export function getUserSettings() {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/getSettings",
+        method: 'GET',
+    });
+}
+
+export function changeUserSettings(settingsRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/changeSettings",
+        method: 'POST',
+        body: JSON.stringify(settingsRequest)
+    });
+}
