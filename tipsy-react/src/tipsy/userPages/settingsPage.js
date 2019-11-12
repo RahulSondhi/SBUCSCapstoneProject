@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, NavLink} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import Avatar from 'react-avatar-edit';
 import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
@@ -12,12 +12,11 @@ import {
     LASTNAME_MIN_LENGTH,
     LASTNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
-    PASSWORD_MIN_LENGTH,
-    PASSWORD_MAX_LENGTH
 } from '../../main/constants';
 
-import {Form, Input, Icon, notification} from 'antd';
+import {Form, Input, Icon, notification, Select} from 'antd';
 const FormItem = Form.Item;
+const {Option} = Select;
 
 const imgSize = {
     height: "360px",
@@ -44,22 +43,19 @@ class SettingsPage extends Component {
             email: {
                 value: ''
             },
-            password: {
-                value: ''
-            },
-            passwordConfirm: {
-                value: ''
-            },
             profilePic: {
                 value: ''
             },
-            unit : {
+            measurement : {
                 value : null
             }
         }
         //Functions needed for this Settings Class
         this.handleInputChange = this
             .handleInputChange
+            .bind(this);
+        this.handleSelectChange = this
+            .handleSelectChange
             .bind(this);
         this.handleSubmit = this
             .handleSubmit
@@ -94,6 +90,14 @@ class SettingsPage extends Component {
         });
     }
 
+    handleSelectChange(event){
+        this.setState({
+            measurement : {
+                value : event.name
+            }
+        });
+    }
+
     /*
     Handle our submit
     */
@@ -104,7 +108,6 @@ class SettingsPage extends Component {
         firstName: this.state.firstName.value,
         lastName: this.state.lastName.value,
         email: this.state.email.value,
-        password: this.state.password.value,
         profilePic : this.state.profilePic.value,
         unit : this.state.unit
     };
@@ -124,21 +127,9 @@ class SettingsPage extends Component {
         returns true if the Form is invalid.
     */
    isFormInvalid() {
-       let b = !(
-        (this.state.firstName.validateStatus === 'success' && 
+       return !(this.state.firstName.validateStatus === 'success' && 
         this.state.lastName.validateStatus === 'success' && 
-        this.state.email.validateStatus === 'success' && 
-        this.state.password.validateStatus === 'success' && 
-        this.state.passwordConfirm.validateStatus === 'success') && 
-        (this.state.firstName ||
-        this.state.lastName ||
-        this.state.email ||
-        this.state.password ||
-        this.state.passwordConfirm ||
-        this.state.profilePic ||
-        this.state.unit));
-        console.log(b);
-    return b;
+        this.state.email.validateStatus === 'success');
 }
 
 
@@ -155,7 +146,43 @@ class SettingsPage extends Component {
 
         getUserSettings().then(response => {
             console.log(response);
-            this.setState({isLoading: false});
+
+            if(response.measurement === null || response.measurement === ""){
+                response.measurement = MeasurementType.US;
+            }else if(response.measurement === "US"){
+                response.measurement = MeasurementType.US;
+            }else if(response.measurement === "Metric"){
+                response.measurement = MeasurementType.Metric;
+            }
+
+            this.setState({
+                firstName: {
+                    value: response.firstName,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },
+                lastName: {
+                    value: response.lastName,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },
+                email: {
+                    value: response.email,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },
+                profilePic: {
+                    value: response.profilePic,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },
+                measurement: {
+                    value: response.measurement,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },                    
+                isLoading: false
+            });
         }).catch(error => {
             console.log(error);
             if (error.status === 404) {
@@ -202,6 +229,16 @@ class SettingsPage extends Component {
             //     <img id="preview" src={this.state.preview} style={imgSize} alt="preview"/>
             // </div>
             <div className="grid-x align-center-middle">
+                <Navbar/>
+                <h1 className="caption align-center-middle cell">
+                    Settings
+                </h1>
+                <Avatar
+                    width={360}
+                    height={360}
+                    onCrop={this.onCrop}
+                    onClose={this.onClose}/>
+                <img id="preview" src={this.state.preview} style={imgSize} alt="preview"/>
                 <Form
                     onSubmit={this.handleSubmit}
                     className="small-12 medium-8 cell grid-x align-center-middle">
@@ -254,39 +291,37 @@ class SettingsPage extends Component {
                     </FormItem>
 
                     <FormItem
-                        label="Password"
-                        validateStatus={this.state.password.validateStatus}
-                        help={this.state.password.errorMsg}
+                        label="Measurements"
                         className="medium-8 cell">
-                        <Input
-                            prefix={< Icon type = "lock" />}
-                            name="password"
-                            type="password"
-                            autoComplete="off"
-                            placeholder="Enter Password"
-                            value={this.state.password.value}
-                            onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
+                        <Select
+                        placeholder ="Select your Measurement"
+                        name="measurement"
+                        onChange={(event) => this.handleSelectChange(event)}
+                        defaultValue={this.state.measurement.value}>
+                            <Option
+                            value={MeasurementType.US}
+                            name="US">
+                                US System (fl oz.)
+                            </Option>
+                            <Option
+                            value={MeasurementType.Metric}
+                            name="Metric">
+                                International System (ml)
+                            </Option>
+                        </Select>
                     </FormItem>
 
-                    <FormItem
-                        label="Confirm Password"
-                        validateStatus={this.state.passwordConfirm.validateStatus}
-                        help={this.state.passwordConfirm.errorMsg}
-                        className="medium-8 cell">
-                        <Input
-                            prefix={< Icon type = "lock" />}
-                            name="passwordConfirm"
-                            type="password"
-                            autoComplete="off"
-                            placeholder="Confirm your password"
-                            value={this.state.passwordConfirm.value}
-                            onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
-                    </FormItem>
-
-                    <FormItem className="cell">
-                        <button type="submit" id="registerButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
+                    <FormItem className="small-12 medium-6 cell">
+                        <button type="submit" id="settingsButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
                             Update Settings
                         </button>
+                    </FormItem>
+                    <FormItem className="small-12 medium-6 cell">
+                        <NavLink 
+                         to="/tipsy/user/stg/resetPassword"
+                         id="passwordButton" className="button">
+                            Update Password
+                        </NavLink>
                     </FormItem>
                 </Form>
             </div>
@@ -297,9 +332,7 @@ class SettingsPage extends Component {
     // Functions performed after page is rendered Frontend Validation Functions
 
     validateFirstName = (firstName) => {
-        if (!firstName){
-            return {validateStatus: 'success', errorMsg: `Leave blank to not change`};
-        } else if (firstName.length > 0 && firstName.length < FIRSTNAME_MIN_LENGTH) {
+        if (firstName.length < FIRSTNAME_MIN_LENGTH) {
             return {validateStatus: 'error', errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`}
         } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
             return {validationStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
@@ -309,9 +342,7 @@ class SettingsPage extends Component {
     }
 
     validateLastName = (lastName) => {
-        if (!lastName){
-            return {validateStatus: 'success', errorMsg: `Leave blank to not change`};
-        } else if (lastName.length > 0 && lastName.length < LASTNAME_MIN_LENGTH) {
+        if (lastName.length < LASTNAME_MIN_LENGTH) {
             return {validateStatus: 'error', errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`}
         } else if (lastName.length > LASTNAME_MAX_LENGTH) {
             return {validationStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
@@ -322,8 +353,9 @@ class SettingsPage extends Component {
 
     validateEmail = (email) => {
         if (!email) {
-            return {validateStatus: 'success', errorMsg: 'Leave blank to not change'}
+            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
         }
+
         const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
         if (!EMAIL_REGEX.test(email)) {
             return {validateStatus: 'error', errorMsg: 'Email not valid'}
@@ -334,27 +366,6 @@ class SettingsPage extends Component {
         }
 
         return {validateStatus: null, errorMsg: null}
-    }
-
-    validatePassword = (password) => {
-        if(!password){
-            return {validateStatus: 'success', errorMsg: 'Leave blank to not change'}
-        }else if (password.length > 0 && password.length < PASSWORD_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`}
-        } else if (password.length > PASSWORD_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validatePasswordConfirm = (passwordConfirm) => {
-        const passwordValue = this.state.password.value;
-        if (passwordConfirm !== passwordValue) {
-            return {validateStatus: 'error', errorMsg: `Passwords do not match`}
-        } else {
-            return this.validatePassword(passwordConfirm)
-        }
     }
 
     // Backend Validation Functions
