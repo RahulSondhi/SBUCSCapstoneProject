@@ -1,5 +1,7 @@
 import React, {Component, Fragment} from 'react';
+import {notification} from 'antd';
 import {Link} from 'react-router-dom';
+import Avatar from 'react-avatar-edit';
 
 import UserPic from '../assets/defaultIcons/user.svg';
 import BarPic from '../assets/defaultIcons/bar.svg';
@@ -7,6 +9,7 @@ import RecipePic from '../assets/defaultIcons/recipe.svg';
 import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
+import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 
 export const CustomButton = (props) => {
     return (
@@ -81,18 +84,100 @@ export class GetProfImg extends Component {
                 this.image = UserPic
             } else if (this.type === "add") {
                 this.image = AddPic
-            }else if (this.type === "search") {
+            } else if (this.type === "search") {
                 this.image = SearchPic
-            }else{
+            } else {
                 this.image = UnknownPic
             }
-        }else{
+        } else {
             this.image = "data:image/png;base64, " + this.props.pic
         }
 
         return (<img src={this.image} className={this.className} alt={this.alt}/>)
     }
 };
+
+export class MakeProfImg extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            preview: null,
+            src: null
+        }
+
+        this.state.src = this.props.pic;
+        this.className = this.props.className;
+
+        if (this.state.src === null || this.state.src === "") {
+            this.state.src = NewUserPic;
+        } else {
+            this.state.src = ("data:image/png;base64, " + this.props.pic);
+        }
+
+        this.onCrop = this
+            .onCrop
+            .bind(this)
+        this.onClose = this
+            .onClose
+            .bind(this)
+        this.onBeforeFileLoad = this
+            .onBeforeFileLoad
+            .bind(this)
+        this.onImageLoad = this
+            .onImageLoad
+            .bind(this)
+    }
+
+    onClose() {
+        this.setState({preview: null})
+    }
+
+    onCrop(preview) {
+        this.setState({preview});
+        if (this.state.preview != null) {
+            this
+                .props
+                .data(this.state.preview);
+        }
+    }
+
+    onImageLoad() {
+            this
+                .props
+                .data(this.state.src);
+    }
+
+    onBeforeFileLoad(elem) {
+        if (elem.target.files[0].size > 71680) {
+            notification["error"]({message: 'Tipsy App', description: "File is too big!"});
+            elem.target.value = "";
+        };
+
+        if (elem.target.files[0].type != "image/png" && elem.target.files[0].type != "image/jpeg") {
+            notification["error"]({message: 'Tipsy App', description: "Only PNG + JPEG Allowed To Be Uploaded"});
+            elem.target.value = "";
+        };
+    }
+
+    render() {
+        return (
+            <div
+                className={"makeProfPicEditor grid-x align-center-middle " + this.className}>
+                <Avatar
+                    width={360}
+                    height={360}
+                    onCrop={this.onCrop}
+                    onClose={this.onClose}
+                    onImageLoad={this.onImageLoad}
+                    onBeforeFileLoad={this.onBeforeFileLoad}
+                    src={this.state.src}
+                    className="editor-canvas cell"/>
+            </div>
+        )
+    }
+}
 
 // Preview Components
 
@@ -172,7 +257,7 @@ class GetRecipe extends Component {
                 className={this.className}
                 key={this.recipe.id}>
                 <div className="small-4 grid-x cell">
-                <GetProfImg
+                    <GetProfImg
                         className="small-10 cell"
                         pic={this.recipe.img}
                         alt={this.recipe.name}
@@ -205,7 +290,7 @@ class GetUser extends Component {
                 className={this.className}
                 key={this.user.nickname}>
                 <div className="small-4 grid-x cell">
-                <GetProfImg
+                    <GetProfImg
                         className="small-10 cell"
                         pic={this.user.img}
                         alt={this.user.nickname}

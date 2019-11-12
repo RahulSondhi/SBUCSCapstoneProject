@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect, NavLink} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import Avatar from 'react-avatar-edit';
 import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
 
 import {Enum} from 'enumify';
@@ -12,27 +11,23 @@ import {
     LASTNAME_MIN_LENGTH,
     LASTNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
+    MakeProfImg
 } from '../../main/constants';
 
 import {Form, Input, Icon, notification, Select} from 'antd';
 const FormItem = Form.Item;
 const {Option} = Select;
 
-const imgSize = {
-    height: "360px",
-    width: "360px"
-}
-
-class MeasurementType extends Enum {} 
+class MeasurementType extends Enum {}
 MeasurementType.initEnum(['US', 'Metric'])
 
 class SettingsPage extends Component {
-    
+
     constructor(props) {
         super(props);
         //Initialize values for all fields
         this.state = {
-            isLoading : true,
+            isLoading: true,
             preview: null,
             firstName: {
                 value: ''
@@ -46,8 +41,8 @@ class SettingsPage extends Component {
             profilePic: {
                 value: ''
             },
-            measurement : {
-                value : null
+            measurement: {
+                value: null
             }
         }
         //Functions needed for this Settings Class
@@ -63,14 +58,11 @@ class SettingsPage extends Component {
         this.validateEmailAvailability = this
             .validateEmailAvailability
             .bind(this);
-        this.onClose = this
-            .onClose
-            .bind(this);
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
-        this.onCrop = this
-            .onCrop
+        this.handleImageLoad = this
+            .handleImageLoad
             .bind(this);
     }
 
@@ -90,10 +82,10 @@ class SettingsPage extends Component {
         });
     }
 
-    handleSelectChange(event){
+    handleSelectChange(event) {
         this.setState({
-            measurement : {
-                value : event.name
+            measurement: {
+                value: event.name
             }
         });
     }
@@ -101,37 +93,31 @@ class SettingsPage extends Component {
     /*
     Handle our submit
     */
-   handleSubmit(event) {
-    event.preventDefault();
+    handleSubmit(event) {
+        event.preventDefault();
 
-    const settingsRequest = {
-        firstName: this.state.firstName.value,
-        lastName: this.state.lastName.value,
-        email: this.state.email.value,
-        profilePic : this.state.profilePic.value,
-        unit : this.state.unit
-    };
-    changeUserSettings(settingsRequest).then(response => {
-        notification.success({
-            message: 'Tipsy App',
-            description: "Your settings were succesfully changed!"
+        const settingsRequest = {
+            firstName: this.state.firstName.value,
+            lastName: this.state.lastName.value,
+            email: this.state.email.value,
+            profilePic: this.state.profilePic.value,
+            unit: this.state.unit
+        };
+        changeUserSettings(settingsRequest).then(response => {
+            notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
+        }).catch(error => {
+            notification.error({
+                message: 'Tipsy App',
+                description: error.message || 'Sorry! Something went wrong. Please try again!'
+            });
         });
-    }).catch(error => {
-        notification.error({
-            message: 'Tipsy App',
-            description: error.message || 'Sorry! Something went wrong. Please try again!'
-        });
-    });
-}
+    }
     /*
         returns true if the Form is invalid.
     */
-   isFormInvalid() {
-       return !(this.state.firstName.validateStatus === 'success' && 
-        this.state.lastName.validateStatus === 'success' && 
-        this.state.email.validateStatus === 'success');
-}
-
+    isFormInvalid() {
+        return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success');
+    }
 
     onClose() {
         this.setState({preview: null})
@@ -147,11 +133,11 @@ class SettingsPage extends Component {
         getUserSettings().then(response => {
             console.log(response);
 
-            if(response.measurement === null || response.measurement === ""){
+            if (response.measurement === null || response.measurement === "") {
                 response.measurement = MeasurementType.US;
-            }else if(response.measurement === "US"){
+            } else if (response.measurement === "US") {
                 response.measurement = MeasurementType.US;
-            }else if(response.measurement === "Metric"){
+            } else if (response.measurement === "Metric") {
                 response.measurement = MeasurementType.Metric;
             }
 
@@ -180,7 +166,7 @@ class SettingsPage extends Component {
                     value: response.measurement,
                     validateStatus: 'success',
                     errorMsg: null
-                },                    
+                },
                 isLoading: false
             });
         }).catch(error => {
@@ -195,6 +181,12 @@ class SettingsPage extends Component {
 
     componentDidMount() {
         this.loadUserSettings();
+    }
+
+    handleImageLoad = (val) => {
+        this.setState({
+            profilePic:{value: val.replace(/^data:image\/(png|jpg);base64,/, "")}
+        });
     }
 
     render() {
@@ -216,29 +208,15 @@ class SettingsPage extends Component {
             }}/>
         }
         return (
-            // <div className="grid-container-fluid grid-frame grid-y">
-            //     <Navbar/>
-            //     <h1 className="caption align-center-middle">
-            //         Settings
-            //     </h1>
-            //     <Avatar
-            //         width={360}
-            //         height={360}
-            //         onCrop={this.onCrop}
-            //         onClose={this.onClose}/>
-            //     <img id="preview" src={this.state.preview} style={imgSize} alt="preview"/>
-            // </div>
             <div className="grid-x align-center-middle">
                 <Navbar/>
+
                 <h1 className="caption align-center-middle cell">
                     Settings
                 </h1>
-                <Avatar
-                    width={360}
-                    height={360}
-                    onCrop={this.onCrop}
-                    onClose={this.onClose}/>
-                <img id="preview" src={this.state.preview} style={imgSize} alt="preview"/>
+
+                <MakeProfImg pic={this.state.profilePic.value} className="cell" data={this.handleImageLoad}/>
+
                 <Form
                     onSubmit={this.handleSubmit}
                     className="small-12 medium-8 cell grid-x align-center-middle">
@@ -290,36 +268,37 @@ class SettingsPage extends Component {
                             onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
                     </FormItem>
 
-                    <FormItem
-                        label="Measurements"
-                        className="medium-8 cell">
+                    <FormItem label="Measurements" className="small-8 cell">
                         <Select
-                        placeholder ="Select your Measurement"
-                        name="measurement"
-                        onChange={(event) => this.handleSelectChange(event)}
-                        defaultValue={this.state.measurement.value}>
-                            <Option
-                            value={MeasurementType.US}
-                            name="US">
+                            placeholder="Select your Measurement"
+                            name="measurement"
+                            onChange={(event) => this.handleSelectChange(event)}
+                            defaultValue={this.state.measurement.value}>
+                            <Option value={MeasurementType.US} name="US">
                                 US System (fl oz.)
                             </Option>
-                            <Option
-                            value={MeasurementType.Metric}
-                            name="Metric">
+                            <Option value={MeasurementType.Metric} name="Metric">
                                 International System (ml)
                             </Option>
                         </Select>
                     </FormItem>
 
-                    <FormItem className="small-12 medium-6 cell">
-                        <button type="submit" id="settingsButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
+                    <FormItem className="small-12 medium-5 cell">
+                        <button
+                            type="submit"
+                            id="settingsButton"
+                            disabled={this.isFormInvalid()}
+                            onClick={this.disableButton}
+                            className="button">
                             Update Settings
                         </button>
                     </FormItem>
-                    <FormItem className="small-12 medium-6 cell">
-                        <NavLink 
-                         to="/tipsy/user/stg/resetPassword"
-                         id="passwordButton" className="button">
+
+                    <FormItem className="small-12 medium-5 medium-offset-2 cell">
+                        <NavLink
+                            to="/tipsy/user/stg/resetPassword"
+                            id="passwordButton"
+                            className="button">
                             Update Password
                         </NavLink>
                     </FormItem>
@@ -327,7 +306,6 @@ class SettingsPage extends Component {
             </div>
         );
     }
-
 
     // Functions performed after page is rendered Frontend Validation Functions
 
