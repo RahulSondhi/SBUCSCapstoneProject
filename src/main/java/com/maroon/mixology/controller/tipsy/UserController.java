@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.exchange.request.ChangePasswordRequest;
 import com.maroon.mixology.exchange.request.SettingsRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
@@ -132,7 +133,7 @@ public class UserController {
             user.setLastName(settingsRequest.getLastName());
             user.setEmail(settingsRequest.getEmail());
             user.setProfilePic(settingsRequest.getProfilePic());
-            user.setMeasurement(settingsRequest.getMeasurement());
+            user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
             userRepository.save(user);
             return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
         } catch (Exception e) {

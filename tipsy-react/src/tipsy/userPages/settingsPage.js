@@ -19,7 +19,7 @@ const FormItem = Form.Item;
 const {Option} = Select;
 
 class MeasurementType extends Enum {}
-MeasurementType.initEnum(['US', 'Metric'])
+MeasurementType.initEnum(['US', 'METRIC'])
 
 class SettingsPage extends Component {
 
@@ -38,11 +38,14 @@ class SettingsPage extends Component {
             email: {
                 value: ''
             },
+            oldemail: {
+                value: ''
+            },
             profilePic: {
                 value: ''
             },
             measurement: {
-                value: null
+                value: ''
             }
         }
         //Functions needed for this Settings Class
@@ -101,7 +104,7 @@ class SettingsPage extends Component {
             lastName: this.state.lastName.value,
             email: this.state.email.value,
             profilePic: this.state.profilePic.value,
-            unit: this.state.unit
+            measurement: this.state.measurement.value
         };
         changeUserSettings(settingsRequest).then(response => {
             notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
@@ -128,8 +131,8 @@ class SettingsPage extends Component {
                 response.measurement = MeasurementType.US;
             } else if (response.measurement === "US") {
                 response.measurement = MeasurementType.US;
-            } else if (response.measurement === "Metric") {
-                response.measurement = MeasurementType.Metric;
+            } else if (response.measurement === "METRIC") {
+                response.measurement = MeasurementType.METRIC;
             }
 
             this.setState({
@@ -140,6 +143,11 @@ class SettingsPage extends Component {
                 },
                 lastName: {
                     value: response.lastName,
+                    validateStatus: 'success',
+                    errorMsg: null
+                },
+                oldemail: {
+                    value: response.email,
                     validateStatus: 'success',
                     errorMsg: null
                 },
@@ -268,8 +276,8 @@ class SettingsPage extends Component {
                             <Option value={MeasurementType.US} name="US">
                                 US System (fl oz.)
                             </Option>
-                            <Option value={MeasurementType.Metric} name="Metric">
-                                International System (ml)
+                            <Option value={MeasurementType.METRIC} name="METRIC">
+                                Metric System (ml)
                             </Option>
                         </Select>
                     </FormItem>
@@ -342,6 +350,7 @@ class SettingsPage extends Component {
         const emailValue = this.state.email.value;
         const emailValidation = this.validateEmail(emailValue);
 
+
         if (emailValidation.validateStatus === 'error') {
             this.setState({
                 email: {
@@ -370,13 +379,24 @@ class SettingsPage extends Component {
                     }
                 });
             } else {
-                this.setState({
-                    email: {
-                        value: emailValue,
-                        validateStatus: 'error',
-                        errorMsg: 'This Email is already registered'
-                    }
-                });
+                if(emailValue === this.state.oldemail.value){
+                    this.setState({
+                        email: {
+                            value: emailValue,
+                            validateStatus: 'success',
+                            errorMsg: null
+                        }
+                    });
+                }
+                else{
+                    this.setState({
+                        email: {
+                            value: emailValue,
+                            validateStatus: 'error',
+                            errorMsg: 'This Email is already registered'
+                        }
+                    });
+                }
             }
         }).catch(error => {
             // Marking validateStatus as success, Form will be recchecked at server
