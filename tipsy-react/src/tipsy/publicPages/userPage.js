@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import UserPic from '../../assets/user.svg';
-import {RecipesPreview, BarsPreview} from '../../main/constants';
+import {RecipesPreview, BarsPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
 import {getUserProfile} from '../../util/APIUtils';
@@ -80,19 +79,17 @@ class UserPage extends Component {
                     id="leftProfileSide"
                     className="small-12 medium-4 grid-x align-center-middle cell">
 
-                    <GetUserImg
-                        className="small-4"
+                    <GetProfImg
+                        className="small-4 cell"
                         pic={this.state.user.img}
-                        nickname={this.state.user.nickname}/>
+                        alt={this.state.user.nickname}/>
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div
                         className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
                         <div
                             className="userPageBarContainer grid-x grid-margin-x align-center-middle cell">
-                            <BarsPreview
-                                className="cell"
-                                bars={this.state.user.bars}/>
+                            <BarsPreview className="cell" bars={this.state.user.bars}/>
                         </div>
                     </div>
                 </div>
@@ -130,24 +127,3 @@ class UserPage extends Component {
 };
 
 export default UserPage;
-
-class GetUserImg extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.image = this.props.pic;
-        this.className = this.props.className;
-    }
-
-    render() {
-
-        if (this.image == null) {
-            this.image = UserPic
-        }
-
-        return (
-        <img src={this.image} className={this.className} alt={this.props.nickname}/>
-        )
-    }
-};

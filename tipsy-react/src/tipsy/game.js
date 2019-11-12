@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import GameNavbar from './navbar/gameNavbar.js';
+import Navbar from './navbar/navbar.js';
 import { SVG, CounterStyle, IngredientStyle } from '../main/constants.js';
 import Counter from '../assets/game.svg';
-import Bottle from '../assets/bottle.svg';
+import Bottle from '../assets/equipment/bottle.svg';
 
 class Game extends Component {
     render() {
         return (
           <div>
-              <GameNavbar/>
-              <h3>
+              <Navbar type="game"/>
+              {/* <h3>
                   Instructions
               </h3>
                 <div className="ingredients">
@@ -57,7 +57,7 @@ class Game extends Component {
               </div>
               <div className="counter">
               <SVG src={Counter} style={CounterStyle} alt="Counter"/>
-              </div>
+              </div> */}
           </div>
         )
     }

@@ -95,7 +95,7 @@ class LoginForm extends Component {
                                 }
                             ]
                         })(
-                            <Input
+                            <Input.Password
                                 prefix={< Icon type = "lock" />}
                                 name="password"
                                 type="password"

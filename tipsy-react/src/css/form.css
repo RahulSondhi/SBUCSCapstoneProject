@@ -35,7 +35,8 @@ input[name=password]:focus {
 
 /* Icons */
 
-form .ant-input-prefix{
+form .ant-input-prefix,
+form .ant-input-suffix i{
     color: white !important;
 }
 

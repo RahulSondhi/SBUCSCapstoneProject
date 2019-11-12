@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import UserPic from '../../assets/user.svg';
-import {RecipesPreview, UsersPreview} from '../../main/constants';
+import {RecipesPreview, UsersPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
 import {getBarProfile} from '../../util/APIUtils';
@@ -73,10 +72,10 @@ class BarPage extends Component {
                 <Navbar/>
 
                 <div className="small-12 grid-x align-center-middle cell">
-                    <GetBarImg
-                        className="small-6"
+                    <GetProfImg
+                        className="small-6 cell"
                         pic={this.state.bar.img}
-                        nickname={this.state.bar.name}/>
+                        alt={this.state.bar.name}/>
                 </div>
                 <h1 id="barPageTitle" className="caption small-10 cell">{this.state.bar.name}</h1>
 
@@ -120,22 +119,3 @@ class BarPage extends Component {
 }
 
 export default BarPage;
-
-class GetBarImg extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.image = this.props.pic;
-        this.className = this.props.className;
-    }
-
-    render() {
-
-        if (this.image == null) {
-            this.image = UserPic
-        }
-
-        return (<img src={this.image} className={this.className} alt={this.props.id}/>)
-    }
-};

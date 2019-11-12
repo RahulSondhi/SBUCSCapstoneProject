@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 import {Menu, Icon} from 'antd';
 
-import SearchPNG from '../../assets/searchIcon.png';
-import BarToolsPNG from '../../assets/barToolsIcon.png';
-import MyBarsPNG from '../../assets/myBarsIcon.png';
-import RecipePNG from '../../assets/recipeIcon.png';
-import AccountPNG from '../../assets/accountIcon.png';
+import SearchPNG from '../../assets/navbar/searchIcon.png';
+import BarToolsPNG from '../../assets/navbar/barToolsIcon.png';
+import MyBarsPNG from '../../assets/navbar/myBarsIcon.png';
+import RecipePNG from '../../assets/navbar/recipeIcon.png';
+import AccountPNG from '../../assets/navbar/accountIcon.png';
 
 const {SubMenu} = Menu;
 
@@ -14,79 +14,22 @@ var isFirefox = typeof InstallTrigger !== 'undefined';
 
 class GeneralNavbar extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.type = this.props.type;
+        this.gameId = this.props.gameId;
+    }
+
     render() {
-        return (
-            <Menu theme="dark" mode={this.props.mode}>
+        if (this.type === "game") {
+            return (
+                <Menu theme="dark" mode={this.props.mode}>
 
-                {/* Search */}
-                <Menu.Item key="search">
-                    <NavLink
-                        to="/tipsy/search"
-                        isActive={(match, location) => {
-                        if (!match) {
-                            return false;
-                        }
-                        const eventID = parseInt(match.params.eventID);
-                        return !isNaN(eventID) && eventID % 2 === 1;
-                    }}>
-                        < SearchIcon/>
-                        Search
-                    </NavLink>
-                </Menu.Item>
-
-                {/* Bar Gears */}
-                <Menu.Item key="barEquipment">
-                    <NavLink
-                        to="/tipsy/barEquipment"
-                        isActive={(match, location) => {
-                        if (!match) {
-                            return false;
-                        }
-                        const eventID = parseInt(match.params.eventID);
-                        return !isNaN(eventID) && eventID % 2 === 1;
-                    }}>
-                        < BarToolsIcon/>
-                        Bar Equipment
-                    </NavLink>
-                </Menu.Item>
-
-                {/* My Bars */}
-                <Menu.Item key="myBars">
-                    <NavLink
-                        to="/tipsy/myBars"
-                        isActive={(match, location) => {
-                        if (!match) {
-                            return false;
-                        }
-                        const eventID = parseInt(match.params.eventID);
-                        return !isNaN(eventID) && eventID % 2 === 1;
-                    }}>
-                        < BarIcon/>
-                        My Bars
-                    </NavLink>
-                </Menu.Item>
-
-                {/* My Recipes */}
-                <Menu.Item key="myRecipes">
-                    <NavLink
-                        to="/tipsy/myRecipes"
-                        isActive={(match, location) => {
-                        if (!match) {
-                            return false;
-                        }
-                        const eventID = parseInt(match.params.eventID);
-                        return !isNaN(eventID) && eventID % 2 === 1;
-                    }}>
-                        < RecipeIcon/>
-                        My Recipes
-                    </NavLink>
-                </Menu.Item>
-
-                {/* Account */}
-                <SubMenu title={<span>< AccountIcon />Account</span>}>
-                    <Menu.Item key="Account:1">
+                    {/* Instruction */}
+                    <Menu.Item key="instruction">
                         <NavLink
-                            to="/tipsy/user/me"
+                            to={"/tipsy/recipe/"+this.gameId+"/instruction"}
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;
@@ -94,14 +37,16 @@ class GeneralNavbar extends Component {
                             const eventID = parseInt(match.params.eventID);
                             return !isNaN(eventID) && eventID % 2 === 1;
                         }}>
-                            < UserIcon/>
-                            My Profile
+                            <InstructionIcon/>
+                            Instruction
                         </NavLink>
                     </Menu.Item>
 
-                    <Menu.Item key="setting:2">
+
+                    {/* Quit */}
+                    <Menu.Item key="quit">
                         <NavLink
-                            to="/tipsy/user/settings"
+                            to={"/tipsy/myBars/tipsy/recipe/"+this.gameId}
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;
@@ -109,14 +54,21 @@ class GeneralNavbar extends Component {
                             const eventID = parseInt(match.params.eventID);
                             return !isNaN(eventID) && eventID % 2 === 1;
                         }}>
-                            <Icon type="tool" theme="twoTone" twoToneColor="#A0A0A0"/>
-                            Settings
+                            <QuitIcon/>
+                            Quit
                         </NavLink>
                     </Menu.Item>
+                </Menu>
+            )
 
-                    <Menu.Item key="setting:3">
+        } else {
+            return (
+                <Menu theme="dark" mode={this.props.mode}>
+
+                    {/* Search */}
+                    <Menu.Item key="search">
                         <NavLink
-                            to="/logout"
+                            to="/tipsy/search"
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;
@@ -124,40 +76,157 @@ class GeneralNavbar extends Component {
                             const eventID = parseInt(match.params.eventID);
                             return !isNaN(eventID) && eventID % 2 === 1;
                         }}>
-                            <Icon type="logout" theme="twoTone" twoToneColor="#FFFFFF"/>
-                            Log Out
+                            < SearchIcon/>
+                            Search
                         </NavLink>
                     </Menu.Item>
-                </SubMenu>
 
-            </Menu>
-        );
+                    {/* Bar Gears */}
+                    <Menu.Item key="barEquipment">
+                        <NavLink
+                            to="/tipsy/barEquipment"
+                            isActive={(match, location) => {
+                            if (!match) {
+                                return false;
+                            }
+                            const eventID = parseInt(match.params.eventID);
+                            return !isNaN(eventID) && eventID % 2 === 1;
+                        }}>
+                            < BarToolsIcon/>
+                            Bar Equipment
+                        </NavLink>
+                    </Menu.Item>
+
+                    {/* My Bars */}
+                    <Menu.Item key="myBars">
+                        <NavLink
+                            to="/tipsy/myBars"
+                            isActive={(match, location) => {
+                            if (!match) {
+                                return false;
+                            }
+                            const eventID = parseInt(match.params.eventID);
+                            return !isNaN(eventID) && eventID % 2 === 1;
+                        }}>
+                            < BarIcon/>
+                            My Bars
+                        </NavLink>
+                    </Menu.Item>
+
+                    {/* My Recipes */}
+                    <Menu.Item key="myRecipes">
+                        <NavLink
+                            to="/tipsy/myRecipes"
+                            isActive={(match, location) => {
+                            if (!match) {
+                                return false;
+                            }
+                            const eventID = parseInt(match.params.eventID);
+                            return !isNaN(eventID) && eventID % 2 === 1;
+                        }}>
+                            < RecipeIcon/>
+                            My Recipes
+                        </NavLink>
+                    </Menu.Item>
+
+                    {/* Account */}
+                    <SubMenu title={<span> <AccountIcon/> Account </span>}>
+                        <Menu.Item key="Account:1">
+                            <NavLink
+                                to="/tipsy/user/me"
+                                isActive={(match, location) => {
+                                if (!match) {
+                                    return false;
+                                }
+                                const eventID = parseInt(match.params.eventID);
+                                return !isNaN(eventID) && eventID % 2 === 1;
+                            }}>
+                                < UserIcon/>
+                                My Profile
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="setting:2">
+                            <NavLink
+                                to="/tipsy/user/settings"
+                                isActive={(match, location) => {
+                                if (!match) {
+                                    return false;
+                                }
+                                const eventID = parseInt(match.params.eventID);
+                                return !isNaN(eventID) && eventID % 2 === 1;
+                            }}>
+                                <Icon type="tool" theme="twoTone" twoToneColor="#A0A0A0"/>
+                                Settings
+                            </NavLink>
+                        </Menu.Item>
+
+                        <Menu.Item key="setting:3">
+                            <NavLink
+                                to="/logout"
+                                isActive={(match, location) => {
+                                if (!match) {
+                                    return false;
+                                }
+                                const eventID = parseInt(match.params.eventID);
+                                return !isNaN(eventID) && eventID % 2 === 1;
+                            }}>
+                                <Icon type="logout" theme="twoTone" twoToneColor="#FFFFFF"/>
+                                Log Out
+                            </NavLink>
+                        </Menu.Item>
+                    </SubMenu>
+
+                </Menu>
+            )
+        }
     }
 }
 
-const SearchIcon = (props) => isFirefox ? <img src={SearchPNG} id="search" alt="SearchIcon"/> : <Icon component={SearchSvg} {...props}/>;
-const BarIcon = (props) => isFirefox ? <img src={MyBarsPNG} id="myBars" alt="barIcon"/> : <Icon component={MyBarsSvg} {...props}/>;
-const RecipeIcon = (props) => isFirefox ? <img src={RecipePNG} id="recipes" alt="recipeIcon"/> : <Icon component={RecipeSvg} {...props}/>;
-const BarToolsIcon = (props) => isFirefox ? <img src={BarToolsPNG} id="barEquipment" alt="barToolsIcon"/> : <Icon component={BarToolsSvg} {...props}/>;
-const AccountIcon = (props) => isFirefox ? <img src={AccountPNG} id="account" alt="accountIcon"/> : <Icon component={AccountSvg} {...props}/>;
-const UserIcon = (props) => isFirefox ? <img src={AccountPNG} id="account" alt="userIcon"/> : <Icon component={AccountSvg} {...props}/>;
+// Normal
+const SearchIcon = (props) => isFirefox
+    ? <img src={SearchPNG} id="search" alt="SearchIcon"/>
+    : <Icon component={SearchSvg} {...props}/>;
+const BarIcon = (props) => isFirefox
+    ? <img src={MyBarsPNG} id="myBars" alt="barIcon"/>
+    : <Icon component={MyBarsSvg} {...props}/>;
+const RecipeIcon = (props) => isFirefox
+    ? <img src={RecipePNG} id="recipes" alt="recipeIcon"/>
+    : <Icon component={RecipeSvg} {...props}/>;
+const BarToolsIcon = (props) => isFirefox
+    ? <img src={BarToolsPNG} id="barEquipment" alt="barToolsIcon"/>
+    : <Icon component={BarToolsSvg} {...props}/>;
+const AccountIcon = (props) => isFirefox
+    ? <img src={AccountPNG} id="account" alt="accountIcon"/>
+    : <Icon component={AccountSvg} {...props}/>;
+const UserIcon = (props) => isFirefox
+    ? <img src={AccountPNG} id="account" alt="userIcon"/>
+    : <Icon component={AccountSvg} {...props}/>;
+
+// Game
+const InstructionIcon = (props) => isFirefox
+    ? <img src={RecipePNG} id="instruction" alt="instructionIcon"/>
+    : <Icon component={RecipeSvg} {...props}/>;
+const QuitIcon = (props) => isFirefox
+    ? <img src={RecipePNG} id="instruction" alt="instructionIcon"/>
+    : <Icon component={RecipeSvg} {...props}/>;    
 
 // SVGs
 const SearchSvg = () => (
     <svg
-    height="18px"
-    version="1.1"
-    viewBox="0 0 18 18"
-    width="18px"
-    xmlns="http://www.w3.org/2000/svg"><title/><desc/><defs/>
-    <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">
-        <g fill="#000000" id="Core" transform="translate(-339.000000, -381.000000)">
-            <g id="search" transform="translate(339.000000, 381.000000)"><path
-                d="M12.5,11 L11.7,11 L11.4,10.7 C12.4,9.6 13,8.1 13,6.5 C13,2.9 10.1,0 6.5,0 C2.9,0 0,2.9 0,6.5 C0,10.1 2.9,13 6.5,13 C8.1,13 9.6,12.4 10.7,11.4 L11,11.7 L11,12.5 L16,17.5 L17.5,16 L12.5,11 L12.5,11 Z M6.5,11 C4,11 2,9 2,6.5 C2,4 4,2 6.5,2 C9,2 11,4 11,6.5 C11,9 9,11 6.5,11 L6.5,11 Z"
-                id="Shape"/></g>
+        height="18px"
+        version="1.1"
+        viewBox="0 0 18 18"
+        width="18px"
+        xmlns="http://www.w3.org/2000/svg"><title/><desc/><defs/>
+        <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-width="1">
+            <g fill="#000000" id="Core" transform="translate(-339.000000, -381.000000)">
+                <g id="search" transform="translate(339.000000, 381.000000)"><path
+                    d="M12.5,11 L11.7,11 L11.4,10.7 C12.4,9.6 13,8.1 13,6.5 C13,2.9 10.1,0 6.5,0 C2.9,0 0,2.9 0,6.5 C0,10.1 2.9,13 6.5,13 C8.1,13 9.6,12.4 10.7,11.4 L11,11.7 L11,12.5 L16,17.5 L17.5,16 L12.5,11 L12.5,11 Z M6.5,11 C4,11 2,9 2,6.5 C2,4 4,2 6.5,2 C9,2 11,4 11,6.5 C11,9 9,11 6.5,11 L6.5,11 Z"
+                    id="Shape"/></g>
+            </g>
         </g>
-    </g>
-</svg>
+    </svg>
 );
 
 const MyBarsSvg = () => (
@@ -321,4 +390,4 @@ const AccountSvg = () => (
             d="m58.213 25.684-1.213-.405v-4.279c1.103 0 2-.897 2-2v-2c0-1.103-.897-2-2-2h-8c-1.103 0-2 .897-2 2v2c0 1.103.897 2 2 2v4.279l-1.214.404c-2.863.955-4.786 3.624-4.786 6.642v6.675h-8v1.649l-2.399-.933c-.549-1.016-1.61-1.716-2.844-1.716-.061 0-.121.012-.182.015-.368-.508-.575-1.112-.575-1.751v-.682c1.659-1.238 3.029-2.798 4.041-4.581h.959c2.757 0 5-2.243 5-5v-10.001c0-8.271-6.729-15-15-15s-15 6.729-15 15v10c0 2.757 2.243 5 5 5h.959c1.011 1.783 2.382 3.343 4.041 4.581v.682c0 .639-.207 1.243-.575 1.751-.061-.002-.121-.014-.182-.014-1.233 0-2.295.7-2.843 1.716l-6.111 2.377c-5.036 1.957-8.289 6.713-8.289 12.116v8.791h41.472.569 2.959 1.528 8.472c3.86 0 7-3.14 7-7v-23.675c0-3.018-1.923-5.687-4.787-6.641zm-9.213-8.684h8l.001 2h-8.001zm-.582 10.581 2.582-.86v-5.721h4v5.721l2.581.86c1.611.537 2.794 1.839 3.228 3.419h-15.618c.434-1.58 1.617-2.882 3.227-3.419zm-3.418 5.419h16v22h-6v-16h-10zm8 8v5.24c-1.651-.903-3.894-1.24-5-1.24-1.874 0-4.063 1.051-6.515 3.125-1.496-.898-3.03-1.8-4.485-2.403v-4.722zm0 8c0 .966-2.935 2-5 2-1.281 0-2.947-.803-4.68-1.792 1.816-1.432 3.45-2.208 4.68-2.208 2.065 0 5 1.034 5 2zm-22-7.757v1.515c0 .684-.558 1.242-1.243 1.242-.271 0-.538-.09-.753-.254l-2.024-1.542c.004-.069.02-.134.02-.204s-.016-.135-.021-.203l2.025-1.542c.215-.165.483-.255.753-.255.685 0 1.243.558 1.243 1.243zm-7 3.757c.844 0 1.604-.352 2.149-.915l1.642 1.251c.163.125.341.227.524.318-1.024 2.526-2.479 4.886-4.316 6.898-1.837-2.012-3.292-4.372-4.316-6.898.183-.091.361-.194.524-.318l1.643-1.251c.546.562 1.306.915 2.15.915zm-1-3c0-.551.449-1 1-1s1 .449 1 1-.449 1-1 1-1-.449-1-1zm11-13h-.014c.652-1.695 1.014-3.529 1.014-5.44v-.375c1.161.414 2 1.514 2 2.816 0 1.653-1.346 2.999-3 2.999zm-10-26c7.168 0 13 5.832 13 13v6.026c-.584-.442-1.257-.773-2-.924v-1.102c0-1.654-1.346-3-3-3h-.384c-4.083 0-8.106-.686-11.958-2.038-1.814-.636-3.854-.18-5.198 1.164-.941.941-1.46 2.193-1.46 3.524v1.451c-.743.152-1.416.482-2 .924v-6.025c0-7.168 5.832-13 13-13zm-10 26c-1.654 0-3-1.346-3-3 0-1.302.839-2.402 2-2.816v.375c0 1.912.362 3.745 1.014 5.44h-.014zm1-5.44v-3.91c0-.786.318-1.555.874-2.11.567-.567 1.317-.867 2.095-.867.341 0 .688.058 1.026.176 4.066 1.427 8.312 2.151 12.621 2.151h.384c.551 0 1 .449 1 1v3.56c0 5.699-3.604 10.642-9 12.393-5.396-1.752-9-6.694-9-12.393zm8.712 14.398.288.086.288-.086c.976-.293 1.895-.685 2.766-1.146.075.689.287 1.342.629 1.935l-1.533 1.168c-.546-.562-1.306-.915-2.15-.915s-1.604.352-2.149.915l-1.533-1.168c.342-.593.553-1.247.629-1.935.87.461 1.79.853 2.765 1.146zm-6.712 3.285c0-.685.558-1.243 1.243-1.243.271 0 .538.09.753.254l2.024 1.542c-.004.069-.02.134-.02.204s.016.135.021.203l-2.025 1.542c-.215.165-.483.255-.753.255-.685 0-1.243-.558-1.243-1.243zm-14 12.966c0-3.483 1.602-6.646 4.248-8.688 1.16 3.587 1.752 7.313 1.752 11.095v4.384h-6zm8 6.791v-4.384c0-4.161-.683-8.257-2.013-12.192.333-.169.672-.329 1.026-.467l4.987-1.939v.74c0 1.577 1.132 2.891 2.626 3.18 1.248 3.272 3.193 6.295 5.667 8.769l.707.707.707-.707c2.475-2.475 4.419-5.497 5.667-8.769 1.494-.29 2.626-1.604 2.626-3.181v-.74l2 .778v15.44l.105.211c.499.998 1.184 1.854 1.992 2.553h-26.097zm35 0h-2.959-.569c-2.301 0-4.377-1.237-5.472-3.245v-9.851c1.12.54 2.315 1.251 3.485 1.954 2.694 1.616 5.238 3.142 7.515 3.142 1.106 0 3.349-.337 5-1.24v5.995c-1.095 2.008-3.171 3.245-5.472 3.245zm10 0h-3.097c.808-.699 1.493-1.555 1.992-2.553l.105-.211v-1.236h5.899c-.465 2.279-2.485 4-4.899 4z"/><path d="m13 53h6v2h-6z"/><path d="m13 57h2v2h-2z"/><path d="m17 57h2v2h-2z"/><path d="m47 35h2v2h-2z"/><path d="m51 35h8v2h-8z"/></svg>
 );
 
-export default GeneralNavbar; 
+export default GeneralNavbar;
