@@ -70,11 +70,11 @@ export class GetProfImg extends Component {
     render() {
 
         if (this.image === null || this.image === "") {
-            if (this.type == "bar") {
+            if (this.type === "bar") {
                 this.image = BarPic
-            } else if (this.type == "recipe") {
+            } else if (this.type === "recipe") {
                 this.image = RecipePic
-            } else if (this.type == "user") {
+            } else if (this.type === "user") {
                 this.image = UserPic
             } else {
                 this.image = UserPic
@@ -92,6 +92,7 @@ export class GetProfImg extends Component {
 export const BarsPreview = ({bars, className}) => (
     <Fragment>
         {bars.map(bar => (<GetBar
+            key={bar.id}
             bar={bar}
             className={"previewBar grid-x align-center-middle " + className}/>))}
     </Fragment>
@@ -100,6 +101,7 @@ export const BarsPreview = ({bars, className}) => (
 export const RecipesPreview = ({recipes, className}) => (
     <Fragment>
         {recipes.map(recipe => (<GetRecipe
+            key={recipe.id}
             recipe={recipe}
             className={"previewRecipe grid-x align-center-middle " + className}/>))}
     </Fragment>
@@ -108,6 +110,7 @@ export const RecipesPreview = ({recipes, className}) => (
 export const UsersPreview = ({users, className}) => (
     <Fragment>
         {users.map(user => (<GetUser
+            key={user.id}
             user={user}
             className={"previewUser grid-x align-center-middle " + className}/>))}
     </Fragment>

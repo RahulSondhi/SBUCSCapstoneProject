@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Tipsy from '../assets/Tipsy.svg';
 
 import { resetPassword, validateReset} from '../util/APIUtils';
 
