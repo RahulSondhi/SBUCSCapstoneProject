@@ -1,34 +1,14 @@
 import React, {Component} from 'react';
-import Navbar from '../navbar/navbar.js';
-import Avatar from 'react-avatar-edit';
 
-const imgSize = {
-    height: "360px",
-    width: "360px"
-}
-
-class SettingsPage extends Component {
-
+class BarSettings extends Component {
     constructor(props) {
         super(props);
         //Initialize values for all fields
         this.state = {
             preview: null,
-            email: {
-                value: ''
-            },
-            password: {
-                value: ''
-            },
             profilePic: {
                 value: ''
             },
-            units: {
-                value: ''
-            },
-            name: {
-                value: ''
-            }
         }
 
         this.handleSubmit = this
@@ -57,18 +37,14 @@ class SettingsPage extends Component {
             <div className="grid-container-fluid grid-frame grid-y">
                 <Navbar/>
                 <h1 className="caption align-center-middle">
-                    Settings
+                    Bar Settings
                 </h1>
 
-                <Avatar
-                    width={360}
-                    height={360}
-                    onCrop={this.onCrop}
-                    onClose={this.onClose}/>
-                <img id="preview" src={this.state.preview} style={imgSize} alt="preview"/>
+                <Avatar width={360} height={360} onCrop={this.onCrop} onClose={this.onClose}/>
+                <img id="preview" src={this.state.preview} style={imgSize}/>
             </div>
         );
     }
 }
 
-export default SettingsPage;
+export default BarSettings;

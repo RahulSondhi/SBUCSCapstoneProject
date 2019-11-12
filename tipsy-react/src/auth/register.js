@@ -62,8 +62,8 @@ class Register extends Component {
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
-        this.clearFields = this
-            .clearFields
+        this.disableButton = this
+            .disableButton
             .bind(this);
     }
     /*
@@ -115,14 +115,8 @@ class Register extends Component {
         return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success' && this.state.nickname.validateStatus === 'success' && this.state.password.validateStatus === 'success' && this.state.passwordConfirm.validateStatus === 'success');
     }
 
-    clearFields() {
-        this.setState({
-            firstName: '',
-            lastName: '',
-            nickname: '',
-            email: '',
-            password: ''
-        });
+    disableButton() {
+        document.getElementById("registerButton").disabled = true;
     }
 
     /*
@@ -244,7 +238,7 @@ class Register extends Component {
                     </FormItem>
 
                     <FormItem className="cell">
-                        <button type="submit" disabled={this.isFormInvalid()} onClick={this.clearFields} className="button">
+                        <button type="submit" id="registerButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
                             Register
                         </button>
                     </FormItem>

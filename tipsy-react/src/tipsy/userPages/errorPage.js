@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React from 'react';
+import Tipsy from '../../assets/Tipsy.svg';
 
 const ErrorPage = (props) => {
 
@@ -12,6 +13,7 @@ const ErrorPage = (props) => {
 
     return (
         <div>
+            <img src={Tipsy} alt="TipsyLogo"/>
             {errorType}
             <h3 className="errorCaption align-center-middle">Oops. Something went terribly wrong!</h3>
             <h4 className="errorCaption align-center-middle"> Try refreshing the page.</h4>
