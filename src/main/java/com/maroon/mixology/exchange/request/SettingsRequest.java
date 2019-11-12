@@ -22,8 +22,7 @@ public class SettingsRequest {
 
     private String profilePic;
 
-    @NotBlank
-    private MeasurementType measurement;
+    private String measurement;
 
     public String getFirstName() {
         return firstName;
@@ -57,11 +56,11 @@ public class SettingsRequest {
         this.profilePic = profilePic;
     }
 
-    public MeasurementType getMeasurement() {
+    public String getMeasurement() {
         return measurement;
     }
 
-    public void setMeasurement(MeasurementType measurement) {
+    public void setMeasurement(String measurement) {
         this.measurement = measurement;
     }
 

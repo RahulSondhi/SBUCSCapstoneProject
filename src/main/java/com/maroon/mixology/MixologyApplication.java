@@ -7,6 +7,7 @@ import java.util.Set;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.RoleRepository;
@@ -28,6 +29,7 @@ public class MixologyApplication {
 	@Bean
     CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository) {
         return args -> {
+
             // // Role adminRole = roleRepository.findByName("ADMIN");
             // // if (adminRole == null) {
             // //     Role newUserRole = new Role();
@@ -35,6 +37,8 @@ public class MixologyApplication {
             // //     roleRepository.save(newUserRole);
             // // }
             // User bryan = userRepository.findByNickname("bryan");
+            // bryan.setMeasurement(MeasurementType.US);
+            // userRepository.save(bryan);
             // User rahul = userRepository.findByNickname("rahul");
             // User manny = userRepository.findByNickname("manny");
             // Set<User> workers = new HashSet<User>();
