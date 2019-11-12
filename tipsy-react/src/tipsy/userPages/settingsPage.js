@@ -293,13 +293,11 @@ class SettingsPage extends Component {
                             Update Settings
                         </button>
                     </FormItem>
-
-                    <FormItem className="small-12 medium-5 medium-offset-2 cell">
-                        <NavLink
-                            to="/tipsy/user/stg/resetPassword"
-                            id="passwordButton"
-                            className="button">
-                            Update Password
+                    <FormItem className="small-12 medium-6 cell">
+                        <NavLink 
+                         to="/tipsy/user/stg/changePassword"
+                         id="passwordButton" className="button">
+                            Change Password
                         </NavLink>
                     </FormItem>
                 </Form>

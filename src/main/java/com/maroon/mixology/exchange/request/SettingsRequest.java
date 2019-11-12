@@ -20,10 +20,6 @@ public class SettingsRequest {
     @Email
     private String email;
 
-    @NotBlank
-    @Size(min = 8, max = 256)
-    private String password;
-
     private String profilePic;
 
     @NotBlank
@@ -51,14 +47,6 @@ public class SettingsRequest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getProfilePic() {

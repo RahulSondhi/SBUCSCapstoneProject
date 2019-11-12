@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.exchange.request.ChangePasswordRequest;
 import com.maroon.mixology.exchange.request.SettingsRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 
@@ -127,22 +128,10 @@ public class UserController {
         try{
             //we get the current user by getting their email address
             User user = userService.findByEmail(currentUser.getUsername());
-            //If empty, leave default
-            if(settingsRequest.getFirstName() != ""){
-                user.setFirstName(settingsRequest.getFirstName());
-            }
-            if(settingsRequest.getLastName() != ""){
-                user.setLastName(settingsRequest.getLastName());
-            }
-            if(settingsRequest.getEmail() != ""){
-                user.setEmail(settingsRequest.getEmail());
-            }
-            if(settingsRequest.getPassword() != ""){
-                user.setPassword(passwordEncoder.encode(settingsRequest.getPassword()));
-            }
-            if(settingsRequest.getProfilePic() != ""){
-                user.setProfilePic(settingsRequest.getProfilePic());
-            }
+            user.setFirstName(settingsRequest.getFirstName());
+            user.setLastName(settingsRequest.getLastName());
+            user.setEmail(settingsRequest.getEmail());
+            user.setProfilePic(settingsRequest.getProfilePic());
             user.setMeasurement(settingsRequest.getMeasurement());
             userRepository.save(user);
             return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
@@ -169,5 +158,19 @@ public class UserController {
             HttpStatus.BAD_REQUEST);
         }
         
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@CurrentUser UserDetails currentUser, @Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        try{
+            //we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
+            user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
+            userRepository.save(user);
+            return ResponseEntity.ok(new ApiResponse(true, "Password has been updated successfully!"));
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }  
     }
 }
