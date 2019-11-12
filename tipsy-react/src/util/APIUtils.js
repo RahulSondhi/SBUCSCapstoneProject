@@ -129,3 +129,11 @@ export function changeUserSettings(settingsRequest) {
         body: JSON.stringify(settingsRequest)
     });
 }
+
+export function changePassword(changePasswordRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/changePassword",
+        method: 'POST',
+        body: JSON.stringify(changePasswordRequest)
+    });
+}

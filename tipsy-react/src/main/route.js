@@ -24,6 +24,7 @@ import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
 import BarEquipmentPage from '../tipsy/userPages/barEquipmentPage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
 import SettingsPage from '../tipsy/userPages/settingsPage.js';
+import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
 import ErrorPage from '../tipsy/userPages/errorPage.js';
 
 // Game Page Imports
@@ -139,6 +140,12 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
+                    <PrivateRoute
+                        exact
+                        path = "/tipsy/user/stg/changePassword"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>} />
                     <PrivateRoute
                         exact
                         path={["/tipsy/user/:nickname"]}
