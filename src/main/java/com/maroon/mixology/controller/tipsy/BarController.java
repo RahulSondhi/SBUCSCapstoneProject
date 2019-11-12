@@ -113,9 +113,9 @@ public class BarController {
             for (User worker : bar.getWorkers()){
                 barWorkers.add(new BriefUserResponse(worker.getNickname(), worker.getFirstName() + " " + worker.getLastName(), worker.getProfilePic()));
             }
-            Set<BriefRecipeResponse> barRecipesAvaliable = new HashSet<BriefRecipeResponse>();
-            for (Recipe recipeAvaliable : bar.getRecipesAvaliable()){
-                barRecipesAvaliable.add(new BriefRecipeResponse(recipeAvaliable.getId(), recipeAvaliable.getName(), recipeAvaliable.getImage(), recipeAvaliable.getAuthor().getNickname()));
+            Set<BriefRecipeResponse> barRecipesAvailable = new HashSet<BriefRecipeResponse>();
+            for (Recipe recipeAvailable : bar.getRecipesAvailable()){
+                barRecipesAvailable.add(new BriefRecipeResponse(recipeAvailable.getId(), recipeAvailable.getName(), recipeAvailable.getImage(), recipeAvailable.getAuthor().getNickname()));
             }
             //lets build our response
             BarResponse barProfile = new BarResponse(
@@ -125,7 +125,7 @@ public class BarController {
                 bar.getOwner().getNickname(),
                 barManagers,
                 barWorkers,
-                barRecipesAvaliable
+                barRecipesAvailable
             );
             return ResponseEntity.ok(barProfile);
         } catch (Exception e) {

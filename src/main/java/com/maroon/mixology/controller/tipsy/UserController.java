@@ -3,9 +3,12 @@ package com.maroon.mixology.controller.tipsy;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.exchange.request.SettingsRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
@@ -26,6 +29,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -112,5 +117,8 @@ public class UserController {
         }
     }
 
-
+    @PostMapping("/settings")
+    public ResponseEntity<?> changeProfile(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
+        return null;
+    }
 }

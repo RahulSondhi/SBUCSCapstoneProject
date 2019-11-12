@@ -21,17 +21,17 @@ public class Bar {
     @DBRef
     private Set<User> workers;
     @DBRef
-    private Set<Recipe> recipesAvaliable;
+    private Set<Recipe> recipesAvailable;
 
     public Bar(String name, String description, User owner, String image, Set<User> managers, Set<User> workers,
-            Set<Recipe> recipesAvaliable) {
+            Set<Recipe> recipesAvailable) {
         this.name = name;
         this.description = description;
         this.owner = owner;
         this.image = image;
         this.managers = managers;
         this.workers = workers;
-        this.recipesAvaliable = recipesAvaliable;
+        this.recipesAvailable = recipesAvailable;
     }
 
 
@@ -91,12 +91,12 @@ public class Bar {
         this.description = description;
     }
 
-    public Set<Recipe> getRecipesAvaliable() {
-        return recipesAvaliable;
+    public Set<Recipe> getRecipesAvailable() {
+        return recipesAvailable;
     }
 
-    public void setRecipesAvaliable(Set<Recipe> recipesAvaliable) {
-        this.recipesAvaliable = recipesAvaliable;
+    public void setRecipesAvailable(Set<Recipe> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
     }
 
 
