@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="196" height="196" viewBox="0 0 196 196">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.271" y1="0.393" x2="-0.283" y2="0.892" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ddd"/>
+      <stop offset="1" stop-color="#888686"/>
+    </linearGradient>
+  </defs>
+  <g id="vodka" transform="translate(-194 -33)">
+    <rect id="Rectangle_26" data-name="Rectangle 26" width="196" height="196" rx="20" transform="translate(194 33)" fill="#18562c"/>
+    <path id="Path_38" data-name="Path 38" d="M28.6-.766H49.9l-.673,42.425,15.663,3.17.673,127.477a131.547,131.547,0,0,1-25.807,2.949,138.079,138.079,0,0,1-26.194-2.949L12.891,44.83l15.036-3.17Z" transform="translate(253 44.793)" fill="rgba(255,255,255,0.25)"/>
+    <path id="Path_40" data-name="Path 40" d="M0,0H23.729V29.825A43.879,43.879,0,0,1,12.05,31.658,48.5,48.5,0,0,1,0,29.825Z" transform="translate(280.708 42)" fill="url(#linear-gradient)"/>
+    <line id="Line_3" data-name="Line 3" x2="21.274" transform="translate(281.936 53.864)" fill="none" stroke="red" stroke-width="3"/>
+    <path id="Path_39" data-name="Path 39" d="M26.77,56.215h18.5V68.888l13.6,3.468V191.432s-10.679,5.721-21.967,5.721-23.184-5.721-23.184-5.721V72.356L26.77,68.888Z" transform="translate(256.123 21.052)" fill="rgba(175,214,219,0.54)"/>
+    <text id="V_O_D_K_A" data-name="V O D K A" transform="translate(270 198) rotate(-90)" fill="red" font-size="15" font-family="Candara"><tspan x="0" y="14">V O D K A</tspan></text>
+    <text id="product_of_Maroon" data-name="product
+of Maroon" transform="translate(275 202)" font-size="5" font-family="Candara"><tspan x="8.587" y="5">product</tspan><tspan x="5.821" y="11">of Maroon</tspan></text>
+    <path id="Path_43" data-name="Path 43" d="M2209-43.234v68.97" transform="translate(-1901.289 144.773)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="196" height="196" viewBox="0 0 196 196">
+  <g id="lime" transform="translate(-448 -460)">
+    <rect id="Rectangle_40" data-name="Rectangle 40" width="196" height="196" rx="20" transform="translate(448 460)" fill="#ff5300"/>
+    <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(505 517)" fill="#fefedc" stroke="#b5f04d" stroke-width="5">
+      <circle cx="41" cy="41" r="41" stroke="none"/>
+      <circle cx="41" cy="41" r="38.5" fill="none"/>
+    </g>
+    <path id="Path_3" data-name="Path 3" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="translate(538 559.323)" fill="#e6f6c2"/>
+    <path id="Path_4" data-name="Path 4" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="translate(553.629 557.341) rotate(-179)" fill="#e6f6c2"/>
+    <path id="Path_5" data-name="Path 5" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="matrix(-0.017, 1, -1, -0.017, 544.973, 550.221)" fill="#e6f6c2"/>
+    <path id="Path_6" data-name="Path 6" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="matrix(0.035, -0.999, 0.999, 0.035, 546.682, 565.883)" fill="#e6f6c2"/>
+    <path id="Path_7" data-name="Path 7" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="matrix(-0.695, 0.719, -0.719, -0.695, 550.76, 551.726)" fill="#e6f6c2"/>
+    <path id="Path_8" data-name="Path 8" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="translate(541.329 564.346) rotate(-45)" fill="#e6f6c2"/>
+    <path id="Path_9" data-name="Path 9" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="translate(552.197 563.369) rotate(-133)" fill="#e6f6c2"/>
+    <path id="Path_10" data-name="Path 10" d="M7.579,2.234l8,26.079-8,2.364L.337,28.313S7.3,1.182,7.579,2.234Z" transform="translate(540.088 553.29) rotate(48)" fill="#e6f6c2"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" cx="3" cy="3" r="3" transform="translate(543 555)" fill="#f0f9e0"/>
+  </g>
+</svg>
