@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="196" height="196" viewBox="0 0 196 196">
+  <g id="wine_glass" transform="translate(-25 -641)">
+    <rect id="Rectangle_33" data-name="Rectangle 33" width="196" height="196" rx="20" transform="translate(25 641)"/>
+    <g id="wine_glass-2" data-name="wine_glass" transform="translate(-126 409)">
+      <path id="Icon_awesome-wine-glass" data-name="Icon awesome-wine-glass" d="M59.1,126.963H48.158V94.9A39.58,39.58,0,0,0,78.64,52.714L74.275,3.981A4.341,4.341,0,0,0,69.977,0H8.827a4.338,4.338,0,0,0-4.3,3.981L.164,52.717A39.58,39.58,0,0,0,30.646,94.9v32.064H19.7A10.946,10.946,0,0,0,8.755,137.908a2.188,2.188,0,0,0,2.189,2.189H67.859a2.188,2.188,0,0,0,2.189-2.189A10.946,10.946,0,0,0,59.1,126.963Z" transform="matrix(0.999, -0.035, 0.035, 0.999, 208.868, 261.022)" fill="rgba(255,255,255,0.55)"/>
+      <path id="Path_1" data-name="Path 1" d="M2237.125,208.389c18.525,20.1,8.5,71.6,8.5,71.6" transform="matrix(-1, 0.017, -0.017, -1, 2472.579, 509.791)" fill="none" stroke="#fff" stroke-width="5"/>
+    </g>
+  </g>
+</svg>

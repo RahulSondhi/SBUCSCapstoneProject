@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="196" height="196" viewBox="0 0 196 196">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.657" y1="0.299" x2="1.918" y2="0.392" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dfdfdf"/>
+      <stop offset="1" stop-color="#757575"/>
+    </linearGradient>
+  </defs>
+  <g id="muddler" transform="translate(-1018.51 -753.687) rotate(14)">
+    <rect id="Rectangle_31" data-name="Rectangle 31" width="196" height="196" rx="20" transform="translate(1170.589 484.899) rotate(-14)" fill="#f343d0"/>
+    <path id="Path_23" data-name="Path 23" d="M-1,11.443C.6,1.586,12.221.788,12.221.788S25.128.467,27.053,11.443c.9,5.159-4.19,32.628-4.191,60.565,0,30.944,5.027,62.411,5.027,62.411A31.8,31.8,0,0,1,14.389,138c-7.013,0-14.551-3.582-14.551-3.582A601.558,601.558,0,0,0,3.221,72.008C3.012,41.264-1.756,16.126-1,11.443Z" transform="translate(1276.279 486.406)" fill="url(#linear-gradient)"/>
+    <path id="Path_24" data-name="Path 24" d="M3201.11,391.341c1.926,11.553-2.5,29.461-1.54,37.934" transform="translate(-1902.547 104.823)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>
