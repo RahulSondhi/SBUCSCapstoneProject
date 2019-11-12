@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Tipsy from '../assets/Tipsy.svg';
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../util/APIUtils';
-import Bottle from '../assets/bottle.svg';
-import Cup from '../assets/cup.svg';
+import Bottle from '../assets/equipment/bottle.svg';
+import Cup from '../assets/equipment/cup.svg';
 
 import {
     FIRSTNAME_MIN_LENGTH,
@@ -219,7 +219,7 @@ class Register extends Component {
                         validateStatus={this.state.password.validateStatus}
                         help={this.state.password.errorMsg}
                         className="medium-8 cell">
-                        <Input
+                        <Input.Password
                             prefix={< Icon type = "lock" />}
                             name="password"
                             type="password"
@@ -234,7 +234,7 @@ class Register extends Component {
                         validateStatus={this.state.passwordConfirm.validateStatus}
                         help={this.state.passwordConfirm.errorMsg}
                         className="medium-8 cell">
-                        <Input
+                        <Input.Password
                             prefix={< Icon type = "lock" />}
                             name="passwordConfirm"
                             type="password"

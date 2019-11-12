@@ -7,14 +7,24 @@ class Navbar extends Component {
 
     state = {
         current: 'mail',
-        visible: false
+        visible: false,
+        type: "normal"
     }
+
     showDrawer = () => {
         this.setState({visible: true});
     };
     onClose = () => {
         this.setState({visible: false});
     };
+
+    constructor(props) {
+        super(props);
+
+        if(this.props.type === "game"){
+            this.state.type = "game";
+        }
+    }
 
     render() {
         return (
@@ -27,7 +37,7 @@ class Navbar extends Component {
                         <LeftMenu/>
                     </div> */}
                     <div className="rightMenu">
-                        <GeneralNavbar mode={'horizontal'}/>
+                        <GeneralNavbar mode={'horizontal'} type={this.type}/>
                     </div>
                     <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
                         <span className="barsBtn"></span>
@@ -39,7 +49,7 @@ class Navbar extends Component {
                         onClose={this.onClose}
                         visible={this.state.visible}>
                         {/* <LeftMenu/> */}
-                        <GeneralNavbar mode={'inline'}/>
+                        <GeneralNavbar mode={'inline'} type={this.type}/>
                     </Drawer>
                 </div>
             </nav>
