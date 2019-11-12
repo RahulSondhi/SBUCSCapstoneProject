@@ -128,6 +128,7 @@ public class UserController {
     public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
         try{
             //we get the current user by getting their email address
+            // System.out.println(settingsRequest.getMeasurement());
             User user = userService.findByEmail(currentUser.getUsername());
             user.setFirstName(settingsRequest.getFirstName());
             user.setLastName(settingsRequest.getLastName());

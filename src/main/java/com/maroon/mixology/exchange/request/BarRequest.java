@@ -16,7 +16,7 @@ public class BarRequest {
     private String img;
     private ArrayList<String> managers; //nicknames
     private ArrayList<String> workers; //nicknames
-    private ArrayList<String> recipesAvaliable; //ids in base 64
+    private ArrayList<String> recipesAvailable; //ids in base 64
 
     public String getName() {
         return name;
@@ -58,16 +58,16 @@ public class BarRequest {
         this.workers = workers;
     }
 
-    public ArrayList<String> getRecipesAvaliable() {
+    public ArrayList<String> getRecipesAvailable() {
         ArrayList<String> realIds = new ArrayList<String>();
-        for (String recipe : recipesAvaliable) {
+        for (String recipe : recipesAvailable) {
             realIds.add(Helper.decodeBase64ToHex(recipe));
         }
         return realIds;
     }
 
-    public void setRecipesAvaliable(ArrayList<String> recipesAvaliable) {
-        this.recipesAvaliable = recipesAvaliable;
+    public void setRecipesAvailable(ArrayList<String> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
     }
 
 

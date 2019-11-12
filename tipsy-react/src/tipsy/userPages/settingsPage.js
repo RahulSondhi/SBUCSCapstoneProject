@@ -98,7 +98,6 @@ class SettingsPage extends Component {
     */
     handleSubmit(event) {
         event.preventDefault();
-
         const settingsRequest = {
             firstName: this.state.firstName.value,
             lastName: this.state.lastName.value,
@@ -106,6 +105,7 @@ class SettingsPage extends Component {
             profilePic: this.state.profilePic.value,
             measurement: this.state.measurement.value
         };
+        console.log(settingsRequest);
         changeUserSettings(settingsRequest).then(response => {
             notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
         }).catch(error => {
@@ -162,7 +162,7 @@ class SettingsPage extends Component {
                     errorMsg: null
                 },
                 measurement: {
-                    value: response.measurement,
+                    value: response.measurement.name,
                     validateStatus: 'success',
                     errorMsg: null
                 },

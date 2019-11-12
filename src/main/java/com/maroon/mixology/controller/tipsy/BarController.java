@@ -66,7 +66,7 @@ public class BarController {
                 barWorkers.add(userService.findByNickname(workerNickname));
             }
             Set<Recipe> barRecipes = new HashSet<Recipe>();
-            for (String recipeID : barRequest.getRecipesAvaliable()){
+            for (String recipeID : barRequest.getRecipesAvailable()){
                 barRecipes.add(recipeService.findById(recipeID));
             }
             Bar bar = new Bar(
