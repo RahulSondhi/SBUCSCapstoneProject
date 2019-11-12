@@ -134,6 +134,13 @@ class Routes extends Component {
                         redirectTo="/login"
                         component={(props) => <AdminPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
+                        exact
+                        path = "/tipsy/user/stg"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
+                    <PrivateRoute
+                        exact
                         path={["/tipsy/user/:nickname"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
@@ -156,12 +163,6 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <CreateRecipePage currentUser={this.state.currentUser} {...props}/>}/>
-                    <PrivateRoute
-                        exact
-                        path = "/tipsy/settings"
-                        authed={this.state.isAuthenticated}
-                        redirectTo="/login"
-                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.props.onLogout} {...props}/>}/>
