@@ -1,16 +1,18 @@
 package com.maroon.mixology.controller.tipsy;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exchange.response.ApiResponse;
-import com.maroon.mixology.exchange.response.ProfileResponse;
-import com.maroon.mixology.exchange.response.UserBarResponse;
+
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
-import com.maroon.mixology.exchange.response.UserRecipeResponse;
+import com.maroon.mixology.exchange.response.UserResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
+import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
+import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarServiceImpl;
@@ -73,27 +75,27 @@ public class UserController {
                         HttpStatus.BAD_REQUEST);
             }
             // Build all
-            ArrayList<UserBarResponse> userBars = new ArrayList<UserBarResponse>();
+            Set<BriefBarResponse> userBars = new HashSet<BriefBarResponse>();
             for (String barID : user.getBars()) {
                 Bar bar = barService.findById(barID);
-                userBars.add(new UserBarResponse(bar.getId(), bar.getName(), bar.getImage(), bar.getOwner().getNickname()));
+                userBars.add(new BriefBarResponse(bar.getId(), bar.getName(), bar.getImage(), bar.getOwner().getNickname()));
             }
-            ArrayList<UserRecipeResponse> userRecipesWritten = new ArrayList<UserRecipeResponse>();
+            Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();
             for (String recipeWrittenID : user.getRecipesWritten()){
                 Recipe recipeWritten = recipeService.findById(recipeWrittenID);
-                userRecipesWritten.add(new UserRecipeResponse(recipeWritten.getId(), recipeWritten.getName(), recipeWritten.getImage(), recipeWritten.getAuthor().getNickname()));
+                userRecipesWritten.add(new BriefRecipeResponse(recipeWritten.getId(), recipeWritten.getName(), recipeWritten.getImage(), recipeWritten.getAuthor().getNickname()));
             }
-            ArrayList<UserRecipeResponse> userRecipesCompleted = new ArrayList<UserRecipeResponse>();
+            Set<BriefRecipeResponse> userRecipesCompleted = new HashSet<BriefRecipeResponse>();
             for (String recipeCompletedID : user.getRecipesCompleted()){
                 Recipe recipeCompleted = recipeService.findById(recipeCompletedID);
-                userRecipesCompleted.add(new UserRecipeResponse(recipeCompleted.getId(), recipeCompleted.getName(), recipeCompleted.getImage(), recipeCompleted.getAuthor().getNickname()));
+                userRecipesCompleted.add(new BriefRecipeResponse(recipeCompleted.getId(), recipeCompleted.getName(), recipeCompleted.getImage(), recipeCompleted.getAuthor().getNickname()));
             }
-            ArrayList<UserRecipeResponse> userRecipesIncompleted = new ArrayList<UserRecipeResponse>();
+            Set<BriefRecipeResponse> userRecipesIncompleted = new HashSet<BriefRecipeResponse>();
             for (String recipeIncompletedID : user.getRecipesIncompleted()){
                 Recipe recipeIncompleted = recipeService.findById(recipeIncompletedID);
-                userRecipesIncompleted.add(new UserRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
+                userRecipesIncompleted.add(new BriefRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
             }
-            ProfileResponse userProfile = new ProfileResponse(
+            UserResponse userProfile = new UserResponse(
                 user.getNickname(),
                 user.getProfilePic(), 
                 user.getFirstName() + " " + user.getLastName(),

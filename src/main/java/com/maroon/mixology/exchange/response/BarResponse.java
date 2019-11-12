@@ -1,18 +1,23 @@
 package com.maroon.mixology.exchange.response;
 
-import java.util.ArrayList;
+import java.util.Set;
+
+import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
+import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 
 public class BarResponse {
+    //we don't give them the ID
     private String name;
-    private String image;
+    private String img;
     private String owner;
-    private ArrayList<String> managers;
-    private ArrayList<String> workers;
-    private ArrayList<RecipeResponse> recipesAvaliable;
+    private Set<BriefUserResponse> managers;
+    private Set<BriefUserResponse> workers;
+    private Set<BriefRecipeResponse> recipesAvaliable;
 
-    public BarResponse(String name, String image, String owner, ArrayList<String> managers, ArrayList<String> workers, ArrayList<RecipeResponse> recipesAvaliable) {
+    public BarResponse(String name, String img, String owner, Set<BriefUserResponse> managers,
+            Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvaliable) {
         this.name = name;
-        this.image = image;
+        this.img = img;
         this.owner = owner;
         this.managers = managers;
         this.workers = workers;
@@ -27,12 +32,12 @@ public class BarResponse {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public String getOwner() {
@@ -43,29 +48,28 @@ public class BarResponse {
         this.owner = owner;
     }
 
-    public ArrayList<String> getManagers() {
+    public Set<BriefUserResponse> getManagers() {
         return managers;
     }
 
-    public void setManagers(ArrayList<String> managers) {
+    public void setManagers(Set<BriefUserResponse> managers) {
         this.managers = managers;
     }
 
-    public ArrayList<String> getWorkers() {
+    public Set<BriefUserResponse> getWorkers() {
         return workers;
     }
 
-    public void setWorkers(ArrayList<String> workers) {
+    public void setWorkers(Set<BriefUserResponse> workers) {
         this.workers = workers;
     }
 
-    public ArrayList<RecipeResponse> getRecipesAvaliable() {
+    public Set<BriefRecipeResponse> getRecipesAvaliable() {
         return recipesAvaliable;
     }
 
-    public void setRecipesAvaliable(ArrayList<RecipeResponse> recipesAvaliable) {
+    public void setRecipesAvaliable(Set<BriefRecipeResponse> recipesAvaliable) {
         this.recipesAvaliable = recipesAvaliable;
     }
-
 
 }

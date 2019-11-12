@@ -1,6 +1,5 @@
 package com.maroon.mixology.entity;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -21,10 +20,10 @@ public class Bar {
     @DBRef
     private Set<User> workers;
     @DBRef
-    private ArrayList<Recipe> recipesAvaliable;
+    private Set<Recipe> recipesAvaliable;
 
     public Bar(String name, User owner, String image, Set<User> managers, Set<User> workers,
-    ArrayList<Recipe> recipesAvaliable) {
+    Set<Recipe> recipesAvaliable) {
         this.name = name;
         this.owner = owner;
         this.image = image;
@@ -81,11 +80,11 @@ public class Bar {
         this.workers = workers;
     }
 
-    public ArrayList<Recipe> getRecipesAvaliable(){
+    public Set<Recipe> getRecipesAvaliable(){
         return recipesAvaliable;
     }
 
-    public void setRecipes(ArrayList<Recipe> recipesAvaliable){
+    public void setRecipes(Set<Recipe> recipesAvaliable){
         this.recipesAvaliable = recipesAvaliable;
     }
 

@@ -1,6 +1,6 @@
 package com.maroon.mixology.entity;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
 import com.maroon.mixology.entity.type.EquipmentType;
@@ -20,8 +20,8 @@ public class Equipment {
     private EquipmentType type;
     private boolean published;
     private boolean filled;
-    private ArrayList<ActionType> actionsDoTo;
-    private ArrayList<ActionType> actionsDoing;
+    private Set<ActionType> actionsDoTo;
+    private Set<ActionType> actionsDoing;
 
     public String getId() {
         return id;
@@ -72,20 +72,22 @@ public class Equipment {
         this.filled = filled;
     }
 
-    public ArrayList<ActionType> getActionsDoTo() {
+    public Set<ActionType> getActionsDoTo() {
         return actionsDoTo;
     }
 
-    public void setActionsDoTo(ArrayList<ActionType> actionsDoTo) {
+    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
         this.actionsDoTo = actionsDoTo;
     }
-    
-    public ArrayList<ActionType> getActionsDoing() {
+
+    public Set<ActionType> getActionsDoing() {
         return actionsDoing;
     }
 
-    public void setActionsDoing(ArrayList<ActionType> actionsDoing) {
+    public void setActionsDoing(Set<ActionType> actionsDoing) {
         this.actionsDoing = actionsDoing;
     }
+
+
 
 }

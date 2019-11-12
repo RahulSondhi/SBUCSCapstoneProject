@@ -99,6 +99,14 @@ export function getUserProfile(nickname) {
         method: 'GET'
     });
 }
+
+export function getBarProfile(barID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID,
+        method: 'GET'
+    });
+}
+
 export function createBar(barRequest) {
     return request({
         url: API_BASE_URL + "/tipsy/bar/createBar",
