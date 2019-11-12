@@ -10,12 +10,12 @@ public class BarResponse {
     private String name;
     private String description;
     private String img;
-    private String owner;
+    private BriefUserResponse owner;
     private Set<BriefUserResponse> managers;
     private Set<BriefUserResponse> workers;
     private Set<BriefRecipeResponse> recipesAvaliable;
 
-    public BarResponse(String name, String description, String img, String owner, Set<BriefUserResponse> managers,
+    public BarResponse(String name, String description, String img, BriefUserResponse owner, Set<BriefUserResponse> managers,
             Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvaliable) {
         this.name = name;
         this.description = description;
@@ -51,11 +51,11 @@ public class BarResponse {
         this.img = img;
     }
 
-    public String getOwner() {
+    public BriefUserResponse getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(BriefUserResponse owner) {
         this.owner = owner;
     }
 

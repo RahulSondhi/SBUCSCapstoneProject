@@ -118,11 +118,12 @@ public class BarController {
                 barRecipesAvailable.add(new BriefRecipeResponse(recipeAvailable.getId(), recipeAvailable.getName(), recipeAvailable.getImage(), recipeAvailable.getAuthor().getNickname()));
             }
             //lets build our response
+            BriefUserResponse barOwner = new BriefUserResponse(bar.getOwner().getNickname(), bar.getOwner().getFirstName() + " " + bar.getOwner().getLastName(), bar.getOwner().getProfilePic()); 
             BarResponse barProfile = new BarResponse(
                 bar.getName(),
                 bar.getDescription(),
                 bar.getImage(),
-                bar.getOwner().getNickname(),
+                barOwner,
                 barManagers,
                 barWorkers,
                 barRecipesAvailable
