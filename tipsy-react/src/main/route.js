@@ -23,6 +23,8 @@ import CreateBarPage from '../tipsy/userPages/createBarPage.js'
 import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
 import BarEquipmentPage from '../tipsy/userPages/barEquipmentPage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
+import SettingsPage from '../tipsy/userPages/settingsPage.js';
+import ErrorPage from '../tipsy/userPages/errorPage.js';
 
 // Game Page Imports
 import Game from '../tipsy/game.js';
@@ -155,6 +157,9 @@ class Routes extends Component {
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.props.onLogout} {...props}/>}/>
+                    {/* Temp route for settings and error page */}
+                    <Route path="/tipsy/settings" component={SettingsPage}/>
+                    <Route path="/tipsy/error" component={ErrorPage}/>
                 </Switch>
             </Router>
         );

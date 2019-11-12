@@ -123,7 +123,6 @@ class Register extends Component {
             email: '',
             password: ''
         });
-        console.log("ClearFields is being caled");
     }
 
     /*
