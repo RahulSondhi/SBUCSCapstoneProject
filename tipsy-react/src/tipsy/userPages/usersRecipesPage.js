@@ -1,78 +1,125 @@
 import React, {Component} from 'react';
-import {CustomButton, CustomCreateButton, Entry, BottleIconStyle} from '../../main/constants';
-import Bottle from '../../assets/bottle.svg';
+import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
+import {RecipesPreview, GetProfImg} from '../../main/constants';
+import {Tabs} from 'antd';
+import {getUserProfile} from '../../util/APIUtils';
+
+const {TabPane} = Tabs;
+
 
 class UsersRecipesPage extends Component {
-    render() {
-        return (
-            <div className="">
-                <Navbar/>
-                <div className="grid-x">
-                    <h1 className="myTitle cell caption small-12 medium-6 large-4 large-offset-4">
-                        My Recipes</h1>
-                    <div className="cell small-12 medium-6 large-4 createButtonHolder">
-                        <CustomCreateButton redirect="/tipsy/createRecipe" name="Create A Recipe +"/>
-                    </div>
-                </div>
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+            isLoading: true
+        }
+        this.loadUserProfile = this
+            .loadUserProfile
+            .bind(this);
+    }
 
-                <div className="grid-x align-center-middle">
-                    <div className="tabButton">
-                        <CustomButton redirect="/tipsy/myRecipes" name="Owned"/>
-                    </div>
-                    <div className="tabButton">
-                        <CustomButton redirect="/tipsy/myRecipes" name="Completed"/>
-                    </div>
-                    <div className="tabButton">
-                        <CustomButton redirect="/tipsy/myRecipes" name="In Progress"/>
-                    </div>
-                </div>
-                <div className="grid-container grid-x full">
-                    <div className="grid-x grid-margin-y box cell large-10 large-offset-1">
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                        <Entry
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            itemName="RecipeName"
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myRecipes/recipe"/>
-                    </div>
-                    <div className="grid-x cell large-1"></div>
+    loadUserProfile(nickname) {
+        this.setState({isLoading: true});
+
+        getUserProfile(nickname).then(response => {
+            this.setState({user: response, isLoading: false});
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
+    }
+
+    componentDidMount() {
+        let try_name = this.props.currentUser.nickname;
+        const nickname = try_name;
+        this.loadUserProfile(nickname);
+    }
+
+    render() {
+
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        // Checking response
+        if (this.state.notFound === true || this.state.serverError === true) {
+            return <Redirect
+                to={{
+                pathname: "/tipsy/error",
+                state: {
+                    from: this.props.location,
+                    notFound: this.state.notFound,
+                    serverError: this.state.serverError
+                }
+            }}/>
+        }
+
+        console.log(this.state.user)
+
+        return (
+            <div className="grid-x grid-x-margin align-center-middle">
+                <Navbar/>
+
+                <h1 id="userRecipesPageTitle" className="caption small-10 cell">{this.state.user.nickname + "'s Recipes"}</h1>
+
+                <div className="grid-x align-center-middle cell">
+
+                    <Tabs className="small-12 medium-10 cell" tabPosition="top">
+                        <TabPane tab="Doing" key="1">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+                                
+                            <Link
+                                    to="/tipsy/search"
+                                    className="previewBar grid-x align-center-middle small-6 medium-3 cell"
+                                    key="src">
+                                    <div className="small-4 grid-x cell">
+                                        <GetProfImg type="search" className="small-10 cell" pic="" alt="Add A Bar"/>
+                                    </div>
+                                    <div className="small-8 grid-x cell">
+                                        <div className="previewBarName cell">Find A Recipe</div>
+                                    </div>
+                                </Link>
+                                
+                                <RecipesPreview
+                                    className="small-6 medium-3 cell"
+                                    recipes={this.state.user.recipesIncompleted}/>
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Made" key="2">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+
+                                <Link
+                                    to="/tipsy/createRecipe"
+                                    className="previewBar grid-x align-center-middle small-6 medium-3 cell"
+                                    key="add">
+                                    <div className="small-4 grid-x cell">
+                                        <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
+                                    </div>
+                                    <div className="small-8 grid-x cell">
+                                        <div className="previewBarName cell">Add A Recipe</div>
+                                    </div>
+                                </Link>
+
+                                <RecipesPreview
+                                    className="small-6 medium-3 cell"
+                                    recipes={this.state.user.recipesWritten}/>
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Done" key="3">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+                                <RecipesPreview
+                                    className="small-6 medium-3 cell"
+                                    recipes={this.state.user.recipesCompleted}/>
+                            </div>
+                        </TabPane>
+                    </Tabs>
+
                 </div>
             </div>
         )

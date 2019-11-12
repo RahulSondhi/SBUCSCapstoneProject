@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.exception.AppException;
 import com.maroon.mixology.exchange.request.RegisterRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
@@ -101,7 +102,8 @@ public class RegisterController {
                         if(userRole == null){
                                 throw new AppException("User Role not set.");
                         }
-                        user.setRoles(new HashSet<>(Arrays.asList(userRole)));                   
+                        user.setRoles(new HashSet<>(Arrays.asList(userRole))); // Set the Roles
+                        user.setMeasurement(MeasurementType.US); // Set the Measurement
                         userRepository.save(user); // Saving the user in the database
 
                         // Send a confirmation email

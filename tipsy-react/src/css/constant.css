@@ -89,3 +89,17 @@
 .previewRecipeAuthor span{
     color: var(--brass);
 }
+
+/* Make Prof Pic */
+
+.makeProfPicEditor{
+    margin-bottom: 3%;
+}
+
+.makeProfPicEditor label{
+    color: white !important;
+}
+
+.makeProfPicEditor path{
+    fill: red;
+}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 
 // Authentification Imports
 import Login from '../auth/login.js';
@@ -23,12 +23,15 @@ import CreateBarPage from '../tipsy/userPages/createBarPage.js'
 import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
 import BarEquipmentPage from '../tipsy/userPages/barEquipmentPage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
+import SettingsPage from '../tipsy/userPages/settingsPage.js';
+import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
+import ErrorPage from '../tipsy/userPages/errorPage.js';
 
 // Game Page Imports
 import Game from '../tipsy/game.js';
 
-import PrivateRoute from './PrivateRoute';
-import PublicRoute from './PublicRoute';
+// import {PrivateRoute,PublicRoute} from './PrivateRoute';
+// import PublicRoute from './PublicRoute';
 
 class Routes extends Component {
 
@@ -80,7 +83,9 @@ class Routes extends Component {
                         path="/register"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Register}/> {/* Private  */}
+                        component={Register}/> 
+                        
+                    {/* Private  */}
                     <PrivateRoute
                         exact
                         path="/tipsy/search"
@@ -92,7 +97,7 @@ class Routes extends Component {
                         path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={UsersBarsPage}/>
+                        component={(props) => <UsersBarsPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/bar/:id"
@@ -104,7 +109,7 @@ class Routes extends Component {
                         path="/tipsy/myRecipes"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={UsersRecipesPage}/>
+                        component={(props) => <UsersRecipesPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/recipe/:id"
@@ -128,8 +133,21 @@ class Routes extends Component {
                         path="/tipsy/admin"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={AdminPage}/> {/* <Route */}
+                        component={(props) => <AdminPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
+                        exact
+                        path = "/tipsy/user/stg"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
+                    <PrivateRoute
+                        exact
+                        path = "/tipsy/user/stg/changePassword"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>} />
+                    <PrivateRoute
+                        exact
                         path={["/tipsy/user/:nickname"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
@@ -139,22 +157,23 @@ class Routes extends Component {
                         path="/tipsy/game"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={Game}/>
+                        component={(props) => <Game currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/createbar"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={CreateBarPage}/>
+                        component={(props) => <CreateBarPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/createRecipe"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={CreateRecipePage}/>
+                        component={(props) => <CreateRecipePage currentUser={this.state.currentUser} {...props}/>}/>
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.props.onLogout} {...props}/>}/>
+                    <Route path="/tipsy/error" component={ErrorPage}/>
                 </Switch>
             </Router>
         );
@@ -162,3 +181,38 @@ class Routes extends Component {
 }
 
 export default Routes;
+
+const PrivateRoute = ({ component, authed, redirectTo, ...rest }) => {
+    return (
+        <Route {...rest} render={ props => {
+            return authed ? (
+                renderMergedProps(component, props, rest)
+            ) : (
+                <Redirect to={{
+                    pathname: redirectTo,
+                    state: { from: props.location }
+                }}/>
+            );
+        }}/>
+    );
+};
+
+const PublicRoute = ({ component, authed, redirectTo, ...rest }) => {
+    return (
+        <Route {...rest} render={ routeProps => {
+            return authed ? (
+                <Redirect to={{
+                    pathname: redirectTo,
+                    state: { from: routeProps.location }
+                }}/>
+            ) : (
+                renderMergedProps(component, routeProps, rest)
+            );
+        }}/>
+    );
+};
+
+const renderMergedProps = (component, ...rest) => {
+    const theProps = Object.assign({}, ...rest);
+    return React.createElement(component, theProps);
+};

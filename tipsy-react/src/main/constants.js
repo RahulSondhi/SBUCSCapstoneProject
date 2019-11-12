@@ -1,6 +1,15 @@
 import React, {Component, Fragment} from 'react';
+import {notification} from 'antd';
 import {Link} from 'react-router-dom';
-import UserPic from '../assets/user.svg';
+import Avatar from 'react-avatar-edit';
+
+import UserPic from '../assets/defaultIcons/user.svg';
+import BarPic from '../assets/defaultIcons/bar.svg';
+import RecipePic from '../assets/defaultIcons/recipe.svg';
+import AddPic from '../assets/defaultIcons/add.svg';
+import SearchPic from '../assets/defaultIcons/search.svg';
+import UnknownPic from '../assets/defaultIcons/unknown.svg';
+import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 
 export const CustomButton = (props) => {
     return (
@@ -26,83 +35,8 @@ export const CustomCreateButton = (props) => {
     )
 }
 
-export const Entry = (props) => {
-    return (
-        <div className="small-12 medium-6 large-3 entryDiv">
-            <Link to={props.redirect}>
-                <button type="submit" className="entry">
-                    <br/>
-                    <h3 style={props.titleStyle}>
-                        {props.itemName}
-                    </h3>
-                    <img src={props.icon} style={props.style} id={props.id} alt={props.alt}/>
-                    <br/>
-
-                    <p className={props.textClass}>{props.ownerName}</p>
-                </button>
-            </Link>
-        </div>
-    )
-}
-
 export const SVG = (props) => {
     return (<img src={props.src} style={props.style} alt={props.alt}/>);
-}
-
-export const DrinksStyle = {
-    width: "50%",
-    height: "50%",
-    "marginLeft": "auto",
-    "marginRight": "auto",
-    "display": "block"
-}
-
-export const CupBottleStyle = {
-    width: "50em",
-    height: "50em"
-}
-
-export const TipsyStyle = {
-    width: "100%",
-    height: "100%"
-}
-
-export const SmallTipsyStyle = {
-    width: "12%",
-    height: "12%"
-}
-
-export const CounterStyle = {
-    height: "20em"
-}
-
-export const IngredientStyle = {
-    height: "6em",
-    margin: "0.5em"
-}
-
-export const ToolStyle = {
-    width: "70%",
-    height: "70%",
-    "marginLeft": "auto",
-    "marginRight": "auto",
-    "marginTop": "auto",
-    "display": "block"
-}
-
-export const BottleIconStyle = {
-    width: "50%",
-    height: "50%"
-}
-
-export const ProfileIconStyle = {
-    width: "8%",
-    height: "8%"
-}
-
-export const TitleStyle = {
-    width: "80%",
-    height: "20%"
 }
 
 // Neccessary Data
@@ -126,29 +60,151 @@ export const PASSWORD_MAX_LENGTH = 256;
 
 export default SVG;
 
+// Profile Components
+
+export class GetProfImg extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.image = this.props.pic;
+        this.type = this.props.type;
+        this.className = this.props.className;
+        this.alt = this.props.alt;
+    }
+
+    render() {
+
+        if (this.image === null || this.image === "") {
+            if (this.type === "bar") {
+                this.image = BarPic
+            } else if (this.type === "recipe") {
+                this.image = RecipePic
+            } else if (this.type === "user") {
+                this.image = UserPic
+            } else if (this.type === "add") {
+                this.image = AddPic
+            } else if (this.type === "search") {
+                this.image = SearchPic
+            } else {
+                this.image = UnknownPic
+            }
+        } else {
+            this.image = "data:image/png;base64, " + this.props.pic
+        }
+
+        return (<img src={this.image} className={this.className} alt={this.alt}/>)
+    }
+};
+
+export class MakeProfImg extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            preview: null,
+            src: null
+        }
+
+        this.state.src = this.props.pic;
+        this.className = this.props.className;
+
+        if (this.state.src === null || this.state.src === "") {
+            this.state.src = NewUserPic;
+        } else {
+            this.state.src = ("data:image/png;base64, " + this.props.pic);
+        }
+
+        this.onCrop = this
+            .onCrop
+            .bind(this)
+        this.onClose = this
+            .onClose
+            .bind(this)
+        this.onBeforeFileLoad = this
+            .onBeforeFileLoad
+            .bind(this)
+        this.onImageLoad = this
+            .onImageLoad
+            .bind(this)
+    }
+
+    onClose() {
+        this.setState({preview: null})
+    }
+
+    onCrop(preview) {
+        this.setState({preview});
+        if (this.state.preview != null) {
+            this
+                .props
+                .data(this.state.preview);
+        }
+    }
+
+    onImageLoad() {
+            this
+                .props
+                .data(this.state.src);
+    }
+
+    onBeforeFileLoad(elem) {
+        if (elem.target.files[0].size > 71680) {
+            notification["error"]({message: 'Tipsy App', description: "File is too big!"});
+            elem.target.value = "";
+        };
+
+        if (elem.target.files[0].type != "image/png" && elem.target.files[0].type != "image/jpeg") {
+            notification["error"]({message: 'Tipsy App', description: "Only PNG + JPEG Allowed To Be Uploaded"});
+            elem.target.value = "";
+        };
+    }
+
+    render() {
+        return (
+            <div
+                className={"makeProfPicEditor grid-x align-center-middle " + this.className}>
+                <Avatar
+                    width={360}
+                    height={360}
+                    onCrop={this.onCrop}
+                    onClose={this.onClose}
+                    onImageLoad={this.onImageLoad}
+                    onBeforeFileLoad={this.onBeforeFileLoad}
+                    src={this.state.src}
+                    className="editor-canvas cell"/>
+            </div>
+        )
+    }
+}
+
 // Preview Components
 
 export const BarsPreview = ({bars, className}) => (
     <Fragment>
-        {bars.map(bar => (
-           <GetBar bar={bar} className={"previewBar grid-x align-center-middle "+className}/>
-        ))}
+        {bars.map(bar => (<GetBar
+            key={bar.id}
+            bar={bar}
+            className={"previewBar grid-x align-center-middle " + className}/>))}
     </Fragment>
 );
 
 export const RecipesPreview = ({recipes, className}) => (
     <Fragment>
-        {recipes.map(recipe => (
-            <GetRecipe recipe={recipe} className={"previewRecipe grid-x align-center-middle "+className}/>
-        ))}
+        {recipes.map(recipe => (<GetRecipe
+            key={recipe.id}
+            recipe={recipe}
+            className={"previewRecipe grid-x align-center-middle " + className}/>))}
     </Fragment>
 );
 
 export const UsersPreview = ({users, className}) => (
     <Fragment>
-        {users.map(user => (
-            <GetUser user={user} className={"previewUser grid-x align-center-middle "+className}/>
-        ))}
+        {users.map(user => (<GetUser
+            key={user.id}
+            user={user}
+            className={"previewUser grid-x align-center-middle " + className}/>))}
     </Fragment>
 );
 
@@ -162,25 +218,22 @@ class GetBar extends Component {
     }
 
     render() {
-
-        if (this.bar.img === null || this.bar.img === "") {
-            this.bar.img = UserPic
-        }else{
-            this.bar.img = "data:image/png;base64, " + this.props.bar.img
-        }
-
         return (
-            <Link to={"/tipsy/bar/" + this.bar.id} className={this.className} key={this.bar.id}>
+            <Link
+                to={"/tipsy/bar/" + this.bar.id}
+                className={this.className}
+                key={this.bar.id}>
                 <div className="small-4 grid-x cell">
-                    <img
-                        src={this.bar.img}
+                    <GetProfImg
                         className="small-10 cell"
-                        alt={this.bar.name}></img>
+                        pic={this.bar.img}
+                        alt={this.bar.name}
+                        type="bar"/>
                 </div>
                 <div className="small-8 grid-x cell">
                     <div className="previewBarName cell">{this.bar.name}</div>
                     <div className="previewBarOwner cell">Owner:
-                        <span>{" "+this.bar.owner}</span>
+                        <span>{" " + this.bar.owner}</span>
                     </div>
                 </div>
             </Link>
@@ -193,34 +246,30 @@ class GetRecipe extends Component {
     constructor(props) {
         super(props);
 
-
         this.recipe = this.props.recipe;
         this.className = this.props.className;
     }
 
     render() {
-
-        if (this.recipe.img === null || this.recipe.img === "") {
-            this.recipe.img = UserPic
-        }else{
-            this.recipe.img = "data:image/png;base64, " + this.props.recipe.img
-        }
-
         return (
-            <Link to={"/tipsy/recipe/" + this.recipe.id} className={this.className} key={this.recipe.id}>
-            <div className="small-4 grid-x cell">
-                <img
-                    src={this.recipe.img}
-                    className="small-10 cell"
-                    alt={this.recipe.name}></img>
-            </div>
-            <div className="small-8 grid-x cell">
-                <div className="previewRecipeName cell">{this.recipe.name}</div>
-                <div className="previewRecipeAuthor cell">Author:
-                    <span>{" "+this.recipe.author}</span>
+            <Link
+                to={"/tipsy/recipe/" + this.recipe.id}
+                className={this.className}
+                key={this.recipe.id}>
+                <div className="small-4 grid-x cell">
+                    <GetProfImg
+                        className="small-10 cell"
+                        pic={this.recipe.img}
+                        alt={this.recipe.name}
+                        type="recipe"/>
                 </div>
-            </div>
-        </Link>
+                <div className="small-8 grid-x cell">
+                    <div className="previewRecipeName cell">{this.recipe.name}</div>
+                    <div className="previewRecipeAuthor cell">Author:
+                        <span>{" " + this.recipe.author}</span>
+                    </div>
+                </div>
+            </Link>
         )
     }
 };
@@ -235,25 +284,22 @@ class GetUser extends Component {
     }
 
     render() {
-
-        if (this.user.img === null || this.user.img === "") {
-            this.user.img = UserPic
-        }else{
-            this.user.img = "data:image/png;base64, " + this.props.user.img
-        }
-
         return (
-            <Link to={"/tipsy/user/" + this.user.nickname} className={this.className} key={this.user.nickname}>
-            <div className="small-4 grid-x cell">
-                <img
-                    src={this.user.img}
-                    className="small-10 cell"
-                    alt={this.user.nickname}></img>
-            </div>
-            <div className="small-8 grid-x cell">
-                <div className="previewRecipeName cell">{this.user.nickname}</div>
-            </div>
-        </Link>
+            <Link
+                to={"/tipsy/user/" + this.user.nickname}
+                className={this.className}
+                key={this.user.nickname}>
+                <div className="small-4 grid-x cell">
+                    <GetProfImg
+                        className="small-10 cell"
+                        pic={this.user.img}
+                        alt={this.user.nickname}
+                        type="user"/>
+                </div>
+                <div className="small-8 grid-x cell">
+                    <div className="previewRecipeName cell">{this.user.nickname}</div>
+                </div>
+            </Link>
         )
     }
 };

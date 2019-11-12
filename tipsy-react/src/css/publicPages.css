@@ -1,12 +1,6 @@
 /* CSS for Public Pages */
 @import url( 'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
-.boxContainer {
-    width: 70%;
-    height: 50em;
-    margin: 0 auto;
-}
-
 /* General Pages */
 
 #equipmentPageTitle,
@@ -27,31 +21,11 @@
 /* Bar Pages */
 
 .barPageDescTitle{
-    margin-top: 8%;;
+    margin-top: 8%;
 }
 
 /* Gear Pages */
 
-.gearBox {
-    height: 100%;
-    width: 100%;
-    background-image: var(--viewbox-image);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    color: var(--crimson);
-    border-radius: 0.5em;
-}
 
 /* Recipe Pages */
 
-.recipeBox {
-    height: 100%;
-    width: 100%;
-    background-image: var(--viewbox-image);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    color: var(--crimson);
-    border-radius: 0.5em;
-}

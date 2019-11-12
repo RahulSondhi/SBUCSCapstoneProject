@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import Tipsy from '../assets/Tipsy.svg';
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../util/APIUtils';
-import Bottle from '../assets/bottle.svg';
-import Cup from '../assets/cup.svg';
+import Bottle from '../assets/equipment/bottle.svg';
+import Cup from '../assets/equipment/cup.svg';
 
 import {
     FIRSTNAME_MIN_LENGTH,
@@ -62,8 +62,8 @@ class Register extends Component {
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
-        this.clearFields = this
-            .clearFields
+        this.disableButton = this
+            .disableButton
             .bind(this);
     }
     /*
@@ -115,15 +115,8 @@ class Register extends Component {
         return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success' && this.state.nickname.validateStatus === 'success' && this.state.password.validateStatus === 'success' && this.state.passwordConfirm.validateStatus === 'success');
     }
 
-    clearFields() {
-        this.setState({
-            firstName: '',
-            lastName: '',
-            nickname: '',
-            email: '',
-            password: ''
-        });
-        console.log("ClearFields is being caled");
+    disableButton() {
+        document.getElementById("registerButton").disabled = true;
     }
 
     /*
@@ -219,7 +212,7 @@ class Register extends Component {
                         validateStatus={this.state.password.validateStatus}
                         help={this.state.password.errorMsg}
                         className="medium-8 cell">
-                        <Input
+                        <Input.Password
                             prefix={< Icon type = "lock" />}
                             name="password"
                             type="password"
@@ -234,7 +227,7 @@ class Register extends Component {
                         validateStatus={this.state.passwordConfirm.validateStatus}
                         help={this.state.passwordConfirm.errorMsg}
                         className="medium-8 cell">
-                        <Input
+                        <Input.Password
                             prefix={< Icon type = "lock" />}
                             name="passwordConfirm"
                             type="password"
@@ -245,7 +238,7 @@ class Register extends Component {
                     </FormItem>
 
                     <FormItem className="cell">
-                        <button type="submit" disabled={this.isFormInvalid()} onClick={this.clearFields} className="button">
+                        <button type="submit" id="registerButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
                             Register
                         </button>
                     </FormItem>

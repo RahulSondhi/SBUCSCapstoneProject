@@ -1,28 +1,23 @@
-package com.maroon.mixology.exchange.request;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+package com.maroon.mixology.exchange.response;
 
 import com.maroon.mixology.entity.type.MeasurementType;
 
-public class SettingsRequest {
-    @NotBlank
-    @Size(min = 2, max = 50)
+public class UserSettingsResponse {
     private String firstName;
-
-    @NotBlank
-    @Size(min = 2, max = 50)
     private String lastName;
-    
-    @NotBlank
-    @Size(max = 62)
-    @Email
     private String email;
-
     private String profilePic;
+    private MeasurementType measurement;
 
-    private String measurement;
+    public UserSettingsResponse(String firstName, String lastName, String email, String profilePic,
+            MeasurementType measurement) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.profilePic = profilePic;
+        this.measurement = measurement;
+    }
+
 
     public String getFirstName() {
         return firstName;
@@ -56,11 +51,11 @@ public class SettingsRequest {
         this.profilePic = profilePic;
     }
 
-    public String getMeasurement() {
+    public MeasurementType getMeasurement() {
         return measurement;
     }
 
-    public void setMeasurement(String measurement) {
+    public void setMeasurement(MeasurementType measurement) {
         this.measurement = measurement;
     }
 

@@ -1,64 +1,81 @@
 import React, {Component} from 'react';
-import {CustomCreateButton, Entry, BottleIconStyle} from '../../main/constants';
-import Bottle from '../../assets/bottle.svg';
+import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
+import {BarsPreview, GetProfImg} from '../../main/constants';
+
+import {getUserProfile} from '../../util/APIUtils';
+
 class UsersBarsPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: null,
+            isLoading: true
+        }
+        this.loadUserProfile = this
+            .loadUserProfile
+            .bind(this);
+    }
+
+    loadUserProfile(nickname) {
+        this.setState({isLoading: true});
+
+        getUserProfile(nickname).then(response => {
+            this.setState({user: response, isLoading: false});
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
+    }
+
+    componentDidMount() {
+        let try_name = this.props.currentUser.nickname;
+        const nickname = try_name;
+        this.loadUserProfile(nickname);
+    }
+
     render() {
+
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        // Checking response
+        if (this.state.notFound === true || this.state.serverError === true) {
+            return <Redirect
+                to={{
+                pathname: "/tipsy/error",
+                state: {
+                    from: this.props.location,
+                    notFound: this.state.notFound,
+                    serverError: this.state.serverError
+                }
+            }}/>
+        }
+
         return (
-            <div className="grid-container-fluid grid-margin-y">
+            <div className="grid-x grid-x-margin align-center-middle">
                 <Navbar/>
-                <div className="grid-x cell">
-                    <div className="cell small-12 medium-6 large-4 large-offset-4">
-                        <h1 className="myTitle caption">
-                            My Bars
-                        </h1>
-                    </div>
-                    <div className="cell small-12 medium-6 large-4 createButtonHolder">
-                        <CustomCreateButton redirect="/tipsy/createBar" name="Create A Bar +"/>
-                    </div>
-                </div>
-                <div className="grid-container grid-x full">
-                    <div className="grid-x box cell large-10 large-offset-1">
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"
-                            alt="Bottle"/>
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"/>
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"/>
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"/>
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"/>
-                        <Entry
-                            itemName="BarName"
-                            icon={Bottle}
-                            style={BottleIconStyle}
-                            ownerName="OwnerName"
-                            redirect="/tipsy/myBars/bar"/>
-                    </div>
-                    <div className="grid-x cell large-1"></div>
+
+                <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.user.nickname + "'s Bars"}</h1>
+
+                <div className="grid-x align-center-middle cell">
+
+                    <Link to="/tipsy/createbar" className="previewBar grid-x align-center-middle small-6 medium-3 cell" key="add">
+                        <div className="small-4 grid-x cell">
+                            <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
+                        </div>
+                        <div className="small-8 grid-x cell">
+                            <div className="previewBarName cell">Add A Bar</div>
+                        </div>
+                    </Link>
+
+                    <BarsPreview className="small-6 medium-3 cell" bars={this.state.user.bars}/>
                 </div>
             </div>
         )

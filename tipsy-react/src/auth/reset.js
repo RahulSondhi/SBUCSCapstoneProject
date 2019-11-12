@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {SVG, TipsyStyle} from '../main/constants';
-import Tipsy from '../assets/Tipsy.svg';
 
 import { resetPassword, validateReset} from '../util/APIUtils';
 
@@ -124,7 +122,7 @@ class Reset extends Component {
         if(this.state.uuid.validateStatus === 'success'){
             return ( //The token is valid, return the form to proceed with password reset
                     <div>
-                        <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+                        {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                         <h1>Reset Password</h1>
                         <h3>Please enter a new password to login.</h3>
                         <Form onSubmit={this.handleSubmit} className="">
@@ -165,7 +163,7 @@ class Reset extends Component {
             else{
                 return ( //The token is invalid, return an error page
                     <div>
-                        <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/>
+                        {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                         <h1>Invalid Reset token :(</h1>
                     </div>
                 );

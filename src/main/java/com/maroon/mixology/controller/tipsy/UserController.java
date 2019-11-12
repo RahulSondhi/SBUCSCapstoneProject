@@ -8,11 +8,14 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.type.MeasurementType;
+import com.maroon.mixology.exchange.request.ChangePasswordRequest;
 import com.maroon.mixology.exchange.request.SettingsRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
 import com.maroon.mixology.exchange.response.UserResponse;
+import com.maroon.mixology.exchange.response.UserSettingsResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
 import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
@@ -27,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +54,9 @@ public class UserController {
     @Autowired
     private RecipeServiceImpl recipeService;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
     @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserDetails currentUser) {
@@ -117,14 +124,54 @@ public class UserController {
         }
     }
 
-    @PostMapping("/settings")
-    public ResponseEntity<?> changeProfile(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
-        //we get the current user by getting their email address
-        User user = userService.findByEmail(currentUser.getUsername());
-        //If empty, leave default
-        if(settingsRequest.getFirstName() != "")
+    @PostMapping("/changeSettings")
+    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
+        try{
+            //we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
             user.setFirstName(settingsRequest.getFirstName());
-        userRepository.save(user);
-        return null;
+            user.setLastName(settingsRequest.getLastName());
+            user.setEmail(settingsRequest.getEmail());
+            user.setProfilePic(settingsRequest.getProfilePic());
+            user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
+            userRepository.save(user);
+            return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }  
+    }
+
+    @GetMapping("/getSettings")
+    public ResponseEntity<?> getSettings(@CurrentUser UserDetails currentUser) {
+        //we get the current user by getting their email address
+        try{
+            User user = userService.findByEmail(currentUser.getUsername());
+            UserSettingsResponse userSettings = new UserSettingsResponse(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getProfilePic(),
+                user.getMeasurement());
+            return ResponseEntity.ok(userSettings);
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to load. Error: " + e.toString()),
+            HttpStatus.BAD_REQUEST);
+        }
+        
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<?> changePassword(@CurrentUser UserDetails currentUser, @Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+        try{
+            //we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
+            user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
+            userRepository.save(user);
+            return ResponseEntity.ok(new ApiResponse(true, "Password has been updated successfully!"));
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }  
     }
 }
