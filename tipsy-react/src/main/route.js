@@ -27,8 +27,8 @@ import SearchPage from '../tipsy/userPages/searchPage.js';
 // Game Page Imports
 import Game from '../tipsy/game.js';
 
-import PrivateRoute from '../js/PrivateRoute.js';
-import PublicRoute from '../js/PublicRoute.js';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 class Routes extends Component {
 

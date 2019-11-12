@@ -14,7 +14,7 @@ import {
     NICKNAME_MAX_LENGTH,
     PASSWORD_MIN_LENGTH,
     PASSWORD_MAX_LENGTH
-} from '../js/constants.js';
+} from '../main/constants';
 
 import {Link} from 'react-router-dom';
 import {Form, Input, Icon, notification} from 'antd';

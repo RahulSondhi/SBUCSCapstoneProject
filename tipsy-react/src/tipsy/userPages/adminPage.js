@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Entry, CustomButton} from '../../js/constants.js';
+import {Entry, CustomButton} from '../../main/constants';
 import UserIcon from '../../assets/user.svg';
 import Navbar from '../navbar/navbar.js';
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {SVG, TipsyStyle} from '../js/constants.js';
+import {SVG, TipsyStyle} from '../main/constants';
 import Tipsy from '../assets/Tipsy.svg';
 
 import { resetPassword, validateReset} from '../util/APIUtils';
 
 import {
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
-} from '../js/constants.js';
+} from '../main/constants';
 import { Form, Input, Button, notification } from 'antd';
 const FormItem = Form.Item;
 

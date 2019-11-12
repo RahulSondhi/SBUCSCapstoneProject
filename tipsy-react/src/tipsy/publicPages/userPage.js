@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom'
 import UserPic from '../../assets/user.svg';
+import {GetRecipes, GetBars} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
 import {getUserProfile} from '../../util/APIUtils';
@@ -72,227 +72,6 @@ class UserPage extends Component {
             }}/>
         }
 
-        // this.state.user.bars = [
-        //     {
-        //         name: "gay",
-        //         id: "69",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "691",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "692",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "693",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "694",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "695",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "696",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "697",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "698",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "699",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69q",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69w",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69e",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69r",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69t",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69y",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69u",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69i",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69o",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69p",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69a",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69s",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }, {
-        //         name: "gay",
-        //         id: "69696",
-        //         owner: "byranPapi",
-        //         img: UserPic
-        //     }
-        // ]
-
-        // this.state.user.recipes = {
-        //     recipesWritten: [
-        //         {
-        //             name: "gaytini1",
-        //             author: "DAPAPI",
-        //             id: "1",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "2",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "3",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "4",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "5",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "6",
-        //             img: UserPic
-        //         }
-        //     ],
-        //     recipesIncompleted: [
-        //         {
-        //             name: "gaytini2",
-        //             author: "DAPAPI",
-        //             id: "11",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "22",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "33",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "44",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "55",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "66",
-        //             img: UserPic
-        //         }
-        //     ],
-        //     recipesCompleted: [
-        //         {
-        //             name: "gaytini3",
-        //             author: "DAPAPI",
-        //             id: "111",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "222",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "333",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "444",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "555",
-        //             img: UserPic
-        //         }, {
-        //             name: "gaytini",
-        //             author: "DAPAPI",
-        //             id: "666",
-        //             img: UserPic
-        //         }
-        //     ]
-        // }
-
         return (
             <div className="grid-x grid-x-margin align-center-middle">
 
@@ -308,12 +87,12 @@ class UserPage extends Component {
                         pic={this.state.user.profilePic}
                         nickname={this.state.user.nickname}/>
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
-                    <h1 id="userPageBarTitle" className="caption small-10 cell">{this.state.user.nickname}'s Bars</h1>
+                    <h1 id="userPageBarTitle" className="captionRed small-10 cell">{this.state.user.nickname}'s Bars</h1>
                     <div
                         className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
                         <div
                             className="userPageBarContainer grid-x grid-margin-x align-center-middle cell">
-                            <GetBar
+                            <GetBars
                                 className="userPageBarPreview grid-x align-center-middle cell"
                                 bars={this.state.user.bars}/>
                         </div>
@@ -322,27 +101,27 @@ class UserPage extends Component {
                 <div
                     id="rightProfileSide"
                     className="small-12 medium-8 grid-x align-center-middle cell">
-                    <h1 id="userPageBarTitle" className="caption small-10 cell">{this.state.user.nickname}'s Recipes History</h1>
+                    <h1 id="userPageBarTitle" className="captionRed small-10 cell">{this.state.user.nickname}'s Recipes History</h1>
                     <Tabs className="small-12 medium-10 cell" tabPosition="right">
                         <TabPane tab="Done" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
                                 <GetRecipes
                                     className="small-6 userPageRecipePreview grid-x align-center-middle cell"
-                                    bars={this.state.user.recipes.recipesCompleted}/>
-                            </div>userPageBarPreview
+                                    recipes={this.state.user.recipesCompleted}/>
+                            </div>
                         </TabPane>
                         <TabPane tab="Made" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
                                 <GetRecipes
                                     className="small-6 userPageRecipePreview grid-x align-center-middle cell"
-                                    bars={this.state.user.recipes.recipesWritten}/>
+                                    recipes={this.state.user.recipesWritten}/>
                             </div>
                         </TabPane>
                         <TabPane tab="Doing" key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
                                 <GetRecipes
                                     className="small-6 userPageRecipePreview grid-x align-center-middle cell"
-                                    bars={this.state.user.recipes.recipesIncompleted}/>
+                                    recipes={this.state.user.recipesIncompleted}/>
                             </div>
                         </TabPane>
                     </Tabs>
@@ -351,6 +130,8 @@ class UserPage extends Component {
         )
     }
 };
+
+export default UserPage;
 
 class GetUserImg extends Component {
 
@@ -367,37 +148,8 @@ class GetUserImg extends Component {
             this.image = UserPic
         }
 
-        return (<img src={this.image} className={this.className} alt={this.props.nickname}/>)
+        return (
+        <img src={this.image} className={this.className} alt={this.props.nickname}/>
+        )
     }
 };
-
-export default UserPage;
-
-const GetBar = ({bars, className}) => ( <> {
-    bars.map(bar => (
-        <Link to={"/tipsy/bar/" + bar.id} className={className} key={bar.id}>
-            <div className="small-4 grid-x cell">
-                <img src={bar.img} className="small-10 cell" alt={bar.name}></img>
-            </div>
-            <div className="small-8 grid-x cell">
-                <div className="userPageBarPreviewName cell">{bar.name}</div>
-                <div className="userPageBarPreviewOwner cell">Owner:
-                    <span>{bar.owner}</span>
-                </div>
-            </div>
-        </Link>
-    ))
-} < />
-  ); 
-
-const GetRecipes = ({bars, className}) => ( <> {
-    bars.map(bar => (
-        <Link to={"/tipsy / recipe / " + bar.id} className={className} key={bar.id}>
- < div className = "small-4 grid-x cell" > <img src={bar.img} className="small-10 cell" alt={bar.name}></img> < /div>
-            <div className="small-8 grid-x cell">
-                <div className="userPageRecipePreviewName cell">{bar.name}</div > <div className="userPageRecipePreviewOwner cell">Author:
-    <span>{bar.author}</span>
-</div> < /div>
-        </Link >))
-} < />
-  );

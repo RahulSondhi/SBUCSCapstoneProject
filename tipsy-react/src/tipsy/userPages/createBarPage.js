@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CustomCreateButton} from '../../js/constants.js';
+import {CustomCreateButton} from '../../main/constants';
 import {Input} from 'antd';
 import {Link} from 'react-router-dom';
 import Navbar from '../navbar/navbar.js';
