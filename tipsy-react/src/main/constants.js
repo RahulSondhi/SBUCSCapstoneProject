@@ -114,11 +114,18 @@ export class MakeProfImg extends Component {
             src: null
         }
 
+        this.type = this.props.type;
         this.state.src = this.props.pic;
         this.className = this.props.className;
 
         if (this.state.src === null || this.state.src === "") {
-            this.state.src = NewUserPic;
+            if (this.type === "bar") {
+                this.state.src = NewBarPic
+            } else if (this.type === "recipe") {
+                this.state.src = NewRecipePic
+            } else {
+                this.state.src = NewUserPic
+            }
         } else {
             this.state.src = ("data:image/png;base64, " + this.props.pic);
         }
@@ -157,12 +164,11 @@ export class MakeProfImg extends Component {
     }
 
     onBeforeFileLoad(elem) {
+        console.log(elem)
         if (elem.target.files[0].size > 71680) {
             notification["error"]({message: 'Tipsy App', description: "File is too big!"});
             elem.target.value = "";
-        };
-
-        if (elem.target.files[0].type != "image/png" && elem.target.files[0].type != "image/jpeg") {
+        } else if (elem.target.files[0].type != "image/png" && elem.target.files[0].type != "image/jpeg") {
             notification["error"]({message: 'Tipsy App', description: "Only PNG + JPEG Allowed To Be Uploaded"});
             elem.target.value = "";
         };
@@ -307,6 +313,45 @@ class GetUser extends Component {
                     <div className="previewRecipeName cell">{this.user.nickname}</div>
                 </div>
             </Link>
+        )
+    }
+};
+
+// Dynamic Form
+
+export class DynamicForm extends Component {
+
+    state = {
+        value: '',
+        dataSource: []
+    };
+
+    onSearch = searchText => {
+        this.setState({
+            dataSource: !searchText
+                ? []
+                : [
+                    searchText, searchText.repeat(2),
+                    searchText.repeat(3)
+                ]
+        });
+    };
+
+    onChange = value => {
+        this.setState({ value });
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.onLoad = this.props.onLoad;
+        this.type = this.props.type;
+        this.className = this.props.className;
+    }
+
+    render() {
+        return (
+            <div className={"grid-x align-center-middle " + this.className}></div>
         )
     }
 };

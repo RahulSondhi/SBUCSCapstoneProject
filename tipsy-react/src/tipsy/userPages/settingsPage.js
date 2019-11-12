@@ -214,7 +214,7 @@ class SettingsPage extends Component {
                     Settings
                 </h1>
 
-                <MakeProfImg pic={this.state.profilePic.value} className="cell" data={this.handleImageLoad}/>
+                <MakeProfImg type="user" pic={this.state.profilePic.value} className="cell" data={this.handleImageLoad}/>
 
                 <Form
                     onSubmit={this.handleSubmit}
