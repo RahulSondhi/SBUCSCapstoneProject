@@ -13,6 +13,7 @@ import com.maroon.mixology.exchange.response.ApiResponse;
 
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
 import com.maroon.mixology.exchange.response.UserResponse;
+import com.maroon.mixology.exchange.response.UserSettingsResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
 import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
@@ -121,8 +122,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/settings")
-    public ResponseEntity<?> changeProfile(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
+    @PostMapping("/changeSettings")
+    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
         try{
             //we get the current user by getting their email address
             User user = userService.findByEmail(currentUser.getUsername());
@@ -149,5 +150,24 @@ public class UserController {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
         }  
+    }
+
+    @GetMapping("/getSettings")
+    public ResponseEntity<?> getSettings(@CurrentUser UserDetails currentUser) {
+        //we get the current user by getting their email address
+        try{
+            User user = userService.findByEmail(currentUser.getUsername());
+            UserSettingsResponse userSettings = new UserSettingsResponse(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getProfilePic(),
+                user.getMeasurement());
+            return ResponseEntity.ok(userSettings);
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to load. Error: " + e.toString()),
+            HttpStatus.BAD_REQUEST);
+        }
+        
     }
 }
