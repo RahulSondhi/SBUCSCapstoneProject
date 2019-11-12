@@ -1,0 +1,91 @@
+/* Caption Headers */
+
+.caption {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
+    font-size: 3em;
+    color: var(--white);
+}
+
+.captionRed {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
+    font-size: 3em;
+    color: var(--white);
+}
+
+/* Animations */
+@-moz-keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+@keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+/* Adding onto Foundation Grids */
+
+.align-center-middle {
+    text-align: center;
+}
+
+/* Previews */
+
+.previewBar,
+.previewRecipe,
+.previewUser,
+.previewEquipment{
+    text-align: left;
+    color: white;
+    min-height: 0;
+}
+
+.previewBar:hover,
+.previewRecipe:hover,
+.previewUser:hover,
+.previewEquipment:hover{
+    color: white;
+}
+
+.previewBarName,
+.previewRecipeName,
+.previewUserName,
+.previewEquipmentName{
+    font-size: 1.5em;
+}
+
+.previewBarOwner,
+.previewRecipeAuthor{
+    font-size: 0.75em;
+}
+
+.previewBarOwner span,
+.previewRecipeAuthor span{
+    color: var(--brass);
+}

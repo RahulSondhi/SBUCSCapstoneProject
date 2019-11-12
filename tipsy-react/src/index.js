@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 import './foundation/foundation.min.css';
 import './index.css';
+import './css/constant.css';
 import './css/form.css';
 import './css/auth.css';
 import './css/game.css';

@@ -128,23 +128,31 @@ export default SVG;
 
 // Preview Components
 
-export const GetBars = ({bars, className}) => (
+export const BarsPreview = ({bars, className}) => (
     <Fragment>
         {bars.map(bar => (
-           <GetBarPreview bar={bar} className={className}/>
+           <GetBar bar={bar} className={"previewBar grid-x align-center-middle "+className}/>
         ))}
     </Fragment>
 );
 
-export const GetRecipes = ({recipes, className}) => (
+export const RecipesPreview = ({recipes, className}) => (
     <Fragment>
         {recipes.map(recipe => (
-            <GetRecipePreview recipe={recipe} className={className}/>
+            <GetRecipe recipe={recipe} className={"previewRecipe grid-x align-center-middle "+className}/>
         ))}
     </Fragment>
 );
 
-class GetBarPreview extends Component {
+export const UsersPreview = ({users, className}) => (
+    <Fragment>
+        {users.map(user => (
+            <GetUser user={user} className={"previewUser grid-x align-center-middle "+className}/>
+        ))}
+    </Fragment>
+);
+
+class GetBar extends Component {
 
     constructor(props) {
         super(props);
@@ -170,8 +178,8 @@ class GetBarPreview extends Component {
                         alt={this.bar.name}></img>
                 </div>
                 <div className="small-8 grid-x cell">
-                    <div className="userPageBarPreviewName cell">{this.bar.name}</div>
-                    <div className="userPageBarPreviewOwner cell">Owner:
+                    <div className="previewBarName cell">{this.bar.name}</div>
+                    <div className="previewBarOwner cell">Owner:
                         <span>{" "+this.bar.owner}</span>
                     </div>
                 </div>
@@ -180,7 +188,7 @@ class GetBarPreview extends Component {
     }
 };
 
-class GetRecipePreview extends Component {
+class GetRecipe extends Component {
 
     constructor(props) {
         super(props);
@@ -199,7 +207,7 @@ class GetRecipePreview extends Component {
         }
 
         return (
-            <Link to={"/tipsy/recipe/ " + this.recipe.id} className={this.className} key={this.recipe.id}>
+            <Link to={"/tipsy/recipe/" + this.recipe.id} className={this.className} key={this.recipe.id}>
             <div className="small-4 grid-x cell">
                 <img
                     src={this.recipe.img}
@@ -207,10 +215,43 @@ class GetRecipePreview extends Component {
                     alt={this.recipe.name}></img>
             </div>
             <div className="small-8 grid-x cell">
-                <div className="userPageRecipePreviewName cell">{this.recipe.name}</div>
-                <div className="userPageRecipePreviewOwner cell">Author:
+                <div className="previewRecipeName cell">{this.recipe.name}</div>
+                <div className="previewRecipeAuthor cell">Author:
                     <span>{" "+this.recipe.author}</span>
                 </div>
+            </div>
+        </Link>
+        )
+    }
+};
+
+class GetUser extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.user = this.props.user;
+        this.className = this.props.className;
+    }
+
+    render() {
+
+        if (this.user.img === null || this.user.img === "") {
+            this.user.img = UserPic
+        }else{
+            this.user.img = "data:image/png;base64, " + this.props.user.img
+        }
+
+        return (
+            <Link to={"/tipsy/user/" + this.user.nickname} className={this.className} key={this.user.nickname}>
+            <div className="small-4 grid-x cell">
+                <img
+                    src={this.user.img}
+                    className="small-10 cell"
+                    alt={this.user.nickname}></img>
+            </div>
+            <div className="small-8 grid-x cell">
+                <div className="previewRecipeName cell">{this.user.nickname}</div>
             </div>
         </Link>
         )

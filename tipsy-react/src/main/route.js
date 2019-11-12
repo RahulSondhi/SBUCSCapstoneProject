@@ -95,7 +95,7 @@ class Routes extends Component {
                         component={UsersBarsPage}/>
                     <PrivateRoute
                         exact
-                        path="/tipsy/bar/:name"
+                        path="/tipsy/bar/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={BarPage}/>
