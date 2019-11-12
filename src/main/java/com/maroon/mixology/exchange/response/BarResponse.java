@@ -8,21 +8,24 @@ import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 public class BarResponse {
     //we don't give them the ID
     private String name;
+    private String description;
     private String img;
     private String owner;
     private Set<BriefUserResponse> managers;
     private Set<BriefUserResponse> workers;
     private Set<BriefRecipeResponse> recipesAvaliable;
 
-    public BarResponse(String name, String img, String owner, Set<BriefUserResponse> managers,
+    public BarResponse(String name, String description, String img, String owner, Set<BriefUserResponse> managers,
             Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvaliable) {
         this.name = name;
+        this.description = description;
         this.img = img;
         this.owner = owner;
         this.managers = managers;
         this.workers = workers;
         this.recipesAvaliable = recipesAvaliable;
     }
+
 
     public String getName() {
         return name;
@@ -32,6 +35,14 @@ public class BarResponse {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public String getImg() {
         return img;
     }
@@ -71,5 +82,7 @@ public class BarResponse {
     public void setRecipesAvaliable(Set<BriefRecipeResponse> recipesAvaliable) {
         this.recipesAvaliable = recipesAvaliable;
     }
+
+
 
 }

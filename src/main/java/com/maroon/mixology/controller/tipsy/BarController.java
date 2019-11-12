@@ -71,6 +71,7 @@ public class BarController {
             }
             Bar bar = new Bar(
                 barRequest.getName(),
+                barRequest.getDescription(),
                 user,
                 barRequest.getImg(),
                 barManagers,
@@ -119,8 +120,9 @@ public class BarController {
             //lets build our response
             BarResponse barProfile = new BarResponse(
                 bar.getName(),
-                bar.getOwner().getNickname(),
+                bar.getDescription(),
                 bar.getImage(),
+                bar.getOwner().getNickname(),
                 barManagers,
                 barWorkers,
                 barRecipesAvaliable

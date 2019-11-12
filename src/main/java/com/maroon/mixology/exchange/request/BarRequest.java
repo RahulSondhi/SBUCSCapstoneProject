@@ -11,6 +11,7 @@ public class BarRequest {
     @NotBlank
     @Size(min = 4, max = 32)
     private String name;
+    private String description;
     //owner is handled by the current user
     private String img;
     private ArrayList<String> managers; //nicknames
@@ -23,6 +24,14 @@ public class BarRequest {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getImg() {
@@ -60,5 +69,7 @@ public class BarRequest {
     public void setRecipesAvaliable(ArrayList<String> recipesAvaliable) {
         this.recipesAvaliable = recipesAvaliable;
     }
+
+
 
 }
