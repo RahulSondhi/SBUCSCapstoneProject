@@ -27,6 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,9 @@ public class UserController {
     @Autowired
     private RecipeServiceImpl recipeService;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    
     @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserDetails currentUser) {
@@ -119,12 +123,31 @@ public class UserController {
 
     @PostMapping("/settings")
     public ResponseEntity<?> changeProfile(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
-        //we get the current user by getting their email address
-        User user = userService.findByEmail(currentUser.getUsername());
-        //If empty, leave default
-        if(settingsRequest.getFirstName() != "")
-            user.setFirstName(settingsRequest.getFirstName());
-        userRepository.save(user);
-        return null;
+        try{
+            //we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
+            //If empty, leave default
+            if(settingsRequest.getFirstName() != ""){
+                user.setFirstName(settingsRequest.getFirstName());
+            }
+            if(settingsRequest.getLastName() != ""){
+                user.setLastName(settingsRequest.getLastName());
+            }
+            if(settingsRequest.getEmail() != ""){
+                user.setEmail(settingsRequest.getEmail());
+            }
+            if(settingsRequest.getPassword() != ""){
+                user.setPassword(passwordEncoder.encode(settingsRequest.getPassword()));
+            }
+            if(settingsRequest.getProfilePic() != ""){
+                user.setProfilePic(settingsRequest.getProfilePic());
+            }
+            user.setMeasurement(settingsRequest.getMeasurement());
+            userRepository.save(user);
+            return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }  
     }
 }
