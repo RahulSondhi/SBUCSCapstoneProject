@@ -27,8 +27,8 @@ import SearchPage from '../tipsy/userPages/searchPage.js';
 // Game Page Imports
 import Game from '../tipsy/game.js';
 
-import PrivateRoute from '../js/PrivateRoute.js';
-import PublicRoute from '../js/PublicRoute.js';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 class Routes extends Component {
 
@@ -95,7 +95,7 @@ class Routes extends Component {
                         component={UsersBarsPage}/>
                     <PrivateRoute
                         exact
-                        path="/tipsy/bar/:name"
+                        path="/tipsy/bar/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={BarPage}/>

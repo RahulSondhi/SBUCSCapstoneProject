@@ -7,60 +7,27 @@
     margin: 0 auto;
 }
 
-/* User Pages */
+/* General Pages */
 
+#equipmentPageTitle,
+#recipePageTitle,
+#barPageTitle,
 #userPageTitle {
     font-size: 3em;
     margin-bottom: 1%;
 }
 
-/* User Pages - Bar Viewing */
-
+/* User Pages */
 .userPageBarContainer{
-    height: calc(20em);
-    overflow-y:scroll;
-    display: flex;
-    flex-direction: row;
-}
-
-.userPageBarPreview,
-.userPageRecipePreview{
-    text-align: left;
-    color: white;
-    min-height: 0;
-}
-
-.userPageBarPreview:hover,
-.userPageRecipePreview:hover{
-    color: white;
-}
-
-.userPageBarPreviewName,
-.userPageRecipePreviewName{
-    font-size: 1.5em;
-}
-
-.userPageBarPreviewOwner,
-.userPageRecipePreviewOwner{
-    font-size: 0.75em;
-}
-
-.userPageBarPreviewOwner span,
-.userPageRecipePreviewOwner span{
-    color: var(--brass);
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
 }
 
 /* Bar Pages */
 
-.barBox {
-    height: 100%;
-    width: 100%;
-    background-image: var(--viewbox-image);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    color: var(--crimson);
-    border-radius: 0.5em;
+.barPageDescTitle{
+    margin-top: 8%;;
 }
 
 /* Gear Pages */

@@ -1,20 +1,24 @@
 package com.maroon.mixology.controller.tipsy;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.Helper;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.exchange.request.BarRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
+import com.maroon.mixology.exchange.response.BarResponse;
+import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
+import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
+import com.maroon.mixology.service.BarServiceImpl;
 import com.maroon.mixology.service.RecipeServiceImpl;
 import com.maroon.mixology.service.UserServiceImpl;
 
@@ -22,6 +26,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +48,9 @@ public class BarController {
     @Autowired
     private BarRepository barRepository;
 
+    @Autowired
+    private BarServiceImpl barService;
+    
     @PostMapping("/createBar")
     public ResponseEntity<?> createNewBar(@CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
         try{
@@ -56,14 +65,15 @@ public class BarController {
             for (String workerNickname : barRequest.getWorkers()){
                 barWorkers.add(userService.findByNickname(workerNickname));
             }
-            ArrayList<Recipe> barRecipes = new ArrayList<Recipe>();
+            Set<Recipe> barRecipes = new HashSet<Recipe>();
             for (String recipeID : barRequest.getRecipesAvaliable()){
                 barRecipes.add(recipeService.findById(recipeID));
             }
             Bar bar = new Bar(
                 barRequest.getName(),
+                barRequest.getDescription(),
                 user,
-                barRequest.getImage(),
+                barRequest.getImg(),
                 barManagers,
                 barWorkers,
                 barRecipes
@@ -87,5 +97,42 @@ public class BarController {
 
     }
 
+    @GetMapping("/{barID}")
+    public ResponseEntity<?> getBarProfile(@PathVariable(value = "barID") String barID) {
+        try{
+            //BarID is base64 encoded
+            barID = Helper.decodeBase64ToHex(barID);
+            //we have to query the bar from Mongo
+            Bar bar = barService.findById(barID);
+            //We have the bar, now lets build a Bar Response
+            Set<BriefUserResponse> barManagers = new HashSet<BriefUserResponse>();
+            for (User manager : bar.getManagers()){
+                barManagers.add(new BriefUserResponse(manager.getNickname(), manager.getFirstName() + " " + manager.getLastName(), manager.getProfilePic()));
+            }
+            Set<BriefUserResponse> barWorkers = new HashSet<BriefUserResponse>();
+            for (User worker : bar.getWorkers()){
+                barWorkers.add(new BriefUserResponse(worker.getNickname(), worker.getFirstName() + " " + worker.getLastName(), worker.getProfilePic()));
+            }
+            Set<BriefRecipeResponse> barRecipesAvailable = new HashSet<BriefRecipeResponse>();
+            for (Recipe recipeAvailable : bar.getRecipesAvailable()){
+                barRecipesAvailable.add(new BriefRecipeResponse(recipeAvailable.getId(), recipeAvailable.getName(), recipeAvailable.getImage(), recipeAvailable.getAuthor().getNickname()));
+            }
+            //lets build our response
+            BriefUserResponse barOwner = new BriefUserResponse(bar.getOwner().getNickname(), bar.getOwner().getFirstName() + " " + bar.getOwner().getLastName(), bar.getOwner().getProfilePic()); 
+            BarResponse barProfile = new BarResponse(
+                bar.getName(),
+                bar.getDescription(),
+                bar.getImage(),
+                barOwner,
+                barManagers,
+                barWorkers,
+                barRecipesAvailable
+            );
+            return ResponseEntity.ok(barProfile);
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

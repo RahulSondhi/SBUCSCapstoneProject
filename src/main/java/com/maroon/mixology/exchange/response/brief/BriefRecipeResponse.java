@@ -1,18 +1,18 @@
-package com.maroon.mixology.exchange.response;
+package com.maroon.mixology.exchange.response.brief;
 
 import com.maroon.mixology.Helper;
 
-public class UserBarResponse {
-    private String id; //save as base64
+public class BriefRecipeResponse {
+    private String id; // save as base64
     private String name;
     private String img;
-    private String owner;
+    private String author;
 
-    public UserBarResponse(String id, String name, String img, String owner) {
+    public BriefRecipeResponse(String id, String name, String img, String author) {
         this.id = Helper.encodeHexToBase64(id);
         this.name = name;
         this.img = img;
-        this.owner = owner;
+        this.author = author;
     }
 
     public String getId() {
@@ -39,14 +39,13 @@ public class UserBarResponse {
         this.img = img;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAuthor(String author) {
+        this.author = author;
     }
-
 
 
 }

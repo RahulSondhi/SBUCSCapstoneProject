@@ -3,7 +3,7 @@ import history from './history';
 import Routes from './route';
 
 import {getCurrentUser} from '../util/APIUtils.js';
-import * as constant from '../js/constants.js';
+import * as constant from './constants.js';
 import {notification} from 'antd';
 
 class Main extends Component {

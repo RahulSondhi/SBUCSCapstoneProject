@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CustomCreateButton, IngredientStyle, SVG} from '../../js/constants.js';
+import {CustomCreateButton, IngredientStyle, SVG} from '../../main/constants';
 import {Input} from 'antd';
 import {Link} from 'react-router-dom';
 import Bottle from '../../assets/bottle.svg';

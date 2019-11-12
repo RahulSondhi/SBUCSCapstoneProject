@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {CustomButton, CustomCreateButton, Entry, BottleIconStyle} from '../../js/constants.js';
+import {CustomButton, CustomCreateButton, Entry, BottleIconStyle} from '../../main/constants';
 import Bottle from '../../assets/bottle.svg';
 import Navbar from '../navbar/navbar.js';
 

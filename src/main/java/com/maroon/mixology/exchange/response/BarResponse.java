@@ -1,23 +1,31 @@
 package com.maroon.mixology.exchange.response;
 
-import java.util.ArrayList;
+import java.util.Set;
+
+import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
+import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 
 public class BarResponse {
+    //we don't give them the ID
     private String name;
-    private String image;
-    private String owner;
-    private ArrayList<String> managers;
-    private ArrayList<String> workers;
-    private ArrayList<RecipeResponse> recipesAvaliable;
+    private String description;
+    private String img;
+    private BriefUserResponse owner;
+    private Set<BriefUserResponse> managers;
+    private Set<BriefUserResponse> workers;
+    private Set<BriefRecipeResponse> recipesAvailable;
 
-    public BarResponse(String name, String image, String owner, ArrayList<String> managers, ArrayList<String> workers, ArrayList<RecipeResponse> recipesAvaliable) {
+    public BarResponse(String name, String description, String img, BriefUserResponse owner, Set<BriefUserResponse> managers,
+            Set<BriefUserResponse> workers, Set<BriefRecipeResponse> recipesAvailable) {
         this.name = name;
-        this.image = image;
+        this.description = description;
+        this.img = img;
         this.owner = owner;
         this.managers = managers;
         this.workers = workers;
-        this.recipesAvaliable = recipesAvaliable;
+        this.recipesAvailable = recipesAvailable;
     }
+
 
     public String getName() {
         return name;
@@ -27,45 +35,54 @@ public class BarResponse {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getDescription() {
+        return description;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    public String getImg() {
+        return img;
     }
 
-    public String getOwner() {
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public BriefUserResponse getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(BriefUserResponse owner) {
         this.owner = owner;
     }
 
-    public ArrayList<String> getManagers() {
+    public Set<BriefUserResponse> getManagers() {
         return managers;
     }
 
-    public void setManagers(ArrayList<String> managers) {
+    public void setManagers(Set<BriefUserResponse> managers) {
         this.managers = managers;
     }
 
-    public ArrayList<String> getWorkers() {
+    public Set<BriefUserResponse> getWorkers() {
         return workers;
     }
 
-    public void setWorkers(ArrayList<String> workers) {
+    public void setWorkers(Set<BriefUserResponse> workers) {
         this.workers = workers;
     }
 
-    public ArrayList<RecipeResponse> getRecipesAvaliable() {
-        return recipesAvaliable;
+    public Set<BriefRecipeResponse> getRecipesAvailable() {
+        return recipesAvailable;
     }
 
-    public void setRecipesAvaliable(ArrayList<RecipeResponse> recipesAvaliable) {
-        this.recipesAvaliable = recipesAvaliable;
+    public void setRecipesAvailable(Set<BriefRecipeResponse> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
     }
+
 
 
 }

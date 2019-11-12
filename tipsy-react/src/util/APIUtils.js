@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN, API_BASE_URL } from '../js/constants.js'
+import { ACCESS_TOKEN, API_BASE_URL } from '../main/constants'
 
 const request = (options) => {
     const headers = new Headers({
@@ -99,6 +99,14 @@ export function getUserProfile(nickname) {
         method: 'GET'
     });
 }
+
+export function getBarProfile(barID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID,
+        method: 'GET'
+    });
+}
+
 export function createBar(barRequest) {
     return request({
         url: API_BASE_URL + "/tipsy/bar/createBar",

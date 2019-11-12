@@ -1,6 +1,5 @@
 package com.maroon.mixology.entity;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -13,6 +12,7 @@ public class Bar {
     @Id
     private String id;
     private String name;
+    private String description;
     @DBRef
     private User owner;
     private String image;
@@ -21,17 +21,19 @@ public class Bar {
     @DBRef
     private Set<User> workers;
     @DBRef
-    private ArrayList<Recipe> recipesAvaliable;
+    private Set<Recipe> recipesAvailable;
 
-    public Bar(String name, User owner, String image, Set<User> managers, Set<User> workers,
-    ArrayList<Recipe> recipesAvaliable) {
+    public Bar(String name, String description, User owner, String image, Set<User> managers, Set<User> workers,
+            Set<Recipe> recipesAvailable) {
         this.name = name;
+        this.description = description;
         this.owner = owner;
         this.image = image;
         this.managers = managers;
         this.workers = workers;
-        this.recipesAvaliable = recipesAvaliable;
-}
+        this.recipesAvailable = recipesAvailable;
+    }
+
 
     public String getId() {
         return id;
@@ -81,13 +83,22 @@ public class Bar {
         this.workers = workers;
     }
 
-    public ArrayList<Recipe> getRecipesAvaliable(){
-        return recipesAvaliable;
+    public String getDescription() {
+        return description;
     }
 
-    public void setRecipes(ArrayList<Recipe> recipesAvaliable){
-        this.recipesAvaliable = recipesAvaliable;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public Set<Recipe> getRecipesAvailable() {
+        return recipesAvailable;
+    }
+
+    public void setRecipesAvailable(Set<Recipe> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
+    }
+
 
 
 }
