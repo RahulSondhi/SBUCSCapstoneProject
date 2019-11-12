@@ -2,8 +2,11 @@ import React, {Component, Fragment} from 'react';
 import {Link} from 'react-router-dom';
 
 import UserPic from '../assets/defaultIcons/user.svg';
-import BarPic from '../assets/defaultIcons/user.svg';
-import RecipePic from '../assets/defaultIcons/user.svg';
+import BarPic from '../assets/defaultIcons/bar.svg';
+import RecipePic from '../assets/defaultIcons/recipe.svg';
+import AddPic from '../assets/defaultIcons/add.svg';
+import SearchPic from '../assets/defaultIcons/search.svg';
+import UnknownPic from '../assets/defaultIcons/unknown.svg';
 
 export const CustomButton = (props) => {
     return (
@@ -70,14 +73,18 @@ export class GetProfImg extends Component {
     render() {
 
         if (this.image === null || this.image === "") {
-            if (this.type == "bar") {
+            if (this.type === "bar") {
                 this.image = BarPic
-            } else if (this.type == "recipe") {
+            } else if (this.type === "recipe") {
                 this.image = RecipePic
-            } else if (this.type == "user") {
+            } else if (this.type === "user") {
                 this.image = UserPic
-            } else {
-                this.image = UserPic
+            } else if (this.type === "add") {
+                this.image = AddPic
+            }else if (this.type === "search") {
+                this.image = SearchPic
+            }else{
+                this.image = UnknownPic
             }
         }else{
             this.image = "data:image/png;base64, " + this.props.pic
@@ -132,7 +139,8 @@ class GetBar extends Component {
                     <GetProfImg
                         className="small-10 cell"
                         pic={this.bar.img}
-                        alt={this.bar.name}/>
+                        alt={this.bar.name}
+                        type="bar"/>
                 </div>
                 <div className="small-8 grid-x cell">
                     <div className="previewBarName cell">{this.bar.name}</div>
@@ -164,7 +172,8 @@ class GetRecipe extends Component {
                 <GetProfImg
                         className="small-10 cell"
                         pic={this.recipe.img}
-                        alt={this.recipe.name}/>
+                        alt={this.recipe.name}
+                        type="recipe"/>
                 </div>
                 <div className="small-8 grid-x cell">
                     <div className="previewRecipeName cell">{this.recipe.name}</div>
@@ -196,7 +205,8 @@ class GetUser extends Component {
                 <GetProfImg
                         className="small-10 cell"
                         pic={this.user.img}
-                        alt={this.user.nickname}/>
+                        alt={this.user.nickname}
+                        type="user"/>
                 </div>
                 <div className="small-8 grid-x cell">
                     <div className="previewRecipeName cell">{this.user.nickname}</div>

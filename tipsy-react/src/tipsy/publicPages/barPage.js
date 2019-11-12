@@ -71,11 +71,12 @@ class BarPage extends Component {
                 
                 <Navbar/>
 
-                <div className="small-12 grid-x align-center-middle cell">
+                <div className="small-8 grid-x align-center-middle cell">
                     <GetProfImg
-                        className="small-6 cell"
+                        className="small-3 cell"
                         pic={this.state.bar.img}
-                        alt={this.state.bar.name}/>
+                        alt={this.state.bar.name}
+                        type="bar"/>
                 </div>
                 <h1 id="barPageTitle" className="caption small-10 cell">{this.state.bar.name}</h1>
 

@@ -82,7 +82,8 @@ class UserPage extends Component {
                     <GetProfImg
                         className="small-4 cell"
                         pic={this.state.user.img}
-                        alt={this.state.user.nickname}/>
+                        alt={this.state.user.nickname}
+                        type="user"/>
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div

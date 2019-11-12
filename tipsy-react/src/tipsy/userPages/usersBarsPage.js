@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
-import {BarsPreview} from '../../main/constants';
-import {Tabs} from 'antd';
+import {BarsPreview, GetProfImg} from '../../main/constants';
 
 import {getUserProfile} from '../../util/APIUtils';
 
@@ -34,19 +33,9 @@ class UsersBarsPage extends Component {
     }
 
     componentDidMount() {
-        let try_name = "";
-        if (this.props.match.params.nickname === "me") 
-            try_name = this.props.currentUser.nickname;
-        else 
-            try_name = this.props.match.params.nickname;
+        let try_name = this.props.currentUser.nickname;
         const nickname = try_name;
         this.loadUserProfile(nickname);
-    }
-
-    componentDidUpdate(nextProps) {
-        if (this.props.match.params.nickname !== nextProps.match.params.nickname) {
-            this.loadUserProfile(nextProps.match.params.nickname);
-        }
     }
 
     render() {
@@ -70,9 +59,24 @@ class UsersBarsPage extends Component {
         }
 
         return (
-            <div className="grid-container-fluid grid-margin-y">
+            <div className="grid-x grid-x-margin align-center-middle">
                 <Navbar/>
-                
+
+                <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.user.nickname + "'s Bars"}</h1>
+
+                <div className="grid-x align-center-middle cell">
+
+                    <Link to="/tipsy/createbar" className="previewBar grid-x align-center-middle small-6 medium-3 cell" key="add">
+                        <div className="small-4 grid-x cell">
+                            <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
+                        </div>
+                        <div className="small-8 grid-x cell">
+                            <div className="previewBarName cell">Add A Bar</div>
+                        </div>
+                    </Link>
+
+                    <BarsPreview className="small-6 medium-3 cell" bars={this.state.user.bars}/>
+                </div>
             </div>
         )
     }
