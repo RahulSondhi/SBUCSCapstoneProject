@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import GameNavbar from './navbar/gameNavbar.js';
 import { SVG, CounterStyle, IngredientStyle } from '../js/constants.js';
-import Counter from '../assets/counter.svg';
+import Counter from '../assets/game.svg';
 import Bottle from '../assets/bottle.svg';
 
 class Game extends Component {
