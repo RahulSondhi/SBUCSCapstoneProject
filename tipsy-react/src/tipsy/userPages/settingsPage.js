@@ -119,19 +119,10 @@ class SettingsPage extends Component {
         return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success');
     }
 
-    onClose() {
-        this.setState({preview: null})
-    }
-
-    onCrop(preview) {
-        this.setState({preview})
-    }
-
     loadUserSettings() {
         this.setState({isLoading: true});
 
         getUserSettings().then(response => {
-            console.log(response);
 
             if (response.measurement === null || response.measurement === "") {
                 response.measurement = MeasurementType.US;

@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {notification} from 'antd';
+import {Form, Input, Icon, Button, notification} from 'antd';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
 
@@ -10,6 +10,8 @@ import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
+import {NewBarPic} from '../assets/defaultIcons/newbar.json';
+import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 
 export const CustomButton = (props) => {
     return (
@@ -57,6 +59,11 @@ export const NICKNAME_MAX_LENGTH = 32;
 
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 256;
+
+export const NAME_MIN_LENGTH = 4;
+export const NAME_MAX_LENGTH = 32;
+
+export const DESC_MAX_LENGTH = 256;
 
 export default SVG;
 
@@ -144,9 +151,9 @@ export class MakeProfImg extends Component {
     }
 
     onImageLoad() {
-            this
-                .props
-                .data(this.state.src);
+        this
+            .props
+            .data(this.state.src);
     }
 
     onBeforeFileLoad(elem) {
