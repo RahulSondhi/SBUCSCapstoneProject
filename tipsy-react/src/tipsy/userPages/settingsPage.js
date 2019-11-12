@@ -45,7 +45,8 @@ class SettingsPage extends Component {
                 value: ''
             },
             measurement: {
-                value: ''
+                value: '',
+                enum_value: ''
             }
         }
         //Functions needed for this Settings Class
@@ -88,6 +89,7 @@ class SettingsPage extends Component {
     handleSelectChange(event) {
         this.setState({
             measurement: {
+                enum_value: event.name,
                 value: event.name
             }
         });
@@ -162,6 +164,7 @@ class SettingsPage extends Component {
                     errorMsg: null
                 },
                 measurement: {
+                    enum_value : response.measurement,
                     value: response.measurement.name,
                     validateStatus: 'success',
                     errorMsg: null
@@ -272,7 +275,7 @@ class SettingsPage extends Component {
                             placeholder="Select your Measurement"
                             name="measurement"
                             onChange={(event) => this.handleSelectChange(event)}
-                            defaultValue={this.state.measurement.value}>
+                            defaultValue={this.state.measurement.enum_value}>
                             <Option value={MeasurementType.US} name="US">
                                 US System (fl oz.)
                             </Option>
