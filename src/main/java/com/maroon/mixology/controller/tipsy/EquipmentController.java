@@ -15,6 +15,7 @@ import com.maroon.mixology.exchange.request.BarRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
+import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.EquipmentRepository;
 import com.maroon.mixology.repository.RecipeRepository;
@@ -62,14 +63,12 @@ public class EquipmentController {
         try{
             // We have the equipment Name, we can query this specifc one in the db
             List<Equipment> equipments = equipmentService.findAll();
-            Set<EquipmentResponse> equipmentResponses = new HashSet<EquipmentResponse>();
+            Set<BriefEquipmentResponse> equipmentResponses = new HashSet<BriefEquipmentResponse>();
             for (Equipment e : equipments){
-                equipmentResponses.add(new EquipmentResponse(
+                equipmentResponses.add(new BriefEquipmentResponse(
                     e.getName(), 
                     e.getImage(), 
-                    e.getType(), 
-                    e.getActionsDoTo(), 
-                    e.getActionsDoing())
+                    e.getType())
                     );
             }
             return ResponseEntity.ok(equipmentResponses);

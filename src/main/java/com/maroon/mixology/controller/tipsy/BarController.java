@@ -230,7 +230,7 @@ public class BarController {
             // barID = Helper.decodeBase64ToHex(barID);
             // we have the barID(Base64)
             Bar bar = barService.findById(barID);
-            if(bar.getOwner().equals(user)){
+            if(bar.getOwner().getId().equals(user.getId())){
                 //we have to disassociate everyone
                 Set<User> combinedUsers = new HashSet<User>();
                 combinedUsers.add(bar.getOwner());
@@ -242,7 +242,7 @@ public class BarController {
                 }
                 //We delete the bar
                 barRepository.delete(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully deleted!"));
             }
             else{
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete bar"), HttpStatus.UNAUTHORIZED); 

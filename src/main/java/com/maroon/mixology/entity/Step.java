@@ -14,6 +14,10 @@ public class Step {
     private Equipment objToDo;
     @DBRef
     private Equipment objDoing;
+    private boolean customEquipmentTodo;
+    private boolean customEquipmentDoing;
+    private Equipment customObjToDo;
+    private Equipment customObjDoing;
     private ActionType action;
     private int value;
     @DBRef
@@ -43,6 +47,14 @@ public class Step {
         this.objDoing = objDoing;
     }
 
+    public Equipment getCustomObjDoing() {
+        return customObjDoing;
+    }
+
+    public void setCustomObjDoing(Equipment customObjDoing) {
+        this.customObjDoing = customObjDoing;
+    }
+
     public ActionType getAction() {
         return action;
     }
@@ -66,5 +78,31 @@ public class Step {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
+
+    public Equipment getCustomObjToDo() {
+        return customObjToDo;
+    }
+
+    public void setCustomObjToDo(Equipment customObjToDo) {
+        this.customObjToDo = customObjToDo;
+    }
+
+    public boolean isCustomEquipmentTodo() {
+        return customEquipmentTodo;
+    }
+
+    public void setCustomEquipmentTodo(boolean customEquipmentTodo) {
+        this.customEquipmentTodo = customEquipmentTodo;
+    }
+
+    public boolean isCustomEquipmentDoing() {
+        return customEquipmentDoing;
+    }
+
+    public void setCustomEquipmentDoing(boolean customEquipmentDoing) {
+        this.customEquipmentDoing = customEquipmentDoing;
+    }
+
+
 
 }

@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "recipe")
-public class Recipe{
+public class Recipe {
     @Id
     private String id;
     private String name;
@@ -25,6 +25,14 @@ public class Recipe{
 
     public String getId() {
         return id;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public void setId(String id) {
@@ -55,13 +63,6 @@ public class Recipe{
         this.author = author;
     }
 
-    public boolean getPublished(){
-        return published;
-    }
-
-    public void setPublished(boolean published){
-        this.published = published;
-    }
 
     public ArrayList<Step> getSteps(){
         return steps;
