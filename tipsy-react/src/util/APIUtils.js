@@ -124,6 +124,21 @@ export function deleteBar(barID) {
     });
 }
 
+export function getEquipmentProfile(equipmentName) {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/" + equipmentName,
+        method: 'GET'
+    });
+}
+
+export function getAllEquipment() {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/getEquipments",
+        method: 'GET'
+    });
+}
+
+
 export function getUserProfile(nickname) {
     return request({
         url: API_BASE_URL + "/tipsy/user/" + nickname,

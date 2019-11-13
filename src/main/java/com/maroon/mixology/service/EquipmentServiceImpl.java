@@ -1,5 +1,9 @@
 package com.maroon.mixology.service;
 
+
+
+import java.util.List;
+
 import com.maroon.mixology.entity.Equipment;
 import com.maroon.mixology.repository.EquipmentRepository;
 
@@ -15,5 +19,10 @@ public class EquipmentServiceImpl implements EquipmentService {
     public Equipment findByName(String name) {
         return equipmentRepository.findByName(name);
     }
+
+	@Override
+	public List<Equipment> findAll() {
+        return equipmentRepository.findAll();
+	}
 
 }
