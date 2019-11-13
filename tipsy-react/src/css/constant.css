@@ -93,3 +93,9 @@
 .makeProfPicEditor path{
     fill: red;
 }
+
+/* Dynamic Form */
+
+.dynamicInput{
+    margin-bottom: 3%;
+}

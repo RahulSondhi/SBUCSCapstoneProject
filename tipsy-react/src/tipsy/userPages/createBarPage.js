@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {createBar, getBarProfile} from '../../util/APIUtils';
+import {createBar, getBarProfile, changeBarSettings} from '../../util/APIUtils';
 
 import {NAME_MIN_LENGTH, NAME_MAX_LENGTH, DESC_MAX_LENGTH, MakeProfImg, DynamicForm} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
-import responsiveObserve from 'antd/lib/_util/responsiveObserve';
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
@@ -89,7 +88,8 @@ class CreateBarPage extends Component {
                     submit: "Save Bar"
                 },
                 name: {
-                    value: response.name
+                    value: response.name,
+                    validateStatus: 'success'
                 },
                 description: {
                     value: response.description
@@ -108,6 +108,10 @@ class CreateBarPage extends Component {
                     value: ''
                 }
             });
+
+            this.state.SENDmanagers = this.state.managers.value.map(function (el) { return el.nickname; });
+            this.state.SENDworkers = this.state.workers.value.map(function (el) { return el.nickname; });
+            this.state.SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
 
         }).catch(error => {
             if (error.status === 404) {
@@ -273,17 +277,17 @@ class CreateBarPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.state.SENDmanagers.value = this.state.managers.value.map(function (el) { return el.nickname; });
-        this.state.SENDworkers.value = this.state.workers.value.map(function (el) { return el.nickname; });
-        this.state.SENDrecipesAvailable.value = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+        this.state.SENDmanagers = this.state.managers.value.map(function (el) { return el.nickname; });
+        this.state.SENDworkers = this.state.workers.value.map(function (el) { return el.nickname; });
+        this.state.SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
 
         const barRequest = {
             name: this.state.name.value,
             description: this.state.description.value,
             img: this.state.img.value,
-            managers: this.state.SENDmanagers.value,
-            workers: this.state.SENDworkers.value,
-            recipesAvailable: this.state.SENDrecipesAvailable.value
+            managers: this.state.SENDmanagers,
+            workers: this.state.SENDworkers,
+            recipesAvailable: this.state.SENDrecipesAvailable
         };
 
         if (this.state.isCreating === false) {
@@ -296,7 +300,7 @@ class CreateBarPage extends Component {
                 });
             });
         }else{
-            createBar(barRequest).then(response => {
+            changeBarSettings(this.props.match.params.id,barRequest).then(response => {
                 notification.success({message: 'Tipsy App', description: "Your bar was succesfully saved!"});
             }).catch(error => {
                 notification.error({

@@ -10,6 +10,7 @@ import RecipePic from '../assets/defaultIcons/recipe.svg';
 import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
 import SettingPic from '../assets/defaultIcons/setting.svg';
+import RemovePic from '../assets/defaultIcons/remove.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
@@ -94,6 +95,8 @@ export class GetProfImg extends Component {
                 this.image = SearchPic
             } else if (this.type === "settings") {
                 this.image = SettingPic
+            } else if (this.type === "remove") {
+                this.image = RemovePic
             } else {
                 this.image = UnknownPic
             }
@@ -193,13 +196,15 @@ export class MakeProfImg extends Component {
 }
 
 // ItemPreview Item [img,name,type,desc,id]
-export const ItemPreview = ({items, className, type}) => (
+export const ItemPreview = ({items, className, type, postfix, postfixFunc}) => (
     <Fragment>
         {items.map(item => (<GetItem
             key={item.id}
             type={type}
             item={item}
-            className={"previewItem grid-x align-center-middle " + className}/>))}
+            postfix={postfix}
+            postfixFunc={postfixFunc}
+            className={"grid-x align-center-middle " + className}/>))}
     </Fragment>
 );
 
@@ -207,55 +212,85 @@ class GetItem extends Component {
 
     constructor(props) {
         super(props);
+
         this.type = this.props.type;
         this.item = this.props.item;
         this.name = this.props.item.name
         this.id = this.props.item.id;
+        this.img = this.item.img;
+        this.className = this.props.className;
+
         this.link = "/tipsy/" + this.type + "/";
-        this.descPre = ""
-        this.desc = ""
+        this.descPre = "";
+        this.desc = "";
 
         if (this.type === "user") {
-            this.name = this.item.nickname
-            this.link = this.link + this.item.nickname
+            this.name = this.item.nickname;
+            this.link = this.link + this.item.nickname;
         } else if (this.type === "bar") {
-            this.link = this.link + this.item.id
-            this.descPre = "Owner:"
-            this.desc = <span>{" " + this.item.owner}</span>
+            this.link = this.link + this.item.id;
+            this.descPre = "Owner:";
+            this.desc = <span>{" " + this.item.owner}</span>;
         } else if (this.type === "recipe") {
-            this.link = this.link + this.item.id
-            this.descPre = "Author:"
-            this.desc = <span>{" " + this.item.author}</span>
+            this.link = this.link + this.item.id;
+            this.descPre = "Author:";
+            this.desc = <span>{" " + this.item.author}</span>;
         } else if (this.type === "equipment") {
-            this.link = this.link + this.item.name
+            this.link = this.link + this.item.name;
         } else {
             this.link = this.link + this.item.id
             if (this.item.desc !== null && this.item.desc !== "") {
-                this.descPre = "Desc:"
-                this.desc = <span>{" " + this.item.desc}</span>
+                this.descPre = "Desc:";
+                this.desc = <span>{" " + this.item.desc}</span>;
             }
         }
 
-        this.img = this.item.img
-        this.className = this.props.className
+        this.postfix = this.props.postfix;
+        this.postfixFunc = this.props.postfixFunc;
+
+        if (this.postfix == null || this.postfix == "" || this.postfix == undefined) {
+            this.postfixClass = "hidden"
+        } else {
+            this.postfixClass = " ";
+        }
+
+        this.postFunc = this
+            .postFunc
+            .bind(this);
+
+    }
+
+    postFunc() {
+        console.log(this.item)
+        this.postfixFunc(this.item);
     }
 
     render() {
         return (
-            <Link to={this.link} className={this.className} key={this.id}>
-                <div className="small-4 grid-x cell">
-                    <GetProfImg
-                        className="small-10 cell"
-                        pic={this.img}
-                        alt={this.name}
-                        type={this.type}/>
-                </div>
-                <div className="small-8 grid-x cell">
-                    <div className="previeName cell">{this.name}</div>
-                    <div className="previewDesc cell">{this.descPre}{this.desc}
+            <div className={this.className} key={this.id}>
+                <Link
+                    to={this.link}
+                    className="previewItem small-11 grid-x align-center-middle cell">
+                    <div className="small-5 grid-x cell">
+                        <GetProfImg
+                            className="small-10 cell"
+                            pic={this.img}
+                            alt={this.name}
+                            type={this.type}/>
                     </div>
+                    <div className="small-7 grid-x cell">
+                        <div className="previewName cell">{this.name}</div>
+                        <div className="previewDesc cell">{this.descPre}{this.desc}
+                        </div>
+                    </div>
+                </Link>
+                <div className="small-1 grid-x cell" onClick={this.postFunc}>
+                    <GetProfImg
+                        className={"small-6 cell " + this.postfixClass}
+                        alt={this.postfix}
+                        type={this.postfix}/>
                 </div>
-            </Link>
+            </div>
         )
     }
 };
@@ -278,14 +313,20 @@ export class DynamicForm extends Component {
         this.className = this.props.className;
 
         this.addItem = this
-        .addItem
-        .bind(this);
+            .addItem
+            .bind(this);
+
+        this.removeItem = this
+            .removeItem
+            .bind(this);
     }
 
     addItem(success, item) {
         // update the state object
 
-        if (success === true) {
+        let hasItem = this.state.data.some( items => items['nickname'] === item.nickname )
+
+        if (success === true && hasItem === false) {
 
             notification.success({message: 'Tipsy App', description: "Added!"});
 
@@ -297,7 +338,32 @@ export class DynamicForm extends Component {
             this.setState({data: this.state.data});
 
         } else {
-            notification.error({message: 'Tipsy App', description: "Could not find that!"});
+            if (hasItem) {
+                notification.error({message: 'Tipsy App', description: "Already Added!"});
+            } else {
+                notification.error({message: 'Tipsy App', description: "Could not find that!"});
+            }
+        }
+
+    }
+
+    removeItem(item) {
+        // update the state object
+        const index = this
+            .state
+            .data
+            .indexOf(item);
+
+        if (index > -1) {
+            this
+                .state
+                .data
+                .splice(index, 1);
+            this.setState({data: this.state.data});
+            notification.success({message: 'Tipsy App', description: "Removed!"});
+        } else {
+            notification.error({message: 'Tipsy App', description: "Could not remove that!"});
+
         }
 
     }
@@ -306,7 +372,12 @@ export class DynamicForm extends Component {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
                 <DynamicInput input="" addItem={this.addItem} type={this.type}/>
-                <ItemPreview className="small-6 cell" items={this.state.data} type={this.type}/>
+                <ItemPreview
+                    className="small-6 cell"
+                    items={this.state.data}
+                    type={this.type}
+                    postfix="remove"
+                    postfixFunc={this.removeItem}/>
             </div>
         )
     }
@@ -372,7 +443,7 @@ class DynamicInput extends Component {
 
     render() {
         return (
-            <div className="grid-x align-center-middle cell">
+            <div className="dynamicInput grid-x align-center-middle cell">
                 <Input
                     prefix={< Icon type = "idcard" />}
                     name={this.state.name}
