@@ -1,0 +1,14 @@
+{"_id":{"$oid":"5dcbfd877dd2b62a498eb772"},"name":"Coconut","image":"","type":"INGREDIENT","actionsDoTo":["CUT"],"actionsDoing":["ADD"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcbfe3e7dd2b62a498eb776"},"name":"Brandy","image":"","type":"SPIRITS","actionsDoTo":["MIX","MEASURE","SHAKE","POUR","ADD"],"actionsDoing":["POUR"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcbff157dd2b62a498eb778"},"name":"Shaker","image":"","type":"SHAKER","actionsDoTo":["ADD","POUR"],"actionsDoing":["SHAKE"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcbff577dd2b62a498eb77a"},"name":"Cocktail Glass","image":"","type":"GLASS","actionsDoTo":["POUR"],"actionsDoing":[],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcbffd27dd2b62a498eb77c"},"name":"Juicer","image":"","type":"PRESS","actionsDoTo":["ADD"],"actionsDoing":["PRESS"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc00447dd2b62a498eb77e"},"name":"Lemon Juice","image":"","type":"MIXER","actionsDoTo":["MIX"],"actionsDoing":["POUR"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc00b27dd2b62a498eb780"},"name":"Ice Crusher","image":"","type":"CRUSHER","actionsDoTo":["ADD"],"actionsDoing":["CRUSH"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc01327dd2b62a498eb782"},"name":"Channel Knife","image":"","type":"KNIFE","actionsDoTo":[],"actionsDoing":["CUT"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc015b7dd2b62a498eb784"},"name":"Jigger","image":"","type":"MEASURING_UTENSIL","actionsDoTo":["POUR","ADD"],"actionsDoing":["MEASURE"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc01b67dd2b62a498eb786"},"name":"Mixing Cup","image":"","type":"BLENDER","actionsDoTo":["ADD","POUR"],"actionsDoing":["BLEND"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc01e77dd2b62a498eb788"},"name":"Grater","image":"","type":"PEELER","actionsDoTo":[],"actionsDoing":["PEEL"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc02757dd2b62a498eb78a"},"name":"Matches","image":"","type":"HEATING","actionsDoTo":["ADD"],"actionsDoing":["HEAT"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc029e7dd2b62a498eb78c"},"name":"Fridge","image":"","type":"COOLING","actionsDoTo":["ADD"],"actionsDoing":["COOL"],"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dcc02f27dd2b62a498eb78e"},"name":"Simple Syrup","image":"","type":"SYRUP","actionsDoTo":[],"actionsDoing":["POUR"],"_class":"com.maroon.mixology.entity.Equipment"}
