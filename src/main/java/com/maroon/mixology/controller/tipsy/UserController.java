@@ -139,7 +139,7 @@ public class UserController {
             return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
 
@@ -172,7 +172,7 @@ public class UserController {
             return ResponseEntity.ok(new ApiResponse(true, "Password has been updated successfully!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
 }
