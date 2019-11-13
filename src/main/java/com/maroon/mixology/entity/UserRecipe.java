@@ -1,6 +1,6 @@
 package com.maroon.mixology.entity;
 
-import java.util.Set;
+import java.util.ArrayList;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -15,7 +15,7 @@ public class UserRecipe {
     @DBRef
     private Recipe recipe;
     @DBRef
-    private Set<Step> stepsCompleted;
+    private ArrayList<Step> stepsCompleted;
 
     public String getId() {
         return id;
@@ -41,11 +41,11 @@ public class UserRecipe {
         this.recipe = recipe;
     }
 
-    public Set<Step> getStepsCompleted() {
+    public ArrayList<Step> getStepsCompleted() {
         return stepsCompleted;
     }
 
-    public void setStepsCompleted(Set<Step> stepsCompleted) {
+    public void setStepsCompleted(ArrayList<Step> stepsCompleted) {
         this.stepsCompleted = stepsCompleted;
     }
 

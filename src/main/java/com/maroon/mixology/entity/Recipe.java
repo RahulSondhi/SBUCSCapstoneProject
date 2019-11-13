@@ -1,5 +1,6 @@
 package com.maroon.mixology.entity;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -17,7 +18,7 @@ public class Recipe{
     private User author;
     private boolean published;
     @DBRef
-    private Set<Step> steps;
+    private ArrayList<Step> steps;
     @DBRef
     private Set<Equipment> equipments;
     private Set<Equipment> customEquipments;
@@ -62,11 +63,11 @@ public class Recipe{
         this.published = published;
     }
 
-    public Set<Step> getSteps(){
+    public ArrayList<Step> getSteps(){
         return steps;
     }
 
-    public void setSteps(Set<Step> steps){
+    public void setSteps(ArrayList<Step> steps){
         this.steps = steps;
     }
 

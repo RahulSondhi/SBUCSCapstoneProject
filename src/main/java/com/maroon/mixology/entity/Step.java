@@ -18,7 +18,6 @@ public class Step {
     private int value;
     @DBRef
     private Unit unit;
-    private boolean completed;
 
     public String getId() {
         return id;
@@ -66,14 +65,6 @@ public class Step {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 
 }
