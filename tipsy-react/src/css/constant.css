@@ -57,36 +57,25 @@
 
 /* Previews */
 
-.previewBar,
-.previewRecipe,
-.previewUser,
-.previewEquipment{
+.previewItem{
     text-align: left;
     color: white;
     min-height: 0;
 }
 
-.previewBar:hover,
-.previewRecipe:hover,
-.previewUser:hover,
-.previewEquipment:hover{
+.previewItem:hover{
     color: white;
 }
 
-.previewBarName,
-.previewRecipeName,
-.previewUserName,
-.previewEquipmentName{
+.previewName{
     font-size: 1.5em;
 }
 
-.previewBarOwner,
-.previewRecipeAuthor{
+.previewDesc{
     font-size: 0.75em;
 }
 
-.previewBarOwner span,
-.previewRecipeAuthor span{
+.previewDesc span{
     color: var(--brass);
 }
 
@@ -94,6 +83,7 @@
 
 .makeProfPicEditor{
     margin-bottom: 3%;
+    z-index: 0;
 }
 
 .makeProfPicEditor label{

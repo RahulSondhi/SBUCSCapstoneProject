@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
-import {BarsPreview, GetProfImg} from '../../main/constants';
+import {ItemPreview, GetProfImg} from '../../main/constants';
 
 import {getUserProfile} from '../../util/APIUtils';
 
@@ -66,16 +66,16 @@ class UsersBarsPage extends Component {
 
                 <div className="grid-x align-center-middle cell">
 
-                    <Link to="/tipsy/createbar" className="previewBar grid-x align-center-middle small-6 medium-3 cell" key="add">
+                    <Link to="/tipsy/createbar" className="previewItem grid-x align-center-middle small-6 medium-3 cell" key="add">
                         <div className="small-4 grid-x cell">
                             <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
                         </div>
                         <div className="small-8 grid-x cell">
-                            <div className="previewBarName cell">Add A Bar</div>
+                            <div className="previewName cell">Add A Bar</div>
                         </div>
                     </Link>
 
-                    <BarsPreview className="small-6 medium-3 cell" bars={this.state.user.bars}/>
+                    <ItemPreview className="small-6 medium-3 cell" items={this.state.user.bars} type="bar"/>
                 </div>
             </div>
         )

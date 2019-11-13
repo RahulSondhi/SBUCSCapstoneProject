@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import {RecipesPreview, BarsPreview, GetProfImg} from '../../main/constants';
+import {ItemPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
 import {getUserProfile} from '../../util/APIUtils';
@@ -90,7 +90,7 @@ class UserPage extends Component {
                         className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
                         <div
                             className="userPageBarContainer grid-x grid-margin-x align-center-middle cell">
-                            <BarsPreview className="cell" bars={this.state.user.bars}/>
+                            <ItemPreview className="cell" items={this.state.user.bars} type="bar"/>
                         </div>
                     </div>
                 </div>
@@ -101,23 +101,26 @@ class UserPage extends Component {
                     <Tabs className="small-12 medium-10 cell" tabPosition="right">
                         <TabPane tab="Done" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
-                                <RecipesPreview
+                                <ItemPreview
                                     className="small-6 cell"
-                                    recipes={this.state.user.recipesCompleted}/>
+                                    items={this.state.user.recipesCompleted}
+                                    type="recipe"/>
                             </div>
                         </TabPane>
                         <TabPane tab="Made" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
-                                <RecipesPreview
+                                <ItemPreview
                                     className="small-6 cell"
-                                    recipes={this.state.user.recipesWritten}/>
+                                    items={this.state.user.recipesWritten}
+                                    type="recipe"/>
                             </div>
                         </TabPane>
                         <TabPane tab="Doing" key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
-                                <RecipesPreview
+                                <ItemPreview
                                     className="small-6 cell"
-                                    recipes={this.state.user.recipesIncompleted}/>
+                                    items={this.state.user.recipesIncompleted}
+                                    type="recipe"/>
                             </div>
                         </TabPane>
                     </Tabs>

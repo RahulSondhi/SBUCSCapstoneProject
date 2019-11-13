@@ -128,7 +128,7 @@ class Register extends Component {
 
                 {/* Logo */}
                 <div className="loginHeader grid-x cell align-center-middle">
-                    <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
+                    <img src={Tipsy} alt="TipsyLogo" className="small-10 cell"></img>
                 </div>
 
                 {/* Title */}

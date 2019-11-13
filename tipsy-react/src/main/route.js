@@ -30,8 +30,8 @@ import ErrorPage from '../tipsy/userPages/errorPage.js';
 // Game Page Imports
 import Game from '../tipsy/game.js';
 
-// import {PrivateRoute,PublicRoute} from './PrivateRoute';
-// import PublicRoute from './PublicRoute';
+// import {PrivateRoute,PublicRoute} from './PrivateRoute'; import PublicRoute
+// from './PublicRoute';
 
 class Routes extends Component {
 
@@ -44,11 +44,10 @@ class Routes extends Component {
         };
     }
 
-
     render() {
-        console.log("Children Authenticated: "+this.state.isAuthenticated);
-        if(this.state.currentUser) 
-            console.log("User: "+this.state.currentUser.nickname);
+        console.log("Children Authenticated: " + this.state.isAuthenticated);
+        if (this.state.currentUser) 
+            console.log("User: " + this.state.currentUser.nickname);
         return (
             <Router>
                 <Switch>
@@ -83,9 +82,7 @@ class Routes extends Component {
                         path="/register"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Register}/> 
-                        
-                    {/* Private  */}
+                        component={Register}/> {/* Private  */}
                     <PrivateRoute
                         exact
                         path="/tipsy/search"
@@ -98,12 +95,18 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <UsersBarsPage currentUser={this.state.currentUser} {...props}/>}/>
+                     <PrivateRoute
+                        exact
+                        path="/tipsy/bar/:id/settings"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <CreateBarPage isCreating={false} currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/bar/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={BarPage}/>
+                        component={(props) => <BarPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/myRecipes"
@@ -136,16 +139,16 @@ class Routes extends Component {
                         component={(props) => <AdminPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
-                        path = "/tipsy/user/stg"
+                        path="/tipsy/user/stg"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>} />
+                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
-                        path = "/tipsy/user/stg/changePassword"
+                        path="/tipsy/user/stg/changePassword"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>} />
+                        component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path={["/tipsy/user/:nickname"]}
@@ -182,32 +185,48 @@ class Routes extends Component {
 
 export default Routes;
 
-const PrivateRoute = ({ component, authed, redirectTo, ...rest }) => {
+const PrivateRoute = ({
+    component,
+    authed,
+    redirectTo,
+    ...rest
+}) => {
     return (
-        <Route {...rest} render={ props => {
-            return authed ? (
-                renderMergedProps(component, props, rest)
-            ) : (
-                <Redirect to={{
+        <Route
+            {...rest}
+            render={props => {
+            return authed
+                ? (renderMergedProps(component, props, rest))
+                : (<Redirect
+                    to={{
                     pathname: redirectTo,
-                    state: { from: props.location }
-                }}/>
-            );
+                    state: {
+                        from: props.location
+                    }
+                }}/>);
         }}/>
     );
 };
 
-const PublicRoute = ({ component, authed, redirectTo, ...rest }) => {
+const PublicRoute = ({
+    component,
+    authed,
+    redirectTo,
+    ...rest
+}) => {
     return (
-        <Route {...rest} render={ routeProps => {
-            return authed ? (
-                <Redirect to={{
+        <Route
+            {...rest}
+            render={routeProps => {
+            return authed
+                ? (<Redirect
+                    to={{
                     pathname: redirectTo,
-                    state: { from: routeProps.location }
-                }}/>
-            ) : (
-                renderMergedProps(component, routeProps, rest)
-            );
+                    state: {
+                        from: routeProps.location
+                    }
+                }}/>)
+                : (renderMergedProps(component, routeProps, rest));
         }}/>
     );
 };

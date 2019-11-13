@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {RecipesPreview, GetProfImg} from '../../main/constants';
+import {ItemPreview, GetProfImg} from '../../main/constants';
 import {Tabs} from 'antd';
 import {getUserProfile} from '../../util/APIUtils';
 
@@ -60,8 +60,6 @@ class UsersRecipesPage extends Component {
             }}/>
         }
 
-        console.log(this.state.user)
-
         return (
             <div className="grid-x grid-x-margin align-center-middle">
                 <Navbar/>
@@ -76,19 +74,20 @@ class UsersRecipesPage extends Component {
                                 
                             <Link
                                     to="/tipsy/search"
-                                    className="previewBar grid-x align-center-middle small-6 medium-3 cell"
+                                    className="previewItem grid-x align-center-middle small-6 medium-3 cell"
                                     key="src">
                                     <div className="small-4 grid-x cell">
                                         <GetProfImg type="search" className="small-10 cell" pic="" alt="Add A Bar"/>
                                     </div>
                                     <div className="small-8 grid-x cell">
-                                        <div className="previewBarName cell">Find A Recipe</div>
+                                        <div className="previewName cell">Find A Recipe</div>
                                     </div>
                                 </Link>
                                 
-                                <RecipesPreview
+                                <ItemPreview
                                     className="small-6 medium-3 cell"
-                                    recipes={this.state.user.recipesIncompleted}/>
+                                    items={this.state.user.recipesIncompleted}
+                                    type="recipe"/>
                             </div>
                         </TabPane>
                         <TabPane tab="Made" key="2">
@@ -96,26 +95,30 @@ class UsersRecipesPage extends Component {
 
                                 <Link
                                     to="/tipsy/createRecipe"
-                                    className="previewBar grid-x align-center-middle small-6 medium-3 cell"
+                                    className="previewItem grid-x align-center-middle small-6 medium-3 cell"
                                     key="add">
                                     <div className="small-4 grid-x cell">
                                         <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
                                     </div>
                                     <div className="small-8 grid-x cell">
-                                        <div className="previewBarName cell">Add A Recipe</div>
+                                        <div className="previewName cell">Add A Recipe</div>
                                     </div>
                                 </Link>
 
-                                <RecipesPreview
+                                <ItemPreview
                                     className="small-6 medium-3 cell"
-                                    recipes={this.state.user.recipesWritten}/>
+                                    items={this.state.user.recipesWritten}
+                                    type="recipe"/>
                             </div>
                         </TabPane>
                         <TabPane tab="Done" key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
-                                <RecipesPreview
+
+                            <ItemPreview
                                     className="small-6 medium-3 cell"
-                                    recipes={this.state.user.recipesCompleted}/>
+                                    items={this.state.user.recipesCompleted}
+                                    type="recipe"/>
+
                             </div>
                         </TabPane>
                     </Tabs>
