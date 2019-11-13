@@ -100,7 +100,7 @@ public class BarController {
     public ResponseEntity<?> getBarProfile(@PathVariable(value = "barID") String barID) {
         try{
             //BarID is base64 encoded
-            barID = Helper.decodeBase64ToHex(barID);
+            // barID = Helper.decodeBase64ToHex(barID);
             //we have to query the bar from Mongo
             Bar bar = barService.findById(barID);
             //We have the bar, now lets build a Bar Response
@@ -139,11 +139,15 @@ public class BarController {
         try{
             // we get the current user by getting their email address
             User user = userService.findByEmail(currentUser.getUsername());
-            barID = Helper.decodeBase64ToHex(barID);
+            // barID = Helper.decodeBase64ToHex(barID);
             // we have the barID(Base64)
             Bar bar = barService.findById(barID);
             //We must validate that the user is an owner, manager, or worker
-            if(bar.getOwner().equals(user)){
+            Set<String> managerIdList = new HashSet<String>();
+            for (User u : bar.getManagers()){
+                managerIdList.add(u.getId());
+            }
+            if(bar.getOwner().getId().equals(user.getId())){
                 //owner{FULL ACCESS}
                 //We can easily update the Name, Description, and Image
                 bar.setName(barRequest.getName());
@@ -189,7 +193,7 @@ public class BarController {
                 barRepository.save(bar);
                 return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
             }
-            else if(bar.getManagers().contains(user)){
+            else if(managerIdList.contains(user.getId())){
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
@@ -223,7 +227,7 @@ public class BarController {
         try{
             // we get the current user by getting their email address
             User user = userService.findByEmail(currentUser.getUsername());
-            barID = Helper.decodeBase64ToHex(barID);
+            // barID = Helper.decodeBase64ToHex(barID);
             // we have the barID(Base64)
             Bar bar = barService.findById(barID);
             if(bar.getOwner().equals(user)){

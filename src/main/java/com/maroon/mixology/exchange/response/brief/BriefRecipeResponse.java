@@ -9,7 +9,7 @@ public class BriefRecipeResponse {
     private String author;
 
     public BriefRecipeResponse(String id, String name, String img, String author) {
-        this.id = Helper.encodeHexToBase64(id);
+        this.id = id;
         this.name = name;
         this.img = img;
         this.author = author;

@@ -166,7 +166,7 @@ class Routes extends Component {
                         path="/tipsy/createbar"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <CreateBarPage currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <CreateBarPage isCreating={true} currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/createRecipe"

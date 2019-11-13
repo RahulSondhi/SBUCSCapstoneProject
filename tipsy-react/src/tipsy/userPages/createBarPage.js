@@ -290,7 +290,7 @@ class CreateBarPage extends Component {
             recipesAvailable: this.state.SENDrecipesAvailable
         };
 
-        if (this.state.isCreating === false) {
+        if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
                 notification.success({message: 'Tipsy App', description: "Your bar was succesfully created!"});
             }).catch(error => {

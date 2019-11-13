@@ -9,7 +9,7 @@ public class BriefBarResponse {
     private String owner;
 
     public BriefBarResponse(String id, String name, String img, String owner) {
-        this.id = Helper.encodeHexToBase64(id);
+        this.id = id;
         this.name = name;
         this.img = img;
         this.owner = owner;

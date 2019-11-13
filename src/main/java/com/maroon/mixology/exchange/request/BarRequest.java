@@ -60,11 +60,12 @@ public class BarRequest {
     }
 
     public Set<String> getRecipesAvailable() {
-        Set<String> realIds = new HashSet<String>();
-        for (String recipe : recipesAvailable) {
-            realIds.add(Helper.decodeBase64ToHex(recipe));
-        }
-        return realIds;
+        // Set<String> realIds = new HashSet<String>();
+        // for (String recipe : recipesAvailable) {
+        //     realIds.add(Helper.decodeBase64ToHex(recipe));
+        // }
+        // return realIds;
+        return recipesAvailable;
     }
 
     public void setRecipesAvailable(Set<String> recipesAvailable) {
