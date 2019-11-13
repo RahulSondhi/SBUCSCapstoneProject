@@ -92,7 +92,7 @@ public class BarController {
             return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be saved. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -131,8 +131,122 @@ public class BarController {
             return ResponseEntity.ok(barProfile);
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    @PostMapping("/{barID}/changeSettings")
+    public ResponseEntity<?> changeBarSettings(@PathVariable(value = "barID") String barID, @CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
+        try{
+            // we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
+            barID = Helper.decodeBase64ToHex(barID);
+            // we have the barID(Base64)
+            Bar bar = barService.findById(barID);
+            //We must validate that the user is an owner, manager, or worker
+            if(bar.getOwner().equals(user)){
+                //owner{FULL ACCESS}
+                //We can easily update the Name, Description, and Image
+                bar.setName(barRequest.getName());
+                bar.setDescription(barRequest.getDescription());
+                bar.setImage(barRequest.getImg());
+                //We can add or remove managers
+                //Diassociate everyone in managers
+                for (User u : bar.getManagers()){
+                    u.getBars().remove(barID);
+                    userRepository.save(u);
+                }
+                //Reassociate everyone
+                Set<User> barManagers = new HashSet<User>();
+                for (String managerNickname : barRequest.getManagers()){
+                    User u = userService.findByNickname(managerNickname);
+                    barManagers.add(u);
+                    u.getBars().add(barID);
+                    userRepository.save(u);
+                }
+                bar.setManagers(barManagers);
+                //We can add or remove workers
+                //Diassociate everyone in workers
+                for (User u : bar.getWorkers()){
+                    u.getBars().remove(barID);
+                    userRepository.save(u);
+                }
+                //Reassociate everyone
+                Set<User> barWorkers = new HashSet<User>();
+                for (String workerNickname : barRequest.getWorkers()){
+                    User u = userService.findByNickname(workerNickname);
+                    barWorkers.add(u);
+                    u.getBars().add(barID);
+                    userRepository.save(u);
+                }
+                bar.setWorkers(barWorkers);
+                //we can add or remove recipes available
+                Set<Recipe> barRecipes = new HashSet<Recipe>();
+                for (String recipeID : barRequest.getRecipesAvailable()){
+                    barRecipes.add(recipeService.findById(recipeID));
+                }
+                bar.setRecipesAvailable(barRecipes);
+                //We save this bar
+                barRepository.save(bar);
+                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+            }
+            else if(bar.getManagers().contains(user)){
+                //Reassociate everyone
+                Set<User> barWorkers = new HashSet<User>();
+                for (String workerNickname : barRequest.getWorkers()){
+                    User u = userService.findByNickname(workerNickname);
+                    barWorkers.add(u);
+                    u.getBars().add(barID);
+                    userRepository.save(u);
+                }
+                bar.setWorkers(barWorkers);
+                //we can add or remove recipes available
+                Set<Recipe> barRecipes = new HashSet<Recipe>();
+                for (String recipeID : barRequest.getRecipesAvailable()){
+                    barRecipes.add(recipeService.findById(recipeID));
+                }
+                bar.setRecipesAvailable(barRecipes);
+                //We save this bar
+                barRepository.save(bar);
+                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+            }
+            else{
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar settings failed to update. Error: " + e.toString()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }  
+    }
+
+    @PostMapping("/{barID}/delete")
+    public ResponseEntity<?> deleteBar(@PathVariable(value = "barID") String barID, @CurrentUser UserDetails currentUser) {
+        try{
+            // we get the current user by getting their email address
+            User user = userService.findByEmail(currentUser.getUsername());
+            barID = Helper.decodeBase64ToHex(barID);
+            // we have the barID(Base64)
+            Bar bar = barService.findById(barID);
+            if(bar.getOwner().equals(user)){
+                //we have to disassociate everyone
+                Set<User> combinedUsers = new HashSet<User>();
+                combinedUsers.add(bar.getOwner());
+                combinedUsers.addAll(bar.getManagers());
+                combinedUsers.addAll(bar.getWorkers());
+                for (User u : combinedUsers){
+                    u.getBars().remove(bar.getId()); 
+                    userRepository.save(u);
+                }
+                //We delete the bar
+                barRepository.delete(bar);
+                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+            }
+            else{
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete bar"), HttpStatus.UNAUTHORIZED); 
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar settings failed to delete. Error: " + e.toString()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }  
+    }
 }

@@ -18,8 +18,6 @@ public class Equipment {
     private String name;
     private String image;
     private EquipmentType type;
-    private boolean published;
-    private boolean filled;
     private Set<ActionType> actionsDoTo;
     private Set<ActionType> actionsDoing;
 
@@ -54,22 +52,6 @@ public class Equipment {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean published) {
-        this.published = published;
-    }
-
-    public boolean isFilled() {
-        return filled;
-    }
-
-    public void setFilled(boolean filled) {
-        this.filled = filled;
     }
 
     public Set<ActionType> getActionsDoTo() {

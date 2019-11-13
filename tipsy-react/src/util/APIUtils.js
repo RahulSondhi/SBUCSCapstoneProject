@@ -93,13 +93,6 @@ export function getCurrentUser() {
     });
 }
 
-export function getUserProfile(nickname) {
-    return request({
-        url: API_BASE_URL + "/tipsy/user/" + nickname,
-        method: 'GET'
-    });
-}
-
 export function getBarProfile(barID) {
     return request({
         url: API_BASE_URL + "/tipsy/bar/" + barID,
@@ -112,6 +105,29 @@ export function createBar(barRequest) {
         url: API_BASE_URL + "/tipsy/bar/createBar",
         method: 'POST',
         body: JSON.stringify(barRequest)
+    });
+}
+
+export function changeBarSettings(barID, barRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID + "/changeSettings" ,
+        method: 'POST',
+        body: JSON.stringify(barRequest)
+    });
+}
+
+export function deleteBar(barID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID + "/delete" ,
+        method: 'POST',
+        body: JSON.stringify(null)
+    });
+}
+
+export function getUserProfile(nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/" + nickname,
+        method: 'GET'
     });
 }
 
