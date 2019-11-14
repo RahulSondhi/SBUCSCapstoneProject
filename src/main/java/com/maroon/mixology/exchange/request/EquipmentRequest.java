@@ -20,9 +20,6 @@ public class EquipmentRequest {
 
     @NotBlank
     private EquipmentType type;
-
-    private boolean published;
-    private boolean filled;
     @NotBlank
     private Set<ActionType> actionsDoTo;
     @NotBlank

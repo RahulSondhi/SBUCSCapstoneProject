@@ -127,7 +127,7 @@ public class RecipeController {
                     recipe.getImage(),
                     author,
                     recipe.isPublished(),
-                    null, //StepResponses
+                    null, //StepResponses 
                     equipments,
                     customEquipments
                 );
