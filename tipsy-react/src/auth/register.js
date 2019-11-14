@@ -62,9 +62,6 @@ class Register extends Component {
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
-        this.disableButton = this
-            .disableButton
-            .bind(this);
     }
     /*
         Handle changes from the form and update our fields
@@ -87,7 +84,7 @@ class Register extends Component {
     */
     handleSubmit(event) {
         event.preventDefault();
-
+        //save our component values in this const, prepare to send them as POST
         const registerRequest = {
             firstName: this.state.firstName.value,
             lastName: this.state.lastName.value,
@@ -95,11 +92,29 @@ class Register extends Component {
             nickname: this.state.nickname.value,
             password: this.state.password.value
         };
+        // Clear the values from the component, not needed anymore
+        this.setState({
+            firstName: {
+                value: ''
+            },
+            lastName: {
+                value: ''
+            },
+            email: {
+                value: ''
+            },
+            nickname: {
+                value: ''
+            },
+            password: {
+                value: ''
+            }
+        });
+        // Send the response
         register(registerRequest).then(response => {
             notification.success({
                 message: 'Tipsy App',
-                description: "Thank you! You're successfully registered. Please check your email to confirm yo" +
-                        "ur registration!"
+                description: "Thank you! You're successfully registered. Please check your email to confirm your registration!"
             });
         }).catch(error => {
             notification.error({
@@ -112,12 +127,14 @@ class Register extends Component {
         returns true if the Form is invalid.
     */
     isFormInvalid() {
-        return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success' && this.state.nickname.validateStatus === 'success' && this.state.password.validateStatus === 'success' && this.state.passwordConfirm.validateStatus === 'success');
+        return !(this.state.firstName.validateStatus === 'success' && 
+        this.state.lastName.validateStatus === 'success' && 
+        this.state.email.validateStatus === 'success' && 
+        this.state.nickname.validateStatus === 'success' && 
+        this.state.password.validateStatus === 'success' && 
+        this.state.passwordConfirm.validateStatus === 'success');
     }
 
-    disableButton() {
-        document.getElementById("registerButton").disabled = true;
-    }
 
     /*
     Render the html in the page
@@ -238,7 +255,7 @@ class Register extends Component {
                     </FormItem>
 
                     <FormItem className="cell">
-                        <button type="submit" id="registerButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
+                        <button type="submit" id="registerButton" disabled={this.isFormInvalid()} className="button">
                             Register
                         </button>
                     </FormItem>
