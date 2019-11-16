@@ -70,8 +70,7 @@ class UserPage extends Component {
         }
 
         return (
-            <div className="grid-x grid-x-margin align-center-middle">
-
+            <div className="grid-x align-center-middle">
                 <Navbar/>
                 <h1 id="userPageTitle" className="caption small-10 cell">{this.state.user.nickname}</h1>
 
@@ -87,7 +86,7 @@ class UserPage extends Component {
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div
-                        className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
+                        className="userPageBarScroll small-10 medium-8 large-6 grid-x grid-margin-x align-center-middle cell">
                         <div
                             className="userPageBarContainer grid-x grid-margin-x align-center-middle cell">
                             <ItemPreview className="cell" items={this.state.user.bars} type="bar"/>
