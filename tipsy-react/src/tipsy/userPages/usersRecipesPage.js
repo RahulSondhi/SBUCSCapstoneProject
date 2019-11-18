@@ -70,7 +70,7 @@ class UsersRecipesPage extends Component {
 
                     <Tabs className="small-12 medium-10 cell" tabPosition="top">
                         <TabPane tab="Doing" key="1">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
+                            <div className="grid-x align-center align-top small-10 cell">
                                 
                             <Link
                                     to="/tipsy/search"
@@ -91,7 +91,7 @@ class UsersRecipesPage extends Component {
                             </div>
                         </TabPane>
                         <TabPane tab="Made" key="2">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
+                            <div className="grid-x align-center align-top small-10 cell">
 
                                 <Link
                                     to="/tipsy/createRecipe"
@@ -112,7 +112,7 @@ class UsersRecipesPage extends Component {
                             </div>
                         </TabPane>
                         <TabPane tab="Done" key="3">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
+                            <div className="grid-x align-center align-top small-10 cell">
 
                             <ItemPreview
                                     className="small-6 medium-3 cell"

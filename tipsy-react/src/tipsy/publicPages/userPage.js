@@ -88,7 +88,7 @@ class UserPage extends Component {
                     <div
                         className="userPageBarScroll small-10 medium-8 large-6 grid-x grid-margin-x align-center-middle cell">
                         <div
-                            className="userPageBarContainer grid-x grid-margin-x align-center-middle cell">
+                            className="userPageBarContainer grid-x grid-margin-x align-center align-top cell">
                             <ItemPreview className="cell" items={this.state.user.bars} type="bar"/>
                         </div>
                     </div>

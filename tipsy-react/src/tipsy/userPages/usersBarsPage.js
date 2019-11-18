@@ -64,7 +64,7 @@ class UsersBarsPage extends Component {
 
                 <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.user.nickname + "'s Bars"}</h1>
 
-                <div className="grid-x align-center-middle cell">
+                <div className="grid-x align-center align-top small-10 cell">
 
                     <Link to="/tipsy/createbar" className="previewItem grid-x align-center-middle small-6 medium-3 cell" key="add">
                         <div className="small-4 grid-x cell">
@@ -76,6 +76,7 @@ class UsersBarsPage extends Component {
                     </Link>
 
                     <ItemPreview className="small-6 medium-3 cell" items={this.state.user.bars} type="bar"/>
+                
                 </div>
             </div>
         )

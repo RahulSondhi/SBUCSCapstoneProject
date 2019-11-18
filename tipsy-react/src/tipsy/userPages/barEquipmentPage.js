@@ -62,8 +62,8 @@ class BarEquipmentPage extends Component {
 
                 <h1 id="userEquipmentPageTitle" className="caption small-10 cell">Bar Equipment</h1>
 
-                <div className="grid-x align-center-middle cell">
-                    <ItemPreview className="small-6 medium-3 cell" items={this.state.equipment} type="equipment"/>
+                <div className="grid-x align-center align-top small-10 cell">
+                    <ItemPreview className="small-6 medium-6 cell" items={this.state.equipment} type="equipment"/>
                 </div>
             </div>
         )
