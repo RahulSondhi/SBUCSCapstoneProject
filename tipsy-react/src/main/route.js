@@ -118,7 +118,7 @@ class Routes extends Component {
                         path="/tipsy/recipe/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={RecipePage}/>
+                        component={(props) => <RecipePage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/barEquipment"
@@ -127,10 +127,10 @@ class Routes extends Component {
                         component={BarEquipmentPage}/>
                     <PrivateRoute
                         exact
-                        path="/tipsy/equipment"
+                        path="/tipsy/equipment/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={EquipmentPage}/>
+                        component={(props) => <EquipmentPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/admin"

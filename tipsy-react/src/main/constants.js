@@ -11,6 +11,8 @@ import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
 import SettingPic from '../assets/defaultIcons/setting.svg';
 import RemovePic from '../assets/defaultIcons/remove.svg';
+import ActionPic from '../assets/defaultIcons/action.svg';
+import EquipmentPic from '../assets/defaultIcons/equipment.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
@@ -97,6 +99,10 @@ export class GetProfImg extends Component {
                 this.image = SettingPic
             } else if (this.type === "remove") {
                 this.image = RemovePic
+            } else if (this.type === "equipment") {
+                this.image = EquipmentPic
+            } else if (this.type === "action") {
+                this.image = ActionPic
             } else {
                 this.image = UnknownPic
             }
@@ -237,6 +243,11 @@ class GetItem extends Component {
             this.desc = <span>{" " + this.item.author}</span>;
         } else if (this.type === "equipment") {
             this.link = this.link + this.item.name;
+        } else if (this.type === "action") {
+            this.name = this.props.item;
+            this.link = "#";
+            this.descPre = "";
+            this.desc = "";
         } else {
             this.link = this.link + this.item.id
             if (this.item.desc !== null && this.item.desc !== "") {
@@ -261,7 +272,6 @@ class GetItem extends Component {
     }
 
     postFunc() {
-        console.log(this.item)
         this.postfixFunc(this.item);
     }
 
