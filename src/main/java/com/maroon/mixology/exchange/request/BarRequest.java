@@ -1,12 +1,9 @@
 package com.maroon.mixology.exchange.request;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.maroon.mixology.Helper;
 
 public class BarRequest {
     @NotBlank
@@ -17,7 +14,7 @@ public class BarRequest {
     private String img;
     private Set<String> managers; //nicknames
     private Set<String> workers; //nicknames
-    private Set<String> recipesAvailable; //ids in base 64
+    private Set<String> recipesAvailable;
 
     public String getName() {
         return name;

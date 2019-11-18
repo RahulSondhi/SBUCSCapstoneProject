@@ -14,6 +14,7 @@ import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
+import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.UserRepository;
@@ -99,12 +100,18 @@ public class StepController {
                         step.getObjDoing().getActionsDoTo(), 
                         step.getObjDoing().getActionsDoing());
                 }
+                UnitResponse unitResponse = new UnitResponse(
+                    step.getUnit().getName(), 
+                    step.getUnit().getMlMeasurement(), 
+                    step.getUnit().getFlozMeasurement()
+                );
+
                 StepResponse stepResponse = new StepResponse(
                     equipmentTodo,
                     equipmentDoing,
                     step.getAction(),
                     step.getValue(),
-                    null //Unit Response 
+                    unitResponse //Unit Response 
                     );
                     return ResponseEntity.ok(stepResponse);
             }

@@ -2,16 +2,17 @@ package com.maroon.mixology.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 @Document(collection = "unit")
 public class Unit {
     @Id
     private String id;
-    @Indexed() //Is this necessary?
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
-    private int mlMeasurement;
-    private int flozMeasurement;
+    private double mlMeasurement;
+    private double flozMeasurement;
 
     public String getId() {
 		return id;
@@ -29,19 +30,19 @@ public class Unit {
 		this.name = name;
 	}
 
-    public void setFlozMeasurement(int flozMeasurement) {
+    public void setFlozMeasurement(double flozMeasurement) {
         this.flozMeasurement = flozMeasurement;
     }
 
-    public void setMlMeasurement(int mlMeasurement) {
+    public void setMlMeasurement(double mlMeasurement) {
         this.mlMeasurement = mlMeasurement;
     }
 
-    public int getMlMeasurement() {
+    public double getMlMeasurement() {
         return mlMeasurement;
     }
 
-    public int getFlozMeasurement() {
+    public double getFlozMeasurement() {
         return flozMeasurement;
     }
 }

@@ -1,0 +1,15 @@
+{"_id":{"$oid":"5dd2b5547dd2b6215e6a8d3e"},"name":"Dash","mlMeasurement":0.92,"flozMeasurement":0.03125,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b5977dd2b6215e6a8d40"},"name":"Splash","mlMeasurement":5.91,"flozMeasurement":0.2,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b66b7dd2b6215e6a8d42"},"name":"Teaspoon","mlMeasurement":4.93,"flozMeasurement":0.16666666666666666,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7207dd2b623b9f4a19a"},"name":"Tablespoon","mlMeasurement":14.79,"flozMeasurement":0.5,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b75c7dd2b623b9f4a19c"},"name":"Pony","mlMeasurement":29.57,"flozMeasurement":1.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7787dd2b623b9f4a19e"},"name":"Jigger","mlMeasurement":44.36,"flozMeasurement":1.5,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b77f7dd2b623b9f4a1a0"},"name":"Shot","mlMeasurement":44.36,"flozMeasurement":1.5,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7a07dd2b623b9f4a1a2"},"name":"Snit","mlMeasurement":88.72,"flozMeasurement":3.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7dd7dd2b623b9f4a1a6"},"name":"Wineglass","mlMeasurement":118.29,"flozMeasurement":4.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7ed7dd2b623b9f4a1a8"},"name":"Split","mlMeasurement":177.44,"flozMeasurement":6.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b7fd7dd2b623b9f4a1aa"},"name":"Cup","mlMeasurement":236.58,"flozMeasurement":8.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b8137dd2b623b9f4a1ac"},"name":"Pint","mlMeasurement":473.17,"flozMeasurement":16.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b8297dd2b623b9f4a1ae"},"name":"Fifth","mlMeasurement":757.08,"flozMeasurement":25.6,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b83a7dd2b623b9f4a1b0"},"name":"Quart","mlMeasurement":946.35,"flozMeasurement":32.0,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd2b8527dd2b623b9f4a1b2"},"name":"Gallon","mlMeasurement":3785.41,"flozMeasurement":128.0,"_class":"com.maroon.mixology.entity.Unit"}

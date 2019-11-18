@@ -1,11 +1,7 @@
 package com.maroon.mixology.exchange.request;
 
-import java.util.ArrayList;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.maroon.mixology.Helper;
 
 public class RecipeRequest {
     @NotBlank

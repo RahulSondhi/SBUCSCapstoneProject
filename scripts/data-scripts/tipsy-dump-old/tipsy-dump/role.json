@@ -1,2 +1,0 @@
-{"_id":{"$oid":"5dc8da10f19f90691601b2a3"},"name":"USER","_class":"com.maroon.mixology.entity.Role"}
-{"_id":{"$oid":"5dc8dd75f19f90691601b2b7"},"name":"ADMIN","_class":"com.maroon.mixology.entity.Role"}

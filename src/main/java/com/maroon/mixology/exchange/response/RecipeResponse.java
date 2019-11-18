@@ -8,17 +8,17 @@ import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 
 public class RecipeResponse {
     private String name;
-    private String image;
+    private String img;
     private BriefUserResponse author; 
     private boolean published;
     private ArrayList<StepResponse> steps;
     private Set<BriefEquipmentResponse> equipments;
     private Set<BriefEquipmentResponse> customEquipments;
 
-    public RecipeResponse(String name, String image, BriefUserResponse author, boolean published,
+    public RecipeResponse(String name, String img, BriefUserResponse author, boolean published,
             ArrayList<StepResponse> steps, Set<BriefEquipmentResponse> equipments, Set<BriefEquipmentResponse> customEquipments) {
         this.name = name;
-        this.image = image;
+        this.img = img;
         this.author = author;
         this.published = published;
         this.steps = steps;
@@ -34,12 +34,12 @@ public class RecipeResponse {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public BriefUserResponse getAuthor() {

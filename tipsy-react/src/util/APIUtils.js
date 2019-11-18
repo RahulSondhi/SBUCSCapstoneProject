@@ -138,6 +138,12 @@ export function getAllEquipment() {
     });
 }
 
+export function getAllUnits() {
+    return request({
+        url: API_BASE_URL + "/tipsy/unit/getUnits",
+        method: 'GET'
+    });
+}
 
 export function getUserProfile(nickname) {
     return request({

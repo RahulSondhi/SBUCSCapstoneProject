@@ -1,32 +1,19 @@
 package com.maroon.mixology.controller.tipsy;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.Valid;
 
-import com.maroon.mixology.entity.User;
-import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Equipment;
-import com.maroon.mixology.entity.Recipe;
-import com.maroon.mixology.exchange.request.BarRequest;
-import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
-import com.maroon.mixology.repository.BarRepository;
-import com.maroon.mixology.repository.EquipmentRepository;
-import com.maroon.mixology.repository.RecipeRepository;
-import com.maroon.mixology.repository.UserRepository;
-import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.EquipmentServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,7 +48,6 @@ public class EquipmentController {
     @GetMapping("/getEquipments")
     public ResponseEntity<?> getEquipment() {
         try{
-            // We have the equipment Name, we can query this specifc one in the db
             List<Equipment> equipments = equipmentService.findAll();
             Set<BriefEquipmentResponse> equipmentResponses = new HashSet<BriefEquipmentResponse>();
             for (Equipment e : equipments){

@@ -1,9 +1,7 @@
 package com.maroon.mixology.exchange.response.brief;
 
-import com.maroon.mixology.Helper;
-
 public class BriefRecipeResponse {
-    private String id; // save as base64
+    private String id;
     private String name;
     private String img;
     private String author;

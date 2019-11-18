@@ -1,6 +1,5 @@
 package com.maroon.mixology.exchange.request;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
@@ -8,8 +7,6 @@ import com.maroon.mixology.entity.type.EquipmentType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.maroon.mixology.Helper;
 
 public class EquipmentRequest {
     @NotBlank
