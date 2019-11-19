@@ -68,7 +68,7 @@ public class UserController {
     @Value("${tipsy.mail.newemail.subject}")
     private String notificationSubject;
 
-    @Value("${tipsy.mail.newemailnotify.message }")
+    @Value("${tipsy.mail.newemailnotify.message}")
     private String notificationMessage;
 
     @Value("${tipsy.mail.newemail.subject}")
