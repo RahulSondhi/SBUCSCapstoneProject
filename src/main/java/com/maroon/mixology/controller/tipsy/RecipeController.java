@@ -55,39 +55,22 @@ public class RecipeController {
     
     @PostMapping("/createRecipe")
     public ResponseEntity<?> createNewRecipe(@CurrentUser UserDetails currentUser, @Valid @RequestBody RecipeRequest recipeRequest) {
-        // try{
-        //     //we get the current user by getting their email address
-        //     User user = userRepository.findByEmail(currentUser.getUsername());
-        //     //We need to build the list of managers, workers, and recipes from their IDS
-        //     Set<User> barManagers = new HashSet<User>();
-        //     for (String managerNickname : barRequest.getManagers()){
-        //         barManagers.add(userRepository.findByNickname(managerNickname));
-        //     }
-        //     Set<User> barWorkers = new HashSet<User>();
-        //     for (String workerNickname : barRequest.getWorkers()){
-        //         barWorkers.add(userRepository.findByNickname(workerNickname));
-        //     }
-        //     ArrayList<Recipe> barRecipes = new ArrayList<Recipe>();
-        //     for (String recipeID : barRequest.getRecipesAvaliable()){
-        //         barRecipes.add(recipeRepository.findById(recipeID).orElse(null));
-        //     }
-        //     Bar bar = new Bar(
-        //         barRequest.getName(),
-        //         user,
-        //         barRequest.getImage(),
-        //         barManagers,
-        //         barWorkers,
-        //         barRecipes
-        //     );
-        //     barRepository.save(bar); //we save the bar in the database
-        //     user.getBars().add(bar); //we have to add this bar to the user's list of bars
-        //     userRepository.save(user);
-        //     return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
-        // } catch (Exception e) {
-        //     return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be saved. Error: " + e.toString()),
-        //                 HttpStatus.BAD_REQUEST);
-        // }
-        return null;
+        try{
+            //we get the current user by getting their email address
+            User user = userRepository.findByEmail(currentUser.getUsername());
+            //We need to build the recipe
+            //name
+            //image
+            //author = current user
+            //published
+            //steps
+            //equipments
+            //custom equipments
+            return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
+        } catch (Exception e) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be saved. Error: " + e.toString()),
+                        HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{recipe}")

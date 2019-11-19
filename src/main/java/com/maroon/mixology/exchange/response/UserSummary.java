@@ -1,14 +1,18 @@
 package com.maroon.mixology.exchange.response;
 
+import java.util.Set;
+
 public class UserSummary {
     private String id;
     private String email;
-    private String nickname;
+    private String name;
+    private Set<String> roles;
 
-    public UserSummary(String id, String email, String nickname) {
+    public UserSummary(String id, String email, String name, Set<String> roles) {
         this.id = id;
         this.email = email;
-        this.nickname = nickname;
+        this.name = name;
+        this.roles = roles;
     }
 
     /**
@@ -33,18 +37,21 @@ public class UserSummary {
         this.email = email;
     }
 
-    /**
-     * @return String return the nickname
-     */
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @param nickname the nickname to set
-     */
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
 
 }

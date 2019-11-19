@@ -3,10 +3,12 @@ package com.maroon.mixology.controller.tipsy;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
+import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.exchange.request.ChangePasswordRequest;
@@ -22,12 +24,15 @@ import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarServiceImpl;
+import com.maroon.mixology.service.EmailService;
 import com.maroon.mixology.service.RecipeServiceImpl;
 import com.maroon.mixology.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,6 +54,9 @@ public class UserController {
     private UserServiceImpl userService;
     
     @Autowired
+    private EmailService emailService;
+    
+    @Autowired
     private BarServiceImpl barService;
     
     @Autowired
@@ -56,13 +64,36 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Value("${tipsy.mail.newemail.subject}")
+    private String notificationSubject;
+
+    @Value("${tipsy.mail.newemailnotify.message }")
+    private String notificationMessage;
+
+    @Value("${tipsy.mail.newemail.subject}")
+    private String verificationSubject;
+
+    @Value("${tipsy.mail.newemail.message}")
+    private String verificationMessage;
+
+    @Value("${spring.mail.username}")
+    private String mailUserName;
+
+    @Value("${tipsy.react.port}")
+    private String reactPort;
     
     @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
     public UserSummary getCurrentUser(@CurrentUser UserDetails currentUser) {
         // We have their email address
         User user = userService.findByEmail(currentUser.getUsername());
-        UserSummary userSummary = new UserSummary(user.getId(), user.getEmail(), user.getNickname());
+        //build roles
+        Set<String> roles = new HashSet<String>();
+        for (Role role : user.getRoles()){
+            roles.add(role.getName());
+        }
+        UserSummary userSummary = new UserSummary(user.getId(), user.getEmail(), user.getNickname(), roles);
         return userSummary;
     }
 
@@ -125,14 +156,31 @@ public class UserController {
     }
 
     @PostMapping("/changeSettings")
-    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest) {
+    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest, HttpServletRequest request) {
         try{
             //we get the current user by getting their email address
             // System.out.println(settingsRequest.getMeasurement());
             User user = userService.findByEmail(currentUser.getUsername());
             user.setFirstName(settingsRequest.getFirstName());
             user.setLastName(settingsRequest.getLastName());
-            user.setEmail(settingsRequest.getEmail());
+            //Setting Email should be different...
+            if(!user.getEmail().equals(settingsRequest.getEmail())){
+                //We need to confirm the new email address while also notifying the old email address
+                // Send a notification email
+                // Should this also include the port number(?)
+                // For now, yes because of localhost. We have to disable this when uploading to Cloud
+                // the port should be 80 so please change this during deployment when we have domain name
+                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                
+                SimpleMailMessage confirmationEmail = new SimpleMailMessage();
+                confirmationEmail.setFrom(mailUserName);
+                confirmationEmail.setTo(user.getEmail());
+                confirmationEmail.setSubject(notificationSubject);
+                confirmationEmail.setText(notificationMessage);
+                emailService.sendEmail(confirmationEmail);
+
+                //Now send a verification email
+            }
             user.setProfilePic(settingsRequest.getProfilePic());
             user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
             userRepository.save(user);
