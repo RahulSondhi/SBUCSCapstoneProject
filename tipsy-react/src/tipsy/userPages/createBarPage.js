@@ -78,7 +78,7 @@ class CreateBarPage extends Component {
 
         getBarProfile(id).then(response => {
 
-            const tempTitle = "Editting " + response.name;
+            const tempTitle = "Editing " + response.name;
 
             this.setState({
                 bar: response,
@@ -105,13 +105,21 @@ class CreateBarPage extends Component {
 
                 },
                 img: {
-                    value: ''
+                    value: response.img
                 }
             });
 
-            this.state.SENDmanagers = this.state.managers.value.map(function (el) { return el.nickname; });
-            this.state.SENDworkers = this.state.workers.value.map(function (el) { return el.nickname; });
-            this.state.SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+            const SENDmanagers = this.state.managers.value.map(function (el) { return el.name; });
+            const SENDworkers = this.state.workers.value.map(function (el) { return el.name; });
+            const SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+
+            this.setState({
+
+            SENDmanagers: SENDmanagers,
+            SENDworkers: SENDworkers,
+            SENDrecipesAvailable: SENDrecipesAvailable
+            
+            })
 
         }).catch(error => {
             if (error.status === 404) {
@@ -267,6 +275,7 @@ class CreateBarPage extends Component {
     }
 
     handleImageLoad = (val) => {
+        console.log(val);
         this.setState({
             img: {
                 value: val.replace(/^data:image\/(png|jpg);base64,/, "")
@@ -277,9 +286,15 @@ class CreateBarPage extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        this.state.SENDmanagers = this.state.managers.value.map(function (el) { return el.nickname; });
-        this.state.SENDworkers = this.state.workers.value.map(function (el) { return el.nickname; });
-        this.state.SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+        const SENDmanagers = this.state.managers.value.map(function (el) { return el.name; });
+        const SENDworkers = this.state.workers.value.map(function (el) { return el.name; });
+        const SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+
+        this.setState({
+            SENDmanagers: SENDmanagers,
+            SENDworkers: SENDworkers,
+            SENDrecipesAvailable: SENDrecipesAvailable
+        });
 
         const barRequest = {
             name: this.state.name.value,

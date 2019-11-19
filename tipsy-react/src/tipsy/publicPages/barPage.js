@@ -33,7 +33,10 @@ class BarPage extends Component {
         getBarProfile(id).then(response => {
             this.setState({bar: response, isLoading: false});
 
-            if(this.props.currentUser.nickname === response.owner.nickname){
+            if(
+                this.props.currentUser.name === response.owner.name ||
+                this.props.currentUser.role === "Admin" ||
+                response.managers.some(item => item.name === this.props.currentUser.name)){
                 this.setState({
                     settingClass : " "
                 });

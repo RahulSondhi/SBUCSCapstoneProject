@@ -17,11 +17,10 @@ import UserPage from '../tipsy/publicPages/userPage.js';
 
 // User Page Imports
 import AdminPage from '../tipsy/userPages/adminPage.js';
-import UsersBarsPage from '../tipsy/userPages/usersBarsPage.js';
+import UsersDisplaysPage from '../tipsy/userPages/userDisplayPage.js';
 import UsersRecipesPage from '../tipsy/userPages/usersRecipesPage.js';
 import CreateBarPage from '../tipsy/userPages/createBarPage.js'
 import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
-import BarEquipmentPage from '../tipsy/userPages/barEquipmentPage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
 import SettingsPage from '../tipsy/userPages/settingsPage.js';
 import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
@@ -29,9 +28,6 @@ import ErrorPage from '../tipsy/userPages/errorPage.js';
 
 // Game Page Imports
 import Game from '../tipsy/game.js';
-
-// import {PrivateRoute,PublicRoute} from './PrivateRoute'; import PublicRoute
-// from './PublicRoute';
 
 class Routes extends Component {
 
@@ -47,7 +43,7 @@ class Routes extends Component {
     render() {
         console.log("Children Authenticated: " + this.state.isAuthenticated);
         if (this.state.currentUser) 
-            console.log("User: " + this.state.currentUser.nickname);
+            console.log("User: " + this.state.currentUser.name);
         return (
             <Router>
                 <Switch>
@@ -94,13 +90,16 @@ class Routes extends Component {
                         path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <UsersBarsPage currentUser={this.state.currentUser} {...props}/>}/>
-                     <PrivateRoute
+                        component={(props) => <UsersDisplaysPage type="bar" currentUser={this.state.currentUser} {...props}/>}/>
+                    <PrivateRoute
                         exact
                         path="/tipsy/bar/:id/settings"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <CreateBarPage isCreating={false} currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <CreateBarPage
+                        isCreating={false}
+                        currentUser={this.state.currentUser}
+                        {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/bar/:id"
@@ -124,7 +123,10 @@ class Routes extends Component {
                         path="/tipsy/barEquipment"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={BarEquipmentPage}/>
+                        component={(props) => <UsersDisplaysPage
+                        type="equipment"
+                        currentUser={this.state.currentUser}
+                        {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/equipment/:id"
@@ -166,7 +168,10 @@ class Routes extends Component {
                         path="/tipsy/createbar"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <CreateBarPage isCreating={true} currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <CreateBarPage
+                        isCreating={true}
+                        currentUser={this.state.currentUser}
+                        {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/createRecipe"

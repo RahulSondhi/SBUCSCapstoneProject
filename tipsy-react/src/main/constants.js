@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Form, Input, Icon, Button, notification} from 'antd';
+import {Input, Icon, notification} from 'antd';
 import {checkNicknameAvailability, getUserProfile} from '../util/APIUtils';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
@@ -84,7 +84,7 @@ export class GetProfImg extends Component {
     }
 
     render() {
-        if (this.props.pic == null || this.props.pic == "" || this.props.pic == undefined) {
+        if (this.props.pic === null || this.props.pic === "" || this.props.pic === undefined) {
             if (this.type === "bar") {
                 this.image = BarPic
             } else if (this.type === "recipe") {
@@ -121,13 +121,15 @@ export class MakeProfImg extends Component {
 
         this.state = {
             preview: null,
-            src: null
+            src: null,
+            noImg: false
         }
 
         this.type = this.props.type;
         this.className = this.props.className;
 
-        if (this.props.pic == null || this.props.pic == "" || this.props.pic == undefined) {
+        if (this.props.pic === null || this.props.pic === "" || this.props.pic === undefined) {
+            this.state.noImg = true;
             if (this.type === "bar") {
                 this.state.src = NewBarPic
             } else if (this.type === "recipe") {
@@ -167,13 +169,18 @@ export class MakeProfImg extends Component {
     }
 
     onImageLoad() {
-        this
-            .props
-            .data(this.state.src);
+        if (this.state.noImg) {
+            this
+                .props
+                .data("")
+        } else {
+            this
+                .props
+                .data(this.state.src);
+        }
     }
 
     onBeforeFileLoad(elem) {
-        console.log(elem)
         if (elem.target.files[0].size > 71680) {
             notification["error"]({message: 'Tipsy App', description: "File is too big!"});
             elem.target.value = "";
@@ -190,6 +197,7 @@ export class MakeProfImg extends Component {
                 <Avatar
                     width={360}
                     height={360}
+                    cropRadius={180}
                     onCrop={this.onCrop}
                     onClose={this.onClose}
                     onImageLoad={this.onImageLoad}
@@ -205,7 +213,7 @@ export class MakeProfImg extends Component {
 export const ItemPreview = ({items, className, type, postfix, postfixFunc}) => (
     <Fragment>
         {items.map(item => (<GetItem
-            key={item.id}
+            key={new Date().getMilliseconds() + (Math.random() * 69420)}
             type={type}
             item={item}
             postfix={postfix}
@@ -221,7 +229,7 @@ class GetItem extends Component {
 
         this.type = this.props.type;
         this.item = this.props.item;
-        this.name = this.props.item.name
+        this.name = this.props.item.name;
         this.id = this.props.item.id;
         this.img = this.item.img;
         this.className = this.props.className;
@@ -230,9 +238,8 @@ class GetItem extends Component {
         this.descPre = "";
         this.desc = "";
 
-        if (this.type === "user") {
-            this.name = this.item.nickname;
-            this.link = this.link + this.item.nickname;
+        if (this.type === "user" || this.type === "equipment") {
+            this.link = this.link + this.item.name;
         } else if (this.type === "bar") {
             this.link = this.link + this.item.id;
             this.descPre = "Owner:";
@@ -241,8 +248,6 @@ class GetItem extends Component {
             this.link = this.link + this.item.id;
             this.descPre = "Author:";
             this.desc = <span>{" " + this.item.author}</span>;
-        } else if (this.type === "equipment") {
-            this.link = this.link + this.item.name;
         } else if (this.type === "action") {
             this.name = this.props.item;
             this.link = "#";
@@ -259,7 +264,7 @@ class GetItem extends Component {
         this.postfix = this.props.postfix;
         this.postfixFunc = this.props.postfixFunc;
 
-        if (this.postfix == null || this.postfix == "" || this.postfix == undefined) {
+        if (this.postfix === null || this.postfix === "" || this.postfix === undefined) {
             this.postfixClass = "hidden"
         } else {
             this.postfixClass = " ";
@@ -334,7 +339,10 @@ export class DynamicForm extends Component {
     addItem(success, item) {
         // update the state object
 
-        let hasItem = this.state.data.some( items => items['nickname'] === item.nickname )
+        let hasItem = this
+            .state
+            .data
+            .some(items => items['nickname'] === item.nickname)
 
         if (success === true && hasItem === false) {
 
@@ -412,12 +420,10 @@ class DynamicInput extends Component {
             .type
             .slice(1);
 
-        if (this.type.toLowerCase() == "user") {
-            this.state.name = "nickname";
-        } else if (this.type.toLowerCase() == "recipe") {
-            this.state.name = "name";
+        if (this.type.toLowerCase() === "user") {
+            this.state.name = "Nickname";
         } else {
-            this.state.name = "name";
+            this.state.name = "Name";
         }
 
         this.handleInputChange = this
@@ -458,14 +464,7 @@ class DynamicInput extends Component {
                     prefix={< Icon type = "idcard" />}
                     name={this.state.name}
                     autoComplete="on"
-                    placeholder={"Enter " + this.type + " " + this
-                    .state
-                    .name
-                    .charAt(0)
-                    .toUpperCase() + this
-                    .state
-                    .name
-                    .slice(1)}
+                    placeholder={"Enter " + this.type + " " + this.state.name}
                     value={this.state.nickname.value}
                     onChange={(event) => this.handleInputChange(event)}
                     onKeyDown={this.onKeyDown}

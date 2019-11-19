@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, NavLink} from 'react-router-dom'
 import {ItemPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
@@ -19,10 +19,10 @@ class UserPage extends Component {
             .bind(this);
     }
 
-    loadUserProfile(nickname) {
+    loadUserProfile(name) {
         this.setState({isLoading: true});
 
-        getUserProfile(nickname).then(response => {
+        getUserProfile(name).then(response => {
             this.setState({user: response, isLoading: false});
         }).catch(error => {
             if (error.status === 404) {
@@ -36,11 +36,11 @@ class UserPage extends Component {
     componentDidMount() {
         let try_name = "";
         if (this.props.match.params.nickname === "me") 
-            try_name = this.props.currentUser.nickname;
+            try_name = this.props.currentUser.name;
         else 
             try_name = this.props.match.params.nickname;
-        const nickname = try_name;
-        this.loadUserProfile(nickname);
+        const name = try_name;
+        this.loadUserProfile(name);
     }
 
     componentDidUpdate(nextProps) {
@@ -72,7 +72,13 @@ class UserPage extends Component {
         return (
             <div className="grid-x align-center-middle">
                 <Navbar/>
-                <h1 id="userPageTitle" className="caption small-10 cell">{this.state.user.nickname}</h1>
+                <h1 id="userPageTitle" className="caption small-8 small-offset-2 cell">{this.state.user.name}</h1>
+                
+                <div id="redirectUser" className="small-2 cell grid-x align-center-middle">
+                    <NavLink to={"/tipsy/user/stg"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
+                        <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
+                    </NavLink>
+                </div>
 
                 <div
                     id="leftProfileSide"
@@ -81,9 +87,9 @@ class UserPage extends Component {
                     <GetProfImg
                         className="small-4 cell"
                         pic={this.state.user.img}
-                        alt={this.state.user.nickname}
+                        alt={this.state.user.name}
                         type="user"/>
-                    <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.name}</h1>
+                    <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.nameFull}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div
                         className="userPageBarScroll small-10 medium-8 large-6 grid-x grid-margin-x align-center-middle cell">

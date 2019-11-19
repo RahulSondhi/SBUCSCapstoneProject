@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect, NavLink} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {ItemPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
 import {getEquipmentProfile} from '../../util/APIUtils';
