@@ -59,6 +59,9 @@ class CreateBarPage extends Component {
         this.loadBarProfile = this
             .loadBarProfile
             .bind(this);
+        this.handleListLoad = this
+            .handleListLoad
+            .bind(this);
     }
 
     componentDidMount() {
@@ -67,7 +70,7 @@ class CreateBarPage extends Component {
             let try_name = this.props.match.params.id;
             const id = try_name;
             this.loadBarProfile(id);
-        }else{
+        } else {
             this.setState({isLoading: false});
         }
 
@@ -109,17 +112,29 @@ class CreateBarPage extends Component {
                 }
             });
 
-            const SENDmanagers = this.state.managers.value.map(function (el) { return el.name; });
-            const SENDworkers = this.state.workers.value.map(function (el) { return el.name; });
-            const SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
+            const SENDmanagers = this
+                .state
+                .managers
+                .value
+                .map(function (el) {
+                    return el.name;
+                });
+            const SENDworkers = this
+                .state
+                .workers
+                .value
+                .map(function (el) {
+                    return el.name;
+                });
+            const SENDrecipesAvailable = this
+                .state
+                .recipesAvailable
+                .value
+                .map(function (el) {
+                    return el.name;
+                });
 
-            this.setState({
-
-            SENDmanagers: SENDmanagers,
-            SENDworkers: SENDworkers,
-            SENDrecipesAvailable: SENDrecipesAvailable
-            
-            })
+            this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable})
 
         }).catch(error => {
             if (error.status === 404) {
@@ -207,21 +222,35 @@ class CreateBarPage extends Component {
                         <TabPane tab="Recipes" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                <DynamicForm type="recipe" data={this.state.recipesAvailable.value} onUpdate="" className="cell"/>
+                                <DynamicForm
+                                    type="recipe"
+                                    data={this.state.recipesAvailable.value}
+                                    onUpdate={this.handleListLoad}
+                                    className="cell"/>
 
                             </div>
                         </TabPane>
                         <TabPane tab="Managers" key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                <DynamicForm type="user" data={this.state.managers.value} onUpdate="" className="cell"/>
+                                <DynamicForm
+                                    type="user"
+                                    data={this.state.managers.value}
+                                    onUpdate={this.handleListLoad}
+                                    validate={this.validateUserAdd}
+                                    className="cell"/>
 
                             </div>
                         </TabPane>
                         <TabPane tab="Workers" key="4">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                <DynamicForm type="user" data={this.state.workers.value} onUpdate="" className="cell"/>
+                                <DynamicForm
+                                    type="user"
+                                    data={this.state.workers.value}
+                                    onUpdate={this.handleListLoad}
+                                    validate={this.validateUserAdd}
+                                    className="cell"/>
 
                             </div>
                         </TabPane>
@@ -261,6 +290,16 @@ class CreateBarPage extends Component {
         }
     }
 
+    validateUserAdd = (name) => {
+        if(this.state.workers.value.some(items => items['name'] === name) === false && 
+                this.state.managers.value.some(items => items['name'] === name) === false &&
+                this.state.bar.owner.name !== name){
+                    return true;
+                }else{
+                    return false;
+                }
+    }
+
     handleInputChange(event, validationFun) {
         const target = event.target;
         const inputName = target.name;
@@ -275,7 +314,6 @@ class CreateBarPage extends Component {
     }
 
     handleImageLoad = (val) => {
-        console.log(val);
         this.setState({
             img: {
                 value: val.replace(/^data:image\/(png|jpg);base64,/, "")
@@ -283,18 +321,34 @@ class CreateBarPage extends Component {
         });
     }
 
+    handleListLoad = () => {
+        const SENDmanagers = this
+            .state
+            .managers
+            .value
+            .map(function (el) {
+                return el.name;
+            });
+        const SENDworkers = this
+            .state
+            .workers
+            .value
+            .map(function (el) {
+                return el.name;
+            });
+        const SENDrecipesAvailable = this
+            .state
+            .recipesAvailable
+            .value
+            .map(function (el) {
+                return el.name;
+            });
+
+        this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-
-        const SENDmanagers = this.state.managers.value.map(function (el) { return el.name; });
-        const SENDworkers = this.state.workers.value.map(function (el) { return el.name; });
-        const SENDrecipesAvailable = this.state.recipesAvailable.value.map(function (el) { return el.name; });
-
-        this.setState({
-            SENDmanagers: SENDmanagers,
-            SENDworkers: SENDworkers,
-            SENDrecipesAvailable: SENDrecipesAvailable
-        });
 
         const barRequest = {
             name: this.state.name.value,
@@ -314,8 +368,8 @@ class CreateBarPage extends Component {
                     description: error.message || 'Sorry! Something went wrong. Please try again!'
                 });
             });
-        }else{
-            changeBarSettings(this.props.match.params.id,barRequest).then(response => {
+        } else {
+            changeBarSettings(this.props.match.params.id, barRequest).then(response => {
                 notification.success({message: 'Tipsy App', description: "Your bar was succesfully saved!"});
             }).catch(error => {
                 notification.error({
