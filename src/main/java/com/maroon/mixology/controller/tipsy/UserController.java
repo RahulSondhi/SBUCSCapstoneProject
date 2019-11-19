@@ -138,7 +138,7 @@ public class UserController {
                 Recipe recipeIncompleted = recipeService.findById(recipeIncompletedID);
                 userRecipesIncompleted.add(new BriefRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
             }
-            UserResponse userProfile = new UserResponse(
+            UserResponse userResponse = new UserResponse(
                 user.getNickname(),
                 user.getProfilePic(), 
                 user.getFirstName() + " " + user.getLastName(),
@@ -148,7 +148,7 @@ public class UserController {
                 userRecipesIncompleted
                 );
     
-            return ResponseEntity.ok(userProfile);
+            return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "UserProfile was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
@@ -166,20 +166,22 @@ public class UserController {
             //Setting Email should be different...
             if(!user.getEmail().equals(settingsRequest.getEmail())){
                 //We need to confirm the new email address while also notifying the old email address
-                // Send a notification email
-                // Should this also include the port number(?)
-                // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                // the port should be 80 so please change this during deployment when we have domain name
-                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
-                
+                // Send a notification email             
                 SimpleMailMessage confirmationEmail = new SimpleMailMessage();
                 confirmationEmail.setFrom(mailUserName);
                 confirmationEmail.setTo(user.getEmail());
                 confirmationEmail.setSubject(notificationSubject);
                 confirmationEmail.setText(notificationMessage);
                 emailService.sendEmail(confirmationEmail);
-
                 //Now send a verification email
+                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                SimpleMailMessage verificationEmail = new SimpleMailMessage();
+                verificationEmail.setFrom(mailUserName);
+                verificationEmail.setTo(user.getEmail());
+                verificationEmail.setSubject(verificationSubject);
+                verificationEmail.setText(verificationMessage
+                + appUrl + "/verifyEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
+                emailService.sendEmail(verificationEmail);
             }
             user.setProfilePic(settingsRequest.getProfilePic());
             user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));

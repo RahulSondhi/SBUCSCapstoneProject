@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
-import com.maroon.mixology.Helper;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.exchange.request.BarRequest;
