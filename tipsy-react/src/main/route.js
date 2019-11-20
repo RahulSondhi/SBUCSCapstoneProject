@@ -6,8 +6,9 @@ import Login from '../auth/login.js';
 import Logout from '../auth/logout.js';
 import Register from '../auth/register.js';
 import Forgot from '../auth/forgot.js';
-import Confirm from '../auth/confirm.js';
-import Reset from '../auth/reset.js';
+import Verify from '../auth/verify.js'
+// import Confirm from '../auth/confirm.js';
+// import Reset from '../auth/reset.js';
 
 // Public Page Imports
 import EquipmentPage from '../tipsy/publicPages/equipmentPage.js';
@@ -66,19 +67,27 @@ class Routes extends Component {
                         path="/confirm"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Confirm}/>
+                        component={(props) => <Verify flow={"verifyConfirm"} {...props}/>}
+                        />
                     <PublicRoute
                         exact
                         path="/reset"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Reset}/>
+                        component={(props) => <Verify flow={"verifyReset"} {...props}/>}
+                        />
                     <PublicRoute
                         exact
                         path="/register"
                         authed={this.state.isAuthenticated}
                         redirectTo="/tipsy/search"
-                        component={Register}/> {/* Private  */}
+                        component={Register}/>
+                    <Route
+                        exact
+                        path="/newEmail"
+                        component={(props) => <Verify flow={"verifyNewEmail"} onLogout={this.props.onLogout} {...props}/>}
+                    /> 
+                    {/* Private  */}
                     <PrivateRoute
                         exact
                         path="/tipsy/search"

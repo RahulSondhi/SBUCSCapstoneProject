@@ -1,7 +1,9 @@
 package com.maroon.mixology.controller.tipsy;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -44,6 +46,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/tipsy/user")
 public class UserController {
@@ -64,6 +70,8 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
     @Value("${tipsy.mail.newemail.subject}")
     private String notificationSubject;
@@ -115,7 +123,7 @@ public class UserController {
             User user = userService.findByNickname(nickname);
             if (user == null) {
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.NOT_FOUND);
             }
             // Build all
             Set<BriefBarResponse> userBars = new HashSet<BriefBarResponse>();
@@ -151,7 +159,7 @@ public class UserController {
             return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "UserProfile was unable to be loaded. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -159,39 +167,93 @@ public class UserController {
     public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest, HttpServletRequest request) {
         try{
             //we get the current user by getting their email address
-            // System.out.println(settingsRequest.getMeasurement());
             User user = userService.findByEmail(currentUser.getUsername());
             user.setFirstName(settingsRequest.getFirstName());
             user.setLastName(settingsRequest.getLastName());
             //Setting Email should be different...
+
+            String emailUpdate = "";
             if(!user.getEmail().equals(settingsRequest.getEmail())){
-                //We need to confirm the new email address while also notifying the old email address
+                //We need to verify the new email address while also notifying the old email address
+                if(userService.existsByEmail(settingsRequest.getEmail())){
+                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that email address already exists"),
+                        HttpStatus.BAD_REQUEST); 
+                }
+                // Create a token
+                user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
+                user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
                 // Send a notification email             
                 SimpleMailMessage confirmationEmail = new SimpleMailMessage();
                 confirmationEmail.setFrom(mailUserName);
-                confirmationEmail.setTo(user.getEmail());
+                confirmationEmail.setTo(user.getEmail()); //old email
                 confirmationEmail.setSubject(notificationSubject);
-                confirmationEmail.setText(notificationMessage);
+                confirmationEmail.setText(notificationMessage + settingsRequest.getEmail()); //notification message
                 emailService.sendEmail(confirmationEmail);
                 //Now send a verification email
                 String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
                 SimpleMailMessage verificationEmail = new SimpleMailMessage();
                 verificationEmail.setFrom(mailUserName);
-                verificationEmail.setTo(user.getEmail());
+                verificationEmail.setTo(settingsRequest.getEmail()); //new email
                 verificationEmail.setSubject(verificationSubject);
                 verificationEmail.setText(verificationMessage
-                + appUrl + "/verifyEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
+                + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
                 emailService.sendEmail(verificationEmail);
+                emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
             }
+            //the rest we can safely update
             user.setProfilePic(settingsRequest.getProfilePic());
             user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
             userRepository.save(user);
-            return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!"));
+            return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
         } catch (Exception e) {
+            logger.error("User settings failed to update.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
+
+    @GetMapping({"/verifyNewEmail"})
+    public ResponseEntity<?> verifyNewEmail(@RequestParam(value = "token") String token, @RequestParam(value = "email") String email ){
+            try {
+                //Get the current time
+                Calendar expiredTime = Calendar.getInstance();
+                expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
+                // Find the user associated with the reset token
+                User user = userService.findByConfirmationTokenUUID(token);
+                if(user == null) {
+                    logger.error("User with that confirmation token not found");
+                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token not found"),
+                        HttpStatus.NOT_FOUND);
+                }
+                // if(user.isEnabled()) {
+                //     return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token was already enabled"),
+                //         HttpStatus.BAD_REQUEST); //User is already enabled
+                // }
+                Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
+                tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
+                if(tokenTime.before(expiredTime)) { //check if token is expired
+                        //need to add a use case to allow confirmation link to be sent again
+                        //email should be resent
+                        //or rather, send the confirmation link again here
+                        logger.error("Confirmation token is expired, invalid token");
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token is expired, invalid token"),
+                            HttpStatus.GONE); //Token is expired, invalid token.
+                }
+                // Set user to new email
+                user.setEmail(email);
+                // Clear Token
+                user.setConfirmationTokenUUID("");  
+                // Save user
+                userRepository.save(user);
+                // Notify the user that the confirmation is complete 
+                return ResponseEntity.ok(new ApiResponse(true, "You new email has been set! You may now login."));
+            } catch (Exception e){
+                logger.error("Confirmation token unable to be validated.", e);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+    }
+
 
     @GetMapping("/getSettings")
     public ResponseEntity<?> getSettings(@CurrentUser UserDetails currentUser) {

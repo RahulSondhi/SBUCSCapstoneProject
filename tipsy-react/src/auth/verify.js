@@ -1,21 +1,25 @@
 import React, {Component} from 'react';
-
-import { resetPassword, validateReset} from '../util/APIUtils';
-
+import Tipsy from '../assets/Tipsy.svg';
+import {Link} from 'react-router-dom';
+import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../util/APIUtils';
 import {
-    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
+    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH, ACCESS_TOKEN
 } from '../main/constants';
 import { Form, Input, Button, notification } from 'antd';
 const FormItem = Form.Item;
 
-class Reset extends Component {
+class Verify extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isLoading: true,
+            flow: this.props.flow,
             uuid: {
                 value: '',
-                validateStatus: null,
-                errorMsg: null
+                validateStatus: null
+            },
+            email: {
+                value: ''
             },
             password: {
                 value: ''
@@ -28,11 +32,14 @@ class Reset extends Component {
         let search = window.location.search;
         let params = new URLSearchParams(search);
         this.state.uuid.value = params.get('token');
-        //Functions needed for this Reset Class
+        if(this.state.flow === "verifyNewEmail"){
+            this.state.email.value = params.get('email');
+        }
+        //Functions needed for this Verify Class
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
-        this.handleValidateReset = this.handleValidateReset.bind(this);
+        this.handleVerify = this.handleVerify.bind(this);
     }
 
     handleInputChange(event, validationFun) {
@@ -48,40 +55,10 @@ class Reset extends Component {
         });
     }
 
-    componentWillMount(){
-        this.handleValidateReset();
-    }
-    handleValidateReset(){
-        const uuidValue = this.state.uuid.value;
-
-        validateReset(uuidValue)
-        .then(response => {
-            if(response.valid){
-                this.setState({
-                    uuid: {
-                        value: uuidValue,
-                        validateStatus: 'success',
-                        errorMsg: null
-                    }
-                });
-            } else {
-                this.setState({
-                    uuid: {
-                        value: uuidValue,
-                        validateStatus: 'error',
-                        errorMsg: 'This token is not valid!'
-                    }
-                });
-            }
-        }).catch(error => {
-            // Marking validateStatus as error, Form can not contact the server
-            this.setState({
-                uuid: {
-                    value: uuidValue,
-                    validateStatus: 'error',
-                    errorMsg: 'Could not contact the server'
-                }
-            });
+    componentWillMount() {
+        this.handleVerify();
+        this.setState({
+            isLoading: false
         });
     }
 
@@ -116,10 +93,98 @@ class Reset extends Component {
             this.state.passwordConfirm.validateStatus === 'success'
         );
     }
-    
+
+    handleVerify() {
+        const uuidValue = this.state.uuid.value;
+        if(this.state.flow === "verifyConfirm"){
+            //verifyConfirm
+            verifyConfirm(uuidValue).then(response => {
+                notification.success({ 
+                    message: "Tipsy App", 
+                    description: response.message
+                });
+                this.setState({
+                    uuid: {
+                        validateStatus : 'success'
+                    }
+                });
+            }).catch(error => {
+                    notification.error({
+                        message: 'Tipsy App',
+                        description : error.message
+                    });
+                    this.setState({
+                        uuid: {
+                            validateStatus : 'error'
+                        }
+                    });
+                })
+        }
+        else if(this.state.flow === "verifyNewEmail"){
+            //verifyNewEmail
+            // We need to delete their access token
+            if(localStorage.getItem(ACCESS_TOKEN)){
+                localStorage.removeItem(ACCESS_TOKEN);
+            }
+            const emailValue = this.state.email.value;
+            verifyNewEmail(uuidValue, emailValue).then(response =>{
+                notification.success({
+                        message: "Tipsy App",
+                        description : response.message
+                    });
+                    this.setState({
+                        uuid: {
+                            validateStatus : 'success'
+                        }
+                    });
+            }).catch(error => {
+                notification.error({
+                    message: 'Tipsy App',
+                    description : error.message
+                });
+                this.setState({
+                    uuid: {
+                        validateStatus : 'error'
+                    }
+                }); 
+            })
+        }
+        else if(this.state.flow === "verifyReset"){
+            //verifyReset
+            verifyReset(uuidValue).then(response =>{
+                notification.success({ 
+                    message: "Tipsy App", 
+                    description: response.message
+                });
+                this.setState({
+                    uuid: {
+                        validateStatus : 'success'
+                    }
+                });
+            }).catch(error => {
+                    notification.error({
+                        message: 'Tipsy App',
+                        description : error.message
+                    });
+                    this.setState({
+                        uuid: {
+                            validateStatus : 'error'
+                        }
+                    });
+                });
+        }
+
+    }
+
     render() {
-        if(this.state.uuid.validateStatus === 'success'){
-            return ( //The token is valid, return the form to proceed with password reset
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        if (this.state.uuid.validateStatus === "success") {
+            if(this.state.flow === "verifyReset"){
+                return ( //The token is valid, return the form to proceed with password reset
                     <div>
                         {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                         <h1>Reset Password</h1>
@@ -159,14 +224,47 @@ class Reset extends Component {
                     </div>
                 );
             }
-            else{
-                return ( //The token is invalid, return an error page
-                    <div>
-                        {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
-                        <h1>Invalid Reset token :(</h1>
+            else {
+                return (
+                    <div className="grid-x align-center-middle">
+
+                    {/* Logo */}
+                    <div className="loginHeader grid-x cell align-center-middle">
+                        <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
                     </div>
-                );
+
+                    {/* Title */}
+                    <h1 className="caption small-12 medium-8 cell">Welcome to Tipsy!</h1>
+
+                    {/* Description */}
+                    <h4 id="forgotDesc" className="small-8 cell">
+                        You have successfully registered your account!
+                        <br></br>
+                        <br></br>
+                        Login to your account to start!
+                    </h4>
+
+                    <Link to="/login" className="cell">
+                        <button type="submit" className="button">Login</button>
+                    </Link>
+
+                </div>
+                )
             }
+        } else {
+            return (
+                <div className="grid-x align-center-middle">
+
+                    {/* Logo */}
+                    <div className="loginHeader grid-x cell align-center-middle">
+                        <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
+                    </div>
+
+                    {/* Title */}
+                    <h1 className="captionRed small-12 medium-8 cell">Invalid Token</h1>
+                </div>
+            );
+        }
     }
 
     validatePassword = (password) => {
@@ -202,5 +300,4 @@ class Reset extends Component {
     }
 
 }
-
-export default Reset;
+export default Verify;
