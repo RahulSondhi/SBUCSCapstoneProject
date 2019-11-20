@@ -18,7 +18,6 @@ import UserPage from '../tipsy/publicPages/userPage.js';
 // User Page Imports
 import AdminPage from '../tipsy/userPages/adminPage.js';
 import UsersDisplaysPage from '../tipsy/userPages/userDisplayPage.js';
-import UsersRecipesPage from '../tipsy/userPages/usersRecipesPage.js';
 import CreateBarPage from '../tipsy/userPages/createBarPage.js'
 import CreateRecipePage from '../tipsy/userPages/createRecipePage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
@@ -111,7 +110,7 @@ class Routes extends Component {
                         path="/tipsy/myRecipes"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <UsersRecipesPage currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <UsersDisplaysPage type="recipe" currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/recipe/:id"
@@ -139,6 +138,12 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <AdminPage currentUser={this.state.currentUser} {...props}/>}/>
+                    <PrivateRoute
+                        exact
+                        path="/tipsy/user/:id/stg"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/login"
+                        component={(props) => <SettingsPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/user/stg"
