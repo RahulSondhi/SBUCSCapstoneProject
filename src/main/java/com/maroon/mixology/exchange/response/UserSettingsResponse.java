@@ -6,15 +6,15 @@ public class UserSettingsResponse {
     private String firstName;
     private String lastName;
     private String email;
-    private String profilePic;
+    private String img;
     private MeasurementType measurement;
 
-    public UserSettingsResponse(String firstName, String lastName, String email, String profilePic,
+    public UserSettingsResponse(String firstName, String lastName, String email, String img,
             MeasurementType measurement) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.profilePic = profilePic;
+        this.img = img;
         this.measurement = measurement;
     }
 
@@ -43,12 +43,12 @@ public class UserSettingsResponse {
         this.email = email;
     }
 
-    public String getProfilePic() {
-        return profilePic;
+    public String getImg() {
+        return img;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public MeasurementType getMeasurement() {
