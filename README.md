@@ -33,23 +33,51 @@ The technologies we implemented in Tipsy include:
 
 ### API Calls
 - **Login POST**
--- This call handles logging in the for the user. It will send the username and password to Spring as a JSON. If the credentials are valid, Spring will then return a JSON Web Token (JWT) with a digest message containing the user session token. If the credentials are invalid, Spring will return an HTTP Bad Request code.
+-- This call handles logging in the for the user. It will send the username and password to Spring as a JSON. If the credentials are valid, Spring will then return a JSON Web Token (JWT) with a digest message containing the user session token. If the credentials are invalid, Spring will return a 400 HTTP Bad Request status code.
 - **Forgot POST**
--- This call will handle the Forget Password use case. It will send an email address to Spring as a JSON. If the email address is registered in the database, Spring will generate a reset token and send an email to the address. The email will contain a link that will handle resetting the password. If the email address is not registered in the database, Spring will return with an HTTP Bad Request code.
+-- This call will handle the Forget Password use case. It will send an email address to Spring as a JSON. If the email address is registered in the database, Spring will generate a reset token and send an email to the address. The email will contain a link that will handle resetting the password. If the email address is not registered in the database, Spring will return with a 400 HTTP Bad Request status code.
 - **Register POST**
--- This call will handle User Registration. It will send a First Name, Last Name, Email Address, Nickname, and Password to Spring as a JSON. Spring will register an account with those JSON values and it returns with an HTTP OK Request code. If any values are invalid, Spring will return an HTTP Bad Request code.
+-- This call will handle User Registration. It will send a First Name, Last Name, Email Address, Nickname, and Password to Spring as a JSON. Spring will register an account with those JSON values and it returns with a 200 HTTP OK Request status code. If any values are invalid, Spring will return a 400 HTTP Bad Request status code.
 - **ValidateConfirm GET**
 -- This call will handle confirming an account after registration. It requests the confirmation URL that validates the confirmation token generated during registration. Spring will then respond with a JSON that contains a boolean and a message. If the confirmation URL was valid, the user is enabled. Otherwise the confirmation URL was invalid and the user must request a new valid token.
 - **ValidateReset GET**
 -- This call will handle validating the reset token after the user clicks on the link after the "Forgot Password" form. It requests the reset URL and checks if the reset token sent and the reset token in the database match. Spring will then respond with a JSON that contains a boolean and message. If the URL was valid, the user will be able to reset their password. Otherwise if the reset URL is invalid, the user must request a new valid token.
 - **ResetPassword POST**
--- This call will handle resetting a user's password. It sends a request for a JSON from Spring with the reset token from the reset URL and a new password. Spring will then use the token to find the User account and overwrite the password with the new one from the JSON. Spring will then set the reset token to NULL. Spring then responds with HTTP OK code. If spring was unable to reset the password, Spring will respond with an HTTP Bad request.
-- **CheckEmailAvailability POST**
+-- This call will handle resetting a user's password. It sends a request for a JSON from Spring with the reset token from the reset URL and a new password. Spring will then use the token to find the User account and overwrite the password with the new one from the JSON. Spring will then set the reset token to NULL. Spring then responds with a 200 HTTP OK status code. If spring was unable to reset the password, Spring will respond with a 400 HTTP Bad Request status code.
+- **ChangePassword POST**
+-- This call will handle changing a user's password. It  sends a new password to Spring in the form of a JSON. Spring will then take that password and overwrite the password for the current user. If successful, it returns a 200 HTTP OK  Request response status code. Otherwise, Spring returns a 400 Bad Request response status code.
+- **CheckEmailAvailability GET**
 -- This call will handle checking if an email is already registered in the database. It sends a request with a String and Spring then checks if the provided email is already registered in the database. If the given email is already registered, then the user will not be permitted to register for an account, otherwise the user will be allowed to create a new account.
-- **CheckNicknameAvailability POST**
+- **CheckNicknameAvailability GET**
 -- This call will handle checking if a nickname is already registered in the database. It sends a request with a String and Spring then checks if the provided nickname is already reigstered in the database. If the nickname is already registered, then the user will not be allowed to register for an account with that nickname, otherwise the user will be allowed to create a new account.
 - **GetCurrentUser GET**
--- This call will handle returning a JSON containing a UserSummary Object that holds the user ID, nickname, and name. The value that is returned will return a user based on the JWT Token, if no user is found then the function returns nothing. 
+-- This call will handle retrieving the current User. The client sends a token to Spring, where Spring then parses the token, decrypts it, then authenticates it and pulls the ID, email, nickname, and roles of the user. The value that is returned will return a user based on the JWT Token, if no user is found then the function returns nothing.
+- **CreateNewBar POST**
+-- This call will handle creating a new Bar. Spring will receive a barRequest object containing a bar name, description, image, list of managers, list of workers, and list of recipes available for that bar. Spring will then gather a full list of users affiliated with that bar and create a new bar object with the tokens provided in the barRequest object. Finally, Spring will add the Bar to each of the users and save it to the database. If successful, Spring will return a 200 HTTP OK response status code. Otherwise, Spring will return a 500 HTTP Internal Server Error status code.
+- **GetBarProfile GET**
+-- This call will handle pulling a Bar profile from the database. Spring will receive a barID variable and pull the Bar object from the database and gather all the information including: name, description, a base64 encoded image, owner, managers, workers, and recipes associated with the bar. If successful, Spring returns a 200 HTTP OK response status code with an object containing all these tokens. Otherwise Spring returns a 500 HTTP Internal Server Error status code.
+- **ChangeBarSettings POST**
+-- This call will handle changing the settings of a Bar. Spring first checks if the current user is either the owner or a manager of the Bar. The Owner gets full access in terms of changing the Bar settings, which includes: managing Managers, Workers, and Recipes. However, if the current user is a Manager then they are allowed to manage Workers and Recipes, but not other Managers. In either case once the settings are saved Spring returns a 200 HTTP OK response status code. If the current user is neither the Owner nor a Manager, then Spring returns a 401 HTTP Unauthorized status code. If there is an error that comes up along the process then Spring returns a 500 Internal Server Error status code.
+- **DeleteBar POST**
+-- This call will handle deleting a Bar. Spring takes in a barID as well as the current user. If the user is the Owner of the Bar then they are given permission to delete the Bar. Otherwise, Spring returns a 401 HTTP Unauthorized response status code. Spring pulls the Bar from the repository and removes it from all Users associated with it, then deletes the Bar from the Bar repository and returns a 200 HTTP OK response status code. If any internal errors take place along the way, Spring returns a 500 HTTP Internal Server Error status code.
+- **GetEquipment GET**
+-- This call will handle returning a specific piece of Equipment from the database. Spring takes in the name of the piece of Equipment and pulls the Equipment object from the database and pulls: the name, base64 encoded image, type, list of Actions done by the Equipment and a list of Actions done to the Equipment. If successful, Spring returns a 200 HTTP OK status code. Otherwise, Spring returns a 500 HTTP Internal Server Error status code.
+- **GetEquipments GET**
+-- This will handle pulling a full list of all equipment from the database. Spring will access the Equipment repository and gather a full list of details from each piece of equipment containing a name, image, and type. If successful, Spring returns a 200 HTTP OK status code. Otherwise, Spring returns a 500 HTTP Internal Server Error status code.
+- **CreateNewRecipe POST**
+-- Placeholder for CreateNewRecipe POST call.
+- **GetRecipeProfile GET**
+-- Placeholder for GetRecipeProfile GET call.
+- **GetStep GET**
+-- Placeholder for GetStep GET call.
+- **GetUnits GET**
+-- This will handle retrieving the list of units. Spring pulls all the Units form the Unit repository and adds a UnitResponse object containing the name of the unit, and their equivalent measurements in milliliters and fluid ounces. Afterwards, Spring returns a 200 HTTP OK status code along with a JSON containing a list of units. If any internal errors take place along the way, Spring returns a 500 HTTP Internal Server Error.
+- **GetProfile GET**
+-- This will handle retrieving a profile. Spring takes in a nickname as input and matches it to a User in the User repository. It gathers the name, profile picture, first name, last name, Recipes written, Recipes completed, and incomplete Recipes done by the user. Afterwards Spring returns a 200 HTTP OK status code along with the JSON compiled from these tokens. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
+- **ChangeSettings POST**
+-- This call will handle changing User settings. Spring takes in a request object that contains the edits made by the User to their settings. Spring overwrites the previous values it had stored with the new changes. For changing an email, the previously set email address will receive a notification email saying that the email will be changed, and the new email will receive a verification email to confirm the email change. The changes are saved to the User object and Spring returns a 200 HTTP OK status code. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
+- **GetSettings GET**
+--  This will handle retrieving the current User's settings. Spring pulls the current user and maps it to a User on the database. From there Spring creates a JSON that contains the user's first name, last name, email, base64 encoded profile picture, and set measurement. Afterwards Spring returns a 200 HTTP OK status code. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
 
 ## Documentation
 ### Overview
@@ -82,3 +110,89 @@ We as a group have collectively decided to only make commits once a significant 
 The database will be only handled by the Data Designer to prevent any problems arising. The format of data going in and out of database are set by data designer. Our team can request changes in data schema and format, but the data designer is the only one to implement those changes unless team member was given permission to change themself. The data within database will only be dropped with the approval of the data designer.
 ### Making Changes to Project Plan 
 The team meets weekly to do check-ins on everyones assigned tasks and sections. If there is a disagreement on how something is implemented, team members will converse about solutions that will result in a compromise. No change is discussed without proper reasoning given first. The other members of the team have the ability to veto an implementation if atleast 2 of 3 other members severly disagree with the current setup. An agenda is created 2 days prior to each meeting day to ensure that the topics that need to be discussed are mentioned during the meeting.
+
+##Installation
+To launch **Tipsy** you must clone our repository using the command
+------------
+
+	git clone https://github.com/RahulSondhi/Tipsy.git
+From there you must switch into the /scripts/run-scripts/ directory 
+
+From there run the install & run scripts to properly install all the dependencies and launch the program using the following commands in your terminal:
+
+	cd scripts/run-scripts
+	./install.sh
+	./run.sh
+
+When you launch the script your default browser will open at localhost:3000 and you will be taken to the Login screen
+
+<img src="./Documentation/READMEAssets/loginScreen.png" width="200" height="auto">
+
+##Features
+###Register for an account
+For starters, you must register for an account by clicking on the **Register** button found on the **Login** page
+
+<img src="./Documentation/READMEAssets/loginScreenRegisterHighlight.png" width="200" height="auto">
+
+Afterwards you will be taken to the **Register** Page where you should fill in your credentials to create a new account:
+
+<img src="./Documentation/READMEAssets/registerScreen.png" width="200" height="auto">
+
+After clicking on the submit button you will get an email sent to your email address containing a confirmation link
+
+<img src="./Documentation/READMEAssets/registrationEmail.png" width="200" height="auto">
+
+Upon clicking on the link your account will then be registered on the database and you will be able to Log in.
+
+###Log In
+Once you've registered for an account, you are able to **Log in**. You can do this by typing in your credentials into their respective fields and clicking on the Log In button.
+
+<img src="./Documentation/READMEAssets/loginScreenLoginHighlight.png" width="200" height="auto">
+
+Upon successfully logging in, you will be taken to the Search page where you can begin using the application.
+
+<img src="./Documentation/READMEAssets/searchScreen.png" width="200" height="auto">
+
+###Creating a Bar
+To create a Bar you must first navigate to the "My Bars" tab on the navigation bar on the top and you will be taken to the **My Bars** page where you can create, edit, or delete Bars and click on the **Add A Bar** button.
+
+<img src="./Documentation/READMEAssets/myBarTabAddBarHighlight.png" width="200" height="auto">
+
+Once you're on the **Create a Bar** page you can change the profile photo of the bar to a photo of your choosing along with filling in the name of the Bar and including an optional description of your bar and finally pressing the "Create Bar" button to publish your newly created bar.
+
+<img src="./Documentation/READMEAssets/createABarScreen.png" style="position: inline-block;" width="200" height="auto">  <img src="./Documentation/READMEAssets/newlyAddedBar.png" style="position: inline-block;" width="200" height="auto">
+
+###Editing a Bar
+In order to edit a Bar the bar must initially exist. On the **My Bars** screen if you click on a Bar you will be taken to the Bar page for that specific Bar. From there you click on the gear icon to be taken to the **Edit Bar** page. 
+
+<img src="./Documentation/READMEAssets/individualBarPage.png" width="200" height="auto">
+
+Once on the page you may click on the various tabs to make your edits to the bar and have the changes saved by clicking on the "Save Bar" button.
+
+<img src="./Documentation/READMEAssets/editBarPage.png" width="200" height="auto">
+
+If you go back to the **My Bars** screen you will see that your bar has been edited with the desired changes.
+
+<img src="./Documentation/READMEAssets/newlyEditedBar.png" width="200" height="auto">
+
+###Changing User Settings
+In order to change your user settings, the user must first be logged into the application.
+In order to navigate to the **Settings** page hover over the **Account** tab and click on the settings tab on the dropdown box.
+
+<img src="./Documentation/READMEAssets/navigateToSettingsScreen.png" width="200" height="auto">
+
+Once on the **Settings** page you may edit the fields to adjust your profile information as you wish and click on the "Update Settings" button.
+
+<img src="./Documentation/READMEAssets/settingsPageBeforeChange.png" width="200" height="auto"> <img src="./Documentation/READMEAssets/settingsPageAfterChange.png" width="200" height="auto">
+
+Upon updating your user settings you will see your changes applied onto your **Profile Page**:
+<img src="./Documentation/READMEAssets/profilePageBeforeChange.png" width="200" height="auto"> <img src="./Documentation/READMEAssets/profilePageAfterChange.png" width="200" height="auto">
+
+###Changing Password
+In order to change your password, you must first go to the **Settings** page and click on the "Change Password" button on the bottom.
+
+<img src="./Documentation/READMEAssets/profilePageBeforeChange.png" width="200" height="auto"> <img src="./Documentation/READMEAssets/settingsPageHighlightChangePassword.png" width="200" height="auto">
+
+You will then be navigated to the **Change Password** page where you will then fill in your desired password in both the "Password" and "Confirm Password" fields. If the two password match and are at least 8 characters long, you can click on the "Change Password" button to confirm your changes.
+
+<img src="./Documentation/READMEAssets/changePasswordScreen.png" width="200" height="auto"> <img src="./Documentation/READMEAssets/settingsPageHighlightChangePassword.png" width="200" height="auto">
