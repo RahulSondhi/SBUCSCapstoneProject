@@ -35,9 +35,9 @@ class UsersRecipesPage extends Component {
     }
 
     componentDidMount() {
-        let try_name = this.props.currentUser.nickname;
-        const nickname = try_name;
-        this.loadUserProfile(nickname);
+        let try_name = this.props.currentUser.name;
+        const name = try_name;
+        this.loadUserProfile(name);
     }
 
     render() {
@@ -64,7 +64,7 @@ class UsersRecipesPage extends Component {
             <div className="grid-x grid-x-margin align-center-middle">
                 <Navbar/>
 
-                <h1 id="userRecipesPageTitle" className="caption small-10 cell">{this.state.user.nickname + "'s Recipes"}</h1>
+                <h1 id="userRecipesPageTitle" className="caption small-10 cell">{this.state.user.name + "'s Recipes"}</h1>
 
                 <div className="grid-x align-center-middle cell">
 

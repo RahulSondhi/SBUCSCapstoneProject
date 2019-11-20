@@ -251,8 +251,6 @@ class GetItem extends Component {
         } else if (this.type === "action") {
             this.name = this.props.item;
             this.link = "#";
-            this.descPre = "";
-            this.desc = "";
         } else {
             this.link = this.link + this.item.id
             if (this.item.desc !== null && this.item.desc !== "") {
@@ -342,9 +340,11 @@ export class DynamicForm extends Component {
         let hasItem = this
             .state
             .data
-            .some(items => items['nickname'] === item.nickname)
+            .some(items => items['name'] === item.name);
 
-        if (success === true && hasItem === false) {
+        let passed = this.props.validate(item.name);
+
+        if (success === true && hasItem === false && passed === true) {
 
             notification.success({message: 'Tipsy App', description: "Added!"});
 
@@ -354,9 +354,12 @@ export class DynamicForm extends Component {
                 .push(item);
 
             this.setState({data: this.state.data});
+            this
+                .props
+                .onUpdate();
 
         } else {
-            if (hasItem) {
+            if (hasItem || passed === false) {
                 notification.error({message: 'Tipsy App', description: "Already Added!"});
             } else {
                 notification.error({message: 'Tipsy App', description: "Could not find that!"});
@@ -406,24 +409,17 @@ class DynamicInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            nickname: {
+            name: {
                 value: ''
             }
         }
 
-        this.type = this
-            .props
-            .type
-            .charAt(0)
-            .toUpperCase() + this
-            .props
-            .type
-            .slice(1);
+        this.type = this.props.type;
 
-        if (this.type.toLowerCase() === "user") {
-            this.state.name = "Nickname";
+        if (this.type === "user") {
+            this.state.textName = "Nickname";
         } else {
-            this.state.name = "Name";
+            this.state.textName = "Name";
         }
 
         this.handleInputChange = this
@@ -453,7 +449,7 @@ class DynamicInput extends Component {
         if (event.key === 'Enter') {
             event.preventDefault();
             event.stopPropagation();
-            this.validateNicknameExists(this.state.nickname.value);
+            this.validateNicknameExists(this.state.name.value);
         }
     }
 
@@ -462,10 +458,9 @@ class DynamicInput extends Component {
             <div className="dynamicInput grid-x align-center-middle cell">
                 <Input
                     prefix={< Icon type = "idcard" />}
-                    name={this.state.name}
-                    autoComplete="on"
-                    placeholder={"Enter " + this.type + " " + this.state.name}
-                    value={this.state.nickname.value}
+                    name="name"
+                    placeholder={"Enter a " + this.state.textName}
+                    value={this.state.name.value}
                     onChange={(event) => this.handleInputChange(event)}
                     onKeyDown={this.onKeyDown}
                     className="small-8 cell"/>
@@ -474,10 +469,10 @@ class DynamicInput extends Component {
     }
 
     validateNicknameExists() {
-        const nicknameValue = this.state.nickname.value;
+        const nicknameValue = this.state.name.value;
 
         this.setState({
-            nickname: {
+            name: {
                 value: nicknameValue,
                 validateStatus: 'validating',
                 errorMsg: null
@@ -487,7 +482,7 @@ class DynamicInput extends Component {
         checkNicknameAvailability(nicknameValue).then(response => {
             if (response.available) {
                 this.setState({
-                    nickname: {
+                    name: {
                         value: nicknameValue,
                         validateStatus: 'error',
                         errorMsg: 'This nickname doesnt exist'
@@ -499,7 +494,7 @@ class DynamicInput extends Component {
                     .addItem(false, null);
             } else {
                 this.setState({
-                    nickname: {
+                    name: {
                         value: nicknameValue,
                         validateStatus: 'success',
                         errorMsg: null

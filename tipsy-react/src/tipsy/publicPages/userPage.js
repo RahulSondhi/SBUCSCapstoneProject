@@ -89,7 +89,7 @@ class UserPage extends Component {
                         pic={this.state.user.img}
                         alt={this.state.user.name}
                         type="user"/>
-                    <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.nameFull}</h1>
+                    <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.fullName}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div
                         className="userPageBarScroll small-10 medium-8 large-6 grid-x grid-margin-x align-center-middle cell">
