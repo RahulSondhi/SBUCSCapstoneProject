@@ -46,7 +46,7 @@ class GeneralNavbar extends Component {
                     {/* Quit */}
                     <Menu.Item key="quit">
                         <NavLink
-                            to={"/tipsy/myBars/tipsy/recipe/"+this.gameId}
+                            to={"tipsy/recipe/"+this.gameId}
                             isActive={(match, location) => {
                             if (!match) {
                                 return false;

@@ -21,7 +21,7 @@ const {Option} = Select;
 class MeasurementType extends Enum {}
 MeasurementType.initEnum(['US', 'METRIC'])
 
-class SettingsPage extends Component {
+class UserSettingsPage extends Component {
 
     constructor(props) {
         super(props);
@@ -413,4 +413,4 @@ class SettingsPage extends Component {
     }
 }
 
-export default SettingsPage;
+export default UserSettingsPage;
