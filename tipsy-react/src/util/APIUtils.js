@@ -56,16 +56,23 @@ export function resetPassword(resetPasswordRequest) {
     });
 }
 
-export function validateReset(uuid) {
+export function verifyReset(uuid) {
     return request({
-        url: API_BASE_URL + "/validateReset?token=" + uuid,
+        url: API_BASE_URL + "/verifyReset?token=" + uuid,
         method: 'GET'
     });
 }
 
-export function validateConfirm(uuid) {
+export function verifyConfirm(uuid) {
     return request({
-        url: API_BASE_URL + "/validateConfirm?token=" + uuid,
+        url: API_BASE_URL + "/verifyConfirm?token=" + uuid,
+        method: 'GET'
+    });
+}
+
+export function verifyNewEmail(uuid, email) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/verifyNewEmail?token=" + uuid + "&email=" + email,
         method: 'GET'
     });
 }

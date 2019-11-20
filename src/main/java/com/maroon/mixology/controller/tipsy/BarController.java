@@ -31,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 @RequestMapping("/tipsy/bar")
 public class BarController {
@@ -48,6 +51,9 @@ public class BarController {
 
     @Autowired
     private BarServiceImpl barService;
+
+    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+
     
     @PostMapping("/createBar")
     public ResponseEntity<?> createNewBar(@CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
@@ -89,7 +95,8 @@ public class BarController {
             //Added the bar to all affliated Users
             return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be saved. Error: " + e.toString()),
+            logger.error("Bar was unable to be created.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be created. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -128,7 +135,8 @@ public class BarController {
             );
             return ResponseEntity.ok(barProfile);
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.toString()),
+            logger.error("Bar was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -216,7 +224,8 @@ public class BarController {
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar settings failed to update. Error: " + e.toString()),
+            logger.error("Bar was unable to be updated.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be updated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
@@ -247,7 +256,8 @@ public class BarController {
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete bar"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar settings failed to delete. Error: " + e.toString()),
+            logger.error("Bar was unable to be deleted.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be deleted. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }

@@ -107,7 +107,6 @@ class SettingsPage extends Component {
             profilePic: this.state.profilePic.value,
             measurement: this.state.measurement.value
         };
-        console.log(settingsRequest);
         changeUserSettings(settingsRequest).then(response => {
             notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
         }).catch(error => {

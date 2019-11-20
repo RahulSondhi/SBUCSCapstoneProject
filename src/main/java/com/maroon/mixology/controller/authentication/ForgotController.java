@@ -10,7 +10,6 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.exchange.request.ForgotRequest;
 import com.maroon.mixology.exchange.request.ResetPasswordRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
-import com.maroon.mixology.exchange.response.TokenValidity;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
@@ -102,40 +101,52 @@ public class ForgotController {
                 
         }
         
-        @GetMapping({"/validateReset"})
-        public TokenValidity validateReset(@RequestParam(value = "token") String token) {
-                //Get the current time
-                Calendar expiredTime = Calendar.getInstance();
-                expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
-                // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(token);
-                if(user == null) {
-                        return new TokenValidity(false, "User not found"); //User not found
+        @GetMapping({"/verifyReset"})
+        public ResponseEntity<?> verifyReset(@RequestParam(value = "token") String token) {
+                try{
+                        //Get the current time
+                        Calendar expiredTime = Calendar.getInstance();
+                        expiredTime.add(Calendar.HOUR, -24); //get time 24 hours ago
+                        // Find the user associated with the reset token
+                        User user = userService.findByResetTokenUUID(token);
+                        if(user == null) {
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that reset token not found"),
+                                HttpStatus.NOT_FOUND);
+                        }
+                        Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
+                        tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
+                        if(tokenTime.before(expiredTime)) { //check if token is expired
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Reset token is expired, invalid token"),
+                                HttpStatus.GONE); //Token is expired, invalid token.
+                        }
+                        return ResponseEntity.ok(new ApiResponse(true, "Reset password link is valid, proceed to reset your password"));
+                } catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Reset token unable to be validated. Error: " + e.getMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
                 }
-                Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
-                tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
-                if(tokenTime.before(expiredTime)) { //check if token is expired
-                        return new TokenValidity(false, "Token is expired, invalid token."); //Token expired
-                }
-                return new TokenValidity(true, "Reset password link is valid, proceed to reset your password"); //Reset password link is valid, proceed to reset your password
         }
 
         @PostMapping({"/resetPassword"})
         public ResponseEntity<?> resetPasswordForm(@RequestBody ResetPasswordRequest resetPasswordRequest) {
-                // Find the user associated with the reset token
-                User user = userService.findByResetTokenUUID(resetPasswordRequest.getUUID());
-                if(user == null) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
-                                HttpStatus.BAD_REQUEST);
+                try{
+                        // Find the user associated with the reset token
+                        User user = userService.findByResetTokenUUID(resetPasswordRequest.getUUID());
+                        if(user == null) {
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found, invalid token."),
+                                        HttpStatus.NOT_FOUND);
+                        }
+                        // Set new password
+                        user.setPassword(passwordEncoder.encode(resetPasswordRequest.getPassword()));
+                        // Set the reset token to null so it cannot be used again
+                        user.setResetTokenUUID(null);
+                        user.setResetTokenCreationTime(null);
+                        // Save user
+                        userRepository.save(user);
+                        // Notify the user that the reset is complete
+                        return ResponseEntity.ok(new ApiResponse(true, "You have successfully reset your password.  You may now login."));
+                } catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to be reset. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
                 }
-                // Set new password
-                user.setPassword(passwordEncoder.encode(resetPasswordRequest.getPassword()));
-                // Set the reset token to null so it cannot be used again
-                user.setResetTokenUUID(null);
-                user.setResetTokenCreationTime(null);
-                // Save user
-                userRepository.save(user);
-                // Notify the user that the confirmation is complete
-                return ResponseEntity.ok(new ApiResponse(true, "You have successfully reset your password.  You may now login."));
         }
 }
