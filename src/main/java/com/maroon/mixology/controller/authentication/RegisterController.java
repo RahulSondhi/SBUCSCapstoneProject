@@ -151,6 +151,7 @@ public class RegisterController {
                         user.setEnabled(true);
                         // Clear Token
                         user.setConfirmationTokenUUID("");
+                        user.setConfirmationTokenUUID(null);
                         // Save user
                         userRepository.save(user);
                         // Notify the user that the confirmation is complete

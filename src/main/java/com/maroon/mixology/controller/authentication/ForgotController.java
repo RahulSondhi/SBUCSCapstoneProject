@@ -77,7 +77,7 @@ public class ForgotController {
                         User user = userService.findByEmail(userEmail.getEmail());
                         //
                         user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
-                        user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
+                        user.setResetTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
                         // 
                         // Save token to database
                         userRepository.save(user); // Saving the reset token in the database
@@ -114,7 +114,7 @@ public class ForgotController {
                                 HttpStatus.NOT_FOUND);
                         }
                         Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
-                        tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
+                        tokenTime.setTimeInMillis(user.getResetTokenCreationTime()); //set the Token time from user DB
                         if(tokenTime.before(expiredTime)) { //check if token is expired
                                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Reset token is expired, invalid token"),
                                 HttpStatus.GONE); //Token is expired, invalid token.
@@ -138,7 +138,7 @@ public class ForgotController {
                         // Set new password
                         user.setPassword(passwordEncoder.encode(resetPasswordRequest.getPassword()));
                         // Set the reset token to null so it cannot be used again
-                        user.setResetTokenUUID(null);
+                        user.setResetTokenUUID("");
                         user.setResetTokenCreationTime(null);
                         // Save user
                         userRepository.save(user);
