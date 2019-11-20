@@ -10,7 +10,7 @@ import {Form, Input, Icon, Tabs, notification} from 'antd';
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
 
-class CreateBarPage extends Component {
+class ConfigBarPage extends Component {
 
     constructor(props) {
         super(props);
@@ -385,4 +385,4 @@ class CreateBarPage extends Component {
     }
 }
 
-export default CreateBarPage;
+export default ConfigBarPage;
