@@ -201,7 +201,7 @@ public class UserController {
                 emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
             }
             //the rest we can safely update
-            user.setProfilePic(settingsRequest.getProfilePic());
+            user.setProfilePic(settingsRequest.getImg());
             user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
             userRepository.save(user);
             return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
