@@ -62,7 +62,7 @@ The technologies we implemented in Tipsy include:
 -- This call will handle deleting a Bar. Spring takes in a barID as well as the current user. If the user is the Owner of the Bar then they are given permission to delete the Bar. Otherwise, Spring returns a 401 HTTP Unauthorized response status code. Spring pulls the Bar from the repository and removes it from all Users associated with it, then deletes the Bar from the Bar repository and returns a 200 HTTP OK response status code. If any internal errors take place along the way, Spring returns a 500 HTTP Internal Server Error status code.
 - **GetEquipment GET**
 -- This call will handle returning a specific piece of Equipment from the database. Spring takes in the name of the piece of Equipment and pulls the Equipment object from the database and pulls: the name, base64 encoded image, type, list of Actions done by the Equipment and a list of Actions done to the Equipment. If successful, Spring returns a 200 HTTP OK status code. Otherwise, Spring returns a 500 HTTP Internal Server Error status code.
-- **GetEquipments GET**
+- **GetAllEquipment GET**
 -- This will handle pulling a full list of all equipment from the database. Spring will access the Equipment repository and gather a full list of details from each piece of equipment containing a name, image, and type. If successful, Spring returns a 200 HTTP OK status code. Otherwise, Spring returns a 500 HTTP Internal Server Error status code.
 - **CreateNewRecipe POST**
 -- Placeholder for CreateNewRecipe POST call.
@@ -70,11 +70,11 @@ The technologies we implemented in Tipsy include:
 -- Placeholder for GetRecipeProfile GET call.
 - **GetStep GET**
 -- Placeholder for GetStep GET call.
-- **GetUnits GET**
+- **GetAllUnits GET**
 -- This will handle retrieving the list of units. Spring pulls all the Units form the Unit repository and adds a UnitResponse object containing the name of the unit, and their equivalent measurements in milliliters and fluid ounces. Afterwards, Spring returns a 200 HTTP OK status code along with a JSON containing a list of units. If any internal errors take place along the way, Spring returns a 500 HTTP Internal Server Error.
-- **GetProfile GET**
--- This will handle retrieving a profile. Spring takes in a nickname as input and matches it to a User in the User repository. It gathers the name, profile picture, first name, last name, Recipes written, Recipes completed, and incomplete Recipes done by the user. Afterwards Spring returns a 200 HTTP OK status code along with the JSON compiled from these tokens. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
-- **ChangeSettings POST**
+- **GetUserProfile GET**
+-- This will handle retrieving a User profile. Spring takes in a nickname as input and matches it to a User in the User repository. It gathers the name, profile picture, first name, last name, Recipes written, Recipes completed, and incomplete Recipes done by the user. Afterwards Spring returns a 200 HTTP OK status code along with the JSON compiled from these tokens. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
+- **ChangeUserSettings POST**
 -- This call will handle changing User settings. Spring takes in a request object that contains the edits made by the User to their settings. Spring overwrites the previous values it had stored with the new changes. For changing an email, the previously set email address will receive a notification email saying that the email will be changed, and the new email will receive a verification email to confirm the email change. The changes are saved to the User object and Spring returns a 200 HTTP OK status code. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
 - **GetSettings GET**
 --  This will handle retrieving the current User's settings. Spring pulls the current user and maps it to a User on the database. From there Spring creates a JSON that contains the user's first name, last name, email, base64 encoded profile picture, and set measurement. Afterwards Spring returns a 200 HTTP OK status code. If any internal errors take place along the way, Spring returns a 400 HTTP Bad Request status code.
