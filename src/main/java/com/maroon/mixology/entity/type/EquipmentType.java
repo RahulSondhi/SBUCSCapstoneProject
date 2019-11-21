@@ -4,7 +4,7 @@ public enum EquipmentType {
     INGREDIENT,
     SYRUP,
     MIXER,
-    SPIRITS,
+    SPIRIT,
     GLASS,
     SHAKER,
     STRAINER,
