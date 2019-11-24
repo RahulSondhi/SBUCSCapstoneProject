@@ -50,9 +50,7 @@ class Verify extends Component {
     componentWillMount() {
 
         this.handleVerify();
-        this.setState({
-            isLoading: false
-        });
+
     }
 
     /*
@@ -172,6 +170,10 @@ class Verify extends Component {
                     });
                 });
         }
+
+        this.setState({
+            isLoading: false
+        });
 
     }
 
