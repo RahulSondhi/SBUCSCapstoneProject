@@ -163,48 +163,61 @@ public class UserController {
         }
     }
 
-    @PostMapping("/changeSettings")
-    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @Valid @RequestBody SettingsRequest settingsRequest, HttpServletRequest request) {
+    @PostMapping("/{nickname}/changeSettings")
+    public ResponseEntity<?> changeSettings(@CurrentUser UserDetails currentUser, @PathVariable(value = "nickname") String nickname, @Valid @RequestBody SettingsRequest settingsRequest, HttpServletRequest request) {
         try{
+            //Only for self and admin
             //we get the current user by getting their email address
-            User user = userService.findByEmail(currentUser.getUsername());
-            user.setFirstName(settingsRequest.getFirstName());
-            user.setLastName(settingsRequest.getLastName());
-            //Setting Email should be different...
-
-            String emailUpdate = "";
-            if(!user.getEmail().equals(settingsRequest.getEmail())){
-                //We need to verify the new email address while also notifying the old email address
-                if(userService.existsByEmail(settingsRequest.getEmail())){
-                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that email address already exists"),
-                        HttpStatus.BAD_REQUEST); 
+            User requester = userService.findByEmail(currentUser.getUsername());
+            boolean isAdmin = false;
+            //check if self or admin
+            for (Role r : requester.getRoles()){
+                if(r.getName().equals("ADMIN")){
+                    isAdmin = true;
                 }
-                // Create a token
-                user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
-                user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
-                // Send a notification email             
-                SimpleMailMessage confirmationEmail = new SimpleMailMessage();
-                confirmationEmail.setFrom(mailUserName);
-                confirmationEmail.setTo(user.getEmail()); //old email
-                confirmationEmail.setSubject(notificationSubject);
-                confirmationEmail.setText(notificationMessage + settingsRequest.getEmail()); //notification message
-                emailService.sendEmail(confirmationEmail);
-                //Now send a verification email
-                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
-                SimpleMailMessage verificationEmail = new SimpleMailMessage();
-                verificationEmail.setFrom(mailUserName);
-                verificationEmail.setTo(settingsRequest.getEmail()); //new email
-                verificationEmail.setSubject(verificationSubject);
-                verificationEmail.setText(verificationMessage
-                + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
-                emailService.sendEmail(verificationEmail);
-                emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
             }
-            //the rest we can safely update
-            user.setProfilePic(settingsRequest.getImg());
-            user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
-            userRepository.save(user);
-            return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
+            if(nickname.equals(requester.getNickname()) || isAdmin){
+                User user = userService.findByNickname(nickname);
+                user.setFirstName(settingsRequest.getFirstName());
+                user.setLastName(settingsRequest.getLastName());
+                //Setting Email should be different...
+                String emailUpdate = "";
+                if(!user.getEmail().equals(settingsRequest.getEmail())){
+                    //We need to verify the new email address while also notifying the old email address
+                    if(userService.existsByEmail(settingsRequest.getEmail())){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that email address already exists"),
+                            HttpStatus.BAD_REQUEST); 
+                    }
+                    // Create a token
+                    user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
+                    user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
+                    // Send a notification email             
+                    SimpleMailMessage confirmationEmail = new SimpleMailMessage();
+                    confirmationEmail.setFrom(mailUserName);
+                    confirmationEmail.setTo(user.getEmail()); //old email
+                    confirmationEmail.setSubject(notificationSubject);
+                    confirmationEmail.setText(notificationMessage + settingsRequest.getEmail()); //notification message
+                    emailService.sendEmail(confirmationEmail);
+                    //Now send a verification email
+                    String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                    SimpleMailMessage verificationEmail = new SimpleMailMessage();
+                    verificationEmail.setFrom(mailUserName);
+                    verificationEmail.setTo(settingsRequest.getEmail()); //new email
+                    verificationEmail.setSubject(verificationSubject);
+                    verificationEmail.setText(verificationMessage
+                    + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
+                    emailService.sendEmail(verificationEmail);
+                    emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
+                }
+                //the rest we can safely update
+                user.setProfilePic(settingsRequest.getImg());
+                user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
+                userRepository.save(user);
+                return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
+            }
+            else{
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+            }
         } catch (Exception e) {
             logger.error("User settings failed to update.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
@@ -256,18 +269,30 @@ public class UserController {
     }
 
 
-    @GetMapping("/getSettings")
-    public ResponseEntity<?> getSettings(@CurrentUser UserDetails currentUser) {
+    @GetMapping("/{nickname}/getSettings")
+    public ResponseEntity<?> getSettings(@CurrentUser UserDetails currentUser, @PathVariable(value = "nickname") String nickname) {
         //we get the current user by getting their email address
         try{
-            User user = userService.findByEmail(currentUser.getUsername());
-            UserSettingsResponse userSettings = new UserSettingsResponse(
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getProfilePic(),
-                user.getMeasurement());
-            return ResponseEntity.ok(userSettings);
+            User requester = userService.findByEmail(currentUser.getUsername());
+            boolean isAdmin = false;
+            //check if self or admin
+            for (Role r : requester.getRoles()){
+                if(r.getName().equals("ADMIN")){
+                    isAdmin = true;
+                }
+            }
+            if(nickname.equals(requester.getNickname()) || isAdmin){
+                User user = userService.findByNickname(nickname);
+                UserSettingsResponse userSettings = new UserSettingsResponse(
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getEmail(),
+                    user.getProfilePic(),
+                    user.getMeasurement());
+                return ResponseEntity.ok(userSettings);
+            } else {
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to get settings"), HttpStatus.UNAUTHORIZED);
+            }
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to load. Error: " + e.toString()),
             HttpStatus.BAD_REQUEST);

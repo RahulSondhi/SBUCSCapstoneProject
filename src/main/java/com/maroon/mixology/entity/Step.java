@@ -10,9 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Step {
     @Id
     private String id;
-    private String equipmentToDo;
-    private String equipmentDoing;
-    private String equipmentProduct;
+    private String equipmentToDo; //name
+    private String equipmentDoing; //name
+    private String equipmentProduct; //name
     private ActionType action;
     private int value;
     @DBRef

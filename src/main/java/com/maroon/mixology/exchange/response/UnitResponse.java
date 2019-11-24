@@ -2,13 +2,13 @@ package com.maroon.mixology.exchange.response;
 
 public class UnitResponse {
     private String name;
-    private double mlMeasurement;
-    private double flOzMeasurements;
+    private double usMeasurement;
+    private double metricMeasurement;
 
-    public UnitResponse(String name, double mlMeasurement, double flOzMeasurements) {
+    public UnitResponse(String name, double usMeasurement, double metricMeasurement) {
         this.name = name;
-        this.mlMeasurement = mlMeasurement;
-        this.flOzMeasurements = flOzMeasurements;
+        this.usMeasurement = usMeasurement;
+        this.metricMeasurement = metricMeasurement;
     }
 
     public String getName() {
@@ -19,20 +19,21 @@ public class UnitResponse {
         this.name = name;
     }
 
-    public double getMlMeasurement() {
-        return mlMeasurement;
+    public double getUsMeasurement() {
+        return usMeasurement;
     }
 
-    public void setMlMeasurement(double mlMeasurement) {
-        this.mlMeasurement = mlMeasurement;
+    public void setUsMeasurement(double usMeasurement) {
+        this.usMeasurement = usMeasurement;
     }
 
-    public double getFlOzMeasurements() {
-        return flOzMeasurements;
+    public double getMetricMeasurement() {
+        return metricMeasurement;
     }
 
-    public void setFlOzMeasurements(double flOzMeasurements) {
-        this.flOzMeasurements = flOzMeasurements;
+    public void setMetricMeasurement(double metricMeasurement) {
+        this.metricMeasurement = metricMeasurement;
     }
-    
+
+
 }

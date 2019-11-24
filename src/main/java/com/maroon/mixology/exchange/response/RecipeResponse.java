@@ -12,18 +12,16 @@ public class RecipeResponse {
     private BriefUserResponse author; 
     private boolean published;
     private ArrayList<StepResponse> steps;
-    private Set<BriefEquipmentResponse> equipments;
-    private Set<BriefEquipmentResponse> customEquipments;
+    private Set<EquipmentResponse> equipmentsAvailable;
 
     public RecipeResponse(String name, String img, BriefUserResponse author, boolean published,
-            ArrayList<StepResponse> steps, Set<BriefEquipmentResponse> equipments, Set<BriefEquipmentResponse> customEquipments) {
+            ArrayList<StepResponse> steps, Set<EquipmentResponse> equipmentsAvailable) {
         this.name = name;
         this.img = img;
         this.author = author;
         this.published = published;
         this.steps = steps;
-        this.equipments = equipments;
-        this.customEquipments = customEquipments;
+        this.equipmentsAvailable = equipmentsAvailable;
     }
 
     public String getName() {
@@ -66,20 +64,12 @@ public class RecipeResponse {
         this.steps = steps;
     }
 
-    public Set<BriefEquipmentResponse> getEquipments() {
-        return equipments;
+    public Set<EquipmentResponse> getEquipmentsAvailable() {
+        return equipmentsAvailable;
     }
 
-    public void setEquipments(Set<BriefEquipmentResponse> equipments) {
-        this.equipments = equipments;
-    }
-
-    public Set<BriefEquipmentResponse> getCustomEquipments() {
-        return customEquipments;
-    }
-
-    public void setCustomEquipments(Set<BriefEquipmentResponse> customEquipments) {
-        this.customEquipments = customEquipments;
+    public void setEquipmentsAvailable(Set<EquipmentResponse> equipmentsAvailable) {
+        this.equipmentsAvailable = equipmentsAvailable;
     }
     
 }

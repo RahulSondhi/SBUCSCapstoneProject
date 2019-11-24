@@ -32,17 +32,15 @@ public class EquipmentController {
         try{
             // We have the equipment Name, we can query this specifc one in the db
             Equipment equipment = equipmentService.findByName(equipmentName);
-            // Build the type
-            EquipmentTypeResponse equipmentType = new EquipmentTypeResponse(
-                equipment.getEquipmentType().getName(),
-                equipment.getEquipmentType().getActionsDoTo(),
-                equipment.getEquipmentType().getActionsDoing()
-            );
             // Build our equipment response
             EquipmentResponse equipmentResponse = new EquipmentResponse(
                 equipment.getName(), 
                 equipment.getImage(),
-                equipmentType
+                new EquipmentTypeResponse(
+                    equipment.getEquipmentType().getName(),
+                    equipment.getEquipmentType().getActionsDoTo(),
+                    equipment.getEquipmentType().getActionsDoing()
+                    )
                 );
             return ResponseEntity.ok(equipmentResponse);
         } catch (Exception e) {

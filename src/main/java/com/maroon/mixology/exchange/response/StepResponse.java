@@ -3,35 +3,45 @@ package com.maroon.mixology.exchange.response;
 import com.maroon.mixology.entity.type.ActionType;
 
 public class StepResponse {
-      private EquipmentResponse objToDo;
-      private EquipmentResponse objDoing;
+      private String equipmentToDo;
+      private String equipmentDoing;
+      private String equipmentProduct;
       private ActionType action;
       private int value;
       private UnitResponse unit;
 
-    public StepResponse(EquipmentResponse objToDo, EquipmentResponse objDoing, ActionType action, int value,
-            UnitResponse unit) {
-        this.objToDo = objToDo;
-        this.objDoing = objDoing;
+    public StepResponse(String equipmentToDo, String equipmentDoing, String equipmentProduct, ActionType action,
+            int value, UnitResponse unit) {
+        this.equipmentToDo = equipmentToDo;
+        this.equipmentDoing = equipmentDoing;
+        this.equipmentProduct = equipmentProduct;
         this.action = action;
         this.value = value;
         this.unit = unit;
     }
 
-    public EquipmentResponse getObjToDo() {
-        return objToDo;
+    public String getEquipmentToDo() {
+        return equipmentToDo;
     }
 
-    public void setObjToDo(EquipmentResponse objToDo) {
-        this.objToDo = objToDo;
+    public void setEquipmentToDo(String equipmentToDo) {
+        this.equipmentToDo = equipmentToDo;
     }
 
-    public EquipmentResponse getObjDoing() {
-        return objDoing;
+    public String getEquipmentDoing() {
+        return equipmentDoing;
     }
 
-    public void setObjDoing(EquipmentResponse objDoing) {
-        this.objDoing = objDoing;
+    public void setEquipmentDoing(String equipmentDoing) {
+        this.equipmentDoing = equipmentDoing;
+    }
+
+    public String getEquipmentProduct() {
+        return equipmentProduct;
+    }
+
+    public void setEquipmentProduct(String equipmentProduct) {
+        this.equipmentProduct = equipmentProduct;
     }
 
     public ActionType getAction() {
@@ -57,4 +67,5 @@ public class StepResponse {
     public void setUnit(UnitResponse unit) {
         this.unit = unit;
     }
+
 }

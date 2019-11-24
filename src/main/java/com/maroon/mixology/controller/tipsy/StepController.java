@@ -64,54 +64,18 @@ public class StepController {
             if(user.getRecipesIncompleted().contains(recipeID)) {
                 //We have the recipe, we just need to get the step from index
                 Step step = recipe.getSteps().get(i);
-                //we have the step, return a StepResponse
-                //We have to account for Custom Equipment
-                EquipmentResponse equipmentTodo;
-                EquipmentResponse equipmentDoing;
-                // if(step.isCustomEquipmentTodo()){
-                //     equipmentTodo = new EquipmentResponse(
-                //         step.getCustomObjToDo().getName(),
-                //         step.getCustomObjToDo().getImage(), 
-                //         step.getCustomObjToDo().getType(), 
-                //         step.getCustomObjToDo().getActionsDoTo(), 
-                //         step.getCustomObjToDo().getActionsDoing());
-                // }
-                // else{
-                //     equipmentTodo = new EquipmentResponse(
-                //         step.getObjToDo().getName(),
-                //         step.getObjToDo().getImage(), 
-                //         step.getObjToDo().getType(), 
-                //         step.getObjToDo().getActionsDoTo(), 
-                //         step.getObjToDo().getActionsDoing());
-                // }
-                // if(step.isCustomEquipmentDoing()){
-                //     equipmentDoing = new EquipmentResponse(
-                //         step.getCustomObjDoing().getName(),
-                //         step.getCustomObjDoing().getImage(), 
-                //         step.getCustomObjDoing().getType(), 
-                //         step.getCustomObjDoing().getActionsDoTo(), 
-                //         step.getCustomObjDoing().getActionsDoing());
-                // }
-                // else{
-                //     equipmentDoing = new EquipmentResponse(
-                //         step.getObjDoing().getName(),
-                //         step.getObjDoing().getImage(), 
-                //         step.getObjDoing().getType(), 
-                //         step.getObjDoing().getActionsDoTo(), 
-                //         step.getObjDoing().getActionsDoing());
-                // }
-                // UnitResponse unitResponse = new UnitResponse(
-                //     step.getUnit().getName(), 
-                //     step.getUnit().getMlMeasurement(), 
-                //     step.getUnit().getFlozMeasurement()
-                // );
-
+                //we have the step from the DB, return a StepResponse
+                //Unit response needs to be made from Unit
                 StepResponse stepResponse = new StepResponse(
-                    null,
-                    null,
+                    step.getEquipmentToDo(),
+                    step.getEquipmentDoing(),
+                    step.getEquipmentProduct(),
                     step.getAction(),
                     step.getValue(),
-                    null //Unit Response 
+                    new UnitResponse(
+                    step.getUnit().getName(), 
+                    step.getUnit().getUsMeasurement(), 
+                    step.getUnit().getMetricMeasurement()) //Unit Response 
                     );
                     return ResponseEntity.ok(stepResponse);
             }
