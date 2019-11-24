@@ -16,6 +16,12 @@ public class Equipment {
     @DBRef
     private EquipmentType equipmentType;
 
+    public Equipment(String name, String image, EquipmentType equipmentType) {
+        this.name = name;
+        this.image = image;
+        this.equipmentType = equipmentType;
+    }
+    
     public String getId() {
         return id;
     }
@@ -47,6 +53,8 @@ public class Equipment {
     public void setEquipmentType(EquipmentType equipmentType) {
         this.equipmentType = equipmentType;
     }
+
+
 
 
 }

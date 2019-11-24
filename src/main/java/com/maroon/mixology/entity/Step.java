@@ -18,6 +18,16 @@ public class Step {
     @DBRef
     private Unit unit;
 
+    public Step(String equipmentToDo, String equipmentDoing, String equipmentProduct, ActionType action, int value,
+            Unit unit) {
+        this.equipmentToDo = equipmentToDo;
+        this.equipmentDoing = equipmentDoing;
+        this.equipmentProduct = equipmentProduct;
+        this.action = action;
+        this.value = value;
+        this.unit = unit;
+    }
+
     public String getId() {
         return id;
     }
@@ -73,5 +83,6 @@ public class Step {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
+
 
 }

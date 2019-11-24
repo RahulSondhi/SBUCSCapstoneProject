@@ -1,25 +1,34 @@
 package com.maroon.mixology.exchange.request;
 
-import java.util.Set;
-
-import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.EquipmentType;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 public class EquipmentRequest {
-    @NotBlank
-    @Size(min = 4, max = 32)
     private String name;
-
     private String img;
+    private String equipmentTypeName;
 
-    @NotBlank
-    private EquipmentType type;
-    @NotBlank
-    private Set<ActionType> actionsDoTo;
-    @NotBlank
-    private Set<ActionType> actionsDoing;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getEquipmentTypeName() {
+        return equipmentTypeName;
+    }
+
+    public void setEquipmentTypeName(String equipmentTypeName) {
+        this.equipmentTypeName = equipmentTypeName;
+    }
+
 
 }

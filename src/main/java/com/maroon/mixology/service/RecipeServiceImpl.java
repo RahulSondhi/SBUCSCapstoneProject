@@ -16,7 +16,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     /* Our custom method to overrule Optional*/
     public Recipe findById(String id) throws NoSuchElementException {
-        return recipeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Student not found - " + id));
+        return recipeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Recipe not found - " + id));
     }
 
     @Override

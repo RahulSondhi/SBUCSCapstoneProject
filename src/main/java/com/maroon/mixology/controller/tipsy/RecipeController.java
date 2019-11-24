@@ -7,12 +7,15 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.type.ActionType;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Equipment;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Step;
 import com.maroon.mixology.exchange.request.BarRequest;
+import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;
+import com.maroon.mixology.exchange.request.StepRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
@@ -23,10 +26,13 @@ import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.RecipeRepository;
+import com.maroon.mixology.repository.StepRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
+import com.maroon.mixology.service.EquipmentTypeServiceImpl;
 import com.maroon.mixology.service.RecipeService;
 import com.maroon.mixology.service.RecipeServiceImpl;
+import com.maroon.mixology.service.UnitServiceImpl;
 import com.maroon.mixology.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +53,22 @@ public class RecipeController {
     private UserRepository userRepository;
 
     @Autowired
-    private BarRepository barRepository;
+    private RecipeRepository recipeRepository;
 
     @Autowired
-    private RecipeRepository recipeRepository;
+    private StepRepository stepRepository;
 
     @Autowired
     private UserServiceImpl userService;
 
     @Autowired
     private RecipeServiceImpl recipeService;
+
+    @Autowired
+    private EquipmentTypeServiceImpl equipmentTypeService;
+
+    @Autowired
+    private UnitServiceImpl unitService;
     
     @PostMapping("/createRecipe")
     public ResponseEntity<?> createNewRecipe(@CurrentUser UserDetails currentUser, @Valid @RequestBody RecipeRequest recipeRequest) {
@@ -64,16 +76,39 @@ public class RecipeController {
             //we get the current user by getting their email address
             User user = userRepository.findByEmail(currentUser.getUsername());
             //We need to build the recipe
-            //name
-            //image
-            //author = current user
-            //published
-            //steps
-            //equipments
-            //custom equipments
+            Recipe recipe = new Recipe();
+            recipe.setName(recipeRequest.getName());
+            recipe.setImage(recipeRequest.getImg());
+            recipe.setAuthor(user);
+            recipe.setPublished(recipeRequest.getPublished());
+            //Build the Steps from Step requests
+            ArrayList<Step> steps = new ArrayList<Step>();
+            for (StepRequest s : recipeRequest.getSteps()){
+                steps.add(new Step(
+                    s.getEquipmentToDo(),
+                    s.getEquipmentDoing(),
+                    s.getEquipmentProduct(),
+                    ActionType.valueOf(s.getAction()),
+                    s.getValue(),
+                    unitService.findByName(s.getUnitName())
+                ));
+            }
+            recipe.setSteps(steps);
+            //Build the equipments from the Equipment Available
+            Set<Equipment> equipmentsAvailable = new HashSet<Equipment>();
+            for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
+                equipmentsAvailable.add(new Equipment(
+                    e.getName(),
+                    e.getImg(),
+                    equipmentTypeService.findByName(e.getEquipmentTypeName())
+                ));
+            }
+            recipe.setEquipmentsAvailable(equipmentsAvailable);
+            stepRepository.saveAll(steps); //Will this work?
+            recipeRepository.save(recipe);
             return ResponseEntity.ok(new ApiResponse(true, "Recipe creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be saved. Error: " + e.toString()),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be saved. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
         }
     }
