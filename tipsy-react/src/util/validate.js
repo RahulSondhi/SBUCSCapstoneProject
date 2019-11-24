@@ -77,15 +77,6 @@ export const validatePassword = (password) => {
     }
 }
 
-export const validatePasswordConfirm = (passwordConfirm) => {
-    const passwordValue = this.state.password.value;
-    if (passwordConfirm !== passwordValue) {
-        return {validateStatus: 'error', errorMsg: `Passwords do not match`}
-    } else {
-        return validatePassword(passwordConfirm)
-    }
-}
-
 // Bar and Recipe
 
 export const validateName = (name) => {
@@ -103,14 +94,6 @@ export const validateDesc = (description) => {
         return {validationStatus: 'error', errorMsg: `Description is too long (Maximum ${DESC_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
-    }
-}
-
-export const validateUserAdd = (name) => {
-    if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && this.state.bar.owner.name !== name) {
-        return true;
-    } else {
-        return false;
     }
 }
 

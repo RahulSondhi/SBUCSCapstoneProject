@@ -14,6 +14,13 @@
     color: var(--white);
 }
 
+.captionYellow {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--brass), 0 0 0.5em var(--brass);
+    font-size: 3em;
+    color: var(--white);
+}
+
 /* Animations */
 @-moz-keyframes blink {
     0% {

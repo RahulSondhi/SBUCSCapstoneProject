@@ -237,7 +237,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.managers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={ValidateUserAdd}
+                                    validate={this.validateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -249,7 +249,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.workers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={ValidateUserAdd}
+                                    validate={this.validateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -317,6 +317,14 @@ class ConfigBarPage extends Component {
             });
 
         this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
+    }
+
+    validateUserAdd = (name) => {
+        if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && this.state.bar.owner.name !== name) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     handleSubmit(event) {

@@ -62,10 +62,8 @@ export const ValidateLastName = validate.validateLastName;
 export const ValidateEmail = validate.validateEmail;
 export const ValidateNickname = validate.validateNickname;
 export const ValidatePassword = validate.validatePassword;
-export const ValidatePasswordConfirm = validate.validatePasswordConfirm;
 export const ValidateName = validate.validateName;
 export const ValidateDesc = validate.validateDesc;
-export const ValidateUserAdd = validate.validateUserAdd;
 
 // Profile Components
 

@@ -187,19 +187,13 @@ class Routes extends Component {
                         component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
-                        path="/tipsy/user/stg"
-                        authed={this.state.isAuthenticated}
-                        redirectTo="/login"
-                        component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
-                    <PrivateRoute
-                        exact
                         path="/tipsy/user/stg/changePassword"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
-                        path={["/tipsy/user/:nickname"]}
+                        path={["/tipsy/user/:id"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
                         component={(props) => <UserPage currentUser={this.state.currentUser} {...props}/>}/>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Tipsy from '../assets/Tipsy.svg';
 import {Link} from 'react-router-dom';
 import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../util/APIUtils';
-import {ACCESS_TOKEN, ValidatePassword, ValidatePasswordConfirm} from '../main/constants';
+import {ACCESS_TOKEN, ValidatePassword} from '../main/constants';
 import {Form, Input, Button, notification} from 'antd';
 const FormItem = Form.Item;
 
@@ -211,7 +211,7 @@ class Verify extends Component {
                                     autoComplete="off"
                                     placeholder="Confirm your password" 
                                     value={this.state.passwordConfirm.value} 
-                                    onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)} />    
+                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />    
                             </FormItem>
                             <FormItem>
                                 <Button type="primary" 
@@ -263,6 +263,15 @@ class Verify extends Component {
                     <h1 className="captionRed small-12 medium-8 cell">Invalid Token</h1>
                 </div>
             );
+        }
+    }
+
+    validatePasswordConfirm = (passwordConfirm) => {
+        const passwordValue = this.state.password.value;
+        if (passwordConfirm !== passwordValue) {
+            return {validateStatus: 'error', errorMsg: `Passwords do not match`}
+        } else {
+            return ValidatePassword(passwordConfirm)
         }
     }
 

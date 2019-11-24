@@ -3,7 +3,6 @@
 
 /* General Pages */
 
-#equipmentPageTitle,
 #recipePageTitle,
 #barPageTitle,
 #userPageTitle {
@@ -27,6 +26,15 @@
 
 /* Gear Pages */
 
+#equipmentPageTitle {
+    font-size: 3em;
+    margin: 0;
+}
+
+#equipmentPageSubTitle{
+    font-size: 2.3em;
+    margin-bottom: 3%;
+}
 
 /* Recipe Pages */
 

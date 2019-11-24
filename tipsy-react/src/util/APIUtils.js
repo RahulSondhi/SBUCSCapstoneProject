@@ -159,16 +159,16 @@ export function getUserProfile(nickname) {
     });
 }
 
-export function getUserSettings() {
+export function getUserSettings(nickname) {
     return request({
-        url: API_BASE_URL + "/tipsy/user/getSettings",
+        url: API_BASE_URL + "/tipsy/user/" + nickname + "/getSettings",
         method: 'GET',
     });
 }
 
-export function changeUserSettings(settingsRequest) {
+export function changeUserSettings(settingsRequest,nickname) {
     return request({
-        url: API_BASE_URL + "/tipsy/user/changeSettings",
+        url: API_BASE_URL + "/tipsy/user/"+nickname+"/changeSettings",
         method: 'POST',
         body: JSON.stringify(settingsRequest)
     });

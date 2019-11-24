@@ -61,17 +61,6 @@ label {
     text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
 }
 
-.userBoxEntry {
-    display: block;
-    text-decoration: none;
-    color: var(--crimson);
-    margin-bottom: 1rem;
-}
-.userBoxEntry:hover {
-    color: var(--crimson);
-    text-shadow: 0 0 0.2em var(--bright-red);
-}
-
 .button {
     font-size: 1em;
     text-transform: uppercase;

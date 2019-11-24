@@ -64,10 +64,10 @@ class ConfigUserPage extends Component {
     }
 
 
-    loadUserSettings() {
+    loadUserSettings(nickname) {
         this.setState({isLoading: true});
 
-        getUserSettings().then(response => {
+        getUserSettings(nickname).then(response => {
 
             if (response.measurement === null || response.measurement === "") {
                 response.measurement = MeasurementType.US;
@@ -78,6 +78,7 @@ class ConfigUserPage extends Component {
             }
 
             this.setState({
+                user: response,
                 firstName: {
                     value: response.firstName,
                     validateStatus: 'success',
@@ -122,7 +123,22 @@ class ConfigUserPage extends Component {
     }
 
     componentDidMount() {
-        this.loadUserSettings();
+        let try_name = "";
+        console.log(this.props)
+        if (this.props.match.params.id === this.props.currentUser.name ||
+            this.props.currentUser.roles.includes("ADMIN")){
+
+            if(this.props.match.params.id === "me"){
+                try_name = this.props.currentUser.name;
+            }else{
+                try_name = this.props.match.params.id;
+            }
+
+        }else{ 
+            try_name = this.props.currentUser.name;
+        }
+        const name = try_name;
+        this.loadUserSettings(name);
     }
 
     render() {
@@ -184,7 +200,7 @@ class ConfigUserPage extends Component {
                             autoComplete="off"
                             placeholder="Enter Last Name"
                             value={this.state.lastName.value}
-                            onChange={(event) => this.handleInputChange(event, ValidateFirstName)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateLastName)}/>
                     </FormItem>
 
                     <FormItem
@@ -283,7 +299,18 @@ class ConfigUserPage extends Component {
             profilePic: this.state.profilePic.value,
             measurement: this.state.measurement.value
         };
-        changeUserSettings(settingsRequest).then(response => {
+
+        let nickname = "";
+
+        if(this.props.match.params.id === "me"){
+            nickname = this.props.currentUser.name
+        }else{
+            nickname = this.props.match.params.id
+        }
+
+        console.log(nickname)
+
+        changeUserSettings(settingsRequest,nickname).then(response => {
             notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
         }).catch(error => {
             notification.error({

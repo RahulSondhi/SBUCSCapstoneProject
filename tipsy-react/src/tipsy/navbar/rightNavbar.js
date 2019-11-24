@@ -148,7 +148,7 @@ class GeneralNavbar extends Component {
 
                         <Menu.Item key="setting:2">
                             <NavLink
-                                to="/tipsy/user/stg"
+                                to="/tipsy/user/me/stg"
                                 isActive={(match, location) => {
                                 if (!match) {
                                     return false;

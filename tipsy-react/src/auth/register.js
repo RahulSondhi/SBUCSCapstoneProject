@@ -4,7 +4,7 @@ import {register, checkNicknameAvailability, checkEmailAvailability} from '../ut
 import Bottle from '../assets/equipment/bottle.svg';
 import Cup from '../assets/equipment/cup.svg';
 
-import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword, ValidatePasswordConfirm} from '../main/constants';
+import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword} from '../main/constants';
 
 import {Link} from 'react-router-dom';
 import {Form, Input, Icon, notification} from 'antd';
@@ -241,7 +241,7 @@ class Register extends Component {
                             autoComplete="off"
                             placeholder="Confirm your password"
                             value={this.state.passwordConfirm.value}
-                            onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)}/>
+                            onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
                     </FormItem>
 
                     <FormItem className="cell">
@@ -258,6 +258,15 @@ class Register extends Component {
                 </div>
             </div>
         );
+    }
+
+    validatePasswordConfirm = (passwordConfirm) => {
+        const passwordValue = this.state.password.value;
+        if (passwordConfirm !== passwordValue) {
+            return {validateStatus: 'error', errorMsg: `Passwords do not match`}
+        } else {
+            return ValidatePassword(passwordConfirm)
+        }
     }
 
     // Backend Validation Functions

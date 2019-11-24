@@ -3,7 +3,7 @@ import Navbar from '../navbar/navbar.js';
 
 import { changePassword } from '../../util/APIUtils';
 
-import { ValidatePassword, ValidatePasswordConfirm } from '../../main/constants'
+import { ValidatePassword } from '../../main/constants'
 
 import { Form, Input, notification, Icon } from 'antd';
 const FormItem = Form.Item;
@@ -108,7 +108,7 @@ class ChangePasswordPage extends Component {
                                     autoComplete="off"
                                     placeholder="Confirm your password"
                                     value={this.state.passwordConfirm.value}
-                                    onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)}/>
+                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
                             </FormItem>
 
                             <FormItem className="cell">
@@ -119,6 +119,15 @@ class ChangePasswordPage extends Component {
                         </Form>
                     </div>
                 );
+            }
+
+            validatePasswordConfirm = (passwordConfirm) => {
+                const passwordValue = this.state.password.value;
+                if (passwordConfirm !== passwordValue) {
+                    return {validateStatus: 'error', errorMsg: `Passwords do not match`}
+                } else {
+                    return ValidatePassword(passwordConfirm)
+                }
             }
 
 }

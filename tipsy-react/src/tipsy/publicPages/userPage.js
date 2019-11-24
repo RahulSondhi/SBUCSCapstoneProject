@@ -43,10 +43,10 @@ class UserPage extends Component {
 
     componentDidMount() {
         let try_name = "";
-        if (this.props.match.params.nickname === "me") 
+        if (this.props.match.params.id === "me") 
             try_name = this.props.currentUser.name;
         else 
-            try_name = this.props.match.params.nickname;
+            try_name = this.props.match.params.id;
         const name = try_name;
         this.loadUserProfile(name);
     }
@@ -100,10 +100,11 @@ class UserPage extends Component {
                     <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.fullName}</h1>
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
                     <div
-                        className="userPageBarScroll small-10 medium-8 large-6 grid-x grid-margin-x align-center-middle cell">
+                        className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
                         <div
                             className="userPageBarContainer grid-x grid-margin-x align-center align-top cell">
                             <ItemPreview className="cell" items={this.state.user.bars} type="bar"/>
+                            
                         </div>
                     </div>
                 </div>

@@ -77,22 +77,23 @@ class EquipmentPage extends Component {
                 </div>
 
                 <h1 id="equipmentPageTitle" className="caption small-10 cell">{this.state.equipment.name}</h1>
+                <h2 id="equipmentPageSubTitle" className="captionYellow small-10 cell">{this.state.equipment.equipmentType.type}</h2>
 
                 <div className="small-12 medium-6 grid-x align-center align-self-top cell"> 
-                    <h1 className="captionRed small-12 cell">What Actions Can I Do With This?</h1>
+                    <h2 className="captionRed small-12 cell">What Actions Can I Do With This?</h2>
 
                         <ItemPreview
                                     className="small-8 cell"
-                                    items={this.state.equipment.actionsDoing}
+                                    items={this.state.equipment.equipmentType.actionsDoing}
                                     type="action"/>
                 </div>
 
 
                 <div className="small-12 medium-6 grid-x align-center align-self-top cell">
-                    <h1 className="captionRed small-12 cell">What Actions Can Be Done To This?</h1> 
+                    <h2 className="captionRed small-12 cell">What Actions Can Be Done To This?</h2> 
                          <ItemPreview
                                     className="small-8 cell"
-                                    items={this.state.equipment.actionsDoTo}
+                                    items={this.state.equipment.equipmentType.actionsDoTo}
                                     type="action"/>
                 </div>
 
