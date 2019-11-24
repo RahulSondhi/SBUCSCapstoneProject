@@ -1,25 +1,16 @@
 package com.maroon.mixology.exchange.response;
 
-import java.util.Set;
-
-import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentType;
 
 public class EquipmentResponse {
     //we don't give them the ID
     private String name;
     private String img;
-    private EquipmentType type; // ENUM
-    private Set<ActionType> actionsDoTo; // ENUM[]
-    private Set<ActionType> actionsDoing; // ENUM[]
+    private EquipmentTypeResponse equipmentType;
 
-    public EquipmentResponse(String name, String img, EquipmentType type, Set<ActionType> actionsDoTo,
-            Set<ActionType> actionsDoing) {
+    public EquipmentResponse(String name, String img, EquipmentTypeResponse equipmentType) {
         this.name = name;
         this.img = img;
-        this.type = type;
-        this.actionsDoTo = actionsDoTo;
-        this.actionsDoing = actionsDoing;
+        this.equipmentType = equipmentType;
     }
 
     public String getName() {
@@ -34,33 +25,18 @@ public class EquipmentResponse {
         return img;
     }
 
-    public void setImage(String img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
-    public EquipmentType getType() {
-        return type;
+    public EquipmentTypeResponse getEquipmentType() {
+        return equipmentType;
     }
 
-    public void setType(EquipmentType type) {
-        this.type = type;
+    public void setEquipmentType(EquipmentTypeResponse equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
-    public Set<ActionType> getActionsDoTo() {
-        return actionsDoTo;
-    }
-
-    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
-        this.actionsDoTo = actionsDoTo;
-    }
-
-    public Set<ActionType> getActionsDoing() {
-        return actionsDoing;
-    }
-
-    public void setActionsDoing(Set<ActionType> actionsDoing) {
-        this.actionsDoing = actionsDoing;
-    }
 
 
 }

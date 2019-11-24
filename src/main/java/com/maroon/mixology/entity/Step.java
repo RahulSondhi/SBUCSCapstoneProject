@@ -10,14 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Step {
     @Id
     private String id;
-    @DBRef
-    private Equipment objToDo;
-    @DBRef
-    private Equipment objDoing;
-    private boolean customEquipmentTodo;
-    private boolean customEquipmentDoing;
-    private Equipment customObjToDo;
-    private Equipment customObjDoing;
+    private String equipmentToDo;
+    private String equipmentDoing;
+    private String equipmentProduct;
     private ActionType action;
     private int value;
     @DBRef
@@ -31,28 +26,28 @@ public class Step {
         this.id = id;
     }
 
-    public Equipment getObjToDo() {
-        return objToDo;
+    public String getEquipmentToDo() {
+        return equipmentToDo;
     }
 
-    public void setObjToDo(Equipment objToDo) {
-        this.objToDo = objToDo;
+    public void setEquipmentToDo(String equipmentToDo) {
+        this.equipmentToDo = equipmentToDo;
     }
 
-    public Equipment getObjDoing() {
-        return objDoing;
+    public String getEquipmentDoing() {
+        return equipmentDoing;
     }
 
-    public void setObjDoing(Equipment objDoing) {
-        this.objDoing = objDoing;
+    public void setEquipmentDoing(String equipmentDoing) {
+        this.equipmentDoing = equipmentDoing;
     }
 
-    public Equipment getCustomObjDoing() {
-        return customObjDoing;
+    public String getEquipmentProduct() {
+        return equipmentProduct;
     }
 
-    public void setCustomObjDoing(Equipment customObjDoing) {
-        this.customObjDoing = customObjDoing;
+    public void setEquipmentProduct(String equipmentProduct) {
+        this.equipmentProduct = equipmentProduct;
     }
 
     public ActionType getAction() {
@@ -78,31 +73,5 @@ public class Step {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
-
-    public Equipment getCustomObjToDo() {
-        return customObjToDo;
-    }
-
-    public void setCustomObjToDo(Equipment customObjToDo) {
-        this.customObjToDo = customObjToDo;
-    }
-
-    public boolean isCustomEquipmentTodo() {
-        return customEquipmentTodo;
-    }
-
-    public void setCustomEquipmentTodo(boolean customEquipmentTodo) {
-        this.customEquipmentTodo = customEquipmentTodo;
-    }
-
-    public boolean isCustomEquipmentDoing() {
-        return customEquipmentDoing;
-    }
-
-    public void setCustomEquipmentDoing(boolean customEquipmentDoing) {
-        this.customEquipmentDoing = customEquipmentDoing;
-    }
-
-
 
 }

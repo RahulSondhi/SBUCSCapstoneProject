@@ -74,54 +74,54 @@ public class RecipeController {
     }
 
     @GetMapping("/{recipe}")
-    public ResponseEntity<?> getRecipeProfile(@CurrentUser UserDetails currentUser, @PathVariable(value = "recipeID") String recipeID) {
+    public ResponseEntity<?> getRecipe(@CurrentUser UserDetails currentUser, @PathVariable(value = "recipeID") String recipeID) {
         try{
             User user = userService.findByEmail(currentUser.getUsername());
             //we have to query the recipe from Mongo
             Recipe recipe = recipeService.findById(recipeID);
             //We have the recipe, now lets build a recipe Response
-            if(recipe.isPublished() || recipe.getAuthor().getId().equals(user.getId())){
-                BriefUserResponse author = new BriefUserResponse(
-                    recipe.getAuthor().getNickname(), 
-                    recipe.getAuthor().getFirstName() + " " + recipe.getAuthor().getLastName(), 
-                    recipe.getAuthor().getProfilePic()
-                    );
+            // if(recipe.isPublished() || recipe.getAuthor().getId().equals(user.getId())){
+            //     BriefUserResponse author = new BriefUserResponse(
+            //         recipe.getAuthor().getNickname(), 
+            //         recipe.getAuthor().getFirstName() + " " + recipe.getAuthor().getLastName(), 
+            //         recipe.getAuthor().getProfilePic()
+            //         );
 
-                //Need to add Steps
-                Set<BriefEquipmentResponse> equipments = new HashSet<BriefEquipmentResponse>();
-                for (Equipment e : recipe.getEquipments()){
-                    equipments.add(new BriefEquipmentResponse(
-                        e.getName(), 
-                        e.getImage(), 
-                        e.getType()
-                        ));
-                }
-                Set<BriefEquipmentResponse> customEquipments = new HashSet<BriefEquipmentResponse>();
-                for (Equipment e : recipe.getCustomEquipments()){
-                    equipments.add(new BriefEquipmentResponse(
-                        e.getName(), 
-                        e.getImage(), 
-                        e.getType()
-                        ));
-                }
-                //lets build our response
-                RecipeResponse recipeResponse = new RecipeResponse(
-                    recipe.getName(),
-                    recipe.getImage(),
-                    author,
-                    recipe.isPublished(),
-                    null, //StepResponses 
-                    equipments,
-                    customEquipments
-                );
-                return ResponseEntity.ok(recipeResponse);
-            }
-            else{
+            //     //Need to add Steps
+            //     Set<BriefEquipmentResponse> equipments = new HashSet<BriefEquipmentResponse>();
+            //     for (Equipment e : recipe.getEquipments()){
+            //         equipments.add(new BriefEquipmentResponse(
+            //             e.getName(), 
+            //             e.getImage(), 
+            //             e.getName()
+            //             ));
+            //     }
+            //     Set<BriefEquipmentResponse> customEquipments = new HashSet<BriefEquipmentResponse>();
+            //     for (Equipment e : recipe.getCustomEquipments()){
+            //         equipments.add(new BriefEquipmentResponse(
+            //             e.getName(), 
+            //             e.getImage(), 
+            //             e.getType()
+            //             ));
+            //     }
+            //     //lets build our response
+            //     RecipeResponse recipeResponse = new RecipeResponse(
+            //         recipe.getName(),
+            //         recipe.getImage(),
+            //         author,
+            //         recipe.isPublished(),
+            //         null, //StepResponses 
+            //         equipments,
+            //         customEquipments
+            //     );
+            //     return ResponseEntity.ok(recipeResponse);
+            // }
+            // else{
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A published recipe with that ID was not found."),
                         HttpStatus.NOT_FOUND);
-            }
+            // }
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.toString()),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

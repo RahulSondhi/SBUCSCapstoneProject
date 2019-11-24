@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
+import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.exchange.request.BarRequest;
@@ -146,6 +147,7 @@ public class BarController {
         try{
             // we get the current user by getting their email address
             User user = userService.findByEmail(currentUser.getUsername());
+            boolean isAdmin = false;
             // barID = Helper.decodeBase64ToHex(barID);
             // we have the barID(Base64)
             Bar bar = barService.findById(barID);
@@ -154,8 +156,14 @@ public class BarController {
             for (User u : bar.getManagers()){
                 managerIdList.add(u.getId());
             }
-            if(bar.getOwner().getId().equals(user.getId())){
-                //owner{FULL ACCESS}
+            //Check if the user is an admin
+            for (Role r : user.getRoles()){
+                if(r.getName().equals("ADMIN")){
+                    isAdmin = true;
+                }
+            }
+            if(bar.getOwner().getId().equals(user.getId()) || isAdmin){
+                //owner or admin{FULL ACCESS}
                 //We can easily update the Name, Description, and Image
                 bar.setName(barRequest.getName());
                 bar.setDescription(barRequest.getDescription());

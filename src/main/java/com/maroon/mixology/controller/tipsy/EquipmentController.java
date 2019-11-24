@@ -8,6 +8,7 @@ import java.util.Set;
 import com.maroon.mixology.entity.Equipment;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
+import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.service.EquipmentServiceImpl;
 
@@ -31,12 +32,18 @@ public class EquipmentController {
         try{
             // We have the equipment Name, we can query this specifc one in the db
             Equipment equipment = equipmentService.findByName(equipmentName);
+            // Build the type
+            EquipmentTypeResponse equipmentType = new EquipmentTypeResponse(
+                equipment.getEquipmentType().getName(),
+                equipment.getEquipmentType().getActionsDoTo(),
+                equipment.getEquipmentType().getActionsDoing()
+            );
+            // Build our equipment response
             EquipmentResponse equipmentResponse = new EquipmentResponse(
                 equipment.getName(), 
-                equipment.getImage(), 
-                equipment.getType(), 
-                equipment.getActionsDoTo(), 
-                equipment.getActionsDoing());
+                equipment.getImage(),
+                equipmentType
+                );
             return ResponseEntity.ok(equipmentResponse);
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment was unable to be loaded. Error: " + e.toString()),
@@ -48,15 +55,15 @@ public class EquipmentController {
     public ResponseEntity<?> getEquipment() {
         try{
             List<Equipment> equipments = equipmentService.findAll();
-            Set<BriefEquipmentResponse> equipmentResponses = new HashSet<BriefEquipmentResponse>();
+            Set<BriefEquipmentResponse> briefEquipmentResponses = new HashSet<BriefEquipmentResponse>();
             for (Equipment e : equipments){
-                equipmentResponses.add(new BriefEquipmentResponse(
+                briefEquipmentResponses.add(new BriefEquipmentResponse(
                     e.getName(), 
                     e.getImage(), 
-                    e.getType())
+                    e.getEquipmentType().getName())
                     );
             }
-            return ResponseEntity.ok(equipmentResponses);
+            return ResponseEntity.ok(briefEquipmentResponses);
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipments were unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);

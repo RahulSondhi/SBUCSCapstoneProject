@@ -19,20 +19,10 @@ public class Recipe {
     private boolean published;
     @DBRef
     private ArrayList<Step> steps;
-    @DBRef
-    private Set<Equipment> equipments;
-    private Set<Equipment> customEquipments;
+    private Set<Equipment> equipmentsAvailable;
 
     public String getId() {
         return id;
-    }
-
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean published) {
-        this.published = published;
     }
 
     public void setId(String id) {
@@ -43,7 +33,7 @@ public class Recipe {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -55,37 +45,37 @@ public class Recipe {
         this.image = image;
     }
 
-    public User getAuthor(){
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author){
+    public void setAuthor(User author) {
         this.author = author;
     }
 
+    public boolean isPublished() {
+        return published;
+    }
 
-    public ArrayList<Step> getSteps(){
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<Step> steps){
+    public void setSteps(ArrayList<Step> steps) {
         this.steps = steps;
     }
 
-    public Set<Equipment> getEquipments(){
-        return equipments;
+    public Set<Equipment> getEquipmentsAvailable() {
+        return equipmentsAvailable;
     }
 
-    public void setEquipments(Set<Equipment> equipments) {
-        this.equipments = equipments;
+    public void setEquipmentsAvailable(Set<Equipment> equipmentsAvailable) {
+        this.equipmentsAvailable = equipmentsAvailable;
     }
 
-    public Set<Equipment> getCustomEquipments() {
-        return customEquipments;
-    }
-
-    public void setCustomEquipments(Set<Equipment> customEquipments) {
-        this.customEquipments = customEquipments;
-    }
 
 }

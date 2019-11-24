@@ -1,16 +1,16 @@
 package com.maroon.mixology.exchange.response.brief;
 
-import com.maroon.mixology.entity.type.EquipmentType;
+import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 
 public class BriefEquipmentResponse {
     private String name;
     private String img;
-    private EquipmentType type;
+    private EquipmentTypeEnum equipmentType;
 
-    public BriefEquipmentResponse(String name, String img, EquipmentType type) {
+    public BriefEquipmentResponse(String name, String img, EquipmentTypeEnum equipmentType) {
         this.name = name;
         this.img = img;
-        this.type = type;
+        this.equipmentType = equipmentType;
     }
 
     public String getName() {
@@ -29,14 +29,13 @@ public class BriefEquipmentResponse {
         this.img = img;
     }
 
-    public EquipmentType getType() {
-        return type;
+    public EquipmentTypeEnum getEquipmentType() {
+        return equipmentType;
     }
 
-    public void setType(EquipmentType type) {
-        this.type = type;
+    public void setEquipmentType(EquipmentTypeEnum equipmentType) {
+        this.equipmentType = equipmentType;
     }
-
 
 
 

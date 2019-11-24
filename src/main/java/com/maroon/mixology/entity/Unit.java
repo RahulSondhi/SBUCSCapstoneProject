@@ -11,8 +11,8 @@ public class Unit {
     private String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
-    private double mlMeasurement;
-    private double flozMeasurement;
+    private double usMeasurement;
+    private double metricMeasurement;
 
     public String getId() {
 		return id;
@@ -28,21 +28,22 @@ public class Unit {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-    public void setFlozMeasurement(double flozMeasurement) {
-        this.flozMeasurement = flozMeasurement;
     }
 
-    public void setMlMeasurement(double mlMeasurement) {
-        this.mlMeasurement = mlMeasurement;
+    public double getUsMeasurement() {
+        return usMeasurement;
     }
 
-    public double getMlMeasurement() {
-        return mlMeasurement;
+    public void setUsMeasurement(double usMeasurement) {
+        this.usMeasurement = usMeasurement;
     }
 
-    public double getFlozMeasurement() {
-        return flozMeasurement;
+    public double getMetricMeasurement() {
+        return metricMeasurement;
     }
+
+    public void setMetricMeasurement(double metricMeasurement) {
+        this.metricMeasurement = metricMeasurement;
+    }
+    
 }

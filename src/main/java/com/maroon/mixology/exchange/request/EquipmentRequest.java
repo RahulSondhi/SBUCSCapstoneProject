@@ -3,7 +3,7 @@ package com.maroon.mixology.exchange.request;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentType;
+import com.maroon.mixology.entity.EquipmentType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

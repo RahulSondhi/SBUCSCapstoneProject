@@ -1,17 +1,16 @@
 package com.maroon.mixology.entity.type;
 
-public enum EquipmentType {
+public enum EquipmentTypeEnum {
     INGREDIENT,
-    SYRUP,
     MIXER,
     SPIRIT,
-    GLASS,
+    CONTAINER,
     SHAKER,
     STRAINER,
-    PRESS,
+    PRESSER,
     CRUSHER,
     KNIFE,
-    MEASURING_UTENSIL,
+    MEASURER,
     BLENDER,
     PEELER,
     HEATING,

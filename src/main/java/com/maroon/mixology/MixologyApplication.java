@@ -6,9 +6,9 @@ import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Equipment;
+import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentType;
-
+import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Unit;
 import com.maroon.mixology.entity.User;
@@ -16,6 +16,7 @@ import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.EquipmentRepository;
+import com.maroon.mixology.repository.EquipmentTypeRepository;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UnitRepository;
 import com.maroon.mixology.repository.UserRepository;
@@ -34,42 +35,40 @@ public class MixologyApplication {
     
     
 	@Bean
-    CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository, EquipmentRepository equipmentRepository, UnitRepository unitRepository) {
+    CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository, EquipmentRepository equipmentRepository, EquipmentTypeRepository equipmentTypeRepository, UnitRepository unitRepository) {
         return args -> {
+            // Unit Table
             // Unit u = new Unit();
             // u.setName("Gallon");
-            // u.setFlozMeasurement(128);
-            // u.setMlMeasurement(3785.41);
+            // u.setUsMeasurement(128);
+            // u.setMetricMeasurement(3785.41);
             // unitRepository.save(u);
-            // Equipment e = new Equipment();
-            // e.setName("Simple Syrup");
-            // e.setType(EquipmentType.SYRUP);
-            //Actions
+            // Equipment Type Table
+            // EquipmentType eT = new EquipmentType();
+            // eT.setName(EquipmentTypeEnum.COOLING);
             // Set<ActionType> doTo = new HashSet<ActionType>();
             // Set<ActionType> doing = new HashSet<ActionType>();
-            // Add image
-            // e.setImage("");
-            // Add actions
-            // DoTo
-            // doTo.add(ActionType.POUR);
+            // doTo.add(ActionType.PRESS);
+            // doTo.add(ActionType.CRUSH);
+            // doTo.add(ActionType.CUT);
             // doTo.add(ActionType.ADD);
-            // doTo.add(ActionType.MIX);
-            // doTo.add(ActionType.SHAKE);
+            // doTo.add(ActionType.PEEL);
+            // doTo.add(ActionType.POUR);
             // doTo.add(ActionType.MEASURE);
-            // Doing
-            // doing.add(ActionType.POUR);
-            // doing.add(ActionType.SHAKE);
-            // doing.add(ActionType.PRESS);
-            // doing.add(ActionType.CRUSH);
-            // doing.add(ActionType.CUT);
-            // doing.add(ActionType.MEASURE);
-            // doing.add(ActionType.BLEND);
-            // doing.add(ActionType.PEEL);
-            // doing.add(ActionType.HEAT);
+            // 
             // doing.add(ActionType.COOL);
-            //
-            // e.setActionsDoTo(doTo);
-            // e.setActionsDoing(doing);
+            // doing.add(ActionType.IGNITE);
+            // doing.add(ActionType.FREEZE);
+            // eT.setActionsDoTo(doTo);
+            // eT.setActionsDoing(doing);
+            // equipmentTypeRepository.save(eT);
+            // Equipment Table
+            // Equipment e = new Equipment();
+            // EquipmentType t = equipmentTypeRepository.findByName("STRAINER");
+            // e.setName("Strainer");
+            // e.setEquipmentType(t);
+            // // Add image
+            // e.setImage("");
             // equipmentRepository.save(e);
             // // Role adminRole = roleRepository.findByName("ADMIN");
             // // if (adminRole == null) {

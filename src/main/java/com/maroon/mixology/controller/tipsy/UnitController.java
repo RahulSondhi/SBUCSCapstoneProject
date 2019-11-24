@@ -30,8 +30,8 @@ public class UnitController {
             for (Unit u : units){
                 unitResponses.add(new UnitResponse(
                     u.getName(),
-                    u.getMlMeasurement(),
-                    u.getFlozMeasurement()
+                    u.getUsMeasurement(),
+                    u.getMetricMeasurement()
                     ));
             }
             return ResponseEntity.ok(unitResponses);
