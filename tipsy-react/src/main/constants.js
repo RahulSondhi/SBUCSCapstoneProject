@@ -365,6 +365,9 @@ export class DynamicForm extends Component {
                 .splice(index, 1);
             this.setState({data: this.state.data});
             notification.success({message: 'Tipsy App', description: "Removed!"});
+            this
+            .props
+            .onUpdate();
         } else {
             notification.error({message: 'Tipsy App', description: "Could not remove that!"});
 
