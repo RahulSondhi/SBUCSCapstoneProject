@@ -3,6 +3,8 @@ import Tipsy from '../assets/Tipsy.svg';
 
 import {forgot, checkEmailAvailability} from '../util/APIUtils';
 
+import {ValidateEmail} from '../main/constants';
+
 import {Link} from 'react-router-dom';
 import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
@@ -108,7 +110,7 @@ class Forgot extends Component {
                             placeholder="Enter email"
                             value={this.state.email.value}
                             onBlur={this.validateEmailAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateEmail)}/>
                     </FormItem>
 
                     <FormItem className="cell">
@@ -122,23 +124,10 @@ class Forgot extends Component {
         );
     }
 
-    validateEmail = (email) => {
-        if (!email) {
-            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
-        }
-
-        const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
-        if (!EMAIL_REGEX.test(email)) {
-            return {validateStatus: 'error', errorMsg: 'Email not valid'}
-        }
-
-        return {validateStatus: null, errorMsg: null}
-    }
-
     validateEmailAvailability() {
         // First check for client side errors in email
         const emailValue = this.state.email.value;
-        const emailValidation = this.validateEmail(emailValue);
+        const emailValidation = ValidateEmail(emailValue);
 
         if (emailValidation.validateStatus === 'error') {
             this.setState({

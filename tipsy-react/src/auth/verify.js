@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import Tipsy from '../assets/Tipsy.svg';
 import {Link} from 'react-router-dom';
 import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../util/APIUtils';
-import {
-    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH, ACCESS_TOKEN
-} from '../main/constants';
-import { Form, Input, Button, notification } from 'antd';
+import {ACCESS_TOKEN, ValidatePassword, ValidatePasswordConfirm} from '../main/constants';
+import {Form, Input, Button, notification} from 'antd';
 const FormItem = Form.Item;
 
 class Verify extends Component {
@@ -200,7 +198,7 @@ class Verify extends Component {
                                     autoComplete="off"
                                     placeholder="Enter Password" 
                                     value={this.state.password.value} 
-                                    onChange={(event) => this.handleInputChange(event, this.validatePassword)} />    
+                                    onChange={(event) => this.handleInputChange(event, ValidatePassword)} />    
                             </FormItem>
                             <FormItem 
                                 label="Confirm Password"
@@ -212,7 +210,7 @@ class Verify extends Component {
                                     autoComplete="off"
                                     placeholder="Confirm your password" 
                                     value={this.state.passwordConfirm.value} 
-                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />    
+                                    onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)} />    
                             </FormItem>
                             <FormItem>
                                 <Button type="primary" 
@@ -264,38 +262,6 @@ class Verify extends Component {
                     <h1 className="captionRed small-12 medium-8 cell">Invalid Token</h1>
                 </div>
             );
-        }
-    }
-
-    validatePassword = (password) => {
-        if(password.length < PASSWORD_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`
-            }
-        } else if (password.length > PASSWORD_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`
-            }
-        } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-            };            
-        }
-    }
-
-    validatePasswordConfirm = (passwordConfirm) => {
-        const passwordValue = this.state.password.value;
-        if(passwordConfirm !== passwordValue){
-            return {
-                validateStatus: 'error',
-                errorMsg: `Passwords do not match`
-            }
-        }
-        else{
-            return this.validatePassword(passwordConfirm)
         }
     }
 

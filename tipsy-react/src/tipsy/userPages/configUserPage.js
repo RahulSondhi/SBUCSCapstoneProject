@@ -5,14 +5,7 @@ import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../..
 
 import {Enum} from 'enumify';
 
-import {
-    FIRSTNAME_MIN_LENGTH,
-    FIRSTNAME_MAX_LENGTH,
-    LASTNAME_MIN_LENGTH,
-    LASTNAME_MAX_LENGTH,
-    EMAIL_MAX_LENGTH,
-    MakeProfImg
-} from '../../main/constants';
+import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail} from '../../main/constants';
 
 import {Form, Input, Icon, notification, Select} from 'antd';
 const FormItem = Form.Item;
@@ -21,7 +14,7 @@ const {Option} = Select;
 class MeasurementType extends Enum {}
 MeasurementType.initEnum(['US', 'METRIC'])
 
-class UserSettingsPage extends Component {
+class ConfigUserPage extends Component {
 
     constructor(props) {
         super(props);
@@ -70,58 +63,6 @@ class UserSettingsPage extends Component {
             .bind(this);
     }
 
-    /*
-        Handle changes from the form and update our fields
-    */
-    handleInputChange(event, validationFun) {
-        const target = event.target;
-        const inputName = target.name;
-        const inputValue = target.value;
-
-        this.setState({
-            [inputName]: {
-                value: inputValue,
-                ...validationFun(inputValue)
-            }
-        });
-    }
-
-    handleSelectChange(event) {
-        this.setState({
-            measurement: {
-                enum_value: event.name,
-                value: event.name
-            }
-        });
-    }
-
-    /*
-    Handle our submit
-    */
-    handleSubmit(event) {
-        event.preventDefault();
-        const settingsRequest = {
-            firstName: this.state.firstName.value,
-            lastName: this.state.lastName.value,
-            email: this.state.email.value,
-            profilePic: this.state.profilePic.value,
-            measurement: this.state.measurement.value
-        };
-        changeUserSettings(settingsRequest).then(response => {
-            notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
-        }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-            });
-        });
-    }
-    /*
-        returns true if the Form is invalid.
-    */
-    isFormInvalid() {
-        return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success');
-    }
 
     loadUserSettings() {
         this.setState({isLoading: true});
@@ -184,12 +125,6 @@ class UserSettingsPage extends Component {
         this.loadUserSettings();
     }
 
-    handleImageLoad = (val) => {
-        this.setState({
-            profilePic:{value: val.replace(/^data:image\/(png|jpg);base64,/, "")}
-        });
-    }
-
     render() {
         // Checking if data came in
         if (this.state.isLoading) {
@@ -232,7 +167,7 @@ class UserSettingsPage extends Component {
                             autoComplete="off"
                             placeholder="Enter First Name"
                             value={this.state.firstName.value}
-                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateFirstName)}/>
                     </FormItem>
 
                     {/* Place Holder DO NOT DELETE */}
@@ -249,7 +184,7 @@ class UserSettingsPage extends Component {
                             autoComplete="off"
                             placeholder="Enter Last Name"
                             value={this.state.lastName.value}
-                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateFirstName)}/>
                     </FormItem>
 
                     <FormItem
@@ -266,7 +201,7 @@ class UserSettingsPage extends Component {
                             placeholder="Enter email"
                             value={this.state.email.value}
                             onBlur={this.validateEmailAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateEmail)}/>
                     </FormItem>
 
                     <FormItem label="Measurements" className="small-8 cell">
@@ -308,41 +243,60 @@ class UserSettingsPage extends Component {
 
     // Functions performed after page is rendered Frontend Validation Functions
 
-    validateFirstName = (firstName) => {
-        if (firstName.length < FIRSTNAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`}
-        } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
+    handleImageLoad = (val) => {
+        this.setState({
+            profilePic:{value: val.replace(/^data:image\/(png|jpg);base64,/, "")}
+        });
     }
 
-    validateLastName = (lastName) => {
-        if (lastName.length < LASTNAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`}
-        } else if (lastName.length > LASTNAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
+    // Handle changes from the form and update our fields
+   handleInputChange(event, validationFun) {
+    const target = event.target;
+    const inputName = target.name;
+    const inputValue = target.value;
+
+        this.setState({
+            [inputName]: {
+                value: inputValue,
+                ...validationFun(inputValue)
+            }
+        });
     }
 
-    validateEmail = (email) => {
-        if (!email) {
-            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
-        }
+    handleSelectChange(event) {
+        this.setState({
+            measurement: {
+                enum_value: event.name,
+                value: event.name
+            }
+        });
+    }
 
-        const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
-        if (!EMAIL_REGEX.test(email)) {
-            return {validateStatus: 'error', errorMsg: 'Email not valid'}
-        }
+    // Handle our submit
 
-        if (email.length > EMAIL_MAX_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`}
-        }
+    handleSubmit(event) {
+        event.preventDefault();
+        const settingsRequest = {
+            firstName: this.state.firstName.value,
+            lastName: this.state.lastName.value,
+            email: this.state.email.value,
+            profilePic: this.state.profilePic.value,
+            measurement: this.state.measurement.value
+        };
+        changeUserSettings(settingsRequest).then(response => {
+            notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
+        }).catch(error => {
+            notification.error({
+                message: 'Tipsy App',
+                description: error.message || 'Sorry! Something went wrong. Please try again!'
+            });
+        });
+    }
 
-        return {validateStatus: null, errorMsg: null}
+    //returns true if the Form is invalid.
+
+    isFormInvalid() {
+        return !(this.state.firstName.validateStatus === 'success' && this.state.lastName.validateStatus === 'success' && this.state.email.validateStatus === 'success');
     }
 
     // Backend Validation Functions
@@ -350,7 +304,7 @@ class UserSettingsPage extends Component {
     validateEmailAvailability() {
         // First check for client side errors in email
         const emailValue = this.state.email.value;
-        const emailValidation = this.validateEmail(emailValue);
+        const emailValidation = ValidateEmail(emailValue);
 
 
         if (emailValidation.validateStatus === 'error') {
@@ -413,4 +367,4 @@ class UserSettingsPage extends Component {
     }
 }
 
-export default UserSettingsPage;
+export default ConfigUserPage;

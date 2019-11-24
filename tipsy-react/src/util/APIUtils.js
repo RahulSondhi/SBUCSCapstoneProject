@@ -181,3 +181,19 @@ export function changePassword(changePasswordRequest) {
         body: JSON.stringify(changePasswordRequest)
     });
 }
+
+export function getRecipeProfile(recipeID) {
+    return null;
+}
+
+export function createRecipe(recipeRequest) {
+    return null;
+}
+
+export function changeRecipeSettings(recipeID, recipeRequest) {
+    return null;
+}
+
+export function deleteRecipe(recipeID) {
+    return null;
+}

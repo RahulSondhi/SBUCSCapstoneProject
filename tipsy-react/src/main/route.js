@@ -7,9 +7,6 @@ import Logout from '../auth/logout.js';
 import Register from '../auth/register.js';
 import Forgot from '../auth/forgot.js';
 import Verify from '../auth/verify.js'
-// import Confirm from '../auth/confirm.js'; 
-// import Reset from '../auth/reset.js'; 
-
 
 // Public Page Imports
 import EquipmentPage from '../tipsy/publicPages/equipmentPage.js';
@@ -22,7 +19,7 @@ import UsersDisplaysPage from '../tipsy/userPages/userDisplayPage.js';
 import ConfigBarPage from '../tipsy/userPages/configBarPage.js'
 import ConfigRecipePage from '../tipsy/userPages/configRecipePage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
-import UserSettingsPage from '../tipsy/userPages/userSettingsPage.js';
+import ConfigUserPage from '../tipsy/userPages/configUserPage.js';
 import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
 import ErrorPage from '../tipsy/userPages/errorPage.js';
 
@@ -187,13 +184,13 @@ class Routes extends Component {
                         path="/tipsy/user/:id/stg"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <UserSettingsPage currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/user/stg"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-                        component={(props) => <UserSettingsPage currentUser={this.state.currentUser} {...props}/>}/>
+                        component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/user/stg/changePassword"

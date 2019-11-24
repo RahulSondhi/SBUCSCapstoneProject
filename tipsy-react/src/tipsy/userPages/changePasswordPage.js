@@ -3,9 +3,8 @@ import Navbar from '../navbar/navbar.js';
 
 import { changePassword } from '../../util/APIUtils';
 
-import {
-    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
-} from '../../main/constants';
+import { ValidatePassword, ValidatePasswordConfirm } from '../../main/constants'
+
 import { Form, Input, notification, Icon } from 'antd';
 const FormItem = Form.Item;
 
@@ -94,7 +93,7 @@ class ChangePasswordPage extends Component {
                                     autoComplete="off"
                                     placeholder="Enter Password"
                                     value={this.state.password.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
+                                    onChange={(event) => this.handleInputChange(event, ValidatePassword)}/>
                             </FormItem>
 
                             <FormItem
@@ -109,7 +108,7 @@ class ChangePasswordPage extends Component {
                                     autoComplete="off"
                                     placeholder="Confirm your password"
                                     value={this.state.passwordConfirm.value}
-                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
+                                    onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)}/>
                             </FormItem>
 
                             <FormItem className="cell">
@@ -121,39 +120,7 @@ class ChangePasswordPage extends Component {
                     </div>
                 );
             }
-    
 
-    validatePassword = (password) => {
-        if(password.length < PASSWORD_MIN_LENGTH) {
-            return {
-                validateStatus: 'error',
-                errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`
-            }
-        } else if (password.length > PASSWORD_MAX_LENGTH) {
-            return {
-                validationStatus: 'error',
-                errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`
-            }
-        } else {
-            return {
-                validateStatus: 'success',
-                errorMsg: null,
-            };            
-        }
-    }
-
-    validatePasswordConfirm = (passwordConfirm) => {
-        const passwordValue = this.state.password.value;
-        if(passwordConfirm !== passwordValue){
-            return {
-                validateStatus: 'error',
-                errorMsg: `Passwords do not match`
-            }
-        }
-        else{
-            return this.validatePassword(passwordConfirm)
-        }
-    }
 }
 
 export default ChangePasswordPage;

@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {createBar, getBarProfile, changeBarSettings} from '../../util/APIUtils';
 
-import {NAME_MIN_LENGTH, NAME_MAX_LENGTH, DESC_MAX_LENGTH, MakeProfImg, DynamicForm} from '../../main/constants';
+import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, ValidateUserAdd} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
 
@@ -198,7 +198,7 @@ class ConfigBarPage extends Component {
                                         autoComplete="off"
                                         placeholder="Enter Bar Name"
                                         value={this.state.name.value}
-                                        onChange={(event) => this.handleInputChange(event, this.validateName)}/>
+                                        onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                                 </FormItem>
 
                                 <div className="cell"></div>
@@ -214,7 +214,7 @@ class ConfigBarPage extends Component {
                                         autoComplete="off"
                                         placeholder="Enter a Description"
                                         value={this.state.description.value}
-                                        onChange={(event) => this.handleInputChange(event, this.validateDesc)}/>
+                                        onChange={(event) => this.handleInputChange(event, ValidateDesc)}/>
                                 </FormItem>
 
                             </div>
@@ -237,7 +237,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.managers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
+                                    validate={ValidateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -249,7 +249,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.workers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
+                                    validate={ValidateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -270,34 +270,6 @@ class ConfigBarPage extends Component {
                 </Form>
             </div>
         )
-    }
-
-    validateName = (name) => {
-        if (name.length < NAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`}
-        } else if (name.length > NAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validateDesc = (description) => {
-        if (description.length > DESC_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Description is too long (Maximum ${DESC_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validateUserAdd = (name) => {
-        if(this.state.workers.value.some(items => items['name'] === name) === false && 
-                this.state.managers.value.some(items => items['name'] === name) === false &&
-                this.state.bar.owner.name !== name){
-                    return true;
-                }else{
-                    return false;
-                }
     }
 
     handleInputChange(event, validationFun) {

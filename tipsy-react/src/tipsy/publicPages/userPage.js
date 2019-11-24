@@ -23,6 +23,14 @@ class UserPage extends Component {
         this.setState({isLoading: true});
 
         getUserProfile(name).then(response => {
+
+            if(this.props.currentUser.name === response.name ||
+                this.props.currentUser.roles.includes("ADMIN")){
+                this.setState({
+                    settingClass : " "
+                });
+            }
+
             this.setState({user: response, isLoading: false});
         }).catch(error => {
             if (error.status === 404) {
@@ -75,7 +83,7 @@ class UserPage extends Component {
                 <h1 id="userPageTitle" className="caption small-8 small-offset-2 cell">{this.state.user.name}</h1>
                 
                 <div id="redirectUser" className="small-2 cell grid-x align-center-middle">
-                    <NavLink to={"/tipsy/user/stg"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
+                    <NavLink to={"/tipsy/user/"+this.state.user.name+"/stg"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
                         <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
                     </NavLink>
                 </div>

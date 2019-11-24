@@ -35,7 +35,7 @@ class BarPage extends Component {
 
             if(
                 this.props.currentUser.name === response.owner.name ||
-                this.props.currentUser.role === "Admin" ||
+                this.props.currentUser.roles.includes("ADMIN") ||
                 response.managers.some(item => item.name === this.props.currentUser.name)){
                 this.setState({
                     settingClass : " "

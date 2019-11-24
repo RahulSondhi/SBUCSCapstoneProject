@@ -4,17 +4,7 @@ import {register, checkNicknameAvailability, checkEmailAvailability} from '../ut
 import Bottle from '../assets/equipment/bottle.svg';
 import Cup from '../assets/equipment/cup.svg';
 
-import {
-    FIRSTNAME_MIN_LENGTH,
-    FIRSTNAME_MAX_LENGTH,
-    LASTNAME_MIN_LENGTH,
-    LASTNAME_MAX_LENGTH,
-    EMAIL_MAX_LENGTH,
-    NICKNAME_MIN_LENGTH,
-    NICKNAME_MAX_LENGTH,
-    PASSWORD_MIN_LENGTH,
-    PASSWORD_MAX_LENGTH
-} from '../main/constants';
+import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword, ValidatePasswordConfirm} from '../main/constants';
 
 import {Link} from 'react-router-dom';
 import {Form, Input, Icon, notification} from 'antd';
@@ -171,7 +161,7 @@ class Register extends Component {
                             autoComplete="off"
                             placeholder="Enter First Name"
                             value={this.state.firstName.value}
-                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateFirstName)}/>
                     </FormItem>
 
                     {/* Place Holder DO NOT DELETE */}
@@ -188,7 +178,7 @@ class Register extends Component {
                             autoComplete="off"
                             placeholder="Enter Last Name"
                             value={this.state.lastName.value}
-                            onChange={(event) => this.handleInputChange(event, this.validateFirstName)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateLastName)}/>
                     </FormItem>
 
                     <FormItem
@@ -204,7 +194,7 @@ class Register extends Component {
                             placeholder="Enter Nickname"
                             value={this.state.nickname.value}
                             onBlur={this.validateNicknameAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateNickname)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateNickname)}/>
                     </FormItem>
 
                     <FormItem
@@ -221,7 +211,7 @@ class Register extends Component {
                             placeholder="Enter email"
                             value={this.state.email.value}
                             onBlur={this.validateEmailAvailability}
-                            onChange={(event) => this.handleInputChange(event, this.validateEmail)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidateEmail)}/>
                     </FormItem>
 
                     <FormItem
@@ -236,7 +226,7 @@ class Register extends Component {
                             autoComplete="off"
                             placeholder="Enter Password"
                             value={this.state.password.value}
-                            onChange={(event) => this.handleInputChange(event, this.validatePassword)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidatePassword)}/>
                     </FormItem>
 
                     <FormItem
@@ -251,7 +241,7 @@ class Register extends Component {
                             autoComplete="off"
                             placeholder="Confirm your password"
                             value={this.state.passwordConfirm.value}
-                            onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
+                            onChange={(event) => this.handleInputChange(event, ValidatePasswordConfirm)}/>
                     </FormItem>
 
                     <FormItem className="cell">
@@ -268,74 +258,6 @@ class Register extends Component {
                 </div>
             </div>
         );
-    }
-
-    // Functions performed after page is rendered Frontend Validation Functions
-
-    validateFirstName = (firstName) => {
-        if (firstName.length < FIRSTNAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`}
-        } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validateLastName = (lastName) => {
-        if (lastName.length < LASTNAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`}
-        } else if (lastName.length > LASTNAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validateEmail = (email) => {
-        if (!email) {
-            return {validateStatus: 'error', errorMsg: 'Email may not be empty'}
-        }
-
-        const EMAIL_REGEX = RegExp('[^@ ]+@[^@ ]+\\.[^@ ]+');
-        if (!EMAIL_REGEX.test(email)) {
-            return {validateStatus: 'error', errorMsg: 'Email not valid'}
-        }
-
-        if (email.length > EMAIL_MAX_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`}
-        }
-
-        return {validateStatus: null, errorMsg: null}
-    }
-
-    validateNickname = (nickname) => {
-        if (nickname.length < NICKNAME_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Nickname is too short (Minimum ${NICKNAME_MIN_LENGTH} characters needed.)`}
-        } else if (nickname.length > NICKNAME_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: null, errorMsg: null}
-        }
-    }
-
-    validatePassword = (password) => {
-        if (password.length < PASSWORD_MIN_LENGTH) {
-            return {validateStatus: 'error', errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`}
-        } else if (password.length > PASSWORD_MAX_LENGTH) {
-            return {validationStatus: 'error', errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`}
-        } else {
-            return {validateStatus: 'success', errorMsg: null};
-        }
-    }
-
-    validatePasswordConfirm = (passwordConfirm) => {
-        const passwordValue = this.state.password.value;
-        if (passwordConfirm !== passwordValue) {
-            return {validateStatus: 'error', errorMsg: `Passwords do not match`}
-        } else {
-            return this.validatePassword(passwordConfirm)
-        }
     }
 
     // Backend Validation Functions

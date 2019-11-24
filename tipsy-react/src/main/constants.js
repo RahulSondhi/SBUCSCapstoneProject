@@ -18,6 +18,8 @@ import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 
+import * as validate from '../util/validate';
+
 export const CustomButton = (props) => {
     return (
         <div>
@@ -51,26 +53,19 @@ export const SVG = (props) => {
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 export const ACCESS_TOKEN = 'accessToken';
 
-export const FIRSTNAME_MIN_LENGTH = 2;
-export const FIRSTNAME_MAX_LENGTH = 50;
-
-export const LASTNAME_MIN_LENGTH = 2;
-export const LASTNAME_MAX_LENGTH = 50;
-
-export const EMAIL_MAX_LENGTH = 62;
-
-export const NICKNAME_MIN_LENGTH = 4;
-export const NICKNAME_MAX_LENGTH = 32;
-
-export const PASSWORD_MIN_LENGTH = 8;
-export const PASSWORD_MAX_LENGTH = 256;
-
-export const NAME_MIN_LENGTH = 4;
-export const NAME_MAX_LENGTH = 32;
-
-export const DESC_MAX_LENGTH = 256;
-
 export default SVG;
+
+// Component Routing - Validate
+
+export const ValidateFirstName = validate.validateFirstName;
+export const ValidateLastName = validate.validateLastName;
+export const ValidateEmail = validate.validateEmail;
+export const ValidateNickname = validate.validateNickname;
+export const ValidatePassword = validate.validatePassword;
+export const ValidatePasswordConfirm = validate.validatePasswordConfirm;
+export const ValidateName = validate.validateName;
+export const ValidateDesc = validate.validateDesc;
+export const ValidateUserAdd = validate.validateUserAdd;
 
 // Profile Components
 
