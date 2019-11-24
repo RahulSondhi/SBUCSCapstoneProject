@@ -26,18 +26,12 @@ class Verify extends Component {
                 value: ''
             }
         }
-        //initialize the uuid
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        this.state.uuid.value = params.get('token');
-        if(this.state.flow === "verifyNewEmail"){
-            this.state.email.value = params.get('email');
-        }
         //Functions needed for this Verify Class
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.isFormInvalid = this.isFormInvalid.bind(this);
         this.handleVerify = this.handleVerify.bind(this);
+        
     }
 
     handleInputChange(event, validationFun) {
@@ -54,6 +48,7 @@ class Verify extends Component {
     }
 
     componentWillMount() {
+
         this.handleVerify();
         this.setState({
             isLoading: false
@@ -67,7 +62,7 @@ class Verify extends Component {
         event.preventDefault();
     
         const resetPasswordRequest = {
-            uuid : this.state.uuid.value ,
+            uuid : this.state.uuid.value,
             password: this.state.password.value
         };
         resetPassword(resetPasswordRequest).then(response => {
@@ -93,7 +88,9 @@ class Verify extends Component {
     }
 
     handleVerify() {
-        const uuidValue = this.state.uuid.value;
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        const uuidValue = params.get('token');
         if(this.state.flow === "verifyConfirm"){
             //verifyConfirm
             verifyConfirm(uuidValue).then(response => {
@@ -124,7 +121,8 @@ class Verify extends Component {
             if(localStorage.getItem(ACCESS_TOKEN)){
                 localStorage.removeItem(ACCESS_TOKEN);
             }
-            const emailValue = this.state.email.value;
+            const emailValue = params.get('email');
+            console.log(emailValue);
             verifyNewEmail(uuidValue, emailValue).then(response =>{
                 notification.success({
                         message: "Tipsy App",
@@ -149,6 +147,7 @@ class Verify extends Component {
         }
         else if(this.state.flow === "verifyReset"){
             //verifyReset
+            console.log(uuidValue);
             verifyReset(uuidValue).then(response =>{
                 notification.success({ 
                     message: "Tipsy App", 
@@ -156,6 +155,7 @@ class Verify extends Component {
                 });
                 this.setState({
                     uuid: {
+                        value: uuidValue,
                         validateStatus : 'success'
                     }
                 });
@@ -166,6 +166,7 @@ class Verify extends Component {
                     });
                     this.setState({
                         uuid: {
+                            value: uuidValue,
                             validateStatus : 'error'
                         }
                     });

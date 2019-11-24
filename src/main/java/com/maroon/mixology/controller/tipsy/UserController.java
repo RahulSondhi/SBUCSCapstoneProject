@@ -242,7 +242,8 @@ public class UserController {
                 // Set user to new email
                 user.setEmail(email);
                 // Clear Token
-                user.setConfirmationTokenUUID("");  
+                user.setConfirmationTokenUUID("");
+                user.setConfirmationTokenCreationTime(null);  
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete 

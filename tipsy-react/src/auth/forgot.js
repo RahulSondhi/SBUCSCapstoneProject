@@ -148,7 +148,7 @@ class Forgot extends Component {
         });
 
         checkEmailAvailability(emailValue).then(response => {
-            if (!response.available) {
+            if (response.available) {
                 this.setState({
                     email: {
                         value: emailValue,
