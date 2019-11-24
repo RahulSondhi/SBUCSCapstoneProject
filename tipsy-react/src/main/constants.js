@@ -114,15 +114,13 @@ export class MakeProfImg extends Component {
 
         this.state = {
             preview: null,
-            src: null,
-            noImg: false
+            src: null
         }
 
         this.type = this.props.type;
         this.className = this.props.className;
 
         if (this.props.pic === null || this.props.pic === "" || this.props.pic === undefined) {
-            this.state.noImg = true;
             if (this.type === "bar") {
                 this.state.src = NewBarPic
             } else if (this.type === "recipe") {
@@ -162,15 +160,7 @@ export class MakeProfImg extends Component {
     }
 
     onImageLoad() {
-        if (this.state.noImg) {
-            this
-                .props
-                .data("")
-        } else {
-            this
-                .props
-                .data(this.state.src);
-        }
+            this.props.data(this.state.src);     
     }
 
     onBeforeFileLoad(elem) {

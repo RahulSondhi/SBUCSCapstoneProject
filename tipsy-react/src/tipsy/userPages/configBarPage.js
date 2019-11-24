@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {createBar, getBarProfile, changeBarSettings} from '../../util/APIUtils';
 
-import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, ValidateUserAdd} from '../../main/constants';
+import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
 
@@ -71,6 +71,7 @@ class ConfigBarPage extends Component {
             const id = try_name;
             this.loadBarProfile(id);
         } else {
+            this.handleListLoad();
             this.setState({isLoading: false});
         }
 
@@ -112,29 +113,8 @@ class ConfigBarPage extends Component {
                 }
             });
 
-            const SENDmanagers = this
-                .state
-                .managers
-                .value
-                .map(function (el) {
-                    return el.name;
-                });
-            const SENDworkers = this
-                .state
-                .workers
-                .value
-                .map(function (el) {
-                    return el.name;
-                });
-            const SENDrecipesAvailable = this
-                .state
-                .recipesAvailable
-                .value
-                .map(function (el) {
-                    return el.name;
-                });
-
-            this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable})
+            
+            this.handleListLoad();
 
         }).catch(error => {
             if (error.status === 404) {
@@ -294,27 +274,41 @@ class ConfigBarPage extends Component {
     }
 
     handleListLoad = () => {
-        const SENDmanagers = this
+        var SENDmanagers = this
             .state
             .managers
             .value
             .map(function (el) {
                 return el.name;
             });
-        const SENDworkers = this
+        var SENDworkers = this
             .state
             .workers
             .value
             .map(function (el) {
                 return el.name;
             });
-        const SENDrecipesAvailable = this
+        var SENDrecipesAvailable = this
             .state
             .recipesAvailable
             .value
             .map(function (el) {
                 return el.name;
             });
+        
+
+        console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
+        if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
+            SENDmanagers = [];
+        }
+
+        if(SENDworkers  === null || SENDworkers === "" || SENDworkers === undefined){
+            SENDworkers = [];
+        }
+
+        if(SENDrecipesAvailable  === null || SENDrecipesAvailable === "" || SENDrecipesAvailable === undefined){
+            SENDrecipesAvailable = [];
+        }
 
         this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
     }
@@ -338,6 +332,8 @@ class ConfigBarPage extends Component {
             workers: this.state.SENDworkers,
             recipesAvailable: this.state.SENDrecipesAvailable
         };
+
+        console.log(barRequest)
 
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
