@@ -270,7 +270,7 @@ class ConfigRecipePage extends Component {
     handleImageLoad = (val) => {
         this.setState({
             img: {
-                value: val.replace(/^data:image\/(png|jpg);base64,/, "")
+                value: val
             }
         });
     }
@@ -296,7 +296,7 @@ class ConfigRecipePage extends Component {
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable
+            equipmentsAvailable: this.state.equipmentsAvailable.value
         };
 
         if (this.state.isCreating === true) {

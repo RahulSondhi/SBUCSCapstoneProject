@@ -261,7 +261,7 @@ class ConfigUserPage extends Component {
 
     handleImageLoad = (val) => {
         this.setState({
-            profilePic:{value: val.replace(/^data:image\/(png|jpg);base64,/, "")}
+            profilePic:{value: val}
         });
     }
 

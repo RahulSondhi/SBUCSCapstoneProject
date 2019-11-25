@@ -73,7 +73,7 @@ public class SearchController {
     
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> search(@RequestParam(value = "type") String type, @RequestParam(value = "query") String query ) {
         try{
             switch(type){

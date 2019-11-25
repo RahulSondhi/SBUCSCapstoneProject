@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {createBar, getBarProfile, changeBarSettings} from '../../util/APIUtils';
+import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
 
 import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName} from '../../main/constants';
 
@@ -41,7 +41,8 @@ class ConfigBarPage extends Component {
             },
             img: {
                 value: ''
-            }
+            },
+            deleteClass: "hidden"
         }
         //Functions needed for this Settings Class
         this.handleInputChange = this
@@ -50,6 +51,11 @@ class ConfigBarPage extends Component {
         this.handleSubmit = this
             .handleSubmit
             .bind(this);
+        
+        this.handleDelete = this
+            .handleDelete
+            .bind(this);
+
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
@@ -87,6 +93,7 @@ class ConfigBarPage extends Component {
             this.setState({
                 bar: response,
                 isLoading: false,
+                isDeleting: false,
                 page: {
                     title: tempTitle,
                     submit: "Save Bar"
@@ -106,11 +113,11 @@ class ConfigBarPage extends Component {
                 },
                 recipesAvailable: {
                     value: response.recipesAvailable
-
                 },
                 img: {
                     value: response.img
-                }
+                },
+                deleteClass: " "
             });
 
             
@@ -130,6 +137,18 @@ class ConfigBarPage extends Component {
         // Checking if data came in
         if (this.state.isLoading) {
             return null
+        }
+
+        // Checking if time to axe it
+        if (this.state.isDeleting) {
+            deleteBar(this.props.match.params.id);
+            return <Redirect
+                to={{
+                pathname: "/tipsy/myBars",
+                state: {
+                    from: this.props.location
+                }
+            }}/>
         }
 
         // Checking response
@@ -235,6 +254,20 @@ class ConfigBarPage extends Component {
 
                             </div>
                         </TabPane>
+
+                        <TabPane tab="Managers" key="5">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+
+                                <DynamicForm
+                                    type="user"
+                                    data={this.state.managers.value}
+                                    onUpdate={this.handleListLoad}
+                                    validate={this.validateUserAdd}
+                                    className="cell"/>
+
+                            </div>
+                        </TabPane>
+
                     </Tabs>
 
                     <FormItem className="small-12 medium-8 cell">
@@ -248,9 +281,25 @@ class ConfigBarPage extends Component {
                         </button>
                     </FormItem>
 
+                    <FormItem className={"small-12 medium-8 cell "+this.state.deleteClass}>
+                        <button
+                            id="settingsButton"
+                            onClick={this.handleDelete}
+                            className="button">
+                            Delete
+                        </button>
+                    </FormItem>
+
                 </Form>
             </div>
         )
+    }
+
+
+    handleDelete(){
+        this.setState({
+            isDeleting: true
+        })
     }
 
     handleInputChange(event, validationFun) {
@@ -269,12 +318,13 @@ class ConfigBarPage extends Component {
     handleImageLoad = (val) => {
         this.setState({
             img: {
-                value: val.replace(/^data:image\/(png|jpg);base64,/, "")
+                value: val
             }
         });
     }
 
     handleListLoad = () => {
+
         var SENDmanagers = this
             .state
             .managers
@@ -282,6 +332,7 @@ class ConfigBarPage extends Component {
             .map(function (el) {
                 return el.name;
             });
+
         var SENDworkers = this
             .state
             .workers
@@ -289,6 +340,7 @@ class ConfigBarPage extends Component {
             .map(function (el) {
                 return el.name;
             });
+
         var SENDrecipesAvailable = this
             .state
             .recipesAvailable

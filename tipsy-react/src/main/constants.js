@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {Input, Icon, notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
-import {getUserProfile, getBarProfile, getEquipmentProfile, getRecipeProfile, search} from '../util/APIUtils';
+import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search} from '../util/APIUtils';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
  
@@ -103,7 +103,7 @@ export class GetProfImg extends Component {
                 this.image = UnknownPic
             }
         } else {
-            this.image = "data:image/png;base64, " + this.props.pic
+            this.image = this.props.pic
         }
 
         return (<img src={this.image} className={this.className} alt={this.alt}/>)
@@ -132,7 +132,7 @@ export class MakeProfImg extends Component {
                 this.state.src = NewUserPic
             }
         } else {
-            this.state.src = ("data:image/png;base64, " + this.props.pic);
+            this.state.src = (this.props.pic);
         }
 
         this.onCrop = this
@@ -163,7 +163,11 @@ export class MakeProfImg extends Component {
     }
 
     onImageLoad() {
-            this.props.data(this.state.src);     
+        this.props.data(this.state.src);     
+    }
+
+    onFileLoad(data){
+        console.log(data)
     }
 
     onBeforeFileLoad(elem) {
@@ -187,6 +191,7 @@ export class MakeProfImg extends Component {
                     onCrop={this.onCrop}
                     onClose={this.onClose}
                     onImageLoad={this.onImageLoad}
+                    onFileLoad={this.onFileLoad}
                     onBeforeFileLoad={this.onBeforeFileLoad}
                     src={this.state.src}
                     className="editor-canvas cell"/>
@@ -478,12 +483,12 @@ class DynamicInput extends Component {
                 }));
             }else if(this.type === "recipe"){
                 data = response.map(recipe => ({
-                text: `${recipe.name} by ${recipe.author.name}`,
+                text: `${recipe.name} by ${recipe.author}`,
                 value: recipe.id,
                 }));
             }else if(this.type === "bar"){
                 data = response.map(bar => ({
-                text: `${bar.name} owned by ${bar.author.name}`,
+                text: `${bar.name} owned by ${bar.owner}`,
                 value: bar.id,
                 }));
             }else if(this.type === "equipment"){
@@ -502,7 +507,8 @@ class DynamicInput extends Component {
         const value = data[0].key;
         
         if(this.type === "user"){
-            getUserProfile(value).then(response => {
+            getUserBrief(value).then(response => {
+                console.log(response)
                 this.props.addItem(true, response);
 
                 this.setState({
@@ -511,7 +517,7 @@ class DynamicInput extends Component {
                   });
             })
         }else if(this.type === "recipe"){ 
-            getRecipeProfile(value).then(response => {
+            getRecipeBrief(value).then(response => {
                 this.props.addItem(true, response);
 
                 this.setState({
@@ -520,7 +526,7 @@ class DynamicInput extends Component {
                   });
             })
         }else if(this.type === "bar"){
-            getBarProfile(value).then(response => {
+            getBarBrief(value).then(response => {
                 this.props.addItem(true, response);
 
                 this.setState({
@@ -529,7 +535,7 @@ class DynamicInput extends Component {
                   });
             })
         }else if(this.type === "equipment"){
-            getEquipmentProfile(value).then(response => {
+            getEquipmentBrief(value).then(response => {
                 this.props.addItem(true, response);
 
                 this.setState({

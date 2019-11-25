@@ -12,7 +12,8 @@ class UserPage extends Component {
         super(props);
         this.state = {
             user: null,
-            isLoading: true
+            isLoading: true,
+            settingClass: "hidden"
         }
         this.loadUserProfile = this
             .loadUserProfile
