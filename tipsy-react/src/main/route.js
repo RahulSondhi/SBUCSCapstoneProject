@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter , Route, Switch, Redirect} from 'react-router-dom'
 
 // Authentification Imports
 import Login from '../auth/login.js';
@@ -42,7 +42,7 @@ class Routes extends Component {
         if (this.state.currentUser) 
             console.log("User: " + this.state.currentUser.name);
         return (
-            <Router>
+            <BrowserRouter>
                 <Switch>
 
                     {/* Public */}
@@ -86,20 +86,23 @@ class Routes extends Component {
                         
                     {/* Private  */}
 
-                    
                     <PrivateRoute
                         exact
                         path={["/tipsy/","/tipsy/search"]}
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
-                        component={SearchPage}/>
-                    
-
+                        redirectTo="/"
+                        component={(props) => <SearchPage currentUser={this.state.currentUser} {...props}/>}/>
+                    <PrivateRoute
+                        exact
+                        path="/tipsy/results"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/"
+                        component={(props) => <SearchPage results={true} currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/createbar"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ConfigBarPage
                         isCreating={true}
                         currentUser={this.state.currentUser}
@@ -108,13 +111,13 @@ class Routes extends Component {
                         exact
                         path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <UsersDisplaysPage type="bar" currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/bar/:id/settings"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ConfigBarPage
                         isCreating={false}
                         currentUser={this.state.currentUser}
@@ -123,7 +126,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/bar/:id"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <BarPage currentUser={this.state.currentUser} {...props}/>}/>
                     
 
@@ -131,7 +134,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/createRecipe"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ConfigRecipePage
                             isCreating={true}
                             currentUser={this.state.currentUser}
@@ -140,7 +143,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/myRecipes"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <UsersDisplaysPage
                         type="recipe"
                         currentUser={this.state.currentUser}
@@ -149,7 +152,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/recipe/:id/config"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ConfigRecipePage
                             isCreating={false}
                             currentUser={this.state.currentUser}
@@ -158,7 +161,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/recipe/:id"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <RecipePage currentUser={this.state.currentUser} {...props}/>}/>
                     
                     
@@ -166,7 +169,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/barEquipment"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <UsersDisplaysPage
                         type="equipment"
                         currentUser={this.state.currentUser}
@@ -175,7 +178,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/equipment/:id"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <EquipmentPage currentUser={this.state.currentUser} {...props}/>}/>
                     
 
@@ -183,19 +186,19 @@ class Routes extends Component {
                         exact
                         path="/tipsy/user/:id/stg"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path="/tipsy/user/stg/changePassword"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <ChangePasswordPage currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
                         path={["/tipsy/user/:id"]}
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <UserPage currentUser={this.state.currentUser} {...props}/>}/>
                     
 
@@ -203,7 +206,7 @@ class Routes extends Component {
                         exact
                         path="/tipsy/game"
                         authed={this.state.isAuthenticated}
-                        redirectTo="/login"
+                        redirectTo="/"
                         component={(props) => <Game currentUser={this.state.currentUser} {...props}/>}/>
 
                   
@@ -214,7 +217,7 @@ class Routes extends Component {
                 
                 
                 </Switch>
-            </Router>
+            </BrowserRouter>
         );
     }
 }

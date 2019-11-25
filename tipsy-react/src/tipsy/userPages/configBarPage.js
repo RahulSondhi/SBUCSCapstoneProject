@@ -255,19 +255,6 @@ class ConfigBarPage extends Component {
                             </div>
                         </TabPane>
 
-                        <TabPane tab="Managers" key="5">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-
-                                <DynamicForm
-                                    type="user"
-                                    data={this.state.managers.value}
-                                    onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
-                                    className="cell"/>
-
-                            </div>
-                        </TabPane>
-
                     </Tabs>
 
                     <FormItem className="small-12 medium-8 cell">
@@ -367,7 +354,15 @@ class ConfigBarPage extends Component {
     }
 
     validateUserAdd = (name) => {
-        if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && this.state.bar.owner.name !== name) {
+        var notOwner = true;
+
+        if(this.state.isCreating === false){
+            notOwner = (this.state.bar.owner.name !== name);
+        }else{
+            notOwner = (this.props.currentUser.name !== name);
+        }
+
+        if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && notOwner) {
             return true;
         } else {
             return false;
