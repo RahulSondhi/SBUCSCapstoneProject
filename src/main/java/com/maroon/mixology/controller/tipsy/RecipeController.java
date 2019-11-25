@@ -115,7 +115,8 @@ public class RecipeController {
             recipeRepository.save(recipe);
             return ResponseEntity.ok(new ApiResponse(true, "Recipe creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be saved. Error: " + e.toString()),
+            logger.error("Recipe was unable to be created.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be created. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
         }
     }
@@ -180,6 +181,7 @@ public class RecipeController {
                         HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
+            logger.error("Recipe was unable to be loaded.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -248,7 +250,7 @@ public class RecipeController {
                     HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
-            logger.error("Bar was unable to be updated.", e);
+            logger.error("Recipe was unable to be updated.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be updated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
@@ -274,7 +276,7 @@ public class RecipeController {
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete recipe"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
-            logger.error("Bar was unable to be deleted.", e);
+            logger.error("Recipe was unable to be deleted.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be deleted. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
