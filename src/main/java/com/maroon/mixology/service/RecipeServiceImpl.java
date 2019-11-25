@@ -1,5 +1,6 @@
 package com.maroon.mixology.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.maroon.mixology.entity.Recipe;
@@ -23,6 +24,12 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe findByName(String name) {
         return recipeRepository.findByName(name);
     }
+
+	@Override
+	public List<Recipe> findByNameLikeIgnoreCase(String name) {
+		// TODO Auto-generated method stub
+		return recipeRepository.findByNameLikeIgnoreCase(name);
+	}
 
 
 }

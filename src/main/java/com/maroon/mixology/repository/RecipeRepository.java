@@ -1,5 +1,6 @@
 package com.maroon.mixology.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.maroon.mixology.entity.Recipe;
@@ -14,5 +15,7 @@ public interface RecipeRepository extends MongoRepository<Recipe, String> {
     Optional<Recipe> findById(String id);
 
     Recipe findByName(String name);
+
+    List<Recipe> findByNameLikeIgnoreCase(String name);
 
 }

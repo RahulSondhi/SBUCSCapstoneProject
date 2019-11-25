@@ -1,5 +1,7 @@
 package com.maroon.mixology.service;
 
+import java.util.List;
+
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.UserRepository;
 
@@ -23,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByConfirmationTokenUUID(String confirmationTokenUUID) {
-		return userRepository.findByConfirmationTokenUUID(confirmationTokenUUID);
+        return userRepository.findByConfirmationTokenUUID(confirmationTokenUUID);
     }
 
     @Override
@@ -32,23 +34,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean existsByEmail(String email){
-        if(userRepository.findByEmail(email) == null){
+    public Boolean existsByEmail(String email) {
+        if (userRepository.findByEmail(email) == null) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
     }
-    
+
     @Override
-    public Boolean existsByNickname(String nickname){
-        if(userRepository.findByNickname(nickname) == null){
+    public Boolean existsByNickname(String nickname) {
+        if (userRepository.findByNickname(nickname) == null) {
             return false;
-        }
-        else{
+        } else {
             return true;
         }
+    }
+
+    @Override
+    public List<User> findByNicknameLikeIgnoreCase(String name) {
+        // TODO Auto-generated method stub
+        return userRepository.findByNicknameLikeIgnoreCase(name);
     }
 
 }

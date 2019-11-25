@@ -9,4 +9,7 @@ public interface EquipmentService{
     Equipment findByName(String name);
 
     List<Equipment> findAll();
+
+    List<Equipment> findByNameLikeIgnoreCase(String name);
+
 }

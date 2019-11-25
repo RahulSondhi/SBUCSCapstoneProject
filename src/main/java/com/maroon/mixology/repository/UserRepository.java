@@ -1,5 +1,7 @@
 package com.maroon.mixology.repository;
 
+import java.util.List;
+
 import com.maroon.mixology.entity.User;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -11,6 +13,9 @@ public interface UserRepository extends MongoRepository<User, String> {
     User findByEmail(String email);
 
     User findByNickname(String nickname);
+
+    //Will this work?
+    List<User> findByNicknameLikeIgnoreCase(String name);
 
     User findByConfirmationTokenUUID(String confirmationTokenUUID);
 

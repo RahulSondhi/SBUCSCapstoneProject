@@ -13,5 +13,7 @@ public interface EquipmentRepository extends MongoRepository<Equipment, String> 
 
     Equipment findByName(String name);
 
+    List<Equipment> findByNameLikeIgnoreCase(String name);
+
     List<Equipment> findAll();
 }

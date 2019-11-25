@@ -1,5 +1,6 @@
 package com.maroon.mixology.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.maroon.mixology.entity.Bar;
@@ -14,4 +15,7 @@ public interface BarRepository extends MongoRepository<Bar, String> {
     Optional<Bar> findById(String id);
 
     Bar findByName(String name);
+
+    List<Bar> findByNameLikeIgnoreCase(String name);
+
 }

@@ -23,4 +23,9 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findAll();
 	}
 
+    @Override
+    public List<Equipment> findByNameLikeIgnoreCase(String name) {
+        return equipmentRepository.findByNameLikeIgnoreCase(name);
+    }
+
 }

@@ -212,3 +212,11 @@ export function deleteRecipe(recipeID) {
         body: JSON.stringify(null)
     });
 }
+
+
+export function search(type, query) {
+    return request({
+        url: API_BASE_URL + "/tipsy/search?type=" + type + "&query=" + query,
+        method: 'GET'
+    });
+}

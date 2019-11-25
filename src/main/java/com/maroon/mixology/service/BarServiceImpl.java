@@ -1,5 +1,6 @@
 package com.maroon.mixology.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import com.maroon.mixology.entity.Bar;
@@ -22,6 +23,12 @@ public class BarServiceImpl implements BarService {
     @Override
     public Bar findByName(String name) {
         return barRepository.findByName(name);
+    }
+
+    @Override
+    public List<Bar> findByNameLikeIgnoreCase(String name) {
+        // TODO Auto-generated method stub
+        return barRepository.findByNameLikeIgnoreCase(name);
     }
 
 
