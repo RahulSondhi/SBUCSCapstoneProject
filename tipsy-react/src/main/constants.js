@@ -2,10 +2,10 @@ import React, {Component, Fragment} from 'react';
 import {Input, Icon, notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
-import {checkNicknameAvailability, getUserProfile} from '../util/APIUtils';
+import {getUserProfile, getBarProfile, getEquipmentProfile, getRecipeProfile, search} from '../util/APIUtils';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
-
+ 
 import UserPic from '../assets/defaultIcons/user.svg';
 import BarPic from '../assets/defaultIcons/bar.svg';
 import RecipePic from '../assets/defaultIcons/recipe.svg';
@@ -400,10 +400,15 @@ class DynamicInput extends Component {
         this.state = {
             name: {
                 value: ''
-            }
+            },
+            data: [],
+            value: [],
+            fetching: false
         }
 
         this.type = this.props.type;
+        this.lastFetchId = 0;
+        this.fetchUser = debounce(this.fetchUser, 800);
 
         if (this.type === "user") {
             this.state.textName = "Nickname";
@@ -413,12 +418,6 @@ class DynamicInput extends Component {
 
         this.handleInputChange = this
             .handleInputChange
-            .bind(this);
-        this.onKeyDown = this
-            .onKeyDown
-            .bind(this);
-        this.validateNicknameExists = this
-            .validateNicknameExists
             .bind(this);
     }
 
@@ -434,144 +433,111 @@ class DynamicInput extends Component {
         });
     }
 
-    onKeyDown(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            event.stopPropagation();
-            this.validateNicknameExists(this.state.name.value);
-        }
-    }
-
     render() {
+        const { fetching, data, value } = this.state;
         return (
-            <div className="dynamicInput grid-x align-center-middle cell">
-                <Input
-                    prefix={< Icon type = "idcard" />}
-                    name="name"
-                    placeholder={"Enter a " + this.state.textName}
-                    value={this.state.name.value}
-                    onChange={(event) => this.handleInputChange(event)}
-                    onKeyDown={this.onKeyDown}
-                    className="small-8 cell"/>
-            </div>
-        )
+          <Select
+            mode="multiple"
+            labelInValue
+            value={value}
+            placeholder="Select users"
+            notFoundContent={fetching ? <Spin size="small" /> : null}
+            filterOption={false}
+            onSearch={this.fetchUser}
+            onChange={this.handleChange}
+            style={{ width: '100%' }}
+          >
+            {data.map(d => (
+              <Option key={d.value}>{d.text}</Option>
+            ))}
+          </Select>
+        );
     }
 
-    validateNicknameExists() {
-        const nicknameValue = this.state.name.value;
+    fetchUser = value => {
 
-        this.setState({
-            name: {
-                value: nicknameValue,
-                validateStatus: 'validating',
-                errorMsg: null
+        this.lastFetchId += 1;
+        const fetchId = this.lastFetchId;
+
+        this.setState({ data: [], fetching: true });
+
+        search(this.type,value)
+          .then(response => {
+            
+            if (fetchId !== this.lastFetchId) {
+              // for fetch callback order
+              return;
             }
-        });
+            
+            var data;
 
-        checkNicknameAvailability(nicknameValue).then(response => {
-            if (response.available) {
-                this.setState({
-                    name: {
-                        value: nicknameValue,
-                        validateStatus: 'error',
-                        errorMsg: 'This nickname doesnt exist'
-                    }
-                });
-
-                this
-                    .props
-                    .addItem(false, null);
-            } else {
-                this.setState({
-                    name: {
-                        value: nicknameValue,
-                        validateStatus: 'success',
-                        errorMsg: null
-                    }
-                });
-
-                getUserProfile(nicknameValue).then(response => {
-                    this
-                        .props
-                        .addItem(true, response)
-                })
+            if(this.type === "user"){
+                data = response.map(user => ({
+                text: `${user.fullName}`,
+                value: user.name,
+                }));
+            }else if(this.type === "recipe"){
+                data = response.map(recipe => ({
+                text: `${recipe.name} by ${recipe.author.name}`,
+                value: recipe.id,
+                }));
+            }else if(this.type === "bar"){
+                data = response.map(bar => ({
+                text: `${bar.name} owned by ${bar.author.name}`,
+                value: bar.id,
+                }));
+            }else if(this.type === "equipment"){
+                data = response.map(equipment => ({
+                text: `${equipment.name}`,
+                value: equipment.name,
+                }));
             }
 
-        }).catch(error => {
-            // Marking validateStatus as success, Form will be recchecked at server
-            this.setState({
-                nickname: {
-                    value: nicknameValue,
-                    validateStatus: 'success',
-                    errorMsg: null
-                }
-            });
-        });
-    }
-}
+            this.setState({ data, fetching: false });
+          });
+      };
+    
+      handleChange = data => {
+        
+        const value = data[0].key;
+        
+        if(this.type === "user"){
+            getUserProfile(value).then(response => {
+                this.props.addItem(true, response);
 
-// Public search Bar
+                this.setState({
+                    data: [],
+                    fetching: false,
+                  });
+            })
+        }else if(this.type === "recipe"){ 
+            getRecipeProfile(value).then(response => {
+                this.props.addItem(true, response);
 
+                this.setState({
+                    data: [],
+                    fetching: false,
+                  });
+            })
+        }else if(this.type === "bar"){
+            getBarProfile(value).then(response => {
+                this.props.addItem(true, response);
 
-class UserRemoteSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    this.lastFetchId = 0;
-    this.fetchUser = debounce(this.fetchUser, 800);
-  }
+                this.setState({
+                    data: [],
+                    fetching: false,
+                  });
+            })
+        }else if(this.type === "equipment"){
+            getEquipmentProfile(value).then(response => {
+                this.props.addItem(true, response);
 
-  state = {
-    data: [],
-    value: [],
-    fetching: false,
-  };
-
-  fetchUser = value => {
-    console.log('fetching user', value);
-    this.lastFetchId += 1;
-    const fetchId = this.lastFetchId;
-    this.setState({ data: [], fetching: true });
-    fetch('https://randomuser.me/api/?results=5')
-      .then(response => response.json())
-      .then(body => {
-        if (fetchId !== this.lastFetchId) {
-          // for fetch callback order
-          return;
+                this.setState({
+                    data: [],
+                    fetching: false,
+                  });
+            })
         }
-        const data = body.results.map(user => ({
-          text: `${user.name.first} ${user.name.last}`,
-          value: user.login.username,
-        }));
-        this.setState({ data, fetching: false });
-      });
-  };
 
-  handleChange = value => {
-    this.setState({
-      value,
-      data: [],
-      fetching: false,
-    });
-  };
-
-  render() {
-    const { fetching, data, value } = this.state;
-    return (
-      <Select
-        mode="multiple"
-        labelInValue
-        value={value}
-        placeholder="Select users"
-        notFoundContent={fetching ? <Spin size="small" /> : null}
-        filterOption={false}
-        onSearch={this.fetchUser}
-        onChange={this.handleChange}
-        style={{ width: '100%' }}
-      >
-        {data.map(d => (
-          <Option key={d.value}>{d.text}</Option>
-        ))}
-      </Select>
-    );
-  }
+      };
 }

@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
 
-import {MakeProfImg, ValidateName, ValidateDesc} from '../../main/constants';
+import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
 
@@ -101,7 +101,6 @@ class ConfigRecipePage extends Component {
                 },
                 equipmentsAvailable: {
                     value: response.equipmentsAvailable
-
                 },
                 img: {
                     value: response.img
@@ -203,9 +202,9 @@ class ConfigRecipePage extends Component {
                                     <select
                                         name="published"
                                         value={this.state.published.value}
-                                        onChange={(event) => this.handleInputChange(event, function(help){return true;})}>
+                                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                                         <option value="true">Public (You will not be able to edit if public)</option>
-                                        <option value="false">Private (You will onle one able to view this)</option>
+                                        <option value="false">Private (You will be only one able to view this)</option>
                                     </select>
 
                                 </FormItem>
@@ -215,11 +214,12 @@ class ConfigRecipePage extends Component {
                         <TabPane tab="Equipment" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                {/* <DynamicForm
-                                    type="recipe"
-                                    data={this.state.recipesAvailable.value}
+                                <DynamicForm
+                                    type="equipment"
+                                    data={this.state.equipmentsAvailable.value}
                                     onUpdate={this.handleListLoad}
-                                    className="cell"/> */}
+                                    validate={this.validateRecipeAdd}
+                                    className="cell"/>
 
                             </div>
                         </TabPane>
@@ -275,6 +275,14 @@ class ConfigRecipePage extends Component {
         });
     }
 
+    validateRecipeAdd = (name) => {
+        if (this.state.equipmentsAvailable.value.some(items => items['name'] === name) === false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     handleListLoad = () => {
         
     }
@@ -288,7 +296,7 @@ class ConfigRecipePage extends Component {
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable.value
+            equipmentsAvailable: this.state.equipmentsAvailable
         };
 
         if (this.state.isCreating === true) {

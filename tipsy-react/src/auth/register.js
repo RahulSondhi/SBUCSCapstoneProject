@@ -274,7 +274,7 @@ class Register extends Component {
     validateNicknameAvailability() {
         // First check for client side errors in nickname
         const nicknameValue = this.state.nickname.value;
-        const nicknameValidation = this.validateNickname(nicknameValue);
+        const nicknameValidation = ValidateNickname(nicknameValue);
 
         if (nicknameValidation.validateStatus === 'error') {
             this.setState({
