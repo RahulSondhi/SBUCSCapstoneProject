@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
 
-import {MakeProfImg, ValidateName, ValidateDesc, DynamicForm} from '../../main/constants';
+import {MakeProfImg, ValidateName, ValidateDesc} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
 
@@ -32,7 +32,7 @@ class ConfigRecipePage extends Component {
             steps: {
                 value: []
             },
-            equipmentsAvailable: {
+            equipmentAvailable: {
                 value: []
             },
             img: {
@@ -81,16 +81,6 @@ class ConfigRecipePage extends Component {
         getRecipeProfile(id).then(response => {
 
             const tempTitle = "Editing " + response.name;
-            var steps = response.steps;
-            var equipmentsAvailable = response.equipmentsAvailable;
-
-            if(steps  === null || steps === "" || steps === undefined){
-                steps = [];
-            }
-        
-            if(equipmentsAvailable  === null || equipmentsAvailable === "" || equipmentsAvailable === undefined){
-                equipmentsAvailable = [];
-            }
 
             this.setState({
                 recipe: response,
@@ -109,8 +99,8 @@ class ConfigRecipePage extends Component {
                 steps: {
                     value: response.steps
                 },
-                equipmentsAvailable: {
-                    value: response.equipmentsAvailable
+                equipmentAvailable: {
+                    value: response.equipmentAvailable
 
                 },
                 img: {
@@ -225,11 +215,11 @@ class ConfigRecipePage extends Component {
                         <TabPane tab="Equipment" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                <DynamicForm
-                                    type="equipment"
-                                    data={this.state.equipmentsAvailable.value}
+                                {/* <DynamicForm
+                                    type="recipe"
+                                    data={this.state.recipesAvailable.value}
                                     onUpdate={this.handleListLoad}
-                                    className="cell"/>
+                                    className="cell"/> */}
 
                             </div>
                         </TabPane>
@@ -238,10 +228,10 @@ class ConfigRecipePage extends Component {
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 {/* <DynamicForm
-                                    type="step"
-                                    data={this.state.steps.value}
+                                    type="user"
+                                    data={this.state.workers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateStepAdd}
+                                    validate={this.validateUserAdd}
                                     className="cell"/> */}
 
                             </div>
@@ -298,7 +288,7 @@ class ConfigRecipePage extends Component {
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable.value
+            equipmentAvailable: this.state.equipmentAvailable.value
         };
 
         if (this.state.isCreating === true) {

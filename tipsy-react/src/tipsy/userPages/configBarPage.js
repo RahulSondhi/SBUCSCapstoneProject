@@ -297,6 +297,7 @@ class ConfigBarPage extends Component {
             });
         
 
+        console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
         if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
             SENDmanagers = [];
         }

@@ -403,9 +403,9 @@ class DynamicInput extends Component {
         this.type = this.props.type;
 
         if (this.type === "user") {
-            this.state.textName = "nickname";
+            this.state.textName = "Nickname";
         } else {
-            this.state.textName = "name";
+            this.state.textName = "Name";
         }
 
         this.handleInputChange = this
@@ -416,12 +416,6 @@ class DynamicInput extends Component {
             .bind(this);
         this.validateNicknameExists = this
             .validateNicknameExists
-            .bind(this);
-        this.validateRecipeExists = this
-            .validateRecipeExists
-            .bind(this);
-        this.validateEquipmentExists = this
-            .validateEquipmentExists
             .bind(this);
     }
 
@@ -441,12 +435,7 @@ class DynamicInput extends Component {
         if (event.key === 'Enter') {
             event.preventDefault();
             event.stopPropagation();
-            if(this.type === "user")
-                this.validateNicknameExists(this.state.name.value);
-            else if(this.type === "recipe")
-                this.validateRecipeExists(this.state.name.value);
-            else if(this.type === "equipment")
-                this.validateEquipmentExists(this.state.name.value);
+            this.validateNicknameExists(this.state.name.value);
         }
     }
 
@@ -456,7 +445,7 @@ class DynamicInput extends Component {
                 <Input
                     prefix={< Icon type = "idcard" />}
                     name="name"
-                    placeholder={"Enter a " + this.type + " " + this.state.textName}
+                    placeholder={"Enter a " + this.state.textName}
                     value={this.state.name.value}
                     onChange={(event) => this.handleInputChange(event)}
                     onKeyDown={this.onKeyDown}
