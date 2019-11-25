@@ -32,7 +32,7 @@ class ConfigRecipePage extends Component {
             steps: {
                 value: []
             },
-            equipmentAvailable: {
+            equipmentsAvailable: {
                 value: []
             },
             img: {
@@ -99,8 +99,8 @@ class ConfigRecipePage extends Component {
                 steps: {
                     value: response.steps
                 },
-                equipmentAvailable: {
-                    value: response.equipmentAvailable
+                equipmentsAvailable: {
+                    value: response.equipmentsAvailable
 
                 },
                 img: {
@@ -288,7 +288,7 @@ class ConfigRecipePage extends Component {
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentAvailable: this.state.equipmentAvailable.value
+            equipmentsAvailable: this.state.equipmentsAvailable.value
         };
 
         if (this.state.isCreating === true) {

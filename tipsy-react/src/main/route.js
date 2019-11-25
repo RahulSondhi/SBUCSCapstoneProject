@@ -19,23 +19,13 @@ import UsersDisplaysPage from '../tipsy/userPages/userDisplayPage.js';
 import ConfigBarPage from '../tipsy/userPages/configBarPage.js'
 import ConfigRecipePage from '../tipsy/userPages/configRecipePage.js';
 import SearchPage from '../tipsy/userPages/searchPage.js';
-<<<<<<< HEAD
 import ConfigUserPage from '../tipsy/userPages/configUserPage.js';
-=======
-import SettingsPage from '../tipsy/userPages/settingsPage.js';
->>>>>>> master
 import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
 import ErrorPage from '../tipsy/userPages/errorPage.js';
 
 // Game Page Imports
 import Game from '../tipsy/game.js';
 
-<<<<<<< HEAD
-=======
-// import {PrivateRoute,PublicRoute} from './PrivateRoute';
-// import PublicRoute from './PublicRoute';
-
->>>>>>> master
 class Routes extends Component {
 
     constructor(props) {
@@ -86,7 +76,6 @@ class Routes extends Component {
                         exact
                         path="/register"
                         authed={this.state.isAuthenticated}
-<<<<<<< HEAD
                         redirectTo="/tipsy/"
                         component={Register}/>
                     <Route
@@ -98,12 +87,6 @@ class Routes extends Component {
                     {/* Private  */}
 
                     
-=======
-                        redirectTo="/tipsy/search"
-                        component={Register}/> 
-                        
-                    {/* Private  */}
->>>>>>> master
                     <PrivateRoute
                         exact
                         path={["/tipsy/","/tipsy/search"]}
@@ -126,7 +109,6 @@ class Routes extends Component {
                         path="/tipsy/myBars"
                         authed={this.state.isAuthenticated}
                         redirectTo="/login"
-<<<<<<< HEAD
                         component={(props) => <UsersDisplaysPage type="bar" currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
@@ -137,9 +119,6 @@ class Routes extends Component {
                         isCreating={false}
                         currentUser={this.state.currentUser}
                         {...props}/>}/>
-=======
-                        component={(props) => <UsersBarsPage currentUser={this.state.currentUser} {...props}/>}/>
->>>>>>> master
                     <PrivateRoute
                         exact
                         path="/tipsy/bar/:id"
