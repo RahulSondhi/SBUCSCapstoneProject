@@ -219,7 +219,6 @@ export function search(type, query) {
         method: 'GET'
     });
 }
-<<<<<<< HEAD
 
 export function getUserBrief(nickname) {
     return request({
@@ -248,5 +247,3 @@ export function getEquipmentBrief(name) {
         method: 'GET'
     });
 }
-=======
->>>>>>> development
