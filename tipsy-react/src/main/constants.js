@@ -1,10 +1,8 @@
 import React, {Component, Fragment} from 'react';
-<<<<<<< HEAD
-import {Input, Icon, notification} from 'antd';
+import {Input, Icon, notification, Select, Spin } from 'antd';
+import debounce from 'lodash/debounce';
+
 import {checkNicknameAvailability, getUserProfile} from '../util/APIUtils';
-=======
-import {notification} from 'antd';
->>>>>>> master
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
 
@@ -13,7 +11,6 @@ import BarPic from '../assets/defaultIcons/bar.svg';
 import RecipePic from '../assets/defaultIcons/recipe.svg';
 import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
-<<<<<<< HEAD
 import SettingPic from '../assets/defaultIcons/setting.svg';
 import RemovePic from '../assets/defaultIcons/remove.svg';
 import ActionPic from '../assets/defaultIcons/action.svg';
@@ -24,10 +21,7 @@ import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 
 import * as validate from '../util/validate';
-=======
-import UnknownPic from '../assets/defaultIcons/unknown.svg';
-import {NewUserPic} from '../assets/defaultIcons/newuser.json';
->>>>>>> master
+const { Option } = Select;
 
 export const CustomButton = (props) => {
     return (
@@ -514,4 +508,70 @@ class DynamicInput extends Component {
             });
         });
     }
+}
+
+// Public search Bar
+
+
+class UserRemoteSelect extends React.Component {
+  constructor(props) {
+    super(props);
+    this.lastFetchId = 0;
+    this.fetchUser = debounce(this.fetchUser, 800);
+  }
+
+  state = {
+    data: [],
+    value: [],
+    fetching: false,
+  };
+
+  fetchUser = value => {
+    console.log('fetching user', value);
+    this.lastFetchId += 1;
+    const fetchId = this.lastFetchId;
+    this.setState({ data: [], fetching: true });
+    fetch('https://randomuser.me/api/?results=5')
+      .then(response => response.json())
+      .then(body => {
+        if (fetchId !== this.lastFetchId) {
+          // for fetch callback order
+          return;
+        }
+        const data = body.results.map(user => ({
+          text: `${user.name.first} ${user.name.last}`,
+          value: user.login.username,
+        }));
+        this.setState({ data, fetching: false });
+      });
+  };
+
+  handleChange = value => {
+    this.setState({
+      value,
+      data: [],
+      fetching: false,
+    });
+  };
+
+  render() {
+    const { fetching, data, value } = this.state;
+    return (
+      <Select
+        mode="multiple"
+        labelInValue
+        value={value}
+        placeholder="Select users"
+        notFoundContent={fetching ? <Spin size="small" /> : null}
+        filterOption={false}
+        onSearch={this.fetchUser}
+        onChange={this.handleChange}
+        style={{ width: '100%' }}
+      >
+        {data.map(d => (
+          <Option key={d.value}>{d.text}</Option>
+        ))}
+      </Select>
+    );
+  }
 }
