@@ -155,19 +155,15 @@ export class MakeProfImg extends Component {
 
     onCrop(preview) {
         this.setState({preview});
-        if (this.state.preview != null) {
+        if (preview != null) {
             this
                 .props
-                .data(this.state.preview);
+                .data(preview);
         }
     }
 
     onImageLoad() {
         this.props.data(this.state.src);     
-    }
-
-    onFileLoad(data){
-        console.log(data)
     }
 
     onBeforeFileLoad(elem) {
@@ -191,7 +187,6 @@ export class MakeProfImg extends Component {
                     onCrop={this.onCrop}
                     onClose={this.onClose}
                     onImageLoad={this.onImageLoad}
-                    onFileLoad={this.onFileLoad}
                     onBeforeFileLoad={this.onBeforeFileLoad}
                     src={this.state.src}
                     className="editor-canvas cell"/>
