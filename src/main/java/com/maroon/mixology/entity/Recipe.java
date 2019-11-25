@@ -13,6 +13,7 @@ public class Recipe {
     @Id
     private String id;
     private String name;
+    private String description;
     private String image;
     @DBRef
     private User author;
@@ -75,6 +76,14 @@ public class Recipe {
 
     public void setEquipmentsAvailable(Set<Equipment> equipmentsAvailable) {
         this.equipmentsAvailable = equipmentsAvailable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

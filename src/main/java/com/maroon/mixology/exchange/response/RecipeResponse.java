@@ -3,20 +3,21 @@ package com.maroon.mixology.exchange.response;
 import java.util.ArrayList;
 import java.util.Set;
 
-import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 
 public class RecipeResponse {
     private String name;
+    private String description;
     private String img;
     private BriefUserResponse author; 
     private boolean published;
     private ArrayList<StepResponse> steps;
     private Set<EquipmentResponse> equipmentsAvailable;
 
-    public RecipeResponse(String name, String img, BriefUserResponse author, boolean published,
+     public RecipeResponse(String name, String description, String img, BriefUserResponse author, boolean published,
             ArrayList<StepResponse> steps, Set<EquipmentResponse> equipmentsAvailable) {
         this.name = name;
+        this.description = description;
         this.img = img;
         this.author = author;
         this.published = published;
@@ -32,6 +33,14 @@ public class RecipeResponse {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public String getImg() {
         return img;
     }
@@ -71,5 +80,8 @@ public class RecipeResponse {
     public void setEquipmentsAvailable(Set<EquipmentResponse> equipmentsAvailable) {
         this.equipmentsAvailable = equipmentsAvailable;
     }
-    
+
+
+
+
 }

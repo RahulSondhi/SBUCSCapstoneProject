@@ -106,8 +106,6 @@ public class BarController {
     @GetMapping("/{barID}")
     public ResponseEntity<?> getBarProfile(@PathVariable(value = "barID") String barID) {
         try{
-            //BarID is base64 encoded
-            // barID = Helper.decodeBase64ToHex(barID);
             //we have to query the bar from Mongo
             Bar bar = barService.findById(barID);
             //We have the bar, now lets build a Bar Response
@@ -146,23 +144,21 @@ public class BarController {
     public ResponseEntity<?> changeBarSettings(@PathVariable(value = "barID") String barID, @CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
         try{
             // we get the current user by getting their email address
-            User user = userService.findByEmail(currentUser.getUsername());
+            User requester = userService.findByEmail(currentUser.getUsername());
             boolean isAdmin = false;
-            // barID = Helper.decodeBase64ToHex(barID);
-            // we have the barID(Base64)
+            //Check if the user is an admin
+            for (Role r : requester.getRoles()){
+                if(r.getName().equals("ADMIN")){
+                    isAdmin = true;
+                }
+            }
             Bar bar = barService.findById(barID);
             //We must validate that the user is an owner, manager, or worker
             Set<String> managerIdList = new HashSet<String>();
             for (User u : bar.getManagers()){
                 managerIdList.add(u.getId());
             }
-            //Check if the user is an admin
-            for (Role r : user.getRoles()){
-                if(r.getName().equals("ADMIN")){
-                    isAdmin = true;
-                }
-            }
-            if(bar.getOwner().getId().equals(user.getId()) || isAdmin){
+            if(bar.getOwner().getId().equals(requester.getId()) || isAdmin){
                 //owner or admin{FULL ACCESS}
                 //We can easily update the Name, Description, and Image
                 bar.setName(barRequest.getName());
@@ -208,7 +204,7 @@ public class BarController {
                 barRepository.save(bar);
                 return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
             }
-            else if(managerIdList.contains(user.getId())){
+            else if(managerIdList.contains(requester.getId())){
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
@@ -242,11 +238,15 @@ public class BarController {
     public ResponseEntity<?> deleteBar(@PathVariable(value = "barID") String barID, @CurrentUser UserDetails currentUser) {
         try{
             // we get the current user by getting their email address
-            User user = userService.findByEmail(currentUser.getUsername());
-            // barID = Helper.decodeBase64ToHex(barID);
-            // we have the barID(Base64)
+            User requester = userService.findByEmail(currentUser.getUsername());
+            boolean isAdmin = false;
+            for (Role r : requester.getRoles()){
+                if(r.getName().equals("ADMIN")){
+                    isAdmin = true;
+                }
+            }
             Bar bar = barService.findById(barID);
-            if(bar.getOwner().getId().equals(user.getId())){
+            if(bar.getOwner().getId().equals(requester.getId()) || isAdmin){
                 //we have to disassociate everyone
                 Set<User> combinedUsers = new HashSet<User>();
                 combinedUsers.add(bar.getOwner());

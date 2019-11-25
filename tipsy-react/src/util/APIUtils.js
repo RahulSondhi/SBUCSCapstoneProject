@@ -183,17 +183,32 @@ export function changePassword(changePasswordRequest) {
 }
 
 export function getRecipeProfile(recipeID) {
-    return null;
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID,
+        method: 'GET'
+    });
 }
 
 export function createRecipe(recipeRequest) {
-    return null;
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/createRecipe",
+        method: 'POST',
+        body: JSON.stringify(recipeRequest)
+    });
 }
 
 export function changeRecipeSettings(recipeID, recipeRequest) {
-    return null;
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/changeSettings" ,
+        method: 'POST',
+        body: JSON.stringify(recipeRequest)
+    });
 }
 
 export function deleteRecipe(recipeID) {
-    return null;
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/delete" ,
+        method: 'POST',
+        body: JSON.stringify(null)
+    });
 }
