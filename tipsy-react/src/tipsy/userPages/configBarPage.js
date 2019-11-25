@@ -206,6 +206,7 @@ class ConfigBarPage extends Component {
                                     type="recipe"
                                     data={this.state.recipesAvailable.value}
                                     onUpdate={this.handleListLoad}
+                                    validate={this.validateRecipeAdd}
                                     className="cell"/>
 
                             </div>
@@ -293,11 +294,11 @@ class ConfigBarPage extends Component {
             .recipesAvailable
             .value
             .map(function (el) {
-                return el.name;
+                return el.id;
             });
         
 
-        console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
+        // console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
         if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
             SENDmanagers = [];
         }
@@ -321,6 +322,14 @@ class ConfigBarPage extends Component {
         }
     }
 
+    validateRecipeAdd = (id) => {
+        if (this.state.recipesAvailable.value.some(items => items['id'] === id) === false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
@@ -332,8 +341,6 @@ class ConfigBarPage extends Component {
             workers: this.state.SENDworkers,
             recipesAvailable: this.state.SENDrecipesAvailable
         };
-
-        console.log(barRequest)
 
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {

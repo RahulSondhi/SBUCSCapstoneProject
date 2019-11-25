@@ -211,9 +211,7 @@ export function deleteRecipe(recipeID) {
         method: 'POST',
         body: JSON.stringify(null)
     });
-<<<<<<< HEAD
 }
-
 
 export function search(type, query) {
     return request({
@@ -221,6 +219,3 @@ export function search(type, query) {
         method: 'GET'
     });
 }
-=======
-} 
->>>>>>> development
