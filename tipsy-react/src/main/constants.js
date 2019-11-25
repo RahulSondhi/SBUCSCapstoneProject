@@ -1,6 +1,10 @@
 import React, {Component, Fragment} from 'react';
+<<<<<<< HEAD
 import {Input, Icon, notification} from 'antd';
 import {checkNicknameAvailability, getUserProfile} from '../util/APIUtils';
+=======
+import {notification} from 'antd';
+>>>>>>> master
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
 
@@ -9,6 +13,7 @@ import BarPic from '../assets/defaultIcons/bar.svg';
 import RecipePic from '../assets/defaultIcons/recipe.svg';
 import AddPic from '../assets/defaultIcons/add.svg';
 import SearchPic from '../assets/defaultIcons/search.svg';
+<<<<<<< HEAD
 import SettingPic from '../assets/defaultIcons/setting.svg';
 import RemovePic from '../assets/defaultIcons/remove.svg';
 import ActionPic from '../assets/defaultIcons/action.svg';
@@ -19,6 +24,10 @@ import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 
 import * as validate from '../util/validate';
+=======
+import UnknownPic from '../assets/defaultIcons/unknown.svg';
+import {NewUserPic} from '../assets/defaultIcons/newuser.json';
+>>>>>>> master
 
 export const CustomButton = (props) => {
     return (

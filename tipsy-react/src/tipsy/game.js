@@ -6,7 +6,6 @@ class Game extends Component {
         return (
           <div>
               <Navbar type="game"/>
-
           </div>
         )
     }
