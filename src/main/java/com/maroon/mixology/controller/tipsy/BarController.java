@@ -12,6 +12,7 @@ import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.exchange.request.BarRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.BarResponse;
+import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
@@ -55,7 +57,6 @@ public class BarController {
 
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
-    
     @PostMapping("/createBar")
     public ResponseEntity<?> createNewBar(@CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
         try{
@@ -112,7 +113,11 @@ public class BarController {
             //We have the bar, now lets build a Bar Response
             Set<BriefUserResponse> barManagers = new HashSet<BriefUserResponse>();
             for (User manager : bar.getManagers()){
-                barManagers.add(new BriefUserResponse(manager.getNickname(), manager.getFirstName() + " " + manager.getLastName(), manager.getProfilePic()));
+                barManagers.add(new BriefUserResponse(
+                    manager.getNickname(), 
+                    manager.getFirstName() + " " + manager.getLastName(), 
+                    manager.getProfilePic()
+                    ));
             }
             Set<BriefUserResponse> barWorkers = new HashSet<BriefUserResponse>();
             for (User worker : bar.getWorkers()){
@@ -269,5 +274,28 @@ public class BarController {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be deleted. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
+    }
+
+    @GetMapping("/getBrief")
+    public ResponseEntity<?> getBarBrief(@RequestParam(value = "barID") String barID) {
+        try{
+            //we have to query the bar from Mongo
+            Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefBarResponse(
+                bar.getId(), 
+                bar.getName(), 
+                bar.getImage(), 
+                bar.getOwner().getNickname()
+            ));
+        } catch (Exception e) {
+            logger.error("Bar was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

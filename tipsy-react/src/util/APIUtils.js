@@ -211,9 +211,7 @@ export function deleteRecipe(recipeID) {
         method: 'POST',
         body: JSON.stringify(null)
     });
-<<<<<<< HEAD
 }
-
 
 export function search(type, query) {
     return request({
@@ -221,6 +219,31 @@ export function search(type, query) {
         method: 'GET'
     });
 }
-=======
-} 
->>>>>>> development
+
+export function getUserBrief(nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/getBrief?nickname=" + nickname,
+        method: 'GET'
+    });
+}
+
+export function getBarBrief(barID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/getBrief?barID=" + barID,
+        method: 'GET'
+    });
+}
+
+export function getRecipeBrief(recipeID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/getBrief?recipeID=" + recipeID,
+        method: 'GET'
+    });
+}
+
+export function getEquipmentBrief(name) {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/getBrief?name=" + name,
+        method: 'GET'
+    });
+}

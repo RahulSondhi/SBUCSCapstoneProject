@@ -23,6 +23,7 @@ import com.maroon.mixology.exchange.response.UserSettingsResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
 import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
+import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarServiceImpl;
@@ -129,7 +130,12 @@ public class UserController {
             Set<BriefBarResponse> userBars = new HashSet<BriefBarResponse>();
             for (String barID : user.getBars()) {
                 Bar bar = barService.findById(barID);
-                userBars.add(new BriefBarResponse(bar.getId(), bar.getName(), bar.getImage(), bar.getOwner().getNickname()));
+                userBars.add(new BriefBarResponse(
+                        bar.getId(), 
+                        bar.getName(), 
+                        bar.getImage(), 
+                        bar.getOwner().getNickname()
+                    ));
             }
             Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();
             for (String recipeWrittenID : user.getRecipesWritten()){
@@ -312,5 +318,27 @@ public class UserController {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
         }  
+    }
+
+    @GetMapping("/getBrief")
+    public ResponseEntity<?> getUserBrief(@RequestParam(value = "nickname") String nickname) {
+        try{
+            //we have to query the bar from Mongo
+            User user = userService.findByNickname(nickname);
+            if(user == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefUserResponse(
+                user.getNickname(), 
+                user.getFirstName() + " " + user.getLastName(), 
+                user.getProfilePic()
+            ));
+        } catch (Exception e) {
+            logger.error("User was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

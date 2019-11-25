@@ -21,6 +21,7 @@ import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
+import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
@@ -40,6 +41,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
@@ -290,5 +292,28 @@ public class RecipeController {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be deleted. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
+    }
+
+    @GetMapping("/getBrief")
+    public ResponseEntity<?> getRecipeBrief(@RequestParam(value = "recipeID") String recipeID) {
+        try{
+            //we have to query the bar from Mongo
+            Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefRecipeResponse(
+                recipe.getId(), 
+                recipe.getName(), 
+                recipe.getImage(), 
+                recipe.getAuthor().getNickname()
+            ));
+        } catch (Exception e) {
+            logger.error("Recipe was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
