@@ -3,6 +3,8 @@ package com.maroon.mixology.entity;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.maroon.mixology.exchange.response.EquipmentResponse;
+
 import org.springframework.data.annotation.Id;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -20,7 +22,7 @@ public class Recipe {
     private boolean published;
     @DBRef
     private ArrayList<Step> steps;
-    private Set<Equipment> equipmentsAvailable;
+    private Set<EquipmentResponse> equipmentsAvailable;
 
     public String getId() {
         return id;
@@ -70,13 +72,6 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public Set<Equipment> getEquipmentsAvailable() {
-        return equipmentsAvailable;
-    }
-
-    public void setEquipmentsAvailable(Set<Equipment> equipmentsAvailable) {
-        this.equipmentsAvailable = equipmentsAvailable;
-    }
 
     public String getDescription() {
         return description;
@@ -84,6 +79,14 @@ public class Recipe {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<EquipmentResponse> getEquipmentsAvailable() {
+        return equipmentsAvailable;
+    }
+
+    public void setEquipmentsAvailable(Set<EquipmentResponse> equipmentsAvailable) {
+        this.equipmentsAvailable = equipmentsAvailable;
     }
 
 
