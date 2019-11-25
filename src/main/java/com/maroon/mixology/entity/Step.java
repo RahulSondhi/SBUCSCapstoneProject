@@ -10,15 +10,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Step {
     @Id
     private String id;
-    @DBRef
-    private Equipment objToDo;
-    @DBRef
-    private Equipment objDoing;
+    private String equipmentToDo; //name
+    private String equipmentDoing; //name
+    private String equipmentProduct; //name
     private ActionType action;
     private int value;
     @DBRef
     private Unit unit;
-    private boolean completed;
+
+    public Step(String equipmentToDo, String equipmentDoing, String equipmentProduct, ActionType action, int value,
+            Unit unit) {
+        this.equipmentToDo = equipmentToDo;
+        this.equipmentDoing = equipmentDoing;
+        this.equipmentProduct = equipmentProduct;
+        this.action = action;
+        this.value = value;
+        this.unit = unit;
+    }
 
     public String getId() {
         return id;
@@ -28,20 +36,28 @@ public class Step {
         this.id = id;
     }
 
-    public Equipment getObjToDo() {
-        return objToDo;
+    public String getEquipmentToDo() {
+        return equipmentToDo;
     }
 
-    public void setObjToDo(Equipment objToDo) {
-        this.objToDo = objToDo;
+    public void setEquipmentToDo(String equipmentToDo) {
+        this.equipmentToDo = equipmentToDo;
     }
 
-    public Equipment getObjDoing() {
-        return objDoing;
+    public String getEquipmentDoing() {
+        return equipmentDoing;
     }
 
-    public void setObjDoing(Equipment objDoing) {
-        this.objDoing = objDoing;
+    public void setEquipmentDoing(String equipmentDoing) {
+        this.equipmentDoing = equipmentDoing;
+    }
+
+    public String getEquipmentProduct() {
+        return equipmentProduct;
+    }
+
+    public void setEquipmentProduct(String equipmentProduct) {
+        this.equipmentProduct = equipmentProduct;
     }
 
     public ActionType getAction() {
@@ -68,12 +84,5 @@ public class Step {
         this.unit = unit;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
 
 }

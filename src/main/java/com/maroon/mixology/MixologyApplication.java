@@ -5,12 +5,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Equipment;
+import com.maroon.mixology.entity.EquipmentType;
+import com.maroon.mixology.entity.type.ActionType;
+import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 import com.maroon.mixology.entity.Role;
+import com.maroon.mixology.entity.Unit;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.MeasurementType;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.repository.BarRepository;
+import com.maroon.mixology.repository.EquipmentRepository;
+import com.maroon.mixology.repository.EquipmentTypeRepository;
 import com.maroon.mixology.repository.RoleRepository;
+import com.maroon.mixology.repository.UnitRepository;
 import com.maroon.mixology.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
@@ -27,33 +35,47 @@ public class MixologyApplication {
     
     
 	@Bean
-    CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository) {
+    CommandLineRunner init(UserRepository userRepository, BarRepository barRepository, RoleRepository roleRepository, EquipmentRepository equipmentRepository, EquipmentTypeRepository equipmentTypeRepository, UnitRepository unitRepository) {
         return args -> {
-
+            // Unit Table
+            // Unit u = new Unit();
+            // u.setName("Gallon");
+            // u.setUsMeasurement(128);
+            // u.setMetricMeasurement(3785.41);
+            // unitRepository.save(u);
+            // Equipment Type Table
+            // EquipmentType eT = new EquipmentType();
+            // eT.setName(EquipmentTypeEnum.COOLING);
+            // Set<ActionType> doTo = new HashSet<ActionType>();
+            // Set<ActionType> doing = new HashSet<ActionType>();
+            // doTo.add(ActionType.PRESS);
+            // doTo.add(ActionType.CRUSH);
+            // doTo.add(ActionType.CUT);
+            // doTo.add(ActionType.ADD);
+            // doTo.add(ActionType.PEEL);
+            // doTo.add(ActionType.POUR);
+            // doTo.add(ActionType.MEASURE);
+            // 
+            // doing.add(ActionType.COOL);
+            // doing.add(ActionType.IGNITE);
+            // doing.add(ActionType.FREEZE);
+            // eT.setActionsDoTo(doTo);
+            // eT.setActionsDoing(doing);
+            // equipmentTypeRepository.save(eT);
+            // Equipment Table
+            // Equipment e = new Equipment();
+            // EquipmentType t = equipmentTypeRepository.findByName("STRAINER");
+            // e.setName("Strainer");
+            // e.setEquipmentType(t);
+            // // Add image
+            // e.setImage("");
+            // equipmentRepository.save(e);
             // // Role adminRole = roleRepository.findByName("ADMIN");
             // // if (adminRole == null) {
             // //     Role newUserRole = new Role();
             // //     newUserRole.setName("ADMIN");
             // //     roleRepository.save(newUserRole);
             // // }
-            // User bryan = userRepository.findByNickname("bryan");
-            // bryan.setMeasurement(MeasurementType.US);
-            // userRepository.save(bryan);
-            // User rahul = userRepository.findByNickname("rahul");
-            // User manny = userRepository.findByNickname("manny");
-            // Set<User> workers = new HashSet<User>();
-            // Set<User> managers = new HashSet<User>();
-            // ArrayList<Recipe> barRecipes = new ArrayList<Recipe>();
-            // managers.add(rahul);
-            // workers.add(manny);
-            // Bar bar = new Bar("My Second Bar", bryan, "", managers, workers, barRecipes);
-            // barRepository.save(bar);
-            // bryan.getBars().add(bar.getId());
-            // rahul.getBars().add(bar.getId());
-            // manny.getBars().add(bar.getId());
-            // userRepository.save(bryan);
-            // userRepository.save(rahul);
-            // userRepository.save(manny);
         };
     }
 

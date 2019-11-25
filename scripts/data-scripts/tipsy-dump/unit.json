@@ -1,0 +1,15 @@
+{"_id":{"$oid":"5dd9e32cf19f9027cfa873d5"},"name":"Dash","usMeasurement":0.03125,"metricMeasurement":0.92,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9e3a2f19f9027cfa873d9"},"name":"Splash","usMeasurement":0.2,"metricMeasurement":5.91,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9e711f19f9027cfa873db"},"name":"Teaspoon","usMeasurement":0.16666666666666666,"metricMeasurement":4.93,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9e731f19f9027cfa873dd"},"name":"Tablespoon","usMeasurement":0.5,"metricMeasurement":14.79,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9e758f19f9031433c31c0"},"name":"Pony","usMeasurement":1.0,"metricMeasurement":29.57,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f589f19f904cb2284b75"},"name":"Jigger","usMeasurement":1.5,"metricMeasurement":44.36,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f5cef19f904cb2284b77"},"name":"Shot","usMeasurement":1.5,"metricMeasurement":44.36,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f5e5f19f904cb2284b79"},"name":"Snit","usMeasurement":3.0,"metricMeasurement":88.72,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f601f19f904cb2284b7b"},"name":"Wineglass","usMeasurement":4.0,"metricMeasurement":118.29,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f627f19f904cb2284b7d"},"name":"Split","usMeasurement":6.0,"metricMeasurement":177.44,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f696f19f904cb2284b83"},"name":"Pint","usMeasurement":16.0,"metricMeasurement":473.17,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f6a8f19f904cb2284b85"},"name":"Cup","usMeasurement":8.0,"metricMeasurement":236.58,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f6caf19f904cb2284b87"},"name":"Fifth","usMeasurement":25.6,"metricMeasurement":757.08,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f6dff19f904cb2284b89"},"name":"Quart","usMeasurement":32.0,"metricMeasurement":946.35,"_class":"com.maroon.mixology.entity.Unit"}
+{"_id":{"$oid":"5dd9f6f7f19f904cb2284b8b"},"name":"Gallon","usMeasurement":128.0,"metricMeasurement":3785.41,"_class":"com.maroon.mixology.entity.Unit"}

@@ -4,7 +4,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.maroon.mixology.entity.type.MeasurementType;
 
 public class SettingsRequest {
     @NotBlank
@@ -20,7 +19,7 @@ public class SettingsRequest {
     @Email
     private String email;
 
-    private String profilePic;
+    private String img;
 
     private String measurement;
 
@@ -48,12 +47,12 @@ public class SettingsRequest {
         this.email = email;
     }
 
-    public String getProfilePic() {
-        return profilePic;
+    public String getImg() {
+        return img;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
+    public void setProfilePic(String img) {
+        this.img = img;
     }
 
     public String getMeasurement() {

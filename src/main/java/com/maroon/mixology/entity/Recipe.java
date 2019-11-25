@@ -9,17 +9,18 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "recipe")
-public class Recipe{
+public class Recipe {
     @Id
     private String id;
     private String name;
+    private String description;
     private String image;
     @DBRef
     private User author;
     private boolean published;
-    private ArrayList<Step> steps;
     @DBRef
-    private Set<Equipment> equipments;
+    private ArrayList<Step> steps;
+    private Set<Equipment> equipmentsAvailable;
 
     public String getId() {
         return id;
@@ -33,7 +34,7 @@ public class Recipe{
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -45,36 +46,45 @@ public class Recipe{
         this.image = image;
     }
 
-    public User getAuthor(){
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author){
+    public void setAuthor(User author) {
         this.author = author;
     }
 
-    public boolean getPublished(){
+    public boolean isPublished() {
         return published;
     }
 
-    public void setPublished(boolean published){
+    public void setPublished(boolean published) {
         this.published = published;
     }
 
-    public ArrayList<Step> getSteps(){
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
-    public void setSteps(ArrayList<Step> steps){
+    public void setSteps(ArrayList<Step> steps) {
         this.steps = steps;
     }
 
-    public Set<Equipment> getEquipments(){
-        return equipments;
+    public Set<Equipment> getEquipmentsAvailable() {
+        return equipmentsAvailable;
     }
 
-    public void setEquipments(Set<Equipment> equipments) {
-        this.equipments = equipments;
+    public void setEquipmentsAvailable(Set<Equipment> equipmentsAvailable) {
+        this.equipmentsAvailable = equipmentsAvailable;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
 
 }

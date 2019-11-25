@@ -30,7 +30,7 @@ html {
     padding: 0;
     font-family: 'Roboto Mono', monospace;
     color: white !important;
-    background: linear-gradient( rgba(var(--background-color), 0.5) 100%, rgba(var(--background-color), 0.8)100%),url("../src/assets/bg.jpg");
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../src/assets/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -40,6 +40,10 @@ html {
 #root {
     height: 100%;
     width: 100%;
+}
+
+.hidden{
+    display: none;
 }
 
 label {
@@ -55,17 +59,6 @@ label {
     color: var(--white);
     text-decoration: underline;
     text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
-}
-
-.userBoxEntry {
-    display: block;
-    text-decoration: none;
-    color: var(--crimson);
-    margin-bottom: 1rem;
-}
-.userBoxEntry:hover {
-    color: var(--crimson);
-    text-shadow: 0 0 0.2em var(--bright-red);
 }
 
 .button {

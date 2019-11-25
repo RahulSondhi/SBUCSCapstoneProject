@@ -1,18 +1,23 @@
 package com.maroon.mixology.exchange.request;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.maroon.mixology.Helper;
 
 public class RecipeRequest {
     @NotBlank
     @Size(min = 4, max = 32)
     private String name;
-    //owner is handled by the current user
-    private String image;
+    private String description;
+    private String img;
+    //author is handled by the current user
+    private Boolean published;
+    private ArrayList<StepRequest> steps;
+    private Boolean newSteps;
+    private Set<EquipmentRequest> equipmentsAvailable;
+    private Boolean newEquipment;
 
     public String getName() {
         return name;
@@ -22,12 +27,60 @@ public class RecipeRequest {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg() {
+        return img;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public Boolean getPublished() {
+        return published;
+    }
+
+    public void setPublished(Boolean published) {
+        this.published = published;
+    }
+
+    public ArrayList<StepRequest> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(ArrayList<StepRequest> steps) {
+        this.steps = steps;
+    }
+
+    public Set<EquipmentRequest> getEquipmentsAvailable() {
+        return equipmentsAvailable;
+    }
+
+    public void setEquipmentsAvailable(Set<EquipmentRequest> equipmentsAvailable) {
+        this.equipmentsAvailable = equipmentsAvailable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getNewSteps() {
+        return newSteps;
+    }
+
+    public void setNewSteps(Boolean newSteps) {
+        this.newSteps = newSteps;
+    }
+
+    public Boolean getNewEquipment() {
+        return newEquipment;
+    }
+
+    public void setNewEquipment(Boolean newEquipment) {
+        this.newEquipment = newEquipment;
     }
 
 

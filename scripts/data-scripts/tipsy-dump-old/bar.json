@@ -1,0 +1,1 @@
+{"_id":{"$oid":"5dcbf4527dd2b62a498eb75e"},"name":"My First Bar","description":"THis is a bar I made WITH NEW DESCRIPTION","owner":{"$ref":"user","$id":{"$oid":"5dc8dda9f19f90691601b2b9"}},"image":"","managers":[{"$ref":"user","$id":{"$oid":"5dc8dd82f19f90691601b2b8"}}],"workers":[],"recipesAvailable":[],"_class":"com.maroon.mixology.entity.Bar"}

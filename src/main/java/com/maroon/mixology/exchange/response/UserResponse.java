@@ -6,32 +6,32 @@ import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 
 public class UserResponse {
-    private String nickname;
-    private String img;
     private String name;
+    private String img;
+    private String fullName;
     private Set<BriefBarResponse> bars;
     private Set<BriefRecipeResponse> recipesWritten;
     private Set<BriefRecipeResponse> recipesIncompleted;
     private Set<BriefRecipeResponse> recipesCompleted;
 
-    public UserResponse(String nickname, String img, String name, Set<BriefBarResponse> bars,
+    public UserResponse(String name, String img, String fullName, Set<BriefBarResponse> bars,
             Set<BriefRecipeResponse> recipesWritten, Set<BriefRecipeResponse> recipesIncompleted,
             Set<BriefRecipeResponse> recipesCompleted) {
-        this.nickname = nickname;
-        this.img = img;
         this.name = name;
+        this.img = img;
+        this.fullName = fullName;
         this.bars = bars;
         this.recipesWritten = recipesWritten;
         this.recipesIncompleted = recipesIncompleted;
         this.recipesCompleted = recipesCompleted;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getImg() {
@@ -43,12 +43,12 @@ public class UserResponse {
     }
 
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Set<BriefBarResponse> getBars() {

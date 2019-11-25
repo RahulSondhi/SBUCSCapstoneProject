@@ -4,6 +4,7 @@
 
 #userBarsPageTitle,
 #userRecipesPageTitle,
+#userEquipmentPageTitle,
 #createBarPageTitle,
 #createRecipePageTitle,
 #adminPageTitle {
@@ -30,6 +31,10 @@
 
 /* Create Bar Page */
 
+.tabsBarForm{
+  margin-bottom: 2%;
+}
+
 
 /* Create Recipe Page */
 
@@ -45,4 +50,4 @@
 /* Error Page */
 .errorCaption {
     color: white;
-}
+} 

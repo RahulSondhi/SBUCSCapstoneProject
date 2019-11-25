@@ -1,13 +1,9 @@
 package com.maroon.mixology.entity;
 
-import java.util.Set;
-
-import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentType;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "equipment")
@@ -17,12 +13,15 @@ public class Equipment {
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
     private String image;
-    private EquipmentType type;
-    private boolean published;
-    private boolean filled;
-    private Set<ActionType> actionsDoTo;
-    private Set<ActionType> actionsDoing;
+    @DBRef
+    private EquipmentType equipmentType;
 
+    public Equipment(String name, String image, EquipmentType equipmentType) {
+        this.name = name;
+        this.image = image;
+        this.equipmentType = equipmentType;
+    }
+    
     public String getId() {
         return id;
     }
@@ -35,17 +34,8 @@ public class Equipment {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
-    }
-
-
-    public EquipmentType getType() {
-        return type;
-    }
-
-    public void setType(EquipmentType type) {
-        this.type = type;
     }
 
     public String getImage() {
@@ -56,37 +46,14 @@ public class Equipment {
         this.image = image;
     }
 
-    public boolean isPublished() {
-        return published;
+    public EquipmentType getEquipmentType() {
+        return equipmentType;
     }
 
-    public void setPublished(boolean published) {
-        this.published = published;
+    public void setEquipmentType(EquipmentType equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
-    public boolean isFilled() {
-        return filled;
-    }
-
-    public void setFilled(boolean filled) {
-        this.filled = filled;
-    }
-
-    public Set<ActionType> getActionsDoTo() {
-        return actionsDoTo;
-    }
-
-    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
-        this.actionsDoTo = actionsDoTo;
-    }
-
-    public Set<ActionType> getActionsDoing() {
-        return actionsDoing;
-    }
-
-    public void setActionsDoing(Set<ActionType> actionsDoing) {
-        this.actionsDoing = actionsDoing;
-    }
 
 
 

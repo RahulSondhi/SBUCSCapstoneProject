@@ -1,15 +1,13 @@
 package com.maroon.mixology.exchange.response.brief;
 
-import com.maroon.mixology.Helper;
-
 public class BriefBarResponse {
-    private String id; // save as base64
+    private String id;
     private String name;
     private String img;
     private String owner;
 
     public BriefBarResponse(String id, String name, String img, String owner) {
-        this.id = Helper.encodeHexToBase64(id);
+        this.id = id;
         this.name = name;
         this.img = img;
         this.owner = owner;

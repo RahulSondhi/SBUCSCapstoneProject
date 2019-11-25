@@ -1,11 +1,9 @@
 package com.maroon.mixology.exchange.request;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.maroon.mixology.Helper;
 
 public class BarRequest {
     @NotBlank
@@ -14,9 +12,9 @@ public class BarRequest {
     private String description;
     //owner is handled by the current user
     private String img;
-    private ArrayList<String> managers; //nicknames
-    private ArrayList<String> workers; //nicknames
-    private ArrayList<String> recipesAvaliable; //ids in base 64
+    private Set<String> managers; //nicknames
+    private Set<String> workers; //nicknames
+    private Set<String> recipesAvailable;
 
     public String getName() {
         return name;
@@ -42,32 +40,33 @@ public class BarRequest {
         this.img = img;
     }
 
-    public ArrayList<String> getManagers() {
+    public Set<String> getManagers() {
         return managers;
     }
 
-    public void setManagers(ArrayList<String> managers) {
+    public void setManagers(Set<String> managers) {
         this.managers = managers;
     }
 
-    public ArrayList<String> getWorkers() {
+    public Set<String> getWorkers() {
         return workers;
     }
 
-    public void setWorkers(ArrayList<String> workers) {
+    public void setWorkers(Set<String> workers) {
         this.workers = workers;
     }
 
-    public ArrayList<String> getRecipesAvaliable() {
-        ArrayList<String> realIds = new ArrayList<String>();
-        for (String recipe : recipesAvaliable) {
-            realIds.add(Helper.decodeBase64ToHex(recipe));
-        }
-        return realIds;
+    public Set<String> getRecipesAvailable() {
+        // Set<String> realIds = new HashSet<String>();
+        // for (String recipe : recipesAvailable) {
+        //     realIds.add(Helper.decodeBase64ToHex(recipe));
+        // }
+        // return realIds;
+        return recipesAvailable;
     }
 
-    public void setRecipesAvaliable(ArrayList<String> recipesAvaliable) {
-        this.recipesAvaliable = recipesAvaliable;
+    public void setRecipesAvailable(Set<String> recipesAvailable) {
+        this.recipesAvailable = recipesAvailable;
     }
 
 

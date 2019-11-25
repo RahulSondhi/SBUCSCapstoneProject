@@ -56,16 +56,23 @@ export function resetPassword(resetPasswordRequest) {
     });
 }
 
-export function validateReset(uuid) {
+export function verifyReset(uuid) {
     return request({
-        url: API_BASE_URL + "/validateReset?token=" + uuid,
+        url: API_BASE_URL + "/verifyReset?token=" + uuid,
         method: 'GET'
     });
 }
 
-export function validateConfirm(uuid) {
+export function verifyConfirm(uuid) {
     return request({
-        url: API_BASE_URL + "/validateConfirm?token=" + uuid,
+        url: API_BASE_URL + "/verifyConfirm?token=" + uuid,
+        method: 'GET'
+    });
+}
+
+export function verifyNewEmail(uuid, email) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/verifyNewEmail?token=" + uuid + "&email=" + email,
         method: 'GET'
     });
 }
@@ -93,13 +100,6 @@ export function getCurrentUser() {
     });
 }
 
-export function getUserProfile(nickname) {
-    return request({
-        url: API_BASE_URL + "/tipsy/user/" + nickname,
-        method: 'GET'
-    });
-}
-
 export function getBarProfile(barID) {
     return request({
         url: API_BASE_URL + "/tipsy/bar/" + barID,
@@ -112,6 +112,104 @@ export function createBar(barRequest) {
         url: API_BASE_URL + "/tipsy/bar/createBar",
         method: 'POST',
         body: JSON.stringify(barRequest)
+    });
+}
+
+export function changeBarSettings(barID, barRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID + "/changeSettings" ,
+        method: 'POST',
+        body: JSON.stringify(barRequest)
+    });
+}
+
+export function deleteBar(barID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/bar/" + barID + "/delete" ,
+        method: 'POST',
+        body: JSON.stringify(null)
+    });
+}
+
+export function getEquipmentProfile(equipmentName) {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/" + equipmentName,
+        method: 'GET'
+    });
+}
+
+export function getAllEquipment() {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/getEquipments",
+        method: 'GET'
+    });
+}
+
+export function getAllUnits() {
+    return request({
+        url: API_BASE_URL + "/tipsy/unit/getUnits",
+        method: 'GET'
+    });
+}
+
+export function getUserProfile(nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/" + nickname,
+        method: 'GET'
+    });
+}
+
+export function getUserSettings(nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/" + nickname + "/getSettings",
+        method: 'GET',
+    });
+}
+
+export function changeUserSettings(settingsRequest,nickname) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/"+nickname+"/changeSettings",
+        method: 'POST',
+        body: JSON.stringify(settingsRequest)
+    });
+}
+
+export function changePassword(changePasswordRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/user/changePassword",
+        method: 'POST',
+        body: JSON.stringify(changePasswordRequest)
+    });
+}
+
+export function getRecipeProfile(recipeID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID,
+        method: 'GET'
+    });
+}
+
+export function createRecipe(recipeRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/createRecipe",
+        method: 'POST',
+        body: JSON.stringify(recipeRequest)
+    });
+}
+
+export function changeRecipeSettings(recipeID, recipeRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/changeSettings" ,
+        method: 'POST',
+        body: JSON.stringify(recipeRequest)
+    });
+}
+
+export function deleteRecipe(recipeID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/delete" ,
+        method: 'POST',
+        body: JSON.stringify(null)
     });
 }
 

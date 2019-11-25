@@ -39,7 +39,6 @@ public class User {
 	// @DBRef
 	private Set<String> recipesCompleted; //recipeIDs
 
-
 	public User(String firstName, String lastName, String email, String nickname, String password, Set<String> bars,
 			Set<String> recipesWritten, Set<String> recipesIncompleted, Set<String> recipesCompleted) {
 		this.firstName = firstName;

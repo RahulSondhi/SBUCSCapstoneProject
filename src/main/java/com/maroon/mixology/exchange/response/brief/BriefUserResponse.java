@@ -2,22 +2,14 @@ package com.maroon.mixology.exchange.response.brief;
 
 public class BriefUserResponse {
     //we do not save the id
-    private String nickname;
     private String name;
+    private String fullName;
     private String img;
 
-    public BriefUserResponse(String nickname, String name, String img) {
-        this.nickname = nickname;
+    public BriefUserResponse(String name, String fullName, String img) {
         this.name = name;
+        this.fullName = fullName;
         this.img = img;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getName() {
@@ -28,6 +20,14 @@ public class BriefUserResponse {
         this.name = name;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getImg() {
         return img;
     }
@@ -35,6 +35,5 @@ public class BriefUserResponse {
     public void setImg(String img) {
         this.img = img;
     }
-
 
 }

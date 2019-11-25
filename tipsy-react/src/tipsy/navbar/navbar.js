@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import GeneralNavbar from './rightNavbar';
+import {NavLink} from "react-router-dom";
 import {Drawer, Button} from 'antd';
 import Tipsy from '../../assets/Tipsy.png';
 
@@ -30,7 +31,9 @@ class Navbar extends Component {
         return (
             <nav className="menuBar">
                 <div className="logo">
-                    <img src={Tipsy} alt="TipsyLogo"/>
+                    <NavLink to={"/tipsy/"}>
+                        <img src={Tipsy} alt="TipsyLogo"/>
+                    </NavLink>
                 </div>
                 <div className="menuCon">
                     {/* <div className="leftMenu">
