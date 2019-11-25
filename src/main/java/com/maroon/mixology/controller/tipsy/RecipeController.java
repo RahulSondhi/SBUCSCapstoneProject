@@ -294,26 +294,5 @@ public class RecipeController {
         }  
     }
 
-    @GetMapping("/getBrief")
-    public ResponseEntity<?> getRecipeBrief(@RequestParam(value = "recipeID") String recipeID) {
-        try{
-            //we have to query the bar from Mongo
-            Recipe recipe = recipeService.findById(recipeID);
-            if(recipe == null){
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was not found!"),
-                    HttpStatus.NOT_FOUND);
-            }
-            //now we return the brief responses
-            return ResponseEntity.ok(new BriefRecipeResponse(
-                recipe.getId(), 
-                recipe.getName(), 
-                recipe.getImage(), 
-                recipe.getAuthor().getNickname()
-            ));
-        } catch (Exception e) {
-            logger.error("Recipe was unable to be loaded.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be loaded. Error: " + e.getMessage()),
-                        HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 }

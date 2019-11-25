@@ -57,6 +57,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
+@RequestMapping("/tipsy/search")
 public class SearchController {
     @Autowired
     private UserServiceImpl userService;
@@ -72,7 +73,7 @@ public class SearchController {
     
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
-    @GetMapping("/tipsy/search")
+    @GetMapping("")
     public ResponseEntity<?> search(@RequestParam(value = "type") String type, @RequestParam(value = "query") String query ) {
         try{
             switch(type){
@@ -158,6 +159,93 @@ public class SearchController {
         }
     }
 
+    @GetMapping("/user/getBrief")
+    public ResponseEntity<?> getUserBrief(@RequestParam(value = "nickname") String nickname) {
+        try{
+            //we have to query the bar from Mongo
+            User user = userService.findByNickname(nickname);
+            if(user == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefUserResponse(
+                user.getNickname(), 
+                user.getFirstName() + " " + user.getLastName(), 
+                user.getProfilePic()
+            ));
+        } catch (Exception e) {
+            logger.error("User was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-    
+    @GetMapping("/bar/getBrief")
+    public ResponseEntity<?> getBarBrief(@RequestParam(value = "barID") String barID) {
+        try{
+            //we have to query the bar from Mongo
+            Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefBarResponse(
+                bar.getId(), 
+                bar.getName(), 
+                bar.getImage(), 
+                bar.getOwner().getNickname()
+            ));
+        } catch (Exception e) {
+            logger.error("Bar was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/recipe/getBrief")
+    public ResponseEntity<?> getRecipeBrief(@RequestParam(value = "recipeID") String recipeID) {
+        try{
+            //we have to query the bar from Mongo
+            Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefRecipeResponse(
+                recipe.getId(), 
+                recipe.getName(), 
+                recipe.getImage(), 
+                recipe.getAuthor().getNickname()
+            ));
+        } catch (Exception e) {
+            logger.error("Recipe was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/equipment/getBrief")
+    public ResponseEntity<?> getEquipmentBrief(@RequestParam(value = "name") String name) {
+        try{
+            //we have to query the bar from Mongo
+            Equipment equipment = equipmentService.findByName(name);
+            if(equipment == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment '" + name + "' was not found!"),
+                    HttpStatus.NOT_FOUND);
+            }
+            //now we return the brief responses
+            return ResponseEntity.ok(new BriefEquipmentResponse(
+                equipment.getName(), 
+                equipment.getImage(), 
+                equipment.getEquipmentType().getName()
+            ));
+        } catch (Exception e) {
+            logger.error("Equipment was unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment was unable to be loaded. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

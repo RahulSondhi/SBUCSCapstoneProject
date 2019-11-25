@@ -276,26 +276,5 @@ public class BarController {
         }  
     }
 
-    @GetMapping("/getBrief")
-    public ResponseEntity<?> getBarBrief(@RequestParam(value = "barID") String barID) {
-        try{
-            //we have to query the bar from Mongo
-            Bar bar = barService.findById(barID);
-            if(bar == null){
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was not found!"),
-                    HttpStatus.NOT_FOUND);
-            }
-            //now we return the brief responses
-            return ResponseEntity.ok(new BriefBarResponse(
-                bar.getId(), 
-                bar.getName(), 
-                bar.getImage(), 
-                bar.getOwner().getNickname()
-            ));
-        } catch (Exception e) {
-            logger.error("Bar was unable to be loaded.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be loaded. Error: " + e.getMessage()),
-                        HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+   
 }

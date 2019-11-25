@@ -320,25 +320,5 @@ public class UserController {
         }  
     }
 
-    @GetMapping("/getBrief")
-    public ResponseEntity<?> getUserBrief(@RequestParam(value = "nickname") String nickname) {
-        try{
-            //we have to query the bar from Mongo
-            User user = userService.findByNickname(nickname);
-            if(user == null){
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
-                    HttpStatus.NOT_FOUND);
-            }
-            //now we return the brief responses
-            return ResponseEntity.ok(new BriefUserResponse(
-                user.getNickname(), 
-                user.getFirstName() + " " + user.getLastName(), 
-                user.getProfilePic()
-            ));
-        } catch (Exception e) {
-            logger.error("User was unable to be loaded.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User was unable to be loaded. Error: " + e.getMessage()),
-                        HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 }

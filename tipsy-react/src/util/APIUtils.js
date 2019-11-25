@@ -222,28 +222,28 @@ export function search(type, query) {
 
 export function getUserBrief(nickname) {
     return request({
-        url: API_BASE_URL + "/tipsy/user/getBrief?nickname=" + nickname,
+        url: API_BASE_URL + "/tipsy/search/user/getBrief?nickname=" + nickname,
         method: 'GET'
     });
 }
 
 export function getBarBrief(barID) {
     return request({
-        url: API_BASE_URL + "/tipsy/bar/getBrief?barID=" + barID,
+        url: API_BASE_URL + "/tipsy/search/bar/getBrief?barID=" + barID,
         method: 'GET'
     });
 }
 
 export function getRecipeBrief(recipeID) {
     return request({
-        url: API_BASE_URL + "/tipsy/recipe/getBrief?recipeID=" + recipeID,
+        url: API_BASE_URL + "/tipsy/search/recipe/getBrief?recipeID=" + recipeID,
         method: 'GET'
     });
 }
 
 export function getEquipmentBrief(name) {
     return request({
-        url: API_BASE_URL + "/tipsy/equipment/getBrief?name=" + name,
+        url: API_BASE_URL + "/tipsy/search/equipment/getBrief?name=" + name,
         method: 'GET'
     });
 }
