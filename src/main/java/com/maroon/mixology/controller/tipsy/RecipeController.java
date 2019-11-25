@@ -10,6 +10,7 @@ import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.ActionType;
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.Equipment;
+import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
@@ -102,13 +103,18 @@ public class RecipeController {
             }
             recipe.setSteps(steps);
             //Build the equipments from the Equipment Available
-            Set<Equipment> equipmentsAvailable = new HashSet<Equipment>();
+            Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
             for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                equipmentsAvailable.add(new Equipment(
+                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentTypeName());
+                equipmentsAvailable.add(new EquipmentResponse(
                     e.getName(),
                     e.getImg(),
-                    equipmentTypeService.findByName(e.getEquipmentTypeName())
-                ));
+                    new EquipmentTypeResponse(
+                            eT.getName(),
+                            eT.getActionsDoTo(),
+                            eT.getActionsDoing()
+                    ))
+                );
             }
             recipe.setEquipmentsAvailable(equipmentsAvailable);
             stepRepository.saveAll(steps); //Will this work?
@@ -154,18 +160,18 @@ public class RecipeController {
                         ));
                 }
                 //Need to build equipments response 
-                Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
-                for (Equipment e : recipe.getEquipmentsAvailable()){
-                    equipmentsAvailable.add( new EquipmentResponse(
-                        e.getName(), 
-                        e.getImage(),
-                        new EquipmentTypeResponse(
-                            e.getEquipmentType().getName(),
-                            e.getEquipmentType().getActionsDoTo(),
-                            e.getEquipmentType().getActionsDoing()
-                            )
-                        ));
-                }
+                // Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
+                // for (Equipment e : recipe.getEquipmentsAvailable()){
+                //     equipmentsAvailable.add( new EquipmentResponse(
+                //         e.getName(), 
+                //         e.getImage(),
+                //         new EquipmentTypeResponse(
+                //             e.getEquipmentType().getName(),
+                //             e.getEquipmentType().getActionsDoTo(),
+                //             e.getEquipmentType().getActionsDoing()
+                //             )
+                //         ));
+                // }
                 //lets build our response
                 RecipeResponse recipeResponse = new RecipeResponse(
                     recipe.getName(),
@@ -174,7 +180,7 @@ public class RecipeController {
                     author,
                     recipe.isPublished(),
                     steps, //StepResponses 
-                    equipmentsAvailable //EquipmentResponse
+                    recipe.getEquipmentsAvailable() //EquipmentResponses
                 );
                 return ResponseEntity.ok(recipeResponse);
             }
@@ -232,13 +238,18 @@ public class RecipeController {
                 }
                 // We should redo all the equipment from the equipment request
                 if(recipeRequest.getNewEquipment()){
-                    Set<Equipment> equipmentsAvailable = new HashSet<Equipment>();
+                    Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
                     for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                        equipmentsAvailable.add(new Equipment(
+                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentTypeName());
+                        equipmentsAvailable.add(new EquipmentResponse(
                             e.getName(),
                             e.getImg(),
-                            equipmentTypeService.findByName(e.getEquipmentTypeName())
-                        ));
+                            new EquipmentTypeResponse(
+                                    eT.getName(),
+                                    eT.getActionsDoTo(),
+                                    eT.getActionsDoing()
+                            ))
+                        );
                     }
                     recipe.setEquipmentsAvailable(equipmentsAvailable);
                 }
