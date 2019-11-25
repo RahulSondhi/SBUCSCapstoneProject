@@ -93,6 +93,7 @@ public class BarController {
                 u.getBars().add(bar.getId()); 
                 userRepository.save(u);
             }
+            // userRepository.saveAll(combinedUsers);
             //Added the bar to all affliated Users
             return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
