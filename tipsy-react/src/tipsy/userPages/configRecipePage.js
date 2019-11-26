@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
 
 import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc} from '../../main/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
+
+import CustomEquipmentPrompt from './customEquipmentPrompt'
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
@@ -60,6 +62,9 @@ class ConfigRecipePage extends Component {
             .bind(this);
         this.handleListLoad = this
             .handleListLoad
+            .bind(this);
+        this.addEquipmentButton= this
+            .addEquipmentButton
             .bind(this);
     }
 
@@ -219,6 +224,7 @@ class ConfigRecipePage extends Component {
                                     data={this.state.equipmentsAvailable.value}
                                     onUpdate={this.handleListLoad}
                                     validate={this.validateRecipeAdd}
+                                    customButtonData = {this.addEquipmentButton}
                                     className="cell"/>
 
                             </div>
@@ -323,6 +329,11 @@ class ConfigRecipePage extends Component {
     isFormInvalid() {
         return !(this.state.name.validateStatus === 'success');
     }
+
+    addEquipmentButton(){
+        return(  <CustomEquipmentPrompt add={function(item){console.log(item)}}/> );
+    }
+
 }
 
 export default ConfigRecipePage;

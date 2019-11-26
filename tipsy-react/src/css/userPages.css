@@ -12,6 +12,10 @@
     margin-bottom: 1%;
 }
 
+.ant-tabs{
+  margin-bottom: 2%;
+}
+
 /* Admin Page */
 
 /* Search */
@@ -37,7 +41,9 @@
 
 
 /* Create Recipe Page */
-
+.settingsButton{
+  margin-top: 2%;
+}
 
 /* Users Bar Page */
 

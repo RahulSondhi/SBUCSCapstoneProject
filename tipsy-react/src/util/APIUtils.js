@@ -247,3 +247,10 @@ export function getEquipmentBrief(name) {
         method: 'GET'
     });
 }
+
+export function getAllEquipmentTypes() {
+    return request({
+        // url: API_BASE_URL + "/tipsy/search/user/getBrief?name=rahul",
+        // method: 'GET'
+    });
+}

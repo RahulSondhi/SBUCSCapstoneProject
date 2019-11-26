@@ -130,6 +130,8 @@ export class MakeProfImg extends Component {
                 this.state.src = NewBarPic
             } else if (this.type === "recipe") {
                 this.state.src = NewRecipePic
+            } else if (this.type === "equipment") {
+                this.state.src = NewRecipePic
             } else {
                 this.state.src = NewUserPic
             }
@@ -315,6 +317,12 @@ export class DynamicForm extends Component {
         this.type = this.props.type;
         this.className = this.props.className;
 
+        this.customButtonData = <div />;
+        
+        if(this.props.customButtonData !== undefined){
+            this.customButtonData = this.props.customButtonData;
+        }
+
         this.addItem = this
             .addItem
             .bind(this);
@@ -386,6 +394,7 @@ export class DynamicForm extends Component {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
                 <DynamicInput input="" addItem={this.addItem} type={this.type}/>
+                <this.customButtonData />
                 <ItemPreview
                     className="small-6 cell"
                     items={this.state.data}
