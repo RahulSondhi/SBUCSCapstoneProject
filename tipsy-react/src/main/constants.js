@@ -444,12 +444,12 @@ class DynamicInput extends Component {
             mode="multiple"
             labelInValue
             value={value}
-            placeholder="Select users"
+            placeholder={"Select " +this.type}
             notFoundContent={fetching ? <Spin size="small" /> : null}
             filterOption={false}
             onSearch={this.fetchUser}
             onChange={this.handleChange}
-            style={{ width: '100%' }}
+            className="searchbar cell"
           >
             {data.map(d => (
               <Option key={d.value}>{d.text}</Option>

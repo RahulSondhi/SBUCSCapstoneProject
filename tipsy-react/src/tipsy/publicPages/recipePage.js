@@ -1,12 +1,118 @@
 import React, {Component} from 'react';
+import {Redirect, NavLink} from 'react-router-dom'
+import {ItemPreview, GetProfImg} from '../../main/constants';
 import Navbar from '../navbar/navbar.js';
+import {Tabs} from 'antd';
+import {getRecipeProfile} from '../../util/APIUtils';
+
+const {TabPane} = Tabs;
 
 class RecipePage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            recipe: null,
+            isLoading: true,
+            settingClass: "hidden"
+        }
+        this.loadRecipeProfile = this
+            .loadRecipeProfile
+            .bind(this);
+    }
+
+    loadRecipeProfile(id) {
+        this.setState({isLoading: true});
+
+        getRecipeProfile(id).then(response => {
+            this.setState({recipe: response, isLoading: false});
+
+            if(
+                this.props.currentUser.name === response.author.name ||
+                this.props.currentUser.roles.includes("ADMIN")
+            ){
+                this.setState({
+                    settingClass : " "
+                });
+            }
+
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
+    }
+
+    componentDidMount() {
+        let try_name = this.props.match.params.id;
+        const id = try_name;
+        this.loadRecipeProfile(id);
+    }
+
+    componentDidUpdate(nextProps) {
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            this.loadRecipeProfile(nextProps.match.params.id);
+        }
+    }
     render() {
+
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        // Checking response
+        if (this.state.notFound === true || this.state.serverError === true) {
+            return <Redirect
+                to={{
+                pathname: "/tipsy/error",
+                state: {
+                    from: this.props.location,
+                    notFound: this.state.notFound,
+                    serverError: this.state.serverError
+                }
+            }}/>
+        }
+
         return (
-            <div className="grid-margin-y grid-container-fluid">
+            <div className="grid-x align-center-middle">
                 <Navbar/>
                 
+                <div className="small-8 small-offset-2 grid-x align-center-middle cell">
+                    <GetProfImg
+                        className="small-3 cell"
+                        pic={this.state.recipe.img}
+                        alt={this.state.recipe.name}
+                        type="recipe"/>
+                </div>
+
+                <div id="redirectRecipe" className="small-2 cell grid-x align-center-middle">
+                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
+                        <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
+                    </NavLink>
+                </div>
+
+                <h1 id="recipePageTitle" className="caption small-10 cell">{this.state.recipe.name}</h1>
+
+                <div className="small-12 medium-4 grid-x align-center-middle cell">
+
+                    <h1 className="caption small-10 cell">Author:</h1>
+                    <ItemPreview className="small-8 cell" items={[this.state.recipe.author]} type="user"/>
+
+                    <h1 className="barPageDescTitle captionRed small-10 cell">Desc</h1>
+                    <div className="small-10 grid-x grid-margin-x align-center-middle cell">
+                        {this.state.recipe.description}
+                    </div>
+                </div>
+
+                <div
+                    id="rightBarSide"
+                    className="small-12 medium-8 grid-x align-center-middle cell">
+                    <h1 id="userPageBarTitle" className="captionRed small-10 cell">Steps</h1>
+                    
+                </div>
             </div>
         )
     }

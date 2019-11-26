@@ -100,7 +100,7 @@ class ConfigUserPage extends Component {
                     errorMsg: null
                 },
                 profilePic: {
-                    value: response.profilePic,
+                    value: response.img,
                     validateStatus: 'success',
                     errorMsg: null
                 },
@@ -124,7 +124,7 @@ class ConfigUserPage extends Component {
 
     componentDidMount() {
         let try_name = "";
-        console.log(this.props)
+        
         if (this.props.match.params.id === this.props.currentUser.name ||
             this.props.currentUser.roles.includes("ADMIN")){
 
@@ -307,8 +307,6 @@ class ConfigUserPage extends Component {
         }else{
             nickname = this.props.match.params.id
         }
-
-        console.log(nickname)
 
         changeUserSettings(settingsRequest,nickname).then(response => {
             notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});

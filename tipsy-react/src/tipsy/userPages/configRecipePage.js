@@ -68,7 +68,7 @@ class ConfigRecipePage extends Component {
         if (this.state.isCreating === false) {
             let try_name = this.props.match.params.id;
             const id = try_name;
-            this.loadRecipe(id);
+            this.loadRecipeProfile(id);
         } else {
             this.setState({isLoading: false});
         }

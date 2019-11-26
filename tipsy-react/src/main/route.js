@@ -92,6 +92,7 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <SearchPage currentUser={this.state.currentUser} {...props}/>}/>
+                    
                     <PrivateRoute
                         exact
                         path="/tipsy/createbar"
@@ -109,7 +110,7 @@ class Routes extends Component {
                         component={(props) => <UsersDisplaysPage type="bar" currentUser={this.state.currentUser} {...props}/>}/>
                     <PrivateRoute
                         exact
-                        path="/tipsy/bar/:id/settings"
+                        path="/tipsy/bar/:id/config"
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <ConfigBarPage
@@ -178,7 +179,7 @@ class Routes extends Component {
 
                     <PrivateRoute
                         exact
-                        path="/tipsy/user/:id/stg"
+                        path="/tipsy/user/:id/config"
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <ConfigUserPage currentUser={this.state.currentUser} {...props}/>}/>
