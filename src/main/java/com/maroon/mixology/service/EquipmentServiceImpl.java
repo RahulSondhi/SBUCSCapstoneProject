@@ -28,4 +28,9 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findByNameLikeIgnoreCase(name);
     }
 
+    @Override
+    public Boolean existsByName(String name) {
+        return equipmentRepository.existsByName(name);
+    }
+
 }

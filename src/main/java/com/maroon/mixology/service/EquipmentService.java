@@ -8,6 +8,8 @@ public interface EquipmentService{
     
     Equipment findByName(String name);
 
+    Boolean existsByName(String name);
+
     List<Equipment> findAll();
 
     List<Equipment> findByNameLikeIgnoreCase(String name);

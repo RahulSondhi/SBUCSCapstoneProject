@@ -214,7 +214,7 @@ public class RecipeController {
                 recipe.setPublished(recipeRequest.getPublished());
                 //Build the Steps from Step requests
                 // We should redo all the steps from the step request
-                if(recipeRequest.getNewSteps()){
+                if(recipeRequest.getNewSteps()){ //make sure this boolean is a thing
                     // we have to delete the steps saved
                     stepRepository.deleteAll(recipe.getSteps());
                     // now, lets add new steps

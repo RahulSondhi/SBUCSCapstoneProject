@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import com.maroon.mixology.entity.Equipment;
+import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
+import com.maroon.mixology.exchange.response.UserIdentityAvailability;
 import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.service.EquipmentServiceImpl;
+import com.maroon.mixology.service.EquipmentTypeServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +32,10 @@ import org.slf4j.LoggerFactory;
 public class EquipmentController {
     @Autowired
     private EquipmentServiceImpl equipmentService;
+
+    @Autowired
+    private EquipmentTypeServiceImpl equipmentTypeService;
+
 
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
@@ -73,26 +80,29 @@ public class EquipmentController {
         }
     }
 
-    @GetMapping("/getBrief")
-    public ResponseEntity<?> getEquipmentBrief(@RequestParam(value = "name") String name) {
+    @GetMapping("/getEquipmentTypes")
+    public ResponseEntity<?> getEquipmentTypes() {
         try{
-            //we have to query the bar from Mongo
-            Equipment equipment = equipmentService.findByName(name);
-            if(equipment == null){
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment '" + name + "' was not found!"),
-                    HttpStatus.NOT_FOUND);
+            List<EquipmentType> equipmentTypes = equipmentTypeService.findAll();
+            Set<EquipmentTypeResponse> equipmentTypeResponses = new HashSet<EquipmentTypeResponse>();
+            for (EquipmentType eT : equipmentTypes){
+                equipmentTypeResponses.add(new EquipmentTypeResponse(
+                    eT.getName(), 
+                    eT.getActionsDoTo(), 
+                    eT.getActionsDoing())
+                    );
             }
-            //now we return the brief responses
-            return ResponseEntity.ok(new BriefEquipmentResponse(
-                equipment.getName(), 
-                equipment.getImage(), 
-                equipment.getEquipmentType().getName()
-            ));
+            return ResponseEntity.ok(equipmentTypeResponses);
         } catch (Exception e) {
-            logger.error("Equipment was unable to be loaded.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment was unable to be loaded. Error: " + e.getMessage()),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipments were unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/checkEquipmentNameIsPresent")
+    public UserIdentityAvailability checkEquipmentIsPresent(@RequestParam(value = "equipmentName") String equipmentName) {
+        Boolean isAvailable = equipmentService.existsByName(equipmentName);
+        return new UserIdentityAvailability(isAvailable);
     }
 
 }

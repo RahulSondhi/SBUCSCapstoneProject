@@ -91,6 +91,13 @@ export function checkEmailAvailability(email) {
     });
 }
 
+export function checkEquipmentNameIsPresent(equipmentName) {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/checkEquipmentNameIsPresent?equipmentName=" + equipmentName,
+        method: 'GET'
+    });
+}
+
 export function getCurrentUser() {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
@@ -141,6 +148,13 @@ export function getEquipmentProfile(equipmentName) {
 export function getAllEquipment() {
     return request({
         url: API_BASE_URL + "/tipsy/equipment/getEquipments",
+        method: 'GET'
+    });
+}
+
+export function getAllEquipmentTypes() {
+    return request({
+        url: API_BASE_URL + "/tipsy/equipment/getEquipmentTypes",
         method: 'GET'
     });
 }
@@ -245,12 +259,5 @@ export function getEquipmentBrief(name) {
     return request({
         url: API_BASE_URL + "/tipsy/search/equipment/getBrief?name=" + name,
         method: 'GET'
-    });
-}
-
-export function getAllEquipmentTypes() {
-    return request({
-        // url: API_BASE_URL + "/tipsy/search/user/getBrief?name=rahul",
-        // method: 'GET'
     });
 }
