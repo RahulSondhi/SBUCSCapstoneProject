@@ -14,15 +14,21 @@ const { Option } = Select;
 
 export class SearchPage extends Component {
 
+    id = 0;
+
     constructor(props) {
         super(props);
 
         this.state = {
-            data: null,
+            results: [],
             isLoading: true,
             type: "recipe",
-            flow: "search",
-            query: null 
+            defaultType: "recipe",
+            query: null,
+            searchingClass: " ",
+            searchClass: "hidden",
+            searching: false,
+            id: this.id
         }
 
         this.searching = this
@@ -36,72 +42,108 @@ export class SearchPage extends Component {
         this.loadSearch = this
             .loadSearch
             .bind(this);
+        
+        this.exitSearch = this
+            .exitSearch
+            .bind(this);
 
     }
 
     updateType(val){
         this.setState({
-            type: val
+            defaultType: val
         })
     }
 
     componentDidMount() {
         
         const values = queryString.parse(this.props.location.search)
-
-        if(this.props.results === true){
-            this.loadSearch(values.type,values.query,"searched");
+        if(values.type !== undefined && values.query !== undefined ){
+            this.setState({
+                type: values.type,
+                defaultType: values.type,
+                query: values.query,
+                id: this.id + 1
+            });
+            this.loadSearch();
         }else{
-            this.setState({isLoading: false});
+            this.setState({
+                searchingClass: " ",
+                searchClass: "hidden",
+                isLoading: false
+            });
         }
 
     }
 
-    loadSearch = (type,query,status) => {
-        if(type === "user"){
-            
-            search(type,query).then(response => {
-                this.setState({
-                    data: response,
-                    type: type,
-                    query: query,
-                    isLoading: false,
-                    flow: status
-                    });
-            }).catch(error => {
-                if (error.status === 404) {
-                    this.setState({
-                        data: [],
-                        type: type,
-                        query: query,
-                        isLoading: false,
-                        flow: status
-                        });
-                } else {
-                    this.setState({serverError: true, isLoading: false});
-                }
-            });
+    loadSearch = () => {
 
-        } else {
-            this.setState({isLoading: false, notFound:true});
+        this.id += 1;
+        if(["user","bar","equipment","recipe"].includes(this.state.defaultType)){
+            search(this.state.defaultType,this.state.query).then(response => {
+                this.setState({
+                    type: this.state.defaultType,
+                    results: response,
+                    isLoading: false,
+                    searchingClass: "hidden",
+                    searchClass: " ",
+                    searching: true,
+                    id: this.id
+                });
+            }).catch(error => {
+                this.setState({
+                    results: [{name:"No "+this.state.type+" called '"+ this.state.query +"' found!"}],
+                    type: "error",
+                    isLoading: false,
+                    searchingClass: "hidden",
+                    searchClass: " ",
+                    searching: true,
+                    id: this.id
+                });
+            });
+        } else  {
+            this.props.history.push({
+                pathname: '/tipsy/search',
+                search: ""
+            })
+            window.location.reload();
         }
+
+    }
+
+    exitSearch = () => {
+        this.setState({
+            results: [],
+            type: "",
+            searchingClass: " ",
+            searchClass: "hidden",
+            searching: false,
+            id: this.id,
+        });
     }
 
     searching(e){
-        console.log("kill me")
-        this.loadSearch(this.state.type,e.target.value,"searching");
+
+        this.props.history.push({
+            pathname: '/tipsy/search',
+            search: '?type='+this.state.defaultType+"&query="+e.target.value
+        })
+
+        this.state.query = e.target.value;
+
+        this.loadSearch()
 
     }
 
     render() {
 
         const selectBefore = (
-            <Select defaultValue="recipe" onChange={this.updateType}>
+            <Select defaultValue={this.state.defaultType} onChange={this.updateType}>
                 <Option value="bar">Bars Name</Option>
                 <Option value="recipe">Recipe Name</Option>
                 <Option value="user">Users Name</Option>
                 <Option value="equipment">Equipment Name</Option>
-            </Select>
+            </Select> 
         );
 
         // Checking if data came in
@@ -122,61 +164,38 @@ export class SearchPage extends Component {
             }}/>
         }
 
-        console.log(this.state.flow)
+        const values = queryString.parse(this.props.location.search)
 
-        if(this.state.flow === "search"){
-            return (
-                <div className="grid-x align-center-middle">
-                    
-                    <Navbar/>
-
-                    {/* Title */}
-                    <h1 id="searchTitle" className={"caption small-8 cell"}>
-                        Search
-                    </h1>
-
-                    {/* Search Bar */}
-                    <Input addonBefore={selectBefore} className="searchbar medium-10 cell" placeholder="What are you looking for?" onPressEnter={(e) => this.searching(e)} />
-                    
-                    {/* Drinks Footer */}
-                    <div id="searchDrinks" className={"small-12 cell"}>
-                        <img src={Drinks} alt="DrinksLogo"></img>
-                    </div>
-                    
-                </div>
-            )
-        }else if (this.state.flow === "searching") {
-            
-            return <Redirect push
-                to={{
-                pathname: "/tipsy/results?type="+this.state.type+"&query="+this.state.query,
-                state: {
-                    from: this.props.location
-                }
-            }}/>
-
-
-        } else {
-
-            console.log(this.state)
-            return (
-                <div className="grid-x align-center-middle">
-                    
-                    <Navbar/>
-
-                    {/* Title */}
-                    <h1 id="searchTitle" className={"caption small-8 cell"}>
-                        Search
-                    </h1>
-
-                    {/* <ItemPreview
-                        className="small-6 medium-3 cell"
-                        items={this.state.data}
-                        type={this.state.type}/> */}
-                    
-                </div>
-            )
+        if(values.query === undefined && this.state.searching === true){
+            this.exitSearch();
         }
+
+        return (
+            <div className="grid-x align-center-middle">
+                
+                <Navbar/>
+
+                {/* Title */}
+                <h1 id="searchTitle" className={"caption small-8 cell "+this.state.searchingClass}>
+                    Search
+                </h1>
+
+                {/* Search Bar */}
+                <Input addonBefore={selectBefore} className="searchbar medium-10 cell" placeholder="What are you looking for?" onPressEnter={(e) => this.searching(e)} />
+                
+                {/* Drinks Footer */}
+                <div id="searchDrinks" className={"small-12 cell "+this.state.searchingClass}>
+                    <img src={Drinks} alt="DrinksLogo"></img>
+                </div>
+
+                <ItemPreview
+                    className= {"small-6 medium-3 cell "+this.state.searchClass}
+                    items={this.state.results}
+                    type={this.state.type}/>
+                
+            </div>
+        )
+
     }
 }
 

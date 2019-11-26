@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Input, Icon, notification, Select, Spin } from 'antd';
+import {notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
 import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search} from '../util/APIUtils';
@@ -99,6 +99,8 @@ export class GetProfImg extends Component {
                 this.image = EquipmentPic
             } else if (this.type === "action") {
                 this.image = ActionPic
+            } else if (this.type === "error") {
+                this.image = RemovePic
             } else {
                 this.image = UnknownPic
             }
@@ -236,6 +238,8 @@ class GetItem extends Component {
             this.desc = <span>{" " + this.item.author}</span>;
         } else if (this.type === "action") {
             this.name = this.props.item;
+            this.link = "#";
+        } else if (this.type === "error") {
             this.link = "#";
         } else {
             this.link = this.link + this.item.id

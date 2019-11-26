@@ -84,3 +84,11 @@ form .ant-form-item-label{
 .searchbar input[type=text]:focus {
     box-shadow: 0 0 0.5em var(--light-blue);
 }
+
+.searchbar{
+    margin-bottom: 3%;
+}
+
+.ant-input-group .ant-input-group-addon .ant-select{
+    color: white !important;
+}

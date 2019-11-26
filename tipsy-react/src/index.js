@@ -14,6 +14,8 @@ import './css/userPages.css';
 import './css/publicPages.css';
 
 ReactDOM.render(
-  <Main/>,
+  <BrowserRouter>
+    <Main/>
+  </BrowserRouter>,
   document.getElementById('root')
 );
