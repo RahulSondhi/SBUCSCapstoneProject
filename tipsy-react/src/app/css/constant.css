@@ -64,8 +64,34 @@
 
 /* Previews */
 
+.previewItemContainer{
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../assets/card.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 0.5em;
+    padding-bottom: 0.75em;
+    text-align: center;
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+}
+
+.previewItemContainer:hover{
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+}
+
+.previewItemMargin {
+    height: 1em;
+}
+
+.previewItemContainer .spacer{
+    margin-bottom: 1em;
+}
+
 .previewItem{
-    text-align: left;
     color: white;
     min-height: 0;
 }
@@ -75,11 +101,11 @@
 }
 
 .previewName{
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 .previewDesc{
-    font-size: 0.75em;
+    font-size: 1em;
 }
 
 .previewDesc span{

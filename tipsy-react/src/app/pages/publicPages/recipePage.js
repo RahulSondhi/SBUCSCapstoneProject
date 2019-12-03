@@ -82,7 +82,7 @@ class RecipePage extends Component {
             <div className="grid-x align-center-middle">
                 <Navbar/>
                 
-                <div className="small-8 small-offset-2 grid-x align-center-middle cell">
+                <div className="small-6 small-offset-3 grid-x align-center-middle cell">
                     <GetProfImg
                         className="small-3 cell"
                         pic={this.state.recipe.img}
@@ -90,7 +90,7 @@ class RecipePage extends Component {
                         type="recipe"/>
                 </div>
 
-                <div id="redirectRecipe" className="small-2 cell grid-x align-center-middle">
+                <div id="redirectRecipe" className="small-1 small-offset-2 cell grid-x align-center-middle">
                     <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
                         <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
                     </NavLink>

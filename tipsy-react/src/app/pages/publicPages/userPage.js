@@ -85,7 +85,7 @@ class UserPage extends Component {
                 <Navbar/>
                 <h1 id="userPageTitle" className="caption small-8 small-offset-2 cell">{this.state.user.name}</h1>
                 
-                <div id="redirectUser" className="small-2 cell grid-x align-center-middle">
+                <div id="redirectUser" className="small-1 small-offset-1 cell grid-x align-center-middle">
                     <NavLink to={"/tipsy/user/"+this.state.user.name+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
                         <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
                     </NavLink>

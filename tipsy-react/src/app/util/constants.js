@@ -225,8 +225,15 @@ class GetItem extends Component {
         this.descPre = "";
         this.desc = "";
 
-        if (this.type === "user" || this.type === "equipment") {
+        if (this.type === "user") {
             this.link = this.link + this.item.name;
+        } else if (this.type === "equipment") {
+            this.link = this.link + this.item.name;
+            this.descPre = "Type:";
+            this.desc = <span>{" " + this.item.equipmentType}</span>;
+        } else if (this.type === "equipmentAltered") {
+            this.link = this.link + this.item.name;
+            this.desc = <span>{" " + this.item.tags}</span>;
         } else if (this.type === "bar") {
             this.link = this.link + this.item.id;
             this.descPre = "Owner:";
@@ -240,6 +247,12 @@ class GetItem extends Component {
             this.link = "#";
         } else if (this.type === "error") {
             this.link = "#";
+        } else if (this.type === "createBar") {
+            this.type = "add";
+            this.name = this.item.desc;
+        } else if (this.type === "createRecipe") {
+            this.type = "add";
+            this.name = this.item.desc;
         } else {
             this.link = this.link + this.item.id
             if (this.item.desc !== null && this.item.desc !== "") {
@@ -270,28 +283,50 @@ class GetItem extends Component {
     render() {
         return (
             <div className={this.className} key={this.id}>
-                <Link
-                    to={this.link}
-                    className="previewItem small-11 grid-x align-center-middle cell">
-                    <div className="small-5 grid-x cell">
-                        <GetProfImg
-                            className="small-10 cell"
-                            pic={this.img}
-                            alt={this.name}
-                            type={this.type}/>
-                    </div>
-                    <div className="small-7 grid-x cell">
-                        <div className="previewName cell">{this.name}</div>
-                        <div className="previewDesc cell">{this.descPre}{this.desc}
+
+                <div className="previewItemMargin cell"></div>
+
+                <div className="grid-x align-center-middle small-11 previewItemContainer">
+                    <Link
+                        to={this.link}
+                        className="previewItem small-11 grid-x align-center-middle cell">
+                        <div className="small-1 cell"></div>
+                        <div className="small-6 grid-x align-center-middle cell">
+                            <GetProfImg
+                                className="small-10 cell"
+                                pic={this.img}
+                                alt={this.name}
+                                type={this.type}/>
                         </div>
+                    </Link>
+                    
+                    <div className="small-1 grid-x cell" onClick={this.postFunc}>
+                        <GetProfImg
+                            className={"small-6 cell " + this.postfixClass}
+                            alt={this.postfix}
+                            type={this.postfix}/>
                     </div>
-                </Link>
-                <div className="small-1 grid-x cell" onClick={this.postFunc}>
-                    <GetProfImg
-                        className={"small-6 cell " + this.postfixClass}
-                        alt={this.postfix}
-                        type={this.postfix}/>
+
+                    <Link
+                        to={this.link}
+                        className="cell">
+                        <div className="spacer"></div>
+                    </Link>
+                    
+                    <Link
+                        to={this.link}
+                        className="previewItem small-12 grid-x align-center-middle cell">
+                        <div className="small-1 cell"></div>
+                        <div className="small-10 grid-x cell">
+                            <div className="previewName cell">{this.name}</div>
+                            <div className="previewDesc cell">{this.descPre}{this.desc}</div>
+                        </div>
+                        <div className="small-1 cell"></div>
+                    </Link>
+
                 </div>
+
+                <div className="previewItemMargin cell"></div>
             </div>
         )
     }
