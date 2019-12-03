@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {forgot, checkEmailAvailability} from '../../util/APIUtils';
-import {ValidateEmail} from '../../util/constants';
+import {ValidateEmail, Notify} from '../../util/constants';
 
 import Tipsy from '../../assets/Tipsy.svg';
 
-import {Form, Input, Icon, notification} from 'antd';
+import {Form, Input, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Forgot extends Component {
@@ -58,12 +58,9 @@ class Forgot extends Component {
             email: this.state.email.value
         };
         forgot(forgotRequest).then(response => {
-            notification.success({message: 'Tipsy App', description: "Password reset request submitted succesfully. Please check your email."});
+            Notify("success","Password reset request submitted succesfully. Please check your email.",-1)
         }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'This email address was not found.'
-            });
+            Notify("error",error.message || 'This email address was not found.',-1)
         });
     }
     /*

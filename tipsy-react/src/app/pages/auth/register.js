@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {register, checkNicknameAvailability, checkEmailAvailability} from '../../util/APIUtils';
-import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword} from '../../util/constants';
+import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword, Notify} from '../../util/constants';
 
 import Bottle from '../../assets/equipment/bottle.svg';
 import Cup from '../../assets/equipment/cup.svg';
 import Tipsy from '../../assets/Tipsy.svg';
 
-import {Form, Input, Icon, notification} from 'antd';
+import {Form, Input, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Register extends Component {
@@ -103,15 +103,9 @@ class Register extends Component {
         });
         // Send the response
         register(registerRequest).then(response => {
-            notification.success({
-                message: 'Tipsy App',
-                description: "Thank you! You're successfully registered. Please check your email to confirm your registration!"
-            });
+            Notify("success","Thank you! You're successfully registered. Please check your email to confirm your registration!",-1);
         }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-            });
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
     /*
@@ -125,7 +119,6 @@ class Register extends Component {
         this.state.password.validateStatus === 'success' && 
         this.state.passwordConfirm.validateStatus === 'success');
     }
-
 
     /*
     Render the html in the page

@@ -4,7 +4,6 @@ import Routes from './util/route';
 
 import {getCurrentUser} from './util/APIUtils';
 import * as constant from './util/constants';
-import {notification} from 'antd';
 
 class Main extends Component {
 
@@ -60,14 +59,14 @@ class Main extends Component {
         history.push("/");
         window.location.reload();
 
-        notification[notificationType]({message: 'Tipsy App', description: description});
+        constant.Notify(notificationType,description,-1);
     }
 
     async handleLogin() {
         await this.loadCurrentUser();
         history.push("/tipsy/search");
         window.location.reload();
-        notification.success({message: 'Tipsy App', description: "You're successfully logged in."});
+        constant.Notify("success","You're successfully logged in.",-1);
     }
 
     render() {

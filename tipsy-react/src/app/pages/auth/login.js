@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {login} from '../../util/APIUtils';
-import {ACCESS_TOKEN} from '../../util/constants';
+import {ACCESS_TOKEN, Notify} from '../../util/constants';
 
 import Tipsy from '../../assets/Tipsy.svg';
 import Drinks from '../../assets/drinks.svg';
 
-import {Form, Input, Icon, notification} from 'antd';
+import {Form, Input, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -40,12 +40,9 @@ class LoginForm extends Component {
                         this.props.onLogin();
                     }).catch(error => {
                         if (error.status === 401) {
-                            notification.error({message: 'Tipsy App', description: 'Your Email or Password is incorrect. Please try again!'});
+                            Notify("error",'Your Email or Password is incorrect. Please try again!',-1);
                         } else {
-                            notification.error({
-                                message: 'Tipsy App',
-                                description: error.message || 'Sorry! Something went wrong. Please try again!'
-                            });
+                            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
                         }
                     });
                 }

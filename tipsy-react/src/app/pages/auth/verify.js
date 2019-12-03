@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../../util/APIUtils';
-import {ACCESS_TOKEN, ValidatePassword} from '../../util/constants';
+import {ACCESS_TOKEN, ValidatePassword, Notify} from '../../util/constants';
 
 import Tipsy from '../../assets/Tipsy.svg';
 
-import {Form, Input, Button, notification} from 'antd';
+import {Form, Input, Button} from 'antd';
 const FormItem = Form.Item;
 
 class Verify extends Component {
@@ -67,15 +67,9 @@ class Verify extends Component {
             password: this.state.password.value
         };
         resetPassword(resetPasswordRequest).then(response => {
-            notification.success({
-                message: 'Tipsy App',
-                description: "Thank you! We have reset your password. You may now login.",
-            });          
+            Notify("success","Thank you! We have reset your password. You may now login.",-1);        
         }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-            });
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
     /*
@@ -95,26 +89,20 @@ class Verify extends Component {
         if(this.state.flow === "verifyConfirm"){
             //verifyConfirm
             verifyConfirm(uuidValue).then(response => {
-                notification.success({ 
-                    message: "Tipsy App", 
-                    description: response.message
-                });
+                Notify("success",response.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'success'
                     }
                 });
             }).catch(error => {
-                    notification.error({
-                        message: 'Tipsy App',
-                        description : error.message
-                    });
-                    this.setState({
-                        uuid: {
-                            validateStatus : 'error'
-                        }
-                    });
-                })
+                Notify("error",error.message,-1);
+                this.setState({
+                    uuid: {
+                        validateStatus : 'error'
+                    }
+                });
+            })
         }
         else if(this.state.flow === "verifyNewEmail"){
             //verifyNewEmail
@@ -125,20 +113,14 @@ class Verify extends Component {
             const emailValue = params.get('email');
             console.log(emailValue);
             verifyNewEmail(uuidValue, emailValue).then(response =>{
-                notification.success({
-                        message: "Tipsy App",
-                        description : response.message
-                    });
-                    this.setState({
-                        uuid: {
-                            validateStatus : 'success'
-                        }
-                    });
-            }).catch(error => {
-                notification.error({
-                    message: 'Tipsy App',
-                    description : error.message
+                Notify("success",response.message,-1);
+                this.setState({
+                    uuid: {
+                        validateStatus : 'success'
+                    }
                 });
+            }).catch(error => {
+                Notify("error",error.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'error'
@@ -150,10 +132,7 @@ class Verify extends Component {
             //verifyReset
             console.log(uuidValue);
             verifyReset(uuidValue).then(response =>{
-                notification.success({ 
-                    message: "Tipsy App", 
-                    description: response.message
-                });
+                Notify("success",response.message,-1);
                 this.setState({
                     uuid: {
                         value: uuidValue,
@@ -161,17 +140,14 @@ class Verify extends Component {
                     }
                 });
             }).catch(error => {
-                    notification.error({
-                        message: 'Tipsy App',
-                        description : error.message
-                    });
-                    this.setState({
-                        uuid: {
-                            value: uuidValue,
-                            validateStatus : 'error'
-                        }
-                    });
+                Notify("error",error.message,-1);
+                this.setState({
+                    uuid: {
+                        value: uuidValue,
+                        validateStatus : 'error'
+                    }
                 });
+            });
         }
 
         this.setState({

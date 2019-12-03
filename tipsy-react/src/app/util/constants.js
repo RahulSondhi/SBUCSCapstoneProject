@@ -41,6 +41,26 @@ export const ValidateDesc = validate.validateDesc;
 
 // Notifications
 
+export const Notify = (type,desc,duration) => {
+
+    var notifType = type;
+    var notifDuration = duration;
+
+    if(type !== "success" && type !== "warning" && type !== "error" && type !== "info"){
+        notifType = "open";
+    }
+
+    if(duration === -1){
+        notifDuration = 4.5;
+    }
+
+    notification[notifType]({
+      message: APP_NAME,
+      description: desc,
+      duration: notifDuration,
+    });
+
+  };
 
 // Profile Components
 

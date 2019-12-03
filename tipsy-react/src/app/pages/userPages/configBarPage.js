@@ -3,9 +3,9 @@ import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
 import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
-import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName} from '../../util/constants';
+import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, Notify} from '../../util/constants';
 
-import {Form, Input, Icon, Tabs, notification} from 'antd';
+import {Form, Input, Icon, Tabs} from 'antd';
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
@@ -391,21 +391,15 @@ class ConfigBarPage extends Component {
 
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your bar was succesfully created!"});
+                Notify("success","Your bar was succesfully created!",-1);
             }).catch(error => {
-                notification.error({
-                    message: 'Tipsy App',
-                    description: error.message || 'Sorry! Something went wrong. Please try again!'
-                });
+                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
             changeBarSettings(this.props.match.params.id, barRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your bar was succesfully saved!"});
+                Notify("success","Your bar was succesfully saved!",-1);
             }).catch(error => {
-                notification.error({
-                    message: 'Tipsy App',
-                    description: error.message || 'Sorry! Something went wrong. Please try again!'
-                });
+                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         }
     }

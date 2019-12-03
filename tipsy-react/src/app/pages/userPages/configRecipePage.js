@@ -3,9 +3,9 @@ import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
 import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
-import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc} from '../../util/constants';
+import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc, Notify} from '../../util/constants';
 
-import {Form, Input, Icon, Tabs, notification} from 'antd';
+import {Form, Input, Icon, Tabs} from 'antd';
 
 import CustomEquipmentPrompt from './customEquipmentPrompt'
 
@@ -307,21 +307,15 @@ class ConfigRecipePage extends Component {
 
         if (this.state.isCreating === true) {
             createRecipe(recipeRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully created!"});
+                Notify("success","Your recipe was succesfully created!",-1);
             }).catch(error => {
-                notification.error({
-                    message: 'Tipsy App',
-                    description: error.message || 'Sorry! Something went wrong. Please try again!'
-                });
+                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
             changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully saved!"});
+                Notify("success","Your recipe was succesfully saved!",-1);
             }).catch(error => {
-                notification.error({
-                    message: 'Tipsy App',
-                    description: error.message || 'Sorry! Something went wrong. Please try again!'
-                });
+                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         }
     }

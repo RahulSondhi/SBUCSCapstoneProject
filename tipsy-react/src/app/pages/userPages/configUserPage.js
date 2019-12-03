@@ -4,9 +4,9 @@ import Navbar from '../navbar/navbar.js';
 import {Enum} from 'enumify';
 
 import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
-import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail} from '../../util/constants';
+import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail, Notify} from '../../util/constants';
 
-import {Form, Input, Icon, notification, Select} from 'antd';
+import {Form, Input, Icon, Select} from 'antd';
 const FormItem = Form.Item;
 const {Option} = Select;
 
@@ -308,12 +308,9 @@ class ConfigUserPage extends Component {
         }
 
         changeUserSettings(settingsRequest,nickname).then(response => {
-            notification.success({message: 'Tipsy App', description: "Your settings were succesfully changed!"});
+            Notify("success","Your settings were succesfully changed!",-1);
         }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-            });
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
 

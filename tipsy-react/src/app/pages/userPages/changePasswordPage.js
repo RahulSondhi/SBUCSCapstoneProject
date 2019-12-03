@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import { changePassword } from '../../util/APIUtils';
-import { ValidatePassword } from '../../util/constants';
+import { ValidatePassword, Notify } from '../../util/constants';
 
-import { Form, Input, notification, Icon } from 'antd';
+import { Form, Input, Icon } from 'antd';
 const FormItem = Form.Item;
 
 class ChangePasswordPage extends Component {
@@ -48,15 +48,9 @@ class ChangePasswordPage extends Component {
         };
         changePassword(changePasswordRequest)
         .then(response => {
-            notification.success({
-                message: 'Tipsy App',
-                description: "Thank you! We have changed your password.",
-            });          
+            Notify("success","Thank you! We have changed your password.",-1);        
         }).catch(error => {
-            notification.error({
-                message: 'Tipsy App',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
-            });
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
     /*
