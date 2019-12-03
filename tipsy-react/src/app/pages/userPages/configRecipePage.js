@@ -19,7 +19,7 @@ class ConfigRecipePage extends Component {
 
         this.state = {
             isLoading: true,
-            isCreating: this.props.isCreating,
+            type: this.props.type,
             recipe: null,
             page: {
                 title: "Create a Recipe",
@@ -70,7 +70,7 @@ class ConfigRecipePage extends Component {
 
     componentDidMount() {
 
-        if (this.state.isCreating === false) {
+        if (this.state.type === "config" || this.state.type === "clone") {
             let try_name = this.props.match.params.id;
             const id = try_name;
             this.loadRecipeProfile(id);
@@ -85,14 +85,20 @@ class ConfigRecipePage extends Component {
 
         getRecipeProfile(id).then(response => {
 
-            const tempTitle = "Editing " + response.name;
+            var tempTitle = "Editing " + response.name;
+            var tempSubmit = "Save Recipe";
+
+            if (this.state.type === "clone") {
+                tempTitle = "Cloning " + response.name;
+                tempSubmit = "Clone Recipe"
+            }
 
             this.setState({
                 recipe: response,
                 isLoading: false,
                 page: {
                     title: tempTitle,
-                    submit: "Save Recipe"
+                    submit: tempSubmit
                 },
                 name: {
                     value: response.name,
@@ -305,7 +311,7 @@ class ConfigRecipePage extends Component {
             equipmentsAvailable: this.state.equipmentsAvailable.value
         };
 
-        if (this.state.isCreating === true) {
+        if (this.state.type === "clone" || this.state.type === "config") {
             createRecipe(recipeRequest).then(response => {
                 Notify("success","Your recipe was succesfully created!",-1);
             }).catch(error => {

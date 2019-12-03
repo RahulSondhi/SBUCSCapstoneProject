@@ -131,7 +131,7 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <ConfigRecipePage
-                            isCreating={true}
+                            type="create"
                             currentUser={this.state.currentUser}
                             {...props}/>}/>
                     <PrivateRoute
@@ -149,7 +149,16 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <ConfigRecipePage
-                            isCreating={false}
+                            type="config"
+                            currentUser={this.state.currentUser}
+                            {...props}/>}/>
+                    <PrivateRoute
+                        exact
+                        path="/tipsy/recipe/:id/clone"
+                        authed={this.state.isAuthenticated}
+                        redirectTo="/"
+                        component={(props) => <ConfigRecipePage
+                            type="clone"
                             currentUser={this.state.currentUser}
                             {...props}/>}/>
                     <PrivateRoute

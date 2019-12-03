@@ -94,6 +94,10 @@ class RecipePage extends Component {
                     <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
                         <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
                     </NavLink>
+                    <div className="cell" style={{height:'3em'}}></div>
+                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"cell grid-x align-center-middle"}>
+                        <GetProfImg className="small-3 cell" alt="Clone" type="clone"/>
+                    </NavLink>
                 </div>
 
                 <h1 id="recipePageTitle" className="caption small-10 cell">{this.state.recipe.name}</h1>

@@ -15,6 +15,7 @@ import SettingPic from '../assets/defaultIcons/setting.svg';
 import RemovePic from '../assets/defaultIcons/remove.svg';
 import ActionPic from '../assets/defaultIcons/action.svg';
 import EquipmentPic from '../assets/defaultIcons/equipment.svg';
+import ClonePic from '../assets/defaultIcons/clone.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
@@ -95,6 +96,8 @@ export class GetProfImg extends Component {
                 this.image = ActionPic
             } else if (this.type === "error") {
                 this.image = RemovePic
+            } else if (this.type === "clone") {
+                this.image = ClonePic
             } else {
                 this.image = UnknownPic
             }
