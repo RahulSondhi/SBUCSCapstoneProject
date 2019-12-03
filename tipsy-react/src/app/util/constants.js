@@ -178,21 +178,33 @@ export class MakeProfImg extends Component {
     }
 
     render() {
-        return (
-            <div
-                className={"makeProfPicEditor grid-x align-center-middle " + this.className}>
-                <Avatar
-                    width={360}
-                    height={360}
-                    cropRadius={180}
-                    onCrop={this.onCrop}
-                    onClose={this.onClose}
-                    onImageLoad={this.onImageLoad}
-                    onBeforeFileLoad={this.onBeforeFileLoad}
-                    src={this.state.src}
-                    className="editor-canvas cell"/>
-            </div>
-        )
+        if(this.props.disabled === true){
+            return (
+                <div
+                    className={"makeProfPicEditor grid-x align-center-middle " + this.className}>
+                    <GetProfImg
+                        alt={"Can't Edit!"}
+                        type={this.type}
+                        pic={this.state.src}
+                        className="small-5 cell"/>
+                </div>
+            )
+        }else{
+            return (
+                <div
+                    className={"makeProfPicEditor grid-x align-center-middle " + this.className}>
+                    <Avatar
+                        width={360}
+                        height={360}
+                        cropRadius={180}
+                        onCrop={this.onCrop}
+                        onClose={this.onClose}
+                        onImageLoad={this.onImageLoad}
+                        onBeforeFileLoad={this.onBeforeFileLoad}
+                        src={this.state.src}
+                        className="editor-canvas cell"/>
+                </div>
+        )}
     }
 }
 

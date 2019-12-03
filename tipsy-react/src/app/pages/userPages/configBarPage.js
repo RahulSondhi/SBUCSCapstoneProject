@@ -19,6 +19,7 @@ class ConfigBarPage extends Component {
         this.state = {
             isLoading: true,
             isCreating: this.props.isCreating,
+            role:"user",
             bar: null,
             page: {
                 title: "Create a Bar",
@@ -89,11 +90,21 @@ class ConfigBarPage extends Component {
         getBarProfile(id).then(response => {
 
             const tempTitle = "Editing " + response.name;
+            var role = "user";
+            var deleteClass = "hidden";
+
+            if(response.owner.name === this.props.currentUser.name){
+                role="owner";
+                deleteClass = " "
+            }else if (response.managers.some(items => items['name'] === this.props.currentUser.name) === true){
+                role="manager";
+            }
 
             this.setState({
                 bar: response,
                 isLoading: false,
                 isDeleting: false,
+                role: role,
                 page: {
                     title: tempTitle,
                     submit: "Save Bar"
@@ -117,10 +128,9 @@ class ConfigBarPage extends Component {
                 img: {
                     value: response.img
                 },
-                deleteClass: " "
+                deleteClass: deleteClass
             });
 
-            
             this.handleListLoad();
 
         }).catch(error => {
@@ -184,6 +194,7 @@ class ConfigBarPage extends Component {
                                     pic={this.state.img.value}
                                     className="cell"
                                     data={this.handleImageLoad}
+                                    disabled={(this.state.role === "manager")}
                                     type="bar"/>
 
                                 <FormItem
@@ -196,6 +207,7 @@ class ConfigBarPage extends Component {
                                         name="name"
                                         autoComplete="off"
                                         placeholder="Enter Bar Name"
+                                        disabled={(this.state.role === "manager")}
                                         value={this.state.name.value}
                                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                                 </FormItem>
@@ -212,6 +224,7 @@ class ConfigBarPage extends Component {
                                         name="description"
                                         autoComplete="off"
                                         placeholder="Enter a Description"
+                                        disabled={(this.state.role === "manager")}
                                         value={this.state.description.value}
                                         onChange={(event) => this.handleInputChange(event, ValidateDesc)}/>
                                 </FormItem>
@@ -230,7 +243,7 @@ class ConfigBarPage extends Component {
 
                             </div>
                         </TabPane>
-                        <TabPane tab="Managers" key="3">
+                        <TabPane tab="Managers" disabled={(this.state.role === "manager")} key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 <DynamicForm
