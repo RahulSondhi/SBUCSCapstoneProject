@@ -392,12 +392,14 @@ class ConfigBarPage extends Component {
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
                 Notify("success","Your bar was succesfully created!",-1);
+                this.props.history.goBack();
             }).catch(error => {
                 Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
             changeBarSettings(this.props.match.params.id, barRequest).then(response => {
                 Notify("success","Your bar was succesfully saved!",-1);
+                this.props.history.goBack();
             }).catch(error => {
                 Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });

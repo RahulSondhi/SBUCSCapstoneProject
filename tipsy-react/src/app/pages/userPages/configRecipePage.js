@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
 import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
@@ -314,12 +314,14 @@ class ConfigRecipePage extends Component {
         if (this.state.type === "clone" || this.state.type === "config") {
             createRecipe(recipeRequest).then(response => {
                 Notify("success","Your recipe was succesfully created!",-1);
+                this.props.history.goBack();
             }).catch(error => {
                 Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
             changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
                 Notify("success","Your recipe was succesfully saved!",-1);
+                this.props.history.goBack();
             }).catch(error => {
                 Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });

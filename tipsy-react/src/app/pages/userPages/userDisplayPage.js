@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
-import {ItemPreview, GetProfImg} from '../../util/constants';
+import {ItemPreview} from '../../util/constants';
 import {getUserProfile, getAllEquipment} from '../../util/APIUtils';
 
 import Navbar from '../navbar/navbar.js';

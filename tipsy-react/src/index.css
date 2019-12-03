@@ -2,13 +2,13 @@
 @import '../node_modules/antd/dist/antd.css';
 @font-face {
     font-family: fzshuti;
-    src: url("../src/fonts/fzshuti.ttf");
+    src: url("./app/fonts/fzshuti.ttf");
 }
 
 /* Variables */
 :root {
-    --card-bg-image: url("../src/assets/card.jpg");
-    --viewbox-image: url("../src/assets/metalPlate.jpg");
+    --card-bg-image: url("./app/assets/card.jpg");
+    --viewbox-image: url("./app/assets/metalPlate.jpg");
     --crimson: #40110A;
     --maroon: #800000;
     --white: #FFFFFF;
@@ -30,7 +30,7 @@ html {
     padding: 0;
     font-family: 'Roboto Mono', monospace;
     color: white !important;
-    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../src/assets/bg.jpg");
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("./app/assets/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

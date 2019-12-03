@@ -169,10 +169,10 @@ export class MakeProfImg extends Component {
 
     onBeforeFileLoad(elem) {
         if (elem.target.files[0].size > 71680) {
-            notification["error"]({message: 'Tipsy App', description: "File is too big!"});
+            Notify("error","File is too big!",-1);
             elem.target.value = "";
         } else if (elem.target.files[0].type !== "image/png" && elem.target.files[0].type !== "image/jpeg") {
-            notification["error"]({message: 'Tipsy App', description: "Only PNG + JPEG Allowed To Be Uploaded"});
+            Notify("error","Only PNG + JPEG Allowed To Be Uploaded!",-1);
             elem.target.value = "";
         };
     }
@@ -349,12 +349,6 @@ export class DynamicForm extends Component {
         this.type = this.props.type;
         this.className = this.props.className;
 
-        this.customButtonData = <div />;
-        
-        if(this.props.customButtonData !== undefined){
-            this.customButtonData = this.props.customButtonData;
-        }
-
         this.addItem = this
             .addItem
             .bind(this);
@@ -376,23 +370,17 @@ export class DynamicForm extends Component {
 
         if (success === true && hasItem === false && passed === true) {
 
-            notification.success({message: 'Tipsy App', description: "Added!"});
+            Notify("success","Added",-1);
 
-            this
-                .state
-                .data
-                .push(item);
-
+            this.state.data.push(item);
             this.setState({data: this.state.data});
-            this
-                .props
-                .onUpdate();
+            this.props.onUpdate();
 
         } else {
             if (hasItem || passed === false) {
-                notification.error({message: 'Tipsy App', description: "Already Added!"});
+                Notify("error","Already Added!",-1);
             } else {
-                notification.error({message: 'Tipsy App', description: "Could not find that!"});
+                Notify("error","Could not find that!",-1);
             }
         }
 
@@ -406,18 +394,14 @@ export class DynamicForm extends Component {
             .indexOf(item);
 
         if (index > -1) {
-            this
-                .state
-                .data
-                .splice(index, 1);
+            this.state.data.splice(index, 1);
             this.setState({data: this.state.data});
-            notification.success({message: 'Tipsy App', description: "Removed!"});
-            this
-            .props
-            .onUpdate();
+            
+            Notify("success","Removed!",-1);
+            
+            this.props.onUpdate();
         } else {
-            notification.error({message: 'Tipsy App', description: "Could not remove that!"});
-
+            Notify("error","Could not remove that!",-1);
         }
 
     }
@@ -426,7 +410,6 @@ export class DynamicForm extends Component {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
                 <DynamicInput input="" addItem={this.addItem} type={this.type}/>
-                <this.customButtonData />
                 <ItemPreview
                     className="small-6 cell"
                     items={this.state.data}
