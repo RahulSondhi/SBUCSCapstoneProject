@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Navbar from './navbar/navbar.js';
+import Navbar from '../navbar/navbar.js';
 
 class Game extends Component {
     render() {

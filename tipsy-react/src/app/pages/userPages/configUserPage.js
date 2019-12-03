@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, NavLink} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
-
 import {Enum} from 'enumify';
 
-import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail} from '../../main/constants';
+import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
+import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail} from '../../util/constants';
 
 import {Form, Input, Icon, notification, Select} from 'antd';
 const FormItem = Form.Item;

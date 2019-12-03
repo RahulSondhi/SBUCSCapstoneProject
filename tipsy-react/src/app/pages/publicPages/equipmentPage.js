@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
-import {ItemPreview, GetProfImg} from '../../main/constants';
-import Navbar from '../navbar/navbar.js';
+import {Redirect} from 'react-router-dom';
+
+import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getEquipmentProfile} from '../../util/APIUtils';
+
+import Navbar from '../navbar/navbar.js';
+
 class EquipmentPage extends Component {
 
     constructor(props) {

@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
 
-import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName} from '../../main/constants';
+import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
+import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc} from '../../util/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
+
+import CustomEquipmentPrompt from './customEquipmentPrompt'
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
 
-class ConfigBarPage extends Component {
-
+class ConfigRecipePage extends Component {
     constructor(props) {
         super(props);
         //Initialize values for all fields
@@ -19,10 +20,10 @@ class ConfigBarPage extends Component {
         this.state = {
             isLoading: true,
             isCreating: this.props.isCreating,
-            bar: null,
+            recipe: null,
             page: {
-                title: "Create a Bar",
-                submit: "Create a Bar"
+                title: "Create a Recipe",
+                submit: "Create a Recipe"
             },
             name: {
                 value: ''
@@ -30,19 +31,18 @@ class ConfigBarPage extends Component {
             description: {
                 value: ''
             },
-            managers: {
+            steps: {
                 value: []
             },
-            workers: {
-                value: []
-            },
-            recipesAvailable: {
+            equipmentsAvailable: {
                 value: []
             },
             img: {
                 value: ''
             },
-            deleteClass: "hidden"
+            published: {
+                value: false
+            }
         }
         //Functions needed for this Settings Class
         this.handleInputChange = this
@@ -51,22 +51,20 @@ class ConfigBarPage extends Component {
         this.handleSubmit = this
             .handleSubmit
             .bind(this);
-        
-        this.handleDelete = this
-            .handleDelete
-            .bind(this);
-
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
         this.handleImageLoad = this
             .handleImageLoad
             .bind(this);
-        this.loadBarProfile = this
-            .loadBarProfile
+        this.loadRecipeProfile = this
+            .loadRecipeProfile
             .bind(this);
         this.handleListLoad = this
             .handleListLoad
+            .bind(this);
+        this.addEquipmentButton= this
+            .addEquipmentButton
             .bind(this);
     }
 
@@ -75,28 +73,26 @@ class ConfigBarPage extends Component {
         if (this.state.isCreating === false) {
             let try_name = this.props.match.params.id;
             const id = try_name;
-            this.loadBarProfile(id);
+            this.loadRecipeProfile(id);
         } else {
-            this.handleListLoad();
             this.setState({isLoading: false});
         }
 
     }
 
-    loadBarProfile(id) {
+    loadRecipeProfile(id) {
         this.setState({isLoading: true});
 
-        getBarProfile(id).then(response => {
+        getRecipeProfile(id).then(response => {
 
             const tempTitle = "Editing " + response.name;
 
             this.setState({
-                bar: response,
+                recipe: response,
                 isLoading: false,
-                isDeleting: false,
                 page: {
                     title: tempTitle,
-                    submit: "Save Bar"
+                    submit: "Save Recipe"
                 },
                 name: {
                     value: response.name,
@@ -105,23 +101,19 @@ class ConfigBarPage extends Component {
                 description: {
                     value: response.description
                 },
-                managers: {
-                    value: response.managers
+                steps: {
+                    value: response.steps
                 },
-                workers: {
-                    value: response.workers
-                },
-                recipesAvailable: {
-                    value: response.recipesAvailable
+                equipmentsAvailable: {
+                    value: response.equipmentsAvailable
                 },
                 img: {
                     value: response.img
                 },
-                deleteClass: " "
+                published: {
+                    value: response.published
+                }
             });
-
-            
-            this.handleListLoad();
 
         }).catch(error => {
             if (error.status === 404) {
@@ -137,18 +129,6 @@ class ConfigBarPage extends Component {
         // Checking if data came in
         if (this.state.isLoading) {
             return null
-        }
-
-        // Checking if time to axe it
-        if (this.state.isDeleting) {
-            deleteBar(this.props.match.params.id);
-            return <Redirect
-                to={{
-                pathname: "/tipsy/myBars",
-                state: {
-                    from: this.props.location
-                }
-            }}/>
         }
 
         // Checking response
@@ -176,7 +156,7 @@ class ConfigBarPage extends Component {
                     onSubmit={this.handleSubmit}
                     className="small-12 medium-8 cell grid-x align-center-middle">
 
-                    <Tabs className="tabsBarForm small-12 medium-10 cell" tabPosition="top">
+                    <Tabs className="tabsRecipeForm small-12 medium-10 cell" tabPosition="top">
                         <TabPane tab="Desc" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
@@ -184,7 +164,7 @@ class ConfigBarPage extends Component {
                                     pic={this.state.img.value}
                                     className="cell"
                                     data={this.handleImageLoad}
-                                    type="bar"/>
+                                    type="recipe"/>
 
                                 <FormItem
                                     label="Name"
@@ -195,7 +175,7 @@ class ConfigBarPage extends Component {
                                         prefix={< Icon type = "idcard" />}
                                         name="name"
                                         autoComplete="off"
-                                        placeholder="Enter Bar Name"
+                                        placeholder="Enter Recipe Name"
                                         value={this.state.name.value}
                                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                                 </FormItem>
@@ -216,45 +196,52 @@ class ConfigBarPage extends Component {
                                         onChange={(event) => this.handleInputChange(event, ValidateDesc)}/>
                                 </FormItem>
 
+                                <div className="cell"></div>
+
+                                <FormItem
+                                    label="Published"
+                                    validateStatus={this.state.published.validateStatus}
+                                    help={this.state.published.errorMsg}
+                                    className="small-12 medium-10 cell">
+
+                                    <select
+                                        name="published"
+                                        value={this.state.published.value}
+                                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                                        <option value="true">Public (You will not be able to edit if public)</option>
+                                        <option value="false">Private (You will be only one able to view this)</option>
+                                    </select>
+
+                                </FormItem>
+
                             </div>
                         </TabPane>
-                        <TabPane tab="Recipes" key="2">
+                        <TabPane tab="Equipment" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 <DynamicForm
-                                    type="recipe"
-                                    data={this.state.recipesAvailable.value}
+                                    type="equipment"
+                                    data={this.state.equipmentsAvailable.value}
                                     onUpdate={this.handleListLoad}
                                     validate={this.validateRecipeAdd}
+                                    customButtonData = {this.addEquipmentButton}
                                     className="cell"/>
 
                             </div>
                         </TabPane>
-                        <TabPane tab="Managers" key="3">
+
+                        <TabPane tab="Steps" key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                <DynamicForm
-                                    type="user"
-                                    data={this.state.managers.value}
-                                    onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
-                                    className="cell"/>
-
-                            </div>
-                        </TabPane>
-                        <TabPane tab="Workers" key="4">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-
-                                <DynamicForm
+                                {/* <DynamicForm
                                     type="user"
                                     data={this.state.workers.value}
                                     onUpdate={this.handleListLoad}
                                     validate={this.validateUserAdd}
-                                    className="cell"/>
+                                    className="cell"/> */}
 
                             </div>
                         </TabPane>
-
                     </Tabs>
 
                     <FormItem className="small-12 medium-8 cell">
@@ -268,25 +255,9 @@ class ConfigBarPage extends Component {
                         </button>
                     </FormItem>
 
-                    <FormItem className={"small-12 medium-8 cell "+this.state.deleteClass}>
-                        <button
-                            id="settingsButton"
-                            onClick={this.handleDelete}
-                            className="button">
-                            Delete
-                        </button>
-                    </FormItem>
-
                 </Form>
             </div>
         )
-    }
-
-
-    handleDelete(){
-        this.setState({
-            isDeleting: true
-        })
     }
 
     handleInputChange(event, validationFun) {
@@ -310,88 +281,33 @@ class ConfigBarPage extends Component {
         });
     }
 
+    validateRecipeAdd = (name) => {
+        if (this.state.equipmentsAvailable.value.some(items => items['name'] === name) === false) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     handleListLoad = () => {
-
-        var SENDmanagers = this
-            .state
-            .managers
-            .value
-            .map(function (el) {
-                return el.name;
-            });
-
-        var SENDworkers = this
-            .state
-            .workers
-            .value
-            .map(function (el) {
-                return el.name;
-            });
-
-        var SENDrecipesAvailable = this
-            .state
-            .recipesAvailable
-            .value
-            .map(function (el) {
-                return el.id;
-            });
         
-
-        // console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
-        if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
-            SENDmanagers = [];
-        }
-
-        if(SENDworkers  === null || SENDworkers === "" || SENDworkers === undefined){
-            SENDworkers = [];
-        }
-
-        if(SENDrecipesAvailable  === null || SENDrecipesAvailable === "" || SENDrecipesAvailable === undefined){
-            SENDrecipesAvailable = [];
-        }
-
-        this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
-    }
-
-    validateUserAdd = (name) => {
-        var notOwner = true;
-
-        if(this.state.isCreating === false){
-            notOwner = (this.state.bar.owner.name !== name);
-        }else{
-            notOwner = (this.props.currentUser.name !== name);
-        }
-
-        if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && notOwner) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    validateRecipeAdd = (id) => {
-        if (this.state.recipesAvailable.value.some(items => items['id'] === id) === false) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        const barRequest = {
+        const recipeRequest = {
             name: this.state.name.value,
             description: this.state.description.value,
+            published: this.state.published.value,
             img: this.state.img.value,
-            managers: this.state.SENDmanagers,
-            workers: this.state.SENDworkers,
-            recipesAvailable: this.state.SENDrecipesAvailable
+            steps: this.state.steps.value,
+            equipmentsAvailable: this.state.equipmentsAvailable.value
         };
 
         if (this.state.isCreating === true) {
-            createBar(barRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your bar was succesfully created!"});
+            createRecipe(recipeRequest).then(response => {
+                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully created!"});
             }).catch(error => {
                 notification.error({
                     message: 'Tipsy App',
@@ -399,8 +315,8 @@ class ConfigBarPage extends Component {
                 });
             });
         } else {
-            changeBarSettings(this.props.match.params.id, barRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your bar was succesfully saved!"});
+            changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
+                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully saved!"});
             }).catch(error => {
                 notification.error({
                     message: 'Tipsy App',
@@ -413,6 +329,11 @@ class ConfigBarPage extends Component {
     isFormInvalid() {
         return !(this.state.name.validateStatus === 'success');
     }
+
+    addEquipmentButton(){
+        return(  <CustomEquipmentPrompt add={function(item){console.log(item)}}/> );
+    }
+
 }
 
-export default ConfigBarPage;
+export default ConfigRecipePage;

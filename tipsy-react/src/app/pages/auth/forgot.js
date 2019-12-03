@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import Tipsy from '../assets/Tipsy.svg';
-
-import {forgot, checkEmailAvailability} from '../util/APIUtils';
-
-import {ValidateEmail} from '../main/constants';
-
 import {Link} from 'react-router-dom';
+
+import {forgot, checkEmailAvailability} from '../../util/APIUtils';
+import {ValidateEmail} from '../../util/constants';
+
+import Tipsy from '../../assets/Tipsy.svg';
+
 import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 

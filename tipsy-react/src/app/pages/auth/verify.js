@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import Tipsy from '../assets/Tipsy.svg';
 import {Link} from 'react-router-dom';
-import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../util/APIUtils';
-import {ACCESS_TOKEN, ValidatePassword} from '../main/constants';
+
+import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../../util/APIUtils';
+import {ACCESS_TOKEN, ValidatePassword} from '../../util/constants';
+
+import Tipsy from '../../assets/Tipsy.svg';
+
 import {Form, Input, Button, notification} from 'antd';
 const FormItem = Form.Item;
 

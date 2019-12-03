@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
-import {Redirect, Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
-import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
 
-import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc} from '../../main/constants';
+import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
+import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName} from '../../util/constants';
 
 import {Form, Input, Icon, Tabs, notification} from 'antd';
-
-import CustomEquipmentPrompt from './customEquipmentPrompt'
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
 
-class ConfigRecipePage extends Component {
+class ConfigBarPage extends Component {
+
     constructor(props) {
         super(props);
         //Initialize values for all fields
@@ -20,10 +19,10 @@ class ConfigRecipePage extends Component {
         this.state = {
             isLoading: true,
             isCreating: this.props.isCreating,
-            recipe: null,
+            bar: null,
             page: {
-                title: "Create a Recipe",
-                submit: "Create a Recipe"
+                title: "Create a Bar",
+                submit: "Create a Bar"
             },
             name: {
                 value: ''
@@ -31,18 +30,19 @@ class ConfigRecipePage extends Component {
             description: {
                 value: ''
             },
-            steps: {
+            managers: {
                 value: []
             },
-            equipmentsAvailable: {
+            workers: {
+                value: []
+            },
+            recipesAvailable: {
                 value: []
             },
             img: {
                 value: ''
             },
-            published: {
-                value: false
-            }
+            deleteClass: "hidden"
         }
         //Functions needed for this Settings Class
         this.handleInputChange = this
@@ -51,20 +51,22 @@ class ConfigRecipePage extends Component {
         this.handleSubmit = this
             .handleSubmit
             .bind(this);
+        
+        this.handleDelete = this
+            .handleDelete
+            .bind(this);
+
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
         this.handleImageLoad = this
             .handleImageLoad
             .bind(this);
-        this.loadRecipeProfile = this
-            .loadRecipeProfile
+        this.loadBarProfile = this
+            .loadBarProfile
             .bind(this);
         this.handleListLoad = this
             .handleListLoad
-            .bind(this);
-        this.addEquipmentButton= this
-            .addEquipmentButton
             .bind(this);
     }
 
@@ -73,26 +75,28 @@ class ConfigRecipePage extends Component {
         if (this.state.isCreating === false) {
             let try_name = this.props.match.params.id;
             const id = try_name;
-            this.loadRecipeProfile(id);
+            this.loadBarProfile(id);
         } else {
+            this.handleListLoad();
             this.setState({isLoading: false});
         }
 
     }
 
-    loadRecipeProfile(id) {
+    loadBarProfile(id) {
         this.setState({isLoading: true});
 
-        getRecipeProfile(id).then(response => {
+        getBarProfile(id).then(response => {
 
             const tempTitle = "Editing " + response.name;
 
             this.setState({
-                recipe: response,
+                bar: response,
                 isLoading: false,
+                isDeleting: false,
                 page: {
                     title: tempTitle,
-                    submit: "Save Recipe"
+                    submit: "Save Bar"
                 },
                 name: {
                     value: response.name,
@@ -101,19 +105,23 @@ class ConfigRecipePage extends Component {
                 description: {
                     value: response.description
                 },
-                steps: {
-                    value: response.steps
+                managers: {
+                    value: response.managers
                 },
-                equipmentsAvailable: {
-                    value: response.equipmentsAvailable
+                workers: {
+                    value: response.workers
+                },
+                recipesAvailable: {
+                    value: response.recipesAvailable
                 },
                 img: {
                     value: response.img
                 },
-                published: {
-                    value: response.published
-                }
+                deleteClass: " "
             });
+
+            
+            this.handleListLoad();
 
         }).catch(error => {
             if (error.status === 404) {
@@ -129,6 +137,18 @@ class ConfigRecipePage extends Component {
         // Checking if data came in
         if (this.state.isLoading) {
             return null
+        }
+
+        // Checking if time to axe it
+        if (this.state.isDeleting) {
+            deleteBar(this.props.match.params.id);
+            return <Redirect
+                to={{
+                pathname: "/tipsy/myBars",
+                state: {
+                    from: this.props.location
+                }
+            }}/>
         }
 
         // Checking response
@@ -156,7 +176,7 @@ class ConfigRecipePage extends Component {
                     onSubmit={this.handleSubmit}
                     className="small-12 medium-8 cell grid-x align-center-middle">
 
-                    <Tabs className="tabsRecipeForm small-12 medium-10 cell" tabPosition="top">
+                    <Tabs className="tabsBarForm small-12 medium-10 cell" tabPosition="top">
                         <TabPane tab="Desc" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
@@ -164,7 +184,7 @@ class ConfigRecipePage extends Component {
                                     pic={this.state.img.value}
                                     className="cell"
                                     data={this.handleImageLoad}
-                                    type="recipe"/>
+                                    type="bar"/>
 
                                 <FormItem
                                     label="Name"
@@ -175,7 +195,7 @@ class ConfigRecipePage extends Component {
                                         prefix={< Icon type = "idcard" />}
                                         name="name"
                                         autoComplete="off"
-                                        placeholder="Enter Recipe Name"
+                                        placeholder="Enter Bar Name"
                                         value={this.state.name.value}
                                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                                 </FormItem>
@@ -196,52 +216,45 @@ class ConfigRecipePage extends Component {
                                         onChange={(event) => this.handleInputChange(event, ValidateDesc)}/>
                                 </FormItem>
 
-                                <div className="cell"></div>
-
-                                <FormItem
-                                    label="Published"
-                                    validateStatus={this.state.published.validateStatus}
-                                    help={this.state.published.errorMsg}
-                                    className="small-12 medium-10 cell">
-
-                                    <select
-                                        name="published"
-                                        value={this.state.published.value}
-                                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                                        <option value="true">Public (You will not be able to edit if public)</option>
-                                        <option value="false">Private (You will be only one able to view this)</option>
-                                    </select>
-
-                                </FormItem>
-
                             </div>
                         </TabPane>
-                        <TabPane tab="Equipment" key="2">
+                        <TabPane tab="Recipes" key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 <DynamicForm
-                                    type="equipment"
-                                    data={this.state.equipmentsAvailable.value}
+                                    type="recipe"
+                                    data={this.state.recipesAvailable.value}
                                     onUpdate={this.handleListLoad}
                                     validate={this.validateRecipeAdd}
-                                    customButtonData = {this.addEquipmentButton}
+                                    className="cell"/>
+
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Managers" key="3">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+
+                                <DynamicForm
+                                    type="user"
+                                    data={this.state.managers.value}
+                                    onUpdate={this.handleListLoad}
+                                    validate={this.validateUserAdd}
+                                    className="cell"/>
+
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Workers" key="4">
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+
+                                <DynamicForm
+                                    type="user"
+                                    data={this.state.workers.value}
+                                    onUpdate={this.handleListLoad}
+                                    validate={this.validateUserAdd}
                                     className="cell"/>
 
                             </div>
                         </TabPane>
 
-                        <TabPane tab="Steps" key="3">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-
-                                {/* <DynamicForm
-                                    type="user"
-                                    data={this.state.workers.value}
-                                    onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
-                                    className="cell"/> */}
-
-                            </div>
-                        </TabPane>
                     </Tabs>
 
                     <FormItem className="small-12 medium-8 cell">
@@ -255,9 +268,25 @@ class ConfigRecipePage extends Component {
                         </button>
                     </FormItem>
 
+                    <FormItem className={"small-12 medium-8 cell "+this.state.deleteClass}>
+                        <button
+                            id="settingsButton"
+                            onClick={this.handleDelete}
+                            className="button">
+                            Delete
+                        </button>
+                    </FormItem>
+
                 </Form>
             </div>
         )
+    }
+
+
+    handleDelete(){
+        this.setState({
+            isDeleting: true
+        })
     }
 
     handleInputChange(event, validationFun) {
@@ -281,33 +310,88 @@ class ConfigRecipePage extends Component {
         });
     }
 
-    validateRecipeAdd = (name) => {
-        if (this.state.equipmentsAvailable.value.some(items => items['name'] === name) === false) {
+    handleListLoad = () => {
+
+        var SENDmanagers = this
+            .state
+            .managers
+            .value
+            .map(function (el) {
+                return el.name;
+            });
+
+        var SENDworkers = this
+            .state
+            .workers
+            .value
+            .map(function (el) {
+                return el.name;
+            });
+
+        var SENDrecipesAvailable = this
+            .state
+            .recipesAvailable
+            .value
+            .map(function (el) {
+                return el.id;
+            });
+        
+
+        // console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
+        if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
+            SENDmanagers = [];
+        }
+
+        if(SENDworkers  === null || SENDworkers === "" || SENDworkers === undefined){
+            SENDworkers = [];
+        }
+
+        if(SENDrecipesAvailable  === null || SENDrecipesAvailable === "" || SENDrecipesAvailable === undefined){
+            SENDrecipesAvailable = [];
+        }
+
+        this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
+    }
+
+    validateUserAdd = (name) => {
+        var notOwner = true;
+
+        if(this.state.isCreating === false){
+            notOwner = (this.state.bar.owner.name !== name);
+        }else{
+            notOwner = (this.props.currentUser.name !== name);
+        }
+
+        if (this.state.workers.value.some(items => items['name'] === name) === false && this.state.managers.value.some(items => items['name'] === name) === false && notOwner) {
             return true;
         } else {
             return false;
         }
     }
 
-    handleListLoad = () => {
-        
+    validateRecipeAdd = (id) => {
+        if (this.state.recipesAvailable.value.some(items => items['id'] === id) === false) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
-        const recipeRequest = {
+        const barRequest = {
             name: this.state.name.value,
             description: this.state.description.value,
-            published: this.state.published.value,
             img: this.state.img.value,
-            steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable.value
+            managers: this.state.SENDmanagers,
+            workers: this.state.SENDworkers,
+            recipesAvailable: this.state.SENDrecipesAvailable
         };
 
         if (this.state.isCreating === true) {
-            createRecipe(recipeRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully created!"});
+            createBar(barRequest).then(response => {
+                notification.success({message: 'Tipsy App', description: "Your bar was succesfully created!"});
             }).catch(error => {
                 notification.error({
                     message: 'Tipsy App',
@@ -315,8 +399,8 @@ class ConfigRecipePage extends Component {
                 });
             });
         } else {
-            changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
-                notification.success({message: 'Tipsy App', description: "Your recipe was succesfully saved!"});
+            changeBarSettings(this.props.match.params.id, barRequest).then(response => {
+                notification.success({message: 'Tipsy App', description: "Your bar was succesfully saved!"});
             }).catch(error => {
                 notification.error({
                     message: 'Tipsy App',
@@ -329,11 +413,6 @@ class ConfigRecipePage extends Component {
     isFormInvalid() {
         return !(this.state.name.validateStatus === 'success');
     }
-
-    addEquipmentButton(){
-        return(  <CustomEquipmentPrompt add={function(item){console.log(item)}}/> );
-    }
-
 }
 
-export default ConfigRecipePage;
+export default ConfigBarPage;

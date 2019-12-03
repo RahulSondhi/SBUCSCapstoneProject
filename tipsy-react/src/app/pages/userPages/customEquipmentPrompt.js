@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 
-import {MakeProfImg, ValidateName, GetProfImg} from '../../main/constants';
-
-import {getAllEquipmentTypes} from '../../util/APIUtils'
+import {MakeProfImg, ValidateName, GetProfImg} from '../../util/constants';
+import {getAllEquipmentTypes} from '../../util/APIUtils';
 
 import {Form, Input, Icon, Modal} from 'antd';
 

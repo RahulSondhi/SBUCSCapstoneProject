@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import { changePassword } from '../../util/APIUtils';
-
-import { ValidatePassword } from '../../main/constants'
+import { ValidatePassword } from '../../util/constants';
 
 import { Form, Input, notification, Icon } from 'antd';
 const FormItem = Form.Item;

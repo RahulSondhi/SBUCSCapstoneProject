@@ -2,29 +2,29 @@ import React, {Component} from 'react';
 import {BrowserRouter , Route, Switch, Redirect} from 'react-router-dom'
 
 // Authentification Imports
-import Login from '../auth/login.js';
-import Logout from '../auth/logout.js';
-import Register from '../auth/register.js';
-import Forgot from '../auth/forgot.js';
-import Verify from '../auth/verify.js'
+import Login from '../pages/auth/login.js';
+import Logout from '../pages/auth/logout.js';
+import Register from '../pages/auth/register.js';
+import Forgot from '../pages/auth/forgot.js';
+import Verify from '../pages/auth/verify.js'
 
 // Public Page Imports
-import EquipmentPage from '../tipsy/publicPages/equipmentPage.js';
-import RecipePage from '../tipsy/publicPages/recipePage.js';
-import BarPage from '../tipsy/publicPages/barPage.js';
-import UserPage from '../tipsy/publicPages/userPage.js';
+import EquipmentPage from '../pages/publicPages/equipmentPage.js';
+import RecipePage from '../pages/publicPages/recipePage.js';
+import BarPage from '../pages/publicPages/barPage.js';
+import UserPage from '../pages/publicPages/userPage.js';
 
 // User Page Imports
-import UsersDisplaysPage from '../tipsy/userPages/userDisplayPage.js';
-import ConfigBarPage from '../tipsy/userPages/configBarPage.js'
-import ConfigRecipePage from '../tipsy/userPages/configRecipePage.js';
-import SearchPage from '../tipsy/userPages/searchPage.js';
-import ConfigUserPage from '../tipsy/userPages/configUserPage.js';
-import ChangePasswordPage from '../tipsy/userPages/changePasswordPage.js';
-import ErrorPage from '../tipsy/userPages/errorPage.js';
+import UsersDisplaysPage from '../pages/userPages/userDisplayPage.js';
+import ConfigBarPage from '../pages/userPages/configBarPage.js'
+import ConfigRecipePage from '../pages/userPages/configRecipePage.js';
+import SearchPage from '../pages/userPages/searchPage.js';
+import ConfigUserPage from '../pages/userPages/configUserPage.js';
+import ChangePasswordPage from '../pages/userPages/changePasswordPage.js';
+import ErrorPage from '../pages/userPages/errorPage.js';
 
 // Game Page Imports
-import Game from '../tipsy/game.js';
+import Game from '../pages/userPages/game';
 
 class Routes extends Component {
 

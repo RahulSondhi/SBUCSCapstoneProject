@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, Link} from 'react-router-dom'
-import Navbar from '../navbar/navbar.js';
 
-import {ItemPreview, GetProfImg} from '../../main/constants';
-
+import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getUserProfile, getAllEquipment} from '../../util/APIUtils';
+
+import Navbar from '../navbar/navbar.js';
 
 class UsersBarsPage extends Component {
     constructor(props) {

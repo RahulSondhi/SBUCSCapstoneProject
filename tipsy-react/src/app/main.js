@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import history from './history';
-import Routes from './route';
+import history from './util/history';
+import Routes from './util/route';
 
-import {getCurrentUser} from '../util/APIUtils.js';
-import * as constant from './constants.js';
+import {getCurrentUser} from './util/APIUtils';
+import * as constant from './util/constants';
 import {notification} from 'antd';
 
 class Main extends Component {

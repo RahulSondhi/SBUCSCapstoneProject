@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 
-import { Input, Select } from 'antd';
 import Drinks from '../../assets/drinks.svg';
 import Navbar from '../navbar/navbar.js';
 
-import {ItemPreview} from '../../main/constants';
+import {ItemPreview} from '../../util/constants';
+import {search} from '../../util/APIUtils';
 
-import {search} from '../../util/APIUtils'
-import queryString from 'query-string'
-
+import queryString from 'query-string';
+import { Input, Select } from 'antd';
 const { Option } = Select;
 
 export class SearchPage extends Component {

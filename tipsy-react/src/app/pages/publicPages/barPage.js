@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {Redirect, NavLink} from 'react-router-dom'
-import {ItemPreview, GetProfImg} from '../../main/constants';
+import {Redirect, NavLink} from 'react-router-dom';
+
+import {getBarProfile} from '../../util/APIUtils';
+import {ItemPreview, GetProfImg} from '../../util/constants';
+
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
-import {getBarProfile} from '../../util/APIUtils';
 
 const {TabPane} = Tabs;
 

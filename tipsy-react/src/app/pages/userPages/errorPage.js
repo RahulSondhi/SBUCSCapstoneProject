@@ -1,6 +1,7 @@
 import React from 'react';
-import Tipsy from '../../assets/Tipsy.svg';
 import {Link} from 'react-router-dom';
+
+import Tipsy from '../../assets/Tipsy.svg';
 import brokenGlass from '../../assets/errorPage/broken_glass.svg';
 import brokenLink from '../../assets/errorPage/broken_link.svg';
 

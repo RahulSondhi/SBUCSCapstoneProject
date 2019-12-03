@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import Tipsy from '../assets/Tipsy.svg';
-import {register, checkNicknameAvailability, checkEmailAvailability} from '../util/APIUtils';
-import Bottle from '../assets/equipment/bottle.svg';
-import Cup from '../assets/equipment/cup.svg';
-
-import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword} from '../main/constants';
-
 import {Link} from 'react-router-dom';
+
+import {register, checkNicknameAvailability, checkEmailAvailability} from '../../util/APIUtils';
+import {ValidateFirstName, ValidateLastName, ValidateEmail, ValidateNickname, ValidatePassword} from '../../util/constants';
+
+import Bottle from '../../assets/equipment/bottle.svg';
+import Cup from '../../assets/equipment/cup.svg';
+import Tipsy from '../../assets/Tipsy.svg';
+
 import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 

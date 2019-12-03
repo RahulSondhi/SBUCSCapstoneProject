@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {login} from '../util/APIUtils';
-import Tipsy from '../assets/Tipsy.svg';
-import Drinks from '../assets/drinks.svg';
-
-import {ACCESS_TOKEN} from '../main/constants';
 import {Link} from 'react-router-dom';
+
+import {login} from '../../util/APIUtils';
+import {ACCESS_TOKEN} from '../../util/constants';
+
+import Tipsy from '../../assets/Tipsy.svg';
+import Drinks from '../../assets/drinks.svg';
+
 import {Form, Input, Icon, notification} from 'antd';
 const FormItem = Form.Item;
 

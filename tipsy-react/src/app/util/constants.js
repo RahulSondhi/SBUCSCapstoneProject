@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
-import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search} from '../util/APIUtils';
+import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search} from './APIUtils';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
  
@@ -20,43 +20,14 @@ import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 
-import * as validate from '../util/validate';
+import * as validate from './validate';
 const { Option } = Select;
-
-export const CustomButton = (props) => {
-    return (
-        <div>
-            <Link to={props.redirect}>
-                <button type="submit" className="button">
-                    {props.name}
-                </button>
-            </Link>
-        </div>
-    )
-}
-
-export const CustomCreateButton = (props) => {
-    return (
-        <div>
-            <Link to={props.redirect}>
-                <button type="submit" className="createButton">
-                    {props.name}
-                </button>
-            </Link>
-        </div>
-    )
-}
-
-export const SVG = (props) => {
-    return (<img src={props.src} style={props.style} alt={props.alt}/>);
-}
 
 // Neccessary Data
 
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 export const ACCESS_TOKEN = 'accessToken';
-
-export default SVG;
+export const APP_NAME = 'Tipsy';
 
 // Component Routing - Validate
 
@@ -67,6 +38,9 @@ export const ValidateNickname = validate.validateNickname;
 export const ValidatePassword = validate.validatePassword;
 export const ValidateName = validate.validateName;
 export const ValidateDesc = validate.validateDesc;
+
+// Notifications
+
 
 // Profile Components
 

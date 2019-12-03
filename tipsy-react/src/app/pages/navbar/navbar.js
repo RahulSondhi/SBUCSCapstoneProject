@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import GeneralNavbar from './rightNavbar';
 import {NavLink} from "react-router-dom";
-import {Drawer, Button} from 'antd';
+
+import GeneralNavbar from './rightNavbar';
+
 import Tipsy from '../../assets/Tipsy.png';
+
+import {Drawer, Button} from 'antd';
 
 class Navbar extends Component {
 
