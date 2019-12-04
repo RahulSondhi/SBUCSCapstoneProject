@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
-import {createRecipe, getRecipeProfile, changeRecipeSettings} from '../../util/APIUtils';
+import {createRecipe, getRecipeProfile, changeRecipeSettings, deleteRecipe} from '../../util/APIUtils';
 import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc, Notify} from '../../util/constants';
 
-import {Form, Input, Icon, Tabs} from 'antd';
+import {Form, Input, Icon, Tabs, Popconfirm} from 'antd';
 
 import CustomEquipmentPrompt from './customEquipmentPrompt'
 
@@ -51,6 +51,14 @@ class ConfigRecipePage extends Component {
         this.handleSubmit = this
             .handleSubmit
             .bind(this);
+        
+        this.handleDelete = this
+            .handleDelete
+            .bind(this);
+        this.handlePublish = this
+            .handlePublish
+            .bind(this);
+
         this.isFormInvalid = this
             .isFormInvalid
             .bind(this);
@@ -86,16 +94,22 @@ class ConfigRecipePage extends Component {
         getRecipeProfile(id).then(response => {
 
             var tempTitle = "Editing " + response.name;
-            var tempSubmit = "Save Recipe";
+            var tempSubmit = "Save";
+            var type = this.state.type;
 
             if (this.state.type === "clone") {
                 tempTitle = "Cloning " + response.name;
-                tempSubmit = "Clone Recipe"
+                tempSubmit = "Clone";
+            }
+
+            if(response.published === true){
+                var type = "publish";
             }
 
             this.setState({
                 recipe: response,
                 isLoading: false,
+                type: type,
                 page: {
                     title: tempTitle,
                     submit: tempSubmit
@@ -154,15 +168,29 @@ class ConfigRecipePage extends Component {
             <div className="grid-x align-center-middle">
                 <Navbar/>
 
-                <h1 className="caption align-center-middle cell">
+                <h1 className="small-11 medium-10 caption cell">
                     {this.state.page.title}
                 </h1>
+                <div className="small-1 medium-2 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-8 cell grid-x align-center-middle">
+                    className="small-12 medium-11 cell grid-x align-center-middle">
 
-                    <Tabs className="tabsRecipeForm small-12 medium-10 cell" tabPosition="top">
+                    <Tabs className="tabsRecipeForm small-12 cell" tabPosition="right" 
+                        tabBarExtraContent={
+                            <div className="grid-x align-center-middle cell">
+                                <div className="tabsSeperator small-10 cell"></div>
+                                <button
+                                    type="submit"
+                                    id="settingsButton"
+                                    disabled={this.isFormInvalid()}
+                                    onClick={this.disableButton}
+                                    className="button small-7 cell">
+                                    {this.state.page.submit}
+                                </button>
+                            </div>
+                        }>
                         <TabPane tab="Desc" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
@@ -170,6 +198,7 @@ class ConfigRecipePage extends Component {
                                     pic={this.state.img.value}
                                     className="cell"
                                     data={this.handleImageLoad}
+                                    disabled={this.state.type === "publish"}
                                     type="recipe"/>
 
                                 <FormItem
@@ -183,6 +212,7 @@ class ConfigRecipePage extends Component {
                                         autoComplete="off"
                                         placeholder="Enter Recipe Name"
                                         value={this.state.name.value}
+                                        disabled={this.state.type === "publish"}
                                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                                 </FormItem>
 
@@ -199,30 +229,13 @@ class ConfigRecipePage extends Component {
                                         autoComplete="off"
                                         placeholder="Enter a Description"
                                         value={this.state.description.value}
+                                        disabled={this.state.type === "publish"}
                                         onChange={(event) => this.handleInputChange(event, ValidateDesc)}/>
-                                </FormItem>
-
-                                <div className="cell"></div>
-
-                                <FormItem
-                                    label="Published"
-                                    validateStatus={this.state.published.validateStatus}
-                                    help={this.state.published.errorMsg}
-                                    className="small-12 medium-10 cell">
-
-                                    <select
-                                        name="published"
-                                        value={this.state.published.value}
-                                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                                        <option value="true">Public (You will not be able to edit if public)</option>
-                                        <option value="false">Private (You will be only one able to view this)</option>
-                                    </select>
-
                                 </FormItem>
 
                             </div>
                         </TabPane>
-                        <TabPane tab="Equipment" key="2">
+                        <TabPane tab="Equipment" disabled={this.state.type === "publish"} key="2">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 <DynamicForm
@@ -236,7 +249,7 @@ class ConfigRecipePage extends Component {
                             </div>
                         </TabPane>
 
-                        <TabPane tab="Steps" key="3">
+                        <TabPane tab="Steps" disabled={this.state.type === "publish"} key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                 {/* <DynamicForm
@@ -248,18 +261,39 @@ class ConfigRecipePage extends Component {
 
                             </div>
                         </TabPane>
-                    </Tabs>
 
-                    <FormItem className="small-12 medium-8 cell">
-                        <button
-                            type="submit"
-                            id="settingsButton"
-                            disabled={this.isFormInvalid()}
-                            onClick={this.disableButton}
-                            className="button">
-                            {this.state.page.submit}
-                        </button>
-                    </FormItem>
+                        <TabPane tab="Publish" disabled={this.state.type === "publish"} key="4">
+
+                            <Popconfirm
+                                title="Are you sure you want to publish this?"
+                                onConfirm={this.handlePublish}
+                                okText="Yes"
+                                cancelText="No">
+                                <button
+                                    id="settingsButton"
+                                    className={"small-10 button cell"}>
+                                    Publish
+                                </button>
+                            </Popconfirm>
+
+                        </TabPane>
+
+                        <TabPane tab="Delete" disabled={this.state.type === "clone" || this.state.type === "create"} key="5">
+
+                            <Popconfirm
+                                title="Are you sure you want to delete this?"
+                                onConfirm={this.handleDelete}
+                                okText="Yes"
+                                cancelText="No">
+                                <button
+                                    id="settingsButton"
+                                    className={"small-10 button cell"}>
+                                    Delete
+                                </button>
+                            </Popconfirm>
+
+                        </TabPane>
+                    </Tabs>
 
                 </Form>
             </div>
@@ -299,6 +333,35 @@ class ConfigRecipePage extends Component {
         
     }
 
+    handleDelete(event) {
+        deleteRecipe(this.props.match.params.id).then(response => {
+            Notify("success","Your recipe was succesfully deleted!",-1);
+            this.props.history.push("/tipsy/myRecipes");
+        }).catch(error => {
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+        });
+    }
+
+    handlePublish(event) {
+        event.preventDefault();
+
+        const recipeRequest = {
+            name: this.state.name.value,
+            description: this.state.description.value,
+            published: true,
+            img: this.state.img.value,
+            steps: this.state.steps.value,
+            equipmentsAvailable: this.state.equipmentsAvailable.value
+        };
+
+        createRecipe(recipeRequest).then(response => {
+            Notify("success","Your recipe was succesfully published!",-1);
+            this.props.history.goBack();
+        }).catch(error => {
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+        });
+    }
+
     handleSubmit(event) {
         event.preventDefault();
 
@@ -311,7 +374,7 @@ class ConfigRecipePage extends Component {
             equipmentsAvailable: this.state.equipmentsAvailable.value
         };
 
-        if (this.state.type === "clone" || this.state.type === "config") {
+        if (this.state.type === "clone" || this.state.type === "create") {
             createRecipe(recipeRequest).then(response => {
                 Notify("success","Your recipe was succesfully created!",-1);
                 this.props.history.goBack();

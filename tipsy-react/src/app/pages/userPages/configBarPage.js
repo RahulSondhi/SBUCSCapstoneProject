@@ -5,7 +5,7 @@ import Navbar from '../navbar/navbar.js';
 import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
 import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, Notify} from '../../util/constants';
 
-import {Form, Input, Icon, Tabs} from 'antd';
+import {Form, Input, Icon, Tabs, Popconfirm} from 'antd';
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
@@ -42,8 +42,7 @@ class ConfigBarPage extends Component {
             },
             img: {
                 value: ''
-            },
-            deleteClass: "hidden"
+            }
         }
         //Functions needed for this Settings Class
         this.handleInputChange = this
@@ -91,11 +90,9 @@ class ConfigBarPage extends Component {
 
             const tempTitle = "Editing " + response.name;
             var role = "user";
-            var deleteClass = "hidden";
 
-            if(response.owner.name === this.props.currentUser.name){
+            if(response.owner.name === this.props.currentUser.name || this.props.currentUser.roles.includes("ADMIN") ){
                 role="owner";
-                deleteClass = " "
             }else if (response.managers.some(items => items['name'] === this.props.currentUser.name) === true){
                 role="manager";
             }
@@ -107,7 +104,7 @@ class ConfigBarPage extends Component {
                 role: role,
                 page: {
                     title: tempTitle,
-                    submit: "Save Bar"
+                    submit: "Save"
                 },
                 name: {
                     value: response.name,
@@ -127,8 +124,7 @@ class ConfigBarPage extends Component {
                 },
                 img: {
                     value: response.img
-                },
-                deleteClass: deleteClass
+                }
             });
 
             this.handleListLoad();
@@ -149,18 +145,6 @@ class ConfigBarPage extends Component {
             return null
         }
 
-        // Checking if time to axe it
-        if (this.state.isDeleting) {
-            deleteBar(this.props.match.params.id);
-            return <Redirect
-                to={{
-                pathname: "/tipsy/myBars",
-                state: {
-                    from: this.props.location
-                }
-            }}/>
-        }
-
         // Checking response
         if (this.state.notFound === true || this.state.serverError === true) {
             return <Redirect
@@ -178,15 +162,28 @@ class ConfigBarPage extends Component {
             <div className="grid-x align-center-middle">
                 <Navbar/>
 
-                <h1 className="caption align-center-middle cell">
+                <h1 className="small-11 medium-10 caption cell">
                     {this.state.page.title}
                 </h1>
+                <div className="small-1 medium-2 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-8 cell grid-x align-center-middle">
+                    className="small-12 medium-11 cell grid-x align-center-middle">
 
-                    <Tabs className="tabsBarForm small-12 medium-10 cell" tabPosition="top">
+                    <Tabs className="tabsBarForm small-12 cell" tabPosition="right" tabBarExtraContent={
+                        <div className="grid-x align-center-middle cell">
+                            <div className="tabsSeperator small-10 cell"></div>
+                            <button
+                                type="submit"
+                                id="settingsButton"
+                                disabled={this.isFormInvalid()}
+                                onClick={this.disableButton}
+                                className="small-10 button cell">
+                                {this.state.page.submit}
+                            </button>
+                        </div>
+                    }>
                         <TabPane tab="Desc" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
@@ -267,29 +264,22 @@ class ConfigBarPage extends Component {
 
                             </div>
                         </TabPane>
+                        <TabPane tab="Delete" disabled={(this.state.role === "manager" || this.state.isCreating === true)}key="5">
 
+                            <Popconfirm
+                                title="Are you sure you want to delete this?"
+                                onConfirm={this.handleDelete}
+                                okText="Yes"
+                                cancelText="No">
+                                <button
+                                    id="settingsButton"
+                                    className={"small-10 button cell "}>
+                                    Delete
+                                </button>
+                            </Popconfirm>
+
+                        </TabPane>
                     </Tabs>
-
-                    <FormItem className="small-12 medium-8 cell">
-                        <button
-                            type="submit"
-                            id="settingsButton"
-                            disabled={this.isFormInvalid()}
-                            onClick={this.disableButton}
-                            className="button">
-                            {this.state.page.submit}
-                        </button>
-                    </FormItem>
-
-                    <FormItem className={"small-12 medium-8 cell "+this.state.deleteClass}>
-                        <button
-                            id="settingsButton"
-                            onClick={this.handleDelete}
-                            className="button">
-                            Delete
-                        </button>
-                    </FormItem>
-
                 </Form>
             </div>
         )
@@ -297,9 +287,12 @@ class ConfigBarPage extends Component {
 
 
     handleDelete(){
-        this.setState({
-            isDeleting: true
-        })
+        deleteBar(this.props.match.params.id).then(response => {
+            Notify("success","Your bar was succesfully deleted!",-1);
+            this.props.history.push("/tipsy/myBars")
+        }).catch(error => {
+            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+        });
     }
 
     handleInputChange(event, validationFun) {

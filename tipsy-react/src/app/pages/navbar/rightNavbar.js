@@ -172,7 +172,7 @@ class GeneralNavbar extends Component {
                                 const eventID = parseInt(match.params.eventID);
                                 return !isNaN(eventID) && eventID % 2 === 1;
                             }}>
-                                <Icon type="logout" theme="twoTone" twoToneColor="#FFFFFF"/>
+                                <Icon type="logout"/>
                                 Log Out
                             </NavLink>
                         </Menu.Item>
