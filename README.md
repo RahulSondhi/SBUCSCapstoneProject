@@ -214,6 +214,7 @@ Once on the **Settings** page you may edit the fields to adjust your profile inf
 <img src="./Documentation/READMEAssets/settingsPageBeforeChange.png" width="300" height="auto"> <img src="./Documentation/READMEAssets/settingsPageAfterChange.png" width="300" height="auto">
 
 Upon updating your user settings you will see your changes applied onto your **Profile Page**:
+
 <img src="./Documentation/READMEAssets/profilePageBeforeChange.png" width="300" height="auto"> <img src="./Documentation/READMEAssets/profilePageAfterChange.png" width="300" height="auto">
 
 ### Changing Password
