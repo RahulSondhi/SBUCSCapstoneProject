@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
 import {MakeProfImg, ValidateName, ItemPreview, Notify} from '../../util/constants';
-import {getAllEquipmentTypes, checkEquipmentNameIsPresent} from '../../util/APIUtils';
+import {getAllEquipmentTypes} from '../../util/APIUtils';
 
 import {Form, Input, Icon, Modal} from 'antd';
 
 const FormItem = Form.Item;
 
-export class DynamicCustomEquipment extends Component {
+export class DynamicSteps extends Component {
 
     state = {
         data: []
@@ -33,40 +33,10 @@ export class DynamicCustomEquipment extends Component {
 
     async addItem(item) {
         // update the state object
-
-        let hasItem = this
-            .state
-            .data
-            .some(items => items['name'] === item.name);
-
-        let passed = this.props.validate(item.name);
-
-        checkEquipmentNameIsPresent(item.name).then(response => {
-            if (hasItem === false && passed === true && response.available === false) {
-
-                Notify("success","Added",-1);
-    
-                this.state.data.push(item);
-                this.setState({data: this.state.data});
-                this.props.onUpdate();
-    
-            } else {
-                if (hasItem || passed === false) {
-                    Notify("error","This item already exists!",-1);
-                } else if (response.available === true) {
-                    Notify("error","That item name is taken!",-1);
-                } else {
-                    Notify("error","Could not find that!",-1);
-                }
-            }
-        }).catch(error => {
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
-        });
-
+        this.state.data.push(item);
+        this.setState({data: this.state.data});
+        Notify("success","Added",-1);
+        this.props.onUpdate();
     }
 
     removeItem(item) {
@@ -92,19 +62,17 @@ export class DynamicCustomEquipment extends Component {
     render() {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
-                <CustomEquipmentPrompt addItem={this.addItem}/>
-                <ItemPreview
+                <CustomStepPrompt addItem={this.addItem}/>
+                <StepPreview
                     className="small-6 cell"
                     items={this.state.data}
-                    type="equipment"
-                    postfix="remove"
                     postfixFunc={this.removeItem}/>
             </div>
         )
     }
 };
 
-class CustomEquipmentPrompt extends Component {
+class CustomStepPrompt extends Component {
     
     constructor(props){
         super(props);
@@ -179,7 +147,6 @@ class CustomEquipmentPrompt extends Component {
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
                 footer={[
-                    <FormItem key="submit" loading={this.loading}>
                         <button
                             type="submit"
                             id="settingsButton"
@@ -188,7 +155,6 @@ class CustomEquipmentPrompt extends Component {
                             className="button">
                             Create
                         </button>
-                        </FormItem>
                 ]}>
   
                   <MakeProfImg
@@ -303,4 +269,43 @@ class CustomEquipmentPrompt extends Component {
       };
   }
 
-  export default DynamicCustomEquipment;
+  class StepPreview extends Component {
+    
+    constructor(props){
+        super(props);
+
+        this.state = {
+            isLoading: false
+        };
+    }
+  
+  
+    render() {
+
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        // Checking response
+        if (this.state.notFound === true || this.state.serverError === true) {
+            return <Redirect
+                to={{
+                pathname: "/tipsy/error",
+                state: {
+                    from: this.props.location,
+                    notFound: this.state.notFound,
+                    serverError: this.state.serverError
+                }
+            }}/>
+        }
+
+      return (
+        <div className="grid-x align-center-middle small-6 medium-6 cell">
+
+        </div>
+      );
+    }
+  }
+
+  export default DynamicSteps;

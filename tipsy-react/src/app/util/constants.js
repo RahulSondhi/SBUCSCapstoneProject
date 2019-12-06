@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react';
-import {notification, Select, Spin } from 'antd';
+import {Form, Input, Icon, Modal, notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
-import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search} from './APIUtils';
-import {Link} from 'react-router-dom';
+import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search, getAllEquipmentTypes} from './APIUtils';
+import {Link, Redirect} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
  
 import UserPic from '../assets/defaultIcons/user.svg';
@@ -23,7 +23,9 @@ import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 import {NewEquipmentPic} from '../assets/defaultIcons/newequipment.json';
 
 import * as validate from './validate';
+
 const { Option } = Select;
+const FormItem = Form.Item;
 
 // Neccessary Data
 
@@ -438,17 +440,34 @@ export class DynamicForm extends Component {
     }
 
     render() {
-        return (
-            <div className={"dynamicForm grid-x align-center-middle " + this.className}>
-                <DynamicInput input="" addItem={this.addItem} type={this.type}/>
-                <ItemPreview
-                    className="small-6 cell"
-                    items={this.state.data}
-                    type={this.type}
-                    postfix="remove"
-                    postfixFunc={this.removeItem}/>
-            </div>
-        )
+        if(this.type === "equipment"){
+            return (
+                <div className={"dynamicForm grid-x align-center-middle " + this.className}>
+                    <DynamicInput input="" addItem={this.addItem} type={this.type}/>
+                    <div className="cell"></div>
+                    <CustomEquipmentPrompt addItem={this.addItem}/>
+                    <ItemPreview
+                        className="small-4 cell"
+                        items={this.state.data}
+                        type={this.type}
+                        postfix="remove"
+                        postfixFunc={this.removeItem}/>
+                </div>
+                )
+         }else{
+            return (
+                <div className={"dynamicForm grid-x align-center-middle " + this.className}>
+                    <DynamicInput input="" addItem={this.addItem} type={this.type}/>
+                    <div className="cell"></div>
+                    <ItemPreview
+                        className="small-4 cell"
+                        items={this.state.data}
+                        type={this.type}
+                        postfix="remove"
+                        postfixFunc={this.removeItem}/>
+                </div>
+            )
+        }
     }
 };
 
@@ -504,7 +523,7 @@ class DynamicInput extends Component {
             filterOption={false}
             onSearch={this.fetchUser}
             onChange={this.handleChange}
-            className="searchbar cell"
+            className="searchbar small-8 cell"
           >
             {data.map(d => (
               <Option key={d.value}>{d.text}</Option>
@@ -601,3 +620,199 @@ class DynamicInput extends Component {
 
       };
 }
+
+class CustomEquipmentPrompt extends Component {
+    
+    constructor(props){
+        super(props);
+
+        this.state = {
+            visible: false,
+            confirmLoading: false,
+            name: {
+                value: ''
+            },
+            equipmentType: {
+                value: 'INGREDIENT'
+            },
+            img: {
+                value: NewEquipmentPic
+            },
+            isLoading: false,
+            equipmentTypes:[]
+        };
+
+        getAllEquipmentTypes().then(response => {
+            this.setState({
+                equipmentTypes:response,
+                isLoading: false
+            });
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
+    }
+  
+  
+    render() {
+      const { visible, confirmLoading} = this.state;
+
+        // Checking if data came in
+        if (this.state.isLoading) {
+            return null
+        }
+
+        // Checking response
+        if (this.state.notFound === true || this.state.serverError === true) {
+            return <Redirect
+                to={{
+                pathname: "/tipsy/error",
+                state: {
+                    from: this.props.location,
+                    notFound: this.state.notFound,
+                    serverError: this.state.serverError
+                }
+            }}/>
+        }
+
+      return (
+        <div className="grid-x align-center-middle small-4 cell">
+
+          <ItemPreview
+                        className="cell"
+                        items={[{desc:"Add Your Own"}]}
+                        func={this.showModal}
+                        type={"createEquipment"}/>
+  
+          <Form onSubmit={this.handleSubmit} className="cell grid-x align-center-middle">
+              <Modal
+                title="Create a Custom Equipment"
+                className="grid-x align-center-middle"
+                visible={visible}
+                onOk={this.handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={this.handleCancel}
+                footer={[
+                    <FormItem key="submit" loading={this.loading}>
+                        <button
+                            type="submit"
+                            id="settingsButton"
+                            disabled={this.isFormInvalid()}
+                            onClick={(e) => {this.handleSubmit(e)}}
+                            className="button">
+                            Create
+                        </button>
+                        </FormItem>
+                ]}>
+  
+                  <MakeProfImg
+                      pic={this.state.img.value}
+                      className="cell"
+                      data={this.handleImageLoad}
+                      type="equipment"/>
+  
+                  <FormItem
+                      label="Name"
+                      validateStatus={this.state.name.validateStatus}
+                      help={this.state.name.errorMsg}
+                      className="small-12 medium-6 cell">
+                    <Input
+                        prefix={< Icon type = "idcard" />}
+                        name="name"
+                        autoComplete="off"
+                        placeholder="Enter Recipe Name"
+                        value={this.state.name.value}
+                        onChange={(event) => this.handleInputChange(event, ValidateName)}/>
+                    </FormItem>
+
+                  <FormItem
+                      label="Type"
+                      validateStatus={this.state.equipmentType.validateStatus}
+                      help={this.state.equipmentType.errorMsg}
+                      className="small-12 medium-6 cell">
+                    
+                    <select 
+                        name="equipmentType"
+                        className="customEquipmentSelect"
+                        value={this.state.equipmentType.value}
+                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                        {this.state.equipmentTypes.map(fbb =>
+                            <option key={fbb.type} value={fbb.type}>{fbb.type}</option>
+                        )};
+                    </select>
+
+                    </FormItem>
+              </Modal>
+          </Form>
+      </div>
+      );
+    }
+  
+      handleInputChange(event, validationFun) {
+          const target = event.target;
+          const inputName = target.name;
+          const inputValue = target.value;
+  
+          this.setState({
+              [inputName]: {
+                  value: inputValue,
+                  ...validationFun(inputValue)
+              }
+          });
+      }
+  
+      handleImageLoad = (val) => {
+          this.setState({
+              img: {
+                  value: val
+              }
+          });
+      }
+  
+      handleSubmit(event) {
+          event.preventDefault();
+
+          this.setState({
+            confirmLoading: true,
+          });
+  
+          const equipmentRequest = {
+              name: this.state.name.value,
+              img: this.state.img.value,
+              equipmentType: this.state.equipmentType.value
+          };
+  
+          this.props.addItem(true,equipmentRequest);
+
+          this.setState({
+            name: {
+                value: ''
+            },
+            equipmentType: {
+                value: 'INGREDIENT'
+            },
+            visible: false,
+            confirmLoading: false,
+          });
+      }
+  
+      isFormInvalid() {
+          return !(this.state.name.validateStatus === 'success');
+      }
+
+      showModal = () => {
+        this.setState({
+          visible: true,
+        });
+      };
+    
+    
+      handleCancel = () => {
+        this.setState({
+          visible: false,
+        });
+      };
+  }

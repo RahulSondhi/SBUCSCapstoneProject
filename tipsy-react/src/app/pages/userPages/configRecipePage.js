@@ -7,7 +7,7 @@ import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc, Notify} from '../.
 
 import {Form, Input, Icon, Tabs, Popconfirm} from 'antd';
 
-import DynamicCustomEquipment from './customEquipmentPrompt'
+import DynamicSteps from './dynamicSteps'
 
 const FormItem = Form.Item;
 const {TabPane} = Tabs;
@@ -121,10 +121,7 @@ class ConfigRecipePage extends Component {
                 steps: {
                     value: response.steps
                 },
-                equipments: {
-                    value: response.equipmentsAvailable
-                },
-                equipmentsCustom: {
+                equipmentsAvailable: {
                     value: response.equipmentsAvailable
                 },
                 img: {
@@ -237,44 +234,30 @@ class ConfigRecipePage extends Component {
                         </TabPane>
                         <TabPane tab="Equipment" disabled={this.state.type === "publish"} key="2">
                             <div className="grid-x align-center-middle cell">
-                                <div className="grid-x align-center-middle small-7 cell">
+                                <div className="grid-x align-center-middle cell">
 
                                     <h1 id="equipmentPageTitle" className="captionRed small-10 cell">Equipment</h1>
 
                                     <DynamicForm
                                         type="equipment"
-                                        data={this.state.equipments.value}
+                                        data={this.state.equipmentsAvailable.value}
                                         onUpdate={this.handleListLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>
 
                                 </div>
-
-                                <div className="small-1 cell"></div>
-
-                                <div className="grid-x align-center-middle small-4 cell">
-
-                                    <h1 id="equipmentPageTitle" className="captionRed small-10 cell">Custom Equipment</h1>
-
-                                    <DynamicCustomEquipment
-                                        data={this.state.equipmentsCustom.value}
-                                        onUpdate={this.handleListLoad}
-                                        validate={this.validateEquipmentAdd}
-                                        className="cell"/>
-
-                                </div>
+                                
                             </div>
                         </TabPane>
 
                         <TabPane tab="Steps" disabled={this.state.type === "publish"} key="3">
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
-                                {/* <DynamicForm
-                                    type="user"
-                                    data={this.state.workers.value}
-                                    onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
-                                    className="cell"/> */}
+                                    <DynamicSteps
+                                        data={this.state.equipmentsAvailable.value}
+                                        onUpdate={this.handleListLoad}
+                                        validate={this.validateEquipmentAdd}
+                                        className="cell"/>
 
                             </div>
                         </TabPane>
@@ -347,7 +330,7 @@ class ConfigRecipePage extends Component {
     }
 
     handleListLoad = () => {
-        
+        console.log(this.state.equipmentsAvailable)
     }
 
     handleDelete(event) {
