@@ -289,7 +289,7 @@ class ConfigBarPage extends Component {
     handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success","Your bar was succesfully deleted!",-1);
-            this.props.history.push("/tipsy/myBars")
+            this.props.history.push("/tipsy/myBars");
         }).catch(error => {
             Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
         });

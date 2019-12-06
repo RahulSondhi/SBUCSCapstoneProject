@@ -1,13 +1,108 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
-import {MakeProfImg, ValidateName, GetProfImg} from '../../util/constants';
-import {getAllEquipmentTypes} from '../../util/APIUtils';
+import {MakeProfImg, ValidateName, ItemPreview, Notify} from '../../util/constants';
+import {getAllEquipmentTypes, checkEquipmentNameIsPresent} from '../../util/APIUtils';
 
 import {Form, Input, Icon, Modal} from 'antd';
 
 const FormItem = Form.Item;
 
+export class DynamicCustomEquipment extends Component {
+
+    state = {
+        data: []
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.state.data = this.props.data;
+
+        this.onLoad = this.props.onLoad;
+        this.className = this.props.className;
+
+        this.addItem = this
+            .addItem
+            .bind(this);
+
+        this.removeItem = this
+            .removeItem
+            .bind(this);
+    }
+
+    async addItem(item) {
+        // update the state object
+
+        let hasItem = this
+            .state
+            .data
+            .some(items => items['name'] === item.name);
+
+        let passed = this.props.validate(item.name);
+
+        checkEquipmentNameIsPresent(item.name).then(response => {
+            if (hasItem === false && passed === true && response.available === false) {
+
+                Notify("success","Added",-1);
+    
+                this.state.data.push(item);
+                this.setState({data: this.state.data});
+                this.props.onUpdate();
+    
+            } else {
+                if (hasItem || passed === false) {
+                    Notify("error","This item already exists!",-1);
+                } else if (response.available === true) {
+                    Notify("error","That item name is taken!",-1);
+                } else {
+                    Notify("error","Could not find that!",-1);
+                }
+            }
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
+
+    }
+
+    removeItem(item) {
+        // update the state object
+        const index = this
+            .state
+            .data
+            .indexOf(item);
+
+        if (index > -1) {
+            this.state.data.splice(index, 1);
+            this.setState({data: this.state.data});
+            
+            Notify("success","Removed!",-1);
+            
+            this.props.onUpdate();
+        } else {
+            Notify("error","Could not remove that!",-1);
+        }
+
+    }
+
+    render() {
+        return (
+            <div className={"dynamicForm grid-x align-center-middle " + this.className}>
+                <CustomEquipmentPrompt addItem={this.addItem}/>
+                <ItemPreview
+                    className="small-6 cell"
+                    items={this.state.data}
+                    type="equipment"
+                    postfix="remove"
+                    postfixFunc={this.removeItem}/>
+            </div>
+        )
+    }
+};
 
 class CustomEquipmentPrompt extends Component {
     
@@ -20,8 +115,8 @@ class CustomEquipmentPrompt extends Component {
             name: {
                 value: ''
             },
-            type: {
-                value: ''
+            equipmentType: {
+                value: 'INGREDIENT'
             },
             img: {
                 value: ''
@@ -30,18 +125,18 @@ class CustomEquipmentPrompt extends Component {
             equipmentTypes:[]
         };
 
-        // getAllEquipmentTypes().then(response => {
-        //     this.setState({
-        //         equipmentTypes:response,
-        //         isLoading: false
-        //     });
-        // }).catch(error => {
-        //     if (error.status === 404) {
-        //         this.setState({notFound: true, isLoading: false});
-        //     } else {
-        //         this.setState({serverError: true, isLoading: false});
-        //     }
-        // });
+        getAllEquipmentTypes().then(response => {
+            this.setState({
+                equipmentTypes:response,
+                isLoading: false
+            });
+        }).catch(error => {
+            if (error.status === 404) {
+                this.setState({notFound: true, isLoading: false});
+            } else {
+                this.setState({serverError: true, isLoading: false});
+            }
+        });
     }
   
   
@@ -68,18 +163,12 @@ class CustomEquipmentPrompt extends Component {
 
       return (
         <div className="grid-x align-center-middle small-6 medium-6 cell">
-  
-          <div
-              className="previewItem grid-x align-center-middle cell"
-              onClick={this.showModal}
-              key="add">
-              <div className="small-4 grid-x cell">
-                  <GetProfImg type="add" className="small-10 cell" pic="" alt="Add A Bar"/>
-              </div>
-              <div className="small-8 grid-x cell">
-                  <div className="previewName cell">Add A Custom Equipment</div>
-              </div>
-          </div>
+
+          <ItemPreview
+                        className="cell"
+                        items={[{desc:"Add Your Own"}]}
+                        func={this.showModal}
+                        type={"createEquipment"}/>
   
           <Form onSubmit={this.handleSubmit} className="cell grid-x align-center-middle">
               <Modal
@@ -95,7 +184,7 @@ class CustomEquipmentPrompt extends Component {
                             type="submit"
                             id="settingsButton"
                             disabled={this.isFormInvalid()}
-                            onClick={this.disableButton}
+                            onClick={(e) => {this.handleSubmit(e)}}
                             className="button">
                             Create
                         </button>
@@ -124,16 +213,17 @@ class CustomEquipmentPrompt extends Component {
 
                   <FormItem
                       label="Type"
-                      validateStatus={this.state.type.validateStatus}
-                      help={this.state.type.errorMsg}
+                      validateStatus={this.state.equipmentType.validateStatus}
+                      help={this.state.equipmentType.errorMsg}
                       className="small-12 medium-6 cell">
                     
                     <select 
-                    name="type"
-                    value={this.state.type.value}
-                    onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                        name="equipmentType"
+                        className="customEquipmentSelect"
+                        value={this.state.equipmentType.value}
+                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         {this.state.equipmentTypes.map(fbb =>
-                            <option key={fbb.name} value={fbb.name}>{fbb.name}</option>
+                            <option key={fbb.type} value={fbb.type}>{fbb.type}</option>
                         )};
                     </select>
 
@@ -175,19 +265,28 @@ class CustomEquipmentPrompt extends Component {
           const equipmentRequest = {
               name: this.state.name.value,
               img: this.state.img.value,
-              type: this.state.type.value
+              equipmentType: this.state.equipmentType.value
           };
   
-          this.props.add(equipmentRequest);
+          this.props.addItem(equipmentRequest);
 
           this.setState({
+            name: {
+                value: ''
+            },
+            equipmentType: {
+                value: 'INGREDIENT'
+            },
+            img: {
+                value: ''
+            },
             visible: false,
             confirmLoading: false,
           });
       }
   
       isFormInvalid() {
-          return !(this.state.name.validateStatus === 'success' && this.state.type.validateStatus === 'success');
+          return !(this.state.name.validateStatus === 'success');
       }
 
       showModal = () => {
@@ -204,4 +303,4 @@ class CustomEquipmentPrompt extends Component {
       };
   }
 
-  export default CustomEquipmentPrompt;
+  export default DynamicCustomEquipment;

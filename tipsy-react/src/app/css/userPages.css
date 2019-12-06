@@ -65,3 +65,8 @@
 .errorCaption {
     color: white;
 } 
+
+/* Custom Equipment */
+.customEquipmentSelect{
+  padding-top: 0em;
+}

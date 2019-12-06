@@ -20,6 +20,7 @@ import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
+import {NewEquipmentPic} from '../assets/defaultIcons/newequipment.json';
 
 import * as validate from './validate';
 const { Option } = Select;
@@ -128,7 +129,7 @@ export class MakeProfImg extends Component {
             } else if (this.type === "recipe") {
                 this.state.src = NewRecipePic
             } else if (this.type === "equipment") {
-                this.state.src = NewRecipePic
+                this.state.src = NewEquipmentPic
             } else {
                 this.state.src = NewUserPic
             }
@@ -209,12 +210,13 @@ export class MakeProfImg extends Component {
 }
 
 // ItemPreview Item [img,name,type,desc,id]
-export const ItemPreview = ({items, className, type, postfix, postfixFunc}) => (
+export const ItemPreview = ({items, className, type, postfix, postfixFunc,func}) => (
     <Fragment>
         {items.map(item => (<GetItem
             key={new Date().getMilliseconds() + (Math.random() * 69420)}
             type={type}
             item={item}
+            func={func}
             postfix={postfix}
             postfixFunc={postfixFunc}
             className={"grid-x align-center-middle " + className}/>))}
@@ -232,6 +234,7 @@ class GetItem extends Component {
         this.id = this.props.item.id;
         this.img = this.item.img;
         this.className = this.props.className;
+        this.func = this.props.func;
 
         this.link = "/tipsy/" + this.type + "/";
         this.descPre = "";
@@ -256,13 +259,13 @@ class GetItem extends Component {
             this.desc = <span>{" " + this.item.author}</span>;
         } else if (this.type === "action") {
             this.name = this.props.item;
-            this.link = "#";
+            this.func = ()=>{};
         } else if (this.type === "error") {
-            this.link = "#";
-        } else if (this.type === "createBar") {
+            this.func = ()=>{};
+        } else if (this.type === "createBar" || this.type === "createRecipe" ){
             this.type = "add";
             this.name = this.item.desc;
-        } else if (this.type === "createRecipe") {
+        } else if( this.type === "createEquipment") {
             this.type = "add";
             this.name = this.item.desc;
         } else {
@@ -280,6 +283,12 @@ class GetItem extends Component {
             this.postfixClass = "hidden"
         } else {
             this.postfixClass = " ";
+        }
+
+        if (this.func === null || this.func === "" || this.func === undefined) {
+            this.onclick = (e) => {console.log("help")};
+        } else {
+            this.onclick = (e)=>{e.preventDefault(); this.func();}
         }
 
         this.postFunc = this
@@ -301,6 +310,9 @@ class GetItem extends Component {
                 <div className="grid-x align-center-middle small-11 previewItemContainer">
                     <Link
                         to={this.link}
+                        onClick={(e) => {
+                            this.onclick(e)
+                          }}
                         className="previewItem small-11 grid-x align-center-middle cell">
                         <div className="small-1 cell"></div>
                         <div className="small-6 grid-x align-center-middle cell">
@@ -312,21 +324,28 @@ class GetItem extends Component {
                         </div>
                     </Link>
                     
-                    <div className="small-1 grid-x cell" onClick={this.postFunc}>
+                    <div className="small-1 grid-x align-self-top cell" onClick={this.postFunc}>
                         <GetProfImg
-                            className={"small-6 cell " + this.postfixClass}
+                            className={"small-11 cell " + this.postfixClass}
                             alt={this.postfix}
                             type={this.postfix}/>
+                        <div className="small-1 cell"></div>
                     </div>
 
                     <Link
                         to={this.link}
+                        onClick={(e) => {
+                            this.onclick(e)
+                          }}
                         className="cell">
                         <div className="spacer"></div>
                     </Link>
                     
                     <Link
                         to={this.link}
+                        onClick={(e) => {
+                            this.onclick(e)
+                          }}
                         className="previewItem small-12 grid-x align-center-middle cell">
                         <div className="small-1 cell"></div>
                         <div className="small-10 grid-x cell">
