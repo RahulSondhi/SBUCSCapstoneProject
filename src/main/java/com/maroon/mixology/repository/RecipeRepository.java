@@ -16,6 +16,6 @@ public interface RecipeRepository extends MongoRepository<Recipe, String> {
 
     Recipe findByName(String name);
 
-    List<Recipe> findByNameLikeIgnoreCase(String name);
+    List<Recipe> findByNameLikeIgnoreCaseAndPublished(String name, boolean published);
 
 }

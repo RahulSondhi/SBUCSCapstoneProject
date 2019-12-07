@@ -27,7 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> findByNameLikeIgnoreCase(String name) {
-		return recipeRepository.findByNameLikeIgnoreCase(name);
+		return recipeRepository.findByNameLikeIgnoreCaseAndPublished(name, true);
 	}
 
 
