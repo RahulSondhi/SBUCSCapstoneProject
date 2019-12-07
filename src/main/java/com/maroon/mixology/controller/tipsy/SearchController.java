@@ -43,7 +43,7 @@ public class SearchController {
     @Autowired
     private EquipmentServiceImpl equipmentService;
     
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
     @GetMapping
     public ResponseEntity<?> search(@RequestParam(value = "type") String type, @RequestParam(value = "query") String query ) {

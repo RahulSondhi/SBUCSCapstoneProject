@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByNicknameLikeIgnoreCase(String name) {
-        // TODO Auto-generated method stub
         return userRepository.findByNicknameLikeIgnoreCase(name);
     }
 

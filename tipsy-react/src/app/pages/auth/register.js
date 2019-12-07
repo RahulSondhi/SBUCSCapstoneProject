@@ -321,7 +321,7 @@ class Register extends Component {
     validateEmailAvailability() {
         // First check for client side errors in email
         const emailValue = this.state.email.value;
-        const emailValidation = this.validateEmail(emailValue);
+        const emailValidation = ValidateEmail(emailValue);
 
         if (emailValidation.validateStatus === 'error') {
             this.setState({

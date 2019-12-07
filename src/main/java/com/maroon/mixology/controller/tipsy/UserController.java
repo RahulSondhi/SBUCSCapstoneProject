@@ -23,7 +23,6 @@ import com.maroon.mixology.exchange.response.UserSettingsResponse;
 import com.maroon.mixology.exchange.response.UserSummary;
 import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
-import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarServiceImpl;
@@ -36,7 +35,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,7 +70,7 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Value("${tipsy.mail.newemail.subject}")
     private String notificationSubject;

@@ -27,7 +27,6 @@ public class BarServiceImpl implements BarService {
 
     @Override
     public List<Bar> findByNameLikeIgnoreCase(String name) {
-        // TODO Auto-generated method stub
         return barRepository.findByNameLikeIgnoreCase(name);
     }
 
