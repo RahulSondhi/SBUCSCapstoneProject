@@ -109,6 +109,16 @@ class ConfigRecipePage extends Component {
                 var type = "publish";
             }
 
+            var equipmentsAvailable = response
+            .equipmentsAvailable
+            .map(function (el) {
+                return {
+                    name: el.name,
+                    img: el.img,
+                    equipmentType: el.equipmentType.type
+                }
+            });
+
             this.setState({
                 recipe: response,
                 isLoading: false,
@@ -127,8 +137,11 @@ class ConfigRecipePage extends Component {
                 steps: {
                     value: response.steps
                 },
-                equipmentsAvailable: {
+                preLoadedEquipment: {
                     value: response.equipmentsAvailable
+                },
+                equipmentsAvailable: {
+                    value: equipmentsAvailable
                 },
                 img: {
                     value: response.img
