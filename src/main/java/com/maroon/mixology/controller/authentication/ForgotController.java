@@ -14,7 +14,7 @@ import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
 import com.maroon.mixology.service.EmailService;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,7 +51,7 @@ public class ForgotController {
         private EmailService emailService;
 
         @Autowired
-        private UserServiceImpl userService;
+        private UserService userService;
 
         @Value("${tipsy.mail.passwordreset.subject}")
         private String passwordResetSubject;

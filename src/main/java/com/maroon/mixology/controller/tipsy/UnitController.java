@@ -7,7 +7,7 @@ import java.util.Set;
 import com.maroon.mixology.entity.Unit;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
-import com.maroon.mixology.service.UnitServiceImpl;
+import com.maroon.mixology.service.UnitService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tipsy/unit")
 public class UnitController {
     @Autowired
-    private UnitServiceImpl unitService;
+    private UnitService unitService;
 
     @GetMapping("/getUnits")
     public ResponseEntity<?> getAllUnits() {

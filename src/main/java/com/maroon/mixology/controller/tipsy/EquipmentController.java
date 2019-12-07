@@ -11,8 +11,8 @@ import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.UserIdentityAvailability;
 import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
-import com.maroon.mixology.service.EquipmentServiceImpl;
-import com.maroon.mixology.service.EquipmentTypeServiceImpl;
+import com.maroon.mixology.service.EquipmentService;
+import com.maroon.mixology.service.EquipmentTypeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,10 +31,10 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/tipsy/equipment")
 public class EquipmentController {
     @Autowired
-    private EquipmentServiceImpl equipmentService;
+    private EquipmentService equipmentService;
 
     @Autowired
-    private EquipmentTypeServiceImpl equipmentTypeService;
+    private EquipmentTypeService equipmentTypeService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);

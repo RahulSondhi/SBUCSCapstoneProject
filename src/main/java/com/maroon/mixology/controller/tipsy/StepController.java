@@ -7,8 +7,8 @@ import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class StepController {
     
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
     @GetMapping("/step")
     public ResponseEntity<?> getStep(@CurrentUser UserDetails currentUser, @PathVariable(value = "recipeID") String recipeID, @RequestParam(value = "index") String index) {

@@ -12,10 +12,10 @@ import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
-import com.maroon.mixology.service.BarServiceImpl;
-import com.maroon.mixology.service.EquipmentServiceImpl;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.BarService;
+import com.maroon.mixology.service.EquipmentService;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,16 +32,16 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/tipsy/search")
 public class SearchController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private BarServiceImpl barService;
+    private BarService barService;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
     @Autowired
-    private EquipmentServiceImpl equipmentService;
+    private EquipmentService equipmentService;
     
     private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 

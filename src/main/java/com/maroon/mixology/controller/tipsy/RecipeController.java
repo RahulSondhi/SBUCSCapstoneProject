@@ -26,10 +26,10 @@ import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.EquipmentTypeServiceImpl;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UnitServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.EquipmentTypeService;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UnitService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,16 +58,16 @@ public class RecipeController {
     private StepRepository stepRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
     @Autowired
-    private EquipmentTypeServiceImpl equipmentTypeService;
+    private EquipmentTypeService equipmentTypeService;
 
     @Autowired
-    private UnitServiceImpl unitService;
+    private UnitService unitService;
     
     private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 

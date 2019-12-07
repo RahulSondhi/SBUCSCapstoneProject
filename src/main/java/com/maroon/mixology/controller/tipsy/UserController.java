@@ -25,10 +25,10 @@ import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.BarServiceImpl;
+import com.maroon.mixology.service.BarService;
 import com.maroon.mixology.service.EmailService;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,16 +56,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     
     @Autowired
     private EmailService emailService;
     
     @Autowired
-    private BarServiceImpl barService;
+    private BarService barService;
     
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;

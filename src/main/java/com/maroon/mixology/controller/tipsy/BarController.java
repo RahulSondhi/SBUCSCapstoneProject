@@ -17,9 +17,9 @@ import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.BarServiceImpl;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.BarService;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,16 +42,16 @@ public class BarController {
     private UserRepository userRepository;
             
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
     
     @Autowired
     private BarRepository barRepository;
 
     @Autowired
-    private BarServiceImpl barService;
+    private BarService barService;
 
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
@@ -90,9 +90,9 @@ public class BarController {
             combinedUsers.addAll(barWorkers);
             for (User u : combinedUsers){
                 u.getBars().add(bar.getId()); 
-                userRepository.save(u);
+                // userRepository.save(u);
             }
-            // userRepository.saveAll(combinedUsers);
+            userRepository.saveAll(combinedUsers);
             //Added the bar to all affliated Users
             return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
@@ -119,7 +119,10 @@ public class BarController {
             }
             Set<BriefUserResponse> barWorkers = new HashSet<BriefUserResponse>();
             for (User worker : bar.getWorkers()){
-                barWorkers.add(new BriefUserResponse(worker.getNickname(), worker.getFirstName() + " " + worker.getLastName(), worker.getProfilePic()));
+                barWorkers.add(new BriefUserResponse(
+                    worker.getNickname(), 
+                    worker.getFirstName() + " " + worker.getLastName(), 
+                    worker.getProfilePic()));
             }
             Set<BriefRecipeResponse> barRecipesAvailable = new HashSet<BriefRecipeResponse>();
             for (Recipe recipeAvailable : bar.getRecipesAvailable()){
@@ -186,9 +189,10 @@ public class BarController {
                     User u = userService.findByNickname(managerNickname);
                     barManagers.add(u);
                     u.getBars().add(barID);
-                    userRepository.save(u);
+                    // userRepository.save(u);
                 }
                 bar.setManagers(barManagers);
+                userRepository.saveAll(barManagers);
                 //We can add or remove workers
                 //Diassociate everyone in workers
                 for (User u : bar.getWorkers()){
@@ -201,9 +205,10 @@ public class BarController {
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
                     u.getBars().add(barID);
-                    userRepository.save(u);
+                    // userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
+                userRepository.saveAll(barWorkers);
                 //we can add or remove recipes available
                 Set<Recipe> barRecipes = new HashSet<Recipe>();
                 for (String recipeID : barRequest.getRecipesAvailable()){
@@ -215,15 +220,23 @@ public class BarController {
                 return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
             }
             else if(managerIdList.contains(requester.getId())){
+                //manager only{LIMITED ACCESS}
+                //We can add or remove workers
+                //Diassociate everyone in workers
+                for (User u : bar.getWorkers()){
+                    u.getBars().remove(barID);
+                    userRepository.save(u);
+                }
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
                     u.getBars().add(barID);
-                    userRepository.save(u);
+                    // userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
+                userRepository.saveAll(barWorkers);
                 //we can add or remove recipes available
                 Set<Recipe> barRecipes = new HashSet<Recipe>();
                 for (String recipeID : barRequest.getRecipesAvailable()){
@@ -264,8 +277,9 @@ public class BarController {
                 combinedUsers.addAll(bar.getWorkers());
                 for (User u : combinedUsers){
                     u.getBars().remove(bar.getId()); 
-                    userRepository.save(u);
+                    // userRepository.save(u);
                 }
+                userRepository.saveAll(combinedUsers);
                 //We delete the bar
                 barRepository.delete(bar);
                 return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully deleted!"));
