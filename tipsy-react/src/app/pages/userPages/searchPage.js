@@ -129,8 +129,15 @@ export class SearchPage extends Component {
             search: '?type='+this.state.defaultType+"&query="+e.target.value
         })
 
-        this.loadSearch(this.state.defaultType,e.target.value);
+    }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.location !== this.props.location){
+            const values = queryString.parse(nextProps.location.search)
+            if(values.type !== undefined && values.query !== undefined ){
+                this.loadSearch(values.type,values.query);
+            }
+        }
     }
 
     render() {
