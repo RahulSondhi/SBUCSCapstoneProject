@@ -42,6 +42,9 @@ class ConfigRecipePage extends Component {
             },
             published: {
                 value: false
+            },
+            newSteps: {
+                value: false
             }
         }
         //Functions needed for this Settings Class
@@ -129,6 +132,9 @@ class ConfigRecipePage extends Component {
                 },
                 published: {
                     value: response.published
+                },
+                newSteps: {
+                    value: false
                 }
             });
 
@@ -370,7 +376,8 @@ class ConfigRecipePage extends Component {
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable.value
+            equipmentsAvailable: this.state.equipmentsAvailable.value,
+            newSteps: this.state.newSteps.value
         };
 
         if (this.state.type === "clone" || this.state.type === "create") {
