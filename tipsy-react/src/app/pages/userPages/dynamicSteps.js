@@ -11,13 +11,15 @@ const FormItem = Form.Item;
 export class DynamicSteps extends Component {
 
     state = {
-        data: []
+        data: [],
+        equipment: []
     };
 
     constructor(props) {
         super(props);
 
         this.state.data = this.props.data;
+        this.state.equipment = this.props.data;
 
         this.onLoad = this.props.onLoad;
         this.className = this.props.className;
@@ -31,7 +33,7 @@ export class DynamicSteps extends Component {
             .bind(this);
     }
 
-    async addItem(item) {
+    addItem(item) {
         // update the state object
         this.state.data.push(item);
         this.setState({data: this.state.data});
@@ -62,7 +64,7 @@ export class DynamicSteps extends Component {
     render() {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
-                <CustomStepPrompt addItem={this.addItem}/>
+                <CustomStepPrompt addItem={this.addItem} equipment={this.state.equipment}/>
                 <StepPreview
                     className="small-6 cell"
                     items={this.state.data}
@@ -80,14 +82,24 @@ class CustomStepPrompt extends Component {
         this.state = {
             visible: false,
             confirmLoading: false,
-            name: {
-                value: ''
+            equipment: [],
+            equipmentToDo: {
+                value: ""
             },
-            equipmentType: {
-                value: 'INGREDIENT'
+            equipmentDoing: {
+                value: ""
             },
-            img: {
-                value: ''
+            equipmentProduct: {
+                value: ""
+            },
+            action: {
+                value: ""
+            },
+            value: {
+                value: 0
+            },
+            unit: {
+                value: ""
             },
             isLoading: false,
             equipmentTypes:[]
@@ -95,6 +107,7 @@ class CustomStepPrompt extends Component {
 
         getAllEquipmentTypes().then(response => {
             this.setState({
+                equipment: this.props.equipment,
                 equipmentTypes:response,
                 isLoading: false
             });
@@ -157,12 +170,6 @@ class CustomStepPrompt extends Component {
                         </button>
                 ]}>
   
-                  <MakeProfImg
-                      pic={this.state.img.value}
-                      className="cell"
-                      data={this.handleImageLoad}
-                      type="equipment"/>
-  
                   <FormItem
                       label="Name"
                       validateStatus={this.state.name.validateStatus}
@@ -213,14 +220,6 @@ class CustomStepPrompt extends Component {
           });
       }
   
-      handleImageLoad = (val) => {
-          this.setState({
-              img: {
-                  value: val
-              }
-          });
-      }
-  
       handleSubmit(event) {
           event.preventDefault();
 
@@ -237,22 +236,19 @@ class CustomStepPrompt extends Component {
           this.props.addItem(equipmentRequest);
 
           this.setState({
-            name: {
-                value: ''
-            },
-            equipmentType: {
-                value: 'INGREDIENT'
-            },
-            img: {
-                value: ''
-            },
+            equipmentToDo: "",
+            equipmentDoing: "",
+            equipmentProduct: "",
+            action: "",
+            value: 0,
+            unit: "",
             visible: false,
             confirmLoading: false,
           });
       }
-  
+   
       isFormInvalid() {
-          return !(this.state.name.validateStatus === 'success');
+          return !(this.state.equipmentToDo.validateStatus === 'success' && this.state.equipmentDoing.validateStatus === 'success' && this.state.equipmentProduct.validateStatus === 'success');
       }
 
       showModal = () => {

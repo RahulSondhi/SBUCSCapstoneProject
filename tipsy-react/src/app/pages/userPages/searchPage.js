@@ -64,7 +64,7 @@ export class SearchPage extends Component {
                 query: values.query,
                 id: this.id + 1
             });
-            this.loadSearch();
+            this.loadSearch(values.type,values.query);
         }else{
             this.setState({
                 searchingClass: " ",
@@ -75,13 +75,14 @@ export class SearchPage extends Component {
 
     }
 
-    loadSearch = () => {
-
+    loadSearch = (type,query) => {
+        
         this.id += 1;
-        if(["user","bar","equipment","recipe"].includes(this.state.defaultType)){
-            search(this.state.defaultType,this.state.query).then(response => {
+        if(["user","bar","equipment","recipe"].includes(type)){
+            search(type,query).then(response => {
                 this.setState({
-                    type: this.state.defaultType,
+                    type: type,
+                    query: query,
                     results: response,
                     isLoading: false,
                     searchingClass: "hidden",
@@ -91,7 +92,7 @@ export class SearchPage extends Component {
                 });
             }).catch(error => {
                 this.setState({
-                    results: [{name:"No "+this.state.type+" called '"+ this.state.query +"' found!"}],
+                    results: [{name:"No "+type+" called '"+ query +"' found!"}],
                     type: "error",
                     isLoading: false,
                     searchingClass: "hidden",
@@ -128,9 +129,7 @@ export class SearchPage extends Component {
             search: '?type='+this.state.defaultType+"&query="+e.target.value
         })
 
-        this.state.query = e.target.value;
-
-        this.loadSearch()
+        this.loadSearch(this.state.defaultType,e.target.value);
 
     }
 

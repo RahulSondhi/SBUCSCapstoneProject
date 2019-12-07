@@ -164,17 +164,16 @@ class ConfigRecipePage extends Component {
         return (
             <div className="grid-x align-center-middle">
                 <Navbar/>
-
-                <h1 className="small-11 medium-10 caption cell">
+                <h1 className="small-11 caption cell">
                     {this.state.page.title}
                 </h1>
-                <div className="small-1 medium-2 cell"></div>
+                <div className="small-1 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-11 cell grid-x align-center-middle">
+                    className="cell grid-x align-center-middle">
 
-                    <Tabs className="tabsRecipeForm small-12 cell" tabPosition="right" 
+                    <Tabs className="tabsRecipeForm cell" tabPosition="right" 
                         tabBarExtraContent={
                             <div className="grid-x align-center-middle cell">
                                 <div className="tabsSeperator small-10 cell"></div>

@@ -70,3 +70,8 @@
 .customEquipmentSelect{
   padding-top: 0em;
 }
+
+/* Change Password */
+.changePasswordTitle{
+  color: white;
+}

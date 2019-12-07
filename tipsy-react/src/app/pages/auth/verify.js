@@ -224,7 +224,7 @@ class Verify extends Component {
                         Login to your account to start!
                     </h4>
 
-                    <Link to="/login" className="cell">
+                    <Link to="/logout" className="cell">
                         <button type="submit" className="button">Login</button>
                     </Link>
 
