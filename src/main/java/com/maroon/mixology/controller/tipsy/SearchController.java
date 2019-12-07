@@ -92,7 +92,8 @@ public class SearchController {
                             r.getId(), 
                             r.getName(), 
                             r.getImage(), 
-                            r.getAuthor().getNickname()
+                            r.getAuthor().getNickname(),
+                            r.isPublished()
                         ));
                     }
                     if(recipeRet.isEmpty()){
@@ -190,7 +191,8 @@ public class SearchController {
                 recipe.getId(), 
                 recipe.getName(), 
                 recipe.getImage(), 
-                recipe.getAuthor().getNickname()
+                recipe.getAuthor().getNickname(),
+                recipe.isPublished()
             ));
         } catch (Exception e) {
             logger.error("Recipe was unable to be loaded.", e);

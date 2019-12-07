@@ -123,7 +123,13 @@ public class BarController {
             }
             Set<BriefRecipeResponse> barRecipesAvailable = new HashSet<BriefRecipeResponse>();
             for (Recipe recipeAvailable : bar.getRecipesAvailable()){
-                barRecipesAvailable.add(new BriefRecipeResponse(recipeAvailable.getId(), recipeAvailable.getName(), recipeAvailable.getImage(), recipeAvailable.getAuthor().getNickname()));
+                barRecipesAvailable.add(new BriefRecipeResponse(
+                    recipeAvailable.getId(), 
+                    recipeAvailable.getName(), 
+                    recipeAvailable.getImage(), 
+                    recipeAvailable.getAuthor().getNickname(),
+                    recipeAvailable.isPublished()
+                ));
             }
             //lets build our response
             BriefUserResponse barOwner = new BriefUserResponse(bar.getOwner().getNickname(), bar.getOwner().getFirstName() + " " + bar.getOwner().getLastName(), bar.getOwner().getProfilePic()); 

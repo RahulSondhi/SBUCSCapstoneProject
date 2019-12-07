@@ -5,12 +5,14 @@ public class BriefRecipeResponse {
     private String name;
     private String img;
     private String author;
+    private boolean published;
 
-    public BriefRecipeResponse(String id, String name, String img, String author) {
+    public BriefRecipeResponse(String id, String name, String img, String author, boolean published) {
         this.id = id;
         this.name = name;
         this.img = img;
         this.author = author;
+        this.published = published;
     }
 
     public String getId() {
@@ -44,6 +46,15 @@ public class BriefRecipeResponse {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
+    }
+
 
 
 }

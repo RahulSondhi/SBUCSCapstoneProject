@@ -30,5 +30,4 @@ public class RecipeServiceImpl implements RecipeService {
 		return recipeRepository.findByNameLikeIgnoreCaseAndPublished(name, true);
 	}
 
-
 }

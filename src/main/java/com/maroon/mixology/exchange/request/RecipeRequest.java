@@ -18,7 +18,7 @@ public class RecipeRequest {
     private Boolean newSteps;
     private Set<EquipmentRequest> equipmentsAvailable;
     private Boolean newEquipment;
-
+    
     public String getName() {
         return name;
     }

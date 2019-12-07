@@ -138,17 +138,35 @@ public class UserController {
             Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();
             for (String recipeWrittenID : user.getRecipesWritten()){
                 Recipe recipeWritten = recipeService.findById(recipeWrittenID);
-                userRecipesWritten.add(new BriefRecipeResponse(recipeWritten.getId(), recipeWritten.getName(), recipeWritten.getImage(), recipeWritten.getAuthor().getNickname()));
+                    userRecipesWritten.add(new BriefRecipeResponse(
+                            recipeWritten.getId(), 
+                            recipeWritten.getName(), 
+                            recipeWritten.getImage(), 
+                            recipeWritten.getAuthor().getNickname(),
+                            recipeWritten.isPublished()
+                        ));
             }
             Set<BriefRecipeResponse> userRecipesCompleted = new HashSet<BriefRecipeResponse>();
             for (String recipeCompletedID : user.getRecipesCompleted()){
                 Recipe recipeCompleted = recipeService.findById(recipeCompletedID);
-                userRecipesCompleted.add(new BriefRecipeResponse(recipeCompleted.getId(), recipeCompleted.getName(), recipeCompleted.getImage(), recipeCompleted.getAuthor().getNickname()));
+                userRecipesCompleted.add(new BriefRecipeResponse(
+                    recipeCompleted.getId(), 
+                    recipeCompleted.getName(), 
+                    recipeCompleted.getImage(), 
+                    recipeCompleted.getAuthor().getNickname(),
+                    recipeCompleted.isPublished()
+                    ));
             }
             Set<BriefRecipeResponse> userRecipesIncompleted = new HashSet<BriefRecipeResponse>();
             for (String recipeIncompletedID : user.getRecipesIncompleted()){
                 Recipe recipeIncompleted = recipeService.findById(recipeIncompletedID);
-                userRecipesIncompleted.add(new BriefRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
+                userRecipesIncompleted.add(new BriefRecipeResponse(
+                    recipeIncompleted.getId(), 
+                    recipeIncompleted.getName(), 
+                    recipeIncompleted.getImage(), 
+                    recipeIncompleted.getAuthor().getNickname(),
+                    recipeIncompleted.isPublished()
+                    ));
             }
             UserResponse userResponse = new UserResponse(
                 user.getNickname(),
@@ -162,6 +180,7 @@ public class UserController {
     
             return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
+            logger.error("UserProfile was unable to be loaded. Error: ", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "UserProfile was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }

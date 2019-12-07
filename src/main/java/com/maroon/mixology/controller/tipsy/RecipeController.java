@@ -234,7 +234,7 @@ public class RecipeController {
                 if(recipeRequest.getNewEquipment()){
                     Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
                     for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentTypeName());
+                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
                         equipmentsAvailable.add(new EquipmentResponse(
                             e.getName(),
                             e.getImg(),
