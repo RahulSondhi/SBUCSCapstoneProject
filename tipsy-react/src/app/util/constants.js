@@ -22,7 +22,7 @@ import {NewBarPic} from '../assets/defaultIcons/newbar.json';
 import {NewRecipePic} from '../assets/defaultIcons/newrecipe.json';
 import {NewEquipmentPic} from '../assets/defaultIcons/newequipment.json';
 
-import * as validate from './validate';
+import * as validate from './validate.js';
 
 const { Option } = Select;
 const FormItem = Form.Item;

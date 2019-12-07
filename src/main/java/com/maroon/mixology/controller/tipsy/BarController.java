@@ -12,7 +12,6 @@ import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.exchange.request.BarRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
 import com.maroon.mixology.exchange.response.BarResponse;
-import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
@@ -31,7 +30,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;

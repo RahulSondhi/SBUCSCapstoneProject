@@ -27,7 +27,6 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public List<Recipe> findByNameLikeIgnoreCase(String name) {
-		// TODO Auto-generated method stub
 		return recipeRepository.findByNameLikeIgnoreCase(name);
 	}
 

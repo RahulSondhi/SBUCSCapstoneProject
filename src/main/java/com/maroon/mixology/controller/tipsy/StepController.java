@@ -1,23 +1,11 @@
 package com.maroon.mixology.controller.tipsy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.validation.Valid;
-
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Step;
-import com.maroon.mixology.exchange.request.BarRequest;
-import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
-import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
-import com.maroon.mixology.repository.BarRepository;
-import com.maroon.mixology.repository.RecipeRepository;
-import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.RecipeServiceImpl;
 import com.maroon.mixology.service.UserServiceImpl;
@@ -28,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,14 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/tipsy/recipe/{recipeID}/")
 public class StepController {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BarRepository barRepository;
-
-    @Autowired
-    private RecipeRepository recipeRepository;
     
     @Autowired
     private UserServiceImpl userService;

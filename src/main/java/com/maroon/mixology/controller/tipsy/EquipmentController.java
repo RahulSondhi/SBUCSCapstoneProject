@@ -37,7 +37,7 @@ public class EquipmentController {
     private EquipmentTypeServiceImpl equipmentTypeService;
 
 
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(EquipmentController.class);
 
     @GetMapping("/{equipmentName}")
     public ResponseEntity<?> getEquipment(@PathVariable(value = "equipmentName") String equipmentName) {

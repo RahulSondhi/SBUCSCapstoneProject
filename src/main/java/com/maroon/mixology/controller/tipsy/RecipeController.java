@@ -21,7 +21,6 @@ import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
-import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
@@ -41,7 +40,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
@@ -71,7 +69,7 @@ public class RecipeController {
     @Autowired
     private UnitServiceImpl unitService;
     
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     @PostMapping("/createRecipe")
     public ResponseEntity<?> createNewRecipe(@CurrentUser UserDetails currentUser, @Valid @RequestBody RecipeRequest recipeRequest) {
@@ -260,7 +258,7 @@ public class RecipeController {
             }
         } catch (Exception e) {
             logger.error("Recipe was unable to be updated.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be updated. Error: " + e.getMessage()),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be updated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
