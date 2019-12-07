@@ -7,21 +7,21 @@ import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 
 public class EquipmentTypeResponse {
     //we don't give them the ID
-    private EquipmentTypeEnum type;
+    private String type;
     private Set<ActionType> actionsDoTo;
     private Set<ActionType> actionsDoing;
 
-    public EquipmentTypeResponse(EquipmentTypeEnum type, Set<ActionType> actionsDoTo, Set<ActionType> actionsDoing) {
+    public EquipmentTypeResponse(String type, Set<ActionType> actionsDoTo, Set<ActionType> actionsDoing) {
         this.type = type;
         this.actionsDoTo = actionsDoTo;
         this.actionsDoing = actionsDoing;
     }
 
-    public EquipmentTypeEnum getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(EquipmentTypeEnum type) {
+    public void setType(String type) {
         this.type = type;
     }
 

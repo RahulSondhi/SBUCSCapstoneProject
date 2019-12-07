@@ -99,7 +99,7 @@ public class RecipeController {
             //Build the equipments from the Equipment Available
             Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
             for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentTypeName());
+                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
                 equipmentsAvailable.add(new EquipmentResponse(
                     e.getName(),
                     e.getImg(),

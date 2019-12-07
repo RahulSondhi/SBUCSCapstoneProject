@@ -15,7 +15,7 @@ public class EquipmentType {
     @Id
     private String id;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-    private EquipmentTypeEnum name;
+    private String name;
     private Set<ActionType> actionsDoTo;
     private Set<ActionType> actionsDoing;
 
@@ -28,11 +28,11 @@ public class EquipmentType {
     }
 
 
-    public EquipmentTypeEnum getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(EquipmentTypeEnum name) {
+    public void setName(String name) {
         this.name = name;
     }
 

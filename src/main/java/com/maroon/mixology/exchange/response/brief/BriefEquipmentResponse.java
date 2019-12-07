@@ -5,9 +5,9 @@ import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 public class BriefEquipmentResponse {
     private String name;
     private String img;
-    private EquipmentTypeEnum equipmentType;
+    private String equipmentType;
 
-    public BriefEquipmentResponse(String name, String img, EquipmentTypeEnum equipmentType) {
+    public BriefEquipmentResponse(String name, String img, String equipmentType) {
         this.name = name;
         this.img = img;
         this.equipmentType = equipmentType;
@@ -29,11 +29,11 @@ public class BriefEquipmentResponse {
         this.img = img;
     }
 
-    public EquipmentTypeEnum getEquipmentType() {
+    public String getEquipmentType() {
         return equipmentType;
     }
 
-    public void setEquipmentType(EquipmentTypeEnum equipmentType) {
+    public void setEquipmentType(String equipmentType) {
         this.equipmentType = equipmentType;
     }
 

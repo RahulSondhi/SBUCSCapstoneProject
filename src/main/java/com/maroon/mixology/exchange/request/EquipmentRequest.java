@@ -26,7 +26,7 @@ public class EquipmentRequest {
         return equipmentType;
     }
 
-    public void setEquipmentTypeName(String equipmentType) {
+    public void setEquipmentType(String equipmentType) {
         this.equipmentType = equipmentType;
     }
 
