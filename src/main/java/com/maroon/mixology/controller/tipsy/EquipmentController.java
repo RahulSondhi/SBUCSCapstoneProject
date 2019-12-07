@@ -50,7 +50,7 @@ public class EquipmentController {
                 equipment.getImage(),
                 new EquipmentTypeResponse(
                     equipment.getEquipmentType().getName(),
-                    equipment.getEquipmentType().getActionsDoTo(),
+                    equipment.getEquipmentType().getActionsToDo(),
                     equipment.getEquipmentType().getActionsDoing()
                     )
                 );
@@ -88,7 +88,7 @@ public class EquipmentController {
             for (EquipmentType eT : equipmentTypes){
                 equipmentTypeResponses.add(new EquipmentTypeResponse(
                     eT.getName(), 
-                    eT.getActionsDoTo(), 
+                    eT.getActionsToDo(), 
                     eT.getActionsDoing())
                     );
             }

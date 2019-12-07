@@ -105,7 +105,7 @@ public class RecipeController {
                     e.getImg(),
                     new EquipmentTypeResponse(
                             eT.getName(),
-                            eT.getActionsDoTo(),
+                            eT.getActionsToDo(),
                             eT.getActionsDoing()
                     ))
                 );
@@ -240,7 +240,7 @@ public class RecipeController {
                             e.getImg(),
                             new EquipmentTypeResponse(
                                     eT.getName(),
-                                    eT.getActionsDoTo(),
+                                    eT.getActionsToDo(),
                                     eT.getActionsDoing()
                             ))
                         );

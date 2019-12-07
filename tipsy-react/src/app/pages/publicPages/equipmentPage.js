@@ -96,7 +96,7 @@ class EquipmentPage extends Component {
                     <h2 className="captionRed small-12 cell">What Actions Can Be Done To This?</h2> 
                          <ItemPreview
                                     className="small-8 cell"
-                                    items={this.state.equipment.equipmentType.actionsDoTo}
+                                    items={this.state.equipment.equipmentType.actionsToDo}
                                     type="action"/>
                 </div>
 

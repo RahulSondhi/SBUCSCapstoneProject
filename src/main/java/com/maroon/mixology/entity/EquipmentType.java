@@ -16,7 +16,7 @@ public class EquipmentType {
     private String id;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
-    private Set<ActionType> actionsDoTo;
+    private Set<ActionType> actionsToDo;
     private Set<ActionType> actionsDoing;
 
     public String getId() {
@@ -27,7 +27,6 @@ public class EquipmentType {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -37,12 +36,12 @@ public class EquipmentType {
     }
 
 
-    public Set<ActionType> getActionsDoTo() {
-        return actionsDoTo;
+    public Set<ActionType> getActionsToDo() {
+        return actionsToDo;
     }
 
-    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
-        this.actionsDoTo = actionsDoTo;
+    public void setActionsToDo(Set<ActionType> actionsToDo) {
+        this.actionsToDo = actionsToDo;
     }
 
     public Set<ActionType> getActionsDoing() {

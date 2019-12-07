@@ -8,12 +8,12 @@ import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 public class EquipmentTypeResponse {
     //we don't give them the ID
     private String type;
-    private Set<ActionType> actionsDoTo;
+    private Set<ActionType> actionsToDo;
     private Set<ActionType> actionsDoing;
 
-    public EquipmentTypeResponse(String type, Set<ActionType> actionsDoTo, Set<ActionType> actionsDoing) {
+    public EquipmentTypeResponse(String type, Set<ActionType> actionsToDo, Set<ActionType> actionsDoing) {
         this.type = type;
-        this.actionsDoTo = actionsDoTo;
+        this.actionsToDo = actionsToDo;
         this.actionsDoing = actionsDoing;
     }
 
@@ -25,12 +25,12 @@ public class EquipmentTypeResponse {
         this.type = type;
     }
 
-    public Set<ActionType> getActionsDoTo() {
-        return actionsDoTo;
+    public Set<ActionType> getActionsToDo() {
+        return actionsToDo;
     }
 
-    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
-        this.actionsDoTo = actionsDoTo;
+    public void setActionsToDo(Set<ActionType> actionsToDo) {
+        this.actionsToDo = actionsToDo;
     }
 
     public Set<ActionType> getActionsDoing() {
