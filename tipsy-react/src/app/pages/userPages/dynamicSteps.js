@@ -19,7 +19,7 @@ export class DynamicSteps extends Component {
         super(props);
 
         this.state.data = this.props.data;
-        this.state.equipment = this.props.data;
+        this.state.equipment = this.props.equipment; 
 
         this.onLoad = this.props.onLoad;
         this.className = this.props.className;
@@ -101,6 +101,9 @@ class CustomStepPrompt extends Component {
             unit: {
                 value: ""
             },
+            intersectingActions: {
+                value: []
+            },
             isLoading: false,
             equipmentTypes:[]
         };
@@ -153,7 +156,7 @@ class CustomStepPrompt extends Component {
   
           <Form onSubmit={this.handleSubmit} className="cell grid-x align-center-middle">
               <Modal
-                title="Create a Custom Equipment"
+                title="Create an Equipment"
                 className="grid-x align-center-middle"
                 visible={visible}
                 onOk={this.handleOk}
@@ -170,37 +173,51 @@ class CustomStepPrompt extends Component {
                         </button>
                 ]}>
   
-                  <FormItem
-                      label="Name"
-                      validateStatus={this.state.name.validateStatus}
-                      help={this.state.name.errorMsg}
+                <FormItem
+                      label="equipmentToDo"
+                      validateStatus={this.state.equipmentToDo.validateStatus}
+                      help={this.state.equipmentToDo.errorMsg}
+                      className="small-12 medium-6 cell">
+                    <Input
+                        prefix={< Icon type = "idcard" />}
+                        name="name"
+                        autoComplete="off"
+                        placeholder="Enter equipment Name"
+                        value={this.state.equipmentToDo.value}
+                        onChange={(event) => this.handleInputChange(event, ValidateName)}/>
+                </FormItem>
+
+                <FormItem
+                      label="equipmentDoing"
+                      validateStatus={this.state.equipmentToDo.validateStatus}
+                      help={this.state.equipmentToDo.errorMsg}
                       className="small-12 medium-6 cell">
                     <Input
                         prefix={< Icon type = "idcard" />}
                         name="name"
                         autoComplete="off"
                         placeholder="Enter Recipe Name"
-                        value={this.state.name.value}
+                        value={this.state.equipmentToDo.value}
                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
-                    </FormItem>
+                </FormItem>
 
-                  <FormItem
-                      label="Type"
-                      validateStatus={this.state.equipmentType.validateStatus}
-                      help={this.state.equipmentType.errorMsg}
+                <FormItem
+                      label="action"
+                      validateStatus={this.state.action.validateStatus}
+                      help={this.state.action.errorMsg}
                       className="small-12 medium-6 cell">
                     
                     <select 
-                        name="equipmentType"
+                        name="action"
                         className="customEquipmentSelect"
-                        value={this.state.equipmentType.value}
+                        value={this.state.action.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                        {this.state.equipmentTypes.map(fbb =>
+                        {this.state.intersectingActions.value.map(fbb =>
                             <option key={fbb.type} value={fbb.type}>{fbb.type}</option>
                         )};
                     </select>
+                </FormItem>
 
-                    </FormItem>
               </Modal>
           </Form>
       </div>

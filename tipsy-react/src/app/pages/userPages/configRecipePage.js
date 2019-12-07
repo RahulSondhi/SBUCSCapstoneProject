@@ -45,6 +45,9 @@ class ConfigRecipePage extends Component {
             },
             newSteps: {
                 value: false
+            },
+            newEquipment: {
+                value: false
             }
         }
         //Functions needed for this Settings Class
@@ -134,6 +137,9 @@ class ConfigRecipePage extends Component {
                     value: response.published
                 },
                 newSteps: {
+                    value: false
+                },
+                newEquipment: {
                     value: false
                 }
             });
@@ -335,6 +341,11 @@ class ConfigRecipePage extends Component {
     }
 
     handleListLoad = () => {
+        this.setState({
+            newEquipment: {
+                value: true
+            }
+        })
         console.log(this.state.equipmentsAvailable)
     }
 
@@ -370,14 +381,13 @@ class ConfigRecipePage extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        const recipeRequest = {
+        var recipeRequest = {
             name: this.state.name.value,
             description: this.state.description.value,
             published: this.state.published.value,
             img: this.state.img.value,
             steps: this.state.steps.value,
             equipmentsAvailable: this.state.equipmentsAvailable.value,
-            newSteps: this.state.newSteps.value
         };
 
         if (this.state.type === "clone" || this.state.type === "create") {
@@ -388,6 +398,10 @@ class ConfigRecipePage extends Component {
                 Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
+
+            recipeRequest.newSteps = this.state.newSteps.value;
+            recipeRequest.newEquipment = this.state.newEquipment.value;
+
             changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
                 Notify("success","Your recipe was succesfully saved!",-1);
                 this.props.history.goBack();
