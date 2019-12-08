@@ -15,8 +15,11 @@ public class BarService {
     private BarRepository barRepository;
 
     /* Our custom method to overrule Optional*/
-    public Bar findById(String id) throws NoSuchElementException {
-        return barRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Student not found - " + id));
+    public Bar findById(String id) {
+        if(barRepository.findById(id).isEmpty()){
+            return null;
+        }
+        return barRepository.findById(id).get();
     }
 
     public Bar findByName(String name) {

@@ -44,6 +44,10 @@ public class EquipmentController {
         try{
             // We have the equipment Name, we can query this specifc one in the db
             Equipment equipment = equipmentService.findByName(equipmentName);
+            if(equipment == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment \"" + equipmentName +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             // Build our equipment response
             EquipmentResponse equipmentResponse = new EquipmentResponse(
                 equipment.getName(), 
@@ -56,6 +60,7 @@ public class EquipmentController {
                 );
             return ResponseEntity.ok(equipmentResponse);
         } catch (Exception e) {
+            logger.error("Equipment was unable to be loaded. Error: ", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipment was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }

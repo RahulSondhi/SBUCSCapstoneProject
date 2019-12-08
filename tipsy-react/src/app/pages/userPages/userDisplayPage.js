@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 
 import {ItemPreview} from '../../util/constants';
 import {getUserProfile, getAllEquipment} from '../../util/APIUtils';
+import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
 
@@ -68,11 +69,13 @@ class UsersBarsPage extends Component {
             
             this.setState({data: response, isLoading: false, title:"Bar Equipment"});
         }).catch(error => {
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
         });
     }
 
@@ -95,16 +98,12 @@ class UsersBarsPage extends Component {
         }
 
         // Checking response
-        if (this.state.notFound === true || this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            return <ErrorPage
+            status ={this.state.error.status}
+            message = {this.state.error.message.message}
+            history = {this.props.history}
+            />
         }
 
         return (

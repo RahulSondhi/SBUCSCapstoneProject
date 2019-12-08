@@ -5,6 +5,7 @@ import {Enum} from 'enumify';
 
 import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
 import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail, Notify} from '../../util/constants';
+import ErrorPage from '../../util/errorPage.js';
 
 import {Form, Input, Icon, Select} from 'antd';
 const FormItem = Form.Item;
@@ -112,12 +113,13 @@ class ConfigUserPage extends Component {
                 isLoading: false
             });
         }).catch(error => {
-            console.log(error);
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
         });
     }
 
@@ -147,17 +149,14 @@ class ConfigUserPage extends Component {
         }
 
         // Checking response
-        if (this.state.notFound === true || this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            return <ErrorPage
+            status ={this.state.error.status}
+            message = {this.state.error.message.message}
+            history = {this.props.history}
+            />
         }
+
         
         return (
             <div className="grid-x align-center-middle">

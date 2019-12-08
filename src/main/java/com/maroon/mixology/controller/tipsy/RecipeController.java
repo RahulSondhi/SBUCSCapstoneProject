@@ -129,6 +129,10 @@ public class RecipeController {
             User user = userService.findByEmail(currentUser.getUsername());
             //we have to query the recipe from Mongo
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             // We have the recipe, now lets build a recipe Response
             // Unless you are the author, you cant view an unpublished recipe
             if(recipe.isPublished() || recipe.getAuthor().getId().equals(user.getId())){
@@ -204,6 +208,10 @@ public class RecipeController {
             }
             //Find our recipe
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             //check if the requester is the author or an Admin
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
                 recipe.setName(recipeRequest.getName());
@@ -274,6 +282,10 @@ public class RecipeController {
                 }
             }
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
                 User author = userService.findByNickname(recipe.getAuthor().getNickname());
                 author.getRecipesWritten().remove(recipe.getId());//delete this recipe from recipeWritten array for the user

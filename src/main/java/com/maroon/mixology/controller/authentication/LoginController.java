@@ -58,7 +58,7 @@ public class LoginController {
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
                 if(!userService.existsByEmail(loginRequest.getEmail())){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not found!"),
-                        HttpStatus.BAD_REQUEST);
+                        HttpStatus.NOT_FOUND);
                 }
                 if(!userService.findByEmail(loginRequest.getEmail()).isEnabled()){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not enabled!"),

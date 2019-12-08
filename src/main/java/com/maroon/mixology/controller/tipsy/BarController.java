@@ -108,6 +108,11 @@ public class BarController {
         try{
             //we have to query the bar from Mongo
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
+
             //We have the bar, now lets build a Bar Response
             Set<BriefUserResponse> barManagers = new HashSet<BriefUserResponse>();
             for (User manager : bar.getManagers()){
@@ -166,6 +171,10 @@ public class BarController {
                 }
             }
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             //We must validate that the user is an owner, manager, or worker
             Set<String> managerIdList = new HashSet<String>();
             for (User u : bar.getManagers()){
@@ -269,6 +278,10 @@ public class BarController {
                 }
             }
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             if(bar.getOwner().getId().equals(requester.getId()) || isAdmin){
                 //we have to disassociate everyone
                 Set<User> combinedUsers = new HashSet<User>();
