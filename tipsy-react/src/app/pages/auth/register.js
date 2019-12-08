@@ -99,6 +99,9 @@ class Register extends Component {
             },
             password: {
                 value: ''
+            },
+            passwordConfirm: {
+                value: ''
             }
         });
         // Send the response

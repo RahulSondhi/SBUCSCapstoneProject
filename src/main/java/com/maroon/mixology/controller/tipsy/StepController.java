@@ -30,7 +30,7 @@ public class StepController {
     @Autowired
     private RecipeService recipeService;
 
-    @GetMapping("/step")
+    @GetMapping("step")
     public ResponseEntity<?> getStep(@CurrentUser UserDetails currentUser, @PathVariable(value = "recipeID") String recipeID, @RequestParam(value = "index") String index) {
         try{
             int i =  Integer.parseInt(index) - 1; // 0 -> n-1

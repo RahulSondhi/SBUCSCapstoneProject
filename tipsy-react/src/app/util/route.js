@@ -21,7 +21,6 @@ import ConfigRecipePage from '../pages/userPages/configRecipePage.js';
 import SearchPage from '../pages/userPages/searchPage.js';
 import ConfigUserPage from '../pages/userPages/configUserPage.js';
 import ChangePasswordPage from '../pages/userPages/changePasswordPage.js';
-import ErrorPage from '../pages/userPages/errorPage.js';
 
 // Game Page Imports
 import Game from '../pages/userPages/game';
@@ -217,7 +216,7 @@ class Routes extends Component {
                     <Route
                         path="/logout"
                         component={(props) => <Logout onLogout={this.props.onLogout} {...props}/>}/>
-                    <Route path="/tipsy/error" component={ErrorPage}/>
+                    {/* <Route path="/tipsy/error" component={ErrorPage}/> */}
                 
                 
                 </Switch>

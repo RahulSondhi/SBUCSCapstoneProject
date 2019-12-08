@@ -66,6 +66,17 @@ export const Notify = (type,desc,duration) => {
 
   };
 
+export const Error = (status, message, history) => {
+    
+    history.push({
+        pathname: '/tipsy/error',
+        state: {
+            status: status,
+            message: message, 
+        }
+    })
+  };
+
 // Profile Components
 
 export class GetProfImg extends Component {

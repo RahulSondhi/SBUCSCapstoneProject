@@ -3,6 +3,7 @@ import {Redirect, NavLink} from 'react-router-dom';
 
 import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getRecipeProfile} from '../../util/APIUtils';
+import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
 import {Tabs} from 'antd';
@@ -39,11 +40,13 @@ class RecipePage extends Component {
             }
 
         }).catch(error => {
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
         });
     }
 
@@ -66,16 +69,12 @@ class RecipePage extends Component {
         }
 
         // Checking response
-        if (this.state.notFound === true || this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            return <ErrorPage
+            status ={this.state.error.status}
+            message = {this.state.error.message.message}
+            history = {this.props.history}
+            />
         }
 
         return (

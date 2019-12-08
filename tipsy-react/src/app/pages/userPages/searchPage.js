@@ -6,6 +6,7 @@ import Navbar from '../navbar/navbar.js';
 
 import {ItemPreview} from '../../util/constants';
 import {search} from '../../util/APIUtils';
+import ErrorPage from '../../util/errorPage.js';
 
 import queryString from 'query-string';
 import { Input, Select } from 'antd';
@@ -92,6 +93,10 @@ export class SearchPage extends Component {
                 });
             }).catch(error => {
                 this.setState({
+                    error:{
+                        status: error.status,
+                        message: error.message, 
+                    },
                     results: [{name:"No "+type+" called '"+ query +"' found!"}],
                     type: "error",
                     isLoading: false,
@@ -157,16 +162,14 @@ export class SearchPage extends Component {
         }
 
         // Checking response
-        if (this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            if(this.state.error.status >= 500){
+                return <ErrorPage
+                status ={this.state.error.status}
+                message = {this.state.error.message.message}
+                history = {this.props.history}
+                />
+            }
         }
 
         const values = queryString.parse(this.props.location.search)
