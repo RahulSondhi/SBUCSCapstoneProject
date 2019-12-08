@@ -12,10 +12,12 @@ import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
+import com.maroon.mixology.exchange.request.EquipmentProductRequest;
 import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.request.StepRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
+import com.maroon.mixology.exchange.response.EquipmentProductResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
@@ -110,7 +112,22 @@ public class RecipeController {
                     ))
                 );
             }
+            Set<EquipmentProductResponse> equipmentProducts = new HashSet<EquipmentProductResponse>();
+            for (EquipmentProductRequest e : recipeRequest.getEquipmentProducts()){
+                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                equipmentProducts.add(new EquipmentProductResponse(
+                    e.getName(),
+                    e.getImg(),
+                    new EquipmentTypeResponse(
+                            eT.getName(),
+                            eT.getActionsToDo(),
+                            eT.getActionsDoing()
+                    ),
+                    e.getTags())
+                );
+            }
             recipe.setEquipmentsAvailable(equipmentsAvailable);
+            recipe.setEquipmentProducts(equipmentProducts);
             stepRepository.saveAll(steps); //Will this work?
             recipeRepository.save(recipe);
             user.getRecipesWritten().add(recipe.getId());//add this recipe to recipeWritten array for the user
@@ -178,7 +195,8 @@ public class RecipeController {
                     author,
                     recipe.isPublished(),
                     steps, //StepResponses 
-                    recipe.getEquipmentsAvailable() //EquipmentResponses
+                    recipe.getEquipmentsAvailable(), //EquipmentResponses
+                    recipe.getEquipmentProducts()
                 );
                 return ResponseEntity.ok(recipeResponse);
             }
@@ -236,6 +254,21 @@ public class RecipeController {
                         ));
                     }                    
                     recipe.setSteps(newSteps);
+                    Set<EquipmentProductResponse> equipmentProducts = new HashSet<EquipmentProductResponse>();
+                    for (EquipmentProductRequest e : recipeRequest.getEquipmentProducts()){
+                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                        equipmentProducts.add(new EquipmentProductResponse(
+                            e.getName(),
+                            e.getImg(),
+                            new EquipmentTypeResponse(
+                                    eT.getName(),
+                                    eT.getActionsToDo(),
+                                    eT.getActionsDoing()
+                            ),
+                            e.getTags())
+                        );
+                    }
+                    recipe.setEquipmentProducts(equipmentProducts);
                     stepRepository.saveAll(newSteps); //Will this work?
                 }
                 // We should redo all the equipment from the equipment request

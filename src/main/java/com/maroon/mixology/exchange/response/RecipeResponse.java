@@ -13,9 +13,11 @@ public class RecipeResponse {
     private boolean published;
     private ArrayList<StepResponse> steps;
     private Set<EquipmentResponse> equipmentsAvailable;
+    private Set<EquipmentProductResponse> equipmentProducts;
 
-     public RecipeResponse(String name, String description, String img, BriefUserResponse author, boolean published,
-            ArrayList<StepResponse> steps, Set<EquipmentResponse> equipmentsAvailable) {
+    public RecipeResponse(String name, String description, String img, BriefUserResponse author, boolean published,
+            ArrayList<StepResponse> steps, Set<EquipmentResponse> equipmentsAvailable,
+            Set<EquipmentProductResponse> equipmentProducts) {
         this.name = name;
         this.description = description;
         this.img = img;
@@ -23,6 +25,7 @@ public class RecipeResponse {
         this.published = published;
         this.steps = steps;
         this.equipmentsAvailable = equipmentsAvailable;
+        this.equipmentProducts = equipmentProducts;
     }
 
     public String getName() {
@@ -81,7 +84,12 @@ public class RecipeResponse {
         this.equipmentsAvailable = equipmentsAvailable;
     }
 
+    public Set<EquipmentProductResponse> getEquipmentProducts() {
+        return equipmentProducts;
+    }
 
-
+    public void setEquipmentProducts(Set<EquipmentProductResponse> equipmentProducts) {
+        this.equipmentProducts = equipmentProducts;
+    }
 
 }

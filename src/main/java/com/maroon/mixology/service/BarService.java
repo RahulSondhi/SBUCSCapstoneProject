@@ -1,7 +1,6 @@
 package com.maroon.mixology.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.repository.BarRepository;
