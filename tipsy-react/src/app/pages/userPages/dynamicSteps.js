@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
-import {MakeProfImg, ValidateName, ItemPreview, Notify} from '../../util/constants';
-import {getAllEquipmentTypes} from '../../util/APIUtils';
+import {ValidateName, ItemPreview, Notify} from '../../util/constants';
+import {getAllEquipmentTypes, getAllUnits} from '../../util/APIUtils';
 
 import {Form, Input, Icon, Modal} from 'antd';
 
@@ -104,12 +104,17 @@ class CustomStepPrompt extends Component {
             intersectingActions: {
                 value: []
             },
+            intersectingEquipment: {
+                value: []
+            },
             actionClass: "hidden",
-            doingClass: "hidden",
+            toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
-            isLoading: false,
-            equipmentTypes:[]
+            buttonClass: "hidden",
+            isLoading: true,
+            equipmentTypes:[],
+            units:[]
         };
 
         this.handleCancel = this
@@ -128,15 +133,21 @@ class CustomStepPrompt extends Component {
         .handleInputChange
         .bind(this);
 
-        this.handleActionIntersecting = this
-        .handleActionIntersecting
-        .bind(this);
-
         getAllEquipmentTypes().then(response => {
-            this.setState({
-                equipment: this.props.equipment,
-                equipmentTypes:response,
-                isLoading: false
+            var equipmentTypes = response
+            getAllUnits().then(response => {
+                this.setState({
+                    equipment: this.props.equipment,
+                    equipmentTypes:equipmentTypes,
+                    units:response,
+                    isLoading: false
+                });
+            }).catch(error => {
+                if (error.status === 404) {
+                    this.setState({notFound: true, isLoading: false});
+                } else {
+                    this.setState({serverError: true, isLoading: false});
+                }
             });
         }).catch(error => {
             if (error.status === 404) {
@@ -169,7 +180,6 @@ class CustomStepPrompt extends Component {
             }}/>
         }
 
-        console.log(this.state)
       return (
         <div className="grid-x align-center-middle small-6 medium-6 cell">
 
@@ -188,27 +198,28 @@ class CustomStepPrompt extends Component {
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
                 footer={[
-                        <button
-                            type="submit"
-                            id="settingsButton"
-                            disabled={this.isFormInvalid()}
-                            onClick={(e) => {this.handleSubmit(e)}}
-                            className="button">
-                            Create
-                        </button>
+                    <button
+                        key="footer"
+                        type="submit"
+                        id="settingsButton"
+                        disabled={this.isFormInvalid()}
+                        onClick={(e) => {this.handleSubmit(e)}}
+                        className={"button cell "+this.state.buttonClass}>
+                        Create
+                    </button>
                 ]}>
   
                 <FormItem
                       label="Equipment"
-                      validateStatus={this.state.equipmentToDo.validateStatus}
-                      help={this.state.equipmentToDo.errorMsg}
+                      validateStatus={this.state.equipmentDoing.validateStatus}
+                      help={this.state.equipmentDoing.errorMsg}
                       className={"small-12 medium-6 cell"}>
                     <select 
-                        name="equipmentToDo"
+                        name="equipmentDoing"
                         className="customEquipmentSelect"
-                        value={this.state.equipmentToDo.value}
+                        value={this.state.equipmentDoing.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                        <option hidden disabled selected value=""> -- select an option -- </option>
+                        <option hidden disabled key="0" value=""> -- select an option -- </option>
                         {this.state.equipment.map(fbb =>
                             <option key={fbb.name} value={fbb.name}>{fbb.name}</option>
                         )};
@@ -226,7 +237,7 @@ class CustomStepPrompt extends Component {
                         className="customEquipmentSelect"
                         value={this.state.action.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                        <option hidden disabled selected value=""> -- select an option -- </option>
+                        <option hidden disabled key="1" value=""> -- select an option -- </option>
                         {this.state.intersectingActions.value.map(fbb =>
                             <option key={fbb} value={fbb}>{fbb}</option>
                         )};
@@ -234,21 +245,52 @@ class CustomStepPrompt extends Component {
                 </FormItem>
 
                 <FormItem
-                      label="equipmentDoing"
+                      label="To This Equipment"
                       validateStatus={this.state.equipmentToDo.validateStatus}
                       help={this.state.equipmentToDo.errorMsg}
-                      className={"small-12 medium-6 cell "+this.state.doingClass}>
+                      className={"small-12 medium-6 cell "+this.state.toDoClass}>
                     <select 
-                        name="equipmentDoing"
+                        name="equipmentToDo"
                         className="customEquipmentSelect"
-                        value={this.state.equipmentDoing.value}
+                        value={this.state.equipmentToDo.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
-                        <option hidden disabled selected value=""> -- select an option -- </option>
-                        {this.state.equipment.map(fbb =>
+                        <option hidden disabled key="2" value=""> -- select an option -- </option>
+                        {this.state.intersectingEquipment.value.map(fbb =>
                             <option key={fbb.name+"2"} value={fbb.name}>{fbb.name}</option>
                         )};
                     </select>
                 </FormItem>
+
+                <FormItem
+                      label="Units of Measurement"
+                      validateStatus={this.state.unit.validateStatus}
+                      help={this.state.unit.errorMsg}
+                      className={"small-12 medium-6 cell "+this.state.unitClass}>
+                    <select 
+                        name="unit"
+                        className="customEquipmentSelect"
+                        value={this.state.unit.value}
+                        onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                        <option hidden disabled key="3" value=""> -- select an option -- </option>
+                        {this.state.units.map(fbb =>
+                            <option key={fbb.name+"3"} value={fbb.name}>{fbb.name}</option>
+                        )};
+                    </select>
+                </FormItem>     
+
+                <FormItem
+                      label="Number of Units"
+                      validateStatus={this.state.value.validateStatus}
+                      help={this.state.value.errorMsg}
+                      className={"small-12 medium-6 cell "+this.state.valueClass}>
+                    <Input
+                        type="number"
+                        name="value"
+                        autoComplete="off"
+                        placeholder="Enter Number of Units"
+                        value={this.state.value.value}
+                        onChange={(event) => this.handleInputChange(event, function(){return true;})}/>
+                </FormItem>  
 
               </Modal>
           </Form>
@@ -261,8 +303,91 @@ class CustomStepPrompt extends Component {
         const inputName = target.name;
         const inputValue = target.value;
 
-        if((inputName === "equipmentToDo" || inputName === "equipmentDoing")){
-            this.handleActionIntersecting(inputName,inputValue,validationFun)
+        if((inputName === "equipmentDoing")){
+            this.setState({
+                actionClass: "",
+                toDoClass: "hidden",
+                unitClass: "hidden",
+                valueClass:"hidden",
+                buttonClass:"hidden",
+                action:{
+                    value:""
+                },
+                intersectingActions:{
+                    value: this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === inputValue)).equipmentType).actionsDoing
+                },
+                [inputName]: {
+                    value: inputValue,
+                    validateStatus: "success",
+                    ...validationFun(inputValue)
+                }
+            });
+        }else if(inputName === "action"){
+
+            this.setState({
+                actionClass: "",
+                toDoClass: "",
+                unitClass: "hidden",
+                valueClass:"hidden",
+                buttonClass:"hidden",
+                intersectingEquipment:{
+                    value: this.state.equipment.filter(equip => 
+                        { 
+                            var actions = this.state.equipmentTypes.find(type => type.type === equip.equipmentType).actionsToDo;
+                            return (actions.includes(inputValue));
+
+                        },this)
+                },
+                [inputName]: {
+                    value: inputValue,
+                    validateStatus: "success",
+                    ...validationFun(inputValue)
+                }
+            });
+        }else if(inputName === "equipmentToDo"){
+            this.setState({
+                actionClass: "",
+                toDoClass: "",
+                unitClass: "",
+                valueClass:"hidden",
+                buttonClass:"hidden",
+                unit: {
+                    value: ""
+                },
+                [inputName]: {
+                    value: inputValue,
+                    ...validationFun(inputValue)
+                }
+            });
+        }else if(inputName === "unit"){
+            this.setState({
+                actionClass: "",
+                toDoClass: "",
+                unitClass: "",
+                valueClass:"",
+                buttonClass:"hidden",
+                value:{
+                    value:0
+                },
+                [inputName]: {
+                    value: inputValue,
+                    validateStatus: "success",
+                    ...validationFun(inputValue)
+                }
+            });
+        }else if(inputName === "value"){
+            this.setState({
+                actionClass: "",
+                toDoClass: "",
+                unitClass: "",
+                valueClass:"",
+                buttonClass:"",
+                [inputName]: {
+                    value: inputValue,
+                    validateStatus: "success",
+                    ...validationFun(inputValue)
+                }
+            });
         }else{
             this.setState({
                 [inputName]: {
@@ -297,56 +422,12 @@ class CustomStepPrompt extends Component {
             unit: "",
             visible: false,
             actionClass: "hidden",
-            doingClass: "hidden",
+            toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
+            buttonClass: "hidden",
             confirmLoading: false,
           });
-    }
-
-    handleActionIntersecting(inputName,inputValue,validationFun){
-
-        var equipmentToDoType;
-        var equipmentDoingType; 
-
-        if(this.state.equipmentToDo.value !== "" && inputName === "equipmentDoing"){
-
-            equipmentToDoType = this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === this.state.equipmentToDo.value)).equipmentType);
-            equipmentDoingType = this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === inputValue)).equipmentType);
-
-        } else if(this.state.equipmentDoing.value !== "" && inputName === "equipmentToDo"){
-
-            equipmentToDoType = this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === inputValue)).equipmentType);
-            equipmentDoingType = this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === this.state.equipmentDoing.value)).equipmentType);
-
-        }
-
-        if((this.state.equipmentToDo.value !== "" && inputName === "equipmentDoing") || (this.state.equipmentDoing.value !== "" && inputName === "equipmentToDo")){
-
-            var results = equipmentToDoType.actionsToDo.filter(function(n) {
-                return equipmentDoingType.actionsDoing.indexOf(n) > -1;
-            });
-
-            this.setState({
-                intersectingActions: {
-                    value: results
-                },
-                action: {
-                    value: ""
-                },
-                [inputName]: {
-                    value: inputValue,
-                    ...validationFun(inputValue)
-                }
-            })
-        }else{
-            this.setState({
-                [inputName]: {
-                    value: inputValue,
-                    ...validationFun(inputValue)
-                }
-            })
-        }
     }
    
     isFormInvalid() {
@@ -357,9 +438,10 @@ class CustomStepPrompt extends Component {
         this.setState({
             visible: true,
             actionClass: "hidden",
-            doingClass: "hidden",
+            toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
+            buttonClass: "hidden"
         });
     };
 
@@ -374,7 +456,7 @@ class CustomStepPrompt extends Component {
             unit: "",
             visible: false,
             actionClass: "hidden",
-            doingClass: "hidden",
+            toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
             confirmLoading: false,
