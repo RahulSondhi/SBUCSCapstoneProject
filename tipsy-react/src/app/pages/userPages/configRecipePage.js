@@ -37,6 +37,9 @@ class ConfigRecipePage extends Component {
             equipmentsAvailable: {
                 value: []
             },
+            equipmentProduct: {
+                value: []
+            },
             img: {
                 value: ''
             },
@@ -119,6 +122,17 @@ class ConfigRecipePage extends Component {
                 }
             });
 
+            var equipmentProduct = response
+            .equipmentProduct
+            .map(function (el) {
+                return {
+                    name: el.name,
+                    img: el.img,
+                    equipmentType: el.equipmentType.type,
+                    tags: el.tags
+                }
+            });
+
             this.setState({
                 recipe: response,
                 isLoading: false,
@@ -142,6 +156,9 @@ class ConfigRecipePage extends Component {
                 },
                 equipmentsAvailable: {
                     value: equipmentsAvailable
+                },
+                equipmentProduct: {
+                    value: equipmentProduct
                 },
                 img: {
                     value: response.img
@@ -280,6 +297,7 @@ class ConfigRecipePage extends Component {
                                     <DynamicSteps
                                         data={this.state.steps.value}
                                         equipment={this.state.equipmentsAvailable.value}
+                                        product={this.state.equipmentProduct.value}
                                         onUpdate={this.handleListLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>

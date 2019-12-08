@@ -12,14 +12,16 @@ export class DynamicSteps extends Component {
 
     state = {
         data: [],
-        equipment: []
+        equipment: [],
+        product: [],
     };
 
     constructor(props) {
         super(props);
 
         this.state.data = this.props.data;
-        this.state.equipment = this.props.equipment; 
+        this.state.equipment = this.props.equipment;
+        this.state.product = this.props.product; 
 
         this.onLoad = this.props.onLoad;
         this.className = this.props.className;
@@ -64,7 +66,7 @@ export class DynamicSteps extends Component {
     render() {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
-                <CustomStepPrompt addItem={this.addItem} equipment={this.state.equipment}/>
+                <CustomStepPrompt addItem={this.addItem} equipment={this.state.equipment} product={this.state.product}/>
                 <StepPreview
                     className="small-6 cell"
                     items={this.state.data}
@@ -78,11 +80,12 @@ class CustomStepPrompt extends Component {
     
     constructor(props){
         super(props);
-
+        console.log(this.props)
         this.state = {
             visible: false,
             confirmLoading: false,
             equipment: [],
+            product: [],
             equipmentToDo: {
                 value: ""
             },
@@ -105,6 +108,9 @@ class CustomStepPrompt extends Component {
                 value: []
             },
             intersectingEquipment: {
+                value: []
+            },
+            intersectingProducts: {
                 value: []
             },
             actionClass: "hidden",
@@ -138,6 +144,7 @@ class CustomStepPrompt extends Component {
             getAllUnits().then(response => {
                 this.setState({
                     equipment: this.props.equipment,
+                    product: this.props.product,
                     equipmentTypes:equipmentTypes,
                     units:response,
                     isLoading: false
@@ -220,9 +227,16 @@ class CustomStepPrompt extends Component {
                         value={this.state.equipmentDoing.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="0" value=""> -- select an option -- </option>
-                        {this.state.equipment.map(fbb =>
-                            <option key={fbb.name} value={fbb.name}>{fbb.name}</option>
-                        )};
+                        <optgroup label="Equipments">
+                            {this.state.equipment.map(fbb =>
+                                <option key={fbb.name} value={fbb.name}>{fbb.name}</option>
+                            )};
+                        </optgroup>
+                        <optgroup label="Products">
+                            {this.state.product.map(fbb =>
+                                <option key={fbb.name} value={fbb.name}>{fbb.name}</option>
+                            )};
+                        </optgroup>
                     </select>
                 </FormItem>
 
@@ -238,9 +252,11 @@ class CustomStepPrompt extends Component {
                         value={this.state.action.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="1" value=""> -- select an option -- </option>
-                        {this.state.intersectingActions.value.map(fbb =>
-                            <option key={fbb} value={fbb}>{fbb}</option>
-                        )};
+                        <optgroup label="Actions">
+                            {this.state.intersectingActions.value.map(fbb =>
+                                <option key={fbb} value={fbb}>{fbb}</option>
+                            )};
+                        </optgroup>
                     </select>
                 </FormItem>
 
@@ -255,9 +271,16 @@ class CustomStepPrompt extends Component {
                         value={this.state.equipmentToDo.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="2" value=""> -- select an option -- </option>
-                        {this.state.intersectingEquipment.value.map(fbb =>
-                            <option key={fbb.name+"2"} value={fbb.name}>{fbb.name}</option>
-                        )};
+                        <optgroup label="Equipments">
+                            {this.state.intersectingEquipment.value.map(fbb =>
+                                <option key={fbb.name+"2"} value={fbb.name}>{fbb.name}</option>
+                            )};
+                        </optgroup>
+                        <optgroup label="Products">
+                            {this.state.intersectingProducts.value.map(fbb =>
+                                <option key={fbb.name+"2"} value={fbb.name}>{fbb.name}</option>
+                            )};
+                        </optgroup>
                     </select>
                 </FormItem>
 
@@ -272,9 +295,11 @@ class CustomStepPrompt extends Component {
                         value={this.state.unit.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="3" value=""> -- select an option -- </option>
-                        {this.state.units.map(fbb =>
-                            <option key={fbb.name+"3"} value={fbb.name}>{fbb.name}</option>
-                        )};
+                        <optgroup label="Units">
+                            {this.state.units.map(fbb =>
+                                <option key={fbb.name+"3"} value={fbb.name}>{fbb.name}</option>
+                            )};
+                        </optgroup>
                     </select>
                 </FormItem>     
 
@@ -314,7 +339,17 @@ class CustomStepPrompt extends Component {
                     value:""
                 },
                 intersectingActions:{
-                    value: this.state.equipmentTypes.find(type => type.type === (this.state.equipment.find(o => o.name === inputValue)).equipmentType).actionsDoing
+                    value: this.state.equipmentTypes.find(type => {
+                        var equip = this.state.equipment.find(o => o.name === inputValue);
+                        var product = this.state.product.find(o => o.name === inputValue);
+
+                        if(equip !== undefined){
+                           return type.type === (equip.equipmentType);
+                        }else{
+                            return type.type === (product.equipmentType);
+                        }
+                        
+                    }).actionsDoing
                 },
                 [inputName]: {
                     value: inputValue,
@@ -330,8 +365,19 @@ class CustomStepPrompt extends Component {
                 unitClass: "hidden",
                 valueClass:"hidden",
                 buttonClass:"hidden",
+                equipmentToDo:{
+                    value:""
+                },
                 intersectingEquipment:{
                     value: this.state.equipment.filter(equip => 
+                        { 
+                            var actions = this.state.equipmentTypes.find(type => type.type === equip.equipmentType).actionsToDo;
+                            return (actions.includes(inputValue));
+
+                        },this)
+                },
+                intersectingProducts:{
+                    value: this.state.product.filter(equip => 
                         { 
                             var actions = this.state.equipmentTypes.find(type => type.type === equip.equipmentType).actionsToDo;
                             return (actions.includes(inputValue));
