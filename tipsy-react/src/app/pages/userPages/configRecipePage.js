@@ -278,7 +278,8 @@ class ConfigRecipePage extends Component {
                             <div className="grid-x grid-margin-x align-center-middle cell">
 
                                     <DynamicSteps
-                                        data={this.state.equipmentsAvailable.value}
+                                        data={this.state.steps.value}
+                                        equipment={this.state.equipmentsAvailable.value}
                                         onUpdate={this.handleListLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>

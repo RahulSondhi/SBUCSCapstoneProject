@@ -104,10 +104,6 @@ class CustomStepPrompt extends Component {
             intersectingActions: {
                 value: []
             },
-            actionClass: "hidden",
-            doingClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
             isLoading: false,
             equipmentTypes:[]
         };
@@ -199,10 +195,10 @@ class CustomStepPrompt extends Component {
                 ]}>
   
                 <FormItem
-                      label="Equipment"
+                      label="equipmentToDo"
                       validateStatus={this.state.equipmentToDo.validateStatus}
                       help={this.state.equipmentToDo.errorMsg}
-                      className={"small-12 medium-6 cell"}>
+                      className="small-12 medium-6 cell">
                     <select 
                         name="equipmentToDo"
                         className="customEquipmentSelect"
@@ -216,10 +212,10 @@ class CustomStepPrompt extends Component {
                 </FormItem>
 
                 <FormItem
-                      label="Action"
+                      label="action"
                       validateStatus={this.state.action.validateStatus}
                       help={this.state.action.errorMsg}
-                      className={"small-12 medium-6 cell "+this.state.actionClass}>
+                      className="small-12 medium-6 cell">
                     
                     <select 
                         name="action"
@@ -237,7 +233,7 @@ class CustomStepPrompt extends Component {
                       label="equipmentDoing"
                       validateStatus={this.state.equipmentToDo.validateStatus}
                       help={this.state.equipmentToDo.errorMsg}
-                      className={"small-12 medium-6 cell "+this.state.doingClass}>
+                      className="small-12 medium-6 cell">
                     <select 
                         name="equipmentDoing"
                         className="customEquipmentSelect"
@@ -296,10 +292,6 @@ class CustomStepPrompt extends Component {
             value: 0,
             unit: "",
             visible: false,
-            actionClass: "hidden",
-            doingClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
             confirmLoading: false,
           });
     }
@@ -356,10 +348,6 @@ class CustomStepPrompt extends Component {
     showModal = () => {
         this.setState({
             visible: true,
-            actionClass: "hidden",
-            doingClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
         });
     };
 
@@ -373,10 +361,6 @@ class CustomStepPrompt extends Component {
             value: 0,
             unit: "",
             visible: false,
-            actionClass: "hidden",
-            doingClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
             confirmLoading: false,
             });
         };

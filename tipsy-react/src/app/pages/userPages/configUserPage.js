@@ -158,6 +158,7 @@ class ConfigUserPage extends Component {
                 }
             }}/>
         }
+        
         return (
             <div className="grid-x align-center-middle">
                 <Navbar/>
