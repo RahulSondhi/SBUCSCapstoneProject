@@ -210,7 +210,7 @@ const InstructionIcon = (props) => isFirefox
     : <Icon component={RecipeSvg} {...props}/>;
 const QuitIcon = (props) => isFirefox
     ? <img src={RecipePNG} id="instruction" alt="instructionIcon"/>
-    : <Icon component={RecipeSvg} {...props}/>;    
+    : <Icon component={RecipeSvg} {...props}/>;
 
 // SVGs
 const SearchSvg = () => (
