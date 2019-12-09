@@ -286,7 +286,7 @@ class ConfigRecipePage extends Component {
                                     <DynamicForm
                                         type="equipment"
                                         data={this.state.equipmentsAvailable.value}
-                                        onUpdate={this.handleEquipmemntLoad}
+                                        onUpdate={this.handleEquipmentLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>
 
