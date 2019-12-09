@@ -231,6 +231,14 @@ export function deleteRecipe(recipeID) {
     });
 }
 
+export function initGame(recipeID){
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/play" ,
+        method: 'POST',
+        body: JSON.stringify(null)
+    });
+}
+
 export function search(type, query) {
     return request({
         url: API_BASE_URL + "/tipsy/search?type=" + type + "&query=" + query,

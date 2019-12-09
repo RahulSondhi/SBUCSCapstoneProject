@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
 import {createRecipe, getRecipeProfile, changeRecipeSettings, deleteRecipe} from '../../util/APIUtils';

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getEquipmentProfile} from '../../util/APIUtils';

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect, NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 import {Enum} from 'enumify';
 

@@ -257,7 +257,8 @@ public class BarController {
                 return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings")
+                , HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             logger.error("Bar was unable to be updated.", e);

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom'
 import Navbar from '../navbar/navbar.js';
 
 import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';

@@ -242,7 +242,7 @@ public class UserController {
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
-            logger.error("User settings failed to update.", e);
+            logger.error("User settings failed to update. Error:", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  

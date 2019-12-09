@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 import Tipsy from '../assets/Tipsy.svg';
 import brokenGlass from '../assets/errorPage/broken_glass.svg';
 import brokenLink from '../assets/errorPage/broken_link.svg';
-import { Button } from 'antd';
 
 class ErrorPage extends Component {
     constructor(props) {
@@ -22,10 +21,10 @@ class ErrorPage extends Component {
     }
     
     render() {
-        const error = this.state.status == 500
+        const error = this.state.status === 500
             ? "Internal Server Error"
             : "Resource Not Found" ;
-        const errorImg = this.state.status == 500
+        const errorImg = this.state.status === 500
             ? <img src={brokenGlass} alt="BrokenGlassLogo"/>
             : <img src={brokenLink} alt="BrokenLinkLogo"/>;
         return (

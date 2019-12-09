@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 
 import Drinks from '../../assets/drinks.svg';
 import Navbar from '../navbar/navbar.js';

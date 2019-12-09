@@ -1,6 +1,7 @@
 package com.maroon.mixology.controller.tipsy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,9 +10,11 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.ActionType;
 import com.maroon.mixology.entity.EquipmentType;
+import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
+import com.maroon.mixology.entity.Unit;
 import com.maroon.mixology.exchange.request.EquipmentProductRequest;
 import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;
@@ -24,11 +27,13 @@ import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
+import com.maroon.mixology.repository.GameRepository;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.EquipmentTypeService;
+import com.maroon.mixology.service.GameService;
 import com.maroon.mixology.service.RecipeService;
 import com.maroon.mixology.service.UnitService;
 import com.maroon.mixology.service.UserService;
@@ -60,6 +65,9 @@ public class RecipeController {
     private StepRepository stepRepository;
 
     @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -71,6 +79,9 @@ public class RecipeController {
     @Autowired
     private UnitService unitService;
     
+    @Autowired
+    private GameService gameService;
+
     private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     @PostMapping("/createRecipe")
@@ -78,14 +89,14 @@ public class RecipeController {
         try{
             //we get the current user by getting their email address
             User user = userRepository.findByEmail(currentUser.getUsername());
-            //We need to build the recipe
+            //We need to build the recipe  
             Recipe recipe = new Recipe();
             recipe.setName(recipeRequest.getName());
             recipe.setDescription(recipeRequest.getDescription());
             recipe.setImage(recipeRequest.getImg());
             recipe.setAuthor(user);
             recipe.setPublished(recipeRequest.getPublished());
-            //Build the Steps from Step requests
+            //Build the Steps from Step requests    
             ArrayList<Step> steps = new ArrayList<Step>();
             for (StepRequest s : recipeRequest.getSteps()){
                 steps.add(new Step(
@@ -94,7 +105,7 @@ public class RecipeController {
                     s.getEquipmentProduct(),
                     ActionType.valueOf(s.getAction()),
                     s.getValue(),
-                    unitService.findByName(s.getUnitName())
+                    unitService.findByName(s.getUnit())
                 ));
             }
             recipe.setSteps(steps);
@@ -337,5 +348,36 @@ public class RecipeController {
         }  
     }
 
-
+    @PostMapping("/{recipeID}/play")
+    public ResponseEntity<?> initGame(@PathVariable(value = "recipeID") String recipeID, @CurrentUser UserDetails currentUser) {
+        try{
+            User player = userService.findByEmail(currentUser.getUsername());
+            Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            //Let see if and incompleted game already exists
+            Game game = gameService.findByPlayerAndRecipeAndCompleted(player, recipe, false);
+            if(game != null){
+                //Game exists, return that game ID
+                return ResponseEntity.ok(game.getId()); 
+            }   
+            else{
+            //Game doesn't exist, so lets make one
+            Game newGame = new Game(
+                player, 
+                recipe, 
+                new ArrayList<Integer>(Collections.nCopies(recipe.getSteps().size(), 0)), //size of steps array in recipe 
+                false
+                );
+            gameRepository.save(newGame);
+            return ResponseEntity.ok(newGame.getId()); 
+            }
+        } catch (Exception e) {
+            logger.error("Game was unable to be initialized. Error: ", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Game was unable to be initialized. Error:  " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        } 
+    }
 }

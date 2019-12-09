@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {Redirect, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import {ItemPreview, GetProfImg} from '../../util/constants';
-import {getRecipeProfile} from '../../util/APIUtils';
+import {getRecipeProfile, initGame} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
-import {Tabs} from 'antd';
+import {Tabs, Button} from 'antd';
 
 const {TabPane} = Tabs;
 
@@ -22,6 +22,34 @@ class RecipePage extends Component {
         this.loadRecipeProfile = this
             .loadRecipeProfile
             .bind(this);
+        this.play = this
+            .play
+            .bind(this);
+    }
+
+    play(){
+        const id = this.props.match.params.id;
+        initGame(id).then(response => {
+            this.setState({recipe: response, isLoading: false});
+
+            if(
+                this.props.currentUser.name === response.author.name ||
+                this.props.currentUser.roles.includes("ADMIN")
+            ){
+                this.setState({
+                    settingClass : " "
+                });
+            }
+
+        }).catch(error => {
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
+        });
     }
 
     loadRecipeProfile(id) {
@@ -97,6 +125,9 @@ class RecipePage extends Component {
                     <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"cell grid-x align-center-middle"}>
                         <GetProfImg className="small-3 cell" alt="Clone" type="clone"/>
                     </NavLink>
+                    <Button className="button" onClick={this.play}>
+                        Play
+                    </Button>
                 </div>
 
                 <h1 id="recipePageTitle" className="caption small-10 cell">{this.state.recipe.name}</h1>

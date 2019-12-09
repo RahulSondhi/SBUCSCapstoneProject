@@ -1,13 +1,12 @@
 package com.maroon.mixology.exchange.request;
 
-
 public class StepRequest {
     private String equipmentToDo;
     private String equipmentDoing;
     private String equipmentProduct;
     private String action;
     private int value;
-    private String unitName;
+    private String unit;
 
     public String getEquipmentToDo() {
         return equipmentToDo;
@@ -49,12 +48,12 @@ public class StepRequest {
         this.value = value;
     }
 
-    public String getUnitName() {
-        return unitName;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
 
