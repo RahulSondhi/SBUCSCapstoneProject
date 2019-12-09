@@ -121,7 +121,7 @@ public class UserController {
         try{
             User user = userService.findByNickname(nickname);
             if (user == null) {
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A user with the nickname \"" + nickname + "\" was not found!"),
                         HttpStatus.NOT_FOUND);
             }
             // Build all
@@ -208,7 +208,7 @@ public class UserController {
                 if(!user.getEmail().equals(settingsRequest.getEmail())){
                     //We need to verify the new email address while also notifying the old email address
                     if(userService.existsByEmail(settingsRequest.getEmail())){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that email address already exists"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A User with that email address already exists"),
                             HttpStatus.BAD_REQUEST); 
                     }
                     // Create a token
@@ -236,10 +236,10 @@ public class UserController {
                 user.setProfilePic(settingsRequest.getImg());
                 user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
                 userRepository.save(user);
-                return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
+                return ResponseEntity.ok(new ApiResponse(true, "Your settings were succesfully changed!" + emailUpdate));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to change these user's settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             logger.error("User settings failed to update. Error:", e);
@@ -283,7 +283,7 @@ public class UserController {
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete 
-                return ResponseEntity.ok(new ApiResponse(true, "You new email has been set! You may now login."));
+                return ResponseEntity.ok(new ApiResponse(true, "Your new email has been set! You may now login."));
             } catch (Exception e){
                 logger.error("Confirmation token unable to be validated.", e);
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
@@ -314,7 +314,7 @@ public class UserController {
                     user.getMeasurement());
                 return ResponseEntity.ok(userSettings);
             } else {
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to get settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to these user's settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to load. Error: " + e.toString()),
@@ -330,7 +330,7 @@ public class UserController {
             User user = userService.findByEmail(currentUser.getUsername());
             user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
             userRepository.save(user);
-            return ResponseEntity.ok(new ApiResponse(true, "Password has been updated successfully!"));
+            return ResponseEntity.ok(new ApiResponse(true, "Your password was successfully changed!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);

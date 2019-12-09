@@ -308,10 +308,10 @@ class ConfigUserPage extends Component {
         }
 
         changeUserSettings(settingsRequest,nickname).then(response => {
-            Notify("success","Your settings were succesfully changed!",-1);
+            Notify("success",response.message,-1);
             this.props.history.goBack();
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
 

@@ -286,10 +286,10 @@ class ConfigBarPage extends Component {
 
     handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
-            Notify("success","Your bar was succesfully deleted!",-1);
+            Notify("success",response.message,-1);
             this.props.history.push("/tipsy/myBars");
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
 
@@ -395,17 +395,17 @@ class ConfigBarPage extends Component {
 
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
-                Notify("success","Your bar was succesfully created!",-1);
+                Notify("success",response.message,-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message,-1);
             });
         } else {
             changeBarSettings(this.props.match.params.id, barRequest).then(response => {
-                Notify("success","Your bar was succesfully saved!",-1);
+                Notify("success",response.message,-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message,-1);
             });
         }
     }

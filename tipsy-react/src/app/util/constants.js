@@ -172,7 +172,7 @@ export class MakeProfImg extends Component {
 
     onBeforeFileLoad(elem) {
         if (elem.target.files[0].size > 71680) {
-            Notify("error","File is too big!",-1);
+            Notify("error","File is too large!",-1);
             elem.target.value = "";
         } else if (elem.target.files[0].type !== "image/png" && elem.target.files[0].type !== "image/jpeg") {
             Notify("error","Only PNG + JPEG Allowed To Be Uploaded!",-1);

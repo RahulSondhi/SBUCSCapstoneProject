@@ -67,9 +67,9 @@ class Verify extends Component {
             password: this.state.password.value
         };
         resetPassword(resetPasswordRequest).then(response => {
-            Notify("success","Thank you! We have reset your password. You may now login.",-1);        
+            Notify("success",response.message,-1);        
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
     /*
@@ -96,7 +96,7 @@ class Verify extends Component {
                     }
                 });
             }).catch(error => {
-                Notify("error",error.message,-1);
+                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'error'
@@ -120,7 +120,7 @@ class Verify extends Component {
                     }
                 });
             }).catch(error => {
-                Notify("error",error.message,-1);
+                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'error'
@@ -140,7 +140,7 @@ class Verify extends Component {
                     }
                 });
             }).catch(error => {
-                Notify("error",error.message,-1);
+                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         value: uuidValue,

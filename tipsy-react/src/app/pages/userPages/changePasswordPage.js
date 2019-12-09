@@ -48,9 +48,9 @@ class ChangePasswordPage extends Component {
         };
         changePassword(changePasswordRequest)
         .then(response => {
-            Notify("success","Thank you! We have changed your password.",-1);        
+            Notify("success",response.message,-1);        
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
     /*

@@ -39,11 +39,7 @@ class LoginForm extends Component {
                         localStorage.setItem(ACCESS_TOKEN, response.accessToken); //get the token and save it
                         this.props.onLogin();
                     }).catch(error => {
-                        if (error.status === 401) {
-                            Notify("error",'Your Email or Password is incorrect. Please try again!',-1);
-                        } else {
-                            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
-                        }
+                        Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
                     });
                 }
             });

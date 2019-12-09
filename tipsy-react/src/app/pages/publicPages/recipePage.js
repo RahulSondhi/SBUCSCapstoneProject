@@ -30,17 +30,9 @@ class RecipePage extends Component {
     play(){
         const id = this.props.match.params.id;
         initGame(id).then(response => {
-            this.setState({recipe: response, isLoading: false});
-
-            if(
-                this.props.currentUser.name === response.author.name ||
-                this.props.currentUser.roles.includes("ADMIN")
-            ){
-                this.setState({
-                    settingClass : " "
-                });
-            }
-
+            this.props.history.push({
+                pathname: '/tipsy/game/' + response.message + ''
+            })
         }).catch(error => {
             this.setState({
                 error:{

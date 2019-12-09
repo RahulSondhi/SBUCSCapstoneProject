@@ -94,7 +94,7 @@ public class BarController {
             }
             userRepository.saveAll(combinedUsers);
             //Added the bar to all affliated Users
-            return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
+            return ResponseEntity.ok(new ApiResponse(true, "Your bar was successfully created!"));
         } catch (Exception e) {
             logger.error("Bar was unable to be created.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be created. Error: " + e.getMessage()),
@@ -226,7 +226,7 @@ public class BarController {
                 bar.setRecipesAvailable(barRecipes);
                 //We save this bar
                 barRepository.save(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully saved!"));
             }
             else if(managerIdList.contains(requester.getId())){
                 //manager only{LIMITED ACCESS}
@@ -254,10 +254,10 @@ public class BarController {
                 bar.setRecipesAvailable(barRecipes);
                 //We save this bar
                 barRepository.save(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully saved!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings")
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to this bar!")
                 , HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
@@ -296,10 +296,10 @@ public class BarController {
                 userRepository.saveAll(combinedUsers);
                 //We delete the bar
                 barRepository.delete(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully deleted!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully deleted!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete bar"), HttpStatus.UNAUTHORIZED); 
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to delete this bar"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
             logger.error("Bar was unable to be deleted.", e);

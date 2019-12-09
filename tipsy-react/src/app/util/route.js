@@ -207,7 +207,7 @@ class Routes extends Component {
 
                     <PrivateRoute
                         exact
-                        path="/tipsy/game"
+                        path="/tipsy/game/:id"
                         authed={this.state.isAuthenticated}
                         redirectTo="/"
                         component={(props) => <Game currentUser={this.state.currentUser} {...props}/>}/>
