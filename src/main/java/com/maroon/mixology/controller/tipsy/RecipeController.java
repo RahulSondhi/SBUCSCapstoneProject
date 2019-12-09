@@ -339,7 +339,7 @@ public class RecipeController {
                 return ResponseEntity.ok(new ApiResponse(true, "Recipe was succesfully deleted!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete recipe"), HttpStatus.UNAUTHORIZED); 
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to delete this recipe"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
             logger.error("Recipe was unable to be deleted.", e);
@@ -358,10 +358,10 @@ public class RecipeController {
                 HttpStatus.NOT_FOUND);
             }
             //Let see if and incompleted game already exists
-            Game game = gameService.findByPlayerAndRecipeAndCompleted(player, recipe, false);
+            Game game = gameService.findByPlayerAndRecipeAndCompleted(player, recipe, false); //omg this actually works...
             if(game != null){
                 //Game exists, return that game ID
-                return ResponseEntity.ok(game.getId()); 
+                return ResponseEntity.ok(new ApiResponse(true, game.getId())); 
             }   
             else{
             //Game doesn't exist, so lets make one
@@ -372,8 +372,8 @@ public class RecipeController {
                 false
                 );
             gameRepository.save(newGame);
-            return ResponseEntity.ok(newGame.getId()); 
-            }
+            return ResponseEntity.ok(new ApiResponse(true, newGame.getId())); 
+        }
         } catch (Exception e) {
             logger.error("Game was unable to be initialized. Error: ", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Game was unable to be initialized. Error:  " + e.getMessage()),

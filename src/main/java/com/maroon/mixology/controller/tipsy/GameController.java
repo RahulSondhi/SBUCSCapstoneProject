@@ -169,7 +169,7 @@ public class GameController {
                 game.setProgress(gameRequest.getProgress());
                 game.setCompleted(gameRequest.isCompleted());
                 gameRepository.save(game); //save game
-                return ResponseEntity.ok(new ApiResponse(true, "Game was succesfully saved!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your game was succesfully saved!"));
             }
             else{
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to save Game. Only the player may save this game."), 

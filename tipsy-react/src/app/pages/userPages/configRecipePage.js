@@ -431,10 +431,10 @@ class ConfigRecipePage extends Component {
 
     handleDelete(event) {
         deleteRecipe(this.props.match.params.id).then(response => {
-            Notify("success","Your recipe was succesfully deleted!",-1);
+            Notify("success",response.message,-1);
             this.props.history.push("/tipsy/myRecipes");
         }).catch(error => {
-            Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
 
@@ -452,10 +452,10 @@ class ConfigRecipePage extends Component {
         };
 
         createRecipe(recipeRequest).then(response => {
-            Notify("success","Your recipe was succesfully published!",-1);
+            Notify("success",response.message,-1);
             this.props.history.goBack();
         }).catch(error => {
-            Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message,-1);
         });
     }
 
@@ -474,10 +474,10 @@ class ConfigRecipePage extends Component {
 
         if (this.state.type === "clone" || this.state.type === "create") {
             createRecipe(recipeRequest).then(response => {
-                Notify("success","Your recipe was succesfully created!",-1);
+                Notify("success",response.message,-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message,-1);
             });
         } else {
 
@@ -485,10 +485,10 @@ class ConfigRecipePage extends Component {
             recipeRequest.newEquipment = this.state.newEquipment.value;
 
             changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
-                Notify("success","Your recipe was succesfully saved!",-1);
+                Notify("success",response.message,-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message,-1);
             });
         }
     }

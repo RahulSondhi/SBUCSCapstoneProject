@@ -70,12 +70,13 @@ public class RegisterController {
 
         @PostMapping("/register")
         public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+        try{
                 if(userService.existsByEmail(registerRequest.getEmail())) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Email Address is already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
                 if(userService.existsByNickname(registerRequest.getNickname())){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname already in use!"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Nickname is already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
                 else{
@@ -119,8 +120,12 @@ public class RegisterController {
                         + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
                         emailService.sendEmail(confirmationEmail);
                         // Notify the user that an email has been sent
-                        return ResponseEntity.ok(new ApiResponse(true, "User registeration submitted successfully. Please complete the registration process by confirming your account."));
+                        return ResponseEntity.ok(new ApiResponse(true, "Thank you! You have successfully registered. Please check your email to complete your registration!"));
                         }
+                } catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to register. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);  
+                }
                 }
 
         @GetMapping({"/verifyConfirm"})
@@ -132,7 +137,7 @@ public class RegisterController {
                         // Find the user associated with the reset token
                         User user = userService.findByConfirmationTokenUUID(token);
                         if(user == null) {
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token not found"),
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token was not found."),
                                 HttpStatus.NOT_FOUND);
                         }
                         if(user.isEnabled()) {
@@ -144,7 +149,7 @@ public class RegisterController {
                         if(tokenTime.before(expiredTime)) { //check if token is expired
                                 //need to add a use case to allow confirmation link to be sent again
                                 //or rather, send the confirmation link again here
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token is expired, invalid token"),
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This confirmation token is expired, invalid token"),
                             HttpStatus.GONE); //Token is expired, invalid token.
                         }
                         // Set user to enabled
@@ -156,7 +161,8 @@ public class RegisterController {
                         userRepository.save(user);
                         // Notify the user that the confirmation is complete
                         return ResponseEntity.ok(new ApiResponse(true, "Your account has been confirmed. You may now login!"));
-                } catch (Exception e){
+                } 
+                catch (Exception e){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
                 }

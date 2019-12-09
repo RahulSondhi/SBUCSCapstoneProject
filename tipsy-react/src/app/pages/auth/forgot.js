@@ -58,9 +58,9 @@ class Forgot extends Component {
             email: this.state.email.value
         };
         forgot(forgotRequest).then(response => {
-            Notify("success","Password reset request submitted succesfully. Please check your email.",-1)
+            Notify("success", response.message,-1)
         }).catch(error => {
-            Notify("error",error.message || 'This email address was not found.',-1)
+            Notify("error", error.message.message,-1)
         });
     }
     /*

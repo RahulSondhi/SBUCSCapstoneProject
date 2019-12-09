@@ -96,7 +96,7 @@ public class ForgotController {
                         + appUrl + "/reset?token=" + user.getResetTokenUUID());
                         emailService.sendEmail(resetEmail);
                         // Notify the user that an email has been sent
-                        return ResponseEntity.ok(new ApiResponse(true, "Password reset request submitted succesfully. Please check your email."));
+                        return ResponseEntity.ok(new ApiResponse(true, "Your password reset request was submitted succesfully! Please check your email to complete the reset."));
                 }
                 
         }

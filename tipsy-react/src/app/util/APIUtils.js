@@ -239,6 +239,30 @@ export function initGame(recipeID){
     });
 }
 
+export function getGameProfile(gameID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/game/" + gameID,
+        method: 'GET'
+    });
+}
+
+export function saveGame(gameID, gameRequest) {
+    return request({
+        url: API_BASE_URL + "/tipsy/game/" + gameID + "/save" ,
+        method: 'POST',
+        body: JSON.stringify(gameRequest)
+    });
+}
+
+export function forfeitGame(gameID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/game/" + gameID + "/forfeit" ,
+        method: 'POST',
+        body: JSON.stringify(null)
+    });
+}
+
+
 export function search(type, query) {
     return request({
         url: API_BASE_URL + "/tipsy/search?type=" + type + "&query=" + query,
