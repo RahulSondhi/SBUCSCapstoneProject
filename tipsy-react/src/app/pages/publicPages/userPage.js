@@ -127,7 +127,11 @@ class UserPage extends Component {
                             <div className="grid-x grid-margin-x align-center-middle cell">
                                 <ItemPreview
                                     className="small-6 cell"
-                                    items={this.state.user.recipesWritten}
+                                    items={this.state.user.recipesWritten.filter(equip => 
+                                        { 
+                                            return equip.published === true
+                
+                                        })}
                                     type="recipe"/>
                             </div>
                         </TabPane>
