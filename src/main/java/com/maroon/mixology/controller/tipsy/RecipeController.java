@@ -141,8 +141,6 @@ public class RecipeController {
             recipe.setEquipmentProducts(equipmentProducts);
             stepRepository.saveAll(steps); //Will this work?
             recipeRepository.save(recipe);
-            user.getRecipesWritten().add(recipe.getId());//add this recipe to recipeWritten array for the user
-            userRepository.save(user);
             return ResponseEntity.ok(new ApiResponse(true, "Recipe creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
             logger.error("Recipe was unable to be created.", e);
@@ -331,9 +329,6 @@ public class RecipeController {
                 HttpStatus.NOT_FOUND);
             }
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
-                User author = userService.findByNickname(recipe.getAuthor().getNickname());
-                author.getRecipesWritten().remove(recipe.getId());//delete this recipe from recipeWritten array for the user
-                userRepository.save(author);
                 stepRepository.deleteAll(recipe.getSteps());
                 recipeRepository.delete(recipe);
                 return ResponseEntity.ok(new ApiResponse(true, "Recipe was succesfully deleted!"));

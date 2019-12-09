@@ -38,8 +38,6 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/tipsy/bar")
 public class BarController {
-    @Autowired
-    private UserRepository userRepository;
             
     @Autowired
     private UserService userService;
@@ -84,15 +82,15 @@ public class BarController {
             );
             barRepository.save(bar); //we save the bar in the database
             //we have to add this bar to the user's list of bars
-            Set<User> combinedUsers = new HashSet<User>();
-            combinedUsers.add(user);
-            combinedUsers.addAll(barManagers);
-            combinedUsers.addAll(barWorkers);
-            for (User u : combinedUsers){
-                u.getBars().add(bar.getId()); 
-                // userRepository.save(u);
-            }
-            userRepository.saveAll(combinedUsers);
+            // Set<User> combinedUsers = new HashSet<User>();
+            // combinedUsers.add(user);
+            // combinedUsers.addAll(barManagers);
+            // combinedUsers.addAll(barWorkers);
+            // for (User u : combinedUsers){
+            //     u.getBars().add(bar.getId()); 
+            //     // userRepository.save(u);
+            // }
+            // userRepository.saveAll(combinedUsers);
             //Added the bar to all affliated Users
             return ResponseEntity.ok(new ApiResponse(true, "Your bar was successfully created!"));
         } catch (Exception e) {
@@ -187,37 +185,21 @@ public class BarController {
                 bar.setDescription(barRequest.getDescription());
                 bar.setImage(barRequest.getImg());
                 //We can add or remove managers
-                //Diassociate everyone in managers
-                for (User u : bar.getManagers()){
-                    u.getBars().remove(barID);
-                    userRepository.save(u);
-                }
                 //Reassociate everyone
                 Set<User> barManagers = new HashSet<User>();
                 for (String managerNickname : barRequest.getManagers()){
                     User u = userService.findByNickname(managerNickname);
                     barManagers.add(u);
-                    u.getBars().add(barID);
-                    // userRepository.save(u);
                 }
                 bar.setManagers(barManagers);
-                userRepository.saveAll(barManagers);
                 //We can add or remove workers
-                //Diassociate everyone in workers
-                for (User u : bar.getWorkers()){
-                    u.getBars().remove(barID);
-                    userRepository.save(u);
-                }
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
-                    u.getBars().add(barID);
-                    // userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
-                userRepository.saveAll(barWorkers);
                 //we can add or remove recipes available
                 Set<Recipe> barRecipes = new HashSet<Recipe>();
                 for (String recipeID : barRequest.getRecipesAvailable()){
@@ -231,21 +213,13 @@ public class BarController {
             else if(managerIdList.contains(requester.getId())){
                 //manager only{LIMITED ACCESS}
                 //We can add or remove workers
-                //Diassociate everyone in workers
-                for (User u : bar.getWorkers()){
-                    u.getBars().remove(barID);
-                    userRepository.save(u);
-                }
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
-                    u.getBars().add(barID);
-                    // userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
-                userRepository.saveAll(barWorkers);
                 //we can add or remove recipes available
                 Set<Recipe> barRecipes = new HashSet<Recipe>();
                 for (String recipeID : barRequest.getRecipesAvailable()){
@@ -284,16 +258,6 @@ public class BarController {
                 HttpStatus.NOT_FOUND);
             }
             if(bar.getOwner().getId().equals(requester.getId()) || isAdmin){
-                //we have to disassociate everyone
-                Set<User> combinedUsers = new HashSet<User>();
-                combinedUsers.add(bar.getOwner());
-                combinedUsers.addAll(bar.getManagers());
-                combinedUsers.addAll(bar.getWorkers());
-                for (User u : combinedUsers){
-                    u.getBars().remove(bar.getId()); 
-                    // userRepository.save(u);
-                }
-                userRepository.saveAll(combinedUsers);
                 //We delete the bar
                 barRepository.delete(bar);
                 return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully deleted!"));
