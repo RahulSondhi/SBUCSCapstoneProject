@@ -261,7 +261,7 @@ public class RecipeController {
                             s.getEquipmentProduct(),
                             ActionType.valueOf(s.getAction()),
                             s.getValue(),
-                            unitService.findByName(s.getUnitName())
+                            unitService.findByName(s.getUnit())
                         ));
                     }                    
                     recipe.setSteps(newSteps);
