@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 
-import {ValidateName, ItemPreview, Notify} from '../../util/constants';
-import {getAllEquipmentTypes, getAllUnits} from '../../util/APIUtils';
+import {ValidateName, ItemPreview, Notify, MakeProfImg} from '../../util/constants';
+import {getAllEquipmentTypes, getAllUnits, checkEquipmentNameIsPresent} from '../../util/APIUtils';
+import ErrorPage from '../../util/errorPage.js';
 
-import {Form, Input, Icon, Modal} from 'antd';
+
+import {Form, Input, Icon, Modal, Popconfirm} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -18,7 +20,7 @@ export class DynamicSteps extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.state.data = this.props.data;
         this.state.equipment = this.props.equipment;
         this.state.product = this.props.product; 
@@ -40,7 +42,7 @@ export class DynamicSteps extends Component {
         this.state.data.push(item);
         this.setState({data: this.state.data});
         Notify("success","Added",-1);
-        this.props.onUpdate();
+        this.props.onUpdate("add",item);
     }
 
     removeItem(item) {
@@ -56,7 +58,7 @@ export class DynamicSteps extends Component {
             
             Notify("success","Removed!",-1);
             
-            this.props.onUpdate();
+            this.props.onUpdate("remove",item);
         } else {
             Notify("error","Could not remove that!",-1);
         }
@@ -80,7 +82,6 @@ class CustomStepPrompt extends Component {
     
     constructor(props){
         super(props);
-        console.log(this.props)
         this.state = {
             visible: false,
             confirmLoading: false,
@@ -104,6 +105,18 @@ class CustomStepPrompt extends Component {
             unit: {
                 value: ""
             },
+            resultImg:{
+                value:""
+            },
+            resultName: {
+                value: ""
+            },
+            resultEquipmentType: {
+                value: ""
+            },
+            resulTags: {
+                value: []
+            },
             intersectingActions: {
                 value: []
             },
@@ -113,11 +126,15 @@ class CustomStepPrompt extends Component {
             intersectingProducts: {
                 value: []
             },
+            doingClass: "",
             actionClass: "hidden",
             toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
             buttonClass: "hidden",
+            imgClass: "hidden",
+            nameClass: "hidden",
+            submitClass: "hidden",
             isLoading: true,
             equipmentTypes:[],
             units:[]
@@ -125,6 +142,10 @@ class CustomStepPrompt extends Component {
 
         this.handleCancel = this
         .handleCancel
+        .bind(this);
+
+        this.validateName = this
+        .validateName
         .bind(this);
 
         this.showModal = this
@@ -137,6 +158,14 @@ class CustomStepPrompt extends Component {
 
         this.handleInputChange = this
         .handleInputChange
+        .bind(this);
+
+        this.handleImageLoad = this
+        .handleImageLoad
+        .bind(this);
+
+        this.handleContinue = this
+        .handleContinue
         .bind(this);
 
         getAllEquipmentTypes().then(response => {
@@ -157,11 +186,13 @@ class CustomStepPrompt extends Component {
                 }
             });
         }).catch(error => {
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
         });
     }
   
@@ -175,21 +206,16 @@ class CustomStepPrompt extends Component {
         }
 
         // Checking response
-        if (this.state.notFound === true || this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            return <ErrorPage
+            status ={this.state.error.status}
+            message = {this.state.error.message.message}
+            history = {this.props.history}
+            />
         }
 
       return (
         <div className="grid-x align-center-middle small-6 medium-6 cell">
-
           <ItemPreview
                         className="cell"
                         items={[{desc:"Add Your Own"}]}
@@ -205,25 +231,17 @@ class CustomStepPrompt extends Component {
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
                 footer={[
-                    <button
-                        key="footer"
-                        type="submit"
-                        id="settingsButton"
-                        disabled={this.isFormInvalid()}
-                        onClick={(e) => {this.handleSubmit(e)}}
-                        className={"button cell "+this.state.buttonClass}>
-                        Create
-                    </button>
+                    
                 ]}>
   
                 <FormItem
                       label="Equipment"
                       validateStatus={this.state.equipmentDoing.validateStatus}
                       help={this.state.equipmentDoing.errorMsg}
-                      className={"small-12 medium-6 cell"}>
-                    <select 
+                      className={"small-12 medium-6 cell "+this.state.doingClass}>
+                    <select
                         name="equipmentDoing"
-                        className="customEquipmentSelect"
+                        className={"customEquipmentSelect"}
                         value={this.state.equipmentDoing.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="0" value=""> -- select an option -- </option>
@@ -310,12 +328,55 @@ class CustomStepPrompt extends Component {
                       className={"small-12 medium-6 cell "+this.state.valueClass}>
                     <Input
                         type="number"
+                        min="0"
                         name="value"
                         autoComplete="off"
                         placeholder="Enter Number of Units"
                         value={this.state.value.value}
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}/>
-                </FormItem>  
+                </FormItem>
+
+                <button
+                    key="continue"
+                    id="settingsButton"
+                    onClick={(e) => {this.handleContinue(e)}}
+                    className={"button cell "+this.state.buttonClass}>
+                    Continue
+                </button>
+                
+                <FormItem
+                    className={"small-12 medium-6 cell "+this.state.imgClass}>
+                    <MakeProfImg
+                        pic={this.state.resultImg.value}
+                        className={"cell"}
+                        data={this.handleImageLoad}
+                        type="equipment"/>
+                </FormItem>
+  
+                <FormItem
+                      label="Name"
+                      validateStatus={this.state.resultName.validateStatus}
+                      help={this.state.resultName.errorMsg}
+                      className={"small-12 medium-6 cell "+this.state.nameClass}>
+                    <Input
+                        name="resultName"
+                        autoComplete="off"
+                        placeholder="Enter Name of Equipment"
+                        value={this.state.resultName.value}
+                        onChange={(event) => this.handleInputChange(event, this.validateName)}/>
+                </FormItem>
+
+                <FormItem
+                    className={"small-12 medium-6 cell "+this.state.submitClass}>                               
+                    <button
+                        key="footer"
+                        type="submit"
+                        id="settingsButton"
+                        onClick={(e) => {this.handleSubmit(e)}}
+                        className={"button cell"}>
+                        Create
+                    </button>
+                </FormItem> 
 
               </Modal>
           </Form>
@@ -330,11 +391,15 @@ class CustomStepPrompt extends Component {
 
         if((inputName === "equipmentDoing")){
             this.setState({
+                doingClass: "",
                 actionClass: "",
                 toDoClass: "hidden",
                 unitClass: "hidden",
                 valueClass:"hidden",
                 buttonClass:"hidden",
+                imgClass: "hidden",
+                nameClass: "hidden",
+                submitClass: "hidden",
                 action:{
                     value:""
                 },
@@ -360,11 +425,15 @@ class CustomStepPrompt extends Component {
         }else if(inputName === "action"){
 
             this.setState({
+                doingClass: "",
                 actionClass: "",
                 toDoClass: "",
                 unitClass: "hidden",
                 valueClass:"hidden",
                 buttonClass:"hidden",
+                imgClass: "hidden",
+                nameClass: "hidden",
+                submitClass: "hidden",
                 equipmentToDo:{
                     value:""
                 },
@@ -392,11 +461,15 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "equipmentToDo"){
             this.setState({
+                doingClass: "",
                 actionClass: "",
                 toDoClass: "",
                 unitClass: "",
                 valueClass:"hidden",
                 buttonClass:"hidden",
+                imgClass: "hidden",
+                nameClass: "hidden",
+                submitClass: "hidden",
                 unit: {
                     value: ""
                 },
@@ -407,11 +480,15 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "unit"){
             this.setState({
+                doingClass: "",
                 actionClass: "",
                 toDoClass: "",
                 unitClass: "",
                 valueClass:"",
                 buttonClass:"hidden",
+                imgClass: "hidden",
+                nameClass: "hidden",
+                submitClass: "hidden",
                 value:{
                     value:0
                 },
@@ -423,17 +500,23 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "value"){
             this.setState({
+                doingClass: "",
                 actionClass: "",
                 toDoClass: "",
                 unitClass: "",
                 valueClass:"",
                 buttonClass:"",
+                imgClass: "hidden",
+                nameClass: "hidden",
+                submitClass: "hidden",
                 [inputName]: {
                     value: inputValue,
                     validateStatus: "success",
                     ...validationFun(inputValue)
                 }
             });
+        }else if(inputName === "resultName"){
+            validationFun(inputValue)
         }else{
             this.setState({
                 [inputName]: {
@@ -443,6 +526,130 @@ class CustomStepPrompt extends Component {
             });
         }
     }
+
+    validateName = (name) => {
+        checkEquipmentNameIsPresent(name).then(response => {
+
+            var validName = ValidateName(name);
+            var existingEquipment = this.state.equipment.find(o => o.name === name);
+            var existingProduct = this.state.product.find(o => o.name === name);
+
+            if(!response.available && validName.validateStatus === "success" && (existingEquipment === undefined)){
+                this.setState({
+                    doingClass: "hidden",
+                    actionClass: "hidden",
+                    toDoClass: "hidden",
+                    unitClass: "hidden",
+                    valueClass:"hidden",
+                    buttonClass:"hidden",
+                    imgClass: "",
+                    nameClass: "",
+                    submitClass: "",
+                    resultName: {
+                        value: name,
+                        validateStatus: "success",
+                        errorMsg: null
+                    }
+                });
+            }else if(validName.validateStatus !== "success"){
+                this.setState({
+                    doingClass: "hidden",
+                    actionClass: "hidden",
+                    toDoClass: "hidden",
+                    unitClass: "hidden",
+                    valueClass:"hidden",
+                    buttonClass:"hidden",
+                    imgClass: "",
+                    nameClass: "",
+                    submitClass: "hidden",
+                    resultName: {
+                        value: name,
+                        validateStatus: validName.validateStatus,
+                        errorMsg: validName.errorMsg
+                    }
+                });
+            }else{
+                this.setState({
+                    doingClass: "hidden",
+                    actionClass: "hidden",
+                    toDoClass: "hidden",
+                    unitClass: "hidden",
+                    valueClass:"hidden",
+                    buttonClass:"hidden",
+                    imgClass: "",
+                    nameClass: "",
+                    submitClass: "hidden",
+                    resultName: {
+                        value: name,
+                        validateStatus: "error",
+                        errorMsg: "Name is taken"
+                    }
+                });
+            }
+
+        }).catch(error => {
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
+        });
+    }
+
+    handleImageLoad = (val) => {
+        this.setState({
+            resultImg: {
+                value: val
+            }
+        });
+    }
+
+    handleContinue(event){
+        event.preventDefault();
+
+        var equip = this.state.equipment.find(o => o.name === this.state.equipmentToDo.value);
+        var product = this.state.product.find(o => o.name === this.state.equipmentToDo.value);
+
+        if(equip !== undefined){
+            var img = equip.img;
+            var equipmentType = equip.equipmentType;
+            var tags = [this.state.action.value];    
+        }else{
+            var img = product.img;
+            var equipmentType = product.equipmentType;
+            var tags = product.tags.push(this.state.action.value);    
+        }
+
+        var name = this.state.action.value + " " + this.state.equipmentToDo.value;
+
+        this.setState({
+            doingClass: "hidden",
+            actionClass: "hidden",
+            toDoClass: "hidden",
+            unitClass: "hidden",
+            valueClass:"hidden",
+            buttonClass:"hidden",
+            imgClass: "",
+            nameClass: "",
+            submitClass: "hidden",
+            resultName: {
+                value:name,
+                validateStatus:"warning",
+                errorMsg: "Put in a valid name of the product"
+            },
+            resultImg: {
+                value:img
+            },
+            resultEquipmentType: {
+                value:equipmentType
+            },
+            resultTags: {
+                value:tags
+            },
+        })
+    }
   
     handleSubmit(event) {
           event.preventDefault();
@@ -451,60 +658,78 @@ class CustomStepPrompt extends Component {
             confirmLoading: true,
           });
   
-          const equipmentRequest = {
-              name: this.state.name.value,
-              img: this.state.img.value,
-              equipmentType: this.state.equipmentType.value
+          const stepRequest = {
+            equipmentToDo: this.state.equipmentToDo.value,
+            equipmentDoing: this.state.equipmentDoing.value,
+            equipmentProduct:{
+              name: this.state.resultName.value,
+              img: this.state.resultImg.value,
+              equipmentType: this.state.resultEquipmentType.value,
+              tags: this.state.resultTags.value
+            },
+            action: this.state.action.value,
+            value: parseInt(this.state.value.value),
+            unit: this.state.unit.value
           };
   
-          this.props.addItem(equipmentRequest);
+          this.props.addItem(stepRequest);
 
           this.setState({
-            equipmentToDo: "",
-            equipmentDoing: "",
-            equipmentProduct: "",
-            action: "",
-            value: 0,
-            unit: "",
             visible: false,
-            actionClass: "hidden",
-            toDoClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
-            buttonClass: "hidden",
             confirmLoading: false,
           });
     }
    
     isFormInvalid() {
-        return !(this.state.equipmentToDo.validateStatus === 'success' && this.state.equipmentDoing.validateStatus === 'success' && this.state.equipmentProduct.validateStatus === 'success');
+        return !(this.state.equipmentToDo.validateStatus === 'success' && this.state.equipmentDoing.validateStatus === 'success' && this.state.resultName.validateStatus === 'success');
     }
 
     showModal = () => {
         this.setState({
             visible: true,
+            doingClass: "",
             actionClass: "hidden",
             toDoClass: "hidden",
             valueClass:"hidden",
             unitClass: "hidden",
-            buttonClass: "hidden"
+            buttonClass: "hidden",
+            imgClass: "hidden",
+            nameClass: "hidden",
+            submitClass: "hidden",
+            equipmentToDo: {
+                value: ""
+            },
+            equipmentDoing: {
+                value: ""
+            },
+            equipmentProduct: {
+                value: ""
+            },
+            action: {
+                value: ""
+            },
+            value: {
+                value: 0
+            },
+            unit: {
+                value: ""
+            },
+            intersectingActions: {
+                value: []
+            },
+            intersectingEquipment: {
+                value: []
+            },
+            intersectingProducts: {
+                value: []
+            }
         });
     };
 
 
     handleCancel = () => {
         this.setState({
-            equipmentToDo: "",
-            equipmentDoing: "",
-            equipmentProduct: "",
-            action: "",
-            value: 0,
-            unit: "",
             visible: false,
-            actionClass: "hidden",
-            toDoClass: "hidden",
-            valueClass:"hidden",
-            unitClass: "hidden",
             confirmLoading: false,
             });
         };

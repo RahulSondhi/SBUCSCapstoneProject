@@ -15,7 +15,6 @@ const request = (options) => {
     return fetch(options.url, options)
     .then(response => 
         response.json().then(json => {
-            console.log(response);
             if(!response.ok) {
                 const rejection = {
                     status: response.status,

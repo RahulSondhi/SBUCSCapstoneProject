@@ -38,7 +38,7 @@ class ConfigRecipePage extends Component {
             equipmentsAvailable: {
                 value: []
             },
-            equipmentProduct: {
+            equipmentProducts: {
                 value: []
             },
             img: {
@@ -78,8 +78,11 @@ class ConfigRecipePage extends Component {
         this.loadRecipeProfile = this
             .loadRecipeProfile
             .bind(this);
-        this.handleListLoad = this
-            .handleListLoad
+        this.handleStepLoad = this
+            .handleStepLoad
+            .bind(this);
+        this.handleEquipmentLoad = this
+            .handleEquipmentLoad
             .bind(this);
     }
 
@@ -99,6 +102,8 @@ class ConfigRecipePage extends Component {
         this.setState({isLoading: true});
 
         getRecipeProfile(id).then(response => {
+
+            console.log(response)
 
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
@@ -123,8 +128,8 @@ class ConfigRecipePage extends Component {
                 }
             });
 
-            var equipmentProduct = response
-            .equipmentProduct
+            var equipmentProducts = response
+            .equipmentProducts
             .map(function (el) {
                 return {
                     name: el.name,
@@ -158,8 +163,8 @@ class ConfigRecipePage extends Component {
                 equipmentsAvailable: {
                     value: equipmentsAvailable
                 },
-                equipmentProduct: {
-                    value: equipmentProduct
+                equipmentProducts: {
+                    value: equipmentProducts
                 },
                 img: {
                     value: response.img
@@ -281,7 +286,7 @@ class ConfigRecipePage extends Component {
                                     <DynamicForm
                                         type="equipment"
                                         data={this.state.equipmentsAvailable.value}
-                                        onUpdate={this.handleListLoad}
+                                        onUpdate={this.handleEquipmemntLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>
 
@@ -296,8 +301,8 @@ class ConfigRecipePage extends Component {
                                     <DynamicSteps
                                         data={this.state.steps.value}
                                         equipment={this.state.equipmentsAvailable.value}
-                                        product={this.state.equipmentProduct.value}
-                                        onUpdate={this.handleListLoad}
+                                        product={this.state.equipmentProducts.value}
+                                        onUpdate={this.handleStepLoad}
                                         validate={this.validateEquipmentAdd}
                                         className="cell"/>
 
@@ -371,13 +376,45 @@ class ConfigRecipePage extends Component {
         }
     }
 
-    handleListLoad = () => {
+    handleEquipmentLoad = () => {
+
         this.setState({
             newEquipment: {
                 value: true
             }
         })
-        console.log(this.state.equipmentsAvailable)
+
+    }
+
+    handleStepLoad = (type,step) => {
+        console.log(this.state)
+        var products;
+        
+        if(type === "add"){
+            products = this.state.equipmentProducts.value;
+            products.push(step.equipmentProduct);
+            step.equipmentProduct = step.equipmentProduct.name;
+        }else{
+            products = (this.state.equipmentProducts.value).filter(equip => 
+                { 
+                    return equip.name !== step.equipmentProduct.name
+                })
+        }
+
+        console.log(products);
+
+        this.setState({
+            newEquipment: {
+                value: true
+            },
+            newSteps: {
+                value: true
+            },
+            equipmentProducts:{
+                value: products
+            }
+        })
+
     }
 
     handleDelete(event) {
@@ -385,7 +422,7 @@ class ConfigRecipePage extends Component {
             Notify("success","Your recipe was succesfully deleted!",-1);
             this.props.history.push("/tipsy/myRecipes");
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
 
@@ -398,14 +435,15 @@ class ConfigRecipePage extends Component {
             published: true,
             img: this.state.img.value,
             steps: this.state.steps.value,
-            equipmentsAvailable: this.state.equipmentsAvailable.value
+            equipmentsAvailable: this.state.equipmentsAvailable.value,
+            equipmentProducts: this.state.equipmentProducts.value
         };
 
         createRecipe(recipeRequest).then(response => {
             Notify("success","Your recipe was succesfully published!",-1);
             this.props.history.goBack();
         }).catch(error => {
-            Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+            Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
         });
     }
 
@@ -419,6 +457,7 @@ class ConfigRecipePage extends Component {
             img: this.state.img.value,
             steps: this.state.steps.value,
             equipmentsAvailable: this.state.equipmentsAvailable.value,
+            equipmentProducts: this.state.equipmentProducts.value,
         };
 
         if (this.state.type === "clone" || this.state.type === "create") {
@@ -426,7 +465,7 @@ class ConfigRecipePage extends Component {
                 Notify("success","Your recipe was succesfully created!",-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         } else {
 
@@ -437,7 +476,7 @@ class ConfigRecipePage extends Component {
                 Notify("success","Your recipe was succesfully saved!",-1);
                 this.props.history.goBack();
             }).catch(error => {
-                Notify("error",error.message || 'Sorry! Something went wrong. Please try again!',-1);
+                Notify("error",error.message.message || 'Sorry! Something went wrong. Please try again!',-1);
             });
         }
     }

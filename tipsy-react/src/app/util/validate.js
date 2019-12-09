@@ -24,7 +24,7 @@ export const validateFirstName = (firstName) => {
     if (firstName.length < FIRSTNAME_MIN_LENGTH) {
         return {validateStatus: 'error', errorMsg: `First name is too short (Minimum ${FIRSTNAME_MIN_LENGTH} characters needed.)`}
     } else if (firstName.length > FIRSTNAME_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `First name is too long (Maximum ${FIRSTNAME_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
     }
@@ -34,7 +34,7 @@ export const validateLastName = (lastName) => {
     if (lastName.length < LASTNAME_MIN_LENGTH) {
         return {validateStatus: 'error', errorMsg: `Last name is too short (Minimum ${LASTNAME_MIN_LENGTH} characters needed.)`}
     } else if (lastName.length > LASTNAME_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `Last name is too long (Maximum ${LASTNAME_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
     }
@@ -61,7 +61,7 @@ export const validateNickname = (nickname) => {
     if (nickname.length < NICKNAME_MIN_LENGTH) {
         return {validateStatus: 'error', errorMsg: `Nickname is too short (Minimum ${NICKNAME_MIN_LENGTH} characters needed.)`}
     } else if (nickname.length > NICKNAME_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `Nickname is too long (Maximum ${NICKNAME_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: null, errorMsg: null}
     }
@@ -71,7 +71,7 @@ export const validatePassword = (password) => {
     if (password.length < PASSWORD_MIN_LENGTH) {
         return {validateStatus: 'error', errorMsg: `Password is too short (Minimum ${PASSWORD_MIN_LENGTH} characters needed.)`}
     } else if (password.length > PASSWORD_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `Password is too long (Maximum ${PASSWORD_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
     }
@@ -83,7 +83,7 @@ export const validateName = (name) => {
     if (name.length < NAME_MIN_LENGTH) {
         return {validateStatus: 'error', errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`}
     } else if (name.length > NAME_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
     }
@@ -91,7 +91,7 @@ export const validateName = (name) => {
 
 export const validateDesc = (description) => {
     if (description.length > DESC_MAX_LENGTH) {
-        return {validationStatus: 'error', errorMsg: `Description is too long (Maximum ${DESC_MAX_LENGTH} characters allowed.)`}
+        return {validateStatus: 'error', errorMsg: `Description is too long (Maximum ${DESC_MAX_LENGTH} characters allowed.)`}
     } else {
         return {validateStatus: 'success', errorMsg: null};
     }
