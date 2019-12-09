@@ -86,11 +86,8 @@ public class RegisterController {
                                 registerRequest.getLastName(), 
                                 registerRequest.getEmail(), 
                                 registerRequest.getNickname(), 
-                                registerRequest.getPassword(),
-                                new HashSet<String>(),
-                                new HashSet<String>(),
-                                new HashSet<String>(),
-                                new HashSet<String>());
+                                registerRequest.getPassword()
+                                );
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
                         //
                         user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID

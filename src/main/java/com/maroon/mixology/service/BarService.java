@@ -1,8 +1,12 @@
 package com.maroon.mixology.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.BarRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,10 @@ public class BarService {
 
     public List<Bar> findByNameLikeIgnoreCase(String name) {
         return barRepository.findByNameLikeIgnoreCase(name);
+    }
+
+    public List<Bar> findByOwnerOrManagersOrWorkers(User user) {
+        return barRepository.findByOwnerOrManagersInOrWorkersIn(user, new HashSet<User>(Arrays.asList(user)), new HashSet<User>(Arrays.asList(user)));
     }
 
 

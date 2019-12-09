@@ -53,11 +53,13 @@ class UsersBarsPage extends Component {
                 });
             }
         }).catch(error => {
-            if (error.status === 404) {
-                this.setState({notFound: true, isLoading: false});
-            } else {
-                this.setState({serverError: true, isLoading: false});
-            }
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
         });
     }
 

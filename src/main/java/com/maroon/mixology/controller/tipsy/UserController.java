@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
@@ -27,6 +28,7 @@ import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarService;
 import com.maroon.mixology.service.EmailService;
+import com.maroon.mixology.service.GameService;
 import com.maroon.mixology.service.RecipeService;
 import com.maroon.mixology.service.UserService;
 
@@ -67,6 +69,9 @@ public class UserController {
     @Autowired
     private RecipeService recipeService;
 
+    @Autowired
+    private GameService gameService;
+    
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -126,8 +131,7 @@ public class UserController {
             }
             // Build all
             Set<BriefBarResponse> userBars = new HashSet<BriefBarResponse>();
-            for (String barID : user.getBars()) {
-                Bar bar = barService.findById(barID);
+            for (Bar bar : barService.findByOwnerOrManagersOrWorkers(user)){
                 userBars.add(new BriefBarResponse(
                         bar.getId(), 
                         bar.getName(), 
@@ -136,8 +140,7 @@ public class UserController {
                     ));
             }
             Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();
-            for (String recipeWrittenID : user.getRecipesWritten()){
-                Recipe recipeWritten = recipeService.findById(recipeWrittenID);
+            for (Recipe recipeWritten : recipeService.findByAuthor(user)){
                     userRecipesWritten.add(new BriefRecipeResponse(
                             recipeWritten.getId(), 
                             recipeWritten.getName(), 
@@ -147,25 +150,23 @@ public class UserController {
                         ));
             }
             Set<BriefRecipeResponse> userRecipesCompleted = new HashSet<BriefRecipeResponse>();
-            for (String recipeCompletedID : user.getRecipesCompleted()){
-                Recipe recipeCompleted = recipeService.findById(recipeCompletedID);
+            for (Game recipeCompleted : gameService.findByPlayerAndIsCompleted(user)){
                 userRecipesCompleted.add(new BriefRecipeResponse(
-                    recipeCompleted.getId(), 
-                    recipeCompleted.getName(), 
-                    recipeCompleted.getImage(), 
-                    recipeCompleted.getAuthor().getNickname(),
-                    recipeCompleted.isPublished()
+                    recipeCompleted.getRecipe().getId(), 
+                    recipeCompleted.getRecipe().getName(), 
+                    recipeCompleted.getRecipe().getImage(), 
+                    recipeCompleted.getRecipe().getAuthor().getNickname(),
+                    recipeCompleted.getRecipe().isPublished()
                     ));
             }
             Set<BriefRecipeResponse> userRecipesIncompleted = new HashSet<BriefRecipeResponse>();
-            for (String recipeIncompletedID : user.getRecipesIncompleted()){
-                Recipe recipeIncompleted = recipeService.findById(recipeIncompletedID);
+            for (Game recipeIncompleted : gameService.findByPlayerAndIsNotCompleted(user)){
                 userRecipesIncompleted.add(new BriefRecipeResponse(
-                    recipeIncompleted.getId(), 
-                    recipeIncompleted.getName(), 
-                    recipeIncompleted.getImage(), 
-                    recipeIncompleted.getAuthor().getNickname(),
-                    recipeIncompleted.isPublished()
+                    recipeIncompleted.getRecipe().getId(), 
+                    recipeIncompleted.getRecipe().getName(), 
+                    recipeIncompleted.getRecipe().getImage(), 
+                    recipeIncompleted.getRecipe().getAuthor().getNickname(),
+                    recipeIncompleted.getRecipe().isPublished()
                     ));
             }
             UserResponse userResponse = new UserResponse(
@@ -174,8 +175,8 @@ public class UserController {
                 user.getFirstName() + " " + user.getLastName(),
                 userBars,
                 userRecipesWritten,
-                userRecipesCompleted,
-                userRecipesIncompleted
+                userRecipesIncompleted,
+                userRecipesCompleted
                 );
     
             return ResponseEntity.ok(userResponse);

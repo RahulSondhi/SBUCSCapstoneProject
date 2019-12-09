@@ -30,26 +30,13 @@ public class User {
 	private boolean enabled;
 	@DBRef
 	private Set<Role> roles;
-	// @DBRef
-	private Set<String> bars; //barIDs
-	// @DBRef
-	private Set<String> recipesWritten; //recipeIDs
-	// @DBRef
-	private Set<String> recipesIncompleted; //recipeIDs
-	// @DBRef
-	private Set<String> recipesCompleted; //recipeIDs
 
-	public User(String firstName, String lastName, String email, String nickname, String password, Set<String> bars,
-			Set<String> recipesWritten, Set<String> recipesIncompleted, Set<String> recipesCompleted) {
+	public User(String firstName, String lastName, String email, String nickname, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.nickname = nickname;
 		this.password = password;
-		this.bars = bars;
-		this.recipesWritten = recipesWritten;
-		this.recipesIncompleted = recipesIncompleted;
-		this.recipesCompleted = recipesCompleted;
 	}
 
 	public String getId() {
@@ -162,40 +149,6 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
 	}
-
-	public Set<String> getBars() {
-		return bars;
-	}
-
-	public void setBars(Set<String> bars) {
-		this.bars = bars;
-	}
-
-	public Set<String> getRecipesWritten() {
-		return recipesWritten;
-	}
-
-	public void setRecipesWritten(Set<String> recipesWritten) {
-		this.recipesWritten = recipesWritten;
-	}
-
-	public Set<String> getRecipesIncompleted() {
-		return recipesIncompleted;
-	}
-
-	public void setRecipesIncompleted(Set<String> recipesIncompleted) {
-		this.recipesIncompleted = recipesIncompleted;
-	}
-
-	public Set<String> getRecipesCompleted() {
-		return recipesCompleted;
-	}
-
-	public void setRecipesCompleted(Set<String> recipesCompleted) {
-		this.recipesCompleted = recipesCompleted;
-	}
-
 	
-
 
 }
