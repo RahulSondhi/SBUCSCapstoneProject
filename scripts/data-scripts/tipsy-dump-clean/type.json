@@ -1,0 +1,14 @@
+{"_id":{"$oid":"5dd9d53df19f9002ee7b1fdd"},"name":"INGREDIENT","actionsToDo":["PRESS","CUT","CRUSH","PEEL","ADD"],"actionsDoing":["ADD"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d57af19f9002ee7b1fdf"},"name":"MIXER","actionsToDo":[],"actionsDoing":["POUR"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d581f19f9002ee7b1fe1"},"name":"SPIRIT","actionsToDo":[],"actionsDoing":["POUR"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d5aff19f9002ee7b1fe3"},"name":"CONTAINER","actionsToDo":["ADD"],"actionsDoing":["ADD"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d5d3f19f9002ee7b1fe5"},"name":"SHAKER","actionsToDo":["ADD"],"actionsDoing":["SHAKE"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d5e4f19f9002ee7b1fe7"},"name":"STRAINER","actionsToDo":["ADD"],"actionsDoing":["STRAIN"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d61af19f9002ee7b1feb"},"name":"PRESSER","actionsToDo":[],"actionsDoing":["PRESS"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d646f19f9002ee7b1fed"},"name":"CRUSHER","actionsToDo":[],"actionsDoing":["CRUSH"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d64df19f9002ee7b1fef"},"name":"KNIFE","actionsToDo":[],"actionsDoing":["CUT"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d681f19f9002ee7b1ff1"},"name":"MEASURER","actionsToDo":["MEASURE","POUR"],"actionsDoing":["ADD"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d69af19f9002ee7b1ff3"},"name":"BLENDER","actionsToDo":["ADD"],"actionsDoing":["BLEND"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d6acf19f9002ee7b1ff5"},"name":"PEELER","actionsToDo":[],"actionsDoing":["PEEL"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d6c6f19f9002ee7b1ff7"},"name":"HEATING","actionsToDo":["ADD"],"actionsDoing":["BOIL","IGNITE","HEAT"],"_class":"com.maroon.mixology.entity.EquipmentType"}
+{"_id":{"$oid":"5dd9d6d6f19f9002ee7b1ff9"},"name":"COOLING","actionsToDo":["ADD"],"actionsDoing":["COOL","FREEZE"],"_class":"com.maroon.mixology.entity.EquipmentType"}
