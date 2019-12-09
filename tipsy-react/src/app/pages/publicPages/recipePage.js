@@ -6,9 +6,8 @@ import {getRecipeProfile, initGame} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
-import {Tabs, Button} from 'antd';
-
-const {TabPane} = Tabs;
+import { Button, Icon } from 'antd';
+import { StepPreview } from '../userPages/dynamicSteps';
 
 class RecipePage extends Component {
 
@@ -56,7 +55,52 @@ class RecipePage extends Component {
         this.setState({isLoading: true});
 
         getRecipeProfile(id).then(response => {
-            this.setState({recipe: response, isLoading: false});
+
+            var equipmentsAvailable = response
+            .equipmentsAvailable
+            .map(function (el) {
+                return {
+                    name: el.name,
+                    img: el.img,
+                    equipmentType: el.equipmentType.type
+                }
+            });
+
+            var equipmentProducts = response
+            .equipmentProducts
+            .map(function (el) {
+                return {
+                    name: el.name,
+                    img: el.img,
+                    equipmentType: el.equipmentType.type,
+                    tags: el.tags
+                }
+            });
+
+            var steps = response.steps
+            .map(function (el) {
+                return {
+                    action: el.action,
+                    equipmentDoing: el.equipmentDoing,
+                    equipmentProduct: el.equipmentProduct,
+                    equipmentToDo: el.equipmentToDo,
+                    unit: el.unit.name,
+                    value: el.value
+                }
+            });
+
+            this.setState({
+                recipe:{
+                    author: response.author,
+                    description: response.description,
+                    equipmentProducts: equipmentProducts,
+                    equipmentsAvailable: equipmentsAvailable,
+                    img: response.img,
+                    name: response.name,
+                    published: response.published,
+                    steps: steps}, 
+                isLoading: false
+            });
 
             if(
                 this.props.currentUser.name === response.author.name ||
@@ -91,6 +135,8 @@ class RecipePage extends Component {
     }
     render() {
 
+        console.log(this.state)
+
         // Checking if data came in
         if (this.state.isLoading) {
             return null
@@ -117,17 +163,20 @@ class RecipePage extends Component {
                         type="recipe"/>
                 </div>
 
-                <div id="redirectRecipe" className="small-1 small-offset-2 cell grid-x align-center-middle">
-                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
-                        <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
+                <div id="redirectRecipe" className="small-2 small-offset-1 cell grid-x align-center-middle">
+                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"small-4 cell grid-x align-center-middle "+this.state.settingClass}>
+                        <GetProfImg className="small-10 cell" alt="Settings" type="settings"/>
                     </NavLink>
+                    
+                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"small-4 small-offset-2 cell grid-x align-center-middle"}>
+                        <GetProfImg className="small-10 cell" alt="Clone" type="clone"/>
+                    </NavLink>
+
                     <div className="cell" style={{height:'3em'}}></div>
-                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"cell grid-x align-center-middle"}>
-                        <GetProfImg className="small-3 cell" alt="Clone" type="clone"/>
-                    </NavLink>
-                    <Button className="button" onClick={this.play}>
-                        Play
-                    </Button>
+
+                    <div className="cell grid-x align-center-middle" onClick={this.play}>
+                        <GetProfImg className="small-4 cell" alt="Play" type="play"/>
+                    </div>
                 </div>
 
                 <h1 id="recipePageTitle" className="caption small-10 cell">{this.state.recipe.name}</h1>
@@ -147,6 +196,13 @@ class RecipePage extends Component {
                     id="rightBarSide"
                     className="small-12 medium-8 grid-x align-center-middle cell">
                     <h1 id="userPageBarTitle" className="captionRed small-10 cell">Steps</h1>
+
+                    
+                    <StepPreview
+                        className="small-6 cell"
+                        items={this.state.recipe.steps}
+                        product={this.state.recipe.equipmentProducts}
+                        equipment={this.state.recipe.equipmentsAvailable}/>
                     
                 </div>
             </div>

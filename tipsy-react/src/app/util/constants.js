@@ -16,6 +16,7 @@ import RemovePic from '../assets/defaultIcons/remove.svg';
 import ActionPic from '../assets/defaultIcons/action.svg';
 import EquipmentPic from '../assets/defaultIcons/equipment.svg';
 import ClonePic from '../assets/defaultIcons/clone.svg';
+import PlayPic from '../assets/defaultIcons/play.svg';
 import UnknownPic from '../assets/defaultIcons/unknown.svg';
 import {NewUserPic} from '../assets/defaultIcons/newuser.json';
 import {NewBarPic} from '../assets/defaultIcons/newbar.json';
@@ -101,7 +102,9 @@ export class GetProfImg extends Component {
                 this.image = RemovePic
             } else if (this.type === "clone") {
                 this.image = ClonePic
-            } else {
+            } else if (this.type === "play") {
+                this.image = PlayPic
+            } else  {
                 this.image = UnknownPic
             }
         } else {
@@ -250,6 +253,7 @@ class GetItem extends Component {
             this.desc = <span>{" " + this.item.equipmentType}</span>;
         } else if (this.type === "equipmentAltered") {
             this.link = this.link + this.item.name;
+            this.descPre = "Actions Done: ";
             this.desc = <span>{" " + this.item.tags}</span>;
         } else if (this.type === "bar") {
             this.link = this.link + this.item.id;
@@ -288,7 +292,7 @@ class GetItem extends Component {
         }
 
         if (this.func === null || this.func === "" || this.func === undefined) {
-            this.onclick = (e) => {console.log("help")};
+            this.onclick = (e) => {};
         } else {
             this.onclick = (e)=>{e.preventDefault(); this.func();}
         }
@@ -450,6 +454,7 @@ export class DynamicForm extends Component {
                         className="small-4 cell"
                         items={this.state.data}
                         type={this.type}
+                        func={()=>{}}
                         postfix="remove"
                         postfixFunc={this.removeItem}/>
                 </div>
@@ -463,6 +468,7 @@ export class DynamicForm extends Component {
                         className="small-4 cell"
                         items={this.state.data}
                         type={this.type}
+                        func={()=>{}}
                         postfix="remove"
                         postfixFunc={this.removeItem}/>
                 </div>

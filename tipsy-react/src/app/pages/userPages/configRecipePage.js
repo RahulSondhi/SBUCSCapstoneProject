@@ -138,6 +138,19 @@ class ConfigRecipePage extends Component {
                 }
             });
 
+            var steps = response
+            .steps
+            .map(function (el) {
+                return {
+                    action: el.action,
+                    equipmentDoing: el.equipmentDoing,
+                    equipmentProduct: el.equipmentProduct,
+                    equipmentToDo: el.equipmentToDo,
+                    unit: el.unit.name,
+                    value: el.value
+                }
+            });
+
             this.setState({
                 recipe: response,
                 isLoading: false,
@@ -154,7 +167,7 @@ class ConfigRecipePage extends Component {
                     value: response.description
                 },
                 steps: {
-                    value: response.steps
+                    value: steps
                 },
                 preLoadedEquipment: {
                     value: response.equipmentsAvailable

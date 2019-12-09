@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Redirect} from 'react-router-dom';
 
-import {ValidateName, ItemPreview, Notify, MakeProfImg} from '../../util/constants';
+import {ValidateName, ItemPreview, Notify, MakeProfImg, GetProfImg} from '../../util/constants';
 import {getAllEquipmentTypes, getAllUnits, checkEquipmentNameIsPresent} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
 
-import {Form, Input, Icon, Modal, Popconfirm} from 'antd';
+import {Form, Input, Modal, Icon} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -72,7 +72,10 @@ export class DynamicSteps extends Component {
                 <StepPreview
                     className="small-6 cell"
                     items={this.state.data}
-                    postfixFunc={this.removeItem}/>
+                    removeFunc={this.removeItem}
+                    moveFunc={this.removeItem}
+                    product={this.state.product}
+                    equipment={this.state.equipment}/>
             </div>
         )
     }
@@ -216,22 +219,21 @@ class CustomStepPrompt extends Component {
 
       return (
         <div className="grid-x align-center-middle small-6 medium-6 cell">
-          <ItemPreview
-                        className="cell"
+            <ItemPreview
+                        className="small-6 cell"
                         items={[{desc:"Add Your Own"}]}
                         func={this.showModal}
                         type={"createEquipment"}/>
   
           <Form onSubmit={this.handleSubmit} className="cell grid-x align-center-middle">
               <Modal
-                title="Create Equipment"
+                title="Create a Step"
                 className="grid-x align-center-middle"
                 visible={visible}
                 onOk={this.handleOk}
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
-                footer={[
-                    
+                footer={[   
                 ]}>
   
                 <FormItem
@@ -534,7 +536,7 @@ class CustomStepPrompt extends Component {
             var existingEquipment = this.state.equipment.find(o => o.name === name);
             var existingProduct = this.state.product.find(o => o.name === name);
 
-            if(!response.available && validName.validateStatus === "success" && (existingEquipment === undefined)){
+            if(!response.available && validName.validateStatus === "success" && (existingEquipment === undefined) && (existingProduct === undefined)){
                 this.setState({
                     doingClass: "hidden",
                     actionClass: "hidden",
@@ -611,15 +613,19 @@ class CustomStepPrompt extends Component {
 
         var equip = this.state.equipment.find(o => o.name === this.state.equipmentToDo.value);
         var product = this.state.product.find(o => o.name === this.state.equipmentToDo.value);
+        var img = "";
+        var equipmentType = "";
+        var tags = [];
 
         if(equip !== undefined){
-            var img = equip.img;
-            var equipmentType = equip.equipmentType;
-            var tags = [this.state.action.value];    
+            img = equip.img;
+            equipmentType = equip.equipmentType;
+            tags = [this.state.action.value];    
         }else{
-            var img = product.img;
-            var equipmentType = product.equipmentType;
-            var tags = product.tags.push(this.state.action.value);    
+            img = product.img;
+            equipmentType = product.equipmentType;
+            tags = [].concat(product.tags);
+            tags.push(this.state.action.value);    
         }
 
         var name = this.state.action.value + " " + this.state.equipmentToDo.value;
@@ -735,14 +741,68 @@ class CustomStepPrompt extends Component {
         };
     }
 
-class StepPreview extends Component {
+export const StepPreview = ({items, equipment, product, className, removeFunc,moveFunc}) => (
+    <Fragment>
+        {items.map(item => (<GetStep
+            key={new Date().getMilliseconds() + (Math.random() * 69420)}
+            item={item}
+            equipment={equipment}
+            product={product}
+            steps={items}
+            removeFunc={removeFunc}
+            moveFunc={moveFunc}
+            className={"grid-x align-center-middle " + className}/>))}
+    </Fragment>
+);
+
+class GetStep extends Component {
     
     constructor(props){
         super(props);
 
+        var removeClass = " ";
+        var moveClass = " ";
+
+        if(this.props.removeFunc === undefined){
+            removeClass = "hidden"
+        }
+
+        if(this.props.moveFunc === undefined){
+            moveClass = "hidden"
+        }
+
         this.state = {
-            isLoading: false
+            isLoading: false,
+            className: this.props.className,
+            item:this.props.item,
+            moveFunc:this.props.moveFunc,
+            removeFunc: this.props.removeFunc,
+            equipment:this.props.equipment,
+            product:this.props.product,
+            steps:this.props.steps,
+            moveClass: moveClass,
+            removeClass: removeClass
         };
+    }
+
+    getEquipment(name){
+        console.log(this.state);
+        var equip = this.state.equipment.find(o => o.name === name);
+        var product = this.state.product.find(o => o.name === name);
+
+        if(equip !== undefined){
+            return <ItemPreview
+            className="cell"
+            items={[equip]}
+            func={()=>{}}
+            type={"equipment"} />   
+        }else{
+            return <ItemPreview
+            className="cell"
+            items={[product]}
+            func={()=>{}}
+            type={"equipmentAltered"} />   
+        }
     }
   
   
@@ -767,8 +827,37 @@ class StepPreview extends Component {
         }
 
       return (
-        <div className="grid-x align-center-middle small-6 medium-6 cell">
+        <div className="grid-x align-center-middle small-10 cell">
+            <div className="previewItemMargin cell"></div>
+            <div className="grid-x align-center-middle small-11 cell previewStepContainer">
+                <div className="grid-x align-center-middle small-3 cell">
+                    {this.getEquipment(this.state.item.equipmentDoing)}
+                </div>
+                <div className="grid-x align-center-middle small-1 cell">
+                    <Icon type="plus-square" theme="twoTone" className="cell"/>
+                </div>
+                <div className="grid-x align-center-middle small-3 cell">
+                    {this.getEquipment(this.state.item.equipmentToDo)}
+                </div>
+                <div className="grid-x align-center-middle small-1 cell">
+                    <Icon type="right-square" theme="twoTone" className="cell"/>
+                </div>
+                <div className="grid-x align-center-middle small-3 cell">
+                    {this.getEquipment(this.state.item.equipmentProduct)}
+                </div>
+                <div className="grid-x small-1 align-self-top cell">
+                    <div className={"small-6 small-offset-5 cell "+this.state.removeClass} onClick={() => {console.log(this.state.item)}}>
+                        <GetProfImg type="error" className="cell" />
+                    </div>
+                    <div className={"small-6 small-offset-5 cell "+this.state.moveClass} onClick={() => {console.log(this.state.item)}}> 
+                    
+                    </div>
+                    <div className={"small-6 small-offset-5 cell "+this.state.moveClass} onClick={() => {console.log(this.state.item)}}>
 
+                    </div>
+                </div>
+            </div>
+            <div className="previewItemMargin cell"></div>
         </div>
       );
     }

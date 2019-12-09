@@ -83,6 +83,23 @@
     box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
 }
 
+.previewStepContainer{
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../assets/metalPlate.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 0.5em;
+    padding-bottom: 0.75em;
+    text-align: center;
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+}
+
+.previewStepContainer i{
+    font-size: 4em;
+}
+
 .previewItemMargin {
     height: 1em;
 }
