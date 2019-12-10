@@ -271,6 +271,4 @@ public class BarController {
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
-
-   
 }

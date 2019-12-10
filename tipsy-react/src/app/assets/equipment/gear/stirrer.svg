@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="175" viewBox="0 0 24 175">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-3.335" y1="0.232" x2="3.109" y2="0.219" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-0.687" y1="1" x2="1.366" y2="0.733" xlink:href="#linear-gradient"/>
+    <radialGradient id="radial-gradient" cx="-0.233" cy="0.56" r="1.104" gradientTransform="translate(0.149 0.196) scale(1.636 0.649)" xlink:href="#linear-gradient"/>
+    <radialGradient id="radial-gradient-2" cx="0.5" cy="0.5" r="0.433" gradientTransform="translate(-0.271 -0.304) scale(1.542 1.609)" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="stirrer" transform="translate(-1255 -488)">
+    <rect id="Rectangle_6" data-name="Rectangle 6" width="5" height="121" transform="translate(1264 522)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_7" data-name="Rectangle 7" width="9" height="5" rx="2.5" transform="translate(1262 642)" fill="url(#linear-gradient-2)"/>
+    <path id="Path_22" data-name="Path 22" d="M9.42,2.686A12.077,12.077,0,0,1,11,9c0,4.971-2.462,9-5.5,9S0,13.971,0,9A12.693,12.693,0,0,1,1.653,2.567C2.5,1.09,8.272.921,9.42,2.686Z" transform="translate(1261 645)" fill="url(#radial-gradient)"/>
+    <ellipse id="Ellipse_7" data-name="Ellipse 7" cx="12" cy="18.5" rx="12" ry="18.5" transform="translate(1255 488)" fill="url(#radial-gradient-2)"/>
+  </g>
+</svg>

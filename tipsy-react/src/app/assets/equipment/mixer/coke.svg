@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="192.395" height="385" viewBox="0 0 192.395 385">
+  <defs>
+  <style type="text/css">
+  @font-face {
+      font-family: CooperBlack;
+      src: url('../../fonts/Cooper Black Regular.ttf');
+    }
+    </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b3a7a7"/>
+    </radialGradient>
+  </defs>
+  <g id="coke" transform="translate(-896 -71)">
+    <rect id="mixer" width="171" height="277" transform="translate(907 149)" fill="rgba(123,92,51,0.8)"/>
+    <path id="bottle" d="M48-718v-327H238v327c0,15.464-42.532,28-95,28S48-702.536,48-718Z" transform="translate(848 1146)" fill="#ff1616"/>
+    <ellipse id="cap" cx="95" cy="28" rx="95" ry="28" transform="translate(896 71)" fill="url(#radial-gradient)"/>
+    <g id="label">
+      <path id="Path_78" data-name="Path 78" d="M0,73.949,190,0V97.241L0,170Z" transform="translate(896 183)" fill="#fff"/>
+      <path id="Path_79" data-name="Path 79" d="M0,22.544,192.395-51.524V-21.88L0,51.825Z" transform="translate(896 346)" fill="#fff"/>
+      <text id="COKE-2" data-name="COKE" transform="translate(992 291)" font-size="49" font-family="CooperBlack, Cooper"><tspan x="-73.895" y="0">COLA</tspan></text>
+    </g>
+    <ellipse id="hole" cx="23.5" cy="7.5" rx="23.5" ry="7.5" transform="translate(918 92)"/>
+  </g>
+</svg>

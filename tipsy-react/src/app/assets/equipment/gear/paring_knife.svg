@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.219" height="328.25" viewBox="0 0 52.219 328.25">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.941" y1="0.896" x2="0" y2="0.857" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#dddcdc"/>
+      <stop offset="1" stop-color="#b1b1b1"/>
+    </linearGradient>
+  </defs>
+  <g id="paring_knife" transform="translate(-396.526 -62.75)">
+    <path id="Path_87" data-name="Path 87" d="M12.717,26.583C25.763-14.641,34.755-26.358,34.755-26.358c16.956,26.5,16.99,182.074,16.99,182.074-14.981,2.654-21.71,13.065-21.71,13.065H-.474S-.33,67.807,12.717,26.583Z" transform="translate(397 89.107)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_55" data-name="Rectangle 55" width="33" height="133" transform="translate(397 258)"/>
+  </g>
+</svg>

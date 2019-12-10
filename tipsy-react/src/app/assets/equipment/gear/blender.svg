@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="248.001" height="761" viewBox="0 0 248.001 761">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="56" height="267.5" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="blender" transform="translate(-1474 -281)">
+    <g id="base">
+      <path id="Path_107" data-name="Path 107" d="M10,0H127a10,10,0,0,1,10,10l22.451,62H-16.342L0,10S4.477,0,10,0Z" transform="translate(1526 696)" fill="#8d8d8d"/>
+      <g id="Union_5" data-name="Union 5" transform="translate(7405 1813)">
+        <path d="M -5716.00048828125 -771.4994506835938 L -5739.99951171875 -771.4994506835938 C -5742.48095703125 -771.4994506835938 -5744.49951171875 -773.51806640625 -5744.49951171875 -775.999267578125 L -5744.49951171875 -787.9994506835938 L -5744.49951171875 -788.4994506835938 L -5744.99951171875 -788.4994506835938 L -5869.00048828125 -788.4994506835938 L -5869.50048828125 -788.4994506835938 L -5869.50048828125 -787.9994506835938 L -5869.50048828125 -775.999267578125 C -5869.50048828125 -773.51806640625 -5871.51904296875 -771.4994506835938 -5874.00048828125 -771.4994506835938 L -5898.00048828125 -771.4994506835938 C -5900.48193359375 -771.4994506835938 -5902.50048828125 -773.51806640625 -5902.50048828125 -775.999267578125 L -5902.50048828125 -787.9994506835938 L -5902.50048828125 -788.4994506835938 L -5903.00048828125 -788.4994506835938 L -5930.47216796875 -788.4994506835938 L -5916.4208984375 -1044.499755859375 L -5697.880859375 -1044.499755859375 L -5683.5283203125 -788.4994506835938 L -5710.99951171875 -788.4994506835938 L -5711.49951171875 -788.4994506835938 L -5711.49951171875 -787.9994506835938 L -5711.49951171875 -775.999267578125 C -5711.49951171875 -773.51806640625 -5713.5185546875 -771.4994506835938 -5716.00048828125 -771.4994506835938 Z" stroke="none"/>
+        <path d="M -5716.00048828125 -771.9994506835938 C -5713.79443359375 -771.9994506835938 -5711.99951171875 -773.7937622070313 -5711.99951171875 -775.999267578125 L -5711.99951171875 -787.9994506835938 L -5711.99951171875 -788.9994506835938 L -5710.99951171875 -788.9994506835938 L -5684.05712890625 -788.9994506835938 L -5698.353515625 -1043.999755859375 L -5915.947265625 -1043.999755859375 L -5929.9443359375 -788.9994506835938 L -5903.00048828125 -788.9994506835938 L -5902.00048828125 -788.9994506835938 L -5902.00048828125 -787.9994506835938 L -5902.00048828125 -775.999267578125 C -5902.00048828125 -773.7937622070313 -5900.2060546875 -771.9994506835938 -5898.00048828125 -771.9994506835938 L -5874.00048828125 -771.9994506835938 C -5871.794921875 -771.9994506835938 -5870.00048828125 -773.7937622070313 -5870.00048828125 -775.999267578125 L -5870.00048828125 -787.9994506835938 L -5870.00048828125 -788.9994506835938 L -5869.00048828125 -788.9994506835938 L -5744.99951171875 -788.9994506835938 L -5743.99951171875 -788.9994506835938 L -5743.99951171875 -787.9994506835938 L -5743.99951171875 -775.999267578125 C -5743.99951171875 -773.7937622070313 -5742.205078125 -771.9994506835938 -5739.99951171875 -771.9994506835938 L -5716.00048828125 -771.9994506835938 M -5716.00048828125 -770.9994506835938 L -5739.99951171875 -770.9994506835938 C -5742.7607421875 -770.9994506835938 -5744.99951171875 -773.2380981445313 -5744.99951171875 -775.999267578125 L -5744.99951171875 -787.9994506835938 L -5869.00048828125 -787.9994506835938 L -5869.00048828125 -775.999267578125 C -5869.00048828125 -773.2380981445313 -5871.2392578125 -770.9994506835938 -5874.00048828125 -770.9994506835938 L -5898.00048828125 -770.9994506835938 C -5900.76171875 -770.9994506835938 -5903.00048828125 -773.2380981445313 -5903.00048828125 -775.999267578125 L -5903.00048828125 -787.9994506835938 L -5931.00048828125 -787.9994506835938 L -5916.89404296875 -1044.999755859375 L -5697.408203125 -1044.999755859375 L -5682.99951171875 -787.9994506835938 L -5710.99951171875 -787.9994506835938 L -5710.99951171875 -775.999267578125 C -5710.99951171875 -773.2380981445313 -5713.23828125 -770.9994506835938 -5716.00048828125 -770.9994506835938 Z" stroke="none" fill="#707070"/>
+      </g>
+    </g>
+    <g id="control">
+      <circle id="Ellipse_50" data-name="Ellipse 50" cx="33.5" cy="33.5" r="33.5" transform="translate(1565 918)" fill="#686868"/>
+      <circle id="Ellipse_51" data-name="Ellipse 51" cx="28.5" cy="28.5" r="28.5" transform="translate(1570 923)" fill="#c5c5c5"/>
+      <line id="Line_12" data-name="Line 12" x2="8" y2="9" transform="translate(1579.5 929.5)" fill="none" stroke="red" stroke-width="3"/>
+      <text id="OFF" transform="translate(1555 928)" fill="#cacaca" font-size="10" font-family="CopperplateGothic-Bold, Copperplate Gothic" font-weight="700"><tspan x="-11.553" y="0">OFF</tspan></text>
+      <text id="ON" transform="translate(1642 928)" fill="#cacaca" font-size="10" font-family="CopperplateGothic-Bold, Copperplate Gothic" font-weight="700"><tspan x="-8.635" y="0">ON</tspan></text>
+    </g>
+    <g id="container">
+      <path id="Path_105" data-name="Path 105" d="M0,0H221l6.061,113.974s-61.839-30.36-119.946-30.36-112.48,30.36-112.48,30.36Z" transform="translate(1487 774)" fill="#c5c5c5"/>
+      <path id="Path_106" data-name="Path 106" d="M0,0H225L192.667,385.937,210.161,465H18.808l13.122-79.063Z" transform="translate(1482 303)" fill="rgba(255,255,255,0.5)"/>
+      <g id="Repeat_Grid_15" data-name="Repeat Grid 15" transform="translate(1625.5 661.5) rotate(180)" clip-path="url(#clip-path)">
+        <g transform="translate(-421.5 -949)">
+          <line id="Line_7" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+        <g transform="translate(-421.5 -904)">
+          <line id="Line_7-2" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8-2" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9-2" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10-2" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11-2" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+        <g transform="translate(-421.5 -859)">
+          <line id="Line_7-3" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8-3" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9-3" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10-3" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11-3" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+        <g transform="translate(-421.5 -814)">
+          <line id="Line_7-4" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8-4" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9-4" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10-4" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11-4" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+        <g transform="translate(-421.5 -769)">
+          <line id="Line_7-5" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8-5" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9-5" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10-5" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11-5" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+        <g transform="translate(-421.5 -724)">
+          <line id="Line_7-6" data-name="Line 7" x2="56" transform="translate(421.5 985.5)" fill="none" stroke="#707070" stroke-width="2"/>
+          <line id="Line_8-6" data-name="Line 8" x2="29" transform="translate(435.5 976.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_9-6" data-name="Line 9" x2="29" transform="translate(435.5 967.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_10-6" data-name="Line 10" x2="29" transform="translate(435.5 958.5)" fill="none" stroke="#707070" stroke-width="1"/>
+          <line id="Line_11-6" data-name="Line 11" x2="29" transform="translate(435.5 949.5)" fill="none" stroke="#707070" stroke-width="1"/>
+        </g>
+      </g>
+    </g>
+    <rect id="cap" width="232" height="44" rx="10" transform="translate(1479 281)"/>
+  </g>
+</svg>

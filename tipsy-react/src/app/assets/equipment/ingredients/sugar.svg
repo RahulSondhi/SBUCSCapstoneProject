@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="149.46" height="272.73" viewBox="0 0 149.46 272.73">
+<defs>
+<style type="text/css">
+  @font-face {
+      font-family: CopperplateGothic-Bold;
+      src: url('../../fonts/Copperplate Gothic Bold Regular.ttf');
+    }
+    </style>
+</defs>
+  <g id="sugar" transform="translate(-350.707 -140)">
+    <path id="sugar-2" data-name="sugar" d="M0,0H121V118s-29.99,10.614-60.24,10.614S0,118,0,118Z" transform="translate(365 266)" fill="#fff"/>
+    <path id="bottle" d="M0,0H128V192.2L138.167,209s-35.1,8.73-72.465,8.73S-11.293,209-11.293,209L0,192.2Z" transform="translate(362 195)" fill="rgba(255,255,255,0.6)"/>
+    <path id="cap" d="M20.646,15.631c27.822-18.116,82.818-14.881,107.4,0S137.756,58,137.756,58H8.354S-7.175,33.747,20.646,15.631Z" transform="translate(354 137)" fill="#a2a2a2"/>
+    <ellipse id="hole" cx="14" cy="3" rx="14" ry="3" transform="translate(413 140)"/>
+    <text id="SUGAR-3" data-name="SUGAR" transform="translate(425 230)" font-size="15" font-family="CopperplateGothic-Bold, Copperplate Gothic"><tspan x="-30.121" y="0">SUGAR</tspan></text>
+  </g>
+</svg>

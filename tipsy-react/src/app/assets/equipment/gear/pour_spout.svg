@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="101" height="220.346" viewBox="0 0 101 220.346">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.11" y1="0.235" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="-7.416" y1="1.044" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="pour_spout" transform="translate(-109 -502.654)">
+    <path id="Path_88" data-name="Path 88" d="M0,0H101L83.871,12.25,101,24.047,83.871,33.469,101,46H0L11.425,33.469,0,24.047l11.425-11.8Z" transform="translate(109 604)"/>
+    <path id="Path_89" data-name="Path 89" d="M21.991,32.206C37.741,6.869,63,0,63,0L73.233,15.4S48.4,30.134,45.845,51.621,63,101.346,63,101.346H0S6.241,57.543,21.991,32.206Z" transform="translate(127 502.654)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_56" data-name="Rectangle 56" width="10" height="73" transform="translate(138 650)" fill="url(#linear-gradient-2)"/>
+  </g>
+</svg>

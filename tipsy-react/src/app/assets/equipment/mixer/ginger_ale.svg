@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="190" height="390" viewBox="0 0 190 390">
+  <defs>
+  <style type="text/css">
+    @font-face {
+      font-family: CopperplateGothic-Bold;
+      src: url('../../fonts/Copperplate Gothic Bold Regular.ttf');
+    }
+  </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#b3a7a7"/>
+    </radialGradient>
+  </defs>
+  <g id="ginger_ale" transform="translate(-896 -71)">
+    <rect id="mixer" width="171" height="277" transform="translate(905 152)" fill="rgba(217,221,92,0.8)"/>
+    <path id="bottle" d="M48-718v-327H238v327c0,15.464-42.532,28-95,28S48-702.536,48-718Z" transform="translate(848 1146)" fill="#41bc09"/>
+    <ellipse id="cap" cx="95" cy="28" rx="95" ry="28" transform="translate(896 71)" fill="url(#radial-gradient)"/>
+    <g id="label">
+      <path id="Union_1" data-name="Union 1" d="M-298.349-894H-299v-151s32.274-18.442,54.977-7.834,45.291,43.3,45.291,43.3,30.448,32.507,55.245,21.9S-109-1045-109-1045v151h-.651c-5.533,16.892-45.664,30-94.35,30S-292.816-877.107-298.349-894Z" transform="translate(1195 1325)" fill="#fff"/>
+      <text id="GINGER_ALE-2" data-name="GINGER
+ALE" transform="translate(992 280)" font-size="37" font-family="CopperplateGothic-Bold, Copperplate Gothic"><tspan x="-82.943" y="0">GINGER</tspan><tspan x="-42.194" y="41">ALE</tspan></text>
+      <path id="Union_2" data-name="Union 2" d="M-298.349-931.129H-299v-95.512s26.938,37.4,49.641,44.115,50.627-21.682,50.627-21.682,22.145-36.474,46.942-43.185,42.79,20.751,42.79,20.751v95.512h-.651C-115.183-918.105-155.315-908-204-908S-292.817-918.105-298.349-931.129Z" transform="translate(1195 1369)" fill="#a0dd80"/>
+      <path id="Icon_feather-shield" data-name="Icon feather-shield" d="M67.473,156.682s61.473-30.736,61.473-76.841V26.052L67.473,3,6,26.052V79.841C6,125.946,67.473,156.682,67.473,156.682Z" transform="translate(923.2 199)" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+    <ellipse id="hole" cx="23.5" cy="7.5" rx="23.5" ry="7.5" transform="translate(918 92)"/>
+  </g>
+</svg>

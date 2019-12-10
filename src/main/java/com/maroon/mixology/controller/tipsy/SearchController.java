@@ -170,7 +170,9 @@ public class SearchController {
                 bar.getId(), 
                 bar.getName(), 
                 bar.getImage(), 
-                bar.getOwner().getNickname()
+                bar.getOwner().getNickname(),
+                bar.getManagersNames(),
+                bar.getWorkersNames()
             ));
         } catch (Exception e) {
             logger.error("Bar was unable to be loaded.", e);

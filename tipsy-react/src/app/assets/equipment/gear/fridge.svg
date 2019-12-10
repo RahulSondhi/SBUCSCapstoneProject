@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="626" height="994" viewBox="0 0 626 994">
+  <defs>
+  <style type="text/css">
+  @font-face {
+      font-family: CopperplateGothic-Bold;
+      src: url('../../fonts/Copperplate Gothic Bold Regular.ttf');
+    }
+    </style>
+    <clipPath id="clip-path">
+      <rect width="625" height="574" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="fridge" transform="translate(-705 -16)">
+    <g id="inside">
+      <rect id="Rectangle_71" data-name="Rectangle 71" width="625" height="940" rx="20" transform="translate(705 70)" fill="#bfbfbf"/>
+      <g id="Repeat_Grid_13" data-name="Repeat Grid 13" transform="translate(706 253)" clip-path="url(#clip-path)">
+        <g transform="translate(-705 -205)">
+          <g id="Rectangle_72" data-name="Rectangle 72" transform="translate(705 205)" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="625" height="38" stroke="none"/>
+            <rect x="0.5" y="0.5" width="624" height="37" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-705 44)">
+          <g id="Rectangle_72-2" data-name="Rectangle 72" transform="translate(705 205)" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="625" height="38" stroke="none"/>
+            <rect x="0.5" y="0.5" width="624" height="37" fill="none"/>
+          </g>
+        </g>
+        <g transform="translate(-705 293)">
+          <g id="Rectangle_72-3" data-name="Rectangle 72" transform="translate(705 205)" fill="#fff" stroke="#707070" stroke-width="1">
+            <rect width="625" height="38" stroke="none"/>
+            <rect x="0.5" y="0.5" width="624" height="37" fill="none"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="door">
+      <rect id="Rectangle_68" data-name="Rectangle 68" width="625" height="940" rx="20" transform="translate(705 70)" fill="#f11"/>
+      <rect id="Rectangle_70" data-name="Rectangle 70" width="211" height="38" rx="5" transform="translate(749 205)" fill="#c2c2c2"/>
+      <text id="GALANZ" transform="translate(1012 154)" fill="#cacaca" font-size="50" font-family="CopperplateGothic-Bold, Copperplate Gothic" ><tspan x="-119.446" y="0">GALANZ</tspan></text>
+    </g>
+    <g id="Rectangle_69" data-name="Rectangle 69" transform="translate(705 16)" fill="#ff0e0e" stroke="#707070" stroke-width="1">
+      <rect width="625" height="54" rx="10" stroke="none"/>
+      <rect x="0.5" y="0.5" width="624" height="53" rx="9.5" fill="none"/>
+    </g>
+  </g>
+</svg>

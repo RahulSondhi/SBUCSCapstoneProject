@@ -1,0 +1,16 @@
+{"_id":{"$oid":"5def8d6cf19f904aefb96a44"},"name":"Blender","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d69af19f9002ee7b1ff3"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8dc5f19f904aefb96a46"},"name":"Cocktail Glass","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d5aff19f9002ee7b1fe3"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8dfcf19f904aefb96a48"},"name":"Refrigerator","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6d6f19f9002ee7b1ff9"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8e2cf19f904aefb96a4a"},"name":"Ice Crusher","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d646f19f9002ee7b1fed"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8e40f19f904aefb96a4c"},"name":"Blowtorch","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6c6f19f9002ee7b1ff7"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8e70f19f904aefb96a4e"},"name":"Coconut","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d53df19f9002ee7b1fdd"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8e83f19f904aefb96a50"},"name":"Channel Knife","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d64df19f9002ee7b1fef"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8ecaf19f904aefb96a52"},"name":"Simple Syrup","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d57af19f9002ee7b1fdf"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8edaf19f904aefb96a54"},"name":"Water","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d57af19f9002ee7b1fdf"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8efaf19f904aefb96a58"},"name":"Juicer","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d61af19f9002ee7b1feb"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8f52f19f904aefb96a5a"},"name":"Shaker","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d5d3f19f9002ee7b1fe5"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8f65f19f904aefb96a5c"},"name":"Brandy","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d581f19f9002ee7b1fe1"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8fb0f19f904aefb96a60"},"name":"Strainer","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d5e4f19f9002ee7b1fe7"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def8fc1f19f904aefb96a62"},"name":"Sugar","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5def88d7359de93a71c43725"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def91a7f19f9052faa5da29"},"name":"Mixing Spoon","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5def88ee359de93a71c43726"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5def91c5f19f9052faa5da2b"},"name":"Grater","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6acf19f9002ee7b1ff5"}},"_class":"com.maroon.mixology.entity.Equipment"}
