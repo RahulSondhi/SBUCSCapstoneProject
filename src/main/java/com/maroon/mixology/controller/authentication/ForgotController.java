@@ -68,37 +68,41 @@ public class ForgotController {
         // POST forget template
         @PostMapping({"/forgot"})
         public ResponseEntity<?> processForgotPasswordForm(@Valid @RequestBody ForgotRequest userEmail, HttpServletRequest request) {
-                if(!userService.existsByEmail(userEmail.getEmail())) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
-                        HttpStatus.BAD_REQUEST);
-                }
-                else {
-                        // Lookup user in database by e-mail
-                        User user = userService.findByEmail(userEmail.getEmail());
-                        //
-                        user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
-                        user.setResetTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
-                        // 
-                        // Save token to database
-                        userRepository.save(user); // Saving the reset token in the database
+                try{
+                        if(!userService.existsByEmail(userEmail.getEmail())) {
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
+                                HttpStatus.BAD_REQUEST);
+                        }
+                        else {
+                                // Lookup user in database by e-mail
+                                User user = userService.findByEmail(userEmail.getEmail());
+                                //
+                                user.setResetTokenUUID(UUID.randomUUID().toString()); // Generate a reset token UUID
+                                user.setResetTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
+                                // 
+                                // Save token to database
+                                userRepository.save(user); // Saving the reset token in the database
 
-                        // Send a reset email
-                        // Should this also include the port number(?)
-                        // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                        // the port should be 80 so please change this during deployment when we have domain name
-                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
-                        
-                        SimpleMailMessage resetEmail = new SimpleMailMessage();
-                        resetEmail.setFrom(mailUserName);
-                        resetEmail.setTo(user.getEmail());
-                        resetEmail.setSubject(passwordResetSubject);
-                        resetEmail.setText(passwordResetMessage
-                        + appUrl + "/reset?token=" + user.getResetTokenUUID());
-                        emailService.sendEmail(resetEmail);
-                        // Notify the user that an email has been sent
-                        return ResponseEntity.ok(new ApiResponse(true, "Your password reset request was submitted succesfully! Please check your email to complete the reset."));
+                                // Send a reset email
+                                // Should this also include the port number(?)
+                                // For now, yes because of localhost. We have to disable this when uploading to Cloud
+                                // the port should be 80 so please change this during deployment when we have domain name
+                                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                                
+                                SimpleMailMessage resetEmail = new SimpleMailMessage();
+                                resetEmail.setFrom(mailUserName);
+                                resetEmail.setTo(user.getEmail());
+                                resetEmail.setSubject(passwordResetSubject);
+                                resetEmail.setText(passwordResetMessage
+                                + appUrl + "/reset?token=" + user.getResetTokenUUID());
+                                emailService.sendEmail(resetEmail);
+                                // Notify the user that an email has been sent
+                                return ResponseEntity.ok(new ApiResponse(true, "Your password reset request was submitted succesfully! Please check your email to complete the reset."));
+                        }
+                } catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to process the forgot password form. Error: " + e.getMessage()),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
                 }
-                
         }
         
         @GetMapping({"/verifyReset"})
@@ -116,7 +120,7 @@ public class ForgotController {
                         Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                         tokenTime.setTimeInMillis(user.getResetTokenCreationTime()); //set the Token time from user DB
                         if(tokenTime.before(expiredTime)) { //check if token is expired
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Reset token is expired, invalid token"),
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Reset token is expired, invalid token. Please make a new forgot password request."),
                                 HttpStatus.GONE); //Token is expired, invalid token.
                         }
                         return ResponseEntity.ok(new ApiResponse(true, "Reset password link is valid, proceed to reset your password"));

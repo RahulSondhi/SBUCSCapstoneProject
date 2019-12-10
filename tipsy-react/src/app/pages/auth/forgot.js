@@ -59,6 +59,7 @@ class Forgot extends Component {
         };
         forgot(forgotRequest).then(response => {
             Notify("success", response.message,-1)
+            this.props.history.push("/");
         }).catch(error => {
             Notify("error", error.message.message,-1)
         });

@@ -11,6 +11,7 @@ public class Unit {
     private String id;
     @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
+    private String type;
     private double usMeasurement;
     private double metricMeasurement;
 
@@ -44,6 +45,14 @@ public class Unit {
 
     public void setMetricMeasurement(double metricMeasurement) {
         this.metricMeasurement = metricMeasurement;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
 }

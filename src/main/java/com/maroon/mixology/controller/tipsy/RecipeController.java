@@ -179,6 +179,7 @@ public class RecipeController {
                         s.getValue(),
                         new UnitResponse(
                             s.getUnit().getName(), 
+                            s.getUnit().getType(),
                             s.getUnit().getUsMeasurement(), 
                             s.getUnit().getMetricMeasurement()) 
                         ));
@@ -348,8 +349,8 @@ public class RecipeController {
         try{
             User player = userService.findByEmail(currentUser.getUsername());
             Recipe recipe = recipeService.findById(recipeID);
-            if(recipe == null){
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+            if(recipe == null || !recipe.isPublished()){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Game was unable to be initialized. Error:  Recipe with the ID \"" + recipeID +"\" was not found."),
                 HttpStatus.NOT_FOUND);
             }
             //Let see if and incompleted game already exists

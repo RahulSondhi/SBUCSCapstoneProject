@@ -118,6 +118,7 @@ public class GameController {
                         s.getValue(),
                         new UnitResponse(
                             s.getUnit().getName(), 
+                            s.getUnit().getType(),
                             s.getUnit().getUsMeasurement(), 
                             s.getUnit().getMetricMeasurement()) 
                         ));

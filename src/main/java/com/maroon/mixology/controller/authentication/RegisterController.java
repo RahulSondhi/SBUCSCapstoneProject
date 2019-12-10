@@ -102,7 +102,6 @@ public class RegisterController {
                         user.setRoles(new HashSet<>(Arrays.asList(userRole))); // Set the Roles
                         user.setMeasurement(MeasurementType.US); // Set the Measurement
                         userRepository.save(user); // Saving the user in the database
-
                         // Send a confirmation email
                         // Should this also include the port number(?)
                         // For now, yes because of localhost. We have to disable this when uploading to Cloud
@@ -123,10 +122,10 @@ public class RegisterController {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to register. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);  
                 }
-                }
+        }
 
         @GetMapping({"/verifyConfirm"})
-        public ResponseEntity<?> verifyConfirm(@RequestParam(value = "token") String token){
+        public ResponseEntity<?> verifyConfirm(@RequestParam(value = "token") String token,  HttpServletRequest request){
                 try{
                         //Get the current time
                         Calendar expiredTime = Calendar.getInstance();
@@ -144,16 +143,25 @@ public class RegisterController {
                         Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                         tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
                         if(tokenTime.before(expiredTime)) { //check if token is expired
-                                //need to add a use case to allow confirmation link to be sent again
-                                //or rather, send the confirmation link again here
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This confirmation token is expired, invalid token"),
+                                //allow confirmation link to be sent again
+                                user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
+                                user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
+                                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                                SimpleMailMessage confirmationEmail = new SimpleMailMessage();
+                                confirmationEmail.setFrom(mailUserName);
+                                confirmationEmail.setTo(user.getEmail());
+                                confirmationEmail.setSubject(confirmationSubject);
+                                confirmationEmail.setText(confirmationMessage
+                                + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
+                                emailService.sendEmail(confirmationEmail);
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This confirmation token is expired, invalid token. A new confirmation token has been generated and sent to your email."),
                             HttpStatus.GONE); //Token is expired, invalid token.
                         }
                         // Set user to enabled
                         user.setEnabled(true);
                         // Clear Token
                         user.setConfirmationTokenUUID("");
-                        user.setConfirmationTokenUUID(null);
+                        user.setConfirmationTokenCreationTime(null);
                         // Save user
                         userRepository.save(user);
                         // Notify the user that the confirmation is complete

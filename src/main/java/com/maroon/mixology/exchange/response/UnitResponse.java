@@ -2,14 +2,17 @@ package com.maroon.mixology.exchange.response;
 
 public class UnitResponse {
     private String name;
+    private String type;
     private double usMeasurement;
     private double metricMeasurement;
 
-    public UnitResponse(String name, double usMeasurement, double metricMeasurement) {
+    public UnitResponse(String name, String type, double usMeasurement, double metricMeasurement) {
         this.name = name;
+        this.type = type;
         this.usMeasurement = usMeasurement;
         this.metricMeasurement = metricMeasurement;
     }
+
 
     public String getName() {
         return name;
@@ -33,6 +36,14 @@ public class UnitResponse {
 
     public void setMetricMeasurement(double metricMeasurement) {
         this.metricMeasurement = metricMeasurement;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 

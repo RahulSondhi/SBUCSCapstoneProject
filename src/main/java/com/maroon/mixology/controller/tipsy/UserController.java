@@ -89,6 +89,12 @@ public class UserController {
     @Value("${tipsy.mail.newemail.message}")
     private String verificationMessage;
 
+    @Value("${tipsy.mail.changepassword.subject}")
+    private String changepasswordSubject;
+
+    @Value("${tipsy.mail.changepassword.message}")
+    private String changepasswordMessage;
+
     @Value("${spring.mail.username}")
     private String mailUserName;
 
@@ -178,7 +184,6 @@ public class UserController {
                 userRecipesIncompleted,
                 userRecipesCompleted
                 );
-    
             return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             logger.error("UserProfile was unable to be loaded. Error: ", e);
@@ -231,7 +236,7 @@ public class UserController {
                     verificationEmail.setText(verificationMessage
                     + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
                     emailService.sendEmail(verificationEmail);
-                    emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
+                    emailUpdate = "\nA message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
                 }
                 //the rest we can safely update
                 user.setProfilePic(settingsRequest.getImg());
@@ -284,7 +289,7 @@ public class UserController {
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete 
-                return ResponseEntity.ok(new ApiResponse(true, "Your new email has been set! You may now login."));
+                return ResponseEntity.ok(new ApiResponse(true, "Your new email has been set! \nYou may now login."));
             } catch (Exception e){
                 logger.error("Confirmation token unable to be validated.", e);
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
@@ -331,6 +336,14 @@ public class UserController {
             User user = userService.findByEmail(currentUser.getUsername());
             user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
             userRepository.save(user);
+            //Let the user know via their email
+            SimpleMailMessage changePasswordEmail = new SimpleMailMessage();
+            changePasswordEmail.setFrom(mailUserName);
+            changePasswordEmail.setTo(user.getEmail());
+            changePasswordEmail.setSubject(changepasswordSubject);
+            changePasswordEmail.setText(changepasswordMessage); //notification message password change
+            emailService.sendEmail(changePasswordEmail);
+            //
             return ResponseEntity.ok(new ApiResponse(true, "Your password was successfully changed!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
