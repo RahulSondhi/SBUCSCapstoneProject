@@ -136,8 +136,6 @@ class RecipePage extends Component {
     }
     render() {
 
-        console.log(this.state)
-
         // Checking if data came in
         if (this.state.isLoading) {
             return null

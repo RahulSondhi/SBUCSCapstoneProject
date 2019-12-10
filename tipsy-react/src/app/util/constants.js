@@ -409,7 +409,11 @@ export class DynamicForm extends Component {
             .data
             .some(items => items['name'] === item.name);
 
-        let passed = this.props.validate(item.name);
+        let passed = true;
+
+        if(this.props.validateAdd !== undefined){
+            passed = this.props.validateAdd(item);
+        }
 
         if (success === true && hasItem === false && passed === true) {
 
@@ -435,8 +439,14 @@ export class DynamicForm extends Component {
             .state
             .data
             .indexOf(item);
+        
+        let passed = true;
 
-        if (index > -1) {
+        if(this.props.validateRemove !== undefined){
+            passed = this.props.validateRemove(item);
+        }
+
+        if (index > -1 && passed === true) {
             this.state.data.splice(index, 1);
             this.setState({data: this.state.data});
             
@@ -444,7 +454,11 @@ export class DynamicForm extends Component {
             
             this.props.onUpdate();
         } else {
-            Notify("error","Could not remove that!",-1);
+            if (passed === false) {
+                Notify("error","This item is in use!",-1);
+            } else {
+                Notify("error","Could not remove that!",-1);
+            }
         }
 
     }
@@ -593,7 +607,6 @@ class DynamicInput extends Component {
         
         if(this.type === "user"){
             getUserBrief(value).then(response => {
-                console.log(response)
                 this.props.addItem(true, response);
 
                 this.setState({

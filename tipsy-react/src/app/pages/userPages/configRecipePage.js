@@ -102,8 +102,6 @@ class ConfigRecipePage extends Component {
 
         getRecipeProfile(id).then(response => {
 
-            console.log(response)
-
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
             var type = this.state.type;
@@ -299,7 +297,8 @@ class ConfigRecipePage extends Component {
                                         type="equipment"
                                         data={this.state.equipmentsAvailable.value}
                                         onUpdate={this.handleEquipmentLoad}
-                                        validate={this.validateEquipmentAdd}
+                                        validateAdd={this.validateEquipmentAdd}
+                                        validateRemove={this.validateEquipmentRemove}
                                         className="cell"/>
 
                                 </div>
@@ -315,7 +314,6 @@ class ConfigRecipePage extends Component {
                                         equipment={this.state.equipmentsAvailable.value}
                                         product={this.state.equipmentProducts.value}
                                         onUpdate={this.handleStepLoad}
-                                        validate={this.validateEquipmentAdd}
                                         className="cell"/>
 
                             </div>
@@ -380,12 +378,26 @@ class ConfigRecipePage extends Component {
         });
     }
 
-    validateEquipmentAdd = (name) => {
-        if (this.state.equipmentsAvailable.value.some(items => items['name'] === name) === false) {
+    validateEquipmentAdd = (item) => {
+        var equipment = this.state.equipmentsAvailable.value.some(items => items['name'] === item.name);
+        var product = this.state.equipmentProducts.value.some(items => items['name'] === item.name);
+
+        if ( equipment === false && product === false) {
             return true;
         } else {
             return false;
         }
+    }
+
+    validateEquipmentRemove = (item) => {
+        var inStep = this.state.steps.value.some(step => {
+            return (
+                step.equipmentDoing === item.name || 
+                step.equipmentToDo === item.name ||
+                step.equipmentProduct === item.name
+                );
+        });
+        return !inStep;
     }
 
     handleEquipmentLoad = () => {
@@ -399,7 +411,6 @@ class ConfigRecipePage extends Component {
     }
 
     handleStepLoad = (type,step) => {
-        console.log(this.state)
         var products = this.state.equipmentProducts.value;
         
         if(type === "add"){

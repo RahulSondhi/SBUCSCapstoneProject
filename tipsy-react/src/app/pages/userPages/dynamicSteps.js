@@ -840,7 +840,6 @@ class GetStep extends Component {
     }
 
     getEquipment(name){
-        console.log(this.state);
         var equip = this.state.equipment.find(o => o.name === name);
         var product = this.state.product.find(o => o.name === name);
 

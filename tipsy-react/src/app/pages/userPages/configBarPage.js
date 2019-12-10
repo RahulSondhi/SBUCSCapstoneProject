@@ -233,7 +233,7 @@ class ConfigBarPage extends Component {
                                     type="recipe"
                                     data={this.state.recipesAvailable.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateRecipeAdd}
+                                    validateAdd={this.validateRecipeAdd}
                                     className="cell"/>
 
                             </div>
@@ -245,7 +245,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.managers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
+                                    validateAdd={this.validateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -257,7 +257,7 @@ class ConfigBarPage extends Component {
                                     type="user"
                                     data={this.state.workers.value}
                                     onUpdate={this.handleListLoad}
-                                    validate={this.validateUserAdd}
+                                    validateAdd={this.validateUserAdd}
                                     className="cell"/>
 
                             </div>
@@ -341,7 +341,6 @@ class ConfigBarPage extends Component {
             });
         
 
-        // console.log(SENDmanagers, SENDrecipesAvailable, SENDworkers)
         if(SENDmanagers  === null || SENDmanagers === "" || SENDmanagers === undefined){
             SENDmanagers = [];
         }
@@ -357,7 +356,8 @@ class ConfigBarPage extends Component {
         this.setState({SENDmanagers: SENDmanagers, SENDworkers: SENDworkers, SENDrecipesAvailable: SENDrecipesAvailable});
     }
 
-    validateUserAdd = (name) => {
+    validateUserAdd = (item) => {
+        var name = item.name;
         var notOwner = true;
 
         if(this.state.isCreating === false){
