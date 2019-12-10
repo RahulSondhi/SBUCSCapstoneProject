@@ -10,12 +10,12 @@
 	</parent>
 	<groupId>com.maroon</groupId>
 	<artifactId>mixology</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>tipsy</name>
 	<description>Capstone Project for CSE308</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
