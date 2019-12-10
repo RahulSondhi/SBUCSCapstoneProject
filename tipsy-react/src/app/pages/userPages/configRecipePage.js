@@ -113,7 +113,7 @@ class ConfigRecipePage extends Component {
                 published = false;
             }
 
-            if(response.published === true){
+            if(published === true){
                 var type = "publish";
             }
 

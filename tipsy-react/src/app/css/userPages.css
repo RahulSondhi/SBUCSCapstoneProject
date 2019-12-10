@@ -64,13 +64,9 @@
     height: 82%;
 }
 
-.userDisplayTabs {
-  height: 82%;
-}
-
-.scroll{
-    max-height: 100%;
-    overflow-y: auto;
+.userDisplayTabs .scroll{
+    height: 100% !important;
+    overflow-y: auto !important;
 }
 
 .ant-tabs-tab-prev,
