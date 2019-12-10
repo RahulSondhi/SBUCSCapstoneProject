@@ -30,6 +30,7 @@ public class UnitController {
             for (Unit u : units){
                 unitResponses.add(new UnitResponse(
                     u.getName(),
+                    u.getType(),
                     u.getUsMeasurement(),
                     u.getMetricMeasurement()
                     ));

@@ -15,6 +15,7 @@ class Verify extends Component {
         this.state = {
             isLoading: true,
             flow: this.props.flow,
+            message: '',
             uuid: {
                 value: '',
                 validateStatus: null
@@ -51,9 +52,7 @@ class Verify extends Component {
     }
 
     componentWillMount() {
-
         this.handleVerify();
-
     }
 
     /*
@@ -67,7 +66,8 @@ class Verify extends Component {
             password: this.state.password.value
         };
         resetPassword(resetPasswordRequest).then(response => {
-            Notify("success",response.message,-1);        
+            Notify("success",response.message,-1);
+            this.props.history.push("/logout");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -89,18 +89,18 @@ class Verify extends Component {
         if(this.state.flow === "verifyConfirm"){
             //verifyConfirm
             verifyConfirm(uuidValue).then(response => {
-                Notify("success",response.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'success'
-                    }
+                    },
+                    message : response.message
                 });
             }).catch(error => {
-                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'error'
-                    }
+                    },
+                    message : error.message.message
                 });
             })
         }
@@ -111,41 +111,40 @@ class Verify extends Component {
                 localStorage.removeItem(ACCESS_TOKEN);
             }
             const emailValue = params.get('email');
-            console.log(emailValue);
             verifyNewEmail(uuidValue, emailValue).then(response =>{
-                Notify("success",response.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'success'
-                    }
+                    },
+                    message : response.message
                 });
             }).catch(error => {
-                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         validateStatus : 'error'
-                    }
+                    },
+                    message : error.message.message
                 }); 
             })
         }
         else if(this.state.flow === "verifyReset"){
             //verifyReset
-            console.log(uuidValue);
             verifyReset(uuidValue).then(response =>{
                 Notify("success",response.message,-1);
                 this.setState({
                     uuid: {
                         value: uuidValue,
                         validateStatus : 'success'
-                    }
+                    },
+                    message : response.message
                 });
             }).catch(error => {
-                Notify("error",error.message.message,-1);
                 this.setState({
                     uuid: {
                         value: uuidValue,
                         validateStatus : 'error'
-                    }
+                    },
+                    message : error.message.message
                 });
             });
         }
@@ -168,6 +167,7 @@ class Verify extends Component {
                     <div>
                         {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                         <h1>Reset Password</h1>
+                        <h3>{this.state.message}</h3>
                         <h3>Please enter a new password to login.</h3>
                         <Form onSubmit={this.handleSubmit} className="">
                             <FormItem 
@@ -218,7 +218,7 @@ class Verify extends Component {
 
                     {/* Description */}
                     <h4 id="forgotDesc" className="small-8 cell">
-                        You have successfully registered your account!
+                        {this.state.message}
                         <br></br>
                         <br></br>
                         Login to your account to start!
@@ -241,7 +241,16 @@ class Verify extends Component {
                     </div>
 
                     {/* Title */}
-                    <h1 className="captionRed small-12 medium-8 cell">Invalid Token</h1>
+                    <h1 className="captionRed small-12 medium-8 cell">Invalid Token!</h1>
+                                        {/* Description */}
+                    <h4 id="forgotDesc" className="small-8 cell">
+                        {this.state.message}
+                        <br></br>
+                        <br></br>
+                    </h4>
+                    <Link to="/logout" className="cell">
+                        <button type="submit" className="button">Login</button>
+                    </Link>
                 </div>
             );
         }

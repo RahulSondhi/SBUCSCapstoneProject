@@ -48,10 +48,13 @@ class ChangePasswordPage extends Component {
         };
         changePassword(changePasswordRequest)
         .then(response => {
-            Notify("success",response.message,-1);        
+            Notify("success",response.message,-1);
+            this.props.history.goBack();        
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
+
+
     }
     /*
         returns true if the Form is invalid.

@@ -58,7 +58,6 @@ class Main extends Component {
 
         history.push("/");
         window.location.reload();
-
         constant.Notify(notificationType,description,-1);
     }
 
