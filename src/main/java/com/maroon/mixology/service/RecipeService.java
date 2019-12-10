@@ -16,7 +16,7 @@ public class RecipeService {
 
     /* Our custom method to overrule Optional*/
     public Recipe findById(String id) {
-        if(recipeRepository.findById(id).isEmpty()){
+        if(!recipeRepository.findById(id).isPresent()){
             return null;
         }
         return recipeRepository.findById(id).get();

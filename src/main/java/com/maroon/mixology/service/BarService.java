@@ -19,7 +19,7 @@ public class BarService {
 
     /* Our custom method to overrule Optional*/
     public Bar findById(String id) {
-        if(barRepository.findById(id).isEmpty()){
+        if(!barRepository.findById(id).isPresent()){
             return null;
         }
         return barRepository.findById(id).get();
