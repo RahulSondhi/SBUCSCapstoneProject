@@ -459,12 +459,25 @@ class ConfigRecipePage extends Component {
             equipmentProducts: this.state.equipmentProducts.value
         };
 
-        createRecipe(recipeRequest).then(response => {
-            Notify("success",response.message,-1);
-            this.props.history.goBack();
-        }).catch(error => {
-            Notify("error",error.message.message,-1);
-        });
+
+        if(this.state.type === "clone" || this.state.type === "create"){
+            createRecipe(recipeRequest).then(response => {
+                Notify("success",response.message,-1);
+                this.props.history.goBack();
+            }).catch(error => {
+                Notify("error",error.message.message,-1);
+            });
+        }else{
+            recipeRequest.newSteps = this.state.newSteps.value;
+            recipeRequest.newEquipment = this.state.newEquipment.value;
+
+            changeRecipeSettings(this.props.match.params.id, recipeRequest).then(response => {
+                Notify("success",response.message,-1);
+                this.props.history.goBack();
+            }).catch(error => {
+                Notify("error",error.message.message,-1);
+            });
+        }
     }
 
     handleSubmit(event) {
