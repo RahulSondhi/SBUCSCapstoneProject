@@ -20,5 +20,6 @@ public interface GameRepository extends MongoRepository<Game, String> {
 
     List<Game> findByPlayerAndCompleted(User player, boolean completed);
 
+    List<Game> findByRecipe(Recipe recipe);
 
 }

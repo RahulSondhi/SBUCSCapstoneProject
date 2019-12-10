@@ -3,12 +3,14 @@ package com.maroon.mixology.controller.tipsy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.ActionType;
+import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
@@ -27,11 +29,13 @@ import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
+import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.GameRepository;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
+import com.maroon.mixology.service.BarService;
 import com.maroon.mixology.service.EquipmentTypeService;
 import com.maroon.mixology.service.GameService;
 import com.maroon.mixology.service.RecipeService;
@@ -68,7 +72,13 @@ public class RecipeController {
     private GameRepository gameRepository;
 
     @Autowired
+    private BarRepository barRepository;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
+    private BarService barService;
 
     @Autowired
     private RecipeService recipeService;
@@ -330,8 +340,15 @@ public class RecipeController {
                 HttpStatus.NOT_FOUND);
             }
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
-                stepRepository.deleteAll(recipe.getSteps());
-                recipeRepository.delete(recipe);
+                List<Bar> bars = barService.findByRecipe(recipe);//delete entries from all bars
+                System.out.println(bars);
+                for (Bar b: bars){
+                    b.getRecipesAvailable().remove(recipe);
+                    barRepository.save(b);
+                }
+                gameRepository.deleteAll(gameService.findByRecipe(recipe));//delete the game sessions with that recipe
+                stepRepository.deleteAll(recipe.getSteps()); //delete the steps
+                recipeRepository.delete(recipe); //delete the recipe
                 return ResponseEntity.ok(new ApiResponse(true, "Recipe was succesfully deleted!"));
             }
             else{
