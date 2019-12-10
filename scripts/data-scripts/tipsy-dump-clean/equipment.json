@@ -1,0 +1,13 @@
+{"_id":{"$oid":"5dd9d96ef19f9010562b7482"},"name":"Cocunut","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d53df19f9002ee7b1fdd"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9da0af19f9012fbcb2385"},"name":"Simple Syrup","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d57af19f9002ee7b1fdf"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9da24f19f9012fbcb2387"},"name":"Lemon Juice","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d57af19f9002ee7b1fdf"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9da6cf19f9012fbcb2389"},"name":"Shaker","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d5d3f19f9002ee7b1fe5"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9da7af19f9012fbcb238b"},"name":"Juicer","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d61af19f9002ee7b1feb"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9da8ff19f9012fbcb238d"},"name":"Ice Crusher","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d646f19f9002ee7b1fed"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9daaaf19f9012fbcb238f"},"name":"Channel Knife","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d64df19f9002ee7b1fef"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9dabcf19f9012fbcb2391"},"name":"Jigger","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d681f19f9002ee7b1ff1"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9dacaf19f9012fbcb2393"},"name":"Mixing Cup","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d69af19f9002ee7b1ff3"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9dae1f19f9012fbcb2395"},"name":"Grater","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6acf19f9002ee7b1ff5"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9daedf19f9012fbcb2397"},"name":"Matches","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6c6f19f9002ee7b1ff7"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9dafdf19f9012fbcb2399"},"name":"Fridge","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d6d6f19f9002ee7b1ff9"}},"_class":"com.maroon.mixology.entity.Equipment"}
+{"_id":{"$oid":"5dd9db2af19f9012fbcb239b"},"name":"Strainer","image":"","equipmentType":{"$ref":"type","$id":{"$oid":"5dd9d5e4f19f9002ee7b1fe7"}},"_class":"com.maroon.mixology.entity.Equipment"}

@@ -1,0 +1,108 @@
+/* CSS for User Pages */
+
+/* General */
+
+#userBarsPageTitle,
+#userRecipesPageTitle,
+#userEquipmentPageTitle,
+#createBarPageTitle,
+#createRecipePageTitle,
+#adminPageTitle {
+    font-size: 3em;
+    margin-bottom: 1%;
+}
+
+.ant-tabs{
+  margin-bottom: 2%;
+  color: white;
+}
+
+.tabsSeperator{
+  background-color: white;
+  height: 0.1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Admin Page */
+
+/* Search */
+
+#searchDrinks {
+  width: 50%;
+}
+
+#searchTitle{
+  margin-top: 5%;
+  height: 15%;
+  font-size: 7em;
+  margin-bottom: 5%;
+}
+
+
+/* Create Bar Page */
+
+.tabsBarForm{
+  margin-bottom: 2%;
+}
+
+
+/* Create Recipe Page */
+.settingsButton{
+  margin-top: 2%;
+}
+
+/* Users Display Page */
+
+#userDisplayPageTitle{
+    height: 5%;
+    margin-bottom: 5%;
+}
+
+.userDisplayTabs{
+    height: 82%;
+}
+
+.userDisplayTabs .ant-tabs-content,
+.userDisplayTabs .ant-tabs-content-animated,
+.userDisplayTabs .ant-tabs-right-content{
+    height: 100% !important;
+    overflow-y: auto !important;
+}
+
+.ant-tabs-tab-prev,
+.ant-tabs-tab-next,
+.ant-tabs-tab-prev:hover,
+.ant-tabs-tab-next:hover{
+  color: white;
+}
+
+.ant-tabs-tab-btn-disabled, .ant-tabs-tab-btn-disabled:hover{
+  color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Users Recipes Page */
+
+/* Error Page */
+.errorCaption {
+    color: white;
+} 
+
+/* Custom Equipment */
+.customEquipmentSelect{
+  padding-top: 0em;
+}
+
+/* Change Password */
+.changePasswordTitle{
+  color: white;
+}
+
+/* Game Page */
+
+.previewGameStepContainer{
+  padding-top: 0.5em;
+  padding-bottom: 0.75em;
+  text-align: center;
+  word-wrap: break-word;
+}

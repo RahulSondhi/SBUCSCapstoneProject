@@ -3,10 +3,20 @@ package com.maroon.mixology.service;
 import java.util.NoSuchElementException;
 
 import com.maroon.mixology.entity.Step;
+import com.maroon.mixology.repository.StepRepository;
 
-public interface StepService{
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    Step findById(String id) throws NoSuchElementException;
-    
+@Service
+public class StepService {
+    @Autowired
+    private StepRepository stepRepository;
+
+    /* Our custom method to overrule Optional*/
+    public Step findById(String id) throws NoSuchElementException {
+        return stepRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Step not found - " + id));
+    }
+
 
 }

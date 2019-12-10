@@ -1,8 +1,10 @@
 package com.maroon.mixology.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.maroon.mixology.entity.Recipe;
+import com.maroon.mixology.entity.User;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -15,4 +17,7 @@ public interface RecipeRepository extends MongoRepository<Recipe, String> {
 
     Recipe findByName(String name);
 
+    List<Recipe> findByNameLikeIgnoreCaseAndPublished(String name, boolean published);
+
+    List<Recipe> findByAuthor(User author);
 }

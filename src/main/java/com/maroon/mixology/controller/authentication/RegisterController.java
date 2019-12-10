@@ -17,7 +17,7 @@ import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
 import com.maroon.mixology.service.EmailService;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +54,7 @@ public class RegisterController {
         private EmailService emailService;
 
         @Autowired
-        private UserServiceImpl userService;
+        private UserService userService;
 
         @Value("${tipsy.mail.confirmation.subject}")
         private String confirmationSubject;
@@ -70,12 +70,13 @@ public class RegisterController {
 
         @PostMapping("/register")
         public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+        try{
                 if(userService.existsByEmail(registerRequest.getEmail())) {
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Email Address is already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
                 if(userService.existsByNickname(registerRequest.getNickname())){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname already in use!"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Nickname is already in use!"),
                         HttpStatus.BAD_REQUEST);
                 }
                 else{
@@ -85,11 +86,8 @@ public class RegisterController {
                                 registerRequest.getLastName(), 
                                 registerRequest.getEmail(), 
                                 registerRequest.getNickname(), 
-                                registerRequest.getPassword(),
-                                new HashSet<String>(),
-                                new HashSet<String>(),
-                                new HashSet<String>(),
-                                new HashSet<String>());
+                                registerRequest.getPassword()
+                                );
                         user.setEnabled(false); // Disable the user until they click on the confirmation link in email
                         //
                         user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
@@ -104,7 +102,6 @@ public class RegisterController {
                         user.setRoles(new HashSet<>(Arrays.asList(userRole))); // Set the Roles
                         user.setMeasurement(MeasurementType.US); // Set the Measurement
                         userRepository.save(user); // Saving the user in the database
-
                         // Send a confirmation email
                         // Should this also include the port number(?)
                         // For now, yes because of localhost. We have to disable this when uploading to Cloud
@@ -119,12 +116,16 @@ public class RegisterController {
                         + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
                         emailService.sendEmail(confirmationEmail);
                         // Notify the user that an email has been sent
-                        return ResponseEntity.ok(new ApiResponse(true, "User registeration submitted successfully. Please complete the registration process by confirming your account."));
+                        return ResponseEntity.ok(new ApiResponse(true, "Thank you! You have successfully registered. Please check your email to complete your registration!"));
                         }
+                } catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to register. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);  
                 }
+        }
 
         @GetMapping({"/verifyConfirm"})
-        public ResponseEntity<?> verifyConfirm(@RequestParam(value = "token") String token){
+        public ResponseEntity<?> verifyConfirm(@RequestParam(value = "token") String token,  HttpServletRequest request){
                 try{
                         //Get the current time
                         Calendar expiredTime = Calendar.getInstance();
@@ -132,7 +133,7 @@ public class RegisterController {
                         // Find the user associated with the reset token
                         User user = userService.findByConfirmationTokenUUID(token);
                         if(user == null) {
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token not found"),
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token was not found."),
                                 HttpStatus.NOT_FOUND);
                         }
                         if(user.isEnabled()) {
@@ -142,21 +143,31 @@ public class RegisterController {
                         Calendar tokenTime = Calendar.getInstance(); //Initialize a Calender object
                         tokenTime.setTimeInMillis(user.getConfirmationTokenCreationTime()); //set the Token time from user DB
                         if(tokenTime.before(expiredTime)) { //check if token is expired
-                                //need to add a use case to allow confirmation link to be sent again
-                                //or rather, send the confirmation link again here
-                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token is expired, invalid token"),
+                                //allow confirmation link to be sent again
+                                user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
+                                user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
+                                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
+                                SimpleMailMessage confirmationEmail = new SimpleMailMessage();
+                                confirmationEmail.setFrom(mailUserName);
+                                confirmationEmail.setTo(user.getEmail());
+                                confirmationEmail.setSubject(confirmationSubject);
+                                confirmationEmail.setText(confirmationMessage
+                                + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
+                                emailService.sendEmail(confirmationEmail);
+                                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This confirmation token is expired, invalid token. A new confirmation token has been generated and sent to your email."),
                             HttpStatus.GONE); //Token is expired, invalid token.
                         }
                         // Set user to enabled
                         user.setEnabled(true);
                         // Clear Token
                         user.setConfirmationTokenUUID("");
-                        user.setConfirmationTokenUUID(null);
+                        user.setConfirmationTokenCreationTime(null);
                         // Save user
                         userRepository.save(user);
                         // Notify the user that the confirmation is complete
                         return ResponseEntity.ok(new ApiResponse(true, "Your account has been confirmed. You may now login!"));
-                } catch (Exception e){
+                } 
+                catch (Exception e){
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
                 }

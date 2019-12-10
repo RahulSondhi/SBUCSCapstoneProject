@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.User;
@@ -25,17 +26,17 @@ import com.maroon.mixology.exchange.response.brief.BriefBarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.BarServiceImpl;
+import com.maroon.mixology.service.BarService;
 import com.maroon.mixology.service.EmailService;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.GameService;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,21 +58,24 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     
     @Autowired
     private EmailService emailService;
     
     @Autowired
-    private BarServiceImpl barService;
+    private BarService barService;
     
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
 
+    @Autowired
+    private GameService gameService;
+    
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Value("${tipsy.mail.newemail.subject}")
     private String notificationSubject;
@@ -84,6 +88,12 @@ public class UserController {
 
     @Value("${tipsy.mail.newemail.message}")
     private String verificationMessage;
+
+    @Value("${tipsy.mail.changepassword.subject}")
+    private String changepasswordSubject;
+
+    @Value("${tipsy.mail.changepassword.message}")
+    private String changepasswordMessage;
 
     @Value("${spring.mail.username}")
     private String mailUserName;
@@ -122,29 +132,50 @@ public class UserController {
         try{
             User user = userService.findByNickname(nickname);
             if (user == null) {
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Nickname '" + nickname + "' was not found!"),
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A user with the nickname \"" + nickname + "\" was not found!"),
                         HttpStatus.NOT_FOUND);
             }
             // Build all
             Set<BriefBarResponse> userBars = new HashSet<BriefBarResponse>();
-            for (String barID : user.getBars()) {
-                Bar bar = barService.findById(barID);
-                userBars.add(new BriefBarResponse(bar.getId(), bar.getName(), bar.getImage(), bar.getOwner().getNickname()));
+            for (Bar bar : barService.findByOwnerOrManagersOrWorkers(user)){
+                userBars.add(new BriefBarResponse(
+                        bar.getId(), 
+                        bar.getName(), 
+                        bar.getImage(), 
+                        bar.getOwner().getNickname(),
+                        bar.getManagersNames(),
+                        bar.getWorkersNames()
+                    ));
             }
             Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();
-            for (String recipeWrittenID : user.getRecipesWritten()){
-                Recipe recipeWritten = recipeService.findById(recipeWrittenID);
-                userRecipesWritten.add(new BriefRecipeResponse(recipeWritten.getId(), recipeWritten.getName(), recipeWritten.getImage(), recipeWritten.getAuthor().getNickname()));
+            for (Recipe recipeWritten : recipeService.findByAuthor(user)){
+                    userRecipesWritten.add(new BriefRecipeResponse(
+                            recipeWritten.getId(), 
+                            recipeWritten.getName(), 
+                            recipeWritten.getImage(), 
+                            recipeWritten.getAuthor().getNickname(),
+                            recipeWritten.isPublished()
+                        ));
             }
             Set<BriefRecipeResponse> userRecipesCompleted = new HashSet<BriefRecipeResponse>();
-            for (String recipeCompletedID : user.getRecipesCompleted()){
-                Recipe recipeCompleted = recipeService.findById(recipeCompletedID);
-                userRecipesCompleted.add(new BriefRecipeResponse(recipeCompleted.getId(), recipeCompleted.getName(), recipeCompleted.getImage(), recipeCompleted.getAuthor().getNickname()));
+            for (Game recipeCompleted : gameService.findByPlayerAndIsCompleted(user)){
+                userRecipesCompleted.add(new BriefRecipeResponse(
+                    recipeCompleted.getRecipe().getId(), 
+                    recipeCompleted.getRecipe().getName(), 
+                    recipeCompleted.getRecipe().getImage(), 
+                    recipeCompleted.getRecipe().getAuthor().getNickname(),
+                    recipeCompleted.getRecipe().isPublished()
+                    ));
             }
             Set<BriefRecipeResponse> userRecipesIncompleted = new HashSet<BriefRecipeResponse>();
-            for (String recipeIncompletedID : user.getRecipesIncompleted()){
-                Recipe recipeIncompleted = recipeService.findById(recipeIncompletedID);
-                userRecipesIncompleted.add(new BriefRecipeResponse(recipeIncompleted.getId(), recipeIncompleted.getName(), recipeIncompleted.getImage(), recipeIncompleted.getAuthor().getNickname()));
+            for (Game recipeIncompleted : gameService.findByPlayerAndIsNotCompleted(user)){
+                userRecipesIncompleted.add(new BriefRecipeResponse(
+                    recipeIncompleted.getRecipe().getId(), 
+                    recipeIncompleted.getRecipe().getName(), 
+                    recipeIncompleted.getRecipe().getImage(), 
+                    recipeIncompleted.getRecipe().getAuthor().getNickname(),
+                    recipeIncompleted.getRecipe().isPublished()
+                    ));
             }
             UserResponse userResponse = new UserResponse(
                 user.getNickname(),
@@ -152,12 +183,12 @@ public class UserController {
                 user.getFirstName() + " " + user.getLastName(),
                 userBars,
                 userRecipesWritten,
-                userRecipesCompleted,
-                userRecipesIncompleted
+                userRecipesIncompleted,
+                userRecipesCompleted
                 );
-    
             return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
+            logger.error("UserProfile was unable to be loaded. Error: ", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "UserProfile was unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -185,7 +216,7 @@ public class UserController {
                 if(!user.getEmail().equals(settingsRequest.getEmail())){
                     //We need to verify the new email address while also notifying the old email address
                     if(userService.existsByEmail(settingsRequest.getEmail())){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that email address already exists"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "A User with that email address already exists"),
                             HttpStatus.BAD_REQUEST); 
                     }
                     // Create a token
@@ -207,19 +238,19 @@ public class UserController {
                     verificationEmail.setText(verificationMessage
                     + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
                     emailService.sendEmail(verificationEmail);
-                    emailUpdate = " A message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
+                    emailUpdate = "\nA message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
                 }
                 //the rest we can safely update
                 user.setProfilePic(settingsRequest.getImg());
                 user.setMeasurement(MeasurementType.valueOf(settingsRequest.getMeasurement()));
                 userRepository.save(user);
-                return ResponseEntity.ok(new ApiResponse(true, "User settings have been updated successfully!" + emailUpdate));
+                return ResponseEntity.ok(new ApiResponse(true, "Your settings were succesfully changed!" + emailUpdate));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to change these user's settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
-            logger.error("User settings failed to update.", e);
+            logger.error("User settings failed to update. Error:", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to update. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
@@ -260,7 +291,7 @@ public class UserController {
                 // Save user
                 userRepository.save(user);
                 // Notify the user that the confirmation is complete 
-                return ResponseEntity.ok(new ApiResponse(true, "You new email has been set! You may now login."));
+                return ResponseEntity.ok(new ApiResponse(true, "Your new email has been set! \nYou may now login."));
             } catch (Exception e){
                 logger.error("Confirmation token unable to be validated.", e);
                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token unable to be validated. Error: " + e.getMessage()),
@@ -291,7 +322,7 @@ public class UserController {
                     user.getMeasurement());
                 return ResponseEntity.ok(userSettings);
             } else {
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to get settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to these user's settings"), HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User settings failed to load. Error: " + e.toString()),
@@ -307,10 +338,20 @@ public class UserController {
             User user = userService.findByEmail(currentUser.getUsername());
             user.setPassword(passwordEncoder.encode(changePasswordRequest.getPassword()));
             userRepository.save(user);
-            return ResponseEntity.ok(new ApiResponse(true, "Password has been updated successfully!"));
+            //Let the user know via their email
+            SimpleMailMessage changePasswordEmail = new SimpleMailMessage();
+            changePasswordEmail.setFrom(mailUserName);
+            changePasswordEmail.setTo(user.getEmail());
+            changePasswordEmail.setSubject(changepasswordSubject);
+            changePasswordEmail.setText(changepasswordMessage); //notification message password change
+            emailService.sendEmail(changePasswordEmail);
+            //
+            return ResponseEntity.ok(new ApiResponse(true, "Your password was successfully changed!"));
         } catch (Exception e) {
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Password failed to update. Error: " + e.toString()),
                         HttpStatus.BAD_REQUEST);
         }  
     }
+
+
 }

@@ -17,9 +17,9 @@ import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.BarServiceImpl;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.BarService;
+import com.maroon.mixology.service.RecipeService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,24 +38,21 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/tipsy/bar")
 public class BarController {
-    @Autowired
-    private UserRepository userRepository;
             
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private RecipeService recipeService;
     
     @Autowired
     private BarRepository barRepository;
 
     @Autowired
-    private BarServiceImpl barService;
+    private BarService barService;
 
     private static final Logger logger = LoggerFactory.getLogger(BarController.class);
 
-    
     @PostMapping("/createBar")
     public ResponseEntity<?> createNewBar(@CurrentUser UserDetails currentUser, @Valid @RequestBody BarRequest barRequest) {
         try{
@@ -85,17 +82,17 @@ public class BarController {
             );
             barRepository.save(bar); //we save the bar in the database
             //we have to add this bar to the user's list of bars
-            Set<User> combinedUsers = new HashSet<User>();
-            combinedUsers.add(user);
-            combinedUsers.addAll(barManagers);
-            combinedUsers.addAll(barWorkers);
-            for (User u : combinedUsers){
-                u.getBars().add(bar.getId()); 
-                userRepository.save(u);
-            }
+            // Set<User> combinedUsers = new HashSet<User>();
+            // combinedUsers.add(user);
+            // combinedUsers.addAll(barManagers);
+            // combinedUsers.addAll(barWorkers);
+            // for (User u : combinedUsers){
+            //     u.getBars().add(bar.getId()); 
+            //     // userRepository.save(u);
+            // }
             // userRepository.saveAll(combinedUsers);
             //Added the bar to all affliated Users
-            return ResponseEntity.ok(new ApiResponse(true, "Bar creation was succesfully submitted and saved in the database!"));
+            return ResponseEntity.ok(new ApiResponse(true, "Your bar was successfully created!"));
         } catch (Exception e) {
             logger.error("Bar was unable to be created.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be created. Error: " + e.getMessage()),
@@ -109,18 +106,36 @@ public class BarController {
         try{
             //we have to query the bar from Mongo
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
+
             //We have the bar, now lets build a Bar Response
             Set<BriefUserResponse> barManagers = new HashSet<BriefUserResponse>();
             for (User manager : bar.getManagers()){
-                barManagers.add(new BriefUserResponse(manager.getNickname(), manager.getFirstName() + " " + manager.getLastName(), manager.getProfilePic()));
+                barManagers.add(new BriefUserResponse(
+                    manager.getNickname(), 
+                    manager.getFirstName() + " " + manager.getLastName(), 
+                    manager.getProfilePic()
+                    ));
             }
             Set<BriefUserResponse> barWorkers = new HashSet<BriefUserResponse>();
             for (User worker : bar.getWorkers()){
-                barWorkers.add(new BriefUserResponse(worker.getNickname(), worker.getFirstName() + " " + worker.getLastName(), worker.getProfilePic()));
+                barWorkers.add(new BriefUserResponse(
+                    worker.getNickname(), 
+                    worker.getFirstName() + " " + worker.getLastName(), 
+                    worker.getProfilePic()));
             }
             Set<BriefRecipeResponse> barRecipesAvailable = new HashSet<BriefRecipeResponse>();
             for (Recipe recipeAvailable : bar.getRecipesAvailable()){
-                barRecipesAvailable.add(new BriefRecipeResponse(recipeAvailable.getId(), recipeAvailable.getName(), recipeAvailable.getImage(), recipeAvailable.getAuthor().getNickname()));
+                barRecipesAvailable.add(new BriefRecipeResponse(
+                    recipeAvailable.getId(), 
+                    recipeAvailable.getName(), 
+                    recipeAvailable.getImage(), 
+                    recipeAvailable.getAuthor().getNickname(),
+                    recipeAvailable.isPublished()
+                ));
             }
             //lets build our response
             BriefUserResponse barOwner = new BriefUserResponse(bar.getOwner().getNickname(), bar.getOwner().getFirstName() + " " + bar.getOwner().getLastName(), bar.getOwner().getProfilePic()); 
@@ -154,6 +169,10 @@ public class BarController {
                 }
             }
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             //We must validate that the user is an owner, manager, or worker
             Set<String> managerIdList = new HashSet<String>();
             for (User u : bar.getManagers()){
@@ -166,33 +185,19 @@ public class BarController {
                 bar.setDescription(barRequest.getDescription());
                 bar.setImage(barRequest.getImg());
                 //We can add or remove managers
-                //Diassociate everyone in managers
-                for (User u : bar.getManagers()){
-                    u.getBars().remove(barID);
-                    userRepository.save(u);
-                }
                 //Reassociate everyone
                 Set<User> barManagers = new HashSet<User>();
                 for (String managerNickname : barRequest.getManagers()){
                     User u = userService.findByNickname(managerNickname);
                     barManagers.add(u);
-                    u.getBars().add(barID);
-                    userRepository.save(u);
                 }
                 bar.setManagers(barManagers);
                 //We can add or remove workers
-                //Diassociate everyone in workers
-                for (User u : bar.getWorkers()){
-                    u.getBars().remove(barID);
-                    userRepository.save(u);
-                }
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
-                    u.getBars().add(barID);
-                    userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
                 //we can add or remove recipes available
@@ -203,16 +208,16 @@ public class BarController {
                 bar.setRecipesAvailable(barRecipes);
                 //We save this bar
                 barRepository.save(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully saved!"));
             }
             else if(managerIdList.contains(requester.getId())){
+                //manager only{LIMITED ACCESS}
+                //We can add or remove workers
                 //Reassociate everyone
                 Set<User> barWorkers = new HashSet<User>();
                 for (String workerNickname : barRequest.getWorkers()){
                     User u = userService.findByNickname(workerNickname);
                     barWorkers.add(u);
-                    u.getBars().add(barID);
-                    userRepository.save(u);
                 }
                 bar.setWorkers(barWorkers);
                 //we can add or remove recipes available
@@ -223,10 +228,11 @@ public class BarController {
                 bar.setRecipesAvailable(barRecipes);
                 //We save this bar
                 barRepository.save(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully Updated!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully saved!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to change settings"), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to this bar!")
+                , HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             logger.error("Bar was unable to be updated.", e);
@@ -247,22 +253,17 @@ public class BarController {
                 }
             }
             Bar bar = barService.findById(barID);
+            if(bar == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar with the ID \"" + barID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             if(bar.getOwner().getId().equals(requester.getId()) || isAdmin){
-                //we have to disassociate everyone
-                Set<User> combinedUsers = new HashSet<User>();
-                combinedUsers.add(bar.getOwner());
-                combinedUsers.addAll(bar.getManagers());
-                combinedUsers.addAll(bar.getWorkers());
-                for (User u : combinedUsers){
-                    u.getBars().remove(bar.getId()); 
-                    userRepository.save(u);
-                }
                 //We delete the bar
                 barRepository.delete(bar);
-                return ResponseEntity.ok(new ApiResponse(true, "Bar was succesfully deleted!"));
+                return ResponseEntity.ok(new ApiResponse(true, "Your bar was succesfully deleted!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete bar"), HttpStatus.UNAUTHORIZED); 
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to delete this bar"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
             logger.error("Bar was unable to be deleted.", e);
@@ -270,4 +271,6 @@ public class BarController {
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
+
+   
 }

@@ -18,7 +18,8 @@ public class RecipeRequest {
     private Boolean newSteps;
     private Set<EquipmentRequest> equipmentsAvailable;
     private Boolean newEquipment;
-
+    private Set<EquipmentProductRequest> equipmentProducts;
+    
     public String getName() {
         return name;
     }
@@ -81,6 +82,14 @@ public class RecipeRequest {
 
     public void setNewEquipment(Boolean newEquipment) {
         this.newEquipment = newEquipment;
+    }
+
+    public Set<EquipmentProductRequest> getEquipmentProducts() {
+        return equipmentProducts;
+    }
+
+    public void setEquipmentProducts(Set<EquipmentProductRequest> equipmentProducts) {
+        this.equipmentProducts = equipmentProducts;
     }
 
 

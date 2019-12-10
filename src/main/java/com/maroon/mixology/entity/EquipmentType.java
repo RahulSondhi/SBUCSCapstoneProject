@@ -3,7 +3,6 @@ package com.maroon.mixology.entity;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;
@@ -15,8 +14,8 @@ public class EquipmentType {
     @Id
     private String id;
 	@Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
-    private EquipmentTypeEnum name;
-    private Set<ActionType> actionsDoTo;
+    private String name;
+    private Set<ActionType> actionsToDo;
     private Set<ActionType> actionsDoing;
 
     public String getId() {
@@ -27,22 +26,21 @@ public class EquipmentType {
         this.id = id;
     }
 
-
-    public EquipmentTypeEnum getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(EquipmentTypeEnum name) {
+    public void setName(String name) {
         this.name = name;
     }
 
 
-    public Set<ActionType> getActionsDoTo() {
-        return actionsDoTo;
+    public Set<ActionType> getActionsToDo() {
+        return actionsToDo;
     }
 
-    public void setActionsDoTo(Set<ActionType> actionsDoTo) {
-        this.actionsDoTo = actionsDoTo;
+    public void setActionsToDo(Set<ActionType> actionsToDo) {
+        this.actionsToDo = actionsToDo;
     }
 
     public Set<ActionType> getActionsDoing() {

@@ -1,0 +1,157 @@
+/* Caption Headers */
+
+.caption {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
+    font-size: 3em;
+    color: var(--white);
+}
+
+.captionRed {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--maroon), 0 0 0.5em var(--maroon);
+    font-size: 3em;
+    color: var(--white);
+}
+
+.captionYellow {
+    font-family: fzshuti;
+    text-shadow: 0 0 0.5em var(--brass), 0 0 0.5em var(--brass);
+    font-size: 3em;
+    color: var(--white);
+}
+
+/* Animations */
+@-moz-keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+@keyframes blink {
+    0% {
+        opacity: 1.0;
+    }
+    50% {
+        opacity: 0.0;
+    }
+    100% {
+        opacity: 1.0;
+    }
+}
+
+/* Adding onto Foundation Grids */
+
+.align-center-middle {
+    text-align: center;
+}
+
+/* Previews */
+
+.previewItemContainer{
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../assets/card.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 0.5em;
+    padding-bottom: 0.75em;
+    text-align: center;
+    word-wrap: break-word;
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+}
+
+.previewItemContainer:hover{
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,255,255,0.58);
+}
+
+.previewStepContainer{
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../assets/metalPlate.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 0.5em;
+    padding-bottom: 0.75em;
+    text-align: center;
+    word-wrap: break-word;
+    -webkit-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    -moz-box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+    box-shadow: 0.7em 0.8em 28px 0px rgba(0,0,0,0.58);
+}
+
+.previewStepContainer i{
+    font-size: 4em;
+}
+
+.previewItemMargin {
+    height: 1em;
+}
+
+.previewStepContainer .spacer{
+    margin-bottom: 2em;
+}
+
+.previewItemContainer .spacer{
+    margin-bottom: 1em;
+}
+
+.previewItem{
+    color: white;
+    min-height: 0;
+}
+
+.previewItem:hover{
+    color: white;
+}
+
+.previewName{
+    font-size: 2em;
+}
+
+.previewDesc{
+    font-size: 1em;
+}
+
+.previewDesc span{
+    color: var(--brass);
+}
+
+/* Make Prof Pic */
+
+.makeProfPicEditor{
+    margin-bottom: 3%;
+    z-index: 0;
+}
+
+.makeProfPicEditor label{
+    color: white !important;
+}
+
+.makeProfPicEditor path{
+    fill: red;
+}
+
+/* Dynamic Form */
+
+.dynamicInput{
+    margin-bottom: 3%;
+}

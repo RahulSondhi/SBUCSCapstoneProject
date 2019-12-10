@@ -1,5 +1,6 @@
 package com.maroon.mixology.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -99,6 +100,24 @@ public class Bar {
         this.recipesAvailable = recipesAvailable;
     }
 
+    public Set<String> getManagersNames(){
+        
+        Set<String> names = new HashSet<String>(); ;
 
+        for (User user : this.getManagers()){
+            names.add(user.getNickname());
+        }
+        return(names);
+    }
+
+    public Set<String> getWorkersNames(){
+        
+        Set<String> names = new HashSet<String>(); ;
+
+        for (User user : this.getWorkers()){
+            names.add(user.getNickname());
+        }
+        return(names);
+    }
 
 }

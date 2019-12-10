@@ -1,7 +1,9 @@
 package com.maroon.mixology.controller.tipsy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -9,32 +11,36 @@ import javax.validation.Valid;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.entity.type.ActionType;
 import com.maroon.mixology.entity.Bar;
-import com.maroon.mixology.entity.Equipment;
+import com.maroon.mixology.entity.EquipmentType;
+import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
-import com.maroon.mixology.exchange.request.BarRequest;
+import com.maroon.mixology.entity.Unit;
+import com.maroon.mixology.exchange.request.EquipmentProductRequest;
 import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;
 import com.maroon.mixology.exchange.request.StepRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
+import com.maroon.mixology.exchange.response.EquipmentProductResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
-import com.maroon.mixology.exchange.response.brief.BriefEquipmentResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
+import com.maroon.mixology.repository.GameRepository;
 import com.maroon.mixology.repository.RecipeRepository;
 import com.maroon.mixology.repository.StepRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.EquipmentTypeServiceImpl;
+import com.maroon.mixology.service.BarService;
+import com.maroon.mixology.service.EquipmentTypeService;
+import com.maroon.mixology.service.GameService;
 import com.maroon.mixology.service.RecipeService;
-import com.maroon.mixology.service.RecipeServiceImpl;
-import com.maroon.mixology.service.UnitServiceImpl;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.UnitService;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,32 +69,44 @@ public class RecipeController {
     private StepRepository stepRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private GameRepository gameRepository;
 
     @Autowired
-    private RecipeServiceImpl recipeService;
+    private BarRepository barRepository;
 
     @Autowired
-    private EquipmentTypeServiceImpl equipmentTypeService;
+    private UserService userService;
 
     @Autowired
-    private UnitServiceImpl unitService;
+    private BarService barService;
+
+    @Autowired
+    private RecipeService recipeService;
+
+    @Autowired
+    private EquipmentTypeService equipmentTypeService;
+
+    @Autowired
+    private UnitService unitService;
     
-    private static final Logger logger = LoggerFactory.getLogger(BarController.class);
+    @Autowired
+    private GameService gameService;
+
+    private static final Logger logger = LoggerFactory.getLogger(RecipeController.class);
 
     @PostMapping("/createRecipe")
     public ResponseEntity<?> createNewRecipe(@CurrentUser UserDetails currentUser, @Valid @RequestBody RecipeRequest recipeRequest) {
         try{
             //we get the current user by getting their email address
             User user = userRepository.findByEmail(currentUser.getUsername());
-            //We need to build the recipe
+            //We need to build the recipe  
             Recipe recipe = new Recipe();
             recipe.setName(recipeRequest.getName());
             recipe.setDescription(recipeRequest.getDescription());
             recipe.setImage(recipeRequest.getImg());
             recipe.setAuthor(user);
             recipe.setPublished(recipeRequest.getPublished());
-            //Build the Steps from Step requests
+            //Build the Steps from Step requests    
             ArrayList<Step> steps = new ArrayList<Step>();
             for (StepRequest s : recipeRequest.getSteps()){
                 steps.add(new Step(
@@ -97,24 +115,42 @@ public class RecipeController {
                     s.getEquipmentProduct(),
                     ActionType.valueOf(s.getAction()),
                     s.getValue(),
-                    unitService.findByName(s.getUnitName())
+                    unitService.findByName(s.getUnit())
                 ));
             }
             recipe.setSteps(steps);
             //Build the equipments from the Equipment Available
-            Set<Equipment> equipmentsAvailable = new HashSet<Equipment>();
+            Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
             for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                equipmentsAvailable.add(new Equipment(
+                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                equipmentsAvailable.add(new EquipmentResponse(
                     e.getName(),
                     e.getImg(),
-                    equipmentTypeService.findByName(e.getEquipmentTypeName())
-                ));
+                    new EquipmentTypeResponse(
+                            eT.getName(),
+                            eT.getActionsToDo(),
+                            eT.getActionsDoing()
+                    ))
+                );
+            }
+            Set<EquipmentProductResponse> equipmentProducts = new HashSet<EquipmentProductResponse>();
+            for (EquipmentProductRequest e : recipeRequest.getEquipmentProducts()){
+                EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                equipmentProducts.add(new EquipmentProductResponse(
+                    e.getName(),
+                    e.getImg(),
+                    new EquipmentTypeResponse(
+                            eT.getName(),
+                            eT.getActionsToDo(),
+                            eT.getActionsDoing()
+                    ),
+                    e.getTags())
+                );
             }
             recipe.setEquipmentsAvailable(equipmentsAvailable);
+            recipe.setEquipmentProducts(equipmentProducts);
             stepRepository.saveAll(steps); //Will this work?
             recipeRepository.save(recipe);
-            user.getRecipesWritten().add(recipe.getId());//add this recipe to recipeWritten array for the user
-            userRepository.save(user);
             return ResponseEntity.ok(new ApiResponse(true, "Recipe creation was succesfully submitted and saved in the database!"));
         } catch (Exception e) {
             logger.error("Recipe was unable to be created.", e);
@@ -129,6 +165,10 @@ public class RecipeController {
             User user = userService.findByEmail(currentUser.getUsername());
             //we have to query the recipe from Mongo
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             // We have the recipe, now lets build a recipe Response
             // Unless you are the author, you cant view an unpublished recipe
             if(recipe.isPublished() || recipe.getAuthor().getId().equals(user.getId())){
@@ -149,23 +189,24 @@ public class RecipeController {
                         s.getValue(),
                         new UnitResponse(
                             s.getUnit().getName(), 
+                            s.getUnit().getType(),
                             s.getUnit().getUsMeasurement(), 
                             s.getUnit().getMetricMeasurement()) 
                         ));
                 }
                 //Need to build equipments response 
-                Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
-                for (Equipment e : recipe.getEquipmentsAvailable()){
-                    equipmentsAvailable.add( new EquipmentResponse(
-                        e.getName(), 
-                        e.getImage(),
-                        new EquipmentTypeResponse(
-                            e.getEquipmentType().getName(),
-                            e.getEquipmentType().getActionsDoTo(),
-                            e.getEquipmentType().getActionsDoing()
-                            )
-                        ));
-                }
+                // Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
+                // for (Equipment e : recipe.getEquipmentsAvailable()){
+                //     equipmentsAvailable.add( new EquipmentResponse(
+                //         e.getName(), 
+                //         e.getImage(),
+                //         new EquipmentTypeResponse(
+                //             e.getEquipmentType().getName(),
+                //             e.getEquipmentType().getActionsDoTo(),
+                //             e.getEquipmentType().getActionsDoing()
+                //             )
+                //         ));
+                // }
                 //lets build our response
                 RecipeResponse recipeResponse = new RecipeResponse(
                     recipe.getName(),
@@ -174,7 +215,8 @@ public class RecipeController {
                     author,
                     recipe.isPublished(),
                     steps, //StepResponses 
-                    equipmentsAvailable //EquipmentResponse
+                    recipe.getEquipmentsAvailable(), //EquipmentResponses
+                    recipe.getEquipmentProducts()
                 );
                 return ResponseEntity.ok(recipeResponse);
             }
@@ -204,6 +246,10 @@ public class RecipeController {
             }
             //Find our recipe
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             //check if the requester is the author or an Admin
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
                 recipe.setName(recipeRequest.getName());
@@ -212,7 +258,7 @@ public class RecipeController {
                 recipe.setPublished(recipeRequest.getPublished());
                 //Build the Steps from Step requests
                 // We should redo all the steps from the step request
-                if(recipeRequest.getNewSteps()){
+                if(recipeRequest.getNewSteps()){ //make sure this boolean is a thing
                     // we have to delete the steps saved
                     stepRepository.deleteAll(recipe.getSteps());
                     // now, lets add new steps
@@ -224,21 +270,41 @@ public class RecipeController {
                             s.getEquipmentProduct(),
                             ActionType.valueOf(s.getAction()),
                             s.getValue(),
-                            unitService.findByName(s.getUnitName())
+                            unitService.findByName(s.getUnit())
                         ));
                     }                    
                     recipe.setSteps(newSteps);
+                    Set<EquipmentProductResponse> equipmentProducts = new HashSet<EquipmentProductResponse>();
+                    for (EquipmentProductRequest e : recipeRequest.getEquipmentProducts()){
+                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                        equipmentProducts.add(new EquipmentProductResponse(
+                            e.getName(),
+                            e.getImg(),
+                            new EquipmentTypeResponse(
+                                    eT.getName(),
+                                    eT.getActionsToDo(),
+                                    eT.getActionsDoing()
+                            ),
+                            e.getTags())
+                        );
+                    }
+                    recipe.setEquipmentProducts(equipmentProducts);
                     stepRepository.saveAll(newSteps); //Will this work?
                 }
                 // We should redo all the equipment from the equipment request
                 if(recipeRequest.getNewEquipment()){
-                    Set<Equipment> equipmentsAvailable = new HashSet<Equipment>();
+                    Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
                     for (EquipmentRequest e : recipeRequest.getEquipmentsAvailable()){
-                        equipmentsAvailable.add(new Equipment(
+                        EquipmentType eT = equipmentTypeService.findByName(e.getEquipmentType());
+                        equipmentsAvailable.add(new EquipmentResponse(
                             e.getName(),
                             e.getImg(),
-                            equipmentTypeService.findByName(e.getEquipmentTypeName())
-                        ));
+                            new EquipmentTypeResponse(
+                                    eT.getName(),
+                                    eT.getActionsToDo(),
+                                    eT.getActionsDoing()
+                            ))
+                        );
                     }
                     recipe.setEquipmentsAvailable(equipmentsAvailable);
                 }
@@ -253,7 +319,7 @@ public class RecipeController {
             }
         } catch (Exception e) {
             logger.error("Recipe was unable to be updated.", e);
-            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Bar was unable to be updated. Error: " + e.getMessage()),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be updated. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
     }
@@ -269,21 +335,62 @@ public class RecipeController {
                 }
             }
             Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
             if(recipe.getAuthor().getId().equals(requester.getId()) || isAdmin){
-                User author = userService.findByNickname(recipe.getAuthor().getNickname());
-                author.getRecipesWritten().remove(recipe.getId());//delete this recipe from recipeWritten array for the user
-                userRepository.save(author);
-                stepRepository.deleteAll(recipe.getSteps());
-                recipeRepository.delete(recipe);
+                List<Bar> bars = barService.findByRecipe(recipe);//delete entries from all bars
+                System.out.println(bars);
+                for (Bar b: bars){
+                    b.getRecipesAvailable().remove(recipe);
+                    barRepository.save(b);
+                }
+                gameRepository.deleteAll(gameService.findByRecipe(recipe));//delete the game sessions with that recipe
+                stepRepository.deleteAll(recipe.getSteps()); //delete the steps
+                recipeRepository.delete(recipe); //delete the recipe
                 return ResponseEntity.ok(new ApiResponse(true, "Recipe was succesfully deleted!"));
             }
             else{
-                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unauthorized request to delete recipe"), HttpStatus.UNAUTHORIZED); 
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "An unauthorized request was made to delete this recipe"), HttpStatus.UNAUTHORIZED); 
             }
         } catch (Exception e) {
             logger.error("Recipe was unable to be deleted.", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe was unable to be deleted. Error: " + e.getMessage()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }  
+    }
+
+    @PostMapping("/{recipeID}/play")
+    public ResponseEntity<?> initGame(@PathVariable(value = "recipeID") String recipeID, @CurrentUser UserDetails currentUser) {
+        try{
+            User player = userService.findByEmail(currentUser.getUsername());
+            Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null || !recipe.isPublished()){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Game was unable to be initialized. Error:  Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            //Let see if and incompleted game already exists
+            Game game = gameService.findByPlayerAndRecipeAndCompleted(player, recipe, false); //omg this actually works...
+            if(game != null){
+                //Game exists, return that game ID
+                return ResponseEntity.ok(new ApiResponse(true, game.getId())); 
+            }   
+            else{
+            //Game doesn't exist, so lets make one
+            Game newGame = new Game(
+                player, 
+                recipe, 
+                new ArrayList<Integer>(Collections.nCopies(recipe.getSteps().size(), 0)), //size of steps array in recipe 
+                false
+                );
+            gameRepository.save(newGame);
+            return ResponseEntity.ok(new ApiResponse(true, newGame.getId())); 
+        }
+        } catch (Exception e) {
+            logger.error("Game was unable to be initialized. Error: ", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Game was unable to be initialized. Error:  " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        } 
     }
 }

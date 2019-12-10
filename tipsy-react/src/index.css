@@ -2,13 +2,13 @@
 @import '../node_modules/antd/dist/antd.css';
 @font-face {
     font-family: fzshuti;
-    src: url("../src/fonts/fzshuti.ttf");
+    src: url("./app/fonts/fzshuti.ttf");
 }
 
 /* Variables */
 :root {
-    --card-bg-image: url("../src/assets/card.jpg");
-    --viewbox-image: url("../src/assets/metalPlate.jpg");
+    --card-bg-image: url("./app/assets/card.jpg");
+    --viewbox-image: url("./app/assets/metalPlate.jpg");
     --crimson: #40110A;
     --maroon: #800000;
     --white: #FFFFFF;
@@ -30,11 +30,11 @@ html {
     padding: 0;
     font-family: 'Roboto Mono', monospace;
     color: white !important;
-    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("../src/assets/bg.jpg");
+    background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.8)100%),url("./app/assets/bg.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #root {
@@ -43,7 +43,7 @@ html {
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 label {
@@ -59,6 +59,16 @@ label {
     color: var(--white);
     text-decoration: underline;
     text-shadow: 0 0 0.5em var(--light-blue), 0 0 0.5em var(--light-blue);
+}
+
+.page{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 90%;
+}
+
+.pageContainer{
+    height: 100%;
 }
 
 .button {
@@ -94,3 +104,27 @@ label {
     background-color: var(--button-hover-shade) !important;
 }
 
+/* Scroll Bar */
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}

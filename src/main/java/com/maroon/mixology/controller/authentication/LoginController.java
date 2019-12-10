@@ -8,7 +8,7 @@ import com.maroon.mixology.exchange.response.JwtAuthenticationResponse;
 import com.maroon.mixology.repository.RoleRepository;
 import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.JwtTokenProvider;
-import com.maroon.mixology.service.UserServiceImpl;
+import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +41,7 @@ public class LoginController {
         JwtTokenProvider tokenProvider;
         
         @Autowired
-        private UserServiceImpl userService;
+        private UserService userService;
 
         @Value("${tipsy.mail.passwordreset.subject}")
         private String passwordResetSubject;
@@ -56,12 +57,13 @@ public class LoginController {
 
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        try{
                 if(!userService.existsByEmail(loginRequest.getEmail())){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not found!"),
-                        HttpStatus.BAD_REQUEST);
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "The Email Address \""+loginRequest.getEmail() +"\" was not found!"),
+                        HttpStatus.NOT_FOUND);
                 }
                 if(!userService.findByEmail(loginRequest.getEmail()).isEnabled()){
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address is not enabled!"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Email Address is not enabled!"),
                         HttpStatus.BAD_REQUEST);
                 }
                 Authentication authentication = authenticationManager.authenticate(
@@ -75,5 +77,13 @@ public class LoginController {
 
                 String jwt = tokenProvider.generateToken(authentication);
                 return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+                } catch(AuthenticationException AuthException){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Failed to authenticate. Error: " + AuthException.getMessage()),
+                        HttpStatus.UNAUTHORIZED);
+                } 
+                catch(Exception e){
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to login. Error: " + e.getMessage()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+                }
         }
 }

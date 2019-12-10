@@ -4,7 +4,7 @@ package com.maroon.mixology.exchange.request;
 public class EquipmentRequest {
     private String name;
     private String img;
-    private String equipmentTypeName;
+    private String equipmentType;
 
     public String getName() {
         return name;
@@ -22,12 +22,12 @@ public class EquipmentRequest {
         this.img = img;
     }
 
-    public String getEquipmentTypeName() {
-        return equipmentTypeName;
+    public String getEquipmentType() {
+        return equipmentType;
     }
 
-    public void setEquipmentTypeName(String equipmentTypeName) {
-        this.equipmentTypeName = equipmentTypeName;
+    public void setEquipmentType(String equipmentType) {
+        this.equipmentType = equipmentType;
     }
 
 
