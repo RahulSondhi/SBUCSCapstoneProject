@@ -400,20 +400,17 @@ class ConfigRecipePage extends Component {
 
     handleStepLoad = (type,step) => {
         console.log(this.state)
-        var products;
+        var products = this.state.equipmentProducts.value;
         
         if(type === "add"){
-            products = this.state.equipmentProducts.value;
             products.push(step.equipmentProduct);
             step.equipmentProduct = step.equipmentProduct.name;
-        }else{
+        }else if(type === "remove"){
             products = (this.state.equipmentProducts.value).filter(equip => 
                 { 
                     return equip.name !== step.equipmentProduct.name
                 })
         }
-
-        console.log(products);
 
         this.setState({
             newEquipment: {

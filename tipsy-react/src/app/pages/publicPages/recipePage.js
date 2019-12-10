@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getRecipeProfile, initGame} from '../../util/APIUtils';
@@ -81,6 +81,14 @@ class RecipePage extends Component {
                 }
             });
 
+            var playClass;
+
+            if(response.published === true){
+                playClass = ""
+            }else{
+                playClass = "hidden"
+            }
+
             this.setState({
                 recipe:{
                     author: response.author,
@@ -91,7 +99,8 @@ class RecipePage extends Component {
                     name: response.name,
                     published: response.published,
                     steps: steps}, 
-                isLoading: false
+                isLoading: false,
+                playClass: playClass
             });
 
             if(
@@ -156,17 +165,17 @@ class RecipePage extends Component {
                 </div>
 
                 <div id="redirectRecipe" className="small-2 small-offset-1 cell grid-x align-center-middle">
-                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"small-4 cell grid-x align-center-middle "+this.state.settingClass}>
+                    <Link to={"/tipsy/recipe/"+this.props.match.params.id+"/config"} className={"small-4 cell grid-x align-center-middle "+this.state.settingClass}>
                         <GetProfImg className="small-10 cell" alt="Settings" type="settings"/>
-                    </NavLink>
+                    </Link>
                     
-                    <NavLink to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"small-4 small-offset-2 cell grid-x align-center-middle"}>
+                    <Link to={"/tipsy/recipe/"+this.props.match.params.id+"/clone"} className={"small-4 small-offset-2 cell grid-x align-center-middle"}>
                         <GetProfImg className="small-10 cell" alt="Clone" type="clone"/>
-                    </NavLink>
+                    </Link>
 
                     <div className="cell" style={{height:'3em'}}></div>
 
-                    <div className="cell grid-x align-center-middle" onClick={this.play}>
+                    <div className={"cell grid-x align-center-middle "+this.state.playClass} onClick={this.play}>
                         <GetProfImg className="small-4 cell" alt="Play" type="play"/>
                     </div>
                 </div>

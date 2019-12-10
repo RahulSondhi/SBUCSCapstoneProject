@@ -104,6 +104,10 @@
     height: 1em;
 }
 
+.previewStepContainer .spacer{
+    margin-bottom: 2em;
+}
+
 .previewItemContainer .spacer{
     margin-bottom: 1em;
 }

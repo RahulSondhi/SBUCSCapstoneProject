@@ -35,6 +35,10 @@ export class DynamicSteps extends Component {
         this.removeItem = this
             .removeItem
             .bind(this);
+        
+        this.moveItem = this
+            .moveItem
+            .bind(this);
     }
 
     addItem(item) {
@@ -52,16 +56,66 @@ export class DynamicSteps extends Component {
             .data
             .indexOf(item);
 
-        if (index > -1) {
+        var notUsed = this.state.data.find( step => {
+            return ((step.equipmentDoing === item.equipmentProduct) || (step.equipmentToDo === item.equipmentProduct))
+        })
+
+        if (index > -1 && (notUsed === undefined) === true) {
             this.state.data.splice(index, 1);
             this.setState({data: this.state.data});
             
             Notify("success","Removed!",-1);
             
             this.props.onUpdate("remove",item);
+        } else if ((notUsed === undefined) === false) {           
+            Notify("error","The result of this step is being used somewhere else!",-1);
         } else {
             Notify("error","Could not remove that!",-1);
         }
+
+    }
+
+    moveItem(direction,item) {
+        // update the state object
+        const index = this
+            .state
+            .data
+            .indexOf(item);
+
+
+        if (index > -1 && direction === "up") {  
+            if(index === 0){
+                Notify("error","Step is already at the top!",-1);
+            }else if(this.state.data[index-1]){
+                var notUsed = (item.equipmentDoing !== this.state.data[index-1].equipmentProduct) && (item.equipmentToDo !== this.state.data[index-1].equipmentProduct);
+                if(notUsed === true){
+                    this.state.data.splice(index, 1);
+                    this.state.data.splice(index-1, 0, item);
+                    Notify("success","Step Moved Up!",-1);
+                    this.props.onUpdate("move",item);
+                }else{
+                    Notify("error","The result of the above step is used in this one!",-1);
+                }
+            }
+        } else if (index > -1 && direction === "down") {  
+            if(index === this.state.data.length-1){
+                Notify("error","Step is already at the bottom!",-1);
+            }else if(this.state.data[index+1]){
+                var unUsed = (this.state.data[index+1].equipmentDoing !== item.equipmentProduct) && (this.state.data[index+1].equipmentToDo !== item.equipmentProduct);
+                if(unUsed === true){
+                    this.state.data.splice(index, 1);
+                    this.state.data.splice(index+1, 0, item);
+                    Notify("success","Step Moved Down!",-1);
+                    this.props.onUpdate("move",item);
+                }else{
+                    Notify("error","The below step uses the result of this one!",-1);
+                }
+            }
+        } else{
+            Notify("error","Could not move!",-1);
+        }
+
+        this.setState({data: this.state.data});
 
     }
 
@@ -73,7 +127,7 @@ export class DynamicSteps extends Component {
                     className="small-6 cell"
                     items={this.state.data}
                     removeFunc={this.removeItem}
-                    moveFunc={this.removeItem}
+                    moveFunc={this.moveItem}
                     product={this.state.product}
                     equipment={this.state.equipment}/>
             </div>
@@ -845,16 +899,18 @@ class GetStep extends Component {
                 <div className="grid-x align-center-middle small-3 cell">
                     {this.getEquipment(this.state.item.equipmentProduct)}
                 </div>
-                <div className="grid-x small-1 align-self-top cell">
-                    <div className={"small-6 small-offset-5 cell "+this.state.removeClass} onClick={() => {console.log(this.state.item)}}>
+                <div className="grid-x small-1 cell">
+                    <div className={"small-6 small-offset-5 cell align-self-top"+this.state.removeClass} onClick={() => {this.state.removeFunc(this.state.item)}}>
                         <GetProfImg type="error" className="cell" />
                     </div>
-                    <div className={"small-6 small-offset-5 cell "+this.state.moveClass} onClick={() => {console.log(this.state.item)}}> 
-                    
+                    <div className="cell spacer"></div>
+                    <div className={"small-6 small-offset-5 align-self-middle cell "+this.state.moveClass} onClick={() => {this.state.moveFunc("up",this.state.item)}}> 
+                        <GetProfImg type="up" className="cell" />
                     </div>
-                    <div className={"small-6 small-offset-5 cell "+this.state.moveClass} onClick={() => {console.log(this.state.item)}}>
-
-                    </div>
+                    <div className="cell spacer"></div>
+                    <div className={"small-6 small-offset-5 align-self-bottom cell "+this.state.moveClass} onClick={() => {this.state.moveFunc("down",this.state.item)}}>
+                        <GetProfImg type="down" className="cell" />
+                    </div>  
                 </div>
             </div>
             <div className="previewItemMargin cell"></div>
