@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="145" height="249.836" viewBox="0 0 145 249.836">
+  <g id="water" transform="translate(-1384 -745)">
+    <path id="cup" d="M0,0H145L129.829,237s-29.388,12.836-58.17,12.836S14.7,237,14.7,237Z" transform="translate(1384 745)" fill="#fff" opacity="0.6"/>
+    <path id="water-2" data-name="water" d="M0,0H127.405l-13.33,188.538S88.253,198.75,62.963,198.75s-50.047-10.212-50.047-10.212Z" transform="translate(1393 788.086)" fill="#64f5ff" opacity="0.6"/>
+  </g>
+</svg>

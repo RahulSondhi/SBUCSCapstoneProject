@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="119" height="206.639" viewBox="0 0 119 206.639">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="red"/>
+      <stop offset="0.809" stop-color="#c9ad94"/>
+      <stop offset="1" stop-color="#0e5f16"/>
+    </linearGradient>
+  </defs>
+  <g id="watermelon_slice" transform="translate(-639 -670)">
+    <path id="Path_125" data-name="Path 125" d="M59.5,0,119,185s-29.75,21.639-59.5,21.639S0,185,0,185Z" transform="translate(639 670)" fill="url(#linear-gradient)"/>
+    <ellipse id="Ellipse_55" data-name="Ellipse 55" cx="2" cy="4" rx="2" ry="4" transform="translate(690 732)"/>
+    <ellipse id="Ellipse_56" data-name="Ellipse 56" cx="2" cy="4" rx="2" ry="4" transform="translate(699 745)"/>
+    <ellipse id="Ellipse_57" data-name="Ellipse 57" cx="2" cy="4" rx="2" ry="4" transform="translate(686 773)"/>
+  </g>
+</svg>

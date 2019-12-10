@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="102.849" height="378.501" viewBox="0 0 102.849 378.501">
+  <defs>
+  <style type="text/css">
+    @font-face {
+      font-family: VinerHandITC;
+      src: url('../../fonts/VINERITC.TTF');
+    }
+  </style>
+    <linearGradient id="linear-gradient" x1="-0.234" y1="0.907" x2="1.459" y2="0.187" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#34761e"/>
+      <stop offset="1" stop-color="#65c42e"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.171" y1="0.254" x2="-0.428" y2="0.752" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+  </defs>
+  <g id="soju" transform="translate(-385.648 -45)">
+    <path id="liquor" d="M69.184,69.279s18.186,1.615,24.995,16.7,0,223.275,0,223.275-19.595,5.417-39.485,5.417-40.077-5.417-40.077-5.417-6.422-206.3,0-223.275,21.976-16.7,21.976-16.7V26.564H69.184Z" transform="translate(382.055 94.925)" fill="rgba(178,210,238,0.68)"/>
+    <path id="bottle" d="M42.776-.766H82.008l-1.24,84.032s21.891,1.741,30.086,18.013,0,240.766,0,240.766-23.587,5.841-47.529,5.841-48.241-5.841-48.241-5.841-7.73-222.46,0-240.766S41.536,83.267,41.536,83.267Z" transform="translate(374 75.615)" fill="rgba(64,190,0,0.25)"/>
+    <rect id="cap" width="46" height="46" transform="translate(414 45)" fill="url(#linear-gradient)"/>
+    <path id="reflection" d="M2369.091-52.847c12.288,16.221,8.356,43.256,8.356,43.256" transform="translate(-1899.217 231.639)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <g id="label">
+      <path id="Path_57" data-name="Path 57" d="M0,0H102.149V99.29H0Z" transform="translate(386.347 241.594)" fill="url(#linear-gradient-2)"/>
+      <text id="SOJU-2" data-name="SOJU" transform="translate(437.5 316)" font-size="25" font-family="VinerHandITC, Viner Hand ITC"><tspan x="-29.865" y="0">SOJU</tspan></text>
+      <path id="Icon_awesome-cuttlefish" data-name="Icon awesome-cuttlefish" d="M14.513,20.6a6.086,6.086,0,0,1,0-12.173c2.259,0,8.058-2.271,10.709-3.7a14.512,14.512,0,1,0-10.709,24.3c4.243,0,4.214-.056,5.618-2.96S16.772,20.6,14.513,20.6Z" transform="translate(437.363 240.863) rotate(43)" fill="red"/>
+      <path id="Icon_awesome-cuttlefish-2" data-name="Icon awesome-cuttlefish" d="M14.513,20.6a6.086,6.086,0,0,1,0-12.173c2.259,0,8.058-2.271,10.709-3.7a14.512,14.512,0,1,0-10.709,24.3c4.243,0,4.214-.056,5.618-2.96S16.772,20.6,14.513,20.6Z" transform="translate(437.021 293.204) rotate(-140)" fill="#1000ff"/>
+    </g>
+  </g>
+</svg>

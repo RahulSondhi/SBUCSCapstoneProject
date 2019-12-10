@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="382.012" height="222.143" viewBox="0 0 382.012 222.143">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1.129" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f3f0f0"/>
+      <stop offset="1" stop-color="#7a7a7a"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#d6d6d6"/>
+      <stop offset="1" stop-color="#9d9d9d"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ddd"/>
+      <stop offset="1" stop-color="#646464"/>
+    </linearGradient>
+  </defs>
+  <g id="cirtus_presser" transform="translate(-1032.988 -500.857)">
+    <g id="lower">
+      <ellipse id="Ellipse_41" data-name="Ellipse 41" cx="66.5" cy="59.5" rx="66.5" ry="59.5" transform="translate(1058 604)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_61" data-name="Rectangle 61" width="371" height="33" transform="translate(1044 645)" fill="url(#linear-gradient-2)"/>
+      <ellipse id="Ellipse_42" data-name="Ellipse 42" cx="66.5" cy="45" rx="66.5" ry="45" transform="translate(1058 604)" fill="url(#linear-gradient-3)"/>
+    </g>
+    <g id="upper">
+      <ellipse id="Ellipse_43" data-name="Ellipse 43" cx="66.5" cy="59.5" rx="66.5" ry="59.5" transform="translate(1032.988 596.577) rotate(-22)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_62" data-name="Rectangle 62" width="371" height="33" transform="translate(1035.367 639.836) rotate(-22)" fill="url(#linear-gradient-2)"/>
+      <ellipse id="Ellipse_44" data-name="Ellipse 44" cx="66.5" cy="45" rx="66.5" ry="45" transform="translate(1032.988 596.577) rotate(-22)" fill="url(#linear-gradient-3)"/>
+    </g>
+  </g>
+</svg>

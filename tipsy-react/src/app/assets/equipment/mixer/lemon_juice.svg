@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="237.098" height="291.629" viewBox="0 0 237.098 291.629">
+<defs>
+  <style type="text/css">
+  @font-face {
+      font-family: CenturyGothic;
+      src: url('../../fonts/GOTHIC.TTF');
+    }
+    </style>
+</defs>
+  <g id="lemon_juice" transform="translate(-125.946 -114)">
+    <path id="mixer" d="M102.367,0C158.9,0,204.733,49.909,204.733,111.476c0,34.354-11.28,57.808-36.872,85.677,0,0-32.958,9.67-65.495,9.859s-64.653-9.1-64.653-9.1C12.122,170.039,0,146.384,0,111.476,0,49.909,45.831,0,102.367,0Z" transform="translate(142 198.615)" fill="rgba(224,228,117,0.73)"/>
+    <g id="bottle">
+      <path id="Path_71" data-name="Path 71" d="M118,0c65.17,0,118,57.531,118,128.5,0,39.6-13,66.636-42.5,98.761,0,0-37.991,11.147-75.5,11.364s-74.526-10.493-74.526-10.493C13.974,196.008,0,168.739,0,128.5,0,57.531,52.83,0,118,0Z" transform="translate(126 167)" fill="#edf619"/>
+      <path id="Path_72" data-name="Path 72" d="M0,0S58.381,13.273,117.381,13.273,236,0,236,0" transform="translate(126.5 305.5)" fill="none" stroke="#bec31b" stroke-width="5"/>
+    </g>
+    <rect id="cap" width="78" height="53" transform="translate(205 114)" fill="#86ff61"/>
+    <text id="Lemon_Juice-2" data-name="Lemon Juice" transform="translate(244 279)" fill="#0da02f" font-size="30" font-family="CenturyGothic, Century Gothic"><tspan x="-92.673" y="0">Lemon Juice</tspan></text>
+  </g>
+</svg>

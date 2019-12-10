@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75.614" height="106.213" viewBox="0 0 75.614 106.213">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e80000"/>
+      <stop offset="1" stop-color="#8d0000"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#15a80b"/>
+      <stop offset="1" stop-color="#0b5406"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect width="56" height="36" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect width="27" height="17" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="strawberry" transform="translate(-829.662 -819.399)">
+    <path id="Path_60" data-name="Path 60" d="M33,0C51.225,0,66,15.222,66,34S45.673,83.855,33,83.611,0,52.778,0,34,14.775,0,33,0Z" transform="translate(831 842)" fill="url(#linear-gradient)"/>
+    <path id="Path_64" data-name="Path 64" d="M0,0H6A32.059,32.059,0,0,0,3.874,10.068,22.182,22.182,0,0,0,6,19H0a22.182,22.182,0,0,1-2.126-8.932A32.059,32.059,0,0,1,0,0Z" transform="translate(869.848 819.805) rotate(11)" fill="#0f7708"/>
+    <path id="Path_61" data-name="Path 61" d="M11.375.937C15.125.937,16.167,31.011,15,34S1.382,37.233,0,34,7.625.937,11.375.937Z" transform="translate(906.036 852.021) rotate(118)" fill="url(#linear-gradient-2)"/>
+    <path id="Path_62" data-name="Path 62" d="M11.375.937C15.125.937,16.167,31.011,15,34S1.382,37.233,0,34,7.625.937,11.375.937Z" transform="translate(835.594 861.081) rotate(-116)" fill="url(#linear-gradient-2)"/>
+    <path id="Path_63" data-name="Path 63" d="M11.375.937C15.125.937,16.167,31.011,15,34S1.382,37.233,0,34,7.625.937,11.375.937Z" transform="matrix(-0.799, -0.602, 0.602, -0.799, 854.887, 871.522)" fill="url(#linear-gradient-2)"/>
+    <g id="Repeat_Grid_7" data-name="Repeat Grid 7" transform="translate(837 865)" clip-path="url(#clip-path)">
+      <g transform="translate(-837 -865)">
+        <ellipse id="Ellipse_17" data-name="Ellipse 17" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(837 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_18" data-name="Ellipse 18" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(843 873)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_19" data-name="Ellipse 19" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(849 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_20" data-name="Ellipse 20" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(857 873)" fill="#bd9a48"/>
+      </g>
+      <g transform="translate(-806 -865)">
+        <ellipse id="Ellipse_17-2" data-name="Ellipse 17" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(837 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_18-2" data-name="Ellipse 18" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(843 873)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_19-2" data-name="Ellipse 19" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(849 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_20-2" data-name="Ellipse 20" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(857 873)" fill="#bd9a48"/>
+      </g>
+      <g transform="translate(-837 -847)">
+        <ellipse id="Ellipse_17-3" data-name="Ellipse 17" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(837 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_18-3" data-name="Ellipse 18" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(843 873)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_19-3" data-name="Ellipse 19" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(849 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_20-3" data-name="Ellipse 20" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(857 873)" fill="#bd9a48"/>
+      </g>
+      <g transform="translate(-806 -847)">
+        <ellipse id="Ellipse_17-4" data-name="Ellipse 17" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(837 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_18-4" data-name="Ellipse 18" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(843 873)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_19-4" data-name="Ellipse 19" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(849 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_20-4" data-name="Ellipse 20" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(857 873)" fill="#bd9a48"/>
+      </g>
+    </g>
+    <g id="Repeat_Grid_8" data-name="Repeat Grid 8" transform="translate(852 901)" clip-path="url(#clip-path-2)">
+      <g transform="translate(-837 -865)">
+        <ellipse id="Ellipse_17-5" data-name="Ellipse 17" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(837 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_18-5" data-name="Ellipse 18" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(843 873)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_19-5" data-name="Ellipse 19" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(849 865)" fill="#bd9a48"/>
+        <ellipse id="Ellipse_20-5" data-name="Ellipse 20" cx="1" cy="2.5" rx="1" ry="2.5" transform="translate(857 873)" fill="#bd9a48"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55.676" height="182.049" viewBox="0 0 55.676 182.049">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.726" y1="1.096" x2="1.104" y2="-0.48" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="gray"/>
+    </linearGradient>
+  </defs>
+  <g id="juicer" transform="translate(-1342 -478.522)">
+    <path id="Path_26" data-name="Path 26" d="M27.838,6.551c15.375,0,27.838,10.849,27.838,31.521s-19.9,56.1-27.838,55.492S0,58.743,0,38.072,12.464,6.551,27.838,6.551Z" transform="translate(1342 567)" fill="url(#linear-gradient)"/>
+    <path id="Path_27" data-name="Path 27" d="M2.735,14.364C4.123-6.8,15.369-4.4,15.369-4.4s10.1-2.4,11.485,18.759-5.743,70.292-5.743,70.292S36.278,92.414,31,95,5.248,97.586,0,95,10.009,84.656,10.009,84.656,1.347,35.528,2.735,14.364Z" transform="translate(1354 483)" fill="#45f151"/>
+    <path id="Path_28" data-name="Path 28" d="M0,0S4.649,12.425,4.71,20.3.2,57.651.2,57.651Z" transform="translate(1368.838 600.921) rotate(-1)" fill="#939393"/>
+    <path id="Path_29" data-name="Path 29" d="M0,0S3.986,12.341,3.655,20.284-2.675,58.15-2.675,58.15Z" transform="matrix(0.97, 0.242, -0.242, 0.97, 1389.839, 600.35)" fill="#939393"/>
+    <path id="Path_30" data-name="Path 30" d="M4.567.129S.413,13.414.711,21.33,6.5,58.064,6.5,58.064Z" transform="matrix(0.985, -0.174, 0.174, 0.985, 1349.105, 601.029)" fill="#939393"/>
+  </g>
+</svg>

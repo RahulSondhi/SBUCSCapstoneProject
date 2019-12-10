@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="116.953" height="358.223" viewBox="0 0 116.953 358.223">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="70.468" height="53.705" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="whipped_cream" transform="translate(-213.267 -21.468)">
+    <path id="cream" d="M53.558,71.85c8.083.637,17.824,14.891,19.068,21.854.574,3.21,11.408,50.119,11.365,94.846C83.942,240.482,72.956,291.1,72.956,291.1S55.7,298.14,40.069,298.14,6.77,291.1,6.77,291.1-4.58,239.961-5.148,188.551C-5.647,143.43,4.58,97.619,5.259,93.7c1.445-8.33,9.751-21.217,17.3-21.854A251.705,251.705,0,0,1,53.558,71.85Z" transform="translate(232.183 70.19)" fill="rgba(201,34,34,0.54)"/>
+    <path id="bottle" d="M86.592,70.611s23.392-.28,31.19,68.037,0,205.23,0,205.23-25.5,5.873-51.39,5.873-52.16-5.873-52.16-5.873-7.486-136.913,0-205.23S44.174,70.611,44.174,70.611Z" transform="translate(206 22.249)" fill="#fff"/>
+    <path id="cap" d="M13.106,0H36.657L47.251,67.9s-11.444,4.173-23.256,4.173S0,67.9,0,67.9Z" transform="translate(248.397 21.468)" fill="red"/>
+    <g id="label">
+      <path id="bottle-2" data-name="bottle" d="M105.128,90.114s4.855-19.783,12.653,48.367,0,204.728,0,204.728-25.5,5.858-51.39,5.858-52.16-5.858-52.16-5.858-7.486-136.578,0-204.728S26.9,90.114,26.9,90.114Z" transform="translate(206 22.932)" fill="#ff0404"/>
+      <ellipse id="Ellipse_54" data-name="Ellipse 54" cx="44.5" cy="34" rx="44.5" ry="34" transform="translate(227 151)" fill="#fff"/>
+      <path id="Path_111" data-name="Path 111" d="M68.5,0c37.831,0,31.118,27.845,31.118,27.845L93.593,73.757s-61.231,1.91-84.63-7.4c-11.044-4.4-18.84-2.4-19.743-5.949C-11.653,57.051-4.69,47.871,0,36.5,8.883,14.964,30.668,0,68.5,0Z" transform="matrix(0.996, -0.087, 0.087, 0.996, 224.079, 305.109)" fill="#ffc56e"/>
+      <text id="Whipped_CREAM-2" data-name="Whipped
+CREAM" transform="translate(272 182)" font-size="15" font-family="CopperplateGothic-Bold, Copperplate Gothic" font-weight="700"><tspan x="-35.944" y="0">Whipped</tspan><tspan x="-31.403" y="16">CREAM</tspan></text>
+      <g id="Repeat_Grid_16" data-name="Repeat Grid 16" transform="translate(243.258 315.66)" clip-path="url(#clip-path)">
+        <g transform="translate(-124.258 -398.66)">
+          <line id="Line_14" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-109.258 -398.66)">
+          <line id="Line_14-2" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-2" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-94.258 -398.66)">
+          <line id="Line_14-3" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-3" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-79.258 -398.66)">
+          <line id="Line_14-4" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-4" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-64.258 -398.66)">
+          <line id="Line_14-5" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-5" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-124.258 -379.66)">
+          <line id="Line_14-6" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-6" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-109.258 -379.66)">
+          <line id="Line_14-7" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-7" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-94.258 -379.66)">
+          <line id="Line_14-8" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-8" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-79.258 -379.66)">
+          <line id="Line_14-9" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-9" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+        <g transform="translate(-64.258 -379.66)">
+          <line id="Line_14-10" data-name="Line 14" x2="24" y2="34" transform="translate(125.5 404.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+          <line id="Line_15-10" data-name="Line 15" x1="23" y2="34" transform="translate(125.5 399.5)" fill="none" stroke="#8f4b17" stroke-width="3"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

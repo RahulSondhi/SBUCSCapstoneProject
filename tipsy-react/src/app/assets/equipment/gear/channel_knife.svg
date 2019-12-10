@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52" height="319.388" viewBox="0 0 52 319.388">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#eee"/>
+      <stop offset="1" stop-color="#666464"/>
+    </linearGradient>
+  </defs>
+  <g id="channel_knife" transform="translate(-109 -48.612)">
+    <path id="Subtraction_4" data-name="Subtraction 4" d="M-3887-805h-32a10.012,10.012,0,0,1-10-10v-220a10.011,10.011,0,0,1,10-10h32a10.011,10.011,0,0,1,10,10v220A10.012,10.012,0,0,1-3887-805Zm-16-48h0l-11,37h22l-11-37Z" transform="translate(4038 1173)"/>
+    <path id="Subtraction_5" data-name="Subtraction 5" d="M-3918.707-965.612-3929-1045h43.292l-10.353,79.388h-22.646Zm3.294-53.979,4.5,37.98h8l3.676-37.98h-16.175Z" transform="translate(4040.914 1093.612)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>
