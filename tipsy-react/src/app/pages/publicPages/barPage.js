@@ -102,7 +102,7 @@ class BarPage extends Component {
                         <NavLink
                             to={"/tipsy/bar/" + this.props.match.params.id + "/config"}
                             className={"cell grid-x align-center-middle " + this.state.settingClass}>
-                            <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
+                            <GetProfImg className="small-3 small-offset-8 cell" alt="Settings" type="settings"/>
                         </NavLink>
                     </div>
 

@@ -56,11 +56,11 @@
 
 #userDisplayPageTitle{
     height: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
 .userDisplayTabs{
-    height: 82%;
+    height: 80%;
 }
 
 .userDisplayTabs .ant-tabs-content,
