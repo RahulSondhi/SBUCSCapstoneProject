@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
+import SVG from 'react-inlinesvg';
+
 import Navbar from '../navbar/navbar.js';
 
 import {getGameProfile, saveGame, forfeitGame} from '../../util/APIUtils';
 import {Notify, ItemPreview} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
+
+import gamePage from '../../assets/game.svg'
 
 import {Icon} from 'antd';
 
@@ -16,6 +20,7 @@ class Game extends Component {
             progress: null,
             completed: false,
             isLoading: true,
+            game:gamePage,
             equipmentDoing: {
                 value: ""
             },
@@ -133,6 +138,7 @@ class Game extends Component {
                     <GameStepPreview step={this.state.recipe.steps[this.state.currentStep]} 
                         equipment={this.state.equipmentAvailable.value} 
                         product={this.state.equipmentProducts.value}/>
+                    <SVG src={this.state.game} />
                 </div>
             </div>
         )
