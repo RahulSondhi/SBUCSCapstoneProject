@@ -1,20 +1,22 @@
 package com.maroon.mixology.entity.type;
 
 public enum ActionType {
-    POUR,
     ADD,
-    SHAKE,
-    STRAIN,
+    POUR,
+    INPUT,
+    SPRINKLE,
     PRESS,
     CRUSH,
     CUT,
     PEEL,
-    MEASURE,
     BLEND,
     IGNITE,
     HEAT,
     BOIL,
     COOL,
-    SQUEEZE,
-    FREEZE;
+    FREEZE,
+    STRAIN,
+    STIR,
+    TEMPERATE,
+    SHAKE
 }

@@ -10,9 +10,10 @@ public enum EquipmentTypeEnum {
     PRESSER,
     CRUSHER,
     KNIFE,
-    MEASURER,
     BLENDER,
     PEELER,
     HEATING,
-    COOLING;
+    COOLING,
+    TOPPING,
+    STIRRER;
 }
