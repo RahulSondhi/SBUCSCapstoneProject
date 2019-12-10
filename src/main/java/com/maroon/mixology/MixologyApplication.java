@@ -63,13 +63,13 @@ public class MixologyApplication {
             // eT.setActionsDoing(doing);
             // equipmentTypeRepository.save(eT);
             // Equipment Table
-            EquipmentType t = equipmentTypeRepository.findByName("PEELER");
-            Equipment e = new Equipment(
-                "Grater",
-                "",
-                t
-            ); 
-            equipmentRepository.save(e);
+            // EquipmentType t = equipmentTypeRepository.findByName("PEELER");
+            // Equipment e = new Equipment(
+            //     "Grater",
+            //     "",
+            //     t
+            // ); 
+            // equipmentRepository.save(e);
             // // Role adminRole = roleRepository.findByName("ADMIN");
             // // if (adminRole == null) {
             // //     Role newUserRole = new Role();
