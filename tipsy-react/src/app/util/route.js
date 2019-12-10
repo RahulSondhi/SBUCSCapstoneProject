@@ -23,7 +23,7 @@ import ConfigUserPage from '../pages/userPages/configUserPage.js';
 import ChangePasswordPage from '../pages/userPages/changePasswordPage.js';
 
 // Game Page Imports
-import Game from '../pages/userPages/game';
+import Game from '../pages/game/game';
 
 class Routes extends Component {
 

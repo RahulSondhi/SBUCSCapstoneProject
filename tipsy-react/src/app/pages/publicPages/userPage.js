@@ -28,19 +28,16 @@ class UserPage extends Component {
 
         getUserProfile(name).then(response => {
 
-            if(this.props.currentUser.name === response.name ||
-                this.props.currentUser.roles.includes("ADMIN")){
-                this.setState({
-                    settingClass : " "
-                });
+            if (this.props.currentUser.name === response.name || this.props.currentUser.roles.includes("ADMIN")) {
+                this.setState({settingClass: " "});
             }
 
             this.setState({user: response, isLoading: false});
         }).catch(error => {
             this.setState({
-                error:{
+                error: {
                     status: error.status,
-                    message: error.message, 
+                    message: error.message
                 },
                 isLoading: false
             });
@@ -73,77 +70,94 @@ class UserPage extends Component {
         // Checking response
         if (this.state.error) {
             return <ErrorPage
-            status ={this.state.error.status}
-            message = {this.state.error.message.message}
-            history = {this.props.history}
-            />
+                status
+                ={this.state.error.status}
+                message={this.state.error.message.message}
+                history={this.props.history}/>
         }
 
         return (
-            <div className="grid-x align-center-middle">
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
-                <h1 id="userPageTitle" className="caption small-8 small-offset-2 cell">{this.state.user.name}</h1>
-                
-                <div id="redirectUser" className="small-1 small-offset-1 cell grid-x align-center-middle">
-                    <NavLink to={"/tipsy/user/"+this.state.user.name+"/config"} className={"cell grid-x align-center-middle "+this.state.settingClass}>
-                        <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
-                    </NavLink>
-                </div>
 
-                <div
-                    id="leftProfileSide"
-                    className="small-12 medium-4 grid-x align-center-middle cell">
-
-                    <GetProfImg
-                        className="small-4 cell"
-                        pic={this.state.user.img}
-                        alt={this.state.user.name}
-                        type="user"/>
-                    <h1 id="userPageFullName" className="caption small-10 cell">{this.state.user.fullName}</h1>
-                    <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
-                    <div
-                        className="userPageBarScroll small-10 grid-x grid-margin-x align-center-middle cell">
-                        <div
-                            className="userPageBarContainer grid-x grid-margin-x align-center align-top cell">
-                            <ItemPreview className="cell" items={this.state.user.bars} type="bar"/>
-                            
-                        </div>
+                <div className="grid-x align-center align-top cell page">
+                    <div className="small-8 small-offset-2 grid-x align-center-middle cell publicUserProfImg">
+                        <GetProfImg
+                                    className="small-2 cell"
+                                    pic={this.state.user.img}
+                                    alt={this.state.user.name}
+                                    type="user"/>
+                        <h1 id="userPageTitle" className="caption grid-x align-center-middle cell ">
+                            {this.state.user.name}
+                            <div className="cell"/>
+                            {"("+this.state.user.fullName+")"}
+                        </h1>
                     </div>
-                </div>
-                <div
-                    id="rightProfileSide"
-                    className="small-12 medium-8 grid-x align-center-middle cell">
-                    <h1 id="userPageBarTitle" className="captionRed small-10 cell">Recipes History</h1>
-                    <Tabs className="small-12 medium-10 cell" tabPosition="right">
-                        <TabPane tab="Done" key="1">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-                                <ItemPreview
-                                    className="small-6 cell"
-                                    items={this.state.user.recipesCompleted}
-                                    type="recipe"/>
-                            </div>
-                        </TabPane>
-                        <TabPane tab="Made" key="2">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-                                <ItemPreview
-                                    className="small-6 cell"
-                                    items={this.state.user.recipesWritten.filter(equip => 
-                                        { 
-                                            return equip.published === true
-                
-                                        })}
-                                    type="recipe"/>
-                            </div>
-                        </TabPane>
-                        <TabPane tab="Doing" key="3">
-                            <div className="grid-x grid-margin-x align-center-middle cell">
-                                <ItemPreview
-                                    className="small-6 cell"
-                                    items={this.state.user.recipesIncompleted}
-                                    type="recipe"/>
-                            </div>
-                        </TabPane>
-                    </Tabs>
+
+                    <div
+                        id="redirectUser"
+                        className="small-1 small-offset-1 cell grid-x align-center-middle">
+                        <NavLink
+                            to={"/tipsy/user/" + this.state.user.name + "/config"}
+                            className={"cell grid-x align-center-middle " + this.state.settingClass}>
+                            <GetProfImg className="small-3 cell" alt="Settings" type="settings"/>
+                        </NavLink>
+                    </div>
+
+                    <div
+                        className="small-12 medium-4 grid-x align-center-middle cell leftUserPublicSide">
+
+                        <h1 id="userPageBarTitle" className="captionRed small-10 cell">Bars</h1>
+                        <div className="userPageBarContainer small-12 grid-x grid-margin-x align-center align-top cell">
+                            <ItemPreview className="small-5 cell" items={this.state.user.bars} type="bar"/>
+                        </div>
+
+                    </div>
+                    <div className="small-12 medium-8 grid-x align-center-middle rightUserPublicSide cell">
+                        <h1 id="userPageBarTitle" className="captionRed small-10 cell">Recipes History</h1>
+                        <Tabs className="small-12 publicTabs cell" tabPosition="right">
+                        <TabPane tab="Making" key="4">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.user.recipesWritten.filter(equip => 
+                                            { 
+                                                return equip.published === false
+                    
+                                            })}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Doing" key="0">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.user.recipesIncompleted}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Done" key="1">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.user.recipesCompleted}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Published" key="2">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.user.recipesWritten.filter(equip => 
+                                            { 
+                                                return equip.published === true
+                    
+                                            })}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                        </Tabs>
+                    </div>
                 </div>
             </div>
         )

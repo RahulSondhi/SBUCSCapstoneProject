@@ -12,7 +12,7 @@ class EquipmentPage extends Component {
         super(props);
         this.state = {
             equipment: null,
-            isLoading: true,
+            isLoading: true
         }
         this.loadEquipmentProfile = this
             .loadEquipmentProfile
@@ -29,18 +29,15 @@ class EquipmentPage extends Component {
         this.setState({isLoading: true});
 
         getEquipmentProfile(id).then(response => {
-            this.setState({
-                equipment: response, 
-                isLoading: false
-            });
+            this.setState({equipment: response, isLoading: false});
         }).catch(error => {
             this.setState({
-                error:{
+                error: {
                     status: error.status,
-                    message: error.message, 
+                    message: error.message
                 },
                 isLoading: false
-            });        
+            });
         });
     }
 
@@ -60,47 +57,48 @@ class EquipmentPage extends Component {
         // Checking response
         if (this.state.error) {
             return <ErrorPage
-            status ={this.state.error.status}
-            message = {this.state.error.message.message}
-            history = {this.props.history}
-            />
+                status
+                ={this.state.error.status}
+                message={this.state.error.message.message}
+                history={this.props.history}/>
         }
 
         console.log(this.state.equipment)
 
         return (
-            <div className="grid-x grid-x-margin align-center-middle">
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
 
-                <div className="small-8 grid-x align-center-middle cell">
-                    <GetProfImg
-                        className="small-3 cell"
-                        pic={this.state.equipment.img}
-                        alt={this.state.equipment.name}
-                        type="equipment"/>
-                </div>
+                <div className="grid-x align-center align-top cell page">
 
-                <h1 id="equipmentPageTitle" className="caption small-10 cell">{this.state.equipment.name}</h1>
-                <h2 id="equipmentPageSubTitle" className="captionYellow small-10 cell">{this.state.equipment.equipmentType.type}</h2>
+                    <div className="small-8 grid-x align-center-middle cell publicUserProfImg">
+                        <GetProfImg
+                            className="small-2 cell"
+                            pic={this.state.equipment.img}
+                            alt={this.state.equipment.name}
+                            type="equipment"/>
+                        <h1 id="equipmentPageTitle" className="caption cell">{this.state.equipment.name}</h1>
+                        <h2 id="equipmentPageSubTitle" className="captionYellow cell">{this.state.equipment.equipmentType.type}</h2>
+                    </div>
 
-                <div className="small-12 medium-6 grid-x align-center align-self-top cell"> 
-                    <h2 className="captionRed small-12 cell">What Actions Can I Do With This?</h2>
+                    <div className="small-12 medium-6 grid-x align-center align-self-top align-top cell rightUserPublicSide">
+                        <h2 className="captionRed small-12 cell">What Actions Can I Do With This?</h2>
 
                         <ItemPreview
-                                    className="small-8 cell"
-                                    items={this.state.equipment.equipmentType.actionsDoing}
-                                    type="action"/>
+                            className="small-4 cell"
+                            items={this.state.equipment.equipmentType.actionsDoing}
+                            type="action"/>
+                    </div>
+
+                    <div className="small-12 medium-6 grid-x align-center align-self-top align-top cell rightUserPublicSide">
+                        <h2 className="captionRed small-12 cell">What Actions Can Be Done To This?</h2>
+                        <ItemPreview
+                            className="small-4 cell"
+                            items={this.state.equipment.equipmentType.actionsToDo}
+                            type="action"/>
+                    </div>
+
                 </div>
-
-
-                <div className="small-12 medium-6 grid-x align-center align-self-top cell">
-                    <h2 className="captionRed small-12 cell">What Actions Can Be Done To This?</h2> 
-                         <ItemPreview
-                                    className="small-8 cell"
-                                    items={this.state.equipment.equipmentType.actionsToDo}
-                                    type="action"/>
-                </div>
-
             </div>
         )
     }
