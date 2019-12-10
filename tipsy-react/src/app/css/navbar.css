@@ -35,21 +35,21 @@
 }
 
 .logo {
-    width: 10em;
+    width: 15em;
     float: left;
 }
 .logo img {
     display: inline-block;
-    padding: 1.5em 1.25em;
+    padding: 0.5em 0.25em;
 }
 
 /* Right Menu */
 .menuCon {
-    width: calc(100% - 10em);
+    width: calc(100% - 15em);
     float: left;
 }
 .menuCon .ant-menu-item {
-    padding: 0 5px;
+    /* padding: 0 5px; */
 }
 .menuCon .ant-menu-submenu-title {
     padding: 10px 20px;
