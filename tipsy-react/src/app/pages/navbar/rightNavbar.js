@@ -20,6 +20,7 @@ class GeneralNavbar extends Component {
 
         this.type = this.props.type;
         this.gameId = this.props.gameId;
+
     }
 
     render() {
@@ -29,16 +30,8 @@ class GeneralNavbar extends Component {
 
                     {/* Instruction */}
                     <Menu.Item key="instruction">
-                        <NavLink
-                            to={"/tipsy/recipe/"+this.gameId+"/instruction"}
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
-                            <InstructionIcon/>
+                        <NavLink to={"/tipsy/recipe/"+this.gameId+"/instruction"}>
+                            <Icon type="profile" style={{fontSize : "1.5em"}}/>
                             Instruction
                         </NavLink>
                     </Menu.Item>
@@ -46,16 +39,8 @@ class GeneralNavbar extends Component {
 
                     {/* Quit */}
                     <Menu.Item key="quit">
-                        <NavLink
-                            to={"/tipsy/recipe/"+this.gameId}
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
-                            <QuitIcon/>
+                        <NavLink to={"/tipsy/recipe/"+this.gameId}>
+                            <Icon type="logout" style={{fontSize : "1.5em"}}/>
                             Quit
                         </NavLink>
                     </Menu.Item>
@@ -68,15 +53,7 @@ class GeneralNavbar extends Component {
 
                     {/* Search */}
                     <Menu.Item key="search">
-                        <NavLink
-                            to="/tipsy/search"
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
+                        <NavLink to="/tipsy/search">
                             < SearchIcon/>
                             Search
                         </NavLink>
@@ -84,15 +61,7 @@ class GeneralNavbar extends Component {
 
                     {/* Bar Gears */}
                     <Menu.Item key="barEquipment">
-                        <NavLink
-                            to="/tipsy/barEquipment"
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
+                        <NavLink to="/tipsy/barEquipment">
                             < BarToolsIcon/>
                             Bar Equipment
                         </NavLink>
@@ -100,15 +69,7 @@ class GeneralNavbar extends Component {
 
                     {/* My Bars */}
                     <Menu.Item key="myBars">
-                        <NavLink
-                            to="/tipsy/myBars"
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
+                        <NavLink to="/tipsy/myBars">
                             < BarIcon/>
                             My Bars
                         </NavLink>
@@ -116,15 +77,7 @@ class GeneralNavbar extends Component {
 
                     {/* My Recipes */}
                     <Menu.Item key="myRecipes">
-                        <NavLink
-                            to="/tipsy/myRecipes"
-                            isActive={(match, location) => {
-                            if (!match) {
-                                return false;
-                            }
-                            const eventID = parseInt(match.params.eventID);
-                            return !isNaN(eventID) && eventID % 2 === 1;
-                        }}>
+                        <NavLink to="/tipsy/myRecipes">
                             < RecipeIcon/>
                             My Recipes
                         </NavLink>
@@ -133,45 +86,21 @@ class GeneralNavbar extends Component {
                     {/* Account */}
                     <SubMenu title={<span> <AccountIcon/> Account </span>}>
                         <Menu.Item key="Account:1">
-                            <NavLink
-                                to="/tipsy/user/me"
-                                isActive={(match, location) => {
-                                if (!match) {
-                                    return false;
-                                }
-                                const eventID = parseInt(match.params.eventID);
-                                return !isNaN(eventID) && eventID % 2 === 1;
-                            }}>
+                            <NavLink to="/tipsy/user/me">
                                 < UserIcon/>
                                 My Profile
                             </NavLink>
                         </Menu.Item>
 
                         <Menu.Item key="setting:2">
-                            <NavLink
-                                to="/tipsy/user/me/config"
-                                isActive={(match, location) => {
-                                if (!match) {
-                                    return false;
-                                }
-                                const eventID = parseInt(match.params.eventID);
-                                return !isNaN(eventID) && eventID % 2 === 1;
-                            }}>
+                            <NavLink to="/tipsy/user/me/config">
                                 <Icon type="tool" theme="twoTone" twoToneColor="#A0A0A0"/>
                                 Settings
                             </NavLink>
                         </Menu.Item>
 
                         <Menu.Item key="setting:3">
-                            <NavLink
-                                to="/logout"
-                                isActive={(match, location) => {
-                                if (!match) {
-                                    return false;
-                                }
-                                const eventID = parseInt(match.params.eventID);
-                                return !isNaN(eventID) && eventID % 2 === 1;
-                            }}>
+                            <NavLink to="/logout">
                                 <Icon type="logout"/>
                                 Log Out
                             </NavLink>
@@ -203,14 +132,6 @@ const AccountIcon = (props) => isFirefox
 const UserIcon = (props) => isFirefox
     ? <img src={AccountPNG} id="account" alt="userIcon"/>
     : <Icon component={AccountSvg} {...props}/>;
-
-// Game
-const InstructionIcon = (props) => isFirefox
-    ? <img src={RecipePNG} id="instruction" alt="instructionIcon"/>
-    : <Icon component={RecipeSvg} {...props}/>;
-const QuitIcon = (props) => isFirefox
-    ? <img src={RecipePNG} id="instruction" alt="instructionIcon"/>
-    : <Icon component={RecipeSvg} {...props}/>;
 
 // SVGs
 const SearchSvg = () => (

@@ -30,14 +30,13 @@
 
 #searchDrinks {
   width: 50%;
-  position: absolute;
-  bottom: 0;
 }
 
 #searchTitle{
   margin-top: 5%;
+  height: 15%;
   font-size: 7em;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 
@@ -64,7 +63,9 @@
     height: 82%;
 }
 
-.userDisplayTabs .scroll{
+.userDisplayTabs .ant-tabs-content,
+.userDisplayTabs .ant-tabs-content-animated,
+.userDisplayTabs .ant-tabs-right-content{
     height: 100% !important;
     overflow-y: auto !important;
 }
@@ -95,4 +96,13 @@
 /* Change Password */
 .changePasswordTitle{
   color: white;
+}
+
+/* Game Page */
+
+.previewGameStepContainer{
+  padding-top: 0.5em;
+  padding-bottom: 0.75em;
+  text-align: center;
+  word-wrap: break-word;
 }

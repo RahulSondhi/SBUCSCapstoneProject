@@ -86,7 +86,8 @@ form .ant-form-item-label{
 }
 
 .searchbar{
-    margin-bottom: 3%;
+    margin-top: 1%;
+    margin-bottom: 2%;
 }
 
 .ant-input-group .ant-input-group-addon .ant-select{

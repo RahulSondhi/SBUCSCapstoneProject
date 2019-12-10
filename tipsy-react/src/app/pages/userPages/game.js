@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {getGameProfile, saveGame, forfeitGame} from '../../util/APIUtils';
-import {Notify} from '../../util/constants';
+import {Notify, ItemPreview} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
+
+import {Icon} from 'antd';
 
 class Game extends Component {
 
@@ -14,6 +16,22 @@ class Game extends Component {
             progress: null,
             completed: false,
             isLoading: true,
+            equipmentDoing: {
+                value: ""
+            },
+            equipmentToDo: {
+                value: ""
+            },
+            action: {
+                value: ""
+            },
+            equipmentAvailable:{
+                value: []
+            },
+            equipmentProducts:{
+                value: []
+            },
+            currentStep: 0
         }
         this.loadGameProfile = this
             .loadGameProfile
@@ -31,11 +49,24 @@ class Game extends Component {
         this.setState({isLoading: true});
 
         getGameProfile(id).then(response => {
+
+            var index = response.progress.indexOf(0)
+
+            if(index !== 0){
+                index = index - 1
+            }else{
+                response.progress[0] = response.progress[0] + 1
+            }
+
             this.setState({
                 recipe: response.recipe,
                 progress: response.progress,
                 completed: response.completed, 
-                isLoading: false
+                isLoading: false,
+                equipmentAvailable:{
+                    value: response.recipe.equipmentsAvailable
+                },
+                currentStep: index
             });
         }).catch(error => {
             this.setState({
@@ -98,10 +129,77 @@ class Game extends Component {
         return (
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar type="game"/>
-                hi im a game
+                <div className="grid-x align-center align-top cell page">
+                    <GameStepPreview step={this.state.recipe.steps[this.state.currentStep]} 
+                        equipment={this.state.equipmentAvailable.value} 
+                        product={this.state.equipmentProducts.value}/>
+                </div>
             </div>
         )
     }
 }
+
+class GameStepPreview extends Component {
+    
+    constructor(props){
+        super(props);
+        
+        var action = this.props.step.action;
+
+        this.state = {
+            className: this.props.className,
+            step:this.props.step,
+            equipment: this.props.equipment,
+            product: this.props.product,
+            action: action
+        };
+    }
+
+    getEquipment(name){
+        var equip = this.state.equipment.find(o => o.name === name);
+        var product = this.state.product.find(o => o.name === name);
+
+        if(equip !== undefined){
+
+            equip.equipmentType = equip.equipmentType.type;
+
+            return <ItemPreview
+            className="cell"
+            items={[equip]}
+            func={()=>{}}
+            type={"equipment"} />   
+        }else{
+
+            product.equipmentType = product.equipmentType.type;
+
+            return <ItemPreview
+            className="cell"
+            items={[product]}
+            func={()=>{}}
+            type={"equipmentAltered"} />   
+        }
+    }
+  
+  
+    render() {
+      return (
+        <div className="grid-x align-center-middle small-10 cell">
+            <div className="previewItemMargin cell"></div>
+            <div className="grid-x align-center-middle small-11 cell previewGameStepContainer">
+                <div className="grid-x align-center-middle small-3 cell">
+                    {this.getEquipment(this.state.step.equipmentDoing)}
+                </div>
+                <div className="grid-x align-center-middle small-3 cell">
+                    <span>{this.state.action}</span>
+                </div>
+                <div className="grid-x align-center-middle small-3 cell">
+                    {this.getEquipment(this.state.step.equipmentToDo)}
+                </div>
+            </div>
+            <div className="previewItemMargin cell"></div>
+        </div>
+      );
+    }
+  }
 
 export default Game;

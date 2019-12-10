@@ -127,7 +127,7 @@ class UsersBarsPage extends Component {
                     <Navbar/>
 
                     <div className="grid-x align-center align-top cell page">
-
+                        
                         <h1 id="userDisplayPageTitle" className="caption small-10 cell">{this.state.title}</h1>
 
                         <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
@@ -198,8 +198,24 @@ class UsersBarsPage extends Component {
                     <div className="grid-x align-center align-top cell page">
 
                         <h1 id="userDisplayPageTitle" className="caption small-10 cell">{this.state.title}</h1>
-
+                        
                         <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
+                            <TabPane tab="Making" key="4">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 medium-3 cell"
+                                        items={this.state.data.recipesWritten.filter(equip => 
+                                            { 
+                                                return equip.published === false
+                    
+                                            })}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
                             <TabPane tab="Doing" key="0">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
@@ -235,22 +251,6 @@ class UsersBarsPage extends Component {
                                         items={this.state.data.recipesWritten.filter(equip => 
                                             { 
                                                 return equip.published === true
-                    
-                                            })}
-                                        type="recipe"/>
-                                </div>
-                            </TabPane>
-                            <TabPane tab="Making" key="4">
-                                <div className="grid-x grid-margin-x align-center-middle cell">
-                                    <ItemPreview
-                                        className="small-4 medium-3 cell"
-                                        items={this.state.customButtonData}
-                                        type={this.state.customButtonType}/>
-                                    <ItemPreview
-                                        className="small-4 medium-3 cell"
-                                        items={this.state.data.recipesWritten.filter(equip => 
-                                            { 
-                                                return equip.published === false
                     
                                             })}
                                         type="recipe"/>

@@ -178,28 +178,30 @@ export class SearchPage extends Component {
         }
 
         return (
-            <div className="grid-x align-center-middle">
+            <div className="grid-x align-center-middle pageContainer">
                 
                 <Navbar/>
 
-                {/* Title */}
-                <h1 id="searchTitle" className={"caption small-8 cell "+this.state.searchingClass}>
-                    Search
-                </h1>
+                <div className="grid-x align-top align-center cell page">
+                    {/* Title */}
+                    <div id="searchTitle" className={"caption small-8 cell "+this.state.searchingClass}>
+                        Search
+                    </div>
 
-                {/* Search Bar */}
-                <Input addonBefore={selectBefore} className="searchbar medium-10 cell" placeholder="What are you looking for?" onPressEnter={(e) => this.searching(e)} />
-                
-                {/* Drinks Footer */}
-                <div id="searchDrinks" className={"small-12 cell "+this.state.searchingClass}>
-                    <img src={Drinks} alt="DrinksLogo"></img>
+                    {/* Search Bar */}
+                    <Input addonBefore={selectBefore} className="searchbar small-10 cell" placeholder="What are you looking for?" onPressEnter={(e) => this.searching(e)} />
+                    
+                    {/* Drinks Footer */}
+                    <div id="searchDrinks" className={"align-self-bottom small-12 cell "+this.state.searchingClass}>
+                        <img src={Drinks} alt="DrinksLogo"></img>
+                    </div>
+
+                    <ItemPreview
+                        className= {"small-6 medium-3 cell "+this.state.searchClass}
+                        items={this.state.results}
+                        type={this.state.type}/>
                 </div>
 
-                <ItemPreview
-                    className= {"small-6 medium-3 cell "+this.state.searchClass}
-                    items={this.state.results}
-                    type={this.state.type}/>
-                
             </div>
         )
 
