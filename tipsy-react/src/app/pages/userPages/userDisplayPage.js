@@ -123,16 +123,16 @@ class UsersBarsPage extends Component {
 
         if(this.state.type === "bar"){
             return (
-                <div className="grid-x grid-x-margin align-center-middle">
+                <div className="grid-x grid-x-margin align-center-middle pageContainer">
                     <Navbar/>
 
-                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
+                    <div className="grid-x align-center align-top cell page">
 
-                    <div className="grid-x align-center align-top cell">
+                        <h1 id="userDisplayPageTitle" className="caption small-10 cell">{this.state.title}</h1>
 
-                    <Tabs className="small-12 cell" tabPosition="right">
+                        <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
                             <TabPane tab="All Bars" key="0">
-                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                <div className="grid-x grid-margin-x align-center-middle cell scroll">
                                     <ItemPreview
                                         className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
@@ -192,14 +192,14 @@ class UsersBarsPage extends Component {
             )
         }else if(this.state.type === "recipe"){
             return (
-                <div className="grid-x grid-x-margin align-center-middle">
+                <div className="grid-x grid-x-margin align-center-middle pageContainer">
                     <Navbar/>
 
-                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
+                    <div className="grid-x align-center align-top cell page">
 
-                    <div className="grid-x align-center align-top cell">
+                        <h1 id="userDisplayPageTitle" className="caption small-10 cell">{this.state.title}</h1>
 
-                        <Tabs className="small-12 cell" tabPosition="right">
+                        <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
                             <TabPane tab="Doing" key="0">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
@@ -263,21 +263,20 @@ class UsersBarsPage extends Component {
             )
         }else if(this.state.type === "equipment"){
             return (
-                <div className="grid-x grid-x-margin align-center-middle">
+                <div className="grid-x grid-x-margin align-center-middle pageContainer">
                     <Navbar/>
 
-                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
-
-                    <div className="grid-x align-center align-top cell">
+                    <div className="grid-x align-center align-top cell page">
+                        <h1 id="userDisplayPageTitle" className="caption small-10 cell">{this.state.title}</h1>
 
                         <ItemPreview
                             className="small-4 medium-3 cell"
                             items={this.state.customButtonData}
                             type={this.state.customButtonType}/>
 
-                        <Tabs className="small-12 cell" tabPosition="right">
+                        <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
                             <TabPane tab="All" key="All">
-                                    <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <div className="grid-x grid-margin-x align-center-middle cell scroll">
                                         <ItemPreview
                                             className="small-4 medium-3 cell"
                                             items={this.state.data}

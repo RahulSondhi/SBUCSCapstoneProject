@@ -105,10 +105,12 @@ class ConfigRecipePage extends Component {
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
             var type = this.state.type;
+            var published = response.published;
 
             if (this.state.type === "clone") {
                 tempTitle = "Cloning " + response.name;
                 tempSubmit = "Clone";
+                published = false;
             }
 
             if(response.published === true){
@@ -180,7 +182,7 @@ class ConfigRecipePage extends Component {
                     value: response.img
                 },
                 published: {
-                    value: response.published
+                    value: published
                 },
                 newSteps: {
                     value: false

@@ -899,7 +899,7 @@ class GetStep extends Component {
                     {this.getEquipment(this.state.item.equipmentProduct)}
                 </div>
                 <div className="grid-x small-1 cell">
-                    <div className={"small-6 small-offset-5 cell align-self-top"+this.state.removeClass} onClick={() => {this.state.removeFunc(this.state.item)}}>
+                    <div className={"small-6 small-offset-5 cell align-self-top "+this.state.removeClass} onClick={() => {this.state.removeFunc(this.state.item)}}>
                         <GetProfImg type="error" className="cell" />
                     </div>
                     <div className="cell spacer"></div>

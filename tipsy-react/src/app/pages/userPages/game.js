@@ -96,10 +96,10 @@ class Game extends Component {
             />
         }
         return (
-          <div>
-              <Navbar type="game"/>
-              hi im a game
-          </div>
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
+                <Navbar type="game"/>
+                hi im a game
+            </div>
         )
     }
 }

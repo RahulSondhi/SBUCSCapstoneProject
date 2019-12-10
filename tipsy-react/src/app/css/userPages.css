@@ -53,10 +53,35 @@
   margin-top: 2%;
 }
 
-/* Users Bar Page */
+/* Users Display Page */
 
-#userBarsPageTitle{
+#userDisplayPageTitle{
+    height: 5%;
     margin-bottom: 5%;
+}
+
+.userDisplayTabs{
+    height: 82%;
+}
+
+.userDisplayTabs {
+  height: 82%;
+}
+
+.scroll{
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.ant-tabs-tab-prev,
+.ant-tabs-tab-next,
+.ant-tabs-tab-prev:hover,
+.ant-tabs-tab-next:hover{
+  color: white;
+}
+
+.ant-tabs-tab-btn-disabled, .ant-tabs-tab-btn-disabled:hover{
+  color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Users Recipes Page */
