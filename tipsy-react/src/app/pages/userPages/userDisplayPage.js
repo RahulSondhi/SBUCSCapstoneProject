@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {ItemPreview} from '../../util/constants';
-import {getUserProfile, getAllEquipment} from '../../util/APIUtils';
+import {getUserProfile, getAllEquipment, getAllEquipmentTypes} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
@@ -71,9 +71,18 @@ class UsersBarsPage extends Component {
     loadEquipment() {
         this.setState({isLoading: true});
 
-        getAllEquipment().then(response => {
-            
-            this.setState({data: response, isLoading: false, title:"Bar Equipment"});
+        getAllEquipment().then(response1 => {
+            getAllEquipmentTypes().then(response => {
+                this.setState({data: response1, equipmentTypes: response, isLoading: false, title:"Bar Equipment"});
+            }).catch(error => {
+                this.setState({
+                    error:{
+                        status: error.status,
+                        message: error.message, 
+                    },
+                    isLoading: false
+                });
+            });
         }).catch(error => {
             this.setState({
                 error:{
@@ -125,11 +134,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="All Bars" key="0">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.bars}
                                         type="bar"/>
                                 </div>
@@ -137,11 +146,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Owned Bars" key="1">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.bars.filter(bar => {
                                             return bar.owner === this.props.currentUser.name
                                         })}
@@ -151,11 +160,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Managed Bars" key="2">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.bars.filter(bar => {
                                             return bar.managers.includes(this.props.currentUser.name)
                                         })}
@@ -165,11 +174,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Employeed Bars" key="4">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.bars.filter(bar => {
                                             return bar.workers.includes(this.props.currentUser.name)
                                         })}
@@ -194,11 +203,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Doing" key="0">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.recipesIncompleted}
                                         type="recipe"/>
                                 </div>
@@ -206,11 +215,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Done" key="1">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.recipesCompleted}
                                         type="recipe"/>
                                 </div>
@@ -218,11 +227,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Published" key="2">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.recipesWritten.filter(equip => 
                                             { 
                                                 return equip.published === true
@@ -234,11 +243,11 @@ class UsersBarsPage extends Component {
                             <TabPane tab="Making" key="4">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.customButtonData}
                                         type={this.state.customButtonType}/>
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-4 medium-3 cell"
                                         items={this.state.data.recipesWritten.filter(equip => 
                                             { 
                                                 return equip.published === false
@@ -252,7 +261,7 @@ class UsersBarsPage extends Component {
                     </div>
                 </div>
             )
-        }else{
+        }else if(this.state.type === "equipment"){
             return (
                 <div className="grid-x grid-x-margin align-center-middle">
                     <Navbar/>
@@ -266,10 +275,29 @@ class UsersBarsPage extends Component {
                             items={this.state.customButtonData}
                             type={this.state.customButtonType}/>
 
-                        <ItemPreview
-                            className="small-4 medium-3 cell"
-                            items={this.state.data}
-                            type={this.state.type}/>
+                        <Tabs className="small-12 cell" tabPosition="right">
+                            <TabPane tab="All" key="All">
+                                    <div className="grid-x grid-margin-x align-center-middle cell">
+                                        <ItemPreview
+                                            className="small-4 medium-3 cell"
+                                            items={this.state.data}
+                                            type={this.state.type}/>
+                                    </div>
+                            </TabPane>
+                            {this.state.equipmentTypes.map(item => (
+                                <TabPane tab={item.type} key={item.type}>
+                                    <div className="grid-x grid-margin-x align-center-middle cell">
+                                        <ItemPreview
+                                            className="small-4 medium-3 cell"
+                                            items={this.state.data.filter(equip => {
+                                                return equip.equipmentType === item.type;
+                                            })}
+                                            type={this.state.type}/>
+                                    </div>
+                                </TabPane>
+                            ))}
+                        </Tabs>
+
 
                     </div>
                 </div>
