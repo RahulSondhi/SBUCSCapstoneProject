@@ -6,7 +6,6 @@ import {getRecipeProfile, initGame} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
-import {Button, Icon} from 'antd';
 import {StepPreview} from '../userPages/dynamicSteps';
 
 class RecipePage extends Component {

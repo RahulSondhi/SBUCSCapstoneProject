@@ -159,12 +159,12 @@ class ConfigUserPage extends Component {
 
         
         return (
-            <div className="grid-x align-center-middle">
-                <Navbar/>
-
-                <h1 className="caption align-center-middle cell">
-                    Settings
-                </h1>
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
+            <Navbar/>
+                <div className="grid-x align-center align-top cell page">
+                    <h1 className="small-11 caption cell configPageTitle">
+                        Settings
+                    </h1>
 
                 <MakeProfImg type="user" pic={this.state.profilePic.value} className="cell" data={this.handleImageLoad}/>
 
@@ -253,6 +253,7 @@ class ConfigUserPage extends Component {
                     </FormItem>
                 </Form>
             </div>
+        </div>
         );
     }
 

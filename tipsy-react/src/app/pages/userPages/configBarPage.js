@@ -157,19 +157,19 @@ class ConfigBarPage extends Component {
         }
 
         return (
-            <div className="grid-x align-center-middle">
-                <Navbar/>
-
-                <h1 className="small-11 medium-10 caption cell">
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
+            <Navbar/>
+            <div className="grid-x align-center align-top cell page">
+                <h1 className="small-11 caption cell configPageTitle">
                     {this.state.page.title}
                 </h1>
                 <div className="small-1 medium-2 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-11 cell grid-x align-center-middle">
+                    className="small-12 medium-11 cell grid-x align-center-middle configPageForm">
 
-                    <Tabs className="tabsBarForm small-12 cell" tabPosition="right" tabBarExtraContent={
+                    <Tabs className="tabsBarForm small-12 cell userDisplayTabs" tabPosition="right" tabBarExtraContent={
                         <div className="grid-x align-center-middle cell">
                             <div className="tabsSeperator small-10 cell"></div>
                             <button
@@ -280,6 +280,7 @@ class ConfigBarPage extends Component {
                     </Tabs>
                 </Form>
             </div>
+        </div>
         )
     }
 

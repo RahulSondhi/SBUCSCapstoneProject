@@ -199,7 +199,7 @@ export class MakeProfImg extends Component {
                         alt={"Can't Edit!"}
                         type={this.type}
                         pic={this.state.src}
-                        className="small-5 cell"/>
+                        className="small-2 cell"/>
                 </div>
             )
         }else{

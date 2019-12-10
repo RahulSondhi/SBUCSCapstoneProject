@@ -81,6 +81,22 @@
   color: rgba(255, 255, 255, 0.1) !important;
 }
 
+/* Config Pages */
+
+.configPageTitle{
+  height: 6%;
+}
+
+.configPageForm{
+  height: 90%;
+}
+
+.configPageForm .userDisplayTabs{
+  height: 100%;
+  margin-bottom: 0;
+  padding-top: 3%;
+}
+
 /* Users Recipes Page */
 
 /* Error Page */

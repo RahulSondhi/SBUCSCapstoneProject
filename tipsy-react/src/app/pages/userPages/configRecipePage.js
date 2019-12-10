@@ -114,7 +114,7 @@ class ConfigRecipePage extends Component {
             }
 
             if(published === true){
-                var type = "publish";
+                type = "publish";
             }
 
             var equipmentsAvailable = response
@@ -220,18 +220,19 @@ class ConfigRecipePage extends Component {
         }
 
         return (
-            <div className="grid-x align-center-middle">
+            <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
-                <h1 className="small-11 caption cell">
+                <div className="grid-x align-center align-top cell page">
+                <h1 className="small-11 caption cell configPageTitle">
                     {this.state.page.title}
                 </h1>
                 <div className="small-1 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="cell grid-x align-center-middle">
+                    className="cell grid-x align-center-middle configPageForm">
 
-                    <Tabs className="tabsRecipeForm cell" tabPosition="right" 
+                    <Tabs className="tabsRecipeForm cell userDisplayTabs" tabPosition="right" 
                         tabBarExtraContent={
                             <div className="grid-x align-center-middle cell">
                                 <div className="tabsSeperator small-10 cell"></div>
@@ -356,6 +357,7 @@ class ConfigRecipePage extends Component {
 
                 </Form>
             </div>
+        </div>
         )
     }
 

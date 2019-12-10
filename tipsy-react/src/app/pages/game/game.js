@@ -58,21 +58,23 @@ class Game extends Component {
                 .progress
                 .indexOf(0)
 
+            var progress = response.progress;
+
             if (index !== 0) {
                 index = index - 1
             } else {
-                response.progress[0] = response.progress[0] + 1
+                progress[0] = response.progress[0] + 1
             }
 
             this.setState({
                 recipe: response.recipe,
                 progress: response.progress,
                 completed: response.completed,
-                isLoading: false,
                 equipmentAvailable: {
                     value: response.recipe.equipmentsAvailable
                 },
-                currentStep: index
+                currentStep: index,
+                isLoading: false
             });
         }).catch(error => {
             this.setState({
