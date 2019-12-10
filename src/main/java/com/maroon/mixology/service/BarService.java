@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
 import com.maroon.mixology.repository.BarRepository;
 
@@ -37,5 +38,8 @@ public class BarService {
         return barRepository.findByOwnerOrManagersInOrWorkersIn(user, new HashSet<User>(Arrays.asList(user)), new HashSet<User>(Arrays.asList(user)));
     }
 
+    public List<Bar> findByRecipe(Recipe recipe){
+        return barRepository.findByRecipesAvailableIn(new HashSet<Recipe>(Arrays.asList(recipe)));
+    }
 
 }

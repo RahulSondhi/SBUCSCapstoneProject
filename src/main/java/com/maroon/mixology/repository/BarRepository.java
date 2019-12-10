@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
+import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.User;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -22,4 +23,5 @@ public interface BarRepository extends MongoRepository<Bar, String> {
 
     List<Bar> findByOwnerOrManagersInOrWorkersIn(User owner, Set<User> managers, Set<User> workers);
 
+    List<Bar> findByRecipesAvailableIn(Set<Recipe> recipesAvailable);
 }

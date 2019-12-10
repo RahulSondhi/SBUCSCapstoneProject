@@ -34,4 +34,8 @@ public class GameService {
         return gameRepository.findByPlayerAndCompleted(player, false);
     }
 
+    public List<Game> findByRecipe(Recipe recipe){
+        return gameRepository.findByRecipe(recipe);
+    }
+
 }
