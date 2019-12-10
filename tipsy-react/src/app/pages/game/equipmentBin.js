@@ -1,12 +1,11 @@
-import React from 'react'
-import { DropTarget } from 'react-dnd'
-import ItemTypes from './itemTypes'
+import React from 'react';
+import { useDrop } from 'react-dnd';
+
+import {Notify, GetProfImg} from '../../util/constants';
 
 const style = {
   height: '12rem',
   width: '12rem',
-  marginRight: '1.5rem',
-  marginBottom: '1.5rem',
   color: 'white',
   padding: '1rem',
   textAlign: 'center',
@@ -15,35 +14,37 @@ const style = {
   float: 'left',
 }
 
-const Dustbin = ({ canDrop, isOver, allowedDropEffect, connectDropTarget }) => {
-  const isActive = canDrop && isOver
-  let backgroundColor = '#222'
+function selectBackgroundColor(isActive, canDrop) {
   if (isActive) {
-    backgroundColor = 'darkgreen'
+    return 'darkgreen'
   } else if (canDrop) {
-    backgroundColor = 'darkkhaki'
+    return 'darkkhaki'
+  } else {
+    return '#222'
   }
-  return connectDropTarget(
-    <div style={{ ...style, backgroundColor }}>
+}
+
+const Dustbin = ({ allowedDropEffect }) => {
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: "equipment",
+    drop: () => ({
+      name: `${allowedDropEffect} Dustbin`,
+      allowedDropEffect,
+    }),
+    collect: monitor => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  })
+  const isActive = canDrop && isOver
+  const backgroundColor = selectBackgroundColor(isActive, canDrop)
+  return (
+    <div ref={drop} style={{ ...style, backgroundColor }}>
       {`Works with ${allowedDropEffect} drop effect`}
       <br />
       <br />
       {isActive ? 'Release to drop' : 'Drag a box here'}
-    </div>,
+    </div>
   )
 }
-
-export default DropTarget(
-  ItemTypes.BOX,
-  {
-    drop: ({ allowedDropEffect }) => ({
-      name: `${allowedDropEffect} Dustbin`,
-      allowedDropEffect,
-    }),
-  },
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop(),
-  }),
-)(Dustbin)
+export default Dustbin

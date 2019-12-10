@@ -8,9 +8,6 @@ import ErrorPage from '../../util/errorPage.js';
 import Dustbin from './equipmentBin'
 import Box from './equipmentDrag'
 
-import gameHeader from '../../assets/game/glassHeader.svg'
-import gameBarTender from '../../assets/game/bartender.svg'
-
 import {Tabs} from 'antd';
 
 const {TabPane} = Tabs;
@@ -24,8 +21,6 @@ class Game extends Component {
             progress: null,
             completed: false,
             isLoading: true,
-            gameHeader: gameHeader,
-            gameBarTender: gameBarTender,
             equipmentDoing: {
                 value: ""
             },
@@ -132,11 +127,11 @@ class Game extends Component {
         // Checking response
         if (this.state.error) {
             return <ErrorPage
-                status
-                ={this.state.error.status}
+                status={this.state.error.status}
                 message={this.state.error.message.message}
                 history={this.props.history}/>
         }
+
         return (
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar type="game"/>
@@ -152,16 +147,11 @@ class Game extends Component {
                         className={"small-8 cell"}/> 
                     
                     {/* Dragging Areas */}
-                    <div>
-      <Dustbin allowedDropEffect="any" />
-      <Dustbin allowedDropEffect="copy" />
-      <Dustbin allowedDropEffect="move" />
-    </div>
-    <div>
-      <Box name="Glass" />
-      <Box name="Banana" />
-      <Box name="Paper" />
-    </div>
+                    <div className="cell grid-x align-center"> 
+                        <Dustbin allowedDropEffect="copy" />
+                        <div className="small-3 cell"/>
+                        <Dustbin allowedDropEffect="copy" />
+                    </div>
 
                     {/* Area of All Equipment */}
                     <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
@@ -264,7 +254,7 @@ class GameStepPreview extends Component {
 
 export const GameItemPreview = ({items, className, type, postfix, postfixFunc,func}) => (
     <Fragment>
-        {items.map(item => (<GetItem
+        {items.map(item => (<Box
             key={new Date().getMilliseconds() + (Math.random() * 69420)}
             type={type}
             item={item}
@@ -274,75 +264,5 @@ export const GameItemPreview = ({items, className, type, postfix, postfixFunc,fu
             className={"grid-x align-center-middle " + className}/>))}
     </Fragment>
 );
-
-class GetItem extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.type = this.props.type;
-        this.item = this.props.item;
-        this.name = this.props.item.name;
-        this.id = this.props.item.id;
-        this.img = this.item.img;
-        this.className = this.props.className;
-        this.func = this.props.func;
-
-        this.descPre = "";
-        this.desc = "";
-
-        if (this.type === "equipment") {
-            this.descPre = "Type:";
-            this.desc = <span>{" " + this.item.equipmentType}</span>;
-        } else if (this.type === "equipmentAltered") {
-            this.descPre = "Actions Done: ";
-            this.desc = <span>{" " + this.item.tags}</span>;
-        } else if (this.type === "error") {
-            this.func = ()=>{};
-        } else {
-            this.link = this.link + this.item.id
-            if (this.item.desc !== null && this.item.desc !== "") {
-                this.descPre = "Desc:";
-                this.desc = <span>{" " + this.item.desc}</span>;
-            }
-        }
-
-        if (this.func === null || this.func === "" || this.func === undefined) {
-            this.onclick = (e) => {};
-        } else {
-            this.onclick = (e)=>{e.preventDefault(); this.func();}
-        }
-
-    }
-
-    render() {
-        return (
-            <div className={this.className} key={this.id}>
-
-                <div className="previewItemMargin cell"></div>
-
-                <div className="grid-x align-center-middle small-11 previewItemContainer">
-                        <div className="small-6 grid-x align-center-middle cell">
-                            <GetProfImg
-                                className="small-10 cell"
-                                pic={this.img}
-                                alt={this.name}
-                                type={this.type}/>
-                        </div>
-                    
-                        <div className="small-1 cell"></div>
-                        <div className="small-10 grid-x cell">
-                            <div className="previewName cell">{this.name}</div>
-                            <div className="previewDesc cell">{this.descPre}{this.desc}</div>
-                        </div>
-                        <div className="small-1 cell"></div>
-
-                </div>
-
-                <div className="previewItemMargin cell"></div>
-            </div>
-        )
-    }
-};
 
 export default Game;
