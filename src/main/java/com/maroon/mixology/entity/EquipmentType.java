@@ -3,7 +3,6 @@ package com.maroon.mixology.entity;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.IndexDirection;

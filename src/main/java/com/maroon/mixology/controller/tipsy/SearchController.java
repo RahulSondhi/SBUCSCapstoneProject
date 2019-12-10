@@ -74,7 +74,9 @@ public class SearchController {
                             b.getId(), 
                             b.getName(), 
                             b.getImage(), 
-                            b.getOwner().getNickname()
+                            b.getOwner().getNickname(),
+                            b.getManagersNames(),
+                            b.getWorkersNames()
                         ));
                     }
                     if(barRet.isEmpty()){

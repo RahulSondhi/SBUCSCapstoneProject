@@ -3,7 +3,6 @@ package com.maroon.mixology.exchange.response;
 import java.util.Set;
 
 import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.type.EquipmentTypeEnum;
 
 public class EquipmentTypeResponse {
     //we don't give them the ID

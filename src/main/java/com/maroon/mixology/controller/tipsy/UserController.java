@@ -142,7 +142,9 @@ public class UserController {
                         bar.getId(), 
                         bar.getName(), 
                         bar.getImage(), 
-                        bar.getOwner().getNickname()
+                        bar.getOwner().getNickname(),
+                        bar.getManagersNames(),
+                        bar.getWorkersNames()
                     ));
             }
             Set<BriefRecipeResponse> userRecipesWritten = new HashSet<BriefRecipeResponse>();

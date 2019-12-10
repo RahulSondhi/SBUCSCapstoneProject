@@ -1,7 +1,5 @@
 package com.maroon.mixology.exchange.response.brief;
 
-import com.maroon.mixology.entity.type.EquipmentTypeEnum;
-
 public class BriefEquipmentResponse {
     private String name;
     private String img;

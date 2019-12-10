@@ -6,6 +6,10 @@ import ErrorPage from '../../util/errorPage.js';
 
 import Navbar from '../navbar/navbar.js';
 
+import {Tabs} from 'antd';
+
+const {TabPane} = Tabs;
+
 class UsersBarsPage extends Component {
     constructor(props) {
         super(props);
@@ -32,26 +36,27 @@ class UsersBarsPage extends Component {
         this.setState({isLoading: true});
 
         getUserProfile(nickname).then(response => {
+            var title = response.name;
+            var customButtonData = [];
+            var customButtonType = "";
+
             if(this.state.type === "bar"){
-                const title = response.name + "'s Bars";
-                this.setState({
-                    data: response.bars, 
-                    isLoading: false, 
-                    title: title, 
-                    customButtonData: [{desc:"Create a Bar"}],
-                    customButtonType: "createBar"
-                });
+                title = response.name + "'s Bars";
+                customButtonData = [{desc:"Create a Bar"}]
+                customButtonType = "createBar"
             }else if(this.state.type === "recipe"){
-                const title = response.name + "'s Recipes";
-                const recipes = [].concat(response.recipesWritten, response.recipesIncompleted,response.recipesCompleted);
-                this.setState({
-                    data: recipes, 
-                    isLoading: false, 
-                    title: title, 
-                    customButtonData: [{desc:"Create a Recipe"}],
-                    customButtonType: "createRecipe"
-                });
+                title = response.name + "'s Recipes";
+                customButtonData = [{desc:"Create a Recipe"}]
+                customButtonType = "createRecipe"
             }
+
+            this.setState({
+                data:response,
+                isLoading: false, 
+                title: title, 
+                customButtonData: customButtonData,
+                customButtonType: customButtonType
+            });
         }).catch(error => {
             this.setState({
                 error:{
@@ -107,27 +112,169 @@ class UsersBarsPage extends Component {
             />
         }
 
-        return (
-            <div className="grid-x grid-x-margin align-center-middle">
-                <Navbar/>
+        if(this.state.type === "bar"){
+            return (
+                <div className="grid-x grid-x-margin align-center-middle">
+                    <Navbar/>
 
-                <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
+                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
 
-                <div className="grid-x align-center align-top small-10 cell">
+                    <div className="grid-x align-center align-top cell">
 
-                    <ItemPreview
-                        className="small-6 medium-3 cell"
-                        items={this.state.customButtonData}
-                        type={this.state.customButtonType}/>
+                    <Tabs className="small-12 cell" tabPosition="right">
+                            <TabPane tab="All Bars" key="0">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.bars}
+                                        type="bar"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Owned Bars" key="1">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.bars.filter(bar => {
+                                            return bar.owner === this.props.currentUser.name
+                                        })}
+                                        type="bar"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Managed Bars" key="2">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.bars.filter(bar => {
+                                            return bar.managers.includes(this.props.currentUser.name)
+                                        })}
+                                        type="bar"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Employeed Bars" key="4">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.bars.filter(bar => {
+                                            return bar.workers.includes(this.props.currentUser.name)
+                                        })}
+                                        type="bar"/>
+                                </div>
+                            </TabPane>
+                        </Tabs>
 
-                    <ItemPreview
-                        className="small-6 medium-3 cell"
-                        items={this.state.data}
-                        type={this.state.type}/>
-
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }else if(this.state.type === "recipe"){
+            return (
+                <div className="grid-x grid-x-margin align-center-middle">
+                    <Navbar/>
+
+                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
+
+                    <div className="grid-x align-center align-top cell">
+
+                        <Tabs className="small-12 cell" tabPosition="right">
+                            <TabPane tab="Doing" key="0">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.recipesIncompleted}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Done" key="1">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.recipesCompleted}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Published" key="2">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.recipesWritten.filter(equip => 
+                                            { 
+                                                return equip.published === true
+                    
+                                            })}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                            <TabPane tab="Making" key="4">
+                                <div className="grid-x grid-margin-x align-center-middle cell">
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.customButtonData}
+                                        type={this.state.customButtonType}/>
+                                    <ItemPreview
+                                        className="small-4 cell"
+                                        items={this.state.data.recipesWritten.filter(equip => 
+                                            { 
+                                                return equip.published === false
+                    
+                                            })}
+                                        type="recipe"/>
+                                </div>
+                            </TabPane>
+                        </Tabs>
+
+                    </div>
+                </div>
+            )
+        }else{
+            return (
+                <div className="grid-x grid-x-margin align-center-middle">
+                    <Navbar/>
+
+                    <h1 id="userBarsPageTitle" className="caption small-10 cell">{this.state.title}</h1>
+
+                    <div className="grid-x align-center align-top cell">
+
+                        <ItemPreview
+                            className="small-4 medium-3 cell"
+                            items={this.state.customButtonData}
+                            type={this.state.customButtonType}/>
+
+                        <ItemPreview
+                            className="small-4 medium-3 cell"
+                            items={this.state.data}
+                            type={this.state.type}/>
+
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

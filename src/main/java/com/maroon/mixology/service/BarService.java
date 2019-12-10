@@ -3,7 +3,6 @@ package com.maroon.mixology.service;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.maroon.mixology.entity.Bar;
 import com.maroon.mixology.entity.User;
