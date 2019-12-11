@@ -52,9 +52,6 @@ public class LoginController {
         @Value("${spring.mail.username}")
         private String mailUserName;
 
-        @Value("${tipsy.react.port}")
-        private String reactPort;
-
         @PostMapping("/login")
         public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         try{
