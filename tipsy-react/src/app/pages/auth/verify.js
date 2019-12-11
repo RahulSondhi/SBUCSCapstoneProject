@@ -67,7 +67,7 @@ class Verify extends Component {
         };
         resetPassword(resetPasswordRequest).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/logout");
+            this.props.history.push("/Tipsy/logout");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -224,7 +224,7 @@ class Verify extends Component {
                         Login to your account to start!
                     </h4>
 
-                    <Link to="/logout" className="cell">
+                    <Link to="/Tipsy/logout" className="cell">
                         <button type="submit" className="button">Login</button>
                     </Link>
 

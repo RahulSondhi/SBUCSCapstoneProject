@@ -30,7 +30,7 @@ class GeneralNavbar extends Component {
 
                     {/* Instruction */}
                     <Menu.Item key="instruction">
-                        <NavLink to={"/tipsy/recipe/"+this.gameId+"/instruction"}>
+                        <NavLink to={"/app/recipe/"+this.gameId+"/instruction"}>
                             <Icon type="profile" style={{fontSize : "1.5em"}}/>
                             Instruction
                         </NavLink>
@@ -39,7 +39,7 @@ class GeneralNavbar extends Component {
 
                     {/* Quit */}
                     <Menu.Item key="quit">
-                        <NavLink to={"/tipsy/recipe/"+this.gameId}>
+                        <NavLink to={"/app/recipe/"+this.gameId}>
                             <Icon type="logout" style={{fontSize : "1.5em"}}/>
                             Quit
                         </NavLink>
@@ -53,7 +53,7 @@ class GeneralNavbar extends Component {
 
                     {/* Search */}
                     <Menu.Item key="search">
-                        <NavLink to="/tipsy/search">
+                        <NavLink to="/app/search">
                             < SearchIcon/>
                             Search
                         </NavLink>
@@ -61,7 +61,7 @@ class GeneralNavbar extends Component {
 
                     {/* Bar Gears */}
                     <Menu.Item key="barEquipment">
-                        <NavLink to="/tipsy/barEquipment">
+                        <NavLink to="/app/barEquipment">
                             < BarToolsIcon/>
                             Bar Equipment
                         </NavLink>
@@ -69,7 +69,7 @@ class GeneralNavbar extends Component {
 
                     {/* My Bars */}
                     <Menu.Item key="myBars">
-                        <NavLink to="/tipsy/myBars">
+                        <NavLink to="/app/myBars">
                             < BarIcon/>
                             My Bars
                         </NavLink>
@@ -77,7 +77,7 @@ class GeneralNavbar extends Component {
 
                     {/* My Recipes */}
                     <Menu.Item key="myRecipes">
-                        <NavLink to="/tipsy/myRecipes">
+                        <NavLink to="/app/myRecipes">
                             < RecipeIcon/>
                             My Recipes
                         </NavLink>
@@ -86,14 +86,14 @@ class GeneralNavbar extends Component {
                     {/* Account */}
                     <SubMenu title={<span> <AccountIcon/> Account </span>}>
                         <Menu.Item key="Account:1">
-                            <NavLink to="/tipsy/user/me">
+                            <NavLink to="/app/user/me">
                                 < UserIcon/>
                                 My Profile
                             </NavLink>
                         </Menu.Item>
 
                         <Menu.Item key="setting:2">
-                            <NavLink to="/tipsy/user/me/config">
+                            <NavLink to="/app/user/me/config">
                                 <Icon type="tool" theme="twoTone" twoToneColor="#A0A0A0"/>
                                 Settings
                             </NavLink>

@@ -32,7 +32,7 @@ class RecipePage extends Component {
                 .props
                 .history
                 .push({
-                    pathname: '/tipsy/game/' + response.message + ''
+                    pathname: '/Tipsy/app/game/' + response.message + ''
                 })
         }).catch(error => {
             this.setState({
@@ -167,13 +167,13 @@ class RecipePage extends Component {
                         id="redirectRecipe"
                         className="small-2 small-offset-1 cell grid-x align-center-middle">
                         <Link
-                            to={"/tipsy/recipe/" + this.props.match.params.id + "/config"}
+                            to={"/app/recipe/" + this.props.match.params.id + "/config"}
                             className={"small-4 cell grid-x align-center-middle " + this.state.settingClass}>
                             <GetProfImg className="small-10 cell" alt="Settings" type="settings"/>
                         </Link>
 
                         <Link
-                            to={"/tipsy/recipe/" + this.props.match.params.id + "/clone"}
+                            to={"/app/recipe/" + this.props.match.params.id + "/clone"}
                             className={"small-4 small-offset-2 cell grid-x align-center-middle"}>
                             <GetProfImg className="small-10 cell" alt="Clone" type="clone"/>
                         </Link>

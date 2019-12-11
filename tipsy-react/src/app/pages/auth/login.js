@@ -101,12 +101,12 @@ class LoginForm extends Component {
                         <button type="submit" className="button">Login</button>
                     </FormItem>
 
-                    <Link to="register" className="link medium-3 cell">
+                    <Link to="/register" className="link medium-3 cell">
                         Register
                     </Link>
                     <span className="medium-1 medium-offset-1 cell">
                         or</span>
-                    <Link to="forgot" className="link medium-3 medium-offset-1 cell">
+                    <Link to="/forgot" className="link medium-3 medium-offset-1 cell">
                         Forgot Password?
                     </Link>
                 </Form>

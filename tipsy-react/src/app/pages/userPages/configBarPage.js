@@ -286,7 +286,7 @@ class ConfigBarPage extends Component {
     async handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/tipsy/myBars");
+            this.props.history.push("Tipsy/app/myBars");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -394,7 +394,7 @@ class ConfigBarPage extends Component {
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.push("/tipsy/myBars");
+                this.props.history.push("/Tipsy/app/myBars");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });

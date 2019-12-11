@@ -310,7 +310,7 @@ class ConfigUserPage extends Component {
 
         changeUserSettings(settingsRequest,nickname).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/tipsy/user/me");
+            this.props.history.push("/Tipsy/app/user/me");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });

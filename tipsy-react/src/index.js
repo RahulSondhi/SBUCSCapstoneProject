@@ -16,7 +16,7 @@ import './app/css/userPages.css';
 import './app/css/publicPages.css';
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter>
     <DndProvider backend={Backend}>
       <Main/>
     </DndProvider>

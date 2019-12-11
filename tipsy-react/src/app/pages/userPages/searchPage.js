@@ -129,7 +129,7 @@ export class SearchPage extends Component {
     searching(e){
 
         this.props.history.push({
-            pathname: '/tipsy/search',
+            pathname: '/Tipsy/app/search',
             search: '?type='+this.state.defaultType+"&query="+e.target.value
         })
 

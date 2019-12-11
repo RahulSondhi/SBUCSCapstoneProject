@@ -108,7 +108,7 @@ class UserPage extends Component {
                         id="redirectUser"
                         className="small-2 small-offset-1 cell grid-x align-center-middle">
                         <NavLink
-                            to={"/tipsy/user/" + this.state.user.name + "/config"}
+                            to={"/app/user/" + this.state.user.name + "/config"}
                             className={"cell grid-x align-center-middle " + this.state.settingClass}>
                             <GetProfImg className="small-offset-8 small-3 cell" alt="Settings" type="settings"/>
                         </NavLink>

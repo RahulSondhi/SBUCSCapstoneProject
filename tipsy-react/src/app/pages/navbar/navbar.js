@@ -34,7 +34,7 @@ class Navbar extends Component {
         return (
             <nav className="menuBar">
                 <div className="logo">
-                    <NavLink to={"/tipsy/"}>
+                    <NavLink to={"/app/"}>
                         <img src={Tipsy} alt="TipsyLogo"/>
                     </NavLink>
                 </div>

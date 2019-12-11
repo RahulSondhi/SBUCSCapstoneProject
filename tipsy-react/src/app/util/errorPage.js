@@ -45,7 +45,7 @@ class ErrorPage extends Component {
                 {this.state.message}
             </h3>
             <Link className="button" onClick={this.goBack}>Go Back</Link>
-            <Link to='/tipsy/search' className="button">
+            <Link to='/Tipsy/app/search' className="button">
                 Home Page</Link>
         </div>  
         )
