@@ -98,8 +98,8 @@ public class UserController {
     @Value("${spring.mail.username}")
     private String mailUserName;
 
-    @Value("${tipsy.react.port}")
-    private String reactPort;
+    @Value("${tipsy.react.URL}")
+    private String appUrl;
     
     @GetMapping("/currentUser")
     // @PreAuthorize("hasRole('USER')")
@@ -230,7 +230,6 @@ public class UserController {
                     confirmationEmail.setText(notificationMessage + settingsRequest.getEmail()); //notification message
                     emailService.sendEmail(confirmationEmail);
                     //Now send a verification email
-                    String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
                     SimpleMailMessage verificationEmail = new SimpleMailMessage();
                     verificationEmail.setFrom(mailUserName);
                     verificationEmail.setTo(settingsRequest.getEmail()); //new email
@@ -265,8 +264,7 @@ public class UserController {
                 // Find the user associated with the reset token
                 User user = userService.findByConfirmationTokenUUID(token);
                 if(user == null) {
-                    logger.error("User with that confirmation token not found");
-                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token not found"),
+                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User with that confirmation token was not found"),
                         HttpStatus.NOT_FOUND);
                 }
                 // if(user.isEnabled()) {
@@ -279,8 +277,7 @@ public class UserController {
                         //need to add a use case to allow confirmation link to be sent again
                         //email should be resent
                         //or rather, send the confirmation link again here
-                        logger.error("Confirmation token is expired, invalid token");
-                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token is expired, invalid token"),
+                        return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Confirmation token is expired, invalid token. Please generate a new token."),
                             HttpStatus.GONE); //Token is expired, invalid token.
                 }
                 // Set user to new email

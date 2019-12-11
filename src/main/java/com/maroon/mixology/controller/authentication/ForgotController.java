@@ -3,7 +3,6 @@ package com.maroon.mixology.controller.authentication;
 import java.util.Calendar;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
@@ -62,12 +61,12 @@ public class ForgotController {
         @Value("${spring.mail.username}")
         private String mailUserName;
 
-        @Value("${tipsy.react.port}")
-        private String reactPort;
+        @Value("${tipsy.react.URL}")
+        private String appUrl;
 
         // POST forget template
         @PostMapping({"/forgot"})
-        public ResponseEntity<?> processForgotPasswordForm(@Valid @RequestBody ForgotRequest userEmail, HttpServletRequest request) {
+        public ResponseEntity<?> processForgotPasswordForm(@Valid @RequestBody ForgotRequest userEmail) {
                 try{
                         if(!userService.existsByEmail(userEmail.getEmail())) {
                                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User not found."),
@@ -82,13 +81,7 @@ public class ForgotController {
                                 // 
                                 // Save token to database
                                 userRepository.save(user); // Saving the reset token in the database
-
                                 // Send a reset email
-                                // Should this also include the port number(?)
-                                // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                                // the port should be 80 so please change this during deployment when we have domain name
-                                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
-                                
                                 SimpleMailMessage resetEmail = new SimpleMailMessage();
                                 resetEmail.setFrom(mailUserName);
                                 resetEmail.setTo(user.getEmail());
