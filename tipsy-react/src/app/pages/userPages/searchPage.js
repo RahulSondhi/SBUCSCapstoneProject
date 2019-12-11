@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import Drinks from '../../assets/drinks.svg';
 import Navbar from '../navbar/navbar.js';
 
-import {ItemPreview} from '../../util/constants';
+import {ItemPreview, LINK_BASE} from '../../util/constants';
 import {search} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
@@ -107,7 +107,7 @@ export class SearchPage extends Component {
             });
         } else  {
             this.props.history.push({
-                pathname: '/tipsy/search',
+                pathname: LINK_BASE+'/app/search',
                 search: ""
             })
             window.location.reload();
@@ -129,7 +129,7 @@ export class SearchPage extends Component {
     searching(e){
 
         this.props.history.push({
-            pathname: '/Tipsy/app/search',
+            pathname: LINK_BASE+'/app/search',
             search: '?type='+this.state.defaultType+"&query="+e.target.value
         })
 

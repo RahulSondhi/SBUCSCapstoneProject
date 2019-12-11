@@ -4,7 +4,7 @@ import Navbar from '../navbar/navbar.js';
 import {Enum} from 'enumify';
 
 import {getUserSettings, changeUserSettings, checkEmailAvailability} from '../../util/APIUtils';
-import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail, Notify} from '../../util/constants';
+import {MakeProfImg, ValidateFirstName, ValidateLastName, ValidateEmail, Notify, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import {Form, Input, Icon, Select} from 'antd';
@@ -246,7 +246,7 @@ class ConfigUserPage extends Component {
                     </FormItem>
                     <FormItem className="small-12 medium-6 cell">
                         <NavLink 
-                         to="/tipsy/user/stg/changePassword"
+                         to="/app/user/stg/changePassword"
                          id="passwordButton" className="button">
                             Change Password
                         </NavLink>
@@ -310,7 +310,7 @@ class ConfigUserPage extends Component {
 
         changeUserSettings(settingsRequest,nickname).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/Tipsy/app/user/me");
+            this.props.history.push(LINK_BASE+"/app/user/me");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {createRecipe, getRecipeProfile, changeRecipeSettings, deleteRecipe} from '../../util/APIUtils';
-import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc, Notify} from '../../util/constants';
+import {MakeProfImg, DynamicForm, ValidateName, ValidateDesc, Notify, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import {Form, Input, Icon, Tabs, Popconfirm} from 'antd';
@@ -23,7 +23,7 @@ class ConfigRecipePage extends Component {
             recipe: null,
             page: {
                 title: "Create a Recipe",
-                submit: "Create a Recipe"
+                submit: "Create"
             },
             name: {
                 value: ''
@@ -440,7 +440,7 @@ class ConfigRecipePage extends Component {
     async handleDelete(event) {
         deleteRecipe(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/Tipsy/app/myRecipes");
+            this.props.history.push(LINK_BASE+"/app/myRecipes");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -463,7 +463,7 @@ class ConfigRecipePage extends Component {
         if(this.state.type === "clone" || this.state.type === "create"){
             createRecipe(recipeRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.push("/Tipsy/app/myRecipes");
+                this.props.history.push(LINK_BASE+"/app/myRecipes");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });
@@ -496,7 +496,7 @@ class ConfigRecipePage extends Component {
         if (this.state.type === "clone" || this.state.type === "create") {
             createRecipe(recipeRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.push("/Tipsy/app/myRecipes");
+                this.props.history.push(LINK_BASE+"/app/myRecipes");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });
