@@ -56,14 +56,14 @@ class Main extends Component {
             isAuthenticated: false
         });
 
-        history.push("/Tipsy");
+        history.push(constant.LINK_BASE);
         window.location.reload();
         constant.Notify(notificationType,description,-1);
     }
 
     async handleLogin() {
         await this.loadCurrentUser();
-        history.push("/Tipsy/app/search");
+        history.push(constant.LINK_BASE+"/app/search");
         window.location.reload();
         constant.Notify("success","You're successfully logged in.",-1);
     }

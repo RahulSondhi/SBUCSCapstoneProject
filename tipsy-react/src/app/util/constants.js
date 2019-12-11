@@ -250,7 +250,7 @@ class GetItem extends Component {
         this.className = this.props.className;
         this.func = this.props.func;
 
-        this.link = LINK_BASE +"/app/"+ + this.type + "/";
+        this.link = "/app/"+ + this.type + "/";
         this.descPre = "";
         this.desc = "";
 

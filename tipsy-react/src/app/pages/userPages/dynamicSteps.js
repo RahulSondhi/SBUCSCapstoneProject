@@ -900,18 +900,13 @@ class GetStep extends Component {
         }
 
         // Checking response
-        if (this.state.notFound === true || this.state.serverError === true) {
-            return <Redirect
-                to={{
-                pathname: "/tipsy/error",
-                state: {
-                    from: this.props.location,
-                    notFound: this.state.notFound,
-                    serverError: this.state.serverError
-                }
-            }}/>
+        if (this.state.error) {
+            return <ErrorPage
+            status ={this.state.error.status}
+            message = {this.state.error.message.message}
+            history = {this.props.history}
+            />
         }
-
       return (
         <div className="grid-x align-center-middle small-10 cell">
             <div className="previewItemMargin cell"></div>
