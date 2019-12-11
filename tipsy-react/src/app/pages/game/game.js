@@ -208,7 +208,7 @@ class Game extends Component {
                             product={this.state.equipmentProducts.value}
                             currentIndex={this.state.currentStep + 1}
                             totalIndex={this.state.progress.length}
-                            className={"small-8 cell"}/> 
+                            className={"small-11 cell"}/> 
                         
                         {/* Dragging Areas */}
                         <div className="cell grid-x align-center"> 
@@ -218,12 +218,14 @@ class Game extends Component {
                         </div>
                     </div>
 
+                    <div className="small-2 cell"/>
+
                     {/* Area of All Equipment */}
-                    <Tabs className="small-7 cell userDisplayTabs" tabPosition="top">
+                    <Tabs className="small-5 cell userDisplayTabs" tabPosition="top">
                         <TabPane tab="Behind The Bar" key="0">
                             <div className="grid-x grid-margin-x align-center-middle cell scroll">
                                 <GameItemPreview
-                                    className="small-4 medium-3 cell"
+                                    className="small-5 cell"
                                     items={this.state.equipmentAvailable.value}
                                     func={this.setDroppable}
                                     type="equipment"
@@ -233,7 +235,7 @@ class Game extends Component {
                         <TabPane tab="What I've Made So Far" key="1">
                             <div className="grid-x grid-margin-x align-center-middle cell">
                                 <GameItemPreview
-                                    className="small-4 medium-3 cell"
+                                    className="small-5 cell"
                                     items={this.state.equipmentProducts.value}
                                     func={this.setDroppable}
                                     type="equipmentAltered"
@@ -299,21 +301,20 @@ class GameStepPreview extends Component {
         return (
             <div
                 className={"grid-x align-center-middle previewGameStepContainer " + this.props.className}>
-                <div className="grid-x align-center-middle small-offset-1 small-8 cell">
+                <div className="grid-x align-center-middle small-11 cell">
                     <div className="grid-x align-center-middle small-1 cell">
-                        <span>{"Step "+this.state.currentIndex + " of " +this.state.totalIndex}</span>
+                        <span>{"Step "+this.state.currentIndex + "/" +this.state.totalIndex}</span>
                     </div>
-                    <div className="grid-x align-center-middle small-4 cell">
+                    <div className="grid-x align-center-middle small-5 cell">
                         {this.getEquipment(this.state.step.equipmentDoing)}
                     </div>
-                    <div className="grid-x align-center-middle small-3 cell">
+                    <div className="grid-x align-center-middle small-1 cell">
                         <span>{this.state.action}</span>
                     </div>
-                    <div className="grid-x align-center-middle small-4 cell">
+                    <div className="grid-x align-center-middle small-5 cell">
                         {this.getEquipment(this.state.step.equipmentToDo)}
                     </div>
                 </div>
-                <div className="small-1 cell"></div>
             </div>
         );
     }

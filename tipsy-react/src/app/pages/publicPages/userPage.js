@@ -16,7 +16,8 @@ class UserPage extends Component {
         this.state = {
             user: null,
             isLoading: true,
-            settingClass: "hidden"
+            settingClass: "hidden",
+            currentUser: false
         }
         this.loadUserProfile = this
             .loadUserProfile
@@ -28,11 +29,20 @@ class UserPage extends Component {
 
         getUserProfile(name).then(response => {
 
+            var settingClass = this.state.settingClass;
+            var currentUser = this.state.currentUser;
+            var key = this.state.key;
+
             if (this.props.currentUser.name === response.name || this.props.currentUser.roles.includes("ADMIN")) {
-                this.setState({settingClass: " "});
+                
+                settingClass = " ";
+
+                if(this.props.currentUser.name === response.name){
+                    currentUser = true;
+                }
             }
 
-            this.setState({user: response, isLoading: false});
+            this.setState({user: response, isLoading: false, settingClass: settingClass, currentUser: currentUser});
         }).catch(error => {
             this.setState({
                 error: {
@@ -116,7 +126,7 @@ class UserPage extends Component {
                     <div className="small-12 medium-8 grid-x align-center-middle rightUserPublicSide cell">
                         <h1 id="userPageBarTitle" className="captionRed small-10 cell">Recipes History</h1>
                         <Tabs className="small-12 publicTabs cell" tabPosition="right">
-                        <TabPane tab="Making" key="4">
+                        <TabPane tab="Making" disabled={!this.state.currentUser} key="4">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
                                         className="small-4 medium-3 cell"

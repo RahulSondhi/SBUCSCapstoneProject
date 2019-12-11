@@ -21,10 +21,9 @@ export class DynamicSteps extends Component {
     constructor(props) {
         super(props);
         
-        this.setState({
-            data : this.props.data,
-            equipment : this.props.equipment,
-            product : this.props.product })
+        this.state.data = this.props.data;
+        this.state.equipment = this.props.equipment;
+        this.state.product = this.props.product;
 
         this.onLoad = this.props.onLoad;
         this.className = this.props.className;
@@ -184,6 +183,9 @@ class CustomStepPrompt extends Component {
             intersectingProducts: {
                 value: []
             },
+            intersectingUnits: {
+                value: []
+            },
             doingClass: "",
             actionClass: "hidden",
             toDoClass: "hidden",
@@ -197,6 +199,8 @@ class CustomStepPrompt extends Component {
             equipmentTypes:[],
             units:[]
         };
+
+        this.actionType = "";
 
         this.handleCancel = this
         .handleCancel
@@ -371,7 +375,7 @@ class CustomStepPrompt extends Component {
                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                         <option hidden disabled key="3" value=""> -- select an option -- </option>
                         <optgroup label="Units">
-                            {this.state.units.map(fbb =>
+                            {this.state.intersectingUnits.value.map(fbb =>
                                 <option key={fbb.name+"3"} value={fbb.name}>{fbb.name}</option>
                             )};
                         </optgroup>
@@ -448,7 +452,6 @@ class CustomStepPrompt extends Component {
 
         if((inputName === "equipmentDoing")){
             this.setState({
-                doingClass: "",
                 actionClass: "",
                 toDoClass: "hidden",
                 unitClass: "hidden",
@@ -481,18 +484,26 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "action"){
 
+            var toDoClass = "";
+            var unitClass = "hidden";
+            var value = ""
+
+            if(inputValue === "TEMPERATE"){
+                toDoClass = "hidden";
+                unitClass = "";
+                value = this.state.equipmentDoing.value;
+            }
+
             this.setState({
-                doingClass: "",
-                actionClass: "",
-                toDoClass: "",
-                unitClass: "hidden",
+                toDoClass: toDoClass,
+                unitClass: unitClass,
                 valueClass:"hidden",
                 buttonClass:"hidden",
                 imgClass: "hidden",
                 nameClass: "hidden",
                 submitClass: "hidden",
                 equipmentToDo:{
-                    value:""
+                    value:value
                 },
                 intersectingEquipment:{
                     value: this.state.equipment.filter(equip => 
@@ -510,6 +521,30 @@ class CustomStepPrompt extends Component {
 
                         },this)
                 },
+                intersectingUnits: {
+                    value: this.state.units.filter(unit => 
+                        { 
+                            var action = inputValue;
+
+                            if(["ADD","INPUT","SPRINKLE","PEEL","CUT","POUR"].includes(action)){
+                                // measurement
+                                this.actionType = "MEASUREMENT";
+                                return unit.type === "MEASUREMENT"
+                            }else if(["SHAKE","STIR","FREEZE","COOL","IGNITE","BLEND","HEAT","BOIL"].includes(action)){
+                                // time
+                                this.actionType = "TIME";
+                                return unit.type === "TIME"
+                            }else if(["TEMPERATE"].includes(action)){
+                                // temp
+                                this.actionType = "TEMPERATURE";
+                                return unit.type === "TEMPERATURE"
+                            }else{
+                                this.actionType = "NA";
+                                return unit.type === "NA";
+                            }
+
+                        },this)
+                },
                 [inputName]: {
                     value: inputValue,
                     validateStatus: "success",
@@ -517,13 +552,19 @@ class CustomStepPrompt extends Component {
                 }
             });
         }else if(inputName === "equipmentToDo"){
+
+            var unitClass = "";
+            var buttonClass = "hidden";
+
+            if(this.actionType === "NA"){
+                unitClass = "hidden";
+                buttonClass = "";
+            }
+            
             this.setState({
-                doingClass: "",
-                actionClass: "",
-                toDoClass: "",
-                unitClass: "",
-                valueClass:"hidden",
-                buttonClass:"hidden",
+                unitClass: unitClass,
+                valueClass: "hidden",
+                buttonClass: buttonClass,
                 imgClass: "hidden",
                 nameClass: "hidden",
                 submitClass: "hidden",
@@ -537,10 +578,6 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "unit"){
             this.setState({
-                doingClass: "",
-                actionClass: "",
-                toDoClass: "",
-                unitClass: "",
                 valueClass:"",
                 buttonClass:"hidden",
                 imgClass: "hidden",
@@ -557,11 +594,6 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "value"){
             this.setState({
-                doingClass: "",
-                actionClass: "",
-                toDoClass: "",
-                unitClass: "",
-                valueClass:"",
                 buttonClass:"",
                 imgClass: "hidden",
                 nameClass: "hidden",
