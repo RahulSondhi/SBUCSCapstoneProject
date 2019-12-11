@@ -20,4 +20,38 @@
 .gameAction{
   color: black;
 }
+
+.gamePageContainer{
+  background: url("../assets/game/game.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.gameTop{
+  height: 60%;
+}
+
+.gameEquipContainer{
+  height: 100%;
+}
+
+.equipContainer{
+  margin-top: 7%;
+  height: 92%;
+  overflow-y: auto;
+}
+
+.gamestepContainer{
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: white;
+  border-style: ridge;
+  border-width: 1em;
+}
+
+.gameBottom{
+  margin-top: 2%;
+  height: 27%;
+  overflow: hidden;
+}
   

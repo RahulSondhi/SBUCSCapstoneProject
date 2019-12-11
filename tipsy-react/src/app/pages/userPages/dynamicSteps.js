@@ -555,10 +555,12 @@ class CustomStepPrompt extends Component {
 
             var unitClass = "";
             var buttonClass = "hidden";
+            var unit = "";
 
             if(this.actionType === "NA"){
                 unitClass = "hidden";
                 buttonClass = "";
+                unit = "NA";
             }
             
             this.setState({
@@ -569,7 +571,7 @@ class CustomStepPrompt extends Component {
                 nameClass: "hidden",
                 submitClass: "hidden",
                 unit: {
-                    value: ""
+                    value: unit
                 },
                 [inputName]: {
                     value: inputValue,

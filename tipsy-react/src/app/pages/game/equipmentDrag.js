@@ -29,7 +29,6 @@ const Box = ({ type,item,className,func, draggble }) =>{
         end(item, monitor) {
           const dropResult = monitor.getDropResult()
           if (item && dropResult) {
-            let alertMessage = ''
             
             const isDropAllowed =
               dropResult.allowedDropEffect === 'any' ||
@@ -37,20 +36,11 @@ const Box = ({ type,item,className,func, draggble }) =>{
             
               if (isDropAllowed) {
 
-              const isCopyAction = dropResult.dropEffect === 'copy'
-              const actionName = isCopyAction ? 'copied' : 'moved'
+                if (func !== null && func !== "" && func !== undefined) {
+                  func(dropResult.name,item.payload)
+                }
 
-              alertMessage = `You ${actionName} ${item.payload.name} into ${dropResult.name}!`
-
-              if (func !== null && func !== "" && func !== undefined) {
-                func(dropResult.name,item.payload)
-              }
-
-            } else {
-              alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
             }
-
-            alert(alertMessage)
           }
         },
         collect: monitor => ({
