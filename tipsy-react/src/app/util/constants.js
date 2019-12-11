@@ -546,6 +546,12 @@ class DynamicInput extends Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
         const { fetching, data, value } = this.state;
         return (
@@ -689,7 +695,12 @@ class CustomEquipmentPrompt extends Component {
             }
         });
     }
-  
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
   
     render() {
       const { visible, confirmLoading} = this.state;
