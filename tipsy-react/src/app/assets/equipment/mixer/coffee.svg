@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="206" height="388" viewBox="0 0 206 388">
+  <defs>
+  <style type="text/css">
+  @font-face {
+      font-family: CopperplateGothic-Bold;
+      src: url('../../fonts/Copperplate Gothic Bold Regular.ttf');
+    }
+    </style>
+    <linearGradient id="linear-gradient" x1="1.356" y1="0.355" x2="-0.677" y2="0.537" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="coffee" transform="translate(-888 -68)">
+    <rect id="mixer" width="171" height="277" transform="translate(907 149)" fill="#614724"/>
+    <path id="bottle" d="M48-718v-327H238v327c0,15.464-42.532,28-95,28S48-702.536,48-718Z" transform="translate(848 1146)" fill="url(#linear-gradient)"/>
+    <ellipse id="cap" cx="103" cy="33.5" rx="103" ry="33.5" transform="translate(888 68)" fill="#b0603e"/>
+    <g id="label" transform="translate(0 14)">
+      <text id="COFFEE-2" data-name="COFFEE" transform="translate(992 271)" font-size="27" font-family="CopperplateGothic-Bold, Copperplate Gothic"><tspan x="-63.031" y="0">COFFEE</tspan></text>
+      <line id="Line_6" data-name="Line 6" x2="126" transform="translate(929.5 287.5)" fill="none" stroke="#000" stroke-width="3"/>
+      <path id="Subtraction_2" data-name="Subtraction 2" d="M-546-1534.278h0c-3.59-.807-6.879-3.372-9.262-7.222a26.9,26.9,0,0,1-3.736-14,26.9,26.9,0,0,1,3.736-14c2.383-3.85,5.673-6.415,9.264-7.222Zm6-.272h0v-41.9a15.94,15.94,0,0,1,8.578,7.474,24.66,24.66,0,0,1,2.514,6.207A29.016,29.016,0,0,1-528-1555.5a29.016,29.016,0,0,1-.908,7.269,24.664,24.664,0,0,1-2.514,6.207A15.942,15.942,0,0,1-540-1534.55Z" transform="matrix(0.891, -0.454, 0.454, 0.891, 2166.944, 1346.717)"/>
+      <path id="Subtraction_3" data-name="Subtraction 3" d="M-546-1534.278h0c-3.59-.807-6.879-3.372-9.262-7.222a26.9,26.9,0,0,1-3.736-14,26.9,26.9,0,0,1,3.736-14c2.383-3.85,5.673-6.415,9.264-7.222Zm6-.272h0v-41.9a15.94,15.94,0,0,1,8.578,7.474,24.66,24.66,0,0,1,2.514,6.207A29.016,29.016,0,0,1-528-1555.5a29.016,29.016,0,0,1-.908,7.269,24.664,24.664,0,0,1-2.514,6.207A15.942,15.942,0,0,1-540-1534.55Z" transform="matrix(0.914, 0.407, -0.407, 0.914, 879.333, 1835.581)"/>
+      <text id="MAROON" transform="translate(997 309)" font-size="15" font-family="CopperplateGothic-Bold, Copperplate Gothic"><tspan x="-38.782" y="0">MAROON</tspan></text>
+    </g>
+  </g>
+</svg>

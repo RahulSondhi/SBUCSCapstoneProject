@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="696.5" height="523" viewBox="0 0 696.5 523">
+  <g id="freezer" transform="translate(-1182 -532)">
+    <ellipse id="Ellipse_52" data-name="Ellipse 52" cx="19" cy="17.5" rx="19" ry="17.5" transform="translate(1231 1020)"/>
+    <ellipse id="Ellipse_53" data-name="Ellipse 53" cx="19" cy="17.5" rx="19" ry="17.5" transform="translate(1791 1020)"/>
+    <rect id="Rectangle_76" data-name="Rectangle 76" width="696" height="438" rx="10" transform="translate(1182 599)" fill="#ccc"/>
+    <line id="Line_13" data-name="Line 13" x1="696" transform="translate(1182.5 599.5)" fill="none" stroke="#000" stroke-width="5"/>
+    <rect id="close_cover" width="696" height="67" rx="10" transform="translate(1182 532)" fill="#ccc"/>
+  </g>
+</svg>

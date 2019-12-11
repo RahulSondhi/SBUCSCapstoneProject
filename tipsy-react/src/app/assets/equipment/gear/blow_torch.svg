@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="342.893" height="479.192" viewBox="0 0 342.893 479.192">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="56.363" height="51.216" fill="none"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.524" y2="1.01" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#cecbcb"/>
+      <stop offset="0.375" stop-color="#6a6a6a"/>
+      <stop offset="1" stop-color="#a9a9a9"/>
+    </linearGradient>
+  </defs>
+  <g id="blow_torch" transform="translate(-388.107 -155.808)">
+    <path id="Path_97" data-name="Path 97" d="M0,0H23.5S5.041-38.808-32.137-39.9l9.841-77.635s37.451-19.955,75.448-18.589,76.542,24.056,76.542,24.056V-39.9C95.8-28.967,91.423,0,91.423,0H114V308.237C129.581,343.153,154.73,343,154.73,343H-47.558S-6.006,342.06,0,308.237Z" transform="translate(545 292)" fill="#bcbcbc"/>
+    <rect id="Rectangle_65" data-name="Rectangle 65" width="57" height="51" transform="translate(674 189)" fill="#414141"/>
+    <g id="Repeat_Grid_12" data-name="Repeat Grid 12" transform="translate(539.083 189.007)" clip-path="url(#clip-path)">
+      <g transform="translate(-413.083 -186.007)">
+        <path id="Path_98" data-name="Path 98" d="M0,0S4.964,14.269,6.619,26.894a94.622,94.622,0,0,1,0,23.606" transform="translate(414.5 186.5)" fill="none" stroke="#000" stroke-width="3"/>
+      </g>
+      <g transform="translate(-398.083 -186.007)">
+        <path id="Path_98-2" data-name="Path 98" d="M0,0S4.964,14.269,6.619,26.894a94.622,94.622,0,0,1,0,23.606" transform="translate(414.5 186.5)" fill="none" stroke="#000" stroke-width="3"/>
+      </g>
+      <g transform="translate(-383.083 -186.007)">
+        <path id="Path_98-3" data-name="Path 98" d="M0,0S4.964,14.269,6.619,26.894a94.622,94.622,0,0,1,0,23.606" transform="translate(414.5 186.5)" fill="none" stroke="#000" stroke-width="3"/>
+      </g>
+    </g>
+    <rect id="Rectangle_66" data-name="Rectangle 66" width="114" height="252" transform="translate(545 326)"/>
+    <rect id="Rectangle_67" data-name="Rectangle 67" width="127" height="57" transform="matrix(0.995, 0.105, -0.105, 0.995, 394.066, 171.505)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

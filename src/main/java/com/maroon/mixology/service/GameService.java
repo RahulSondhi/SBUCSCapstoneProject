@@ -17,7 +17,7 @@ public class GameService {
 
     /* Our custom method to overrule Optional*/
     public Game findById(String id) {
-        if(gameRepository.findById(id).isEmpty()){
+        if(!gameRepository.findById(id).isPresent()){
             return null;
         }
         return gameRepository.findById(id).get();

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="183.988" height="331.132" viewBox="0 0 183.988 331.132">
+  <defs>
+  <style type="text/css">
+    @font-face {
+      font-family: Algerian;
+      src: url('../../fonts/ALGERIA.ttf');
+    }
+  </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff9200"/>
+      <stop offset="1" stop-color="#ff8448"/>
+    </radialGradient>
+    <linearGradient id="linear-gradient" x1="1.186" y1="0.182" x2="-0.091" y2="0.859" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff1ae"/>
+      <stop offset="1" stop-color="#ecd76d"/>
+    </linearGradient>
+  </defs>
+  <g id="rum" transform="translate(-48.278 -64)">
+    <path id="liquor" d="M62.283,34.337V-10.671H98.289V34.337S163.551,62.843,163.551,98.1s-27.173,141.383-27.173,141.383-27.755-13.815-55.51-13.815-55.51,13.815-55.51,13.815S-.729,128.1-2.979,98.1,62.283,34.337,62.283,34.337Z" transform="translate(58.538 155.65)" fill="url(#radial-gradient)"/>
+    <path id="bottle" d="M63.57-.766h51.009V98.642s54.01,30.571,66.375,50.62-28.868,162.387-28.868,162.387H27.563S-8.175,164.412.692,149.261,63.57,98.642,63.57,98.642Z" transform="translate(49 83.484)" fill="rgba(255,255,255,0.25)"/>
+    <rect id="cap" width="66" height="57" rx="5" transform="translate(106 64)" fill="url(#linear-gradient)"/>
+    <g id="label">
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="82" height="30" transform="translate(99 280)"/>
+      <path id="Icon_map-compass" data-name="Icon map-compass" d="M34.578,68.435A33.858,33.858,0,1,1,68.435,34.578,33.9,33.9,0,0,1,34.578,68.435Zm0-62.072A28.215,28.215,0,1,0,62.793,34.578,28.247,28.247,0,0,0,34.578,6.363Zm.063,4.585S24.7,27.977,24.7,33.167v2.821c0,5.189,9.968,22.572,9.968,22.572s9.782-17.022,9.782-22.211V33.159c0-5.19-9.812-22.211-9.812-22.211Zm-.063,29.273a5.643,5.643,0,1,1,5.643-5.643,5.643,5.643,0,0,1-5.643,5.643Z" transform="translate(105.245 233.196)"/>
+      <path id="Path_35" data-name="Path 35" d="M0,0H25.327V29.4H0L13.179,14.862Z" transform="translate(77.268 289.326)"/>
+      <path id="Path_36" data-name="Path 36" d="M0,0H27.229L14.371,15.515,27.229,29.4H0Z" transform="translate(175.091 289.326)"/>
+      <text id="Rum-2" data-name="Rum" transform="translate(140 303)" fill="#fff" font-size="25" font-family="Algerian"><tspan x="-24.677" y="0">RUM</tspan></text>
+      <text id="Maroon" transform="translate(141 227)" font-size="10" font-family="Algerian"><tspan x="-19.861" y="0">MAROON</tspan></text>
+    </g>
+    <path id="reflection" d="M0,0C47.918,46.657,36.569,40.982,36.569,40.982" transform="matrix(0.995, -0.105, 0.105, 0.995, 169.38, 210.154)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

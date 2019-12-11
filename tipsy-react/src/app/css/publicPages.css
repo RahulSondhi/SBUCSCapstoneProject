@@ -7,21 +7,60 @@
 #barPageTitle,
 #userPageTitle {
     font-size: 3em;
+    height: 4%;
     margin-bottom: 1%;
 }
 
 /* User Pages */
 .userPageBarContainer{
-    max-height: 20rem;
+    height: 80%;
     overflow-x: hidden;
-    align-content: stretch;
-    overflow-y: visible;
+    overflow-y: auto;
 }
 
 /* Bar Pages */
 
-.barPageDescTitle{
+.publicPageDescTitle{
     margin-top: 8%;
+}
+
+.publicProfImg{
+    margin-top: 1%;
+    max-height: 25%;
+    word-wrap: break-word;
+}
+
+.publicUserProfImg{
+    margin-top: 2%;
+    max-height: 30%;
+    word-wrap: break-word;
+}
+
+.publicOwnerInfo{
+    margin-top: 1%;
+}
+
+.leftUserPublicSide,
+.rightUserPublicSide{
+    height: 60%;
+    overflow-y: auto;
+}
+
+.leftPublicSide,
+.rightPublicSide{
+    height: 65%;
+    overflow-y: auto;
+}
+
+.publicTabs{
+    height: 80%;
+}
+
+.publicTabs .ant-tabs-content,
+.publicTabs .ant-tabs-content-animated,
+.publicTabs .ant-tabs-right-content{
+    height: 100% !important;
+    overflow-y: auto !important;
 }
 
 /* Gear Pages */

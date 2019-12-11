@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="104.89" height="350.532" viewBox="0 0 104.89 350.532">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.271" y1="0.393" x2="-0.283" y2="0.892" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3668bb"/>
+      <stop offset="1" stop-color="#222b84"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect width="79" height="32" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="simple_syrup" transform="translate(-218.891 -21.468)">
+    <path id="bottle" d="M44.174-.766H86.592L85.251,83.716l31.19,6.313,1.341,253.849s-25.5,5.873-51.39,5.873-52.16-5.873-52.16-5.873L12.891,90.029l29.942-6.313Z" transform="translate(206 22.249)" fill="rgba(255,255,255,0.25)"/>
+    <path id="cap" d="M0,0H47.251V67.9s-11.444,4.173-23.256,4.173S0,67.9,0,67.9Z" transform="translate(248.397 21.468)" fill="url(#linear-gradient)"/>
+    <path id="syrup" d="M79.278,71.912c11.623.719,24.345,6.906,24.345,6.906V315.937S82.358,327.33,59.881,327.33s-46.167-11.393-46.167-11.393V78.818S23.847,72.63,34.7,71.912,67.656,71.193,79.278,71.912Z" transform="translate(213.035 41)" fill="rgba(175,214,219,0.54)"/>
+    <path id="reflection" d="M2209-43.234V94.108" transform="translate(-1906.838 179.242)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <g id="label">
+      <path id="Path_69" data-name="Path 69" d="M0,0A259.917,259.917,0,0,0,44.153,4.271C66.653,4.271,90,0,90,0V112s-23.347,7.4-45.847,7.4S0,112,0,112Z" transform="translate(227 173)" fill="#fff"/>
+      <text id="SIMPLE_SYRUP-2" data-name="SIMPLE
+SYRUP" transform="translate(237 183)" font-size="30" font-family="NiagaraEngraved-Reg, Niagara Engraved" letter-spacing="0.015em"><tspan x="7.716" y="26">SIMPLE</tspan><tspan x="10.864" y="57">SYRUP</tspan></text>
+      <g id="Repeat_Grid_9" data-name="Repeat Grid 9" transform="translate(232 249)" clip-path="url(#clip-path)">
+        <g transform="translate(-227 -246)">
+          <text id="_Maroon" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-211 -246)">
+          <text id="_Maroon-2" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-195 -246)">
+          <text id="_Maroon-3" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-179 -246)">
+          <text id="_Maroon-4" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-163 -246)">
+          <text id="_Maroon-5" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-227 -238)">
+          <text id="_Maroon-6" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-211 -238)">
+          <text id="_Maroon-7" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-195 -238)">
+          <text id="_Maroon-8" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-179 -238)">
+          <text id="_Maroon-9" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-163 -238)">
+          <text id="_Maroon-10" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-227 -230)">
+          <text id="_Maroon-11" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-211 -230)">
+          <text id="_Maroon-12" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-195 -230)">
+          <text id="_Maroon-13" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-179 -230)">
+          <text id="_Maroon-14" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-163 -230)">
+          <text id="_Maroon-15" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-227 -222)">
+          <text id="_Maroon-16" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-211 -222)">
+          <text id="_Maroon-17" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-195 -222)">
+          <text id="_Maroon-18" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-179 -222)">
+          <text id="_Maroon-19" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+        <g transform="translate(-163 -222)">
+          <text id="_Maroon-20" data-name=" Maroon" transform="translate(227 246)" font-size="5" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="2.777" y="4" xml:space="preserve"> Maroon</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

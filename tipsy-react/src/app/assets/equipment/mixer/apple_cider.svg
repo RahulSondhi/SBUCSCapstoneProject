@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="197.723" height="479.192" viewBox="0 0 197.723 479.192">
+  <defs>
+<style type="text/css">
+      @font-face {
+        font-family: BernardMT-Condensed;
+        src: url('../../fonts/BERNHC.TTF');
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="1.186" y1="0.182" x2="-0.091" y2="0.859" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#bcbcbb"/>
+      <stop offset="1" stop-color="#514d4d"/>
+    </linearGradient>
+  </defs>
+  <g id="apple_cider" transform="translate(-46.989 -63.532)">
+    <path id="mixer" d="M62.748,12.3H99.077s56.424,8.271,65.846,34.736,0,325.326,0,325.326H-3.1s-8.516-297.206,0-325.326S62.748,12.3,62.748,12.3Z" transform="translate(62.493 160.641)" fill="#f6d865"/>
+    <path id="bottle" d="M67.634-.766H120.8V69.783s56.3,2.892,69.183,31.428,0,342.706,0,342.706-62.628,7.226-95.075,7.226S2.1,443.917,2.1,443.917s-9.243-321.142,0-342.706S67.634,69.783,67.634,69.783Z" transform="translate(49 91.58)" fill="rgba(255,255,255,0.25)"/>
+    <rect id="cap" width="93" height="82" rx="5" transform="translate(98 63.532)" fill="url(#linear-gradient)"/>
+    <g id="label" transform="translate(55 275.532)">
+      <g id="Rectangle_10" data-name="Rectangle 10" fill="#f6fc61" stroke="red" stroke-width="3">
+        <rect width="177" height="227" stroke="none"/>
+        <rect x="1.5" y="1.5" width="174" height="224" fill="none"/>
+      </g>
+      <text id="APPLE_CIDER-2" data-name="APPLE CIDER" transform="translate(89 160)" font-size="29" font-family="BernardMT-Condensed, Bernard MT"><tspan x="-69.994" y="0">APPLE CIDER</tspan></text>
+      <text id="Maroon" transform="translate(67 201)" font-size="15" font-family="BernardMT-Condensed, Bernard MT"><tspan x="0" y="0">Maroon</tspan></text>
+      <path id="Icon_awesome-apple-alt" data-name="Icon awesome-apple-alt" d="M47.416,17.434a13.241,13.241,0,0,1,8.638,5.676A25.328,25.328,0,0,1,60.1,33.651a33.611,33.611,0,0,1-.135,11.622,36.518,36.518,0,0,1-6.479,16.082q-5.806,7.839-14.578,7.838a10.249,10.249,0,0,1-4.725-1.351,7.629,7.629,0,0,0-7.83,0,10.249,10.249,0,0,1-4.725,1.351q-8.774,0-14.578-7.838A36.518,36.518,0,0,1,.575,45.273,33.611,33.611,0,0,1,.44,33.651,25.328,25.328,0,0,1,4.489,23.11a13.241,13.241,0,0,1,8.638-5.676q3.239-.541,8.909.946a37.421,37.421,0,0,1,8.234,3.243A37.421,37.421,0,0,1,38.5,18.38q5.672-1.486,8.911-.946Zm-7.425-5.541A11.427,11.427,0,0,1,35,14.46a15.77,15.77,0,0,1-4.725.676L28.247,15a17.342,17.342,0,0,1,0-4.325,12.056,12.056,0,0,1,3.1-7.433A11.427,11.427,0,0,1,36.346.676,15.77,15.77,0,0,1,41.071,0L43.1.135l.135,2.027a15.85,15.85,0,0,1-.674,4.73,11.424,11.424,0,0,1-2.565,5Z" transform="translate(58.851 19.5)" fill="red"/>
+      <g id="Icon_ionic-ios-ribbon" data-name="Icon ionic-ios-ribbon" transform="translate(84.649 54.097)">
+        <path id="Path_82" data-name="Path 82" d="M25.289,35.5A16.616,16.616,0,0,0,42.041,18.735,16.867,16.867,0,0,0,25.569,2.25,16.616,16.616,0,0,0,8.817,19.014,16.867,16.867,0,0,0,25.289,35.5Zm-.471-25.96a9.356,9.356,0,1,1-8.713,8.726A9.357,9.357,0,0,1,24.818,9.538Z" transform="translate(3.491)" fill="#1313ff"/>
+        <path id="Path_83" data-name="Path 83" d="M28.92,24.433a18.87,18.87,0,0,1-13.8-5.978.527.527,0,0,0-.839.089L4.639,35.423a1.046,1.046,0,0,0,.916,1.564H15.743a1.051,1.051,0,0,1,.9.509l4.961,8.255a1.053,1.053,0,0,0,1.857-.1l5.469-12.033,3.981-8.764a.519.519,0,0,0-.572-.725A20.252,20.252,0,0,1,28.92,24.433Z" transform="translate(0 12.974)" fill="#1313ff"/>
+        <path id="Path_84" data-name="Path 84" d="M31.3,18.446a18.9,18.9,0,0,1-6.678,4.592.483.483,0,0,0-.28.267L18.661,35.732a.514.514,0,0,0,0,.432l4.312,9.476a1.053,1.053,0,0,0,1.857.1l4.961-8.255a1.051,1.051,0,0,1,.9-.509H40.882a1.051,1.051,0,0,0,.916-1.564L32.156,18.523A.555.555,0,0,0,31.3,18.446Z" transform="translate(11.417 12.969)" fill="#1313ff"/>
+      </g>
+    </g>
+  </g>
+</svg>

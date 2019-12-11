@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="227.296" height="527" viewBox="0 0 227.296 527">
+<defs>
+  <style type="text/css">
+  @font-face {
+      font-family: CenturyGothic;
+      src: url('../../fonts/GOTHIC.TTF');
+    }
+    </style>
+</defs>
+  <g id="orange_juice" transform="translate(-130.695 -507)">
+    <path id="mixer" d="M44.521,0h81.35V100.713c0,47.4,49.617,88.878,49.617,88.878s14.959,53.705,14.959,109.917-14.959,114.93-14.959,114.93H-10.525s-15.236-58.718-15.236-114.93,15.236-109.917,15.236-109.917,55.046-41.481,55.046-88.878Z" transform="translate(162 610.561)" fill="#ffbc00"/>
+    <path id="bottle" d="M52.916,0h92.4V104.98c0,49.406,47.687,92.645,47.687,92.645s16.991,55.981,16.991,114.575S193,432,193,432H0s-17.305-61.207-17.305-119.8S0,197.625,0,197.625s52.916-43.238,52.916-92.645Z" transform="translate(148 602)" fill="rgba(255,255,255,0.5)"/>
+    <path id="cap" d="M2.589,0H132L120.857,95H15.525Z" transform="translate(178 507)" fill="#ff8000"/>
+    <g id="label">
+      <path id="Path_76" data-name="Path 76" d="M91.5,0C142.034,0,183,58.427,183,130.5c0,31.64-25.208,87.285-25.208,87.285H23.478C8.934,194.841,0,164.158,0,130.5,0,58.427,40.966,0,91.5,0Z" transform="translate(153 784)" fill="#fff"/>
+      <circle id="Ellipse_26" data-name="Ellipse 26" cx="61" cy="61" r="61" transform="translate(166 868)" fill="#f90"/>
+      <line id="Line_4" data-name="Line 4" x1="28" y2="50" transform="translate(244.5 843.5)" fill="none" stroke="#b200ff" stroke-width="10"/>
+      <text id="Orange_Juice-2" data-name="Orange
+Juice" transform="translate(258.5 936)" font-size="30" font-family="CenturyGothic, Century Gothic"><tspan x="-56.785" y="0">Orange</tspan><tspan x="-38.804" y="37">Juice</tspan></text>
+    </g>
+  </g>
+</svg>

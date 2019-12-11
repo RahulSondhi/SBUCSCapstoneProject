@@ -80,6 +80,7 @@ public class EquipmentController {
             }
             return ResponseEntity.ok(briefEquipmentResponses);
         } catch (Exception e) {
+            logger.error("Equipment was unable to be loaded. Error: ", e);
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Equipments were unable to be loaded. Error: " + e.toString()),
                         HttpStatus.INTERNAL_SERVER_ERROR);
         }

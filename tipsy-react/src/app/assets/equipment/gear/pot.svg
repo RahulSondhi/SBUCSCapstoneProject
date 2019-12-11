@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="348" height="457.735" viewBox="0 0 348 457.735">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.047" y1="0.69" x2="1.124" y2="0.785" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c3c3c3"/>
+      <stop offset="1" stop-color="#838181"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#bababa"/>
+      <stop offset="1" stop-color="#656262"/>
+    </linearGradient>
+  </defs>
+  <g id="pot" transform="translate(-115 -223)">
+    <path id="Path_130" data-name="Path 130" d="M0,58.116H348V429s-86.948,38.735-173.948,38.735S0,429,0,429Z" transform="translate(115 213)" fill="url(#linear-gradient)"/>
+    <g id="Ellipse_75" data-name="Ellipse 75" transform="translate(115 223)" stroke="#707070" stroke-width="1" fill="url(#linear-gradient-2)">
+      <ellipse cx="174" cy="47" rx="174" ry="47" stroke="none"/>
+      <ellipse cx="174" cy="47" rx="173.5" ry="46.5" fill="none"/>
+    </g>
+  </g>
+</svg>

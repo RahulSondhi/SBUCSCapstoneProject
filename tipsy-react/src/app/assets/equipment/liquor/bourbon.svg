@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="191.555" height="339.501" viewBox="0 0 191.555 339.501">
+  <defs>
+    <style type="text/css">
+      @font-face {
+        font-family: BernardMT-Condensed;
+        src: url('../../fonts/BERNHC.TTF');
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.5" r="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffca00"/>
+      <stop offset="0.037" stop-color="#f80"/>
+      <stop offset="0.693" stop-color="#ffa000"/>
+      <stop offset="1" stop-color="#fc760d"/>
+    </radialGradient>
+    <linearGradient id="linear-gradient" x1="1.182" y1="0.293" x2="-0.329" y2="1.187" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#c49e53"/>
+      <stop offset="1" stop-color="#ffbb76"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.186" y1="0.182" x2="-0.091" y2="0.859" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#86857f"/>
+      <stop offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="bourbon" transform="translate(-46.989 -64)">
+    <path id="liquor" d="M62.923,12.3H99.282s65.9,28.784,65.9,64.386v141S109.717,205.5,81.69,205.5-2.978,217.685-2.978,217.685s2.272-110.7,0-141S62.923,12.3,62.923,12.3Z" transform="translate(59.871 178.921)" fill="url(#radial-gradient)"/>
+    <path id="bottle" d="M65.461-.766H116.97V99.615s54.539,30.87,67.025,51.115,0,163.977,0,163.977-60.674,5.127-92.11,5.127-89.917-5.127-89.917-5.127-8.954-148.678,0-163.977S65.461,99.615,65.461,99.615Z" transform="translate(49 83.667)" fill="rgba(255,255,255,0.25)"/>
+    <g id="cap">
+      <rect id="Rectangle_12" data-name="Rectangle 12" width="42" height="36" rx="5" transform="translate(120 113)" fill="url(#linear-gradient)"/>
+      <rect id="Rectangle_9" data-name="Rectangle 9" width="66" height="57" rx="5" transform="translate(108 64)" fill="url(#linear-gradient-2)"/>
+    </g>
+    <path id="reflection" d="M0,0C48.387,47.114,36.927,41.384,36.927,41.384" transform="matrix(0.995, -0.105, 0.105, 0.995, 171.828, 211.585)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <g id="label">
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="116" height="16" transform="translate(87 307)"/>
+      <path id="Path_35" data-name="Path 35" d="M0,0H14.285V16.581H0l7.434-8.2Z" transform="translate(76.254 303.404)"/>
+      <path id="Path_36" data-name="Path 36" d="M0,0H15.358L8.106,8.751l7.252,7.83H0Z" transform="translate(199.359 303.404)"/>
+      <text id="Bourbon-2" data-name="Bourbon" transform="translate(145.5 249)" font-size="20" font-family="BernardMT-Condensed, Bernard MT"><tspan x="-33.232" y="0">Bourbon</tspan></text>
+      <text id="Maroon" transform="translate(145 321)" fill="#fff" font-size="15" font-weight="bold" font-family="BernardMT-Condensed, Bernard MT"><tspan x="-21.482" y="0">Maroon</tspan></text>
+      <path id="Path_50" data-name="Path 50" d="M66.125,174.573s29.888-5.98,59.368-5.117a542.295,542.295,0,0,1,57.532,5.117" transform="translate(20.704 89.26)" fill="none" stroke="#000" stroke-width="1"/>
+      <g id="Icon_ionic-md-finger-print" data-name="Icon ionic-md-finger-print" transform="translate(128.5 269.403)">
+        <path id="Path_51" data-name="Path 51" d="M5.466,14.235A.96.96,0,0,1,4.63,12.8c1.219-2.055,4.924-6.855,13.019-6.855a15.312,15.312,0,0,1,9.136,2.767,15.5,15.5,0,0,1,3.842,4.034.952.952,0,0,1-.253,1.329.974.974,0,0,1-1.342-.253A12.949,12.949,0,0,0,17.649,7.845c-7.1,0-10.3,4.137-11.348,5.91A.945.945,0,0,1,5.466,14.235Z" transform="translate(-4.5 -2.346)"/>
+        <path id="Path_52" data-name="Path 52" d="M21.753,33.123a.954.954,0,0,1-.24-.027c-5.869-1.472-8.061-7.4-8.15-7.65l-.014-.055c-.048-.171-1.226-4.239.582-6.623a4.435,4.435,0,0,1,3.753-1.644,4,4,0,0,1,3.431,1.493,7.474,7.474,0,0,1,1.13,2.815c.514,2.034.883,3.1,3.02,3.212a2.206,2.206,0,0,0,1.9-.979,5.728,5.728,0,0,0,.4-5.239c-.918-2.4-4.164-6.91-9.889-6.91A10.04,10.04,0,0,0,11.186,13.8a10.54,10.54,0,0,0-3.246,4.78c-1.055,3.342.329,8.6.342,8.643A.95.95,0,0,1,7.6,28.39a.973.973,0,0,1-1.185-.678c-.062-.24-1.541-5.842-.322-9.7a12.172,12.172,0,0,1,19.375-5.575,13.362,13.362,0,0,1,3.9,5.3,7.57,7.57,0,0,1-.644,7.04,4.1,4.1,0,0,1-3.561,1.767c-3.657-.185-4.315-2.767-4.794-4.65-.493-1.931-.808-2.863-2.692-2.863a2.581,2.581,0,0,0-2.212.883,4.668,4.668,0,0,0-.6,3.013,9.835,9.835,0,0,0,.322,1.9c.151.384,2.109,5.239,6.8,6.417a.951.951,0,0,1,.7,1.157A.972.972,0,0,1,21.753,33.123Z" transform="translate(-4.529 -2.441)"/>
+        <path id="Path_53" data-name="Path 53" d="M14.317,32.782a.975.975,0,0,1-.705-.3,15.386,15.386,0,0,1-4.178-8.766v-.021a10.23,10.23,0,0,1,2.144-7.821,7.939,7.939,0,0,1,6.2-2.5,7.692,7.692,0,0,1,7.061,4.212,11.839,11.839,0,0,1,1.329,4.075.967.967,0,0,1-1.924.2h0a9.914,9.914,0,0,0-1.13-3.4,5.777,5.777,0,0,0-5.342-3.171,6.075,6.075,0,0,0-4.753,1.856,8.413,8.413,0,0,0-1.678,6.314,13.505,13.505,0,0,0,3.678,7.725.947.947,0,0,1-.048,1.349A.971.971,0,0,1,14.317,32.782Z" transform="translate(-4.626 -2.539)"/>
+        <path id="Path_54" data-name="Path 54" d="M25.336,30.243a7.964,7.964,0,0,1-5.2-1.719A9.6,9.6,0,0,1,17,22.353a.965.965,0,0,1,1.924-.151,7.774,7.774,0,0,0,2.452,4.856,6.642,6.642,0,0,0,5.1,1.205.963.963,0,0,1,1.068.842A.951.951,0,0,1,26.7,30.16,11.722,11.722,0,0,1,25.336,30.243Z" transform="translate(-4.825 -2.745)"/>
+        <path id="Path_55" data-name="Path 55" d="M26.731,4.346c-.8-.527-3.643-2.1-8.985-2.1-5.609,0-8.458,1.733-9.088,2.171a.748.748,0,0,0-.116.089.021.021,0,0,1-.014.007h0a.951.951,0,0,0,.644,1.664A.978.978,0,0,0,9.733,6h0l-.007.007c.027-.021,2.486-1.849,8.02-1.849S25.738,6,25.765,6.01L25.758,6l.014-.014a.96.96,0,1,0,.959-1.644Z" transform="translate(-4.596 -2.25)"/>
+      </g>
+    </g>
+  </g>
+</svg>

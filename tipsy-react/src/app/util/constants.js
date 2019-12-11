@@ -32,7 +32,8 @@ const FormItem = Form.Item;
 
 // Neccessary Data
 
-export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+// export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
+export const API_BASE_URL = 'http://tipsy-api.us-east-1.elasticbeanstalk.com';
 export const ACCESS_TOKEN = 'accessToken';
 export const APP_NAME = 'Tipsy';
 
@@ -198,7 +199,7 @@ export class MakeProfImg extends Component {
                         alt={"Can't Edit!"}
                         type={this.type}
                         pic={this.state.src}
-                        className="small-5 cell"/>
+                        className="small-2 cell"/>
                 </div>
             )
         }else{

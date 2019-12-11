@@ -1,2 +1,2 @@
 #!/bin/bash
-curl -X POST -H "Content-Type: application/json"  -d @login.json  http://localhost:8080/login | json_pp
+curl -X POST -H "Content-Type: application/json"  -d @login.json  http://tipsy-api.us-east-1.elasticbeanstalk.com/login | json_pp

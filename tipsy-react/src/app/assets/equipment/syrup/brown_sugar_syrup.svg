@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="106.447" height="350.532" viewBox="0 0 106.447 350.532">
+  <g id="brown_sugar_syrup" transform="translate(-218.523 -21.468)">
+    <path id="bottle" d="M44.174-.766H86.592L85.251,83.716s29.856,11.12,32.53,30.155,0,230.007,0,230.007-25.5,5.873-51.39,5.873-52.16-5.873-52.16-5.873-3.845-209.969,0-230.007,28.6-30.155,28.6-30.155Z" transform="translate(206 22.249)" fill="rgba(255,255,255,0.25)"/>
+    <path id="cap" d="M0,0H47.251V67.9s-11.444,4.173-23.256,4.173S0,67.9,0,67.9Z" transform="translate(248.397 21.468)" fill="#fff"/>
+    <path id="syrup" d="M79.278,71.912C90.9,72.63,104.909,88.72,106.7,96.579s.474,222.8.474,222.8-24.813,7.948-47.291,7.948S12,319.382,12,319.382s-4.25-213.4-2.172-222.8S23.847,72.63,34.7,71.912,67.656,71.193,79.278,71.912Z" transform="translate(214.035 41)" fill="rgba(201,134,34,0.54)"/>
+    <path id="reflection" d="M2209-43.234V94.108" transform="translate(-1906.838 179.242)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <g id="label" transform="translate(4 6.564)">
+      <path id="Path_69" data-name="Path 69" d="M0,0H81.688V114.285H0Z" transform="translate(227 173)" fill="#fff"/>
+      <text id="BROWN_SUGAR_SYRUP-2" data-name="BROWN
+SUGAR
+SYRUP" transform="translate(232 185.436)" font-size="15" font-family="Modern-Regular, "Modern No. 20"" letter-spacing="0.015em"><tspan x="7.807" y="12">BROWN</tspan><tspan x="10.92" y="28">SUGAR</tspan><tspan x="10.86" y="44">SYRUP</tspan></text>
+      <text id="_Maroon" data-name=" Maroon" transform="translate(243 270.436)" font-size="10" font-family="Modern-Regular, "Modern No. 20""><tspan x="5.045" y="8" xml:space="preserve"> Maroon</tspan></text>
+      <path id="Icon_material-grain" data-name="Icon material-grain" d="M15,18a3,3,0,1,0,3,3A3.009,3.009,0,0,0,15,18ZM9,12a3,3,0,1,0,3,3A3.009,3.009,0,0,0,9,12ZM9,24a3,3,0,1,0,3,3A3.009,3.009,0,0,0,9,24ZM27,12a3,3,0,1,0-3-3A3.009,3.009,0,0,0,27,12ZM21,24a3,3,0,1,0,3,3A3.009,3.009,0,0,0,21,24Zm6-6a3,3,0,1,0,3,3A3.009,3.009,0,0,0,27,18Zm-6-6a3,3,0,1,0,3,3A3.009,3.009,0,0,0,21,12ZM15,6a3,3,0,1,0,3,3A3.009,3.009,0,0,0,15,6Z" transform="translate(249.257 235.142)"/>
+    </g>
+  </g>
+</svg>

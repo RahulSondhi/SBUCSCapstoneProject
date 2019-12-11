@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="119.793" height="400.336" viewBox="0 0 119.793 400.336">
+  <defs>
+  <style type="text/css">
+  @font-face {
+      font-family: NiagaraEngraved-Reg;
+      src: url('../../fonts/NIAGENG.TTF');
+    }
+    </style>
+    <linearGradient id="linear-gradient" x1="1.271" y1="0.393" x2="-0.283" y2="0.892" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6e6e6e"/>
+      <stop offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="gin" transform="translate(-218.891 -21.468)">
+    <path id="bottle" d="M48.619-.766H97.063L95.532,95.72l35.621,7.21,1.531,289.917s-29.126,6.707-58.691,6.707-59.571-6.707-59.571-6.707L12.891,102.93l34.2-7.21Z" transform="translate(206 22.251)" fill="rgba(255,255,255,0.25)"/>
+    <path id="cap" d="M0,0H53.965V39.409A166.235,166.235,0,0,1,27.4,41.831,184.2,184.2,0,0,1,0,39.409Z" transform="translate(252.589 21.468)" fill="url(#linear-gradient)"/>
+    <path id="liquor" d="M88.594,71.988c13.274.821,27.8,7.888,27.8,7.888v270.81S92.112,363.7,66.44,363.7s-52.726-13.011-52.726-13.011V79.876s11.573-7.067,23.97-7.888S75.32,71.167,88.594,71.988Z" transform="translate(214.152 53.916)" fill="rgba(175,214,219,0.54)"/>
+    <path id="reflection" d="M2209-43.234V113.621" transform="translate(-1895.007 195.516)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+    <g id="label">
+      <text id="GIN-2" data-name="GIN" transform="translate(276 262.2)" font-size="30" font-family="NiagaraEngraved-Reg, Niagara Engraved" letter-spacing="0.015em"><tspan x="-11.759" y="0">GIN</tspan></text>
+      <path id="Icon_awesome-chess-king" data-name="Icon awesome-chess-king" d="M25.753,28.843H3.09a1.03,1.03,0,0,0-1.03,1.03v2.06a1.03,1.03,0,0,0,1.03,1.03H25.753a1.03,1.03,0,0,0,1.03-1.03v-2.06A1.03,1.03,0,0,0,25.753,28.843ZM26.783,10.3h-10.3V7.211h2.575a.515.515,0,0,0,.515-.515V3.605a.515.515,0,0,0-.515-.515H16.482V.515A.515.515,0,0,0,15.967,0h-3.09a.515.515,0,0,0-.515.515V3.09H9.786a.515.515,0,0,0-.515.515V6.7a.515.515,0,0,0,.515.515h2.575V10.3H2.06A2.06,2.06,0,0,0,.1,12.976L4.8,26.783H24.043l4.705-13.807A2.06,2.06,0,0,0,26.783,10.3Z" transform="translate(261.895 194.188)"/>
+      <rect id="Rectangle_13" data-name="Rectangle 13" width="49" height="13" transform="translate(252 270.2)"/>
+      <text id="_Maroon" data-name=" Maroon" transform="translate(274 279.2)" fill="#fff" font-size="10" font-weight="bold" font-family="NiagaraEngraved-Reg, Niagara Engraved"><tspan x="-9.446" y="0" xml:space="preserve"> Maroon</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100.756" height="340.581" viewBox="0 0 100.756 340.581">
+  <defs>
+    <linearGradient id="linear-gradient" x1="1.271" y1="0.393" x2="-0.283" y2="0.892" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ddd"/>
+      <stop offset="1" stop-color="#888686"/>
+    </linearGradient>
+  </defs>
+  <g id="vodka" transform="translate(-218.891 -19)">
+    <path id="bottle" d="M42.941-.766H83.687L82.4,80.387l29.96,6.064L113.648,330.3s-24.5,5.641-49.365,5.641-50.1-5.641-50.1-5.641L12.891,86.451l28.762-6.064Z" transform="translate(206 23.643)" fill="rgba(255,255,255,0.25)"/>
+    <g id="cap">
+      <path id="Path_40" data-name="Path 40" d="M0,0H45.389V57.05a83.933,83.933,0,0,1-22.34,3.506C11.7,60.556,0,57.05,0,57.05Z" transform="translate(247.234 19)" fill="url(#linear-gradient)"/>
+      <line id="Line_3" data-name="Line 3" x2="40.694" transform="translate(249.582 41.695)" fill="none" stroke="red" stroke-width="3"/>
+    </g>
+    <path id="liquor" d="M38.687,56.215H74.066V80.456L100.08,87.09V314.865s-20.427,10.944-42.019,10.944-44.348-10.944-44.348-10.944V87.09l24.973-6.634Z" transform="translate(212.726 30.247)" fill="rgba(175,214,219,0.54)"/>
+    <g id="label">
+      <text id="V_O_D_K_A" data-name="V O D K A" transform="translate(245 265) rotate(-90)" fill="red" font-size="20" font-family="Candara"><tspan x="-39.653" y="0">V O D K A</tspan></text>
+      <text id="product_of_Maroon" data-name="product
+of Maroon" transform="translate(268 331)" font-size="10" font-family="Candara"><tspan x="-16.826" y="0">product</tspan><tspan x="-22.358" y="13">of Maroon</tspan></text>
+    </g>
+    <path id="reflection" d="M2209-43.234V88.7" transform="translate(-1910.119 176.123)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

@@ -56,11 +56,11 @@
 
 #userDisplayPageTitle{
     height: 5%;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 
 .userDisplayTabs{
-    height: 82%;
+    height: 80%;
 }
 
 .userDisplayTabs .ant-tabs-content,
@@ -79,6 +79,22 @@
 
 .ant-tabs-tab-btn-disabled, .ant-tabs-tab-btn-disabled:hover{
   color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Config Pages */
+
+.configPageTitle{
+  height: 6%;
+}
+
+.configPageForm{
+  height: 90%;
+}
+
+.configPageForm .userDisplayTabs{
+  height: 100%;
+  margin-bottom: 0;
+  padding-top: 3%;
 }
 
 /* Users Recipes Page */
@@ -101,8 +117,24 @@
 /* Game Page */
 
 .previewGameStepContainer{
-  padding-top: 0.5em;
-  padding-bottom: 0.75em;
   text-align: center;
   word-wrap: break-word;
 }
+
+.noBG div{
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.dragArea{
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 1em;
+  padding: 1em;
+}
+
+/* .gamePageContainer{
+  background: url("../assets/game/game.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+} */

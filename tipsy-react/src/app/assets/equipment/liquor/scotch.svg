@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="183.915" height="331" viewBox="0 0 183.915 331">
+  <defs>
+  <style type="text/css">
+    @font-face {
+      font-family: Castellar;
+      src: url('../../fonts/Castellar.ttf');
+    }
+  </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ff9200"/>
+      <stop offset="0.284" stop-color="#ff5f10"/>
+      <stop offset="0.683" stop-color="#ff9200"/>
+      <stop offset="1" stop-color="#fc5b0d"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1.186" y1="0.182" x2="-0.091" y2="0.859" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#86857f"/>
+      <stop offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="scotch" transform="translate(-48.278 -64)">
+    <path id="liquor" d="M62.257,34.32v-44.99H98.249V34.32s65.236,28.494,65.236,63.736-27.162,141.327-27.162,141.327-27.744-13.81-55.488-13.81-55.488,13.81-55.488,13.81S-.73,128.049-2.979,98.056,62.257,34.32,62.257,34.32Z" transform="translate(58.535 155.618)" fill="url(#linear-gradient)"/>
+    <path id="bottle" d="M63.544-.766h50.989V98.6s53.989,30.559,66.348,50.6-28.857,162.322-28.857,162.322H27.552S-8.172,164.346.692,149.2,63.544,98.6,63.544,98.6Z" transform="translate(49 83.476)" fill="rgba(255,255,255,0.25)"/>
+    <rect id="cap" width="65" height="57" rx="5" transform="translate(106 64)" fill="url(#linear-gradient-2)"/>
+    <g id="label">
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="116" height="16" transform="translate(81 303)"/>
+      <path id="Path_35" data-name="Path 35" d="M0,0H14.141V16.414H0L7.358,8.3Z" transform="translate(70.805 299.03)"/>
+      <path id="Path_36" data-name="Path 36" d="M0,0H15.2L8.024,8.663,15.2,16.414H0Z" transform="translate(192.668 299.03)"/>
+      <text id="Scotch-2" data-name="Scotch" transform="translate(140 298)" font-size="20" font-family="Castellar"><tspan x="-45.112" y="0">SCOTCH</tspan></text>
+      <text id="Maroon" transform="translate(138.5 315)" fill="#fff" font-size="10" font-weight="bold" font-family="Castellar"><tspan x="-26.36" y="0">MAROON</tspan></text>
+      <path id="Icon_awesome-shield-alt" data-name="Icon awesome-shield-alt" d="M25.417,4.514,15.064.2a2.6,2.6,0,0,0-1.99,0L2.721,4.514A2.585,2.585,0,0,0,1.125,6.9c0,10.7,6.174,18.1,11.944,20.506a2.6,2.6,0,0,0,1.99,0C19.679,25.484,27.007,18.835,27.007,6.9A2.589,2.589,0,0,0,25.417,4.514ZM14.072,24.066,14.066,3.521l9.485,3.952c-.178,8.164-4.427,14.079-9.479,16.592Z" transform="translate(124.68 236.853)"/>
+      <path id="Path_50" data-name="Path 50" d="M66.125,174.521s29.586-5.92,58.768-5.066a536.824,536.824,0,0,1,56.952,5.066" transform="translate(15.149 102.965)" fill="none" stroke="#000" stroke-width="1"/>
+    </g>
+    <path id="reflection" d="M0,0C47.9,46.638,36.554,40.966,36.554,40.966" transform="matrix(0.995, -0.105, 0.105, 0.995, 169.332, 210.096)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+  </g>
+</svg>

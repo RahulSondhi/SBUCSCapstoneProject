@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168.045" height="166.857" viewBox="0 0 168.045 166.857">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fefac9"/>
+      <stop offset="1" stop-color="#949494"/>
+    </linearGradient>
+  </defs>
+  <g id="coconut" transform="translate(-469.442 -775.407)">
+    <path id="Path_58" data-name="Path 58" d="M62.5,0C97.018,0,125,29.1,125,65s-27.982,65-62.5,65c-12.047,0-31.842-2.96-39.779-9.862C8.538,107.811,6.964,20.978,23.2,10.874,30.311,6.449,51.661,0,62.5,0Z" transform="matrix(0.469, 0.883, -0.883, 0.469, 578.803, 770.864)" fill="#552c10"/>
+    <ellipse id="Ellipse_15" data-name="Ellipse 15" cx="55" cy="24.5" rx="55" ry="24.5" transform="matrix(0.875, -0.485, 0.485, 0.875, 471.018, 828.736)" fill="#fff"/>
+    <ellipse id="Ellipse_16" data-name="Ellipse 16" cx="46.5" cy="19" rx="46.5" ry="19" transform="matrix(0.875, -0.485, 0.485, 0.875, 481.473, 828.36)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

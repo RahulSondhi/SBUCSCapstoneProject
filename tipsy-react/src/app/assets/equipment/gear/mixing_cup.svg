@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="108.511" height="141.359" viewBox="0 0 108.511 141.359">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="74.624" height="45.624" fill="none"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.486" y1="0.041" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.188"/>
+      <stop offset="1" stop-color="#c9c8c8" stop-opacity="0.6"/>
+    </linearGradient>
+    <clipPath id="clip-path-2">
+      <rect width="83.624" height="55.624" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="mixing_cup" transform="translate(-765.681 -553.98)">
+    <path id="Path_19" data-name="Path 19" d="M2.681,0A359.437,359.437,0,0,1,48.215-3.02,483.759,483.759,0,0,1,98,0l13.192,9.666L96.221,22.033,88.991,134a191.9,191.9,0,0,1-38.511,4.339C30.545,138.339,9.25,134,9.25,134Z" transform="translate(763 557)" fill="rgba(255,255,255,0.55)"/>
+    <g id="Repeat_Grid_3" data-name="Repeat Grid 3" transform="translate(775.688 643.688)" clip-path="url(#clip-path)">
+      <g transform="translate(-767.688 -633.688)">
+        <rect id="Rectangle_5" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-746.688 -633.688)">
+        <rect id="Rectangle_5-2" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-725.688 -633.688)">
+        <rect id="Rectangle_5-3" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-704.688 -633.688)">
+        <rect id="Rectangle_5-4" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-767.688 -610.688)">
+        <rect id="Rectangle_5-5" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-746.688 -610.688)">
+        <rect id="Rectangle_5-6" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-725.688 -610.688)">
+        <rect id="Rectangle_5-7" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-704.688 -610.688)">
+        <rect id="Rectangle_5-8" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+    <path id="Path_20" data-name="Path 20" d="M2706.72,424.417c46.44,10.421,86.826,1.5,86.826,1.5l19.42,6.425" transform="translate(-1939.906 133.641)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+    <g id="Repeat_Grid_4" data-name="Repeat Grid 4" transform="translate(769.688 633.688)" clip-path="url(#clip-path-2)">
+      <g transform="translate(-767.688 -633.688)">
+        <rect id="Rectangle_5-9" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-746.688 -633.688)">
+        <rect id="Rectangle_5-10" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-725.688 -633.688)">
+        <rect id="Rectangle_5-11" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-704.688 -633.688)">
+        <rect id="Rectangle_5-12" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-767.688 -610.688)">
+        <rect id="Rectangle_5-13" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-746.688 -610.688)">
+        <rect id="Rectangle_5-14" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-725.688 -610.688)">
+        <rect id="Rectangle_5-15" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-704.688 -610.688)">
+        <rect id="Rectangle_5-16" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-767.688 -587.688)">
+        <rect id="Rectangle_5-17" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-746.688 -587.688)">
+        <rect id="Rectangle_5-18" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-725.688 -587.688)">
+        <rect id="Rectangle_5-19" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+      <g transform="translate(-704.688 -587.688)">
+        <rect id="Rectangle_5-20" data-name="Rectangle 5" width="16" height="16" transform="matrix(0.719, -0.695, 0.695, 0.719, 767.688, 644.803)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+    <path id="Path_21" data-name="Path 21" d="M2711.024,438.689c1.359,59.806,1.813,47.346,1.813,47.346" transform="translate(-1939 135)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1"/>
+  </g>
+</svg>
