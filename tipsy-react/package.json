@@ -1,6 +1,7 @@
 {
   "name": "tipsy-react",
   "version": "0.1.0",
+  "homepage": "https://rahulsondhi.github.io/Tipsy",
   "private": true,
   "dependencies": {
     "@csstools/normalize.css": "github:csstools/normalize.css",
@@ -31,7 +32,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
-    "@babel/preset-flow": "^7.0.0"
+    "@babel/preset-flow": "^7.0.0",
+    "gh-pages": "^2.1.1"
   }
 }
