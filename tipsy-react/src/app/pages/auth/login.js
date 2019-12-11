@@ -26,14 +26,12 @@ class LoginForm extends Component {
             .bind(this);
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        this
-            .props
-            .form
-            .validateFields((err, values) => {
+        this.props.form.validateFields((err, values) => {
                 if (!err) {
                     const loginRequest = Object.assign({}, values);
+                    // Clear the values from the component, not needed anymore
                     login(loginRequest) //JSON to backend
                         .then(response => {
                         localStorage.setItem(ACCESS_TOKEN, response.accessToken); //get the token and save it
