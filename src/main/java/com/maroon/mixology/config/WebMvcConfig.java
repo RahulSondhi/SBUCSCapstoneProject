@@ -12,7 +12,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/Tipsy/**")
+        registry.addMapping("*")
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST")
                 .maxAge(MAX_AGE_SECS);
