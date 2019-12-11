@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {createBar, getBarProfile, changeBarSettings, deleteBar} from '../../util/APIUtils';
-import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, Notify} from '../../util/constants';
+import {MakeProfImg, DynamicForm, ValidateDesc, ValidateName, Notify, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import {Form, Input, Icon, Tabs, Popconfirm} from 'antd';
@@ -286,7 +286,7 @@ class ConfigBarPage extends Component {
     async handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("Tipsy/app/myBars");
+            this.props.history.push(LINK_BASE+"app/myBars");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -394,7 +394,7 @@ class ConfigBarPage extends Component {
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.push("/Tipsy/app/myBars");
+                this.props.history.push(LINK_BASE+"/app/myBars");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {forgot, checkEmailAvailability} from '../../util/APIUtils';
-import {ValidateEmail, Notify} from '../../util/constants';
+import {ValidateEmail, Notify, LINK_BASE} from '../../util/constants';
 
 import Tipsy from '../../assets/Tipsy.svg';
 
@@ -59,7 +59,7 @@ class Forgot extends Component {
         };
         forgot(forgotRequest).then(response => {
             Notify("success", response.message,-1)
-            this.props.history.push("/");
+            this.props.history.push(LINK_BASE);
         }).catch(error => {
             Notify("error", error.message.message,-1)
         });

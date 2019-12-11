@@ -19,7 +19,6 @@ class GeneralNavbar extends Component {
         super(props);
 
         this.type = this.props.type;
-        this.gameId = this.props.gameId;
 
     }
 
@@ -28,18 +27,10 @@ class GeneralNavbar extends Component {
             return (
                 <Menu theme="dark" mode={this.props.mode}>
 
-                    {/* Instruction */}
-                    <Menu.Item key="instruction">
-                        <NavLink to={"/app/recipe/"+this.gameId+"/instruction"}>
-                            <Icon type="profile" style={{fontSize : "1.5em"}}/>
-                            Instruction
-                        </NavLink>
-                    </Menu.Item>
-
 
                     {/* Quit */}
                     <Menu.Item key="quit">
-                        <NavLink to={"/app/recipe/"+this.gameId}>
+                        <NavLink to={"/app/myRecipes"}>
                             <Icon type="logout" style={{fontSize : "1.5em"}}/>
                             Quit
                         </NavLink>

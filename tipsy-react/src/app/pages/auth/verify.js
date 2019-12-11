@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
 import {verifyConfirm, verifyNewEmail, verifyReset, resetPassword} from '../../util/APIUtils';
-import {ACCESS_TOKEN, ValidatePassword, Notify} from '../../util/constants';
+import {ACCESS_TOKEN, ValidatePassword, Notify, LINK_BASE} from '../../util/constants';
 
 import Tipsy from '../../assets/Tipsy.svg';
 
@@ -67,7 +67,7 @@ class Verify extends Component {
         };
         resetPassword(resetPasswordRequest).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push("/Tipsy/logout");
+            this.props.history.push(LINK_BASE+"/logout");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -165,7 +165,6 @@ class Verify extends Component {
             if(this.state.flow === "verifyReset"){
                 return ( //The token is valid, return the form to proceed with password reset
                     <div>
-                        {/* <SVG src={Tipsy} style={TipsyStyle} alt="TipsyLogo"/> */}
                         <h1>Reset Password</h1>
                         <h3>{this.state.message}</h3>
                         <h3>Please enter a new password to login.</h3>

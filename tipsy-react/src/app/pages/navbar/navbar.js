@@ -39,9 +39,6 @@ class Navbar extends Component {
                     </NavLink>
                 </div>
                 <div className="menuCon">
-                    {/* <div className="leftMenu">
-                        <LeftMenu/>
-                    </div> */}
                     <div className="rightMenu">
                         <GeneralNavbar mode={'horizontal'} type={this.state.type}/>
                     </div>
@@ -54,7 +51,6 @@ class Navbar extends Component {
                         closable={false}
                         onClose={this.onClose}
                         visible={this.state.visible}>
-                        {/* <LeftMenu/> */}
                         <GeneralNavbar mode={'inline'} type={this.state.type}/>
                     </Drawer>
                 </div>

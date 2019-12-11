@@ -106,7 +106,8 @@ class UserPage extends Component {
 
                     <div
                         id="redirectUser"
-                        className="small-2 small-offset-1 cell grid-x align-center-middle">
+                        className="small-2 small-offset-1 cell grid-x align-center-middle"
+                        style={{marginTop: "1%"}}>
                         <NavLink
                             to={"/app/user/" + this.state.user.name + "/config"}
                             className={"cell grid-x align-center-middle " + this.state.settingClass}>

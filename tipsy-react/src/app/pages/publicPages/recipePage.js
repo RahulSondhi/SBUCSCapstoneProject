@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ItemPreview, GetProfImg} from '../../util/constants';
+import {ItemPreview, GetProfImg, LINK_BASE} from '../../util/constants';
 import {getRecipeProfile, initGame} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 
@@ -32,7 +32,7 @@ class RecipePage extends Component {
                 .props
                 .history
                 .push({
-                    pathname: '/Tipsy/app/game/' + response.message + ''
+                    pathname: LINK_BASE+'/app/game/' + response.message + ''
                 })
         }).catch(error => {
             this.setState({
@@ -165,7 +165,8 @@ class RecipePage extends Component {
 
                     <div
                         id="redirectRecipe"
-                        className="small-2 small-offset-1 cell grid-x align-center-middle">
+                        className="small-2 small-offset-1 cell grid-x align-center-middle"
+                        style={{marginTop: "1%"}}>
                         <Link
                             to={"/app/recipe/" + this.props.match.params.id + "/config"}
                             className={"small-4 cell grid-x align-center-middle " + this.state.settingClass}>
@@ -195,7 +196,7 @@ class RecipePage extends Component {
 
                         <div className="small-10 grid-x grid-margin-x align-center-middle align-self-top cell">
                             <h1 className="publicPageDescTitle captionRed small-10 cell">Description</h1>
-                            {this.state.recipe.description}
+                            <p className="cell">{this.state.recipe.description}</p>
                         </div>
 
                     </div>

@@ -98,7 +98,8 @@ class BarPage extends Component {
 
                     <div
                         id="redirectBar"
-                        className="small-2 small-offset-1 cell grid-x align-center-middle">
+                        className="small-2 small-offset-1 cell grid-x align-center-middle"
+                        style={{marginTop: "1%"}}>
                         <NavLink
                             to={"/app/bar/" + this.props.match.params.id + "/config"}
                             className={"cell grid-x align-center-middle " + this.state.settingClass}>
@@ -110,7 +111,7 @@ class BarPage extends Component {
 
                         <div className="small-10 grid-x grid-margin-x align-center-middle align-self-top cell">
                             <h1 className="publicPageDescTitle captionRed small-10 cell">Description</h1>
-                            {this.state.bar.description}
+                            <p className="cell">{this.state.bar.description}</p>
                         </div>
 
                     </div>
@@ -121,7 +122,7 @@ class BarPage extends Component {
                             <TabPane tab="Recipes" key="1">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-3 cell"
                                         items={this.state.bar.recipesAvailable}
                                         type="recipe"/>
                                 </div>
@@ -129,7 +130,7 @@ class BarPage extends Component {
                             <TabPane tab="Managers" key="2">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-3 cell"
                                         items={this.state.bar.managers}
                                         type="user"/>
                                 </div>
@@ -137,7 +138,7 @@ class BarPage extends Component {
                             <TabPane tab="Workers" key="3">
                                 <div className="grid-x grid-margin-x align-center-middle cell">
                                     <ItemPreview
-                                        className="small-4 cell"
+                                        className="small-3 cell"
                                         items={this.state.bar.workers}
                                         type="user"/>
                                 </div>
