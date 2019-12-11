@@ -10,12 +10,19 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     private final long MAX_AGE_SECS = 3600;
 
+    // @Override
+    // public void addCorsMappings(CorsRegistry registry) {
+    //     registry.addMapping("/*")
+    //             .allowedOrigins("http://localhost:3000", "https://rahulsondhi.github.io/Tipsy");
+    //             // .allowedHeaders("*")
+    //             // .allowedMethods("OPTIONS","GET", "POST")
+    //             // .maxAge(MAX_AGE_SECS);
+    // }
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/*")
-                .allowedOrigins("http://localhost:3000", "https://rahulsondhi.github.io/Tipsy");
-                // .allowedHeaders("*")
-                // .allowedMethods("OPTIONS","GET", "POST")
-                // .maxAge(MAX_AGE_SECS);
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+                .maxAge(MAX_AGE_SECS);
     }
 }
