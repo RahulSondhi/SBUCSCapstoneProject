@@ -119,6 +119,12 @@ export class DynamicSteps extends Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>

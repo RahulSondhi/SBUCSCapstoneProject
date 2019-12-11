@@ -8,7 +8,7 @@ import ErrorPage from '../../util/errorPage.js';
 import Dustbin from './equipmentBin'
 import Box from './equipmentDrag'
 
-import {Tabs, Input} from 'antd';
+import {Tabs, Input, Modal, Button} from 'antd';
 
 const {TabPane} = Tabs;
 
@@ -211,25 +211,33 @@ class Game extends Component {
                 buttonVisible: "hidden",
             })
 
+            Modal.success({
+                title: "Step Passed!",
+                content: 'Good Job!',
+              });
+
         }else{
-            var response = "Try again,but take a look at: "
+            var response = "Try again, but take a look at: \n"
             if(correctEquipmentToDo === false){
-                response += " Equipment Doing The Action,"
+                response += "\n Equipment Doing The Action,"
             }
 
             if(correctEquipmentDoing === false){
-                response += " Equipment That Is Being Affected,"
+                response += "\n Equipment That Is Being Affected,"
             }
 
             if(correctAction === false){
-                response += " Action You Choose,"
+                response += "\n Action You Choose,"
             }
 
             if(correctUnit === false){
-                response += " Units You Put In,"
+                response += "\n Units You Put In,"
             }
 
-            console.log(response);
+            Modal.error({
+                title: 'Step Failed!',
+                content: response,
+            });
 
             var progress = this.state.progress;
             progress[this.state.currentStep] += 1;

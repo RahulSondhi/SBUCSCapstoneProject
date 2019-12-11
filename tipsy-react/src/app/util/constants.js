@@ -466,6 +466,12 @@ export class DynamicForm extends Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
         if(this.type === "equipment"){
             return (
