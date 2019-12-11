@@ -235,7 +235,7 @@ public class UserController {
                     verificationEmail.setTo(settingsRequest.getEmail()); //new email
                     verificationEmail.setSubject(verificationSubject);
                     verificationEmail.setText(verificationMessage
-                    + appUrl + "/newEmail?token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
+                    + appUrl + "?flow=newEmail&token=" + user.getConfirmationTokenUUID() + "&email=" + settingsRequest.getEmail());
                     emailService.sendEmail(verificationEmail);
                     emailUpdate = "\nA message has been sent to complete updating your email. Please verify this new email from the message sent to your inbox.";
                 }

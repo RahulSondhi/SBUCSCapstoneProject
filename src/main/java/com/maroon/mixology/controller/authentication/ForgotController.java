@@ -87,7 +87,7 @@ public class ForgotController {
                                 resetEmail.setTo(user.getEmail());
                                 resetEmail.setSubject(passwordResetSubject);
                                 resetEmail.setText(passwordResetMessage
-                                + appUrl + "/reset?token=" + user.getResetTokenUUID());
+                                + appUrl + "?flow=reset&token=" + user.getResetTokenUUID());
                                 emailService.sendEmail(resetEmail);
                                 // Notify the user that an email has been sent
                                 return ResponseEntity.ok(new ApiResponse(true, "Your password reset request was submitted succesfully! Please check your email to complete the reset."));
