@@ -29,6 +29,18 @@ class GeneralNavbar extends Component {
 
 
                     {/* Quit */}
+                    <Menu.Item key="save">
+                        <NavLink to={""} onClick={(e)=>{e.preventDefault(); this.props.save()}}>
+                            <Icon type="save" style={{fontSize : "1.5em"}}/>
+                            Save
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="delete">
+                        <NavLink to={""} onClick={(e)=>{e.preventDefault(); this.props.quit()}}>
+                            <Icon type="delete" style={{fontSize : "1.5em"}}/>
+                            Delete Session
+                        </NavLink>
+                    </Menu.Item>
                     <Menu.Item key="quit">
                         <NavLink to={"/app/myRecipes"}>
                             <Icon type="logout" style={{fontSize : "1.5em"}}/>
