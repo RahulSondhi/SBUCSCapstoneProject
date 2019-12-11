@@ -40,12 +40,21 @@ class ChangePasswordPage extends Component {
     /*
         Handle our submit 
     */
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
     
         const changePasswordRequest = {
             password: this.state.password.value
         };
+        // Clear the values from the component, not needed anymore
+        this.setState({
+            password: {
+                value: ''
+            },
+            passwordConfirm: {
+                value: ''
+            }
+        });
         changePassword(changePasswordRequest)
         .then(response => {
             Notify("success",response.message,-1);

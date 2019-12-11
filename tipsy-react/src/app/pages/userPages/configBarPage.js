@@ -283,7 +283,7 @@ class ConfigBarPage extends Component {
     }
 
 
-    handleDelete(){
+    async handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
             this.props.history.push("/tipsy/myBars");
@@ -380,7 +380,7 @@ class ConfigBarPage extends Component {
         }
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
 
         const barRequest = {
@@ -391,11 +391,10 @@ class ConfigBarPage extends Component {
             workers: this.state.SENDworkers,
             recipesAvailable: this.state.SENDrecipesAvailable
         };
-
         if (this.state.isCreating === true) {
             createBar(barRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.goBack();
+                this.props.history.push("/tipsy/myBars");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });

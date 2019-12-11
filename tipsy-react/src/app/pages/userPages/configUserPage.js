@@ -290,7 +290,7 @@ class ConfigUserPage extends Component {
 
     // Handle our submit
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
         const settingsRequest = {
             firstName: this.state.firstName.value,
@@ -310,7 +310,7 @@ class ConfigUserPage extends Component {
 
         changeUserSettings(settingsRequest,nickname).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.goBack();
+            this.props.history.push("/tipsy/user/me");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
