@@ -1,42 +1,23 @@
 package com.maroon.mixology.controller.tipsy;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.maroon.mixology.entity.User;
-import com.maroon.mixology.entity.type.ActionType;
-import com.maroon.mixology.entity.EquipmentType;
 import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
-import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
-import com.maroon.mixology.exchange.request.EquipmentProductRequest;
-import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.GameRequest;
-import com.maroon.mixology.exchange.request.RecipeRequest;
-import com.maroon.mixology.exchange.request.StepRequest;
 import com.maroon.mixology.exchange.response.ApiResponse;
-import com.maroon.mixology.exchange.response.EquipmentProductResponse;
-import com.maroon.mixology.exchange.response.EquipmentResponse;
-import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.GameResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.GameRepository;
-import com.maroon.mixology.repository.RecipeRepository;
-import com.maroon.mixology.repository.StepRepository;
-import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
-import com.maroon.mixology.service.EquipmentTypeService;
 import com.maroon.mixology.service.GameService;
-import com.maroon.mixology.service.RecipeService;
-import com.maroon.mixology.service.UnitService;
 import com.maroon.mixology.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,29 +37,12 @@ import org.slf4j.LoggerFactory;
 @RestController
 @RequestMapping("/tipsy/game")
 public class GameController {
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RecipeRepository recipeRepository;
-
-    @Autowired
-    private StepRepository stepRepository;
 
     @Autowired
     private GameRepository gameRepository;
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private RecipeService recipeService;
-
-    @Autowired
-    private EquipmentTypeService equipmentTypeService;
-
-    @Autowired
-    private UnitService unitService;
     
     @Autowired
     private GameService gameService;

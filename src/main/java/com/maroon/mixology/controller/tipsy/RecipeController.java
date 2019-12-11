@@ -16,7 +16,6 @@ import com.maroon.mixology.entity.Game;
 import com.maroon.mixology.entity.Recipe;
 import com.maroon.mixology.entity.Role;
 import com.maroon.mixology.entity.Step;
-import com.maroon.mixology.entity.Unit;
 import com.maroon.mixology.exchange.request.EquipmentProductRequest;
 import com.maroon.mixology.exchange.request.EquipmentRequest;
 import com.maroon.mixology.exchange.request.RecipeRequest;

@@ -15,7 +15,6 @@ import com.maroon.mixology.exchange.response.BarResponse;
 import com.maroon.mixology.exchange.response.brief.BriefRecipeResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
 import com.maroon.mixology.repository.BarRepository;
-import com.maroon.mixology.repository.UserRepository;
 import com.maroon.mixology.security.CurrentUser;
 import com.maroon.mixology.service.BarService;
 import com.maroon.mixology.service.RecipeService;

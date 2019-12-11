@@ -65,11 +65,11 @@ public class RegisterController {
         @Value("${spring.mail.username}")
         private String mailUserName;
 
-        @Value("${tipsy.react.port}")
-        private String reactPort;
+        @Value("${tipsy.react.URL}")
+        private String appUrl;
 
         @PostMapping("/register")
-        public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+        public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
         try{
                 if(userService.existsByEmail(registerRequest.getEmail())) {
                         return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This Email Address is already in use!"),
@@ -102,12 +102,7 @@ public class RegisterController {
                         user.setRoles(new HashSet<>(Arrays.asList(userRole))); // Set the Roles
                         user.setMeasurement(MeasurementType.US); // Set the Measurement
                         userRepository.save(user); // Saving the user in the database
-                        // Send a confirmation email
-                        // Should this also include the port number(?)
-                        // For now, yes because of localhost. We have to disable this when uploading to Cloud
-                        // the port should be 80 so please change this during deployment when we have domain name
-                        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
-                        
+                        // Send a confirmation email                      
                         SimpleMailMessage confirmationEmail = new SimpleMailMessage();
                         confirmationEmail.setFrom(mailUserName);
                         confirmationEmail.setTo(user.getEmail());
@@ -146,7 +141,6 @@ public class RegisterController {
                                 //allow confirmation link to be sent again
                                 user.setConfirmationTokenUUID(UUID.randomUUID().toString()); // Generate a confirmation token UUID
                                 user.setConfirmationTokenCreationTime(Calendar.getInstance().getTimeInMillis()); // Generate a creation time and store it as a long
-                                String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + reactPort;
                                 SimpleMailMessage confirmationEmail = new SimpleMailMessage();
                                 confirmationEmail.setFrom(mailUserName);
                                 confirmationEmail.setTo(user.getEmail());
