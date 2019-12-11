@@ -263,7 +263,7 @@ class ConfigBarPage extends Component {
                         <TabPane tab="Delete" disabled={(this.state.role === "manager" || this.state.isCreating === true)}key="5">
 
                             <Popconfirm
-                                title="Are you sure you want to delete this?"
+                                title="Warning! You are about to delete the bar. Are you sure you want to do this?"
                                 onConfirm={this.handleDelete}
                                 okText="Yes"
                                 cancelText="No">
