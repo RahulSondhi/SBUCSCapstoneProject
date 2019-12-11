@@ -263,6 +263,12 @@ class CustomStepPrompt extends Component {
             });
         });
     }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
   
   
     render() {
@@ -898,7 +904,13 @@ class GetStep extends Component {
             type={"equipmentAltered"} />   
         }
     }
-  
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
   
     render() {
 

@@ -98,10 +98,6 @@ class ConfigRecipePage extends Component {
 
     }
 
-    getEquipmentProducts(){
-        return this.state.equipmentProducts.value;
-    }
-
     loadRecipeProfile(id) {
         this.setState({isLoading: true});
 
@@ -220,7 +216,7 @@ class ConfigRecipePage extends Component {
             history = {this.props.history}
             />
         }
-        console.log(this.state.equipmentProducts.value);
+
         return (
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
@@ -316,7 +312,7 @@ class ConfigRecipePage extends Component {
                                     <DynamicSteps
                                         data={this.state.steps.value}
                                         equipment={this.state.equipmentsAvailable.value}
-                                        product={this.getEquipmentProducts()}
+                                        product={this.state.equipmentProducts.value}
                                         onUpdate={this.handleStepLoad}
                                         className="cell"/>
 
