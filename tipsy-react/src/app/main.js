@@ -55,8 +55,7 @@ class Main extends Component {
             currentUser: null, 
             isAuthenticated: false
         });
-
-        history.push(constant.LINK_BASE+"/Tipsy");
+        history.push("/Tipsy");
         history.goForward();
         window.location.reload();
         constant.Notify(notificationType,description,-1);

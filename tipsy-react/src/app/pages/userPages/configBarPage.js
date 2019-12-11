@@ -286,7 +286,7 @@ class ConfigBarPage extends Component {
     async handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.goBack();
+            this.props.history.push(LINK_BASE+"/app/myBars");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });

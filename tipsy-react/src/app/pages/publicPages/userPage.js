@@ -31,7 +31,7 @@ class UserPage extends Component {
 
             var settingClass = this.state.settingClass;
             var currentUser = this.state.currentUser;
-            var key = this.state.key;
+            // var key = this.state.key;
 
             if (this.props.currentUser.name === response.name || this.props.currentUser.roles.includes("ADMIN")) {
                 
