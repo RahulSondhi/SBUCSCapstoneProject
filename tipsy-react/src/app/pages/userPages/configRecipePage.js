@@ -83,6 +83,7 @@ class ConfigRecipePage extends Component {
         this.handleEquipmentLoad = this
             .handleEquipmentLoad
             .bind(this);
+        this.getEquipmentProducts = this.handleEquipmentLoad.bind(this);
     }
 
     componentDidMount() {
@@ -97,11 +98,15 @@ class ConfigRecipePage extends Component {
 
     }
 
+    getEquipmentProducts(){
+        return this.state.equipmentProducts.value;
+    }
+
     loadRecipeProfile(id) {
         this.setState({isLoading: true});
 
         getRecipeProfile(id).then(response => {
-
+            console.log("getRecipeProfile()");
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
             var type = this.state.type;
@@ -215,7 +220,7 @@ class ConfigRecipePage extends Component {
             history = {this.props.history}
             />
         }
-
+        console.log(this.state.equipmentProducts.value);
         return (
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
@@ -311,7 +316,7 @@ class ConfigRecipePage extends Component {
                                     <DynamicSteps
                                         data={this.state.steps.value}
                                         equipment={this.state.equipmentsAvailable.value}
-                                        product={this.state.equipmentProducts.value}
+                                        product={this.getEquipmentProducts()}
                                         onUpdate={this.handleStepLoad}
                                         className="cell"/>
 
@@ -420,7 +425,7 @@ class ConfigRecipePage extends Component {
         }else if(type === "remove"){
             products = (this.state.equipmentProducts.value).filter(equip => 
                 { 
-                    return equip.name !== step.equipmentProduct.name
+                    return equip.name !== step.equipmentProduct
                 })
         }
 
@@ -441,7 +446,7 @@ class ConfigRecipePage extends Component {
     async handleDelete(event) {
         deleteRecipe(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.goBack();
+            this.props.history.push(LINK_BASE+"/app/myRecipes");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -464,7 +469,7 @@ class ConfigRecipePage extends Component {
         if(this.state.type === "clone" || this.state.type === "create"){
             createRecipe(recipeRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.goBack();
+                this.props.history.push(LINK_BASE+"/app/myRecipes");
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });

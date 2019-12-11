@@ -553,7 +553,7 @@ class DynamicInput extends Component {
     }
 
     render() {
-        const { fetching, data, value } = this.state;
+        var { fetching, data, value } = this.state;
         return (
           <Select
             mode="multiple"
@@ -765,7 +765,7 @@ class CustomEquipmentPrompt extends Component {
                         prefix={< Icon type = "idcard" />}
                         name="name"
                         autoComplete="off"
-                        placeholder="Enter Recipe Name"
+                        placeholder="Enter a name for your Custom Equipment"
                         value={this.state.name.value}
                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                     </FormItem>

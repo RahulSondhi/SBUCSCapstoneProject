@@ -302,7 +302,7 @@ class CustomStepPrompt extends Component {
                 ]}>
   
                 <FormItem
-                      label="Equipment"
+                      label="Select The Equipment Doing"
                       validateStatus={this.state.equipmentDoing.validateStatus}
                       help={this.state.equipmentDoing.errorMsg}
                       className={"small-12 medium-6 cell "+this.state.doingClass}>
@@ -421,14 +421,14 @@ class CustomStepPrompt extends Component {
                 </FormItem>
   
                 <FormItem
-                      label="Name"
+                      label="Equipment Product Name"
                       validateStatus={this.state.resultName.validateStatus}
                       help={this.state.resultName.errorMsg}
                       className={"small-12 medium-6 cell "+this.state.nameClass}>
                     <Input
                         name="resultName"
                         autoComplete="off"
-                        placeholder="Enter Name of Equipment"
+                        placeholder="Enter Name of Equipment Product"
                         value={this.state.resultName.value}
                         onChange={(event) => this.handleInputChange(event, this.validateName)}/>
                 </FormItem>
