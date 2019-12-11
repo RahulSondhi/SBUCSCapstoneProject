@@ -82,7 +82,7 @@ class ChangePasswordPage extends Component {
                         <h1 className="caption align-center-middle cell">
                             Change Your Password
                         </h1>
-                        <h3 className="changePasswordTitle">Please enter and confirm your new password.</h3>
+                        <h3 className="changePasswordTitle cell">Please enter and confirm your new password.</h3>
                         <Form
                             onSubmit={this.handleSubmit}
                             className="small-12 medium-8 cell grid-x align-center-middle">

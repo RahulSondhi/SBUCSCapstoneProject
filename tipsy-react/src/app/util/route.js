@@ -40,15 +40,19 @@ class Routes extends Component {
         console.log("Children Authenticated: " + this.state.isAuthenticated);
         if (this.state.currentUser) 
             console.log("User: " + this.state.currentUser.name);
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
         return (
             <BrowserRouter basename="/Tipsy">
                 <Switch>
-
                     {/* Public */}
-
+                    <Route
+                        exact
+                        path={["/"]}
+                        component={(props) => <Verify flow={params.get('flow')} onLogout={this.props.onLogout} {...props}/>}/>
                     <PublicRoute
                         exact
-                        path={["/", "/login"]}
+                        path={["/login"]}
                         authed={this.state.isAuthenticated}
                         redirectTo="/app/"
                         component=
@@ -59,7 +63,7 @@ class Routes extends Component {
                         authed={this.state.isAuthenticated}
                         redirectTo="/app/"
                         component={Forgot}/>
-                    <PublicRoute
+                    {/* <PublicRoute
                         exact
                         path="/confirm"
                         authed={this.state.isAuthenticated}
@@ -70,18 +74,18 @@ class Routes extends Component {
                         path="/reset"
                         authed={this.state.isAuthenticated}
                         redirectTo="/app/"
-                        component={(props) => <Verify flow={"verifyReset"} {...props}/>}/>
+                        component={(props) => <Verify flow={"verifyReset"} {...props}/>}/> */}
                     <PublicRoute
                         exact
                         path="/register"
                         authed={this.state.isAuthenticated}
                         redirectTo="/app/"
                         component={Register}/>
-                    <Route
+                    {/* <Route
                         exact
                         path="/newEmail"
                         component={(props) => <Verify flow={"verifyNewEmail"} onLogout={this.props.onLogout} {...props}/>}/> 
-                        
+                         */}
                         
                     {/* Private  */}
 

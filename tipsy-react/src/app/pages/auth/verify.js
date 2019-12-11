@@ -6,7 +6,7 @@ import {ACCESS_TOKEN, ValidatePassword, Notify, LINK_BASE} from '../../util/cons
 
 import Tipsy from '../../assets/Tipsy.svg';
 
-import {Form, Input, Button} from 'antd';
+import {Form, Input, Button, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Verify extends Component {
@@ -86,7 +86,9 @@ class Verify extends Component {
         let search = window.location.search;
         let params = new URLSearchParams(search);
         const uuidValue = params.get('token');
-        if(this.state.flow === "verifyConfirm"){
+        console.log(uuidValue);
+        console.log(this.state.flow);
+        if(this.state.flow === "confirm"){
             //verifyConfirm
             verifyConfirm(uuidValue).then(response => {
                 this.setState({
@@ -104,7 +106,7 @@ class Verify extends Component {
                 });
             })
         }
-        else if(this.state.flow === "verifyNewEmail"){
+        else if(this.state.flow === "newEmail"){
             //verifyNewEmail
             // We need to delete their access token
             if(localStorage.getItem(ACCESS_TOKEN)){
@@ -127,7 +129,7 @@ class Verify extends Component {
                 }); 
             })
         }
-        else if(this.state.flow === "verifyReset"){
+        else if(this.state.flow === "reset"){
             //verifyReset
             verifyReset(uuidValue).then(response =>{
                 Notify("success",response.message,-1);
@@ -148,6 +150,11 @@ class Verify extends Component {
                 });
             });
         }
+        else {
+            //login component
+            this.props.history.push("/login");
+            this.props.history.goForward();
+        }
 
         this.setState({
             isLoading: false
@@ -162,42 +169,50 @@ class Verify extends Component {
         }
 
         if (this.state.uuid.validateStatus === "success") {
-            if(this.state.flow === "verifyReset"){
+            if(this.state.flow === "reset"){
                 return ( //The token is valid, return the form to proceed with password reset
-                    <div>
-                        <h1>Reset Password</h1>
-                        <h3>{this.state.message}</h3>
-                        <h3>Please enter a new password to login.</h3>
-                        <Form onSubmit={this.handleSubmit} className="">
-                            <FormItem 
+                    <div className="grid-x align-center-middle">
+                        <h1 className="caption align-center-middle cell">
+                            Reset Your Password
+                        </h1>
+                <h3 className="changePasswordTitle cell">{this.state.message}</h3>
+                        <Form
+                            onSubmit={this.handleSubmit}
+                            className="small-12 medium-8 cell grid-x align-center-middle">
+                            <FormItem
                                 label="Password"
                                 validateStatus={this.state.password.validateStatus}
-                                help={this.state.password.errorMsg}>
-                                <Input 
-                                    name="password" 
+                                help={this.state.password.errorMsg}
+                                className="medium-8 cell">
+                                <Input.Password
+                                    prefix={< Icon type = "lock" />}
+                                    name="password"
                                     type="password"
                                     autoComplete="off"
-                                    placeholder="Enter Password" 
-                                    value={this.state.password.value} 
-                                    onChange={(event) => this.handleInputChange(event, ValidatePassword)} />    
+                                    placeholder="Enter Password"
+                                    value={this.state.password.value}
+                                    onChange={(event) => this.handleInputChange(event, ValidatePassword)}/>
                             </FormItem>
-                            <FormItem 
+
+                            <FormItem
                                 label="Confirm Password"
                                 validateStatus={this.state.passwordConfirm.validateStatus}
-                                help={this.state.passwordConfirm.errorMsg}>
-                                <Input 
-                                    name="passwordConfirm" 
+                                help={this.state.passwordConfirm.errorMsg}
+                                className="medium-8 cell">
+                                <Input.Password
+                                    prefix={< Icon type = "lock" />}
+                                    name="passwordConfirm"
                                     type="password"
                                     autoComplete="off"
-                                    placeholder="Confirm your password" 
-                                    value={this.state.passwordConfirm.value} 
-                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)} />    
+                                    placeholder="Confirm your password"
+                                    value={this.state.passwordConfirm.value}
+                                    onChange={(event) => this.handleInputChange(event, this.validatePasswordConfirm)}/>
                             </FormItem>
-                            <FormItem>
-                                <Button type="primary" 
-                                    htmlType="submit" 
-                                    disabled={this.isFormInvalid()}>Reset 
-                                </Button>
+
+                            <FormItem className="cell">
+                                <button type="submit" id="changePasswordButton" disabled={this.isFormInvalid()} onClick={this.disableButton} className="button">
+                                    Change Password
+                                </button>
                             </FormItem>
                         </Form>
                     </div>
@@ -223,7 +238,7 @@ class Verify extends Component {
                         Login to your account to start!
                     </h4>
 
-                    <Link to="/Tipsy/logout" className="cell">
+                    <Link to="/logout" className="cell">
                         <button type="submit" className="button">Login</button>
                     </Link>
 

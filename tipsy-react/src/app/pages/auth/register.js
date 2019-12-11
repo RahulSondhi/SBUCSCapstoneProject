@@ -128,11 +128,11 @@ class Register extends Component {
     */
     render() {
         return (
-            <div className="grid-x align-center-middle">
+            <div className="grid-x align-center-middle authPage">
 
                 {/* Logo */}
                 <div className="loginHeader grid-x cell align-center-middle">
-                    <img src={Tipsy} alt="TipsyLogo" className="small-10 cell"></img>
+                    <img src={Tipsy} alt="TipsyLogo" className="small-8 cell"></img>
                 </div>
 
                 {/* Title */}
@@ -140,7 +140,7 @@ class Register extends Component {
 
                 {/* Right Image */}
                 <div className="hide-for-small-only medium-2 grid-x cell align-center-middle">
-                    <img src={Bottle} alt="bottle" className="small-10 cell"></img>
+                    <img src={Bottle} alt="bottle" className="small-8 cell"></img>
                 </div>
 
                 {/* Form */}

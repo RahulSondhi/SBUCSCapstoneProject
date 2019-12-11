@@ -119,6 +119,12 @@ export class DynamicSteps extends Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
@@ -257,6 +263,12 @@ class CustomStepPrompt extends Component {
             });
         });
     }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
   
   
     render() {
@@ -296,7 +308,7 @@ class CustomStepPrompt extends Component {
                 ]}>
   
                 <FormItem
-                      label="Equipment"
+                      label="Select The Equipment Doing"
                       validateStatus={this.state.equipmentDoing.validateStatus}
                       help={this.state.equipmentDoing.errorMsg}
                       className={"small-12 medium-6 cell "+this.state.doingClass}>
@@ -415,14 +427,14 @@ class CustomStepPrompt extends Component {
                 </FormItem>
   
                 <FormItem
-                      label="Name"
+                      label="Equipment Product Name"
                       validateStatus={this.state.resultName.validateStatus}
                       help={this.state.resultName.errorMsg}
                       className={"small-12 medium-6 cell "+this.state.nameClass}>
                     <Input
                         name="resultName"
                         autoComplete="off"
-                        placeholder="Enter Name of Equipment"
+                        placeholder="Enter Name of Equipment Product"
                         value={this.state.resultName.value}
                         onChange={(event) => this.handleInputChange(event, this.validateName)}/>
                 </FormItem>
@@ -555,10 +567,12 @@ class CustomStepPrompt extends Component {
 
             var unitClass = "";
             var buttonClass = "hidden";
+            var unit = "";
 
             if(this.actionType === "NA"){
                 unitClass = "hidden";
                 buttonClass = "";
+                unit = "NA";
             }
             
             this.setState({
@@ -569,7 +583,7 @@ class CustomStepPrompt extends Component {
                 nameClass: "hidden",
                 submitClass: "hidden",
                 unit: {
-                    value: ""
+                    value: unit
                 },
                 [inputName]: {
                     value: inputValue,
@@ -890,7 +904,13 @@ class GetStep extends Component {
             type={"equipmentAltered"} />   
         }
     }
-  
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
   
     render() {
 

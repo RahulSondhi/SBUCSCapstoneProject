@@ -71,6 +71,12 @@ label {
     height: 100%;
 }
 
+.authPage{
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .button {
     font-size: 1em;
     text-transform: uppercase;

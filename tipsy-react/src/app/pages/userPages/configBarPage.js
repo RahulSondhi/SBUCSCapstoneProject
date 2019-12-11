@@ -263,7 +263,7 @@ class ConfigBarPage extends Component {
                         <TabPane tab="Delete" disabled={(this.state.role === "manager" || this.state.isCreating === true)}key="5">
 
                             <Popconfirm
-                                title="Are you sure you want to delete this?"
+                                title="Warning! You are about to delete the bar. Are you sure you want to do this?"
                                 onConfirm={this.handleDelete}
                                 okText="Yes"
                                 cancelText="No">
@@ -286,7 +286,7 @@ class ConfigBarPage extends Component {
     async handleDelete(){
         deleteBar(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push(LINK_BASE+"app/myBars");
+            this.props.history.push(LINK_BASE+"/app/myBars");
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });

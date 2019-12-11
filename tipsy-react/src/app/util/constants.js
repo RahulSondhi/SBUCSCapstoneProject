@@ -35,7 +35,7 @@ const FormItem = Form.Item;
 // Neccessary Data
 
 export const API_BASE_URL = 'https://tipsy-api.herokuapp.com';
-export const LINK_BASE = "/Tipsy"
+export const LINK_BASE = ""
 export const ACCESS_TOKEN = 'accessToken';
 export const APP_NAME = 'Tipsy';
 
@@ -250,7 +250,7 @@ class GetItem extends Component {
         this.className = this.props.className;
         this.func = this.props.func;
 
-        this.link = "/app/"+ + this.type + "/";
+        this.link = "/app/"+ this.type + "/";
         this.descPre = "";
         this.desc = "";
 
@@ -466,6 +466,12 @@ export class DynamicForm extends Component {
 
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
         if(this.type === "equipment"){
             return (
@@ -540,8 +546,14 @@ class DynamicInput extends Component {
         });
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
+
     render() {
-        const { fetching, data, value } = this.state;
+        var { fetching, data, value } = this.state;
         return (
           <Select
             mode="multiple"
@@ -683,7 +695,12 @@ class CustomEquipmentPrompt extends Component {
             }
         });
     }
-  
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.value !== this.props.value) {
+          this.setState({value: this.props.value});
+        }
+    }
   
     render() {
       const { visible, confirmLoading} = this.state;
@@ -748,7 +765,7 @@ class CustomEquipmentPrompt extends Component {
                         prefix={< Icon type = "idcard" />}
                         name="name"
                         autoComplete="off"
-                        placeholder="Enter Recipe Name"
+                        placeholder="Enter a name for your Custom Equipment"
                         value={this.state.name.value}
                         onChange={(event) => this.handleInputChange(event, ValidateName)}/>
                     </FormItem>

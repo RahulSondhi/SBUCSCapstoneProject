@@ -83,6 +83,7 @@ class ConfigRecipePage extends Component {
         this.handleEquipmentLoad = this
             .handleEquipmentLoad
             .bind(this);
+        this.getEquipmentProducts = this.handleEquipmentLoad.bind(this);
     }
 
     componentDidMount() {
@@ -101,7 +102,7 @@ class ConfigRecipePage extends Component {
         this.setState({isLoading: true});
 
         getRecipeProfile(id).then(response => {
-
+            console.log("getRecipeProfile()");
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
             var type = this.state.type;
@@ -321,7 +322,8 @@ class ConfigRecipePage extends Component {
                         <TabPane tab="Publish" disabled={this.state.type === "publish"} key="4">
 
                             <Popconfirm
-                                title="Are you sure you want to publish this?"
+                                title="Are you sure you want to publish this recipe?
+                                Once a recipe is published, it may not be edited again."
                                 onConfirm={this.handlePublish}
                                 okText="Yes"
                                 cancelText="No">
@@ -337,7 +339,7 @@ class ConfigRecipePage extends Component {
                         <TabPane tab="Delete" disabled={this.state.type === "clone" || this.state.type === "create"} key="5">
 
                             <Popconfirm
-                                title="Are you sure you want to delete this?"
+                                title="Warning! You are about to delete this recipe. Are you sure you want to do this? "
                                 onConfirm={this.handleDelete}
                                 okText="Yes"
                                 cancelText="No">
@@ -419,7 +421,7 @@ class ConfigRecipePage extends Component {
         }else if(type === "remove"){
             products = (this.state.equipmentProducts.value).filter(equip => 
                 { 
-                    return equip.name !== step.equipmentProduct.name
+                    return equip.name !== step.equipmentProduct
                 })
         }
 

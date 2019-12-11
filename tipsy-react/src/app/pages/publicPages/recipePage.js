@@ -32,7 +32,7 @@ class RecipePage extends Component {
                 .props
                 .history
                 .push({
-                    pathname: LINK_BASE+'/app/game/' + response.message + ''
+                    pathname: '/app/game/' + response.message + ''
                 })
         }).catch(error => {
             this.setState({
