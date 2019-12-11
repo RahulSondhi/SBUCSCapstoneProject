@@ -40,7 +40,7 @@ class Navbar extends Component {
                 </div>
                 <div className="menuCon">
                     <div className="rightMenu">
-                        <GeneralNavbar mode={'horizontal'} type={this.state.type}/>
+                        <GeneralNavbar mode={'horizontal'} type={this.state.type} save={this.props.save} quit={this.props.quit}/>
                     </div>
                     <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
                         <span className="barsBtn"></span>
@@ -51,7 +51,7 @@ class Navbar extends Component {
                         closable={false}
                         onClose={this.onClose}
                         visible={this.state.visible}>
-                        <GeneralNavbar mode={'inline'} type={this.state.type}/>
+                        <GeneralNavbar mode={'inline'} type={this.state.type} save={this.props.save} quit={this.props.quit}/>
                     </Drawer>
                 </div>
             </nav>

@@ -2,7 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {getGameProfile, saveGame, forfeitGame, getAllUnits} from '../../util/APIUtils';
-import {Notify, ItemPreview, GetProfImg} from '../../util/constants';
+import {Notify, ItemPreview, GetProfImg, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import Dustbin from './equipmentBin'
@@ -86,12 +86,22 @@ class Game extends Component {
                 .progress
                 .indexOf(0)
 
+                var equipmentProducts = [];
+
                 var progress = response.progress;
 
-                if (index !== 0) {
+                if (index !== 0 && index !== -1) {
                     index = index - 1
+                } else if(index === -1){
+                    index = 0
                 } else {
                     progress[0] = response.progress[0] + 1
+                }
+
+                for(var i = 0; i < index; i++){
+                    equipmentProducts.push(
+                        response.recipe.equipmentProducts.find(equip => equip.name === response.recipe.steps[i].equipmentProduct)
+                    )
                 }
 
                 this.setState({
@@ -100,6 +110,9 @@ class Game extends Component {
                     completed: response.completed,
                     equipmentAvailable: {
                         value: response.recipe.equipmentsAvailable
+                    },
+                    equipmentProducts: {
+                        value: equipmentProducts
                     },
                     units:units,
                     currentStep: index,
@@ -182,39 +195,49 @@ class Game extends Component {
             var index = this.state.currentStep + 1;
 
             var progress = this.state.progress;
-            progress[index] = 1;
+            
+            if(index >= this.state.recipe.steps.length){
+                this.state.completed = true;
+                Modal.success({
+                    title: "Recipe Completed!",
+                    content: 'Awesome Work!',
+                    onOk: this.saveGameProfile,
+                    onCancel: this.saveGameProfile
+                  });
+            }else{
+                Modal.success({
+                    title: "Step Passed!",
+                    content: 'Good Job!',
+                  });
+                progress[index] = 1;
 
-            this.setState({
-                equipmentDoing: {
-                    value: ""
-                },
-                equipmentToDo: {
-                    value: ""
-                },
-                action: {
-                    value: ""
-                },
-                unit: {
-                    value: ""
-                },
-                value: {
-                    value: ""
-                },
-                equipmentProducts: {
-                    value: this.state.equipmentProducts.value
-                },
-                currentStep: index,
-                progress: progress,
-                actionVisible: "hidden",
-                unitVisible: "hidden",
-                valueVisible: "hidden",
-                buttonVisible: "hidden",
-            })
-
-            Modal.success({
-                title: "Step Passed!",
-                content: 'Good Job!',
-              });
+                this.setState({
+                    equipmentDoing: {
+                        value: ""
+                    },
+                    equipmentToDo: {
+                        value: ""
+                    },
+                    action: {
+                        value: ""
+                    },
+                    unit: {
+                        value: ""
+                    },
+                    value: {
+                        value: ""
+                    },
+                    equipmentProducts: {
+                        value: this.state.equipmentProducts.value
+                    },
+                    currentStep: index,
+                    progress: progress,
+                    actionVisible: "hidden",
+                    unitVisible: "hidden",
+                    valueVisible: "hidden",
+                    buttonVisible: "hidden",
+                })
+            }
 
         }else{
             var response = "Try again, but take a look at: \n"
@@ -307,6 +330,9 @@ class Game extends Component {
         };
         saveGame(this.props.match.params.id, gameRequest).then(response => {
             Notify("success", response.message, -1);
+            this.props.history.push({
+                pathname: LINK_BASE+'/app/myRecipes'
+            })
         }).catch(error => {
             Notify("error", error.message.message, -1);
         });
@@ -315,6 +341,9 @@ class Game extends Component {
     forfeitGameProfile() {
         forfeitGame(this.props.match.params.id).then(response => {
             Notify("success", response.message, -1);
+            this.props.history.push({
+                pathname: LINK_BASE+'/app/myRecipes'
+            })
         }).catch(error => {
             Notify("error", error.message.message, -1);
         });
@@ -349,7 +378,7 @@ class Game extends Component {
 
         return (
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
-                <Navbar type="game"/>
+                <Navbar type="game" save={this.saveGameProfile} quit={this.forfeitGameProfile}/>
 
                 <div className="grid-x align-center align-top cell page gamePageContainer">
                     
