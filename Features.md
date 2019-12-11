@@ -35,7 +35,9 @@ Next, you type in your email and press the **Send** button.
 
 Afterwards, in your inbox you should receive an email with a verification link. If the token that came with the link is valid then it should redirect you to the **Reset Password** page where you can type in your new password and click on **Reset**.
 
-Lastly, if the token that came with the link is valid then it should 
+Lastly, if the token that came with the link is valid then it should redirect you to the **Reset Password** page where you can then change your password.
+
+<img src="./Documentation/READMEAssets/ResetPasswordPage.png" width="450" height="auto">
 
 ### Changing user Settings
 In order to change your user settings, the user must first be logged into the application.
