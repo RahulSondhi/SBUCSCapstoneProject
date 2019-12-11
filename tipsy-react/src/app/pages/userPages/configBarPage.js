@@ -23,7 +23,7 @@ class ConfigBarPage extends Component {
             bar: null,
             page: {
                 title: "Create a Bar",
-                submit: "Create a Bar"
+                submit: "Create"
             },
             name: {
                 value: ''
@@ -160,24 +160,22 @@ class ConfigBarPage extends Component {
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
             <Navbar/>
             <div className="grid-x align-center align-top cell page">
-                <h1 className="small-11 caption cell configPageTitle">
+                <h1 className="small-12 caption cell configPageTitle">
                     {this.state.page.title}
                 </h1>
-                <div className="small-1 medium-2 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="small-12 medium-11 cell grid-x align-center-middle configPageForm">
+                    className="small-12 medium-11 cell grid-x align-top configPageForm">
 
-                    <Tabs className="tabsBarForm small-12 cell userDisplayTabs" tabPosition="right" tabBarExtraContent={
+                    <Tabs className="tabsBarForm small-12 cell align-self-top" tabPosition="top" tabBarExtraContent={
                         <div className="grid-x align-center-middle cell">
-                            <div className="tabsSeperator small-10 cell"></div>
                             <button
                                 type="submit"
                                 id="settingsButton"
                                 disabled={this.isFormInvalid()}
                                 onClick={this.disableButton}
-                                className="small-10 button cell">
+                                className="small-12 button cell">
                                 {this.state.page.submit}
                             </button>
                         </div>

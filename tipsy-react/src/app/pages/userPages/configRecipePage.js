@@ -169,9 +169,6 @@ class ConfigRecipePage extends Component {
                 steps: {
                     value: steps
                 },
-                preLoadedEquipment: {
-                    value: response.equipmentsAvailable
-                },
                 equipmentsAvailable: {
                     value: equipmentsAvailable
                 },
@@ -223,25 +220,24 @@ class ConfigRecipePage extends Component {
             <div className="grid-x grid-x-margin align-center-middle pageContainer">
                 <Navbar/>
                 <div className="grid-x align-center align-top cell page">
-                <h1 className="small-11 caption cell configPageTitle">
+                <h1 className="caption cell configPageTitle">
                     {this.state.page.title}
                 </h1>
                 <div className="small-1 cell"></div>
 
                 <Form
                     onSubmit={this.handleSubmit}
-                    className="cell grid-x align-center-middle configPageForm">
+                    className="cell grid-x align-top configPageForm">
 
-                    <Tabs className="tabsRecipeForm cell userDisplayTabs" tabPosition="right" 
+                    <Tabs className="tabsRecipeForm cell align-self-top" tabPosition="top" 
                         tabBarExtraContent={
                             <div className="grid-x align-center-middle cell">
-                                <div className="tabsSeperator small-10 cell"></div>
                                 <button
                                     type="submit"
                                     id="settingsButton"
                                     disabled={this.isFormInvalid()}
                                     onClick={this.disableButton}
-                                    className="button small-7 cell">
+                                    className="button small-12 cell">
                                     {this.state.page.submit}
                                 </button>
                             </div>

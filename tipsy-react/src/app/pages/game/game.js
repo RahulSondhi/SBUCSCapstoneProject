@@ -47,6 +47,9 @@ class Game extends Component {
         this.forfeitGameProfile = this
             .forfeitGameProfile
             .bind(this);
+        this.setDroppable = this
+            .setDroppable
+            .bind(this);
     }
 
     loadGameProfile(id) {
@@ -76,6 +79,7 @@ class Game extends Component {
                 currentStep: index,
                 isLoading: false
             });
+
         }).catch(error => {
             this.setState({
                 error: {
@@ -85,6 +89,63 @@ class Game extends Component {
                 isLoading: false
             });
         });
+    }
+
+    setDroppable(name,item){
+        
+        var equipmentDoing = this.state.equipmentDoing.value;
+        var equipmentToDo = this.state.equipmentToDo.value;
+
+        if(name === "equipmentDoing"){
+            equipmentDoing = item.name;
+        }else if(name === "equipmentToDo"){
+            equipmentToDo = item.name;
+        }
+
+        this.setState({
+            equipmentDoing: {
+                value: equipmentDoing
+            },
+            equipmentToDo: {
+                value: equipmentToDo
+            },
+            action: {
+                value: ""
+            },
+        })
+    }
+
+    getEquipment(name) {
+        var equip = this
+            .state
+            .equipmentAvailable
+            .value
+            .find(o => o.name === name);
+        var product = this
+            .state
+            .equipmentProducts
+            .value
+            .find(o => o.name === name);
+
+        if (equip !== undefined) {
+
+            return <GameItemPreview
+                className="cell noBG"
+                items={[equip]}
+                func={() => {}}
+                draggable={false}
+                type={"equipment"}/>
+        } else if (product !== undefined) {
+            
+            return <GameItemPreview
+                className="cell noBG"
+                items={[product]}
+                func={() => {}}
+                draggable={false}
+                type={"equipmentAltered"}/>
+        } else {
+            return ""
+        }
     }
 
     saveGameProfile() {
@@ -139,30 +200,34 @@ class Game extends Component {
                 <Navbar type="game"/>
 
                 <div className="grid-x align-center align-top cell page gamePageContainer">
-                    {/* Shows Step */}
-                    <GameStepPreview
-                        step={this.state.recipe.steps[this.state.currentStep]}
-                        equipment={this.state.equipmentAvailable.value}
-                        product={this.state.equipmentProducts.value}
-                        currentIndex={this.state.currentStep + 1}
-                        totalIndex={this.state.progress.length}
-                        className={"small-8 cell"}/> 
-                    
-                    {/* Dragging Areas */}
-                    <div className="cell grid-x align-center"> 
-                        <Dustbin allowedDropEffect="copy" />
-                        <div className="small-3 cell"/>
-                        <Dustbin allowedDropEffect="copy" />
+                    <div className={"small-5 cell align-x align-center"}>
+                        {/* Shows Step */}
+                        <GameStepPreview
+                            step={this.state.recipe.steps[this.state.currentStep]}
+                            equipment={this.state.equipmentAvailable.value}
+                            product={this.state.equipmentProducts.value}
+                            currentIndex={this.state.currentStep + 1}
+                            totalIndex={this.state.progress.length}
+                            className={"small-8 cell"}/> 
+                        
+                        {/* Dragging Areas */}
+                        <div className="cell grid-x align-center"> 
+                            <Dustbin allowedDropEffect="move" name="equipmentDoing" item={this.getEquipment(this.state.equipmentDoing.value)} />
+                            <div className="small-3 cell"/>
+                            <Dustbin allowedDropEffect="move" name="equipmentToDo" item={this.getEquipment(this.state.equipmentToDo.value)} />
+                        </div>
                     </div>
 
                     {/* Area of All Equipment */}
-                    <Tabs className="small-12 cell userDisplayTabs" tabPosition="right">
+                    <Tabs className="small-7 cell userDisplayTabs" tabPosition="top">
                         <TabPane tab="Behind The Bar" key="0">
                             <div className="grid-x grid-margin-x align-center-middle cell scroll">
                                 <GameItemPreview
                                     className="small-4 medium-3 cell"
                                     items={this.state.equipmentAvailable.value}
-                                    type="equipment"/>
+                                    func={this.setDroppable}
+                                    type="equipment"
+                                    draggable={true}/>
                             </div>
                         </TabPane>
                         <TabPane tab="What I've Made So Far" key="1">
@@ -170,7 +235,9 @@ class Game extends Component {
                                 <GameItemPreview
                                     className="small-4 medium-3 cell"
                                     items={this.state.equipmentProducts.value}
-                                    type="equipmentAltered"/>
+                                    func={this.setDroppable}
+                                    type="equipmentAltered"
+                                    draggable={true}/>
                             </div>
                         </TabPane>
                     </Tabs>
@@ -211,21 +278,19 @@ class GameStepPreview extends Component {
 
         if (equip !== undefined) {
 
-            equip.equipmentType = equip.equipmentType.type;
-
             return <GameItemPreview
                 className="cell noBG"
                 items={[equip]}
                 func={() => {}}
+                draggable={false}
                 type={"equipment"}/>
         } else {
-
-            product.equipmentType = product.equipmentType.type;
-
+            
             return <GameItemPreview
                 className="cell noBG"
                 items={[product]}
                 func={() => {}}
+                draggable={false}
                 type={"equipmentAltered"}/>
         }
     }
@@ -254,15 +319,14 @@ class GameStepPreview extends Component {
     }
 }
 
-export const GameItemPreview = ({items, className, type, postfix, postfixFunc,func}) => (
+export const GameItemPreview = ({items, className, type, draggable, func}) => (
     <Fragment>
         {items.map(item => (<Box
             key={new Date().getMilliseconds() + (Math.random() * 69420)}
             type={type}
             item={item}
             func={func}
-            postfix={postfix}
-            postfixFunc={postfixFunc}
+            draggable={draggable}
             className={"grid-x align-center-middle " + className}/>))}
     </Fragment>
 );

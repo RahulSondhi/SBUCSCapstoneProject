@@ -21,9 +21,10 @@ export class DynamicSteps extends Component {
     constructor(props) {
         super(props);
         
-        this.state.data = this.props.data;
-        this.state.equipment = this.props.equipment;
-        this.state.product = this.props.product; 
+        this.setState({
+            data : this.props.data,
+            equipment : this.props.equipment,
+            product : this.props.product })
 
         this.onLoad = this.props.onLoad;
         this.className = this.props.className;

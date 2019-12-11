@@ -3,7 +3,7 @@ import { DragPreviewImage, useDrag } from 'react-dnd'
 
 import {Notify, GetProfImg} from '../../util/constants';
 
-const Box = ({ type,item,className,func }) =>{
+const Box = ({ type,item,className,func, draggble }) =>{
 
       var name = item.name;
       var img = item.img;
@@ -11,7 +11,6 @@ const Box = ({ type,item,className,func }) =>{
 
       var descPre = "";
       var desc = "";
-      var link = "";
 
       if (type === "equipment") {
           descPre = "Type:";
@@ -21,37 +20,36 @@ const Box = ({ type,item,className,func }) =>{
           desc = <span>{" " + item.tags}</span>;
       } else if (type === "error") {
           func = ()=>{};
-      } else {
-          link = link + item.id
-          if (item.desc !== null && item.desc !== "") {
-              descPre = "Desc:";
-              desc = <span>{" " + item.desc}</span>;
-          }
-      }
-
-      if (func === null || func === "" || func === undefined) {
-          onclick = (e) => {};
-      } else {
-          onclick = (e)=>{e.preventDefault(); func();}
       }
 
 
       const [{ opacity }, drag, preview] = useDrag({
         item:{payload:item,type:"equipment"},
+        canDrag: draggble,
         end(item, monitor) {
           const dropResult = monitor.getDropResult()
           if (item && dropResult) {
             let alertMessage = ''
+            
             const isDropAllowed =
               dropResult.allowedDropEffect === 'any' ||
               dropResult.allowedDropEffect === dropResult.dropEffect
-            if (isDropAllowed) {
+            
+              if (isDropAllowed) {
+
               const isCopyAction = dropResult.dropEffect === 'copy'
               const actionName = isCopyAction ? 'copied' : 'moved'
+
               alertMessage = `You ${actionName} ${item.payload.name} into ${dropResult.name}!`
+
+              if (func !== null && func !== "" && func !== undefined) {
+                func(dropResult.name,item.payload)
+              }
+
             } else {
               alertMessage = `You cannot ${dropResult.dropEffect} an item into the ${dropResult.name}`
             }
+
             alert(alertMessage)
           }
         },
