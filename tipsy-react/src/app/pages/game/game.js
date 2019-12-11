@@ -45,7 +45,7 @@ class Game extends Component {
             actionsAvailable: {
                 value: []
             },
-            unitAvailable: {
+            unitsAvailable: {
                 value: []
             },
             currentStep: 0,
@@ -267,8 +267,8 @@ class Game extends Component {
                                     value={this.state.action.value}
                                     onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                                     <option hidden disabled key="1" value=""> -- select an option -- </option>
-                                    <optgroup label="Actions">
-                                        {this.state.actionsAvailable.value.map(fbb =>
+                                    <optgroup label="Units">
+                                        {this.state.unitsAvailable.value.map(fbb =>
                                             <option key={fbb} value={fbb}>{fbb}</option>
                                         )};
                                     </optgroup>
@@ -315,9 +315,12 @@ class Game extends Component {
         
 
         if(inputName === "action"){
-            this.setState({
 
-            })
+            // this.setState({
+            //     unitsAvailable{
+            //         value:
+            //     }
+            // })
         }
 
             this.setState({

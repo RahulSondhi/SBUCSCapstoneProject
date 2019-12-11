@@ -35,7 +35,7 @@ const FormItem = Form.Item;
 // Neccessary Data
 
 export const API_BASE_URL = 'https://tipsy-api.herokuapp.com';
-export const LINK_BASE = "/Tipsy"
+export const LINK_BASE = ""
 export const ACCESS_TOKEN = 'accessToken';
 export const APP_NAME = 'Tipsy';
 
@@ -250,7 +250,7 @@ class GetItem extends Component {
         this.className = this.props.className;
         this.func = this.props.func;
 
-        this.link = "/app/"+ + this.type + "/";
+        this.link = "/app/"+ this.type + "/";
         this.descPre = "";
         this.desc = "";
 
