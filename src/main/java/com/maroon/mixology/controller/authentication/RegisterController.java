@@ -108,7 +108,7 @@ public class RegisterController {
                         confirmationEmail.setTo(user.getEmail());
                         confirmationEmail.setSubject(confirmationSubject);
                         confirmationEmail.setText(confirmationMessage
-                        + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
+                        + appUrl + "?flow=confirm&token=" + user.getConfirmationTokenUUID());
                         emailService.sendEmail(confirmationEmail);
                         // Notify the user that an email has been sent
                         return ResponseEntity.ok(new ApiResponse(true, "Thank you! You have successfully registered. Please check your email to complete your registration!"));
@@ -146,7 +146,7 @@ public class RegisterController {
                                 confirmationEmail.setTo(user.getEmail());
                                 confirmationEmail.setSubject(confirmationSubject);
                                 confirmationEmail.setText(confirmationMessage
-                                + appUrl + "/confirm?token=" + user.getConfirmationTokenUUID());
+                                + appUrl + "?flow=confirm&token=" + user.getConfirmationTokenUUID());
                                 emailService.sendEmail(confirmationEmail);
                                 return new ResponseEntity<ApiResponse>(new ApiResponse(false, "This confirmation token is expired, invalid token. A new confirmation token has been generated and sent to your email."),
                             HttpStatus.GONE); //Token is expired, invalid token.

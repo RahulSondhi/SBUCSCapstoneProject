@@ -56,7 +56,8 @@ class Main extends Component {
             isAuthenticated: false
         });
 
-        history.push(constant.LINK_BASE);
+        history.push(constant.LINK_BASE+"/login");
+        history.goForward();
         window.location.reload();
         constant.Notify(notificationType,description,-1);
     }
@@ -64,7 +65,7 @@ class Main extends Component {
     async handleLogin() {
         await this.loadCurrentUser();
         history.push(constant.LINK_BASE+"/app/search");
-        window.location.reload();
+        history.goForward();
         constant.Notify("success","You're successfully logged in.",-1);
     }
 

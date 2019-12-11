@@ -86,7 +86,9 @@ class Verify extends Component {
         let search = window.location.search;
         let params = new URLSearchParams(search);
         const uuidValue = params.get('token');
-        if(this.state.flow === "verifyConfirm"){
+        console.log(uuidValue);
+        console.log(this.state.flow);
+        if(this.state.flow === "confirm"){
             //verifyConfirm
             verifyConfirm(uuidValue).then(response => {
                 this.setState({
@@ -104,7 +106,7 @@ class Verify extends Component {
                 });
             })
         }
-        else if(this.state.flow === "verifyNewEmail"){
+        else if(this.state.flow === "newEmail"){
             //verifyNewEmail
             // We need to delete their access token
             if(localStorage.getItem(ACCESS_TOKEN)){
@@ -127,7 +129,7 @@ class Verify extends Component {
                 }); 
             })
         }
-        else if(this.state.flow === "verifyReset"){
+        else if(this.state.flow === "reset"){
             //verifyReset
             verifyReset(uuidValue).then(response =>{
                 Notify("success",response.message,-1);
@@ -147,6 +149,11 @@ class Verify extends Component {
                     message : error.message.message
                 });
             });
+        }
+        else {
+            //login component
+            this.props.history.push(LINK_BASE+"/login");
+            this.props.history.goForward();
         }
 
         this.setState({
@@ -223,7 +230,7 @@ class Verify extends Component {
                         Login to your account to start!
                     </h4>
 
-                    <Link to="/Tipsy/logout" className="cell">
+                    <Link to="/logout" className="cell">
                         <button type="submit" className="button">Login</button>
                     </Link>
 

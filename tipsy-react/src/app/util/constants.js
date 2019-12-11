@@ -35,7 +35,7 @@ const FormItem = Form.Item;
 // Neccessary Data
 
 export const API_BASE_URL = 'https://tipsy-api.herokuapp.com';
-export const LINK_BASE = ""
+export const LINK_BASE = "/Tipsy"
 export const ACCESS_TOKEN = 'accessToken';
 export const APP_NAME = 'Tipsy';
 
