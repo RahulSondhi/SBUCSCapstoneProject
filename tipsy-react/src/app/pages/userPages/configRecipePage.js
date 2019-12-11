@@ -441,7 +441,7 @@ class ConfigRecipePage extends Component {
     async handleDelete(event) {
         deleteRecipe(this.props.match.params.id).then(response => {
             Notify("success",response.message,-1);
-            this.props.history.push(LINK_BASE+"/app/myRecipes");
+            this.props.history.goBack();
         }).catch(error => {
             Notify("error",error.message.message,-1);
         });
@@ -464,7 +464,7 @@ class ConfigRecipePage extends Component {
         if(this.state.type === "clone" || this.state.type === "create"){
             createRecipe(recipeRequest).then(response => {
                 Notify("success",response.message,-1);
-                this.props.history.push(LINK_BASE+"/app/myRecipes");
+                this.props.history.goBack();
             }).catch(error => {
                 Notify("error",error.message.message,-1);
             });

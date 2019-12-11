@@ -152,7 +152,7 @@ class Verify extends Component {
         }
         else {
             //login component
-            this.props.history.push(LINK_BASE+"/login");
+            this.props.history.push("/login");
             this.props.history.goForward();
         }
 

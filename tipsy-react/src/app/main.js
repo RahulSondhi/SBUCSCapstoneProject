@@ -56,7 +56,7 @@ class Main extends Component {
             isAuthenticated: false
         });
 
-        history.push(constant.LINK_BASE+"/login");
+        history.push(constant.LINK_BASE+"/Tipsy/login");
         history.goForward();
         window.location.reload();
         constant.Notify(notificationType,description,-1);
@@ -64,7 +64,7 @@ class Main extends Component {
 
     async handleLogin() {
         await this.loadCurrentUser();
-        history.push(constant.LINK_BASE+"/app/search");
+        history.push(constant.LINK_BASE+"/Tipsy/app/search");
         history.goForward();
         constant.Notify("success","You're successfully logged in.",-1);
     }
