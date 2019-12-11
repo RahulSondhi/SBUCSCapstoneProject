@@ -30,13 +30,29 @@ class Game extends Component {
             action: {
                 value: ""
             },
+            unit: {
+                value: ""
+            },
+            value: {
+                value: ""
+            },
             equipmentAvailable: {
                 value: []
             },
             equipmentProducts: {
                 value: []
             },
-            currentStep: 0
+            actionsAvailable: {
+                value: []
+            },
+            unitAvailable: {
+                value: []
+            },
+            currentStep: 0,
+            actionVisible: "hidden",
+            unitVisible: "hidden",
+            valueVisible: "hidden",
+            buttonVisible: "hidden",
         }
         this.loadGameProfile = this
             .loadGameProfile
@@ -49,6 +65,9 @@ class Game extends Component {
             .bind(this);
         this.setDroppable = this
             .setDroppable
+            .bind(this);
+        this.handleInputChange = this
+            .handleInputChange
             .bind(this);
     }
 
@@ -95,11 +114,20 @@ class Game extends Component {
         
         var equipmentDoing = this.state.equipmentDoing.value;
         var equipmentToDo = this.state.equipmentToDo.value;
+        var actionsAvailable = this.state.actionsAvailable.value;
+        var action = this.state.action.value;
+        var actionVisible = "hidden";
 
         if(name === "equipmentDoing"){
             equipmentDoing = item.name;
+            actionsAvailable = item.equipmentType.actionsDoing;
+            action = "";
         }else if(name === "equipmentToDo"){
             equipmentToDo = item.name;
+        }
+
+        if(equipmentDoing !== "" && equipmentToDo !== ""){
+            actionVisible = "";
         }
 
         this.setState({
@@ -110,8 +138,12 @@ class Game extends Component {
                 value: equipmentToDo
             },
             action: {
-                value: ""
+                value: action
             },
+            actionsAvailable: {
+                value: actionsAvailable
+            },
+            actionVisible: actionVisible
         })
     }
 
@@ -200,7 +232,7 @@ class Game extends Component {
                 <Navbar type="game"/>
 
                 <div className="grid-x align-center align-top cell page gamePageContainer">
-                    <div className={"small-5 cell align-x align-center"}>
+                    <div className={"small-5 small-offset-1 cell align-x align-center"}>
                         {/* Shows Step */}
                         <GameStepPreview
                             step={this.state.recipe.steps[this.state.currentStep]}
@@ -211,14 +243,41 @@ class Game extends Component {
                             className={"small-11 cell"}/> 
                         
                         {/* Dragging Areas */}
-                        <div className="cell grid-x align-center"> 
-                            <Dustbin allowedDropEffect="move" name="equipmentDoing" item={this.getEquipment(this.state.equipmentDoing.value)} />
-                            <div className="small-3 cell"/>
-                            <Dustbin allowedDropEffect="move" name="equipmentToDo" item={this.getEquipment(this.state.equipmentToDo.value)} />
+                        <div className="cell grid-x align-center-middle"> 
+                            <Dustbin className="small-5 cell" allowedDropEffect="move" name="equipmentDoing" item={this.getEquipment(this.state.equipmentDoing.value)} />
+                            <div className="small-2 cell"/>
+                            <Dustbin className="small-5 cell" allowedDropEffect="move" name="equipmentToDo" item={this.getEquipment(this.state.equipmentToDo.value)} />
+                            
+                            <div className="small-8 cell grid-x">
+                                <select 
+                                    name="action"
+                                    className={"small-11 cell customEquipmentSelect gameAction "+this.state.actionVisible}
+                                    value={this.state.action.value}
+                                    onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                                    <option hidden disabled key="1" value=""> -- select an option -- </option>
+                                    <optgroup label="Actions">
+                                        {this.state.actionsAvailable.value.map(fbb =>
+                                            <option key={fbb} value={fbb}>{fbb}</option>
+                                        )};
+                                    </optgroup>
+                                </select>
+                                <select 
+                                    name="unit"
+                                    className={"small-11 cell customEquipmentSelect gameAction "+this.state.actionVisible}
+                                    value={this.state.action.value}
+                                    onChange={(event) => this.handleInputChange(event, function(){return true;})}>
+                                    <option hidden disabled key="1" value=""> -- select an option -- </option>
+                                    <optgroup label="Actions">
+                                        {this.state.actionsAvailable.value.map(fbb =>
+                                            <option key={fbb} value={fbb}>{fbb}</option>
+                                        )};
+                                    </optgroup>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="small-2 cell"/>
+                    <div className="small-1 cell"/>
 
                     {/* Area of All Equipment */}
                     <Tabs className="small-5 cell userDisplayTabs" tabPosition="top">
@@ -248,6 +307,26 @@ class Game extends Component {
             </div>
         )
     }
+
+    handleInputChange(event, validationFun) {
+        const target = event.target;
+        const inputName = target.name;
+        const inputValue = target.value;
+        
+
+        if(inputName === "action"){
+            this.setState({
+
+            })
+        }
+
+            this.setState({
+                [inputName]: {
+                    value: inputValue,
+                    ...validationFun(inputValue)
+                }
+            });
+        }
 }
 
 class GameStepPreview extends Component {

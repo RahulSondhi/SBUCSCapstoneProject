@@ -35,6 +35,7 @@ const FormItem = Form.Item;
 // export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8080';
 export const API_BASE_URL = 'https://tipsy-api.herokuapp.com';
 // export const API_BASE_URL = 'http://tipsy-api.us-east-1.elasticbeanstalk.com';
+export const LINK_BASE = "/Tipsy"
 export const ACCESS_TOKEN = 'accessToken';
 export const APP_NAME = 'Tipsy';
 
@@ -249,7 +250,7 @@ class GetItem extends Component {
         this.className = this.props.className;
         this.func = this.props.func;
 
-        this.link = "/tipsy/" + this.type + "/";
+        this.link = LINK_BASE +"/app/"+ + this.type + "/";
         this.descPre = "";
         this.desc = "";
 

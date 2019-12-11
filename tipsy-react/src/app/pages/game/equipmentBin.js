@@ -5,13 +5,8 @@ import {Notify, GetProfImg} from '../../util/constants';
 
 const style = {
   height: '12rem',
-  width: '12rem',
   color: 'white',
   padding: '1rem',
-  textAlign: 'center',
-  fontSize: '1rem',
-  lineHeight: 'normal',
-  float: 'left',
 }
 
 function selectBackgroundColor(isActive, canDrop) {
@@ -24,7 +19,7 @@ function selectBackgroundColor(isActive, canDrop) {
   }
 }
 
-const Dustbin = ({ allowedDropEffect, name, item }) => {
+const Dustbin = ({ allowedDropEffect, name, item, className }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept: "equipment",
     drop: () => ({
@@ -41,16 +36,16 @@ const Dustbin = ({ allowedDropEffect, name, item }) => {
 
   if(item !== ""){
     return (
-      <div ref={drop} style={{ ...style, backgroundColor }}>
+      <div ref={drop} className={"grid-x "+className} style={{ ...style, backgroundColor }}>
         {item}
       </div>
     )
   }else{
     return (
-      <div ref={drop} style={{ ...style, backgroundColor }}>
+      <div ref={drop} className={className} style={{ ...style, backgroundColor }}>
         <br />
         <br />
-        {isActive ? 'Release to drop' : 'Drag a box here'}
+        {isActive ? 'Release to drop' : 'Drag an equipment here'}
       </div>
     )
   }

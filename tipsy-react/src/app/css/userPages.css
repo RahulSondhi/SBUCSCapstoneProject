@@ -113,28 +113,3 @@
 .changePasswordTitle{
   color: white;
 }
-
-/* Game Page */
-
-.previewGameStepContainer{
-  text-align: center;
-  word-wrap: break-word;
-}
-
-.noBG div{
-  background: none !important;
-  box-shadow: none !important;
-}
-
-.dragArea{
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 1em;
-  padding: 1em;
-}
-
-/* .gamePageContainer{
-  background: url("../assets/game/game.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-} */
