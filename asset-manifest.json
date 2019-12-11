@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/Tipsy/static/css/main.1501d89a.chunk.css",
-    "main.js": "/Tipsy/static/js/main.d4304106.chunk.js",
-    "main.js.map": "/Tipsy/static/js/main.d4304106.chunk.js.map",
+    "main.css": "/Tipsy/static/css/main.5095af10.chunk.css",
+    "main.js": "/Tipsy/static/js/main.d5ac93d7.chunk.js",
+    "main.js.map": "/Tipsy/static/js/main.d5ac93d7.chunk.js.map",
     "runtime-main.js": "/Tipsy/static/js/runtime-main.2c8d7ed5.js",
     "runtime-main.js.map": "/Tipsy/static/js/runtime-main.2c8d7ed5.js.map",
     "static/css/2.7ececfe9.chunk.css": "/Tipsy/static/css/2.7ececfe9.chunk.css",
-    "static/js/2.2c88a5d6.chunk.js": "/Tipsy/static/js/2.2c88a5d6.chunk.js",
-    "static/js/2.2c88a5d6.chunk.js.map": "/Tipsy/static/js/2.2c88a5d6.chunk.js.map",
+    "static/js/2.7484ea0a.chunk.js": "/Tipsy/static/js/2.7484ea0a.chunk.js",
+    "static/js/2.7484ea0a.chunk.js.map": "/Tipsy/static/js/2.7484ea0a.chunk.js.map",
     "index.html": "/Tipsy/index.html",
-    "precache-manifest.073f1acbd3fe0567f1e91a3a30acfaf6.js": "/Tipsy/precache-manifest.073f1acbd3fe0567f1e91a3a30acfaf6.js",
+    "precache-manifest.1f955aaa9a135024912aa6feb6a91aa9.js": "/Tipsy/precache-manifest.1f955aaa9a135024912aa6feb6a91aa9.js",
     "service-worker.js": "/Tipsy/service-worker.js",
     "static/css/2.7ececfe9.chunk.css.map": "/Tipsy/static/css/2.7ececfe9.chunk.css.map",
-    "static/css/main.1501d89a.chunk.css.map": "/Tipsy/static/css/main.1501d89a.chunk.css.map",
+    "static/css/main.5095af10.chunk.css.map": "/Tipsy/static/css/main.5095af10.chunk.css.map",
     "static/media/Tipsy.png": "/Tipsy/static/media/Tipsy.0e44381f.png",
     "static/media/Tipsy.svg": "/Tipsy/static/media/Tipsy.c2423210.svg",
     "static/media/action.svg": "/Tipsy/static/media/action.b585cb91.svg",
@@ -28,6 +28,7 @@
     "static/media/down.svg": "/Tipsy/static/media/down.44d672f8.svg",
     "static/media/drinks.svg": "/Tipsy/static/media/drinks.5c79fd19.svg",
     "static/media/equipment.svg": "/Tipsy/static/media/equipment.47adca0a.svg",
+    "static/media/game.css": "/Tipsy/static/media/game.20b33288.svg",
     "static/media/play.svg": "/Tipsy/static/media/play.fe4dc2fc.svg",
     "static/media/recipe.svg": "/Tipsy/static/media/recipe.fcf48b95.svg",
     "static/media/remove.svg": "/Tipsy/static/media/remove.971f6359.svg",
@@ -40,8 +41,8 @@
   "entrypoints": [
     "static/js/runtime-main.2c8d7ed5.js",
     "static/css/2.7ececfe9.chunk.css",
-    "static/js/2.2c88a5d6.chunk.js",
-    "static/css/main.1501d89a.chunk.css",
-    "static/js/main.d4304106.chunk.js"
+    "static/js/2.7484ea0a.chunk.js",
+    "static/css/main.5095af10.chunk.css",
+    "static/js/main.d5ac93d7.chunk.js"
   ]
 }

@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cec1398652789368ddce884dc168df3e",
+    "revision": "2c4732d7b42a17ebc51a32dc8ab2762f",
     "url": "/Tipsy/index.html"
   },
   {
-    "revision": "89a3acc7422303e19948",
+    "revision": "d7f8877ab23f31ee0cce",
     "url": "/Tipsy/static/css/2.7ececfe9.chunk.css"
   },
   {
-    "revision": "c62589e57804bc5e174c",
-    "url": "/Tipsy/static/css/main.1501d89a.chunk.css"
+    "revision": "48dffc3b8097e2acd595",
+    "url": "/Tipsy/static/css/main.5095af10.chunk.css"
   },
   {
-    "revision": "89a3acc7422303e19948",
-    "url": "/Tipsy/static/js/2.2c88a5d6.chunk.js"
+    "revision": "d7f8877ab23f31ee0cce",
+    "url": "/Tipsy/static/js/2.7484ea0a.chunk.js"
   },
   {
-    "revision": "c62589e57804bc5e174c",
-    "url": "/Tipsy/static/js/main.d4304106.chunk.js"
+    "revision": "48dffc3b8097e2acd595",
+    "url": "/Tipsy/static/js/main.d5ac93d7.chunk.js"
   },
   {
     "revision": "3ad6b658d8703ff8e813",
@@ -86,6 +86,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "48338660b75bbf9828c9a0c8943c7e83",
     "url": "/Tipsy/static/media/fzshuti.48338660.ttf"
+  },
+  {
+    "revision": "20b33288155d0bb5c7c3d0ee55bf533b",
+    "url": "/Tipsy/static/media/game.20b33288.svg"
   },
   {
     "revision": "9a315467a2fafadaf7ab32db4bbd4669",
