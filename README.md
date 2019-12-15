@@ -1,4 +1,5 @@
-# Tipsy 
+# Tipsy
+https://rahulsondhi.github.io/Tipsy
 ## Team 
 ### Lead Programmer - Rahul Sondhi
 <img src="./Documentation/READMEAssets/rahul.jpg" width="300" height="auto">
