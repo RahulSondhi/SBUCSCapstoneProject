@@ -274,7 +274,7 @@ class CustomStepPrompt extends Component {
         });
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.setState({
             equipment: this.props.equipment,
             product: this.props.product,
@@ -933,7 +933,7 @@ class GetStep extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({ data: nextProps.data });  
     }
 

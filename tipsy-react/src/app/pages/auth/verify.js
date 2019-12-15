@@ -51,7 +51,7 @@ class Verify extends Component {
         });
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.handleVerify();
     }
 
