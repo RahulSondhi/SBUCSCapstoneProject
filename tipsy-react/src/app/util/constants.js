@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Form, Input, Icon, Modal, notification, Select, Spin } from 'antd';
+import {Form, Input, Icon, Modal, notification, Select, Spin, Tooltip } from 'antd';
 import debounce from 'lodash/debounce';
 
 import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search, getAllEquipmentTypes} from './APIUtils';
@@ -252,7 +252,7 @@ class GetItem extends Component {
 
         this.link = "/app/"+ this.type + "/";
         this.descPre = "";
-        this.desc = "";
+        this.desc = <br></br>;
 
         if (this.type === "user") {
             this.link = this.link + this.item.name;
@@ -289,6 +289,12 @@ class GetItem extends Component {
                 this.descPre = "Desc:";
                 this.desc = <span>{" " + this.item.desc}</span>;
             }
+        }
+
+        if(this.name.length > 16){
+            this.previewname = this.name.substr(0, 13)+"...";
+        }else{
+            this.previewname = this.name;
         }
 
         this.postfix = this.props.postfix;
@@ -364,7 +370,9 @@ class GetItem extends Component {
                         className="previewItem small-12 grid-x align-center-middle cell">
                         <div className="small-1 cell"></div>
                         <div className="small-10 grid-x cell">
-                            <div className="previewName cell">{this.name}</div>
+                            <Tooltip placement="right" title={this.name}>
+                                <div className="previewName cell">{this.previewname}</div>
+                            </Tooltip>
                             <div className="previewDesc cell">{this.descPre}{this.desc}</div>
                         </div>
                         <div className="small-1 cell"></div>

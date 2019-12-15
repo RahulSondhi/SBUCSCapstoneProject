@@ -38,13 +38,15 @@ class Navbar extends Component {
                         <img src={Tipsy} alt="TipsyLogo"/>
                     </NavLink>
                 </div>
-                <div className="menuCon">
+                <div className="menuCon grid-x align-middle">
                     <div className="rightMenu">
                         <GeneralNavbar mode={'horizontal'} type={this.state.type} save={this.props.save} quit={this.props.quit}/>
                     </div>
-                    <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
-                        <span className="barsBtn"></span>
-                    </Button>
+                    <div className="barsMenu">
+                        <Button className="barsMenuBtn" type="primary" onClick={this.showDrawer}>
+                            <span className="barsBtn"></span>
+                        </Button>
+                    </div>
                     <Drawer
                         title="Menu"
                         placement="right"
