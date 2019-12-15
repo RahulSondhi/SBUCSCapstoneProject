@@ -3,7 +3,7 @@ import {Form, Input, Icon, Modal, notification, Select, Spin } from 'antd';
 import debounce from 'lodash/debounce';
 
 import {getUserBrief, getBarBrief, getEquipmentBrief, getRecipeBrief, search, getAllEquipmentTypes} from './APIUtils';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
  
 import UserPic from '../assets/defaultIcons/user.svg';

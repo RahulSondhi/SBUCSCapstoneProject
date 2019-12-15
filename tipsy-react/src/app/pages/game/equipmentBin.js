@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-import {Notify, GetProfImg} from '../../util/constants';
-
 const style = {
   height: '100%',
   color: 'white',

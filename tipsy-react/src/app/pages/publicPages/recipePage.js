@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ItemPreview, GetProfImg, LINK_BASE} from '../../util/constants';
+import {ItemPreview, GetProfImg} from '../../util/constants';
 import {getRecipeProfile, initGame} from '../../util/APIUtils';
 import ErrorPage from '../../util/errorPage.js';
 

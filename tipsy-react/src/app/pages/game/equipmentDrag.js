@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from 'react';
+import React, {Fragment} from 'react';
 import { DragPreviewImage, useDrag } from 'react-dnd'
 
-import {Notify, GetProfImg} from '../../util/constants';
+import {GetProfImg} from '../../util/constants';
 
 const Box = ({ type,item,className,func, draggble }) =>{
 
@@ -23,7 +23,7 @@ const Box = ({ type,item,className,func, draggble }) =>{
       }
 
 
-      const [{ opacity }, drag, preview] = useDrag({
+      const [drag, preview] = useDrag({
         item:{payload:item,type:"equipment"},
         canDrag: draggble,
         end(item, monitor) {

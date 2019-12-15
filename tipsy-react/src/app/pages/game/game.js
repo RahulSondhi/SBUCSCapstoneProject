@@ -2,15 +2,13 @@ import React, {Component, Fragment} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {getGameProfile, saveGame, forfeitGame, getAllUnits} from '../../util/APIUtils';
-import {Notify, ItemPreview, GetProfImg, LINK_BASE} from '../../util/constants';
+import {Notify, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import Dustbin from './equipmentBin'
 import Box from './equipmentDrag'
 
-import {Tabs, Input, Modal, Button} from 'antd';
-
-const {TabPane} = Tabs;
+import {Input, Modal} from 'antd';
 
 class Game extends Component {
 
@@ -98,11 +96,11 @@ class Game extends Component {
                     progress[0] = response.progress[0] + 1
                 }
 
-                for(var i = 0; i < index; i++){
+                response.recipe.steps.forEach(step => {
                     equipmentProducts.push(
-                        response.recipe.equipmentProducts.find(equip => equip.name === response.recipe.steps[i].equipmentProduct)
+                        response.recipe.equipmentProducts.find(equip => equip.name === step.equipmentProduct)
                     )
-                }
+                });
 
                 this.setState({
                     recipe: response.recipe,
@@ -262,7 +260,7 @@ class Game extends Component {
                 content: response,
             });
 
-            var progress = this.state.progress;
+            progress = this.state.progress;
             progress[this.state.currentStep] += 1;
 
             this.setState({

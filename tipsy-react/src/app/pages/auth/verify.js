@@ -6,7 +6,7 @@ import {ACCESS_TOKEN, ValidatePassword, Notify, LINK_BASE} from '../../util/cons
 
 import Tipsy from '../../assets/Tipsy.svg';
 
-import {Form, Input, Button, Icon} from 'antd';
+import {Form, Input, Icon} from 'antd';
 const FormItem = Form.Item;
 
 class Verify extends Component {

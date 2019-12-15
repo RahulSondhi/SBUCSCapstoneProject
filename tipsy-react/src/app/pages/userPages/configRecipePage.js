@@ -102,7 +102,6 @@ class ConfigRecipePage extends Component {
         this.setState({isLoading: true});
 
         getRecipeProfile(id).then(response => {
-            console.log("getRecipeProfile()");
             var tempTitle = "Editing " + response.name;
             var tempSubmit = "Save";
             var type = this.state.type;
@@ -412,14 +411,13 @@ class ConfigRecipePage extends Component {
 
     }
 
-    handleStepLoad = (type,step) => {
-        var products = this.state.equipmentProducts.value;
+    handleStepLoad = (type,step,product) => {
         
         if(type === "add"){
-            products.push(step.equipmentProduct);
+            product.push(step.equipmentProduct);
             step.equipmentProduct = step.equipmentProduct.name;
         }else if(type === "remove"){
-            products = (this.state.equipmentProducts.value).filter(equip => 
+            product = (this.state.equipmentProducts.value).filter(equip => 
                 { 
                     return equip.name !== step.equipmentProduct
                 })
@@ -433,7 +431,7 @@ class ConfigRecipePage extends Component {
                 value: true
             },
             equipmentProducts:{
-                value: products
+                value: product
             }
         })
 
