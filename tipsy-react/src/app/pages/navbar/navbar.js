@@ -32,7 +32,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <nav className="menuBar">
+            <nav className="menuBar cell">
                 <div className="logo">
                     <NavLink to={"/app/"}>
                         <img src={Tipsy} alt="TipsyLogo"/>

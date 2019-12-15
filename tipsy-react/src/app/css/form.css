@@ -8,7 +8,8 @@ input[name=firstName],
 input[name=lastName],
 input[name=nickname],
 input[name=passwordConfirm],
-input[name=password] {
+input[name=password],
+input[type=number] {
     width: 100%;
     display: inline-block;
     border: none !important;
@@ -25,7 +26,8 @@ input[name=firstName]:focus,
 input[name=lastName]:focus,
 input[name=nickname]:focus,
 input[name=passwordConfirm]:focus,
-input[name=password]:focus {
+input[name=password]:focus,
+input[type=number]:focus {
     outline: none !important;
     background: none !important;
     box-shadow: none !important;

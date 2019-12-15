@@ -23,7 +23,7 @@ const Box = ({ type,item,className,func, draggble }) =>{
       }
 
 
-      const [drag, preview] = useDrag({
+      const [{opacity},drag, preview] = useDrag({
         item:{payload:item,type:"equipment"},
         canDrag: draggble,
         end(item, monitor) {
