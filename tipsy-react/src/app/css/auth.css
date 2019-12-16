@@ -3,8 +3,6 @@
 /* Shared */
 
 .loginHeader {
-    height: auto;
-    width: 40%!important;
     margin-top: 5%;
     margin-bottom: 3%;
 }
@@ -13,8 +11,7 @@
 
 #loginDrinks {
     width: 50%;
-    position: absolute;
-    bottom: 0;
+    margin-top: 4em;
 }
 /* Forgot */
 

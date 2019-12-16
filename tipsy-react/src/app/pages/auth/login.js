@@ -50,9 +50,11 @@ class LoginForm extends Component {
             <div className="grid-x align-center-middle">
 
                 {/* Logo */}
-                <div className="loginHeader grid-x cell align-center-middle">
-                    <img src={Tipsy} alt="TipsyLogo" className="small-12 cell"></img>
+                <div className="loginHeader grid-x small-8 cell align-center-middle">
+                    <img src={Tipsy} alt="TipsyLogo" className="small-8 cell"></img>
                 </div>
+
+                <div className="cell" />
 
                 {/* Title */}
                 <h1 className="caption small-12 medium-8 cell">Sign In</h1>
