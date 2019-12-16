@@ -1,10 +1,8 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-import {Notify, GetProfImg} from '../../util/constants';
-
 const style = {
-  height: '100%',
+  height: '80%',
   color: 'white',
   padding: '1rem',
 }
@@ -42,9 +40,7 @@ const Dustbin = ({ allowedDropEffect, name, item, className }) => {
     )
   }else{
     return (
-      <div ref={drop} className={""+className} style={{ ...style, backgroundColor }}>
-        <br />
-        <br />
+      <div ref={drop} className={"grid-x align-center-middle "+className} style={{ ...style, backgroundColor }}>
         {isActive ? 'Release to drop' : 'Drag an equipment here'}
       </div>
     )

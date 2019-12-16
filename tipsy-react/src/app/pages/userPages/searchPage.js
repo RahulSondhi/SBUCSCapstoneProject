@@ -135,7 +135,7 @@ export class SearchPage extends Component {
 
     }
 
-    componentWillReceiveProps(nextProps){
+    UNSAFE_componentWillReceiveProps(nextProps){
         if(nextProps.location !== this.props.location){
             const values = queryString.parse(nextProps.location.search)
             if(values.type !== undefined && values.query !== undefined ){

@@ -1,5 +1,4 @@
 import React, {Component, Fragment} from 'react';
-import {Redirect} from 'react-router-dom';
 
 import {ValidateName, ItemPreview, Notify, MakeProfImg, GetProfImg} from '../../util/constants';
 import {getAllEquipmentTypes, getAllUnits, checkEquipmentNameIsPresent} from '../../util/APIUtils';
@@ -12,21 +11,14 @@ const FormItem = Form.Item;
 
 export class DynamicSteps extends Component {
 
-    state = {
-        data: [],
-        equipment: [],
-        product: [],
-    };
-
     constructor(props) {
         super(props);
-        
-        this.state.data = this.props.data;
-        this.state.equipment = this.props.equipment;
-        this.state.product = this.props.product;
 
-        this.onLoad = this.props.onLoad;
-        this.className = this.props.className;
+        this.state = {
+            data: [],
+            equipment: [],
+            product: [],
+        };
 
         this.addItem = this
             .addItem
@@ -41,12 +33,22 @@ export class DynamicSteps extends Component {
             .bind(this);
     }
 
+    componentDidMount(){
+        this.setState({
+            data : this.props.data,
+            equipment : this.props.equipment,
+            product : this.props.product
+        })
+
+        this.onLoad = this.props.onLoad;
+        this.className = this.props.className;
+    }
+
     addItem(item) {
         // update the state object
         this.state.data.push(item);
-        this.setState({data: this.state.data});
         Notify("success","Added",-1);
-        this.props.onUpdate("add",item);
+        this.props.onUpdate("add",item,this.state.product);
     }
 
     removeItem(item) {
@@ -62,17 +64,13 @@ export class DynamicSteps extends Component {
 
         if (index > -1 && (notUsed === undefined) === true) {
             this.state.data.splice(index, 1);
-            this.setState({data: this.state.data});
-            
             Notify("success","Removed!",-1);
-            
-            this.props.onUpdate("remove",item);
+            this.props.onUpdate("remove",item,this.state.product);
         } else if ((notUsed === undefined) === false) {           
             Notify("error","The result of this step is being used somewhere else!",-1);
         } else {
             Notify("error","Could not remove that!",-1);
         }
-
     }
 
     moveItem(direction,item) {
@@ -91,8 +89,11 @@ export class DynamicSteps extends Component {
                 if(notUsed === true){
                     this.state.data.splice(index, 1);
                     this.state.data.splice(index-1, 0, item);
+
                     Notify("success","Step Moved Up!",-1);
-                    this.props.onUpdate("move",item);
+
+                    this.props.onUpdate();
+                    this.setState({data: this.state.data});
                 }else{
                     Notify("error","The result of the above step is used in this one!",-1);
                 }
@@ -105,8 +106,11 @@ export class DynamicSteps extends Component {
                 if(unUsed === true){
                     this.state.data.splice(index, 1);
                     this.state.data.splice(index+1, 0, item);
+
                     Notify("success","Step Moved Down!",-1);
-                    this.props.onUpdate("move",item);
+
+                    this.props.onUpdate();
+                    this.setState({data: this.state.data});
                 }else{
                     Notify("error","The below step uses the result of this one!",-1);
                 }
@@ -115,17 +119,23 @@ export class DynamicSteps extends Component {
             Notify("error","Could not move!",-1);
         }
 
-        this.setState({data: this.state.data});
-
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.value !== this.props.value) {
-          this.setState({value: this.props.value});
+        if(prevProps !== this.props) {
+            this.setState({
+                data : this.props.data,
+                equipment : this.props.equipment,
+                product : this.props.product
+            })
+    
+            this.onLoad = this.props.onLoad;
+            this.className = this.props.className;
         }
     }
 
     render() {
+
         return (
             <div className={"dynamicForm grid-x align-center-middle " + this.className}>
                 <CustomStepPrompt addItem={this.addItem} equipment={this.state.equipment} product={this.state.product}/>
@@ -264,9 +274,20 @@ class CustomStepPrompt extends Component {
         });
     }
 
+    UNSAFE_componentWillMount() {
+        this.setState({
+            equipment: this.props.equipment,
+            product: this.props.product,
+            isLoading: false
+        });
+    }
+
     componentDidUpdate(prevProps) {
-        if(prevProps.value !== this.props.value) {
-          this.setState({value: this.props.value});
+        if(prevProps !== this.props) {
+            this.setState({
+                equipment: this.props.equipment,
+                product: this.props.product
+            });
         }
     }
   
@@ -289,7 +310,7 @@ class CustomStepPrompt extends Component {
         }
 
       return (
-        <div className="grid-x align-center-middle small-6 medium-6 cell">
+        <div key={this.state.product} className="grid-x align-center-middle small-6 medium-6 cell">
             <ItemPreview
                         className="small-6 cell"
                         items={[{desc:"Add Your Own"}]}
@@ -462,6 +483,13 @@ class CustomStepPrompt extends Component {
         const inputName = target.name;
         const inputValue = target.value;
 
+        var value = "";
+
+        var toDoClass = "";
+        var unitClass = "";
+        var buttonClass = "";
+        
+
         if((inputName === "equipmentDoing")){
             this.setState({
                 actionClass: "",
@@ -496,9 +524,9 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "action"){
 
-            var toDoClass = "";
-            var unitClass = "hidden";
-            var value = ""
+            toDoClass = "";
+            unitClass = "hidden";
+            value = ""
 
             if(inputValue === "TEMPERATE"){
                 toDoClass = "hidden";
@@ -565,14 +593,14 @@ class CustomStepPrompt extends Component {
             });
         }else if(inputName === "equipmentToDo"){
 
-            var unitClass = "";
-            var buttonClass = "hidden";
-            var unit = "";
+            unitClass = "";
+            buttonClass = "hidden";
+            value = "";
 
             if(this.actionType === "NA"){
                 unitClass = "hidden";
                 buttonClass = "";
-                unit = "NA";
+                value = "NA";
             }
             
             this.setState({
@@ -583,7 +611,7 @@ class CustomStepPrompt extends Component {
                 nameClass: "hidden",
                 submitClass: "hidden",
                 unit: {
-                    value: unit
+                    value: value
                 },
                 [inputName]: {
                     value: inputValue,
@@ -905,10 +933,8 @@ class GetStep extends Component {
         }
     }
 
-    componentDidUpdate(prevProps) {
-        if(prevProps.value !== this.props.value) {
-          this.setState({value: this.props.value});
-        }
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        this.setState({ data: nextProps.data });  
     }
 
   
@@ -928,7 +954,7 @@ class GetStep extends Component {
             />
         }
       return (
-        <div className="grid-x align-center-middle small-10 cell">
+        <div key={this.state.product} className="grid-x align-center-middle small-10 cell">
             <div className="previewItemMargin cell"></div>
             <div className="grid-x align-center-middle small-11 cell previewStepContainer">
                 <div className="grid-x align-center-middle small-3 cell">

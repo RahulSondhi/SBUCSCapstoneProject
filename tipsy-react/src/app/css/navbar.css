@@ -16,15 +16,8 @@
     z-index: 1;
 }
 
-#barEquipment, #myBars, #account {
-    width: 10%;
-    height: 10%;
-    margin-right: .5em;
-}
-
-#recipes {
-    width: 8%;
-    height: 8%;
+#barEquipment, #myBars, #account, #recipes {
+    max-width: 10%;
     margin-right: .5em;
 }
 
@@ -35,47 +28,62 @@
 }
 
 .logo {
-    width: 15em;
+    max-width: 15em;
+    height: 100%;
     float: left;
 }
+
 .logo img {
     display: inline-block;
     padding: 0.5em 0.25em;
+    max-width: 100%;
+    height: 100%;
 }
 
 /* Right Menu */
 .menuCon {
     width: calc(100% - 15em);
-    float: left;
+    float: right;
+    height: 100%;
+    align-items: center;
 }
-.menuCon .ant-menu-item {
-    /* padding: 0 5px; */
-}
+
 .menuCon .ant-menu-submenu-title {
-    padding: 10px 20px;
+    padding: 0px 20px;
+    height: 100%;
 }
+
 .menuCon .ant-menu-item a,
 .menuCon .ant-menu-submenu-title a {
-    padding: 10px 15px;
+    padding: 0px 15px;
 }
 .menuCon .ant-menu-horizontal {
     border-bottom: none;
 }
-.menuCon .leftMenu {
-    float: left;
-}
-.menuCon .rightMenu {
+
+.menuCon .ant-menu{
     float: right;
 }
 
+.menuCon .rightMenu{
+    width: 100%;
+}
+
+.menuCon .ant-menu-item,
+.menuCon .ant-menu-submenu{
+    vertical-align: top;
+}
+
 /* Hamburger Btn */
-.barsMenu {
+.barsMenu{
+    width: 100%;
+    display: none;
+}
+.barsMenuBtn {
     float: right;
     height: 2.3em;
     padding: 0 0.5em 0.5em;
-    display: none;
     background: none;
-    margin-top: 1em;
 }
 .barsBtn {
     display: block;
@@ -130,7 +138,7 @@
 }
 
 /* Page Size Listener */
-@media(max-width: 47.9375em) {
+@media(max-width: 61em) {
     .barsMenu {
         display: inline-block;
     }

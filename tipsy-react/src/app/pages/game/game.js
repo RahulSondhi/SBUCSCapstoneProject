@@ -2,15 +2,13 @@ import React, {Component, Fragment} from 'react';
 import Navbar from '../navbar/navbar.js';
 
 import {getGameProfile, saveGame, forfeitGame, getAllUnits} from '../../util/APIUtils';
-import {Notify, ItemPreview, GetProfImg, LINK_BASE} from '../../util/constants';
+import {Notify, LINK_BASE} from '../../util/constants';
 import ErrorPage from '../../util/errorPage.js';
 
 import Dustbin from './equipmentBin'
 import Box from './equipmentDrag'
 
-import {Tabs, Input, Modal, Button} from 'antd';
-
-const {TabPane} = Tabs;
+import {Input, Modal} from 'antd';
 
 class Game extends Component {
 
@@ -98,11 +96,16 @@ class Game extends Component {
                     progress[0] = response.progress[0] + 1
                 }
 
-                for(var i = 0; i < index; i++){
-                    equipmentProducts.push(
-                        response.recipe.equipmentProducts.find(equip => equip.name === response.recipe.steps[i].equipmentProduct)
-                    )
-                }
+                var counter = 0
+
+                response.recipe.steps.forEach(step => {
+                    if(counter < index){
+                        equipmentProducts.push(
+                            response.recipe.equipmentProducts.find(equip => equip.name === step.equipmentProduct)
+                        )
+                    }
+                    counter = counter + 1;
+                });
 
                 this.setState({
                     recipe: response.recipe,
@@ -262,7 +265,7 @@ class Game extends Component {
                 content: response,
             });
 
-            var progress = this.state.progress;
+            progress = this.state.progress;
             progress[this.state.currentStep] += 1;
 
             this.setState({
@@ -377,14 +380,14 @@ class Game extends Component {
         }
 
         return (
-            <div className="grid-x grid-x-margin align-center-middle pageContainer">
+            <div className="grid-x align-top pageContainer">
                 <Navbar type="game" save={this.saveGameProfile} quit={this.forfeitGameProfile}/>
 
-                <div className="grid-x align-center align-top cell page gamePageContainer">
-                    
-                    <div className="cell grid-x align-center-middle gameTop">
+                <div className="grid-y cell gamePage">
 
-                        <div className={"small-4 small-offset-2 cell grid-x align-center align-self-top gamestepContainer"}>
+                    <div className="small-7 cell grid-x align-center-middle gameTop">
+
+                        <div className={"small-5 small-offset-1 cell grid-x align-center align-self-top gamestepContainer"}>
                             {/* Shows Step */}
                             <GameStepPreview
                                 steps={this.state.recipe.steps}
@@ -415,12 +418,14 @@ class Game extends Component {
 
                     </div>
 
-                    <div className={"cell align-x align-center gameBottom"}>
+                    <div className={"small-1 cell"}></div>
+
+                    <div className={"small-4 cell grid-x align-center gameBottom"}>
                         
                         {/* Dragging Areas */}
-                        <div className="cell grid-x align-center-middle"> 
-                            <Dustbin className="small-3 small-offset-1 cell" allowedDropEffect="move" name="equipmentDoing" item={this.getEquipment(this.state.equipmentDoing.value)} />
-                            <div className="small-2 cell grid-x align-center-middle">
+                        <div className="cell grid-x align-center-middle gameHeightFix"> 
+                            <Dustbin className="small-2 small-offset-1 cell" allowedDropEffect="move" name="equipmentDoing" item={this.getEquipment(this.state.equipmentDoing.value)} />
+                            <div className="small-3 cell grid-x align-center-middle">
                                 <select 
                                         name="action"
                                         className={"small-10 cell customEquipmentSelect gameAction "+this.state.actionVisible}
@@ -434,11 +439,11 @@ class Game extends Component {
                                         </optgroup>
                                 </select>
                             </div>
-                            <Dustbin className="small-3 cell" allowedDropEffect="move" name="equipmentToDo" item={this.getEquipment(this.state.equipmentToDo.value)} />
+                            <Dustbin className="small-2 cell" allowedDropEffect="move" name="equipmentToDo" item={this.getEquipment(this.state.equipmentToDo.value)} />
                             
-                            <div className="small-2 cell grid-x">
-                                <div className="cell grid-x">
-                                    <div className={"small-4 small-offset-1 cell "+this.state.valueVisible}>
+                            <div className="small-3 grid-x cell">
+                                <div className="small-10 cell grid-x">
+                                    <div className={"small-6 small-offset-3 cell "+this.state.valueVisible}>
                                         <Input
                                             type="number"
                                             min="0"
@@ -448,9 +453,10 @@ class Game extends Component {
                                             value={this.state.value.value}
                                             onChange={(event) => this.handleInputChange(event, function(){return true;})}/>
                                     </div>
+                                    <div className="spacer cell"/>
                                     <select 
                                         name="unit"
-                                        className={"small-6 small-offset-1 cell customEquipmentSelect gameAction "+this.state.unitVisible}
+                                        className={"small-6 small-offset-3 cell customEquipmentSelect gameAction "+this.state.unitVisible}
                                         value={this.state.unit.value}
                                         onChange={(event) => this.handleInputChange(event, function(){return true;})}>
                                         <option hidden disabled key="1" value=""> -- select an option -- </option>
@@ -460,20 +466,19 @@ class Game extends Component {
                                             )};
                                         </optgroup>
                                     </select>
+                                    <div className="spacer cell"/>
+                                    <button
+                                        key="continue"
+                                        id="settingsButton"
+                                        onClick={(e) => {this.handleSubmitStep(e)}}
+                                        className={"small-6 small-offset-3 cell button  "+this.state.buttonVisible}>
+                                        Continue
+                                    </button>
                                 </div>
-                                <button
-                                    key="continue"
-                                    id="settingsButton"
-                                    onClick={(e) => {this.handleSubmitStep(e)}}
-                                    className={"button cell align-self-bottom "+this.state.buttonVisible}>
-                                    Continue
-                                </button>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         )
     }
@@ -653,13 +658,13 @@ class GameStepPreview extends Component {
                     <div className="grid-x align-center-middle small-1 cell">
                         <span>{"Step "+ (this.props.index+1) + "/" +this.state.totalIndex}</span>
                     </div>
-                    <div className="grid-x align-center-middle small-5 cell">
+                    <div className="grid-x align-center-middle small-4 cell">
                         {this.getEquipment(this.props.steps[this.props.index].equipmentDoing)}
                     </div>
-                    <div className="grid-x align-center-middle small-1 cell">
+                    <div className="grid-x align-center-middle small-3 cell">
                         <span>{action}</span>
                     </div>
-                    <div className="grid-x align-center-middle small-5 cell">
+                    <div className="grid-x align-center-middle small-4 cell">
                         {this.getEquipment(this.props.steps[this.props.index].equipmentToDo)}
                     </div>
                 </div>

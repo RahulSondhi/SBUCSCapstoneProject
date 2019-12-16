@@ -21,15 +21,18 @@
   color: black;
 }
 
-.gamePageContainer{
+.gamePage{
   background: url("../assets/game/game.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+  width: 100%;
+  height: calc(100vw * (9/16) * 0.82);
 }
 
-.gameTop{
-  height: 60%;
+.gamePageContainer{
+  width: 100%;
+  height: 100%;
 }
 
 .gameEquipContainer{
@@ -43,15 +46,28 @@
 }
 
 .gamestepContainer{
-  background-color: rgba(0, 0, 0, 0.9);
+  background: linear-gradient( rgba(25,7,4, 0.5) 100%, rgba(25,7,4, 0.5)100%),url("../assets/card.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-color: white;
   border-style: ridge;
   border-width: 1em;
 }
 
-.gameBottom{
-  margin-top: 2%;
-  height: 27%;
-  overflow: hidden;
+.gameBottom .gameHeightFix{
+  height: 95%;
+}
+
+.gameBottom .spacer{
+  height: 1em;
+}
+
+.gameBottom .button{
+  margin: auto;
+}
+
+.gameBottom .previewDesc{
+  display: none !important;
 }
   
