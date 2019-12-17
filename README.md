@@ -51,7 +51,7 @@ This is a UML Package Diagram which simplifies the complex class diagrams and he
 ![PackageDiagram](./Documentation/UMLDiagrams/tipsyUMLPackageDiagram.png)
 ### SRS Document
 This is a software requirements specification **(SRS)** which is a document that describes what the software will do and how it will be expected to perform. This was created in Google Documents.
-#### ![Link to SRS Document File](https://drive.google.com/open?id=1h81CsaTjOd_eqaE66Ed1VLQVxs5Tvw--zg5BFjDpaEk)
+#### ![Link to SRS Document File](https://github.com/RahulSondhi/Tipsy/blob/master/Documentation/SRSDocument/CSE308%20SRS.pdf)
 
 ## Build Process/Work Flow
 ### Team Communication/Organization
