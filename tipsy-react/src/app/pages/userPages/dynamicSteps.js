@@ -80,7 +80,6 @@ export class DynamicSteps extends Component {
             .data
             .indexOf(item);
 
-
         if (index > -1 && direction === "up") {  
             if(index === 0){
                 Notify("error","Step is already at the top!",-1);
@@ -123,6 +122,9 @@ export class DynamicSteps extends Component {
 
     componentDidUpdate(prevProps) {
         if(prevProps !== this.props) {
+
+            console.log("Parent Update:",this.props.product)
+
             this.setState({
                 data : this.props.data,
                 equipment : this.props.equipment,
@@ -931,10 +933,6 @@ class GetStep extends Component {
             func={()=>{}}
             type={"equipmentAltered"} />   
         }
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        this.setState({ data: nextProps.data });  
     }
 
   

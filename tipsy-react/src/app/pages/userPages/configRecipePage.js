@@ -412,6 +412,8 @@ class ConfigRecipePage extends Component {
     }
 
     handleStepLoad = (type,step,product) => {
+
+        var product = this.state.equipmentProducts.value;
         
         if(type === "add"){
             product.push(step.equipmentProduct);
