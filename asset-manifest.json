@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Tipsy/static/css/main.6e29af01.chunk.css",
-    "main.js": "/Tipsy/static/js/main.ef01fc1d.chunk.js",
-    "main.js.map": "/Tipsy/static/js/main.ef01fc1d.chunk.js.map",
+    "main.js": "/Tipsy/static/js/main.e01f24b5.chunk.js",
+    "main.js.map": "/Tipsy/static/js/main.e01f24b5.chunk.js.map",
     "runtime-main.js": "/Tipsy/static/js/runtime-main.2c8d7ed5.js",
     "runtime-main.js.map": "/Tipsy/static/js/runtime-main.2c8d7ed5.js.map",
     "static/css/2.7ececfe9.chunk.css": "/Tipsy/static/css/2.7ececfe9.chunk.css",
-    "static/js/2.2972f867.chunk.js": "/Tipsy/static/js/2.2972f867.chunk.js",
-    "static/js/2.2972f867.chunk.js.map": "/Tipsy/static/js/2.2972f867.chunk.js.map",
+    "static/js/2.7484ea0a.chunk.js": "/Tipsy/static/js/2.7484ea0a.chunk.js",
+    "static/js/2.7484ea0a.chunk.js.map": "/Tipsy/static/js/2.7484ea0a.chunk.js.map",
     "index.html": "/Tipsy/index.html",
-    "precache-manifest.ee589e69d2ac0f769fe07a71a7dbf8c4.js": "/Tipsy/precache-manifest.ee589e69d2ac0f769fe07a71a7dbf8c4.js",
+    "precache-manifest.d4eaf6bc0f79d1fa24831e8334373f81.js": "/Tipsy/precache-manifest.d4eaf6bc0f79d1fa24831e8334373f81.js",
     "service-worker.js": "/Tipsy/service-worker.js",
     "static/css/2.7ececfe9.chunk.css.map": "/Tipsy/static/css/2.7ececfe9.chunk.css.map",
     "static/css/main.6e29af01.chunk.css.map": "/Tipsy/static/css/main.6e29af01.chunk.css.map",
@@ -41,8 +41,8 @@
   "entrypoints": [
     "static/js/runtime-main.2c8d7ed5.js",
     "static/css/2.7ececfe9.chunk.css",
-    "static/js/2.2972f867.chunk.js",
+    "static/js/2.7484ea0a.chunk.js",
     "static/css/main.6e29af01.chunk.css",
-    "static/js/main.ef01fc1d.chunk.js"
+    "static/js/main.e01f24b5.chunk.js"
   ]
 }

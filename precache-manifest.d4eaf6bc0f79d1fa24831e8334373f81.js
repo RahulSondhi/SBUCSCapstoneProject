@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0953f1dce89b31c10420011dac9e1968",
+    "revision": "44e2eb5040fc6118f429991589e8d3d8",
     "url": "/Tipsy/index.html"
   },
   {
-    "revision": "96584656e1da4902e715",
+    "revision": "d7f8877ab23f31ee0cce",
     "url": "/Tipsy/static/css/2.7ececfe9.chunk.css"
   },
   {
-    "revision": "f3c6775281832bdc8c95",
+    "revision": "3474ce908b840a7673a8",
     "url": "/Tipsy/static/css/main.6e29af01.chunk.css"
   },
   {
-    "revision": "96584656e1da4902e715",
-    "url": "/Tipsy/static/js/2.2972f867.chunk.js"
+    "revision": "d7f8877ab23f31ee0cce",
+    "url": "/Tipsy/static/js/2.7484ea0a.chunk.js"
   },
   {
-    "revision": "f3c6775281832bdc8c95",
-    "url": "/Tipsy/static/js/main.ef01fc1d.chunk.js"
+    "revision": "3474ce908b840a7673a8",
+    "url": "/Tipsy/static/js/main.e01f24b5.chunk.js"
   },
   {
     "revision": "3ad6b658d8703ff8e813",
