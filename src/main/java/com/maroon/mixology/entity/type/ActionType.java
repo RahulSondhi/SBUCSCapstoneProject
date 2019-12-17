@@ -18,5 +18,6 @@ public enum ActionType {
     STRAIN,
     STIR,
     TEMPERATE,
-    SHAKE
+    SHAKE,
+    COAT
 }

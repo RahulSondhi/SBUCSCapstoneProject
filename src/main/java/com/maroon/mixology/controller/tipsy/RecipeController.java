@@ -25,6 +25,7 @@ import com.maroon.mixology.exchange.response.EquipmentProductResponse;
 import com.maroon.mixology.exchange.response.EquipmentResponse;
 import com.maroon.mixology.exchange.response.EquipmentTypeResponse;
 import com.maroon.mixology.exchange.response.RecipeResponse;
+import com.maroon.mixology.exchange.response.StatResponse;
 import com.maroon.mixology.exchange.response.StepResponse;
 import com.maroon.mixology.exchange.response.UnitResponse;
 import com.maroon.mixology.exchange.response.brief.BriefUserResponse;
@@ -222,6 +223,45 @@ public class RecipeController {
         }
     }
 
+    @GetMapping("/{recipeID}/stats")
+    public ResponseEntity<?> getRecipeStats(@CurrentUser UserDetails currentUser, @PathVariable(value = "recipeID") String recipeID) {
+        try{
+            User requester = userService.findByEmail(currentUser.getUsername());
+            //we have to query the recipe from Mongo
+            Recipe recipe = recipeService.findById(recipeID);
+            if(recipe == null){
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Recipe with the ID \"" + recipeID +"\" was not found."),
+                HttpStatus.NOT_FOUND);
+            }
+            // We have the recipe, now lets build an array of Game Responses
+            // Unless you are the author, you cant view an unpublished recipe
+            if(recipe.isPublished() && recipe.getAuthor().getId().equals(requester.getId())){//only works if requster is author and is Published
+                //query all games based on the recipe both complete and incomplete
+                List<Game> games = gameService.findByRecipe(recipe);
+                //All of the relevant game sessions, lets make an array of StatResponses
+                Set<StatResponse> statResponses = new HashSet<StatResponse>();
+                for(Game g: games){
+                    statResponses.add(new StatResponse(
+                        new BriefUserResponse(
+                            g.getPlayer().getNickname(), 
+                            g.getPlayer().getFirstName() + " " + recipe.getAuthor().getLastName(), 
+                            g.getPlayer().getProfilePic()),
+                        g.getProgress(),
+                        g.isCompleted()
+                    ));
+                }
+                return ResponseEntity.ok(statResponses);
+            }
+            else{
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Statistics for this recipe were not found."),
+                        HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.error("Statistics were unable to be loaded.", e);
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Statistics were unable to be loaded. Error: " + e.toString()),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PostMapping("/{recipeID}/changeSettings")
     public ResponseEntity<?> changeRecipeSettings(@PathVariable(value = "recipeID") String recipeID, @CurrentUser UserDetails currentUser, @Valid @RequestBody RecipeRequest recipeRequest) {

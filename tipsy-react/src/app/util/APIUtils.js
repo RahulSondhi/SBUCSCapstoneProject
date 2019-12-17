@@ -207,6 +207,13 @@ export function getRecipeProfile(recipeID) {
     });
 }
 
+export function getRecipeStats(recipeID) {
+    return request({
+        url: API_BASE_URL + "/tipsy/recipe/" + recipeID + "/stats",
+        method: 'GET'
+    });
+}
+
 export function createRecipe(recipeRequest) {
     return request({
         url: API_BASE_URL + "/tipsy/recipe/createRecipe",
