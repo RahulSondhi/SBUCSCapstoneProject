@@ -261,19 +261,25 @@ class ConfigBarPage extends Component {
                             </div>
                         </TabPane>
                         <TabPane tab="Delete" disabled={(this.state.role === "manager" || this.state.isCreating === true)}key="5">
-
-                            <Popconfirm
-                                title="Warning! You are about to delete the bar. Are you sure you want to do this?"
-                                onConfirm={this.handleDelete}
-                                okText="Yes"
-                                cancelText="No">
-                                <button
-                                    id="settingsButton"
-                                    className={"small-10 button cell "}>
-                                    Delete
-                                </button>
-                            </Popconfirm>
-
+                        <div className="grid-x grid-margin-x align-center-middle cell">
+                                <h1 className="captionRed cell">
+                                    This can not be undone!
+                                </h1>
+                                <h1 className="captionRed cell">
+                                    Once you delete a recipe, you will not be able to get it back again!
+                                </h1>
+                                <Popconfirm
+                                    title="Warning! You are about to delete the bar. Are you sure you want to do this?"
+                                    onConfirm={this.handleDelete}
+                                    okText="Yes"
+                                    cancelText="No">
+                                    <button
+                                        id="settingsButton"
+                                        className={"small-10 button cell "}>
+                                        Delete
+                                    </button>
+                                </Popconfirm>
+                            </div>
                         </TabPane>
                     </Tabs>
                 </Form>

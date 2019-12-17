@@ -530,7 +530,7 @@ class CustomStepPrompt extends Component {
             unitClass = "hidden";
             value = ""
 
-            if(inputValue === "TEMPERATE"){
+            if(["TEMPERATE","SHAKE","BLEND"].includes(inputValue)){
                 toDoClass = "hidden";
                 unitClass = "";
                 value = this.state.equipmentDoing.value;

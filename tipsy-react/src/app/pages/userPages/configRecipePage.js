@@ -319,36 +319,48 @@ class ConfigRecipePage extends Component {
                         </TabPane>
 
                         <TabPane tab="Publish" disabled={this.state.type === "publish"} key="4">
-
-                            <Popconfirm
-                                title="Are you sure you want to publish this recipe?
-                                Once a recipe is published, it may not be edited again."
-                                onConfirm={this.handlePublish}
-                                okText="Yes"
-                                cancelText="No">
-                                <button
-                                    id="settingsButton"
-                                    className={"small-10 button cell"}>
-                                    Publish
-                                </button>
-                            </Popconfirm>
-
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+                                <h1 className="captionRed cell">
+                                    This can not be undone!
+                                </h1>
+                                <h1 className="captionRed cell">
+                                    Once you publish a recipe, you will not be able to edit again!
+                                </h1>
+                                <Popconfirm
+                                    title="Are you sure you want to publish this recipe?
+                                    Once a recipe is published, it may not be edited again."
+                                    onConfirm={this.handlePublish}
+                                    okText="Yes"
+                                    cancelText="No">
+                                    <button
+                                        id="settingsButton"
+                                        className={"small-6 button cell"}>
+                                        Publish
+                                    </button>
+                                </Popconfirm>
+                            </div>
                         </TabPane>
 
                         <TabPane tab="Delete" disabled={this.state.type === "clone" || this.state.type === "create"} key="5">
-
-                            <Popconfirm
-                                title="Warning! You are about to delete this recipe. Are you sure you want to do this? "
-                                onConfirm={this.handleDelete}
-                                okText="Yes"
-                                cancelText="No">
-                                <button
-                                    id="settingsButton"
-                                    className={"small-10 button cell"}>
-                                    Delete
-                                </button>
-                            </Popconfirm>
-
+                            <div className="grid-x grid-margin-x align-center-middle cell">
+                                <h1 className="captionRed cell">
+                                    This can not be undone!
+                                </h1>
+                                <h1 className="captionRed cell">
+                                    Once you delete a recipe, you will not be able to get it back again!
+                                </h1>
+                                <Popconfirm
+                                    title="Warning! You are about to delete this recipe. Are you sure you want to do this? "
+                                    onConfirm={this.handleDelete}
+                                    okText="Yes"
+                                    cancelText="No">
+                                    <button
+                                        id="settingsButton"
+                                        className={"small-6 button cell"}>
+                                        Delete
+                                    </button>
+                                </Popconfirm>
+                            </div>
                         </TabPane>
                     </Tabs>
 
