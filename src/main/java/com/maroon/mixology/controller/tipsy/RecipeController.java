@@ -254,7 +254,6 @@ public class RecipeController {
                 recipe.setName(recipeRequest.getName());
                 recipe.setDescription(recipeRequest.getDescription());
                 recipe.setImage(recipeRequest.getImg());
-                recipe.setPublished(recipeRequest.getPublished());
                 //Build the Steps from Step requests
                 // We should redo all the steps from the step request
                 if(recipeRequest.getNewSteps()){ //make sure this boolean is a thing
@@ -308,6 +307,12 @@ public class RecipeController {
                     recipe.setEquipmentsAvailable(equipmentsAvailable);
                 }
                 //
+                recipe.setPublished(recipeRequest.getPublished()); //set published
+                if(recipe.isPublished() && recipe.getSteps().size() == 0){ //really bad secure design but it works :(
+                    //make sure the recipe does not have 0 steps
+                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to publish a recipe with null steps"),
+                    HttpStatus.BAD_REQUEST);
+                }
                 recipeRepository.save(recipe); //update recipe
                 //
                 return ResponseEntity.ok(new ApiResponse(true, "Recipe was succesfully updated!"));
