@@ -104,7 +104,6 @@ public class RecipeController {
             recipe.setDescription(recipeRequest.getDescription());
             recipe.setImage(recipeRequest.getImg());
             recipe.setAuthor(user);
-            recipe.setPublished(recipeRequest.getPublished());
             //Build the Steps from Step requests    
             ArrayList<Step> steps = new ArrayList<Step>();
             for (StepRequest s : recipeRequest.getSteps()){
@@ -145,6 +144,12 @@ public class RecipeController {
                     ),
                     e.getTags())
                 );
+            }
+            recipe.setPublished(recipeRequest.getPublished()); //set published
+            if(recipe.isPublished() && recipe.getSteps().size() == 0){ //really bad secure design but it works :(
+                //make sure the recipe does not have 0 steps
+                return new ResponseEntity<ApiResponse>(new ApiResponse(false, "You are unable to publish a recipe with 0 steps"),
+                HttpStatus.BAD_REQUEST);
             }
             recipe.setEquipmentsAvailable(equipmentsAvailable);
             recipe.setEquipmentProducts(equipmentProducts);
@@ -193,19 +198,6 @@ public class RecipeController {
                             s.getUnit().getMetricMeasurement()) 
                         ));
                 }
-                //Need to build equipments response 
-                // Set<EquipmentResponse> equipmentsAvailable = new HashSet<EquipmentResponse>();
-                // for (Equipment e : recipe.getEquipmentsAvailable()){
-                //     equipmentsAvailable.add( new EquipmentResponse(
-                //         e.getName(), 
-                //         e.getImage(),
-                //         new EquipmentTypeResponse(
-                //             e.getEquipmentType().getName(),
-                //             e.getEquipmentType().getActionsDoTo(),
-                //             e.getEquipmentType().getActionsDoing()
-                //             )
-                //         ));
-                // }
                 //lets build our response
                 RecipeResponse recipeResponse = new RecipeResponse(
                     recipe.getName(),
@@ -310,7 +302,7 @@ public class RecipeController {
                 recipe.setPublished(recipeRequest.getPublished()); //set published
                 if(recipe.isPublished() && recipe.getSteps().size() == 0){ //really bad secure design but it works :(
                     //make sure the recipe does not have 0 steps
-                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Unable to publish a recipe with null steps"),
+                    return new ResponseEntity<ApiResponse>(new ApiResponse(false, "You are unable to publish a recipe with 0 steps"),
                     HttpStatus.BAD_REQUEST);
                 }
                 recipeRepository.save(recipe); //update recipe
