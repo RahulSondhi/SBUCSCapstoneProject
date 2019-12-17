@@ -159,10 +159,14 @@ Now your new piece of Equipment will be created and added to the recipe.
 <img src="./Documentation/READMEAssets/UploadEquipmentStep4.png" width="450" height="auto">
 
 ### Mixer page
-Placeholder for the Mixer page.
+The Mixer page is where you will take the recipes you've created and practice making your drink. You will be provided with the current step you need to perform and be given the ability to drag and drop the ingredients and select the proper units to progressively create your drink. Once you are finished performing all the steps you will be notified that you have successfully completed the recipe. If you ever perform a step incorrectly, **Tipsy** will notify you that you have done the step incorrectly and will prompt you to try again.
+
+<img src="./Documentation/READMEAssets/GamePage.png" width="450" height="auto">
 
 ### Step
-Placeholder for Step.
+Steps are where your instructions for creating your recipe will go. A step comprises of two pieces of equipment along with an action, unit of measurement and amount. 
+
+<img src="./Documentation/READMEAssets/Steps.png" width="450" height="auto">
 
 ### Search
 In order to perform a search, the user must be logged in.
