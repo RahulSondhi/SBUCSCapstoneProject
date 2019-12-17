@@ -459,7 +459,7 @@ class CustomStepPrompt extends Component {
                         autoComplete="off"
                         placeholder="Enter Name of Equipment Product"
                         value={this.state.resultName.value}
-                        onChange={(event) => this.handleInputChange(event, this.validateName)}/>
+                        onChange={(event) => this.handleInputChange(event, this.validateName)} />
                 </FormItem>
 
                 <FormItem
@@ -661,13 +661,10 @@ class CustomStepPrompt extends Component {
     }
 
     validateName = (name) => {
-        checkEquipmentNameIsPresent(name).then(response => {
 
             var validName = ValidateName(name);
-            var existingEquipment = this.state.equipment.find(o => o.name === name);
-            var existingProduct = this.state.product.find(o => o.name === name);
 
-            if(!response.available && validName.validateStatus === "success" && (existingEquipment === undefined) && (existingProduct === undefined)){
+            if(validName.validateStatus === "success"){
                 this.setState({
                     doingClass: "hidden",
                     actionClass: "hidden",
@@ -684,7 +681,7 @@ class CustomStepPrompt extends Component {
                         errorMsg: null
                     }
                 });
-            }else if(validName.validateStatus !== "success"){
+            }else{
                 this.setState({
                     doingClass: "hidden",
                     actionClass: "hidden",
@@ -701,34 +698,7 @@ class CustomStepPrompt extends Component {
                         errorMsg: validName.errorMsg
                     }
                 });
-            }else{
-                this.setState({
-                    doingClass: "hidden",
-                    actionClass: "hidden",
-                    toDoClass: "hidden",
-                    unitClass: "hidden",
-                    valueClass:"hidden",
-                    buttonClass:"hidden",
-                    imgClass: "",
-                    nameClass: "",
-                    submitClass: "hidden",
-                    resultName: {
-                        value: name,
-                        validateStatus: "error",
-                        errorMsg: "Name is taken"
-                    }
-                });
             }
-
-        }).catch(error => {
-            this.setState({
-                error:{
-                    status: error.status,
-                    message: error.message, 
-                },
-                isLoading: false
-            });
-        });
     }
 
     handleImageLoad = (val) => {
@@ -789,32 +759,68 @@ class CustomStepPrompt extends Component {
     }
   
     handleSubmit(event) {
-          event.preventDefault();
+        event.preventDefault();
 
-          this.setState({
-            confirmLoading: true,
-          });
-  
-          const stepRequest = {
-            equipmentToDo: this.state.equipmentToDo.value,
-            equipmentDoing: this.state.equipmentDoing.value,
-            equipmentProduct:{
-              name: this.state.resultName.value,
-              img: this.state.resultImg.value,
-              equipmentType: this.state.resultEquipmentType.value,
-              tags: this.state.resultTags.value
-            },
-            action: this.state.action.value,
-            value: parseInt(this.state.value.value),
-            unit: this.state.unit.value
-          };
-  
-          this.props.addItem(stepRequest);
+        var name = this.state.resultName.value;
+        
+        checkEquipmentNameIsPresent(name).then(response => {
 
-          this.setState({
-            visible: false,
-            confirmLoading: false,
-          });
+            var existingEquipment = this.state.equipment.find(o => o.name === name);
+            var existingProduct = this.state.product.find(o => o.name === name);
+
+            if(!response.available && (existingEquipment === undefined) && (existingProduct === undefined)){
+                this.setState({
+                    confirmLoading: true,
+                });
+        
+                const stepRequest = {
+                    equipmentToDo: this.state.equipmentToDo.value,
+                    equipmentDoing: this.state.equipmentDoing.value,
+                    equipmentProduct:{
+                    name: this.state.resultName.value,
+                    img: this.state.resultImg.value,
+                    equipmentType: this.state.resultEquipmentType.value,
+                    tags: this.state.resultTags.value
+                    },
+                    action: this.state.action.value,
+                    value: parseInt(this.state.value.value),
+                    unit: this.state.unit.value
+                };
+        
+                this.props.addItem(stepRequest);
+
+                this.setState({
+                    visible: false,
+                    confirmLoading: false,
+                });
+            }else{
+                this.setState({
+                    doingClass: "hidden",
+                    actionClass: "hidden",
+                    toDoClass: "hidden",
+                    unitClass: "hidden",
+                    valueClass:"hidden",
+                    buttonClass:"hidden",
+                    imgClass: "",
+                    nameClass: "",
+                    submitClass: "hidden",
+                    resultName: {
+                        value: name,
+                        validateStatus: "error",
+                        errorMsg: "Name is taken"
+                    }
+                });
+            }
+        
+        }).catch(error => {
+            this.setState({
+                error:{
+                    status: error.status,
+                    message: error.message, 
+                },
+                isLoading: false
+            });
+        });
     }
    
     isFormInvalid() {
