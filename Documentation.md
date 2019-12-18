@@ -1,3 +1,23 @@
+# Table of Contents
+1. Register for an Account
+2. Log in
+3. Log Out
+4. Forgot password
+5. Changing user settings
+6. Changing password
+7. Creating a bar
+8. Editing a bar
+9. Deleting a bar
+10. Creating a Recipe
+11. Perform Recipe
+12. Publishing a Recipe
+13. Deleting a Recipe
+14. Cloning a Recipe
+15. Upload Equipment
+16. Game Page
+17. Step
+
+
 ## Features
 ### Register for an account
 For starters, you must register for an account by clicking on the **Register** button found on the **Login** page
@@ -60,36 +80,36 @@ In order to change your password, you must first go to the **Settings** page and
 
 You will then be navigated to the **Change Password** page where you will then fill in your desired password in both the "Password" and "Confirm Password" fields. If the two password match and are at least 8 characters long, you can click on the "Change Password" button to confirm your changes.
 
-### Creating a Bar
-To create a Bar the user must already be logged in. You must first navigate to the **My Bars** tab on the navigation bar on the top and you will be taken to the **My Bars** page where you can create, edit, or delete Bars and click on the **Add A Bar** button.
+### Creating a bar
+To create a bar the user must already be logged in. You must first navigate to the **My Bars** tab on the navigation bar on the top and you will be taken to the **My Bars** page where you can create, edit, or delete bars and click on the **Add A Bar** button.
 
-<img src="./Documentation/READMEAssets/myBarTabAddBarHighlight.png" width="450" height="auto">
+<img src="./Documentation/READMEAssets/mybarTabAddBarHighlight.png" width="450" height="auto">
 
-Once you're on the **Create a Bar** page you can change the profile photo of the bar to a photo of your choosing along with filling in the name of the Bar and including an optional description of your bar and finally pressing the **Create Bar** button to publish your newly created bar.
+Once you're on the **Create a bar** page you can change the profile photo of the bar to a photo of your choosing along with filling in the name of the Bar and including an optional description of your bar and finally pressing the **Create Bar** button to publish your newly created bar.
 
-<img src="./Documentation/READMEAssets/createABarScreen.png" style="position: inline-block;" width="450" height="auto">  <img src="./Documentation/READMEAssets/newlyAddedBar.png" style="position: inline-block;" width="450" height="auto">
+<img src="./Documentation/READMEAssets/createAbarScreen.png" style="position: inline-block;" width="450" height="auto">  <img src="./Documentation/READMEAssets/newlyAddedBar.png" style="position: inline-block;" width="450" height="auto">
 
-### Editing a Bar
-In order to edit a Bar the Bar must initially exist and the user must be logged in. On the **My Bars** screen if you click on a Bar you will be taken to the Bar page for that specific Bar. From there you click on the gear icon to be taken to the **Edit Bar** page. 
+### Editing a bar
+In order to edit a bar the Bar must initially exist and the user must be logged in. On the **My Bars** screen if you click on a Bar you will be taken to the Bar page for that specific Bar. From there you click on the gear icon to be taken to the **Edit Bar** page. 
 
-<img src="./Documentation/READMEAssets/individualBarPage.png" width="450" height="auto">
+<img src="./Documentation/READMEAssets/individualbarPage.png" width="450" height="auto">
 
-Once on the page you may click on the various tabs to manage your workers, managers, and recipes associated with the bar. You can save these changes by clicking on the **Save Bar** button afterwards.
+Once on the page you may click on the various tabs to manage your workers, managers, and recipes associated with the bar. You can save these changes by clicking on the **Save bar** button afterwards.
 
-<img src="./Documentation/READMEAssets/editBarPage.png" width="450" height="auto">
+<img src="./Documentation/READMEAssets/editbarPage.png" width="450" height="auto">
 
 If you go back to the **My Bars** screen you will see that your bar has been edited with the desired changes.
 
-<img src="./Documentation/READMEAssets/newlyEditedBar.png" width="450" height="auto">
+<img src="./Documentation/READMEAssets/newlyEditedbar.png" width="450" height="auto">
 
-### Deleting a Bar
-In order to delete a Bar the Bar must initially exist and the user must be logged in. On the **My Bars** screen if you click on a Bar you will be taken to the Bar page for that specific Bar. From there you click on the gear icon to be taken to the **Edit Bar** page. 
+### Deleting a bar
+In order to delete a bar the Bar must initially exist and the user must be logged in. On the **My Bars** screen if you click on a Bar you will be taken to the Bar page for that specific Bar. From there you click on the gear icon to be taken to the **Edit Bar** page. 
 
-<img src="./Documentation/READMEAssets/DeleteBarStep1.png" width="450" height="auto"> <img src="./Documentation/READMEAssets/DeleteBarStep2.png" width="450" height="auto"> 
+<img src="./Documentation/READMEAssets/DeletebarStep1.png" width="450" height="auto"> <img src="./Documentation/READMEAssets/DeleteBarStep2.png" width="450" height="auto"> 
 
-Once on the page you may click on the **Delete** tab and click on the **Delete** button. Afterwards you may click on the **Yes** button when prompted to delete the Bar.
+Once on the page you may click on the **Delete** tab and click on the **Delete** button. Afterwards you may click on the **Yes** button when prompted to delete the bar.
 
-<img src="./Documentation/READMEAssets/DeleteBarStep3.png" width="450" height="auto"> 
+<img src="./Documentation/READMEAssets/DeletebarStep3.png" width="450" height="auto"> 
 
 ### Creating a Recipe
 
@@ -115,7 +135,7 @@ Placeholder for Perform recipe
 ### Publishing a Recipe
 In order to publish a recipe the user must be logged in, the user should own the recipe and the recipe should not already be published.
 
-To start off the user must go on the **My Recipes** page and enter the **Recipe** page by clicking on the recipe they want to delete. Afterwards you click on the gear icon on the top right to go into the **Edit Bar** page.
+To start off the user must go on the **My Recipes** page and enter the **Recipe** page by clicking on the recipe they want to delete. Afterwards you click on the gear icon on the top right to go into the **Edit bar** page.
 
 <img src="./Documentation/READMEAssets/EditRecipeStep1.png" width="450" height="auto">  <img src="./Documentation/READMEAssets/EditRecipeStep2.png" width="450" height="auto"> 
 
@@ -126,7 +146,7 @@ Once here you simply need to click on the **Publish** tab and click on the **Pub
 ### Deleting a Recipe
 In order to delete a recipe the user must be logged in and the user should own the recipe. 
 
-To start off the user must go on the **My Recipes** page and enter the **Recipe** page by clicking on the recipe they want to delete. Afterwards you click on the gear icon on the top right to go into the **Edit Bar** page.
+To start off the user must go on the **My Recipes** page and enter the **Recipe** page by clicking on the recipe they want to delete. Afterwards you click on the gear icon on the top right to go into the **Edit bar** page.
 
 <img src="./Documentation/READMEAssets/EditRecipeStep1.png" width="450" height="auto">  <img src="./Documentation/READMEAssets/EditRecipeStep2.png" width="450" height="auto"> 
 
@@ -137,7 +157,7 @@ Once here you simply need to click on the **Delete** tab and click on the **Dele
 ### Cloning a Recipe
 In order to clone a recipe the user should already be logged in, the recipe should exist and the recipe should be owned by the user.
 
-In order to do this, the user must first click on the **My Recipes** tab on the navigation Bar and click on the cloning icon on the top right.
+In order to do this, the user must first click on the **My Recipes** tab on the navigation bar and click on the cloning icon on the top right.
 
 <img src="./Documentation/READMEAssets/EditRecipeStep1.png" width="450" height="auto"> <img src="./Documentation/READMEAssets/CloneRecipeStep2.png" width="450" height="auto">  
 
@@ -158,8 +178,8 @@ Now your new piece of Equipment will be created and added to the recipe.
 
 <img src="./Documentation/READMEAssets/UploadEquipmentStep4.png" width="450" height="auto">
 
-### Mixer page
-The Mixer page is where you will take the recipes you've created and practice making your drink. You will be provided with the current step you need to perform and be given the ability to drag and drop the ingredients and select the proper units to progressively create your drink. Once you are finished performing all the steps you will be notified that you have successfully completed the recipe. If you ever perform a step incorrectly, **Tipsy** will notify you that you have done the step incorrectly and will prompt you to try again.
+### Game page
+The Game page is where you will take the recipes you've created and practice making your drink. You will be provided with the current step you need to perform and be given the ability to drag and drop the ingredients and select the proper units to progressively create your drink. Once you are finished performing all the steps you will be notified that you have successfully completed the recipe. If you ever perform a step incorrectly, **Tipsy** will notify you that you have done the step incorrectly and will prompt you to try again.
 
 <img src="./Documentation/READMEAssets/GamePage.png" width="450" height="auto">
 
