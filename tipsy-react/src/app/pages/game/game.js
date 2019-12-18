@@ -183,15 +183,19 @@ class Game extends Component {
 
     handleSubmitStep(event){
         var step = this.state.recipe.steps[this.state.currentStep];
+        console.log(step)
+        console.log(this.state)
         var correctEquipmentToDo = (this.state.equipmentToDo.value === step.equipmentToDo);
         var correctEquipmentDoing = (this.state.equipmentDoing.value === step.equipmentDoing);;
         var correctAction = (this.state.action.value === step.action);
         var correctUnit = (this.state.unit.value === step.unit.name);
+        var correctValue = (Number(this.state.value.value) === step.value);
 
         if( correctEquipmentToDo === true && 
             correctEquipmentDoing === true &&
             correctAction === true &&
-            correctUnit === true){
+            correctUnit === true &&
+            correctValue === true){
             
             this.state.equipmentProducts.value.push(this.state.recipe.equipmentProducts.find(equip => equip.name === step.equipmentProduct))
             
@@ -244,6 +248,7 @@ class Game extends Component {
 
         }else{
             var response = "Try again, but take a look at: \n"
+
             if(correctEquipmentToDo === false){
                 response += "\n Equipment Doing The Action,"
             }
@@ -254,6 +259,10 @@ class Game extends Component {
 
             if(correctAction === false){
                 response += "\n Action You Choose,"
+            }
+
+            if(correctValue === false){
+                response += "\n Value You Put In,"
             }
 
             if(correctUnit === false){
@@ -364,7 +373,6 @@ class Game extends Component {
     }
 
     render() {
-        console.log(this.state);
 
         // Checking if data came in
         if (this.state.isLoading) {
@@ -493,6 +501,9 @@ class Game extends Component {
         var buttonVisible = this.state.buttonVisible;
 
         if(inputName === "action"){
+
+            var NA = false;
+
             unitsAvailable = this.state.units.filter(unit => 
                 { 
                     var action = inputValue;
@@ -520,11 +531,18 @@ class Game extends Component {
                         buttonVisible = "";
                         valueVisible = "hidden"
                         unitVisible = "hidden"
+                        NA = true;
                         return unit.type === "NA";
                     }
                     
 
                 },this)
+
+                var unit = "";
+
+                if(NA === true){
+                    unit = "NA"
+                }
 
                 this.setState({
                     [inputName]: {
@@ -538,7 +556,7 @@ class Game extends Component {
                     valueVisible: valueVisible,
                     buttonVisible: buttonVisible,
                     unit:{
-                        value: ""
+                        value: unit
                     },
                     value:{
                         value: 0
