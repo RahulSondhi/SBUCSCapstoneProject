@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Tipsy/static/css/main.363c71e2.chunk.css",
-    "main.js": "/Tipsy/static/js/main.c8885e05.chunk.js",
-    "main.js.map": "/Tipsy/static/js/main.c8885e05.chunk.js.map",
+    "main.js": "/Tipsy/static/js/main.52244832.chunk.js",
+    "main.js.map": "/Tipsy/static/js/main.52244832.chunk.js.map",
     "runtime-main.js": "/Tipsy/static/js/runtime-main.2c8d7ed5.js",
     "runtime-main.js.map": "/Tipsy/static/js/runtime-main.2c8d7ed5.js.map",
     "static/css/2.7ececfe9.chunk.css": "/Tipsy/static/css/2.7ececfe9.chunk.css",
     "static/js/2.2972f867.chunk.js": "/Tipsy/static/js/2.2972f867.chunk.js",
     "static/js/2.2972f867.chunk.js.map": "/Tipsy/static/js/2.2972f867.chunk.js.map",
     "index.html": "/Tipsy/index.html",
-    "precache-manifest.f8bc052acadd157b9b75d012a0cb63b7.js": "/Tipsy/precache-manifest.f8bc052acadd157b9b75d012a0cb63b7.js",
+    "precache-manifest.9fe96b745fdd171ca09879de10cc24e5.js": "/Tipsy/precache-manifest.9fe96b745fdd171ca09879de10cc24e5.js",
     "service-worker.js": "/Tipsy/service-worker.js",
     "static/css/2.7ececfe9.chunk.css.map": "/Tipsy/static/css/2.7ececfe9.chunk.css.map",
     "static/css/main.363c71e2.chunk.css.map": "/Tipsy/static/css/main.363c71e2.chunk.css.map",
@@ -43,6 +43,6 @@
     "static/css/2.7ececfe9.chunk.css",
     "static/js/2.2972f867.chunk.js",
     "static/css/main.363c71e2.chunk.css",
-    "static/js/main.c8885e05.chunk.js"
+    "static/js/main.52244832.chunk.js"
   ]
 }

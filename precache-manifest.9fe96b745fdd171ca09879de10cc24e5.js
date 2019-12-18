@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b205eddeb8a8ff8d2766736091d604c7",
+    "revision": "1f5e76e4fcc67944d51abb563daae690",
     "url": "/Tipsy/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Tipsy/static/css/2.7ececfe9.chunk.css"
   },
   {
-    "revision": "81238e3c6616e3977e71",
+    "revision": "250f91c741020edebc11",
     "url": "/Tipsy/static/css/main.363c71e2.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Tipsy/static/js/2.2972f867.chunk.js"
   },
   {
-    "revision": "81238e3c6616e3977e71",
-    "url": "/Tipsy/static/js/main.c8885e05.chunk.js"
+    "revision": "250f91c741020edebc11",
+    "url": "/Tipsy/static/js/main.52244832.chunk.js"
   },
   {
     "revision": "3ad6b658d8703ff8e813",
